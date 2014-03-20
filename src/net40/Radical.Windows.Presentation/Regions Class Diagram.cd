@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Topics.Radical.Windows.Presentation.Regions.ContentRegion&lt;T&gt;" Collapsed="true">
+    <Position X="1" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Regions\ContentRegion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Topics.Radical.Windows.Presentation.Regions.Region&lt;T&gt;" Collapsed="true">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAIAAAAAAAgAASQAIAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Regions\Region.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Topics.Radical.Windows.Presentation.Regions.ContentPresenterRegion" Collapsed="true">
+    <Position X="0.75" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Regions\Specialized\ContentPresenterRegion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Topics.Radical.Windows.Presentation.Regions.ElementsRegion&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAEABYAAAAABAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Regions\ElementsRegion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Topics.Radical.Windows.Presentation.Regions.PanelRegion" Collapsed="true">
+    <Position X="3.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Regions\Specialized\PanelRegion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Topics.Radical.Windows.Presentation.Regions.SwitchingElementsRegion&lt;T&gt;" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACFAAAAAAAAAAAAAAAAAAAAAACAAgAA=</HashCode>
+      <FileName>Regions\SwitchingElementsRegion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Topics.Radical.Windows.Presentation.ComponentModel.IRegion" Collapsed="true">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQQAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComponentModel\Regions\IRegion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Topics.Radical.Windows.Presentation.ComponentModel.IContentRegion" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComponentModel\Regions\IContentRegion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Topics.Radical.Windows.Presentation.ComponentModel.IElementsRegion" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComponentModel\Regions\IElementsRegion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Topics.Radical.Windows.Presentation.ComponentModel.ISwitchingElementsRegion" Collapsed="true">
+    <Position X="2.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACFAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>ComponentModel\Regions\ISwitchingElementsRegion.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

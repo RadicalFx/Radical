@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Topics.Radical.Presentation.AsyncRegions.AsyncRegionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:rg="http://schemas.topics.it/wpf/radical/windows/presentation/regions"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ContentPresenter rg:RegionService.Region="{rg:ContentPresenterRegion Name=AsyncFoo}" Margin="46,26,52,186" />
+        <ContentPresenter rg:RegionService.Region="{rg:ContentPresenterRegion Name=AsyncOther, AsyncLoadDelay=2000}" Margin="46,162,52,50" />
+    </Grid>
+</UserControl>

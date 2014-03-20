@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{53515226-FBB6-477E-9C5F-4C5C592D6EC7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Topics.Radical.ServiceModel</RootNamespace>
+    <AssemblyName>Radical.ServiceModel</AssemblyName>
+    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FX35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Radical.ServiceModel.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;FX35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Radical.ServiceModel.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+      <Link>Properties\Radical.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Behaviors\InlineWsdlEndpointBehavior.cs">
+      <Link>Behaviors\InlineWsdlEndpointBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Behaviors\InlineWsdlEndpointSection.cs">
+      <Link>Behaviors\InlineWsdlEndpointSection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Behaviors\Log4NetErrorLoggingServiceBehavior.cs">
+      <Link>Behaviors\Log4NetErrorLoggingServiceBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Behaviors\Log4NetErrorLoggingServiceSection.cs">
+      <Link>Behaviors\Log4NetErrorLoggingServiceSection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\DefaultClientMessageHeaderManagerFactory.cs">
+      <Link>DefaultClientMessageHeaderManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\DefaultMessageHeaderManager.cs">
+      <Link>DefaultMessageHeaderManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\DefaultServerMessageHeaderManagerFactory.cs">
+      <Link>DefaultServerMessageHeaderManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\HeaderSearchBehavior.cs">
+      <Link>HeaderSearchBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Hosting\AbstractServiceHostFactory.cs">
+      <Link>Hosting\AbstractServiceHostFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Hosting\BasicDependencyInjectionInstanceProvider.cs">
+      <Link>Hosting\BasicDependencyInjectionInstanceProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Hosting\BasicDependencyInjectionServiceBehavior.cs">
+      <Link>Hosting\BasicDependencyInjectionServiceBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Hosting\BasicDependencyInjectionServiceHost.cs">
+      <Link>Hosting\BasicDependencyInjectionServiceHost.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\IClientMessageHeaderManagerFactory.cs">
+      <Link>IClientMessageHeaderManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\IMessageHeaderManager.cs">
+      <Link>IMessageHeaderManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\INeedValidationHeader.cs">
+      <Link>INeedValidationHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\IServerMessageHeaderManagerFactory.cs">
+      <Link>IServerMessageHeaderManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.ServiceModel\Web\Extensions\ObjectExtensions.cs">
+      <Link>Web\Extensions\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Radical\Radical.csproj">
+      <Project>{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}</Project>
+      <Name>Radical %28net35\Radical%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35". (
+    del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\*.*"  /Q
+    echo "Build/NuGet folder purged".
+) else (
+    echo "no Build/NuGet folder to purge.".
+)
+
+if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35". (
+    md "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35"
+    echo "Build/NuGet folder created.".
+)
+
+copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\$(TargetName).*" /B /Y
+
+del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\$(TargetFileName).config"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,29 @@
+﻿<Page x:Class="Topics.Radical.Samples.EntityView.CustomPropertyMappingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:Topics.Radical.Samples.EntityView"
+      d:DesignHeight="300" d:DesignWidth="300"
+	  Title="{Binding Path=Title}"
+      Style="{StaticResource ResourceKey=samplePage}">
+    <Page.DataContext>
+        <local:CustomPropertyMappingViewModel />
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Command="{Binding Path=ToggleCustomProperty}" Content="Toggle..." />
+        
+        <DataGrid AutoGenerateColumns="True" 
+                  Grid.Row="1"
+                  x:Name="foo"
+                  ItemsSource="{Binding Path=Items}"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch" />
+    </Grid>
+</Page>

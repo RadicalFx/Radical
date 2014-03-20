@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{591AD4DF-2FAD-4451-8A8A-5EF36ED2A2AC}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Topics.Radical.Windows.Presentation</RootNamespace>
+    <AssemblyName>Radical.Windows.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FX40</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Radical.Windows.Presentation.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;FX40</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Radical.Windows.Presentation.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Interactivity\net\40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+      <Link>Properties\Radical.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AbstractMementoViewModel.cs" />
+    <Compile Include="Behaviors\Focus.cs" />
+    <Compile Include="Behaviors\FrameworkElementLifecycleNotificationsBehavior.cs" />
+    <Compile Include="Behaviors\DependencyObjectCloseHandlerBehavior.cs" />
+    <Compile Include="Behaviors\WindowLifecycleNotificationsBehavior.cs" />
+    <Compile Include="Boot\ApplicationBootstrapper.cs" />
+    <Compile Include="Boot\ApplicationShutdownArgs.cs" />
+    <Compile Include="Boot\ApplicationShutdownReason.cs" />
+    <Compile Include="Boot\BootstrapConventions.cs" />
+    <Compile Include="Boot\IExpectShutdownCallback.cs" />
+    <Compile Include="Boot\DisableAutomaticRegistrationAttribute.cs" />
+    <Compile Include="Boot\IExpectBootCallback.cs" />
+    <Compile Include="Boot\SingletonApplicationScope.cs" />
+    <Compile Include="Boot\SingletonApplicationStartupArgs.cs" />
+    <Compile Include="ComponentModel\IReleaseComponents.cs" />
+    <Compile Include="ComponentModel\IViewModelResolver.cs" />
+    <Compile Include="ComponentModel\NotifyClosedAttribute.cs" />
+    <Compile Include="ComponentModel\NotifyShownAttribute.cs" />
+    <Compile Include="ComponentModel\IConventionsHandler.cs" />
+    <Compile Include="ComponentModel\IExpectViewClosingCallback.cs" />
+    <Compile Include="ComponentModel\IExpectViewClosedCallback.cs" />
+    <Compile Include="ComponentModel\IExpectViewActivatedCallback.cs" />
+    <Compile Include="ComponentModel\IExpectViewLoadedCallback.cs" />
+    <Compile Include="ComponentModel\IExpectViewShownCallback.cs" />
+    <Compile Include="ComponentModel\ICanBeValidated.cs" />
+    <Compile Include="ComponentModel\NotifyLoadedAttribute.cs" />
+    <Compile Include="ComponentModel\Regions\InjectViewInRegionAttribute.cs" />
+    <Compile Include="ComponentModel\ToolkitComponentAttribute.cs" />
+    <Compile Include="ComponentModel\ValidationBehavior.cs" />
+    <Compile Include="ComponentModel\___ICanHandleAsyncOperations.cs" />
+    <Compile Include="ComponentModel\IValidationService.cs" />
+    <Compile Include="ComponentModel\IView.cs" />
+    <Compile Include="ComponentModel\IViewModel.cs" />
+    <Compile Include="ComponentModel\IViewResolver.cs" />
+    <Compile Include="ComponentModel\Regions\ActiveContentChangedEventArgs.cs" />
+    <Compile Include="Helpers\EnvironmentHelper.cs" />
+    <Compile Include="Messaging\ApplicationShutdownRequest.cs" />
+    <Compile Include="Messaging\ApplicationBootCompleted.cs" />
+    <Compile Include="Messaging\ApplicationShutdownRequested.cs" />
+    <Compile Include="Messaging\ApplicationShutdown.cs" />
+    <Compile Include="Messaging\ApplicationShutdownCanceled.cs" />
+    <Compile Include="Messaging\Handlers\ViewLoadedHandler.cs" />
+    <Compile Include="Messaging\Handlers\ViewModelLoadedHandler.cs" />
+    <Compile Include="Messaging\ViewLoaded.cs" />
+    <Compile Include="Messaging\ViewModelClosing.cs" />
+    <Compile Include="Messaging\ViewModelClosed.cs" />
+    <Compile Include="Messaging\ViewModelLoaded.cs" />
+    <Compile Include="Properties\NugetInfo.cs" />
+    <Compile Include="Regions\RegionExtensions.cs" />
+    <Compile Include="Regions\RegionManagerFactory.cs" />
+    <Compile Include="Regions\___ActiveContentChangedMonitor.cs" />
+    <Compile Include="Regions\ContentRegion.cs" />
+    <Compile Include="Regions\ElementsRegion.cs" />
+    <Compile Include="ComponentModel\Regions\IContentRegion.cs" />
+    <Compile Include="ComponentModel\Regions\IElementsRegion.cs" />
+    <Compile Include="ComponentModel\Regions\IRegion.cs" />
+    <Compile Include="ComponentModel\Regions\IRegionManager.cs" />
+    <Compile Include="ComponentModel\Regions\IRegionManagerFactory.cs" />
+    <Compile Include="ComponentModel\Regions\IRegionService.cs" />
+    <Compile Include="ComponentModel\Regions\ISwitchingElementsRegion.cs" />
+    <Compile Include="Regions\Region.cs" />
+    <Compile Include="Regions\RegionHilightAdorner.cs" />
+    <Compile Include="Regions\RegionManager.cs" />
+    <Compile Include="Regions\RegionService.cs" />
+    <Compile Include="Regions\Specialized\ContentPresenterRegion.cs" />
+    <Compile Include="Regions\Specialized\PanelRegion.cs" />
+    <Compile Include="Regions\Specialized\___PopupRegionBehavior.cs" />
+    <Compile Include="Regions\SwitchingElementsRegion.cs" />
+    <Compile Include="Repeat.cs" />
+    <Compile Include="Messaging\CloseViewRequest.cs" />
+    <Compile Include="Messaging\ViewModelShown.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\XmlnsDefinitions.cs" />
+    <Compile Include="ComponentModel\IRegionInjectionHandler.cs" />
+    <Compile Include="Services\ViewModelResolver.cs" />
+    <Compile Include="Services\RegionInjectionHandler.cs" />
+    <Compile Include="Services\Validation\AbstractValidationService.cs" />
+    <Compile Include="Services\ConventionsHanlder.cs" />
+    <Compile Include="Services\Validation\DataAnnotationValidationService.cs" />
+    <Compile Include="Services\Validation\EntityValidationService.cs" />
+    <Compile Include="Services\Validation\NullValidationService.cs" />
+    <Compile Include="Services\Validation\DelegateValidationService.cs" />
+    <Compile Include="AbstractViewModel.cs" />
+    <Compile Include="Services\ViewResolver.cs" />
+    <Compile Include="DependencyObjectExtensions.cs" />
+    <Compile Include="Tracing.cs" />
+    <Compile Include="Wait.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
+      <Project>{8AD2DC17-392C-4BBE-B34B-11A3ACB9DC86}</Project>
+      <Name>Radical.Windows %28net40\Radical.Windows%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Radical\Radical.csproj">
+      <Project>{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}</Project>
+      <Name>Radical %28net40\Radical%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Regions Class Diagram.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40". (
+    del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\*.*"  /Q
+    echo "Build/NuGet folder purged".
+) else (
+    echo "no Build/NuGet folder to purge.".
+)
+
+if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40". (
+    md "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40"
+    echo "Build/NuGet folder created.".
+)
+
+copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetName).*" /B /Y
+copy "$(SolutionDir)readme.txt" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
+
+del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetFileName).config"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

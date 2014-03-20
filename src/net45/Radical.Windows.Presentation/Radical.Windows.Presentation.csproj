@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{767FAD7D-A6CF-426E-AC34-6EA187C76FF9}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Topics.Radical.Windows.Presentation</RootNamespace>
+    <AssemblyName>Radical.Windows.Presentation</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FX40;FX45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\Radical.Windows.Presentation.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;FX40;FX45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\Radical.Windows.Presentation.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+      <Link>Properties\Radical.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\AbstractMementoViewModel.cs">
+      <Link>AbstractMementoViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\AbstractViewModel.cs">
+      <Link>AbstractViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Behaviors\DependencyObjectCloseHandlerBehavior.cs">
+      <Link>Behaviors\DependencyObjectCloseHandlerBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Behaviors\Focus.cs">
+      <Link>Behaviors\Focus.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Behaviors\FrameworkElementLifecycleNotificationsBehavior.cs">
+      <Link>Behaviors\FrameworkElementLifecycleNotificationsBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Behaviors\WindowLifecycleNotificationsBehavior.cs">
+      <Link>Behaviors\WindowLifecycleNotificationsBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\ApplicationBootstrapper.cs">
+      <Link>Boot\ApplicationBootstrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\ApplicationShutdownArgs.cs">
+      <Link>Boot\ApplicationShutdownArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\ApplicationShutdownReason.cs">
+      <Link>Boot\ApplicationShutdownReason.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\BootstrapConventions.cs">
+      <Link>Boot\BootstrapConventions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\DisableAutomaticRegistrationAttribute.cs">
+      <Link>Boot\DisableAutomaticRegistrationAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\IExpectBootCallback.cs">
+      <Link>Boot\IExpectBootCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\IExpectShutdownCallback.cs">
+      <Link>Boot\IExpectShutdownCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\SingletonApplicationScope.cs">
+      <Link>Boot\SingletonApplicationScope.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\SingletonApplicationStartupArgs.cs">
+      <Link>Boot\SingletonApplicationStartupArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ICanBeValidated.cs">
+      <Link>ComponentModel\ICanBeValidated.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IConventionsHandler.cs">
+      <Link>ComponentModel\IConventionsHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IExpectViewActivatedCallback.cs">
+      <Link>ComponentModel\IExpectViewActivatedCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IExpectViewClosedCallback.cs">
+      <Link>ComponentModel\IExpectViewClosedCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IExpectViewClosingCallback.cs">
+      <Link>ComponentModel\IExpectViewClosingCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IExpectViewLoadedCallback.cs">
+      <Link>ComponentModel\IExpectViewLoadedCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IExpectViewShownCallback.cs">
+      <Link>ComponentModel\IExpectViewShownCallback.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IRegionInjectionHandler.cs">
+      <Link>ComponentModel\IRegionInjectionHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IReleaseComponents.cs">
+      <Link>ComponentModel\IReleaseComponents.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IValidationService.cs">
+      <Link>ComponentModel\IValidationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IView.cs">
+      <Link>ComponentModel\IView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IViewModel.cs">
+      <Link>ComponentModel\IViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IViewResolver.cs">
+      <Link>ComponentModel\IViewResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\NotifyClosedAttribute.cs">
+      <Link>ComponentModel\NotifyClosedAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\NotifyLoadedAttribute.cs">
+      <Link>ComponentModel\NotifyLoadedAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\NotifyShownAttribute.cs">
+      <Link>ComponentModel\NotifyShownAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\ActiveContentChangedEventArgs.cs">
+      <Link>ComponentModel\Regions\ActiveContentChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\IContentRegion.cs">
+      <Link>ComponentModel\Regions\IContentRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\IElementsRegion.cs">
+      <Link>ComponentModel\Regions\IElementsRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\InjectViewInRegionAttribute.cs">
+      <Link>ComponentModel\Regions\InjectViewInRegionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\IRegion.cs">
+      <Link>ComponentModel\Regions\IRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\IRegionManager.cs">
+      <Link>ComponentModel\Regions\IRegionManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\IRegionManagerFactory.cs">
+      <Link>ComponentModel\Regions\IRegionManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\IRegionService.cs">
+      <Link>ComponentModel\Regions\IRegionService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\Regions\ISwitchingElementsRegion.cs">
+      <Link>ComponentModel\Regions\ISwitchingElementsRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ToolkitComponentAttribute.cs">
+      <Link>ComponentModel\ToolkitComponentAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ValidationBehavior.cs">
+      <Link>ComponentModel\ValidationBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\___ICanHandleAsyncOperations.cs">
+      <Link>ComponentModel\___ICanHandleAsyncOperations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\DependencyObjectExtensions.cs">
+      <Link>DependencyObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Helpers\EnvironmentHelper.cs">
+      <Link>Helpers\EnvironmentHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ApplicationBootCompleted.cs">
+      <Link>Messaging\ApplicationBootCompleted.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ApplicationShutdown.cs">
+      <Link>Messaging\ApplicationShutdown.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ApplicationShutdownCanceled.cs">
+      <Link>Messaging\ApplicationShutdownCanceled.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ApplicationShutdownRequest.cs">
+      <Link>Messaging\ApplicationShutdownRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ApplicationShutdownRequested.cs">
+      <Link>Messaging\ApplicationShutdownRequested.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\CloseViewRequest.cs">
+      <Link>Messaging\CloseViewRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\Handlers\ViewLoadedHandler.cs">
+      <Link>Messaging\Handlers\ViewLoadedHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\Handlers\ViewModelLoadedHandler.cs">
+      <Link>Messaging\Handlers\ViewModelLoadedHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewLoaded.cs">
+      <Link>Messaging\ViewLoaded.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewModelClosed.cs">
+      <Link>Messaging\ViewModelClosed.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewModelClosing.cs">
+      <Link>Messaging\ViewModelClosing.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewModelLoaded.cs">
+      <Link>Messaging\ViewModelLoaded.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewModelShown.cs">
+      <Link>Messaging\ViewModelShown.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\NugetInfo.cs">
+      <Link>Properties\NugetInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\XmlnsDefinitions.cs">
+      <Link>Properties\XmlnsDefinitions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\ContentRegion.cs">
+      <Link>Regions\ContentRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\ElementsRegion.cs">
+      <Link>Regions\ElementsRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\Region.cs">
+      <Link>Regions\Region.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\RegionExtensions.cs">
+      <Link>Regions\RegionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\RegionHilightAdorner.cs">
+      <Link>Regions\RegionHilightAdorner.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\RegionManager.cs">
+      <Link>Regions\RegionManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\RegionManagerFactory.cs">
+      <Link>Regions\RegionManagerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\RegionService.cs">
+      <Link>Regions\RegionService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\Specialized\ContentPresenterRegion.cs">
+      <Link>Regions\Specialized\ContentPresenterRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\Specialized\PanelRegion.cs">
+      <Link>Regions\Specialized\PanelRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\Specialized\___PopupRegionBehavior.cs">
+      <Link>Regions\Specialized\___PopupRegionBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\SwitchingElementsRegion.cs">
+      <Link>Regions\SwitchingElementsRegion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\___ActiveContentChangedMonitor.cs">
+      <Link>Regions\___ActiveContentChangedMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Repeat.cs">
+      <Link>Repeat.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\ConventionsHanlder.cs">
+      <Link>Services\ConventionsHanlder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\RegionInjectionHandler.cs">
+      <Link>Services\RegionInjectionHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\Validation\AbstractValidationService.cs">
+      <Link>Services\Validation\AbstractValidationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\Validation\DataAnnotationValidationService.cs">
+      <Link>Services\Validation\DataAnnotationValidationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\Validation\DelegateValidationService.cs">
+      <Link>Services\Validation\DelegateValidationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\Validation\EntityValidationService.cs">
+      <Link>Services\Validation\EntityValidationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\Validation\NullValidationService.cs">
+      <Link>Services\Validation\NullValidationService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\ViewResolver.cs">
+      <Link>Services\ViewResolver.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Tracing.cs">
+      <Link>Tracing.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Wait.cs">
+      <Link>Wait.cs</Link>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
+      <Project>{135504b6-2a47-4e30-994e-60bc49477091}</Project>
+      <Name>Radical.Windows %28net45\Radical.Windows%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Radical\Radical.csproj">
+      <Project>{db4e99f1-3cbe-4e76-9197-d6f884a0f618}</Project>
+      <Name>Radical %28net45\Radical%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45". (
+    del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\*.*"  /Q
+    echo "Build/NuGet folder purged".
+) else (
+    echo "no Build/NuGet folder to purge.".
+)
+
+if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45". (
+    md "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45"
+    echo "Build/NuGet folder created.".
+)
+
+copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetName).*" /B /Y
+copy "$(SolutionDir)readme.txt" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
+
+del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetFileName).config"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

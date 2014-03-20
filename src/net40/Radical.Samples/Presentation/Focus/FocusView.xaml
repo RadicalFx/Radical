@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Topics.Radical.Presentation.Focus.FocusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:behaviors="http://schemas.topics.it/wpf/radical/windows/behaviors"
+             xmlns:pb="http://schemas.topics.it/wpf/radical/windows/presentation/behaviors"
+	  xmlns:markup="http://schemas.topics.it/wpf/radical/windows/markup"
+	  mc:Ignorable="d" 
+	  d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="85,111,0,0" TextWrapping="Wrap" Text="this text box focus is controlled by the Focus behavior." VerticalAlignment="Top" Width="337">
+            <i:Interaction.Behaviors>
+                <pb:Focus ControlledBy="{Binding Path=FocusedElementKey}" UsingKey="Name" />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="85,70,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="337"/>
+        <Button Command="{markup:AutoCommandBinding Path=MoveFocusToName}" Content="Move focus" HorizontalAlignment="Left" Margin="85,152,0,0" VerticalAlignment="Top" Width="119"/>
+
+    </Grid>
+</UserControl>
