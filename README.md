@@ -7,13 +7,11 @@ In the documentation section there are a lot of articles that details the Radica
 
 The Radical framework is not tight to WPF/Silverlight/WP/WinRT but some part of it can be freely used, and will be valuable, even in services and web applications.
 
-Release
--------
+### Release
 
 The latest release can be found on NuGet: http://nuget.org/packages?q=radical
 
-Notes
------
+### Notes
 
 In order to fully build the solution from source code the Expression Blend SDK is required:
 Silverlight: http://www.microsoft.com/en-us/download/details.aspx?id=3062
