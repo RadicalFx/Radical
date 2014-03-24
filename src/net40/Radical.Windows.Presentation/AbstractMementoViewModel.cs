@@ -281,7 +281,7 @@ namespace Topics.Radical.Windows.Presentation
         {
             base.OnMementoChanged( newMemento, oldMemmento );
 
-            if ( oldMemmento != null )
+            if ( oldMemmento != null && !oldMemmento.IsDisposed)
             {
                 oldMemmento.AcceptingChanges -= new EventHandler<CancelEventArgs>( OnAcceptingChanges );
                 oldMemmento.RejectingChanges -= new EventHandler<CancelEventArgs>( OnRejectingChanges );
@@ -290,7 +290,7 @@ namespace Topics.Radical.Windows.Presentation
                 oldMemmento.ChangesRejected -= new EventHandler( OnChangesRejected );
             }
 
-            if ( newMemento != null )
+			if ( newMemento != null && !newMemento.IsDisposed )
             {
                 newMemento.AcceptingChanges += new EventHandler<CancelEventArgs>( OnAcceptingChanges );
                 newMemento.RejectingChanges += new EventHandler<CancelEventArgs>( OnRejectingChanges );

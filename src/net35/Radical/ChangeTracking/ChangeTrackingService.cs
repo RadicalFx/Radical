@@ -110,6 +110,8 @@
             this.transientEntities = null;
             this.iComponentEntities = null;
 
+			this.IsDisposed = true;
+
             this.OnDisposed();
         }
 
@@ -1337,5 +1339,10 @@
         {
             return this.BeginAtomicOperation( AddChangeBehavior.Default );
         }
-    }
+
+		/// <summary>
+		/// Whether this component is disposed or not.
+		/// </summary>
+		public bool IsDisposed { get; private set; }
+	}
 }

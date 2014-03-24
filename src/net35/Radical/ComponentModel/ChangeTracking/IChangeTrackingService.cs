@@ -10,6 +10,11 @@
 	public interface IChangeTrackingService : IRevertibleChangeTracking, IDisposable, IComponent
 	{
 		/// <summary>
+		/// Whether this component is disposed or not.
+		/// </summary>
+		bool IsDisposed { get; }
+
+		/// <summary>
 		/// Occurs when the internal state of the tracking service changes.
 		/// </summary>
 		event EventHandler TrackingServiceStateChanged;
