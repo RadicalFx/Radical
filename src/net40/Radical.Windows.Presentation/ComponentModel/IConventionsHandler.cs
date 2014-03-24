@@ -48,6 +48,14 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// </value>
 		Func<DependencyObject, Boolean> ShouldReleaseView { get; set; }
 
+		/// <summary>
+		/// Gets or sets the handler that determines if a view model should be automatically unsubscribed from all the subscriptions when its view is relased, the default behavior is that the view model is unsubscribed if the view is not a singleton view.
+		/// </summary>
+		/// <value>
+		/// The unsubscribe handler.
+		/// </value>
+		Func<DependencyObject, Boolean> ShouldUnsubscribeViewModelOnRelease { get; set; }
+
 #if !WINDOWS_PHONE
 		/// <summary>
 		/// Gets or sets the ViewModel -> window finder that given a ViewModel finds the root Window that hosts that ViewModel.

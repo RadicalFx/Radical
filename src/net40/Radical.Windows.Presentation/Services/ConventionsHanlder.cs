@@ -59,6 +59,10 @@ namespace Topics.Radical.Windows.Presentation.Services
 				if ( vm != null )
 				{
 					this.releaser.Release( vm );
+					if ( this.ShouldUnsubscribeViewModelOnRelease( v ) )
+					{
+						this.broker.Unsubscribe( vm );
+					}
 				}
 
 				this.releaser.Release( v );
@@ -72,6 +76,8 @@ namespace Topics.Radical.Windows.Presentation.Services
 
 				return isShell;
 			};
+
+			this.ShouldUnsubscribeViewModelOnRelease = view => !isSingletonView( view );
 
 			this.ShouldReleaseView = view => !isSingletonView( view );
 
@@ -383,16 +389,10 @@ namespace Topics.Radical.Windows.Presentation.Services
 		public Action<DependencyObject> ViewReleaseHandler { get; set; }
 
 
-		public Func<DependencyObject, bool> ShouldUnregisterRegionManagerOfView
-		{
-			get;
-			set;
-		}
+		public Func<DependencyObject, bool> ShouldUnregisterRegionManagerOfView{ get; set; }
 
-		public Func<DependencyObject, bool> ShouldReleaseView
-		{
-			get;
-			set;
-		}
+		public Func<DependencyObject, bool> ShouldReleaseView { get; set; }
+
+		public Func<DependencyObject, bool> ShouldUnsubscribeViewModelOnRelease { get; set; }
 	}
 }
