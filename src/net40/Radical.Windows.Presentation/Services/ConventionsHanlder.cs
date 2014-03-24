@@ -8,6 +8,7 @@ using Topics.Radical.Conversions;
 using Topics.Radical.Linq;
 using Topics.Radical.Reflection;
 using Topics.Radical.Windows.Presentation.Behaviors;
+using Topics.Radical.Windows.Presentation.Boot;
 using Topics.Radical.Windows.Presentation.ComponentModel;
 using Topics.Radical.Windows.Presentation.Regions;
 
@@ -20,16 +21,19 @@ namespace Topics.Radical.Windows.Presentation.Services
 	{
 		readonly IMessageBroker broker;
 		readonly IReleaseComponents releaser;
+		readonly BootstrapConventions bootstrapConventions;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConventionsHanlder"/> class.
 		/// </summary>
 		/// <param name="broker">The broker.</param>
 		/// <param name="releaser">The releaser.</param>
-		public ConventionsHanlder( IMessageBroker broker, IReleaseComponents releaser )
+		/// <param name="bootstrapConventions">The Bootstrap Conventions</param>
+		public ConventionsHanlder( IMessageBroker broker, IReleaseComponents releaser, BootstrapConventions bootstrapConventions )
 		{
 			this.broker = broker;
 			this.releaser = releaser;
+			this.bootstrapConventions = bootstrapConventions;
 
 			this.ResolveViewModelType = viewType =>
 			{
@@ -59,6 +63,19 @@ namespace Topics.Radical.Windows.Presentation.Services
 
 				this.releaser.Release( v );
 			};
+
+			Func<DependencyObject, Boolean> isSingletonView = view =>
+			{
+				var implementation = view.GetType();
+				var contracts = this.bootstrapConventions.SelectViewContracts( implementation );
+				var isShell = this.bootstrapConventions.IsShellView( contracts, implementation );
+
+				return isShell;
+			};
+
+			this.ShouldReleaseView = view => !isSingletonView( view );
+
+			this.ShouldUnregisterRegionManagerOfView = view => !isSingletonView( view );
 
 			this.FindHostingWindowOf = vm =>
 			{
@@ -364,5 +381,18 @@ namespace Topics.Radical.Windows.Presentation.Services
 		/// The view release handler.
 		/// </value>
 		public Action<DependencyObject> ViewReleaseHandler { get; set; }
+
+
+		public Func<DependencyObject, bool> ShouldUnregisterRegionManagerOfView
+		{
+			get;
+			set;
+		}
+
+		public Func<DependencyObject, bool> ShouldReleaseView
+		{
+			get;
+			set;
+		}
 	}
 }

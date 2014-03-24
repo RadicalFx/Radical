@@ -106,28 +106,28 @@ namespace Topics.Radical.Windows.Presentation.Regions
 		/// </returns>
 		public override sealed object ProvideValue( IServiceProvider serviceProvider )
 		{
-			if( serviceProvider != null )
+			if ( serviceProvider != null )
 			{
 				var service = serviceProvider.GetService( typeof( IProvideValueTarget ) ) as IProvideValueTarget;
-				if( service != null )
+				if ( service != null )
 				{
 					var element = service.TargetObject as T;
-					if( element == null )
+					if ( element == null )
 					{
 						//TODO: migliorare l'exception
 						var msg = String.Format( "The TargetObject of this {0} is null.", this.GetType().ToString( "SN" ) );
 						throw new NotSupportedException( msg );
 					}
 
-					if( this.Element != element )
+					if ( this.Element != element )
 					{
 						this.Element = element;
 						this.OnElementChanged();
 					}
 
-					if( !DesignerProperties.GetIsInDesignMode( this.Element ) )
+					if ( !DesignerProperties.GetIsInDesignMode( this.Element ) )
 					{
-						#if SILVERLIGHT
+#if SILVERLIGHT
 
 						RoutedEventHandler loaded = null;
 
@@ -157,7 +157,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 
 						var view = this.FindHostingViewOf( this.Element );
 
-						if( view == null )
+						if ( view == null )
 						{
 							//TODO: migliorare l'exception
 							var msg = String.Format( "Cannot find any hosting view for this {0}.",
@@ -171,7 +171,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 
 #if !SILVERLIGHT
 
-						if( CommandLine.GetCurrent().Contains( "hr" ) )
+						if ( CommandLine.GetCurrent().Contains( "hr" ) )
 						{
 							this.Logger.Warning( "Regions hilighting is turned on." );
 
@@ -180,7 +180,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 								var obj = ( UIElement )s;
 								var layer = AdornerLayer.GetAdornerLayer( obj );
 								Debug.WriteLineIf( layer == null, "Region: cannot find any AdornerLayer on the given element." );
-								if( layer != null )
+								if ( layer != null )
 								{
 									var adorner = new RegionHilightAdorner( obj, this, Brushes.Red );
 									layer.Add( adorner );
@@ -192,16 +192,16 @@ namespace Topics.Radical.Windows.Presentation.Regions
 								var obj = ( UIElement )s;
 								var layer = AdornerLayer.GetAdornerLayer( obj );
 								Debug.WriteLineIf( layer == null, "Region: cannot find any AdornerLayer on the given element." );
-								
-								if( layer != null )
+
+								if ( layer != null )
 								{
 									var adorners = layer.GetAdorners( obj );
 									Debug.WriteLineIf( adorners == null, "Region: cannot find any Adorner on the given element." );
 
-									if( adorners != null )
+									if ( adorners != null )
 									{
 										var la = adorners.Where( a => a is RegionHilightAdorner ).SingleOrDefault();
-										if( la != null )
+										if ( la != null )
 										{
 											layer.Remove( la );
 										}
@@ -237,7 +237,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 
 			if ( view != null )
 			{
-				if ( RegionService.CurrentService.HoldsRegionManager( view ) )
+				if ( RegionService.Conventions.ShouldUnregisterRegionManagerOfView( view ) && RegionService.CurrentService.HoldsRegionManager( view ) )
 				{
 					RegionService.CurrentService.UnregisterRegionManager( view, UnregisterBehavior.WholeLogicalTreeChain );
 				}
@@ -246,7 +246,10 @@ namespace Topics.Radical.Windows.Presentation.Regions
 					.GetViewDataContext( view )
 					.As<IExpectViewClosedCallback>( i => i.OnViewClosed() );
 
-				RegionService.Conventions.ViewReleaseHandler( view );
+				if ( RegionService.Conventions.ShouldReleaseView( view ) )
+				{
+					RegionService.Conventions.ViewReleaseHandler( view );
+				}
 			}
 		}
 
@@ -257,15 +260,15 @@ namespace Topics.Radical.Windows.Presentation.Regions
 		/// <returns></returns>
 		protected virtual DependencyObject FindHostingViewOf( FrameworkElement fe )
 		{
-			if( fe == null )
+			if ( fe == null )
 			{
 				return null;
 			}
-			else if( RegionService.Conventions.IsHostingView( fe ) )
+			else if ( RegionService.Conventions.IsHostingView( fe ) )
 			{
 				return fe;
 			}
-			else if( fe.Parent != null )
+			else if ( fe.Parent != null )
 			{
 				return FindHostingViewOf( fe.Parent as FrameworkElement );
 			}
