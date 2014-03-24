@@ -202,7 +202,7 @@
     <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IPropertyValueChange.cs">
       <Link>ComponentModel\ChangeTracking\IPropertyValueChange.cs</Link>
     </Compile>
-    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IPuzzleSetupDescriptor.cs">
+    <Compile Include="..\..\net35\radical\componentmodel\container\IPuzzleSetupDescriptor.cs">
       <Link>ComponentModel\Container\IPuzzleSetupDescriptor.cs</Link>
     </Compile>
     <Compile Include="..\..\net35\Radical\ComponentModel\ContractAttribute\ContractAttribute.cs">
@@ -700,48 +700,6 @@
     <Compile Include="..\..\net35\Radical\WeakReference %28Generic%29.cs">
       <Link>WeakReference %28Generic%29.cs</Link>
     </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\ComponentRegisteredEventArgs.cs">
-      <Link>ComponentModel\Container\ComponentRegisteredEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\IBootable.cs">
-      <Link>ComponentModel\Container\IBootable.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\IContainerEntry.cs">
-      <Link>ComponentModel\Container\IContainerEntry.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\IPuzzleContainer.cs">
-      <Link>ComponentModel\Container\IPuzzleContainer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\IPuzzleContainerEntry %28Generic%29.cs">
-      <Link>ComponentModel\Container\IPuzzleContainerEntry %28Generic%29.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\IPuzzleContainerEntry.cs">
-      <Link>ComponentModel\Container\IPuzzleContainerEntry.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\IPuzzleContainerFacility.cs">
-      <Link>ComponentModel\Container\IPuzzleContainerFacility.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\ComponentModel\Container\Lifestyle.cs">
-      <Link>ComponentModel\Container\Lifestyle.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\Container\BootableFacility.cs">
-      <Link>Container\BootableFacility.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\Container\EntryBuilder.cs">
-      <Link>Container\EntryBuilder.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\Container\PuzzleContainer.cs">
-      <Link>Container\PuzzleContainer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\Container\PuzzleContainerEntry.cs">
-      <Link>Container\PuzzleContainerEntry.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\Phone\Shell\Services\INavigationService.cs">
-      <Link>Phone\Shell\Services\INavigationService.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical\System\ComponentModel\ISupportInitialize.Phone.cs">
-      <Link>System\ComponentModel\ISupportInitialize.Phone.cs</Link>
-    </Compile>
     <Compile Include="..\..\sl40\Radical.Silverlight\Helpers\EnumHelper.Silverlight.cs">
       <Link>Helpers\EnumHelper.Silverlight.cs</Link>
     </Compile>
@@ -751,7 +709,21 @@
     <Compile Include="..\..\sl50\Radical\System\ComponentModel\IBindingList.cs">
       <Link>System\ComponentModel\IBindingList.cs</Link>
     </Compile>
+    <Compile Include="ComponentModel\Container\ComponentRegisteredEventArgs.cs" />
+    <Compile Include="ComponentModel\Container\IBootable.cs" />
+    <Compile Include="ComponentModel\Container\IContainerEntry.cs" />
+    <Compile Include="ComponentModel\Container\IPuzzleContainer.cs" />
+    <Compile Include="ComponentModel\Container\IPuzzleContainerEntry %28Generic%29.cs" />
+    <Compile Include="ComponentModel\Container\IPuzzleContainerEntry.cs" />
+    <Compile Include="ComponentModel\Container\IPuzzleContainerFacility.cs" />
+    <Compile Include="ComponentModel\Container\Lifestyle.cs" />
+    <Compile Include="Container\BootableFacility.cs" />
+    <Compile Include="Container\EntryBuilder.cs" />
+    <Compile Include="Container\PuzzleContainer.cs" />
+    <Compile Include="Container\PuzzleContainerEntry.cs" />
     <Compile Include="Model\EntityCollection\EntityCollection.%28Generic%29.cs" />
+    <Compile Include="Phone\Shell\Services\INavigationService.cs" />
+    <Compile Include="System\ISupportInitialize.Phone.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\net35\Radical\Resources\Exceptions.it-IT.resx">

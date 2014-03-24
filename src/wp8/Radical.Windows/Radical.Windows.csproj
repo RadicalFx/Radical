@@ -125,33 +125,6 @@
     <Compile Include="..\..\net35\Radical.Windows\WeakEvent Managers\MonitorChangedWeakEventManager.cs">
       <Link>WeakEvent Managers\MonitorChangedWeakEventManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Presentation\AbstractViewModel.cs">
-      <Link>Phone\Shell\Presentation\AbstractViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Presentation\IRequireNavigationCallback.cs">
-      <Link>Phone\Shell\Presentation\IRequireNavigationCallback.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Presentation\LifecycleAwareViewModel.cs">
-      <Link>Phone\Shell\Presentation\LifecycleAwareViewModel.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Services\DefaultNavigationService.cs">
-      <Link>Phone\Shell\Services\DefaultNavigationService.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Services\LifecycleAwareService.cs">
-      <Link>Phone\Shell\Services\LifecycleAwareService.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Services\LifecycleEvent.cs">
-      <Link>Phone\Shell\Services\LifecycleEvent.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Services\LifecycleMessage.cs">
-      <Link>Phone\Shell\Services\LifecycleMessage.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Phone\Shell\Services\NavigatingMessage.cs">
-      <Link>Phone\Shell\Services\NavigatingMessage.cs</Link>
-    </Compile>
-    <Compile Include="..\..\sl4-wp71\Radical.Windows\Presentation\Behaviors\ButtonBase.cs">
-      <Link>Presentation\Behaviors\ButtonBase.cs</Link>
-    </Compile>
     <Compile Include="..\..\sl40\Radical.Windows.Silverlight\Presentation\Behaviors\BusyStatusManager\BusyAdorner.cs">
       <Link>Presentation\Behaviors\BusyStatusManager\BusyAdorner.cs</Link>
     </Compile>
@@ -185,6 +158,15 @@
     <Compile Include="..\..\sl40\Radical.Windows.Silverlight\Threading\SilverlightDispatcher.cs">
       <Link>Threading\SilverlightDispatcher.cs</Link>
     </Compile>
+    <Compile Include="Phone\Shell\Presentation\AbstractViewModel.cs" />
+    <Compile Include="Phone\Shell\Presentation\IRequireNavigationCallback.cs" />
+    <Compile Include="Phone\Shell\Presentation\LifecycleAwareViewModel.cs" />
+    <Compile Include="Phone\Shell\Services\DefaultNavigationService.cs" />
+    <Compile Include="Phone\Shell\Services\LifecycleAwareService.cs" />
+    <Compile Include="Phone\Shell\Services\LifecycleEvent.cs" />
+    <Compile Include="Phone\Shell\Services\LifecycleMessage.cs" />
+    <Compile Include="Phone\Shell\Services\NavigatingMessage.cs" />
+    <Compile Include="Presentation\Behaviors\ButtonBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Radical\Radical.csproj">
