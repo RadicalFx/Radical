@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Topics.Radical.Presentation.Memento.ComplexGraph.ComplexGraphView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="335" d:DesignWidth="536">
+    <Grid>
+        <TextBox Height="23"
+                 Text="{Binding Path=Entity.FirstName, UpdateSourceTrigger=PropertyChanged}" 
+                 Margin="12,73,132,0" 
+                 VerticalAlignment="Top" />
+        <TextBox Height="23" 
+                 Text="{Binding Path=Entity.LastName, UpdateSourceTrigger=PropertyChanged}" 
+                 Margin="12,44,132,0" 
+                 VerticalAlignment="Top" />
+        <Button Content="Undo"
+            Command="{Binding Path=UndoCommand}"
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="12,7,0,0" 
+            VerticalAlignment="Top" 
+            Width="75" />
+        <Button Content="Redo" 
+            Command="{Binding Path=RedoCommand}"
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="93,7,0,0"
+            VerticalAlignment="Top" Width="75" />
+        <DataGrid AutoGenerateColumns="True" 
+                  Height="156" 
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeRows="False"
+                  HorizontalAlignment="Left" 
+                  Margin="12,103,0,0" 
+                  VerticalAlignment="Top" 
+                  SelectedItem="{Binding Path=SelectedAddress}"
+                  Width="392" 
+                  ItemsSource="{Binding Path=Entity.Addresses}" />
+        <Button Command="{Binding Path=CreateNewAddressCommand}" 
+                Content="Create Address" 
+                Height="23" 
+                HorizontalAlignment="Left" 
+                Margin="174,7,0,0" 
+                VerticalAlignment="Top" 
+                Width="107" />
+        <Button Command="{Binding Path=DeleteAddressCommand}" 
+                Content="Delete Address" 
+                Height="23" 
+                HorizontalAlignment="Left" 
+                Margin="287,7,0,0" 
+                VerticalAlignment="Top" 
+                Width="107" />
+    </Grid>
+</UserControl>

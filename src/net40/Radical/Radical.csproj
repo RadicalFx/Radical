@@ -1,0 +1,1002 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Topics.Radical</RootNamespace>
+    <AssemblyName>Radical</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FX40</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Radical.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;FX40</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Radical.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+      <Link>Properties\Radical.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\AnalyticsService.cs">
+      <Link>AnalyticsService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Advisory\AdvisedAction.cs">
+      <Link>ChangeTracking\Advisory\AdvisedAction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Advisory\Advisory.cs">
+      <Link>ChangeTracking\Advisory\Advisory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Advisory\AdvisoryBuilder.cs">
+      <Link>ChangeTracking\Advisory\AdvisoryBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Advisory\ChangeSetDistinctVisitor.cs">
+      <Link>ChangeTracking\Advisory\ChangeSetDistinctVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Atomic Operations\AtomicChange.cs">
+      <Link>ChangeTracking\Atomic Operations\AtomicChange.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Atomic Operations\AtomicOperation.cs">
+      <Link>ChangeTracking\Atomic Operations\AtomicOperation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Change Management\Bookmark.cs">
+      <Link>ChangeTracking\Change Management\Bookmark.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Change Management\Change.cs">
+      <Link>ChangeTracking\Change Management\Change.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Change Management\ChangeSet.cs">
+      <Link>ChangeTracking\Change Management\ChangeSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\Change Management\IncludeAllChangeSetFilter.cs">
+      <Link>ChangeTracking\Change Management\IncludeAllChangeSetFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ChangeTracking\ChangeTrackingService.cs">
+      <Link>ChangeTracking\ChangeTrackingService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Collections\ReadOnlyCollection.cs">
+      <Link>Collections\ReadOnlyCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\AddChangeBehavior.cs">
+      <Link>ComponentModel\ChangeTracking\AddChangeBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Advisory\IAdvisedAction.cs">
+      <Link>ComponentModel\ChangeTracking\Advisory\IAdvisedAction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Advisory\IAdvisory.cs">
+      <Link>ComponentModel\ChangeTracking\Advisory\IAdvisory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Advisory\IAdvisoryBuilder.cs">
+      <Link>ComponentModel\ChangeTracking\Advisory\IAdvisoryBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Advisory\IChangeSetDistinctVisitor.cs">
+      <Link>ComponentModel\ChangeTracking\Advisory\IChangeSetDistinctVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Advisory\ProposedActions.cs">
+      <Link>ComponentModel\ChangeTracking\Advisory\ProposedActions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\ChangeCommittedEventArgs %28Generic%29.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\ChangeCommittedEventArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\ChangeEventArgs %28Generic%29.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\ChangeEventArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\ChangeRejectedEventArgs %28Generic%29.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\ChangeRejectedEventArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\Commit, Reject Reason%28s%29.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\Commit, Reject Reason%28s%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\CommittedEventArgs.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\CommittedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\Delegates.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\Delegates.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\RejectedEventArgs.cs">
+      <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\RejectedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\EntityTrackingStates.cs">
+      <Link>ComponentModel\ChangeTracking\EntityTrackingStates.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IAtomicOperation.cs">
+      <Link>ComponentModel\ChangeTracking\IAtomicOperation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IBookmark.cs">
+      <Link>ComponentModel\ChangeTracking\IBookmark.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IChange %28Generic%29.cs">
+      <Link>ComponentModel\ChangeTracking\IChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IChange.cs">
+      <Link>ComponentModel\ChangeTracking\IChange.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IChangeSet.cs">
+      <Link>ComponentModel\ChangeTracking\IChangeSet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IChangeSetFilter.cs">
+      <Link>ComponentModel\ChangeTracking\IChangeSetFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IChangeTrackingService.cs">
+      <Link>ComponentModel\ChangeTracking\IChangeTrackingService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IMemento.cs">
+      <Link>ComponentModel\ChangeTracking\IMemento.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IMementoPropertyMetadata.cs">
+      <Link>ComponentModel\ChangeTracking\IMementoPropertyMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\IPropertyValueChange.cs">
+      <Link>ComponentModel\ChangeTracking\IPropertyValueChange.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\ComponentRegisteredEventArgs.cs">
+      <Link>ComponentModel\Container\ComponentRegisteredEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IBootable.cs">
+      <Link>ComponentModel\Container\IBootable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IContainerEntry.cs">
+      <Link>ComponentModel\Container\IContainerEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IPuzzleContainer.cs">
+      <Link>ComponentModel\Container\IPuzzleContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IPuzzleContainerEntry %28Generic%29.cs">
+      <Link>ComponentModel\Container\IPuzzleContainerEntry %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IPuzzleContainerEntry.cs">
+      <Link>ComponentModel\Container\IPuzzleContainerEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IPuzzleContainerFacility.cs">
+      <Link>ComponentModel\Container\IPuzzleContainerFacility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\IPuzzleSetupDescriptor.cs">
+      <Link>ComponentModel\Container\IPuzzleSetupDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Container\Lifestyle.cs">
+      <Link>ComponentModel\Container\Lifestyle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ContractAttribute\ContractAttribute.cs">
+      <Link>ComponentModel\ContractAttribute\ContractAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Factories\IChangeTrackingServiceFactory.cs">
+      <Link>ComponentModel\Factories\IChangeTrackingServiceFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Factories\IDataContextFactory.cs">
+      <Link>ComponentModel\Factories\IDataContextFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Factories\IEntityFactory.cs">
+      <Link>ComponentModel\Factories\IEntityFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IDataContext.cs">
+      <Link>ComponentModel\IDataContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IDataContextFactoryProvider.cs">
+      <Link>ComponentModel\IDataContextFactoryProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IDispatcher.cs">
+      <Link>ComponentModel\IDispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IKeyService.cs">
+      <Link>ComponentModel\IKeyService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IMonitor %28Generic%29.cs">
+      <Link>ComponentModel\IMonitor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IMonitor.cs">
+      <Link>ComponentModel\IMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IReadOnlyCollection.cs">
+      <Link>ComponentModel\IReadOnlyCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ITransaction.cs">
+      <Link>ComponentModel\ITransaction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IUniqueEntity\Generic IUniqueEntity.cs">
+      <Link>ComponentModel\IUniqueEntity\Generic IUniqueEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IUniqueEntity\IKey.cs">
+      <Link>ComponentModel\IUniqueEntity\IKey.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\IUniqueEntity\IUniqueEntity.cs">
+      <Link>ComponentModel\IUniqueEntity\IUniqueEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IHandleMessage %28Generic%29.cs">
+      <Link>ComponentModel\Messaging\IHandleMessage %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IHandleMessage.cs">
+      <Link>ComponentModel\Messaging\IHandleMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IMessage.cs">
+      <Link>ComponentModel\Messaging\IMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IMessageBroker.cs">
+      <Link>ComponentModel\Messaging\IMessageBroker.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IMessageHandler %28Generic%29.cs">
+      <Link>ComponentModel\Messaging\IMessageHandler %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IMessageHandler.cs">
+      <Link>ComponentModel\Messaging\IMessageHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\INeedSafeSubscription.cs">
+      <Link>ComponentModel\Messaging\INeedSafeSubscription.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\IRequireToBeValid.cs">
+      <Link>ComponentModel\Messaging\IRequireToBeValid.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Messaging\SubscribeToMessageAttribute.cs">
+      <Link>ComponentModel\Messaging\SubscribeToMessageAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\CollectionChangedEventArgs %28Generic%29.cs">
+      <Link>ComponentModel\Model\CollectionChangedEventArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\CollectionChangeType enum.cs">
+      <Link>ComponentModel\Model\CollectionChangeType enum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityCollection.cs">
+      <Link>ComponentModel\Model\IEntityCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\EntityItemViewCustomPropertyDescriptor.cs">
+      <Link>ComponentModel\Model\IEntityView\EntityItemViewCustomPropertyDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\EntityItemViewPropertyDescriptor.cs">
+      <Link>ComponentModel\Model\IEntityView\EntityItemViewPropertyDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\EntityItemViewValue Setter and Getter.cs">
+      <Link>ComponentModel\Model\IEntityView\EntityItemViewValue Setter and Getter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\IEntityItemView %28Generic%29.cs">
+      <Link>ComponentModel\Model\IEntityView\IEntityItemView %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\IEntityItemView.cs">
+      <Link>ComponentModel\Model\IEntityView\IEntityItemView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\IEntityItemViewFilter %28Generic%29.cs">
+      <Link>ComponentModel\Model\IEntityView\IEntityItemViewFilter %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\IEntityItemViewFilter.cs">
+      <Link>ComponentModel\Model\IEntityView\IEntityItemViewFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\IEntityView %28Generic%29.cs">
+      <Link>ComponentModel\Model\IEntityView\IEntityView %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\IEntityView.cs">
+      <Link>ComponentModel\Model\IEntityView\IEntityView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Model\IEntityView\INotifyEditableObject.cs">
+      <Link>ComponentModel\Model\IEntityView\INotifyEditableObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IBatchCommand.cs">
+      <Link>ComponentModel\QueryModel\IBatchCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IBatchCommandEngine.cs">
+      <Link>ComponentModel\QueryModel\IBatchCommandEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IQueryEngine %28Generic%29.cs">
+      <Link>ComponentModel\QueryModel\IQueryEngine %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IQuerySpecification %28Generic%29.cs">
+      <Link>ComponentModel\QueryModel\IQuerySpecification %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IQuerySystemManager.cs">
+      <Link>ComponentModel\QueryModel\IQuerySystemManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IScalarEvaluator %28Generic%29.cs">
+      <Link>ComponentModel\QueryModel\IScalarEvaluator %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\IScalarSpecification %28Generic%29.cs">
+      <Link>ComponentModel\QueryModel\IScalarSpecification %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\ISpecification %28Generic%29.cs">
+      <Link>ComponentModel\QueryModel\ISpecification %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\QueryModel\SpecificationNotSupportedException.cs">
+      <Link>ComponentModel\QueryModel\SpecificationNotSupportedException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Validation Facade\IRequireValidationCallback %28Generic%29.cs">
+      <Link>ComponentModel\Validation Facade\IRequireValidationCallback %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Validation Facade\IValidator %28Generic%29.cs">
+      <Link>ComponentModel\Validation Facade\IValidator %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Validation Facade\IValidator.cs">
+      <Link>ComponentModel\Validation Facade\IValidator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\Validation Facade\IValidatorFactory.cs">
+      <Link>ComponentModel\Validation Facade\IValidatorFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Container\BootableFacility.cs">
+      <Link>Container\BootableFacility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Container\EntryBuilder.cs">
+      <Link>Container\EntryBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Container\PuzzleContainer.cs">
+      <Link>Container\PuzzleContainer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Container\PuzzleContainerEntry.cs">
+      <Link>Container\PuzzleContainerEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Container\PuzzleContainerServiceProviderFacade.cs">
+      <Link>Container\PuzzleContainerServiceProviderFacade.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Container\SubscribeToMessageFacility.cs">
+      <Link>Container\SubscribeToMessageFacility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\DataBinding\EnumBinder.cs">
+      <Link>DataBinding\EnumBinder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\Adapters\DataAdapter %28Abstract, Generic%29.cs">
+      <Link>Data\Adapters\DataAdapter %28Abstract, Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\Adapters\DataFiller %28Abstract, Generic%29.cs">
+      <Link>Data\Adapters\DataFiller %28Abstract, Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\Adapters\IDataAdapter %28Generic%29.cs">
+      <Link>Data\Adapters\IDataAdapter %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\Adapters\IDataFiller %28Generic%29.cs">
+      <Link>Data\Adapters\IDataFiller %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\DataBase.cs">
+      <Link>Data\DataBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\DataCommand.cs">
+      <Link>Data\DataCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\DbConnectionWrapper.cs">
+      <Link>Data\DbConnectionWrapper.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\IDataBase.cs">
+      <Link>Data\IDataBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\IDataBaseProvider.cs">
+      <Link>Data\IDataBaseProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Data\IDataCommand.cs">
+      <Link>Data\IDataCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Diagnostics\BuildAttribute.cs">
+      <Link>Diagnostics\BuildAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Diagnostics\EnsurePreviewExtensions.cs">
+      <Link>Diagnostics\EnsurePreviewExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Diagnostics\New.cs">
+      <Link>Diagnostics\New.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Diagnostics\ObjectDumper.cs">
+      <Link>Diagnostics\ObjectDumper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Diagnostics\TraceSourceExtensions.cs">
+      <Link>Diagnostics\TraceSourceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Enumerations\Attributes\EnumItemDescriptionAttribute.cs">
+      <Link>Enumerations\Attributes\EnumItemDescriptionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Enumerations\Attributes\LocalizableEnumItemDescriptionAttribute.cs">
+      <Link>Enumerations\Attributes\LocalizableEnumItemDescriptionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Enumerations\Attributes\ResourceAssemblyLocationBehavior.cs">
+      <Link>Enumerations\Attributes\ResourceAssemblyLocationBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Exceptions\EnumValueOutOfRangeException.cs">
+      <Link>Exceptions\EnumValueOutOfRangeException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Exceptions\MissingContractAttributeException.cs">
+      <Link>Exceptions\MissingContractAttributeException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Exceptions\RadicalException.cs">
+      <Link>Exceptions\RadicalException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Exceptions\SuspendedChangeTrackingServiceException.cs">
+      <Link>Exceptions\SuspendedChangeTrackingServiceException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\ArrayExtensions.cs">
+      <Link>Extensions\ArrayExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\ChangeTracking\ChangeTrackingServiceExtensions.cs">
+      <Link>Extensions\ChangeTracking\ChangeTrackingServiceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\ChangeTracking\MementoExtensions.cs">
+      <Link>Extensions\ChangeTracking\MementoExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\ConsoleColorExtensions.cs">
+      <Link>Extensions\ConsoleColorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Conversions\CastExtensions.cs">
+      <Link>Extensions\Conversions\CastExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Conversions\ConvertExtensions.cs">
+      <Link>Extensions\Conversions\ConvertExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Conversions\KeyConversionExtensions.cs">
+      <Link>Extensions\Conversions\KeyConversionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Data\SqlServer\KeywordsExtensions.cs">
+      <Link>Extensions\Data\SqlServer\KeywordsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\DateTimeExtensions.cs">
+      <Link>Extensions\DateTimeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\EntityCollectionExtensions.cs">
+      <Link>Extensions\EntityCollectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\EntityViewExtensions.cs">
+      <Link>Extensions\EntityViewExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\EnumExtensions.cs">
+      <Link>Extensions\EnumExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\IServiceProviderExtensions.cs">
+      <Link>Extensions\IServiceProviderExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\KeyExtensions.cs">
+      <Link>Extensions\KeyExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Linq\EnumerableExtensions.cs">
+      <Link>Extensions\Linq\EnumerableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Linq\ExpressionExtensions.cs">
+      <Link>Extensions\Linq\ExpressionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Linq\ListExtensions.cs">
+      <Link>Extensions\Linq\ListExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Linq\PredicateBuilder.cs">
+      <Link>Extensions\Linq\PredicateBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Linq\QueryableExtensions.cs">
+      <Link>Extensions\Linq\QueryableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Linq\SelectorExtensions.cs">
+      <Link>Extensions\Linq\SelectorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\NullableExtensions.cs">
+      <Link>Extensions\NullableExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\NumbersExtensions.cs">
+      <Link>Extensions\NumbersExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\ObjectExtensions.cs">
+      <Link>Extensions\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Reflection\AssemblyExtension.cs">
+      <Link>Extensions\Reflection\AssemblyExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Reflection\MemberInfoExtensions.cs">
+      <Link>Extensions\Reflection\MemberInfoExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Reflection\MethodInfoExtensions %28Fast Delegate Factory%29.cs">
+      <Link>Extensions\Reflection\MethodInfoExtensions %28Fast Delegate Factory%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Reflection\ObjectExtensions.cs">
+      <Link>Extensions\Reflection\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Reflection\ParameterInfoExtension.cs">
+      <Link>Extensions\Reflection\ParameterInfoExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\Reflection\TypeExtensions.cs">
+      <Link>Extensions\Reflection\TypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Extensions\StringExtensions.cs">
+      <Link>Extensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\ActionTextWriter.cs">
+      <Link>Helpers\ActionTextWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\CommandLine.Desktop.cs">
+      <Link>Helpers\CommandLine.Desktop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\CommandLineArgumentAttribute.cs">
+      <Link>Helpers\CommandLineArgumentAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\DelegateComparer %28Generic%29.cs">
+      <Link>Helpers\DelegateComparer %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\DelegateEqualityComparer %28Generic%29.cs">
+      <Link>Helpers\DelegateEqualityComparer %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\EnumHelper.cs">
+      <Link>Helpers\EnumHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\HashCodeBuilder.cs">
+      <Link>Helpers\HashCodeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\KnownRegex.cs">
+      <Link>Helpers\KnownRegex.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\ObjectReferenceEqualityComparer.cs">
+      <Link>Helpers\ObjectReferenceEqualityComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\OSHelper.WPF.cs">
+      <Link>Helpers\OSHelper.WPF.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\Password.cs">
+      <Link>Helpers\Password.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\RandomStrings.cs">
+      <Link>Helpers\RandomStrings.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\ReferenceEqualityComparer.cs">
+      <Link>Helpers\ReferenceEqualityComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\ReflectionHelper.cs">
+      <Link>Helpers\ReflectionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Helpers\Transactions\TransactionEnlistmentHelper.cs">
+      <Link>Helpers\Transactions\TransactionEnlistmentHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Key\Generic Key.cs">
+      <Link>Key_____\Generic Key.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Key\InvalidKeyFormatException.cs">
+      <Link>Key_____\InvalidKeyFormatException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Key\Key.cs">
+      <Link>Key_____\Key.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Messaging\AbstractMessageHandler %28Generic%29.cs">
+      <Link>Messaging\AbstractMessageHandler %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Messaging\Message.cs">
+      <Link>Messaging\Message.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Messaging\MessageBroker.cs">
+      <Link>Messaging\MessageBroker.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Messaging\MessageHandler %28Generic%29.cs">
+      <Link>Messaging\MessageHandler %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Messaging\Subscription.cs">
+      <Link>Messaging\Subscription.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\AddRangeCollectionChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\AddRangeCollectionChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\CollectionChange %28Abstract, Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\CollectionChange %28Abstract, Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\CollectionClearedChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\CollectionClearedChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\Descriptors\CollectionChangeDescriptor %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\Descriptors\CollectionChangeDescriptor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\Descriptors\CollectionRangeDescriptor %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\Descriptors\CollectionRangeDescriptor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\Descriptors\ItemChangedDescriptor %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\Descriptors\ItemChangedDescriptor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\Descriptors\ItemMovedDescriptor %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\Descriptors\ItemMovedDescriptor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\Descriptors\ItemReplacedDescriptor %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\Descriptors\ItemReplacedDescriptor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\ItemChangedCollectionChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\ItemChangedCollectionChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\ItemMovedCollectionChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\ItemMovedCollectionChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\ItemRemovedCollectionChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\ItemRemovedCollectionChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Collection Changes\ItemReplacedCollectionChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Collection Changes\ItemReplacedCollectionChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\ChangeTracking\Properties\PropertyValueChange %28Generic%29.cs">
+      <Link>Model\ChangeTracking\Properties\PropertyValueChange %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.ICollection.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.ICollection.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.IComponent.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.IComponent.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.IDisposable.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.IDisposable.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.IList.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.IList.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.IServiceProvider.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.IServiceProvider.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.ISite.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.ISite.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\EntityCollection.%28Generic%29.Serialization.cs">
+      <Link>Model\EntityCollection\EntityCollection.%28Generic%29.Serialization.cs</Link>
+      <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityCollection\MementoEntityCollection.cs">
+      <Link>Model\EntityCollection\MementoEntityCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\AddingNewEventArgs %28Generic%29.cs">
+      <Link>Model\EntityView\AddingNewEventArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\EntityItemView\EntityItemView.cs">
+      <Link>Model\EntityView\EntityItemView\EntityItemView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\EntityItemView\EntityItemViewSortComparer.cs">
+      <Link>Model\EntityView\EntityItemView\EntityItemViewSortComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\EntityView.cs">
+      <Link>Model\EntityView\EntityView.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\Filter\EntityItemViewFilterBase.cs">
+      <Link>Model\EntityView\Filter\EntityItemViewFilterBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\Filter\PredicateEntityItemViewFilter.cs">
+      <Link>Model\EntityView\Filter\PredicateEntityItemViewFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\Filter\ViewAllEntityItemViewFilter.cs">
+      <Link>Model\EntityView\Filter\ViewAllEntityItemViewFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\Index\DefaultEntityItemViewSortComparer.cs">
+      <Link>Model\EntityView\Index\DefaultEntityItemViewSortComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\Index\Indexer.cs">
+      <Link>Model\EntityView\Index\Indexer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\EntityView\RebuildIndexesEventArgs.cs">
+      <Link>Model\EntityView\RebuildIndexesEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\Entity.cs">
+      <Link>Model\Entity\Entity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\MementoEntity.cs">
+      <Link>Model\Entity\MementoEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\MementoPropertyMetadata.cs">
+      <Link>Model\Entity\MementoPropertyMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\PropertyMetadata %28Generic%29.cs">
+      <Link>Model\Entity\PropertyMetadata %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\PropertyMetadata.cs">
+      <Link>Model\Entity\PropertyMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\PropertyValue %28Generic%29.cs">
+      <Link>Model\Entity\PropertyValue %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\PropertyValue.cs">
+      <Link>Model\Entity\PropertyValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Entity\PropertyValueChanged %28delegate%29.cs">
+      <Link>Model\Entity\PropertyValueChanged %28delegate%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Factories\ChangeTrackingServiceFactory.cs">
+      <Link>Model\Factories\ChangeTrackingServiceFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\InsertEventArgs.cs">
+      <Link>Model\InsertEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\NullDataContext.cs">
+      <Link>Model\NullDataContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Providers\QuerySystemManager.cs">
+      <Link>Model\Providers\QuerySystemManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\AbstractQueryEngine.cs">
+      <Link>Model\QueryModel\AbstractQueryEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\AbstractQuerySpecification %28Generic%29.cs">
+      <Link>Model\QueryModel\AbstractQuerySpecification %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\AbstractScalarEvaluator.cs">
+      <Link>Model\QueryModel\AbstractScalarEvaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\AbstractScalarSpecification %28Generic%29.cs">
+      <Link>Model\QueryModel\AbstractScalarSpecification %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\AllEntitiesQuery %28Generic%29.cs">
+      <Link>Model\QueryModel\AllEntitiesQuery %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\EntitiesByKeywordsQuery %28Generic%29.cs">
+      <Link>Model\QueryModel\EntitiesByKeywordsQuery %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\QueryModel\EntityByKeyQuery %28Generic%29.cs">
+      <Link>Model\QueryModel\EntityByKeyQuery %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Services\Int32KeyService.cs">
+      <Link>Model\Services\Int32KeyService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\Services\KeyServiceProxy.cs">
+      <Link>Model\Services\KeyServiceProxy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Model\SetValueAtEventArgs.cs">
+      <Link>Model\SetValueAtEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\AbstractMonitor %28Generic%29.cs">
+      <Link>Observers\AbstractMonitor %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\AbstractMonitor.cs">
+      <Link>Observers\AbstractMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\BrokerObserver.cs">
+      <Link>Observers\BrokerObserver.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\EntityViewListChangedMonitor.cs">
+      <Link>Observers\EntityViewListChangedMonitor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\MementoObserver.cs">
+      <Link>Observers\MementoObserver.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\Observable %28Generic%29.cs">
+      <Link>Observers\Observable %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Observers\PropertyObserver.cs">
+      <Link>Observers\PropertyObserver.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Properties\NugetInfo.cs">
+      <Link>Properties\NugetInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Resources\Exceptions.Designer.cs">
+      <Link>Resources\Exceptions.Designer.cs</Link>
+      <DependentUpon>Exceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Resources\Labels.Designer.cs">
+      <Link>Resources\Labels.Designer.cs</Link>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\IAfterArgs %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\Arguments\IAfterArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\IAsyncArgs %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\Arguments\IAsyncArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\IAsyncErrorArgs.cs">
+      <Link>Threading\AsyncWorker\Arguments\IAsyncErrorArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\IBeforeArgs %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\Arguments\IBeforeArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\ICancelArgs.cs">
+      <Link>Threading\AsyncWorker\Arguments\ICancelArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\WorkerArgs %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\Arguments\WorkerArgs %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Arguments\WorkerErrorArgs.cs">
+      <Link>Threading\AsyncWorker\Arguments\WorkerErrorArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\AsyncErrorEventArgs.cs">
+      <Link>Threading\AsyncWorker\AsyncErrorEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\AsyncWorker %28Entry point%29.cs">
+      <Link>Threading\AsyncWorker\AsyncWorker %28Entry point%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\IExecutableWorker.cs">
+      <Link>Threading\AsyncWorker\IExecutableWorker.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\InputOutputWorker\IInputOutputWorker %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\InputOutputWorker\IInputOutputWorker %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\InputOutputWorker\IInputOutputWorkerConfiguration %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\InputOutputWorker\IInputOutputWorkerConfiguration %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\InputOutputWorker\InputOutputWorkerConfiguration %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\InputOutputWorker\InputOutputWorkerConfiguration %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\InputWorker\IInputWorker %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\InputWorker\IInputWorker %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\InputWorker\IInputWorkerConfiguration %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\InputWorker\IInputWorkerConfiguration %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\InputWorker\InputWorkerConfiguration %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\InputWorker\InputWorkerConfiguration %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\IRunnableWorkerConfiguration.cs">
+      <Link>Threading\AsyncWorker\IRunnableWorkerConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\IWorker.cs">
+      <Link>Threading\AsyncWorker\IWorker.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\IWorkerConfiguration.cs">
+      <Link>Threading\AsyncWorker\IWorkerConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\IWorkerStatus.cs">
+      <Link>Threading\AsyncWorker\IWorkerStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\OutputWorker\OutputWorkerConfiguration %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\OutputWorker\OutputWorkerConfiguration %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\WarningThreshold.cs">
+      <Link>Threading\AsyncWorker\WarningThreshold.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\WorkCompletedEventArgs.cs">
+      <Link>Threading\AsyncWorker\WorkCompletedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\Worker %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\Worker %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\AsyncWorker\WorkerConfiguration %28Generic%29.cs">
+      <Link>Threading\AsyncWorker\WorkerConfiguration %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Threading\NullDispatcher.cs">
+      <Link>Threading\NullDispatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\TimeStamp\ByteArrayTimestamp.cs">
+      <Link>TimeStamp\ByteArrayTimestamp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\TimeStamp\IHaveTimestamp.cs">
+      <Link>TimeStamp\IHaveTimestamp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\TimeStamp\Timestamp %28Generic%29.cs">
+      <Link>TimeStamp\Timestamp %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\TimeStamp\Timestamp.cs">
+      <Link>TimeStamp\Timestamp.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\ArrayEnsureExtension.cs">
+      <Link>Validation\Ensure\ArrayEnsureExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\ComparableEnsureExtension.cs">
+      <Link>Validation\Ensure\ComparableEnsureExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\Ensure %28Generic%29.cs">
+      <Link>Validation\Ensure\Ensure %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\Ensure.cs">
+      <Link>Validation\Ensure\Ensure.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\EnsureExtensions.cs">
+      <Link>Validation\Ensure\EnsureExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\EnumEnsureExtensions.cs">
+      <Link>Validation\Ensure\EnumEnsureExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\GuidEnsureExtension.cs">
+      <Link>Validation\Ensure\GuidEnsureExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\IConfigurableEnsure.cs">
+      <Link>Validation\Ensure\IConfigurableEnsure.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\IEnsure.cs">
+      <Link>Validation\Ensure\IEnsure.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\StringEnsureExtension.cs">
+      <Link>Validation\Ensure\StringEnsureExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\Ensure\TypeEnsureExtension.cs">
+      <Link>Validation\Ensure\TypeEnsureExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidationContext %28Generic%29.cs">
+      <Link>Validation\ValidationContext %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidationError.cs">
+      <Link>Validation\ValidationError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidationErrors.cs">
+      <Link>Validation\ValidationErrors.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidationResults.cs">
+      <Link>Validation\ValidationResults.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidationTools.cs">
+      <Link>Validation\ValidationTools.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidatorBase.cs">
+      <Link>Validation\ValidatorBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Validation\ValidatorBaseFactory.cs">
+      <Link>Validation\ValidatorBaseFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\WeakReference %28Generic%29.cs">
+      <Link>WeakReference %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Win32\Constants.cs">
+      <Link>Win32\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Win32\NativeMethods.cs">
+      <Link>Win32\NativeMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net35\Radical\Win32\NativeTypes.cs">
+      <Link>Win32\NativeTypes.cs</Link>
+    </Compile>
+    <Compile Include="Threading\LimitedConcurrencyLevelTaskScheduler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\log4net\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\net35\Radical\Resources\Exceptions.it-IT.resx">
+      <Link>Resources\Exceptions.it-IT.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\net35\Radical\Resources\Exceptions.resx">
+      <Link>Resources\Exceptions.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\net35\Radical\Resources\Labels.it-IT.resx">
+      <Link>Resources\Labels.it-IT.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\net35\Radical\Resources\Labels.resx">
+      <Link>Resources\Labels.resx</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40". (
+    if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\it-it". (
+        del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\it-it\*.*"  /Q
+        rd "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\it-it"
+    )
+    
+    del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\*.*"  /Q
+    echo "Build/NuGet folder purged".
+) else (
+    echo "no Build/NuGet folder to purge.".
+)
+
+if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40". (
+    md "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40"
+    echo "Build/NuGet folder created.".
+)
+
+if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\it-IT". (
+    md "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\it-IT"
+    echo "Build/NuGet (resources) folder created.".
+)
+
+copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetName).*" /B /Y
+copy "$(TargetDir)it-IT\$(TargetName).resources.*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\it-IT\$(TargetName).resources.*" /B /Y
+
+del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetFileName).config"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

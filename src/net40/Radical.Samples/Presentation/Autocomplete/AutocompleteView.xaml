@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Topics.Radical.Presentation.Autocomplete.AutocompleteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:behaviors="http://schemas.topics.it/wpf/radical/windows/behaviors"
+	  xmlns:markup="http://schemas.topics.it/wpf/radical/windows/markup"
+	  mc:Ignorable="d" 
+	  d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <TextBox Height="23" HorizontalAlignment="Left" 
+				 Margin="12,12,0,0" 
+				 behaviors:AutoComplete.UserText="{Binding Path=UserText}"
+                 behaviors:AutoComplete.FilterPath="FullName"
+                 behaviors:AutoComplete.ImplicitItemsFilter="Disabled"
+				 behaviors:AutoComplete.Source="{Binding Path=Data}"
+				 behaviors:AutoComplete.ChoosenItem="{markup:ChoosenItemBinding Path=Choosen}"
+				 VerticalAlignment="Top" Width="173">
+            <behaviors:AutoComplete.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=FirstName}" />
+                        <TextBlock Text="{Binding Path=LastName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </behaviors:AutoComplete.ItemTemplate>
+        </TextBox>
+        <Button Content="for tab purpose only" Height="23" HorizontalAlignment="Left" Margin="12,41,0,0" Name="button1" VerticalAlignment="Top" Width="173" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,70,0,0" Name="textBox1" VerticalAlignment="Top" Width="173" />
+        <Calendar Height="170" 
+				  behaviors:BusyStatusManager.Status="Busy"
+				  HorizontalAlignment="Left" 
+				  Margin="96,109,0,0" Name="calendar1" VerticalAlignment="Top" Width="180">
+            <behaviors:BusyStatusManager.Content>
+                <Border BorderBrush="Red" BorderThickness="4">
+                    <Grid>
+                        <TextBlock Text="I'm busy" Margin="30" />
+                    </Grid>
+                </Border>
+            </behaviors:BusyStatusManager.Content>
+        </Calendar>
+    </Grid>
+</UserControl>

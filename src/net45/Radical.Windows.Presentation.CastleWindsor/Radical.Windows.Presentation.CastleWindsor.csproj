@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1B898AE6-9D4A-492C-B9CA-95272A6C6FF1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Topics.Radical.Windows.Presentation</RootNamespace>
+    <AssemblyName>Radical.Windows.Presentation.CastleWindsor</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+      <Link>Properties\Radical.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\InjectViewInRegionFacility.cs">
+      <Link>Boot\InjectViewInRegionFacility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\Installers\DefaultInstaller.cs">
+      <Link>Boot\Installers\DefaultInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\Installers\MessageBrokerInstaller.cs">
+      <Link>Boot\Installers\MessageBrokerInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\Installers\PresentationInstaller.cs">
+      <Link>Boot\Installers\PresentationInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\Installers\ServicesInstaller.cs">
+      <Link>Boot\Installers\ServicesInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\Installers\UICompositionInstaller.cs">
+      <Link>Boot\Installers\UICompositionInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\WindsorApplicationBootstrapper %28Generic%29.cs">
+      <Link>Boot\WindsorApplicationBootstrapper %28Generic%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\WindsorApplicationBootstrapper.cs">
+      <Link>Boot\WindsorApplicationBootstrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Properties\NugetInfo.cs">
+      <Link>Properties\NugetInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Services\ComponentReleaser.cs">
+      <Link>Services\ComponentReleaser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Tracing.cs">
+      <Link>Tracing.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
+      <Project>{25797064-a7eb-4589-92a5-1bb9bc9f380c}</Project>
+      <Name>Radical.Extensions.Castle %28Extensions\net45\Radical.Extensions.Castle%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
+      <Project>{767fad7d-a6cf-426e-ac34-6ea187c76ff9}</Project>
+      <Name>Radical.Windows.Presentation %28net45\Radical.Windows.Presentation%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
+      <Project>{135504b6-2a47-4e30-994e-60bc49477091}</Project>
+      <Name>Radical.Windows %28net45\Radical.Windows%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Radical\Radical.csproj">
+      <Project>{db4e99f1-3cbe-4e76-9197-d6f884a0f618}</Project>
+      <Name>Radical %28net45\Radical%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45". (
+    del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\*.*"  /Q
+    echo "Build/NuGet folder purged".
+) else (
+    echo "no Build/NuGet folder to purge.".
+)
+
+if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45". (
+    md "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45"
+    echo "Build/NuGet folder created.".
+)
+
+copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetName).*" /B /Y
+copy "$(SolutionDir)readme.txt" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
+
+del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetFileName).config"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- <Import Project="$(SolutionDir)\.nuget\nuget.targets" /> -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,8 @@
+Requirements on the developer machine:
+
+Expression Blend SDK:
+WPF: http://www.microsoft.com/en-us/download/details.aspx?id=10801
+Silverlight: http://www.microsoft.com/en-us/download/details.aspx?id=3062
+
+Optional:
+DirectX SDK

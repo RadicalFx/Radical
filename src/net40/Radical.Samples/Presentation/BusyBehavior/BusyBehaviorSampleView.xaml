@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Topics.Radical.Presentation.BusyBehavior.BusyBehaviorSampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behaviors="http://schemas.topics.it/wpf/radical/windows/behaviors"
+             xmlns:converters="http://schemas.topics.it/wpf/radical/windows/converters"
+             xmlns:markup="http://schemas.topics.it/wpf/radical/windows/markup"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <AdornerDecorator>
+        <Grid behaviors:BusyStatusManager.Status="{Binding Path=IsBusy, Converter={converters:BooleanBusyStatusConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <behaviors:BusyStatusManager.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Ellipse x:Name="ellipse" StrokeThickness="6" Width="30" VerticalAlignment="Bottom" Height="30" RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.Resources>
+                            <Storyboard x:Key="SpinAnimation" RepeatBehavior="Forever">
+                                <DoubleAnimation To="359"
+                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" />
+                            </Storyboard>
+                        </Ellipse.Resources>
+                        <Ellipse.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource SpinAnimation}"/>
+                            </EventTrigger>
+                        </Ellipse.Triggers>
+                        <Ellipse.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Ellipse.RenderTransform>
+                        <Ellipse.Stroke>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Red" Offset="0"/>
+                                <GradientStop Color="#FF1442BF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Stroke>
+                    </Ellipse>
+                    <Button IsEnabled="{Binding Path=ThresholdElapsed}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Content="Waited tooooo long, cancel..." Command="{markup:AutoCommandBinding Path=CancelWork}" />
+                </Grid>
+            </behaviors:BusyStatusManager.Content>
+
+            <TextBlock Grid.Row="0" Text="{Binding Path=Status}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Button Grid.Row="1" Content="Click me!" Command="{markup:AutoCommandBinding Path=WorkAsync}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="70" Height="23"/>
+        </Grid>
+    </AdornerDecorator>
+</UserControl>

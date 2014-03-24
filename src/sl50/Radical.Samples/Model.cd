@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Topics.Radical.ComponentModel.Person">
+    <Position X="2.25" Y="0.75" Width="1.5" />
+    <AssociationLine Name="Addresses" Type="Topics.Radical.ComponentModel.Address">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.475" Y="0.081" Height="0.182" Width="0.902" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>ComponentModel\Person.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Addresses" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Topics.Radical.Samples.PersonViewModel">
+    <Position X="5" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Samples\PersonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Topics.Radical.Model.MementoEntity" Collapsed="true">
+    <Position X="5" Y="5.75" Width="2.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Topics.Radical.Samples.MainPageViewModel">
+    <Position X="1.75" Y="7" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Entity" Type="Topics.Radical.Samples.PersonViewModel">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.31" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAIAAIAAAAEAAEAAAAAA=</HashCode>
+      <FileName>Samples\MainPageViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Entity" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Topics.Radical.ComponentModel.AbstractViewModel" Collapsed="true">
+    <Position X="1.75" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComponentModel\AbstractViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Topics.Radical.ComponentModel.Address">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <AssociationLine Name="Person" Type="Topics.Radical.ComponentModel.Person">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.787" Y="0.091" Height="0.182" Width="0.673" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAIAEAAAAAAAAAAAAABAAIAAAAAAAA=</HashCode>
+      <FileName>ComponentModel\Address.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

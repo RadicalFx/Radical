@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Topics.Radical.Samples.MainPage"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Topics.Radical.Windows.Controls;assembly=Radical.Windows"
+			 xmlns:behaviors="http://schemas.topics.it/wpf/radical/windows/behaviors"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+    <controls:AdornerLayer>
+        <Grid x:Name="LayoutRoot" Background="White">
+            <TextBox Height="23"
+                     behaviors:BusyStatusManager.Status="Busy"
+                Text="{Binding Path=Entity.FirstName, Mode=TwoWay}" Margin="12,73,232,0" 
+                VerticalAlignment="Top">
+                <behaviors:BusyStatusManager.Content>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Red" BorderThickness="1">
+                        <TextBlock Text="Hello!" 
+                               TextAlignment="Left" 
+                               Margin="5,0,0,0"
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Left" />
+                    </Border>
+                </behaviors:BusyStatusManager.Content>
+            </TextBox>
+            <TextBox Height="23" 
+                Text="{Binding Path=Entity.LastName, Mode=TwoWay}"
+                HorizontalAlignment="Left" 
+                Margin="12,44,0,0" 
+                VerticalAlignment="Top" 
+                Width="156" />
+            <Button Content="Undo"
+            Command="{Binding Path=UndoCommand}"
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="12,12,0,0" 
+            VerticalAlignment="Top" 
+            Width="75" />
+            <Button Content="Redo" 
+            Command="{Binding Path=RedoCommand}"
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="93,12,0,0"
+            VerticalAlignment="Top" Width="75" />
+        </Grid>
+    </controls:AdornerLayer>
+</UserControl>
