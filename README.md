@@ -15,9 +15,10 @@ The latest release can be found on NuGet: http://nuget.org/packages?q=radical
 ### Notes
 
 In order to fully build the solution from source code the Expression Blend SDK is required:
-Silverlight: http://www.microsoft.com/en-us/download/details.aspx?id=3062
-WPF: http://www.microsoft.com/en-us/download/details.aspx?id=10801
+
+* Silverlight: http://www.microsoft.com/en-us/download/details.aspx?id=3062
+* WPF: http://www.microsoft.com/en-us/download/details.aspx?id=10801
 
 For projects targeting .Net framework 3.5 the Blend 3 SDK is required:
 
-http://www.microsoft.com/en-us/download/details.aspx?id=22829
+* http://www.microsoft.com/en-us/download/details.aspx?id=22829
