@@ -113,6 +113,8 @@
     <Compile Include="Properties\NugetInfo.cs" />
     <Compile Include="Regions\RegionExtensions.cs" />
     <Compile Include="Regions\RegionManagerFactory.cs" />
+    <Compile Include="Regions\RegionHeaderedElement.cs" />
+    <Compile Include="Regions\Specialized\TabControlRegion.cs" />
     <Compile Include="Regions\___ActiveContentChangedMonitor.cs" />
     <Compile Include="Regions\ContentRegion.cs" />
     <Compile Include="Regions\ElementsRegion.cs" />
