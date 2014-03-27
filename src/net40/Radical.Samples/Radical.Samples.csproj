@@ -200,6 +200,19 @@
     <Compile Include="Presentation\Memento\SimpleGraph\SimpleGraphView.xaml.cs">
       <DependentUpon>SimpleGraphView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\TabControlRegion\AlphaView.xaml.cs">
+      <DependentUpon>AlphaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\TabControlRegion\BetaView.xaml.cs">
+      <DependentUpon>BetaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\TabControlRegion\GammaView.xaml.cs">
+      <DependentUpon>GammaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\TabControlRegion\TabControlRegionView.xaml.cs">
+      <DependentUpon>TabControlRegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\TabControlRegion\TabControlRegionViewModel.cs" />
     <Compile Include="Presentation\Validation\ValidationSampleView.xaml.cs">
       <DependentUpon>ValidationSampleView.xaml</DependentUpon>
     </Compile>
@@ -291,6 +304,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Memento\SimpleGraph\SimpleGraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\TabControlRegion\AlphaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\TabControlRegion\BetaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\TabControlRegion\GammaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\TabControlRegion\TabControlRegionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

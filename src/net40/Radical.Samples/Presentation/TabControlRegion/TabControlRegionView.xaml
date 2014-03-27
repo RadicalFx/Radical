@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Topics.Radical.Presentation.TabControlRegion.TabControlRegionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:rg="http://schemas.topics.it/wpf/radical/windows/presentation/regions"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    
+    <DockPanel>
+
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="Alpha and Beta views are injected with the attribute InjectViewInRegion."/>
+            <Button Content="Add New Gamma View" Command="{Binding AddNewGammaViewCommand}"/>
+            <Button Content="Activate Gamma View" Command="{Binding ActivateGammaViewCommand}"/>
+            <Button Content="Remove Last View" Command="{Binding RemoveLastViewCommand}"/>
+        </StackPanel>
+
+        <TabControl rg:RegionService.Region="{rg:TabControlRegion Name=MainTabRegion}"/>
+
+    </DockPanel>
+    
+</UserControl>
