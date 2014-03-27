@@ -82,9 +82,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Interactivity\net\40\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -354,29 +352,29 @@
       <Project>{25797064-a7eb-4589-92a5-1bb9bc9f380c}</Project>
       <Name>Radical.Extensions.Castle %28Extensions\net45\Radical.Extensions.Castle%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\net45\Radical.Windows.Presentation.CastleWindsor\Radical.Windows.Presentation.CastleWindsor.csproj">
+      <Project>{1b898ae6-9d4a-492c-b9ca-95272a6c6ff1}</Project>
+      <Name>Radical.Windows.Presentation.CastleWindsor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\net45\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
+      <Project>{767fad7d-a6cf-426e-ac34-6ea187c76ff9}</Project>
+      <Name>Radical.Windows.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\net45\Radical.Windows\Radical.Windows.csproj">
+      <Project>{135504b6-2a47-4e30-994e-60bc49477091}</Project>
+      <Name>Radical.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\net45\Radical\Radical.csproj">
+      <Project>{db4e99f1-3cbe-4e76-9197-d6f884a0f618}</Project>
+      <Name>Radical</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Radical.Design\Radical.Design.csproj">
-      <Project>{253F225A-8A50-4D1B-825B-E8C45370E7A9}</Project>
-      <Name>Radical.Design %28net40\Radical.Design%29</Name>
+      <Project>{253f225a-8a50-4d1b-825b-e8c45370e7a9}</Project>
+      <Name>Radical.Design</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical.Samples.Components\Radical.Samples.Components.csproj">
       <Project>{69c801a6-9e90-4a8f-a3f8-dbc21c7f5703}</Project>
       <Name>Radical.Samples.Components</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical.Windows.Presentation.CastleWindsor\Radical.Windows.Presentation.CastleWindsor.csproj">
-      <Project>{e72f0df7-1725-4f64-aaff-00208cd7553e}</Project>
-      <Name>Radical.Windows.Presentation.CastleWindsor %28net40\Radical.Windows.Presentation.CastleWindsor%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
-      <Project>{591ad4df-2fad-4451-8a8a-5ef36ed2a2ac}</Project>
-      <Name>Radical.Windows.Presentation %28net40\Radical.Windows.Presentation%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
-      <Project>{8AD2DC17-392C-4BBE-B34B-11A3ACB9DC86}</Project>
-      <Name>Radical.Windows %28net40\Radical.Windows%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Radical\Radical.csproj">
-      <Project>{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}</Project>
-      <Name>Radical %28net40\Radical%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
