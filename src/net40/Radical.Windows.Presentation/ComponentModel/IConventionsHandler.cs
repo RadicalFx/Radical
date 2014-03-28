@@ -32,6 +32,30 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// </value>
 		Action<DependencyObject> ViewReleaseHandler { get; set; }
 
+		/// <summary>
+		/// Gets or sets the handler that determines if a region manager for the given view should be un-registered, the default behavior is that the region manager should be realsed if the view is not a singleton view.
+		/// </summary>
+		/// <value>
+		/// The un-register region manager handler.
+		/// </value>
+		Func<DependencyObject, Boolean> ShouldUnregisterRegionManagerOfView { get; set; }
+
+		/// <summary>
+		/// Gets or sets the handler that determines if a view should be relased, the default behavior is that the view is released if not a singleton view.
+		/// </summary>
+		/// <value>
+		/// The view release handler.
+		/// </value>
+		Func<DependencyObject, Boolean> ShouldReleaseView { get; set; }
+
+		/// <summary>
+		/// Gets or sets the handler that determines if a view model should be automatically unsubscribed from all the subscriptions when its view is relased, the default behavior is that the view model is unsubscribed if the view is not a singleton view.
+		/// </summary>
+		/// <value>
+		/// The unsubscribe handler.
+		/// </value>
+		Func<DependencyObject, Boolean> ShouldUnsubscribeViewModelOnRelease { get; set; }
+
 #if !WINDOWS_PHONE
 		/// <summary>
 		/// Gets or sets the ViewModel -> window finder that given a ViewModel finds the root Window that hosts that ViewModel.

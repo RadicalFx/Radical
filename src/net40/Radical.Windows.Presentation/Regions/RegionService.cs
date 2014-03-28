@@ -215,7 +215,10 @@ namespace Topics.Radical.Windows.Presentation.Regions
 			 */
 			Action<DependencyObject> closedCallback = d =>
 			{
-				this.UnregisterRegionManagers( d, UnregisterBehavior.WholeLogicalTreeChain );
+				if ( this.conventions.ShouldUnregisterRegionManagerOfView( d ) )
+				{
+					this.UnregisterRegionManagers( d, UnregisterBehavior.WholeLogicalTreeChain );
+				}
 			};
 
 			var closableHost = this.conventions.TryHookClosedEventOfHostOf( owner, closedCallback );
