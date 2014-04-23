@@ -81,7 +81,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// </summary>
 		protected AbstractViewModel()
 		{
-			this.ValidationErrors = new ObservableCollection<ValidationError>();
+			
 		}
 
 		//protected virtual void OnLoading()
@@ -163,14 +163,23 @@ namespace Topics.Radical.Windows.Presentation
 			get { return this.ValidationService.IsValid; }
 		}
 
+		ObservableCollection<ValidationError> _validationErrors;
+
 		/// <summary>
 		/// Gets the validation errors if any.
 		/// </summary>
 		/// <value>The validation errors.</value>
 		public virtual ObservableCollection<ValidationError> ValidationErrors
 		{
-			get;
-			private set;
+			get 
+			{
+				if ( this._validationErrors == null ) 
+				{
+					this._validationErrors = new ObservableCollection<ValidationError>();
+				}
+
+				return this._validationErrors;
+			}
 		}
 
 		/// <summary>

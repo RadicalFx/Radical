@@ -21,11 +21,16 @@ namespace Topics.Radical.Validation
 		/// is raised if the current inspected object is an empty string.</exception>
 		public static IEnsure<String> IsNotEmpty( this IEnsure<String> validator )
 		{
-			validator.If( s => s.Length == 0 )
-				.ThenThrow( v =>
-				{
-					return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( "The inspected string value should be not empty." ) );
-				} );
+			var value = validator.GetValue();
+			if ( value != null && value.Length == 0 ) 
+			{
+				throw new ArgumentOutOfRangeException( validator.Name, validator.GetFullErrorMessage( "The inspected string value should be not empty." ) );
+			}
+				//validator.If( s => s.Length == 0 )
+				//	.ThenThrow( v =>
+				//	{
+				//		return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( "The inspected string value should be not empty." ) );
+				//	} );
 
 			return validator;
 		}

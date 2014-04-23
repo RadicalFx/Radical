@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDD1DA5D-B3A3-4274-9F83-4ACDE54C34EF}"
 	ProjectSection(SolutionItems) = preProject
@@ -144,6 +144,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical.Samples.Components", "src\net40\Radical.Samples.Components\Radical.Samples.Components.csproj", "{69C801A6-9E90-4A8F-A3F8-DBC21C7F5703}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical.Windows.Presentation.Puzzle", "src\wp8\Radical.Windows.Presentation.Puzzle\Radical.Windows.Presentation.Puzzle.csproj", "{87DC41A3-515B-4811-9D27-CE5B182498B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGridView", "src\net40\TestGridView\TestGridView.csproj", "{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -933,6 +935,20 @@ Global
 		{87DC41A3-515B-4811-9D27-CE5B182498B9}.Release|x64.ActiveCfg = Release|Any CPU
 		{87DC41A3-515B-4811-9D27-CE5B182498B9}.Release|x86.ActiveCfg = Release|x86
 		{87DC41A3-515B-4811-9D27-CE5B182498B9}.Release|x86.Build.0 = Release|x86
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|x64.ActiveCfg = Release|Any CPU
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -969,6 +985,7 @@ Global
 		{9922DCDF-57B3-43C9-A8FB-FCAB22A8556F} = {BC8F0174-00B4-4E03-8A1F-8D14BE6C80EC}
 		{54549B5A-EFE2-4932-9681-6A135C796973} = {BC8F0174-00B4-4E03-8A1F-8D14BE6C80EC}
 		{69C801A6-9E90-4A8F-A3F8-DBC21C7F5703} = {BC8F0174-00B4-4E03-8A1F-8D14BE6C80EC}
+		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6} = {BC8F0174-00B4-4E03-8A1F-8D14BE6C80EC}
 		{6313E8C2-5D7D-4EB1-954D-24A7F1D2A4E7} = {EF2AA829-F3C2-439B-9C86-CE5F835B9472}
 		{BB03BD0F-E707-45B9-AAEE-2A8DEB9120D3} = {EF2AA829-F3C2-439B-9C86-CE5F835B9472}
 		{240098B2-2092-4EB7-955C-15154052F6E7} = {4D938E88-567A-4F81-A0E4-A56650C81053}
@@ -1000,5 +1017,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
