@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using Topics.Radical.Validation;
 using Topics.Radical.Windows.Presentation.Boot;
 
 namespace TestGridView
@@ -12,6 +13,8 @@ namespace TestGridView
     {
         public App()
         {
+			Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Skip;
+
             //New Guid cosi posso aprire + volte lo stesso programma se servisse.
             var bootstrapper = new WindsorApplicationBootstrapper<Presentation.MainView>()
                  .RegisterAsSingleton(Guid.NewGuid().ToString(), SingletonApplicationScope.Local);

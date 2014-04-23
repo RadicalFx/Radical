@@ -11,9 +11,9 @@ namespace Topics.Radical.Validation
 	public static class Ensure
 	{
 #if DEBUG
-		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.LoadSourceInfo;
+		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.Load;
 #else
-		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoadSourceInfo;
+		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoad;
 #endif
 
 		/// <summary>
@@ -82,6 +82,12 @@ namespace Topics.Radical.Validation
 						this._methodName = mi.Name;
 						this._className = mi.DeclaringType.Name;
 						this._sourceType = mi.MemberType;
+					}
+					else 
+					{
+						this._methodName = SourceInfo.Empty.MethodName;
+						this._className = SourceInfo.Empty.ClassName;
+						this._sourceType = SourceInfo.Empty.SourceType;
 					}
 
 					this.loaded = true;
@@ -155,11 +161,11 @@ namespace Topics.Radical.Validation
 
 			switch ( strategy )
 			{
-				case SourceInfoLoadStrategy.LoadSourceInfo:
+				case SourceInfoLoadStrategy.Load:
 					si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: false );
 					break;
 
-				case SourceInfoLoadStrategy.LazyLoadSourceInfo:
+				case SourceInfoLoadStrategy.LazyLoad:
 					si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: true );
 					break;
 			}
@@ -172,8 +178,8 @@ namespace Topics.Radical.Validation
 
 	public enum SourceInfoLoadStrategy
 	{
-		LoadSourceInfo,
-		SkipSourceInfoLoad,
-		LazyLoadSourceInfo
+		Load=0,
+		Skip,
+		LazyLoad
 	}
 }

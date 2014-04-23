@@ -17,7 +17,7 @@
 		public static IEnsure<T> IsNotNull<T>( this IEnsure<T> validator )
 			where T : class
 		{
-			var value = validator.GetValue();
+			var value = validator.GetValue<T>();
 			if ( value == null ) 
 			{
 				throw new ArgumentNullException( validator.Name, validator.GetFullErrorMessage( "The inspected value should be non null." ) );
