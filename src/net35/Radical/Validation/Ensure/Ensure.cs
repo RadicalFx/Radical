@@ -13,7 +13,7 @@ namespace Topics.Radical.Validation
 #if DEBUG
 		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.Load;
 #else
-		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoad;
+		static SourceInfoLoadStrategy _sourceInfoLoadStrategy = SourceInfoLoadStrategy.Skip;
 #endif
 
 		/// <summary>
