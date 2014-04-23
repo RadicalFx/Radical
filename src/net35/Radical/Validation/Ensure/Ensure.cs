@@ -159,15 +159,10 @@ namespace Topics.Radical.Validation
 
 #if !SILVERLIGHT
 
-			switch ( strategy )
+			if ( strategy != Validation.SourceInfoLoadStrategy.Skip ) 
 			{
-				case SourceInfoLoadStrategy.Load:
-					si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: false );
-					break;
-
-				case SourceInfoLoadStrategy.LazyLoad:
-					si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: true );
-					break;
+				var lazy = strategy == Validation.SourceInfoLoadStrategy.LazyLoad;
+				si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: lazy );
 			}
 
 #endif

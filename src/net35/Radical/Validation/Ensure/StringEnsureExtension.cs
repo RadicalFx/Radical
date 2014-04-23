@@ -22,15 +22,11 @@ namespace Topics.Radical.Validation
 		public static IEnsure<String> IsNotEmpty( this IEnsure<String> validator )
 		{
 			var value = validator.GetValue<String>();
+
 			if ( value != null && value.Length == 0 ) 
 			{
 				throw new ArgumentOutOfRangeException( validator.Name, validator.GetFullErrorMessage( "The inspected string value should be not empty." ) );
 			}
-				//validator.If( s => s.Length == 0 )
-				//	.ThenThrow( v =>
-				//	{
-				//		return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( "The inspected string value should be not empty." ) );
-				//	} );
 
 			return validator;
 		}
