@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDD1DA5D-B3A3-4274-9F83-4ACDE54C34EF}"
 	ProjectSection(SolutionItems) = preProject
@@ -730,15 +730,11 @@ Global
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|ARM.ActiveCfg = Release|Any CPU
-		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|x64.ActiveCfg = Release|Any CPU
 		{C59F93DA-49AE-4A8A-A011-2BF7EFEC84C6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
@@ -809,8 +805,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
