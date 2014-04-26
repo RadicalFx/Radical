@@ -543,7 +543,7 @@
         del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\it-it\*.*"  /Q
     )
     
-    del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\*.*"  /Q
+del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\*.*"  /Q
     echo "Build/NuGet folder purged".
 ) else (
     echo "no Build/NuGet folder to purge.".

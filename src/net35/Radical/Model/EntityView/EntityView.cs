@@ -693,7 +693,8 @@ namespace Topics.Radical.Model
             get { return this.Filter.ToString(); }
             set
             {
-                throw new NotSupportedException( "Setting a Instance as String is currently not supported" );
+				var msg = String.Format( "Setting '{0}' directly as Filter is not supported.", value ?? "<null>");
+                throw new NotSupportedException( msg );
                 //TODO: IBindingListView.Instance
                 /* Bisogna capire se siamo in grado data 
                  * una stringa di convertirla in un filtro 

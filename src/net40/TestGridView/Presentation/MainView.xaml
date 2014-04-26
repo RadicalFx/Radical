@@ -1,0 +1,53 @@
+﻿<Window x:Class="TestGridView.Presentation.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:markup="http://schemas.topics.it/wpf/radical/windows/markup"
+        Title="MainView" Height="463.265" Width="608.163">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="298"/>
+            <ColumnDefinition Width="302"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="309*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="65*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Numero righe da generare" HorizontalAlignment="Left" Margin="10,0,0,0" 
+               Grid.Row="2" VerticalAlignment="Top" Width="168"/>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="196,3,0,0" 
+                 Grid.Row="2" TextWrapping="Wrap" Text="{Binding Path=NumRigDaGen}" TextAlignment="Right" 
+                 VerticalAlignment="Top" Width="132"/>
+        <Button Content="Genera con INotifyPropertyChanged" 
+                Command="{markup:AutoCommandBinding Path=GenINot}"
+                Margin="29,23,34,0" 
+                Grid.Row="3" VerticalAlignment="Top"/>
+        <ListView HorizontalAlignment="Left" Width="288" 
+                  ItemsSource="{Binding Path=ListaClienti}" Margin="0,15,0,10" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Index" Width="60" DisplayMemberBinding="{Binding Path=ID}" />
+                    <GridViewColumn Header="Nome" Width="auto" DisplayMemberBinding="{Binding Path=Name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=Result}" 
+                   VerticalAlignment="Top" Height="26" Width="288"/>
+        <ListView HorizontalAlignment="Left" Width="288" 
+        	ItemsSource="{Binding ListaClientiRadical}" Margin="4,15,0,10" Grid.Row="1" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Index" Width="60" DisplayMemberBinding="{Binding IDR}" />
+                    <GridViewColumn Header="Nome" Width="auto" DisplayMemberBinding="{Binding NameR}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Genera con AbstractViewModel" 
+        	Command="{markup:AutoCommandBinding Path=GenRad}"
+        	Margin="40,23,27,0" 
+        	Grid.Row="3" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding ResultRadical}" Width="288" Grid.Column="1" Margin="4,0,0,0"/>
+
+    </Grid>
+</Window>

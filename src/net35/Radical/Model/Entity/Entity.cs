@@ -233,7 +233,7 @@ namespace Topics.Radical.Model
         /// </returns>
         protected PropertyMetadata<T> GetPropertyMetadata<T>( Expression<Func<T>> property )
         {
-            Ensure.That( property ).Named( () => property ).IsNotNull();
+            Ensure.That( property ).Named( "property" ).IsNotNull();
 
             return ( PropertyMetadata<T> )this.GetPropertyMetadata<T>( property.GetMemberName() );
         }
@@ -246,7 +246,7 @@ namespace Topics.Radical.Model
         /// <returns>An instance of the requested property metadata.</returns>
         protected PropertyMetadata<T> GetPropertyMetadata<T>( String propertyName )
         {
-            Ensure.That( propertyName ).Named( () => propertyName ).IsNotNullNorEmpty();
+            Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
 
             //return ( PropertyMetadata<T> )this.GetPropertyMetadata( propertyName, typeof( T ) );
 

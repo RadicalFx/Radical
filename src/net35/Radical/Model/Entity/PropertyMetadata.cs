@@ -62,7 +62,23 @@ namespace Topics.Radical.Model
         readonly HashSet<String> cascadeChangeNotifications = new HashSet<String>();
 #endif
 
-        protected PropertyInfo Property { get; private set; }
+		readonly Object propertyOwner;
+		PropertyInfo _property;
+
+		protected PropertyInfo Property 
+		{
+			get 
+			{
+				if ( this._property == null ) 
+				{
+					this._property = this.propertyOwner
+						.GetType()
+						.GetProperty( this.PropertyName );
+				}
+
+				return this._property;
+			} 
+		}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyMetadata" /> class.
@@ -71,10 +87,10 @@ namespace Topics.Radical.Model
         /// <param name="propertyName">Name of the property.</param>
         protected PropertyMetadata( Object propertyOwner, String propertyName )
         {
-            Ensure.That( propertyOwner ).Named( () => propertyOwner ).IsNotNull();
+            Ensure.That( propertyOwner ).Named( "propertyOwner" ).IsNotNull();
             Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
 
-            this.Property = propertyOwner.GetType().GetProperty( propertyName );
+            this.propertyOwner = propertyOwner;
             this.PropertyName = propertyName;
             this.NotifyChanges = true;
         }
