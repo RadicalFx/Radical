@@ -17,11 +17,13 @@
 		public static IEnsure<T> IsNotNull<T>( this IEnsure<T> validator )
 			where T : class
 		{
-			return validator.If( s => s == null )
-				.ThenThrow( v =>
-				{
-					return new ArgumentNullException( v.Name, v.GetFullErrorMessage( "The inspected value should be non null." ) );
-				} );
+			var value = validator.GetValue<T>();
+			if ( value == null ) 
+			{
+				throw new ArgumentNullException( validator.Name, validator.GetFullErrorMessage( "The inspected value should be non null." ) );
+			}
+
+			return validator;
 		}
 	}
 }
