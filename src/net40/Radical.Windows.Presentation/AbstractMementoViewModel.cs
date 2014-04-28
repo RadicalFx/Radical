@@ -65,7 +65,8 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>
         /// The view.
         /// </value>
-        System.Windows.DependencyObject IViewModel.View { get; set; }
+		[Bindable( false )]
+		System.Windows.DependencyObject IViewModel.View { get; set; }
 
         IValidationService _validationService;
 
@@ -138,7 +139,8 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         /// <value>The error.</value>
         /// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
-        public virtual String Error
+        [Bindable(false)]
+		public virtual String Error
         {
             get { return null; }
         }
@@ -146,7 +148,8 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Gets the error message, if any, for the property with the given name.
         /// </summary>
-        public virtual String this[ String propertyName ]
+		[Bindable( false )]
+		public virtual String this[ String propertyName ]
         {
             get
             {
@@ -169,7 +172,8 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
         /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-        public virtual Boolean IsValid
+		[Bindable( false )]
+		public virtual Boolean IsValid
         {
             get { return this.ValidationService.IsValid; }
         }
@@ -178,7 +182,8 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets the validation errors if any.
         /// </summary>
         /// <value>The validation errors.</value>
-        public virtual ObservableCollection<ValidationError> ValidationErrors
+		[Bindable( false )]
+		public virtual ObservableCollection<ValidationError> ValidationErrors
         {
             get;
             private set;
@@ -361,6 +366,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// The focused element key.
 		/// </value>
 		[MementoPropertyMetadata( TrackChanges = false )]
+		[Bindable( false )]
 		public String FocusedElementKey
 		{
 			get { return this.GetPropertyValue( () => this.FocusedElementKey ); }
