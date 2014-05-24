@@ -79,6 +79,7 @@
     <Compile Include="Boot\SingletonApplicationStartupArgs.cs" />
     <Compile Include="ComponentModel\IReleaseComponents.cs" />
     <Compile Include="ComponentModel\IViewModelResolver.cs" />
+    <Compile Include="ComponentModel\NotifyActivatedAttribute.cs" />
     <Compile Include="ComponentModel\NotifyClosedAttribute.cs" />
     <Compile Include="ComponentModel\NotifyShownAttribute.cs" />
     <Compile Include="ComponentModel\IConventionsHandler.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Messaging\Handlers\ViewLoadedHandler.cs" />
     <Compile Include="Messaging\Handlers\ViewModelLoadedHandler.cs" />
     <Compile Include="Messaging\ViewLoaded.cs" />
+    <Compile Include="Messaging\ViewModelActivated.cs" />
     <Compile Include="Messaging\ViewModelClosing.cs" />
     <Compile Include="Messaging\ViewModelClosed.cs" />
     <Compile Include="Messaging\ViewModelLoaded.cs" />

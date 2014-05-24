@@ -56,6 +56,11 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
 				this.activated = ( s, e ) =>
 				{
+                    if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyActivatedAttribute>() )
+                    {
+                        this.broker.Broadcast( this, new ViewModelActivated( this, this.AssociatedObject.DataContext ) );
+                    }
+
 					var dc = this.AssociatedObject.DataContext as IExpectViewActivatedCallback;
 					if( dc != null )
 					{
