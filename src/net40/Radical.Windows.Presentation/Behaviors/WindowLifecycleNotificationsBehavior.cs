@@ -12,28 +12,28 @@ using Topics.Radical.Validation;
 
 namespace Topics.Radical.Windows.Presentation.Behaviors
 {
-    /// <summary>
-    /// Wires the window lifecycle to a view model that requires lifecycle notifications.
-    /// </summary>
-    public class WindowLifecycleNotificationsBehavior : RadicalBehavior<Window>
-    {
+	/// <summary>
+	/// Wires the window lifecycle to a view model that requires lifecycle notifications.
+	/// </summary>
+	public class WindowLifecycleNotificationsBehavior : RadicalBehavior<Window>
+	{
         static readonly TraceSource logger = new TraceSource( typeof( WindowLifecycleNotificationsBehavior ).FullName );
 
-        readonly IMessageBroker broker;
-        readonly IConventionsHandler conventionsHandler;
+		readonly IMessageBroker broker;
+		readonly IConventionsHandler conventionsHandler;
 
-        RoutedEventHandler loaded = null;
-        EventHandler activated = null;
-        EventHandler rendered = null;
-        EventHandler closed = null;
-        CancelEventHandler closing = null;
+		RoutedEventHandler loaded = null;
+		EventHandler activated = null;
+		EventHandler rendered = null;
+		EventHandler closed = null;
+		CancelEventHandler closing = null;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WindowLifecycleNotificationsBehavior"/> class.
-        /// </summary>
-        /// <param name="broker">The broker.</param>
-        /// <param name="conventionsHandler">The conventions handler.</param>
-        public WindowLifecycleNotificationsBehavior( IMessageBroker broker, IConventionsHandler conventionsHandler )
+		/// <summary>
+		/// Initializes a new instance of the <see cref="WindowLifecycleNotificationsBehavior"/> class.
+		/// </summary>
+		/// <param name="broker">The broker.</param>
+		/// <param name="conventionsHandler">The conventions handler.</param>
+		public WindowLifecycleNotificationsBehavior( IMessageBroker broker, IConventionsHandler conventionsHandler )
 		{
             Ensure.That( broker ).Named( () => broker ).IsNotNull();
             Ensure.That( conventionsHandler ).Named( () => conventionsHandler ).IsNotNull();
@@ -84,7 +84,10 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
 				this.activated = ( s, e ) =>
 				{
-                    logger.Debug( "Activated event raised." );
+                    if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyActivatedAttribute>() )
+                    {
+                        this.broker.Broadcast( this, new ViewModelActivated( this, this.AssociatedObject.DataContext ) );
+                    }
 
 					var dc = this.AssociatedObject.DataContext as IExpectViewActivatedCallback;
 					if( dc != null )
@@ -100,7 +103,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                 logger.Debug( "Activated event attached." );
 
 				this.rendered = ( s, e ) =>
-                {
+				{
                     logger.Debug( "Rendered event raised." );
 
 					if( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyShownAttribute>() )
@@ -123,7 +126,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                 logger.Debug( "Rendered event attached." );
 
 				this.closed = ( s, e ) =>
-                {
+				{
                     logger.Debug( "Closed event raised." );
 
 					if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyClosedAttribute>() )
@@ -148,7 +151,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                 logger.Debug( "Closed event attached." );
 
 				this.closing = ( s, e ) =>
-                {
+				{
                     logger.Debug( "Closing event raised." );
 
 					//if( this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyClosingAttribute>() )
@@ -176,40 +179,40 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
             else
             {
                 logger.Information("We are running within a designer.");
-            }
+			}
 		}
 
-        /// <summary>
-        /// Called after the behavior is attached to an AssociatedObject.
-        /// </summary>
-        protected override void OnAttached()
-        {
-            base.OnAttached();
+		/// <summary>
+		/// Called after the behavior is attached to an AssociatedObject.
+		/// </summary>
+		protected override void OnAttached()
+		{
+			base.OnAttached();
 
             if ( !DesignTimeHelper.GetIsInDesignMode() )
-            {
-                this.AssociatedObject.Loaded += this.loaded;
-                this.AssociatedObject.Activated += this.activated;
-                this.AssociatedObject.ContentRendered += this.rendered;
-                this.AssociatedObject.Closing += this.closing;
-                this.AssociatedObject.Closed += this.closed;
-            }
-        }
+			{
+				this.AssociatedObject.Loaded += this.loaded;
+				this.AssociatedObject.Activated += this.activated;
+				this.AssociatedObject.ContentRendered += this.rendered;
+				this.AssociatedObject.Closing += this.closing;
+				this.AssociatedObject.Closed += this.closed;
+			}
+		}
 
-        /// <summary>
-        /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
-        /// </summary>
-        protected override void OnDetaching()
-        {
+		/// <summary>
+		/// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+		/// </summary>
+		protected override void OnDetaching()
+		{
             if ( !DesignTimeHelper.GetIsInDesignMode() )
-            {
-                this.AssociatedObject.Loaded -= this.loaded;
-                this.AssociatedObject.Activated -= this.activated;
-                this.AssociatedObject.ContentRendered -= this.rendered;
-                this.AssociatedObject.Closing -= this.closing;
-                this.AssociatedObject.Closed -= this.closed;
-            }
-            base.OnDetaching();
-        }
-    }
+			{
+				this.AssociatedObject.Loaded -= this.loaded;
+				this.AssociatedObject.Activated -= this.activated;
+				this.AssociatedObject.ContentRendered -= this.rendered;
+				this.AssociatedObject.Closing -= this.closing;
+				this.AssociatedObject.Closed -= this.closed;
+			}
+			base.OnDetaching();
+		}
+	}
 }
