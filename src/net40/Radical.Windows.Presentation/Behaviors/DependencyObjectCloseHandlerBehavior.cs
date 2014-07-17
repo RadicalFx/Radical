@@ -25,6 +25,9 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
             this.conventions = conventions;
         }
 
+        /// <summary>
+        /// Called after the behavior is attached to an AssociatedObject.
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -50,6 +53,10 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
             } );
         }
 
+        /// <summary>
+        /// Called when the behavior is being detached from its AssociatedObject,
+        /// but before it has actually occurred.
+        /// </summary>
         protected override void OnDetaching()
         {
             if ( this.broker != null )
