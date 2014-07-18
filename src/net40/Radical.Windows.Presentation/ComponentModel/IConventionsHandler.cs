@@ -154,7 +154,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		Action<DependencyObject> AttachViewBehaviors { get; set; }
 
 		/// <summary>
-		/// Gets an opportunity to detach behaviors to the view.
+		/// Gets an opportunity to detach behaviors from the view.
 		/// </summary>
 		/// <value>
 		/// The detach view behaviors handler.
