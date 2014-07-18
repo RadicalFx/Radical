@@ -65,6 +65,8 @@ namespace Topics.Radical.Windows.Presentation.Services
 					}
 				}
 
+			    this.DetachViewBehaviors( v );
+
 				this.releaser.Release( v );
 			};
 
@@ -224,6 +226,29 @@ namespace Topics.Radical.Windows.Presentation.Services
 			};
 #endif
 
+#if !SILVERLIGHT
+			this.DetachViewBehaviors = view =>
+			{
+				var bhv = Interaction.GetBehaviors(view);
+				if (view is Window)
+				{
+					bhv.OfType<WindowLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+				}
+				else if (view is FrameworkElement)
+				{
+					bhv.OfType<FrameworkElementLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+				}
+				bhv.OfType<DependencyObjectCloseHandlerBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+			};
+#else
+			this.DetachViewBehaviors = view =>
+			{
+				var bhv = Interaction.GetBehaviors( view );
+				bhv.OfType<FrameworkElementLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+				bhv.OfType<DependencyObjectCloseHandlerBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
+			};
+#endif
+
 			this.ShouldNotifyViewModelLoaded = ( view, dataContext ) =>
 			{
 				if ( dataContext == null )
@@ -363,6 +388,14 @@ namespace Topics.Radical.Windows.Presentation.Services
 		/// The attach view behaviors handler.
 		/// </value>
 		public Action<DependencyObject> AttachViewBehaviors { get; set; }
+
+		/// <summary>
+		/// Gets an opportunity to detach behaviors from the view.
+		/// </summary>
+		/// <value>
+		/// The detach view behaviors handler.
+		/// </value>
+		public Action<DependencyObject> DetachViewBehaviors { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that determines if ViewModel should notify the loaded message.

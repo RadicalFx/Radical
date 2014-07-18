@@ -69,10 +69,14 @@
                  * è quindi lecito accedere ai 'field' e ad 
                  * eventuali reference perchè sicuramente Finalize
                  * non è ancora stato chiamato su questi oggetti
+                 * 
+                 * Staminchia...
                  */
-                this.RejectChangesCore( false );
+                //this.RejectChangesCore( false );
 
                 this.backwardChangesStack.ForEach( c => this.OnUnwire( c ) );
+                this.forwardChangesStack.ForEach( c => this.OnUnwire( c ) );
+                
                 this.iComponentEntities.ForEach( ic =>
                 {
                     if ( ic != null )

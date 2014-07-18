@@ -147,6 +147,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IViewResolver.cs">
       <Link>ComponentModel\IViewResolver.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\NotifyActivatedAttribute.cs">
+      <Link>ComponentModel\NotifyActivatedAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\NotifyClosedAttribute.cs">
       <Link>ComponentModel\NotifyClosedAttribute.cs</Link>
     </Compile>
@@ -224,6 +227,9 @@
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewLoaded.cs">
       <Link>Messaging\ViewLoaded.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewModelActivated.cs">
+      <Link>Messaging\ViewModelActivated.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Messaging\ViewModelClosed.cs">
       <Link>Messaging\ViewModelClosed.cs</Link>

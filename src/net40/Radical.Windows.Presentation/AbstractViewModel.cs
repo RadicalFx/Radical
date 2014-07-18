@@ -27,6 +27,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// <value>
 		/// The view.
 		/// </value>
+		[Bindable( false )]
 		System.Windows.DependencyObject IViewModel.View { get; set; }
 
 		IValidationService _validationService;
@@ -127,6 +128,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// </summary>
 		/// <value>The error.</value>
 		/// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
+		[Bindable( false )]
 		public virtual String Error
 		{
 			get { return null; }
@@ -135,6 +137,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// <summary>
 		/// Gets the error message, if any, for the property with the given name.
 		/// </summary>
+		[Bindable( false )]
 		public virtual String this[ String propertyName ]
 		{
 			get
@@ -158,6 +161,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// Gets a value indicating whether this instance is valid.
 		/// </summary>
 		/// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
+		[Bindable( false )]
 		public virtual Boolean IsValid
 		{
 			get { return this.ValidationService.IsValid; }
@@ -276,6 +280,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// <value>
 		/// The focused element key.
 		/// </value>
+		[Bindable( false )]
 		[MementoPropertyMetadata( TrackChanges = false )]
 		public String FocusedElementKey
 		{

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using Topics.Radical.ComponentModel.Messaging;
 using Topics.Radical.Reflection;
 using Topics.Radical.Windows.Behaviors;
 using Topics.Radical.Windows.Presentation.ComponentModel;
 using Topics.Radical.Windows.Presentation.Messaging;
+using Topics.Radical.Diagnostics;
+using Topics.Radical.Validation;
 
 namespace Topics.Radical.Windows.Presentation.Behaviors
 {
@@ -14,6 +17,8 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 	/// </summary>
 	public class WindowLifecycleNotificationsBehavior : RadicalBehavior<Window>
 	{
+        static readonly TraceSource logger = new TraceSource( typeof( WindowLifecycleNotificationsBehavior ).FullName );
+
 		readonly IMessageBroker broker;
 		readonly IConventionsHandler conventionsHandler;
 
@@ -30,41 +35,77 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 		/// <param name="conventionsHandler">The conventions handler.</param>
 		public WindowLifecycleNotificationsBehavior( IMessageBroker broker, IConventionsHandler conventionsHandler )
 		{
+            Ensure.That( broker ).Named( () => broker ).IsNotNull();
+            Ensure.That( conventionsHandler ).Named( () => conventionsHandler ).IsNotNull();
+
 			this.broker = broker;
 			this.conventionsHandler = conventionsHandler;
 
 			if( !DesignTimeHelper.GetIsInDesignMode() )
 			{
+                logger.Debug( "We are not running within a designer." );
+                logger.Debug( "Ready to attach events." );
+
 				this.loaded = ( s, e ) =>
 				{
+                    logger.Debug( "Loaded event raised." );
+                    Ensure.That( this.AssociatedObject ).Named( "AssociatedObject" ).IsNotNull();
+
 					if( this.conventionsHandler.ShouldNotifyViewModelLoaded( this.AssociatedObject, this.AssociatedObject.DataContext ) )
 					{
+                        logger.Debug( "ShouldNotifyViewModelLoaded -> true." );
+
                         this.broker.Broadcast( this, new ViewModelLoaded( this, this.AssociatedObject.DataContext ) );
+
+                        logger.Debug( "Message broadcasted." );
 					}
 					
 					if ( this.conventionsHandler.ShouldNotifyViewLoaded( this.AssociatedObject ) )
                     {
+                        logger.Debug( "ShouldNotifyViewLoaded -> true." );
+
                         this.broker.Broadcast( this, new ViewLoaded( this, this.AssociatedObject ));
+
+                        logger.Debug( "Message broadcasted." );
                     }
 
 					var dc = this.AssociatedObject.DataContext as IExpectViewLoadedCallback;
 					if( dc != null )
 					{
+                        logger.Debug( "DataContext is IExpectViewLoadedCallback." );
+
 						dc.OnViewLoaded();
+
+                        logger.Debug( "DataContext.OnViewLoaded() invoked." );
 					}
 				};
+
+                logger.Debug( "Loaded event attached." );
 
 				this.activated = ( s, e ) =>
 				{
+                    if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyActivatedAttribute>() )
+                    {
+                        this.broker.Broadcast( this, new ViewModelActivated( this, this.AssociatedObject.DataContext ) );
+                    }
+
 					var dc = this.AssociatedObject.DataContext as IExpectViewActivatedCallback;
 					if( dc != null )
 					{
+                        logger.Debug( "DataContext is IExpectViewActivatedCallback." );
+
 						dc.OnViewActivated();
+
+                        logger.Debug( "DataContext.OnViewActivated() invoked." );
 					}
 				};
 
+                logger.Debug( "Activated event attached." );
+
 				this.rendered = ( s, e ) =>
 				{
+                    logger.Debug( "Rendered event raised." );
+
 					if( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyShownAttribute>() )
 					{
                         this.broker.Broadcast( this, new ViewModelShown( this, this.AssociatedObject.DataContext ) );
@@ -73,12 +114,21 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 					var dc = this.AssociatedObject.DataContext as IExpectViewShownCallback;
 					if( dc != null )
 					{
+                        logger.Debug( "DataContext is IExpectViewShownCallback." );
+
 						dc.OnViewShown();
+
+                        logger.Debug( "DataContext.OnViewShown() invoked." );
 					}
 				};
 
+
+                logger.Debug( "Rendered event attached." );
+
 				this.closed = ( s, e ) =>
 				{
+                    logger.Debug( "Closed event raised." );
+
 					if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyClosedAttribute>() )
 					{
                         this.broker.Broadcast( this, new ViewModelClosed( this, this.AssociatedObject.DataContext ) );
@@ -87,14 +137,23 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 					var dc = this.AssociatedObject.DataContext as IExpectViewClosedCallback;
 					if( dc != null )
 					{
+                        logger.Debug( "DataContext is IExpectViewClosedCallback." );
+
 						dc.OnViewClosed();
+
+                        logger.Debug( "DataContext.OnViewClosed() invoked." );
 					}
 
 					this.conventionsHandler.ViewReleaseHandler( this.AssociatedObject );
 				};
 
+
+                logger.Debug( "Closed event attached." );
+
 				this.closing = ( s, e ) =>
 				{
+                    logger.Debug( "Closing event raised." );
+
 					//if( this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyClosingAttribute>() )
 					//{
 					//    var message = new ViewModelClosing( this, ( IViewModel )this.AssociatedObject.DataContext );
@@ -106,9 +165,20 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 					var dc = this.AssociatedObject.DataContext as IExpectViewClosingCallback;
 					if( dc != null )
 					{
+                        logger.Debug( "DataContext is IExpectViewClosingCallback." );
+
 						dc.OnViewClosing( e );
+
+                        logger.Debug( "DataContext.OnViewClosing() invoked." );
 					}
 				};
+
+
+                logger.Debug( "Closing event attached." );
+			}
+            else
+            {
+                logger.Information("We are running within a designer.");
 			}
 		}
 
@@ -119,7 +189,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 		{
 			base.OnAttached();
 
-			if( !DesignTimeHelper.GetIsInDesignMode() )
+            if ( !DesignTimeHelper.GetIsInDesignMode() )
 			{
 				this.AssociatedObject.Loaded += this.loaded;
 				this.AssociatedObject.Activated += this.activated;
@@ -134,7 +204,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 		/// </summary>
 		protected override void OnDetaching()
 		{
-			if( !DesignTimeHelper.GetIsInDesignMode() )
+            if ( !DesignTimeHelper.GetIsInDesignMode() )
 			{
 				this.AssociatedObject.Loaded -= this.loaded;
 				this.AssociatedObject.Activated -= this.activated;

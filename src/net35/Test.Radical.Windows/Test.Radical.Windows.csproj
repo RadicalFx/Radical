@@ -93,6 +93,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -104,6 +105,7 @@
   <ItemGroup>
     <Compile Include="DelegateCommandTests.cs" />
     <Compile Include="EntityCollectionViewTest.cs" />
+    <Compile Include="Presentation\Converters\TimeSpanToKeyTimeConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -23,13 +23,22 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
         {
             this.broker = broker;
             this.conventions = conventions;
+        }
 
+        /// <summary>
+        /// Called after the behavior is attached to an AssociatedObject.
+        /// </summary>
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            var view = this.AssociatedObject;
             this.broker.Subscribe<CloseViewRequest>( this, InvocationModel.Safe, ( s, m ) =>
             {
-                var dc = this.conventions.GetViewDataContext( this.AssociatedObject );
+                var dc = this.conventions.GetViewDataContext( view );
                 if ( m.ViewOwner == dc )
                 {
-                    var w = this.conventions.FindHostingWindowOf( m.ViewOwner );// this.AssociatedObject.FindWindow();
+                    var w = this.conventions.FindHostingWindowOf( m.ViewOwner );
                     if ( w != null )
                     {
 #if !SILVERLIGHT
@@ -42,6 +51,20 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                     }
                 }
             } );
+        }
+
+        /// <summary>
+        /// Called when the behavior is being detached from its AssociatedObject,
+        /// but before it has actually occurred.
+        /// </summary>
+        protected override void OnDetaching()
+        {
+            if ( this.broker != null )
+            {
+                this.broker.Unsubscribe( this );
+            }
+
+            base.OnDetaching();
         }
     }
 }
