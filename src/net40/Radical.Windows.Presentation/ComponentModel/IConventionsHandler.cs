@@ -146,11 +146,19 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		Func<FrameworkElement, Boolean> IsHostingView { get; set; }
 
 		/// <summary>
-		/// Gets an opportunity toattach behaviors to the view.
+		/// Gets an opportunity to attach behaviors to the view.
 		/// </summary>
 		/// <value>
 		/// The attach view behaviors handler.
 		/// </value>
 		Action<DependencyObject> AttachViewBehaviors { get; set; }
+
+		/// <summary>
+		/// Gets an opportunity to detach behaviors from the view.
+		/// </summary>
+		/// <value>
+		/// The detach view behaviors handler.
+		/// </value>
+		Action<DependencyObject> DetachViewBehaviors { get; set; }
 	}
 }
