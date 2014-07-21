@@ -21,6 +21,6 @@
   </metadata>
   <files>
     <file src="..\..\..\build\release\radical.windows.Presentation.CastleWindsor\lib\" target="lib\" />
-    <file src="..\..\..\build\release\radical.windows.Presentation\readme.txt" target="readme.txt" />
+    <file src="..\..\..\build\release\radical.windows.Presentation.CastleWindsor\readme.txt" target="readme.txt" />
   </files>
 </package>
