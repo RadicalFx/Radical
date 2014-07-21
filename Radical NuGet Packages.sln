@@ -13,6 +13,11 @@ Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Windows.Presentatio
 EndProject
 Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Extensions.CastleWindsor", "src\nuget\Radical.Extensions.CastleWindsor\Radical.Extensions.CastleWindsor.nuproj", "{0ED4E6F2-006C-4E54-9396-566BE245B1DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1824C1A-019C-4812-A9C5-988E8AAF3C66}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
