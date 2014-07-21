@@ -179,7 +179,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{12369004-8AB7-45B0-82AD-0A5C47AE897B}</Project>
-      <Name>Radical %28sl50\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +198,7 @@
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
         <SilverlightProjectProperties />
       </FlavorProperties>
-      <UserProperties ProjectLinkReference="fcd5ef38-2602-43ce-ab0e-b01068873084" ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" />
+      <UserProperties ProjectLinkerExcludeFilter="\\?desktop(\\.*)?$;\\?silverlight(\\.*)?$;\.desktop;\.silverlight;\.xaml;^service references(\\.*)?$;\.clientconfig;^web references(\\.*)?$" ProjectLinkReference="fcd5ef38-2602-43ce-ab0e-b01068873084" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

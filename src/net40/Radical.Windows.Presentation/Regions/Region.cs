@@ -243,7 +243,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 				}
 
 				RegionService.Conventions
-					.GetViewDataContext( view )
+					.GetViewDataContext( view, RegionService.Conventions.DefaultViewDataContextSearchBehavior )
 					.As<IExpectViewClosedCallback>( i => i.OnViewClosed() );
 
 				if ( RegionService.Conventions.ShouldReleaseView( view ) )

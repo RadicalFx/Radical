@@ -152,7 +152,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{53002372-02b3-4cea-be25-350fd8ffcd50}</Project>
-      <Name>Radical %28netcore45\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">

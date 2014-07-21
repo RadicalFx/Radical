@@ -348,7 +348,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{db4e99f1-3cbe-4e76-9197-d6f884a0f618}</Project>
-      <Name>Radical %28net45\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

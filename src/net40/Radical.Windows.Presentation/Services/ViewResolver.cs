@@ -89,7 +89,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         {
             var view = ( DependencyObject )this.container.GetService( viewType );
 
-            if ( !this.conventions.ViewHasDataContext( view ) )
+            if ( !this.conventions.ViewHasDataContext( view, ViewDataContextSearchBehavior.LocalOnly ) )
             {
                 var viewModelType = this.conventions.ResolveViewModelType( viewType );
                 if ( viewModelType != null )

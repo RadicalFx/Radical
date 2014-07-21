@@ -171,7 +171,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{145DD07F-9C4C-42B0-B3C3-B539E9112E5F}</Project>
-      <Name>Radical %28wp8\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

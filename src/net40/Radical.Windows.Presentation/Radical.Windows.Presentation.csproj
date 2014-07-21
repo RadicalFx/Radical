@@ -161,11 +161,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
       <Project>{8AD2DC17-392C-4BBE-B34B-11A3ACB9DC86}</Project>
-      <Name>Radical.Windows %28net40\Radical.Windows%29</Name>
+      <Name>Radical.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}</Project>
-      <Name>Radical %28net40\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

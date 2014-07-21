@@ -139,15 +139,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
       <Project>{D0351D5D-7786-4E73-AD89-95D8F01262B5}</Project>
-      <Name>Radical.Windows.Presentation %28sl50\Radical.Windows.Presentation%29</Name>
+      <Name>Radical.Windows.Presentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
       <Project>{2FC39244-FCF8-4DB8-995E-1DC1AF72BD71}</Project>
-      <Name>Radical.Windows %28sl50\Radical.Windows%29</Name>
+      <Name>Radical.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{12369004-8AB7-45B0-82AD-0A5C47AE897B}</Project>
-      <Name>Radical %28sl50\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

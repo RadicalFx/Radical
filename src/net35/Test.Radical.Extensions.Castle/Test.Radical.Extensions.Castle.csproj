@@ -79,11 +79,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
       <Project>{E30E5700-3630-43B0-9E7C-BD6ACD62BDC2}</Project>
-      <Name>Radical.Extensions.Castle %28Extensions\net35\Radical.Extensions.Castle%29</Name>
+      <Name>Radical.Extensions.Castle</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}</Project>
-      <Name>Radical %28net35\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

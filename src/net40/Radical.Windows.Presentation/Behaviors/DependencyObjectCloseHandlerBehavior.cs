@@ -35,7 +35,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
             var view = this.AssociatedObject;
             this.broker.Subscribe<CloseViewRequest>( this, InvocationModel.Safe, ( s, m ) =>
             {
-                var dc = this.conventions.GetViewDataContext( view );
+                var dc = this.conventions.GetViewDataContext( view, this.conventions.DefaultViewDataContextSearchBehavior );
                 if ( m.ViewOwner == dc )
                 {
                     var w = this.conventions.FindHostingWindowOf( m.ViewOwner );
