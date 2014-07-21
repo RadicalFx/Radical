@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Radical.Windows.Presentation.CastleWindsor</id>
+    <version>1.2.0.0-RC3</version>
+    <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
+    <owners>Mauro Servienti</owners>
+    <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
+    <projectUrl>https://github.com/RadicalFx/radical</projectUrl>
+    <iconUrl>http://www.topics.it/siteimages/Radical.nuget.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Radical Framework for M-V-VM and UI Composition (Castle Windsor Integration)</description>
+    <summary />
+    <language>en-US</language>
+    <tags>Radical Radical.Windows</tags>
+    <dependencies>
+      <dependency id="Castle.Windsor" version="3.1.0" />
+      <dependency id="Radical.Extensions.CastleWindsor" version="2.0.2.0" />
+      <dependency id="Radical.Windows.Presentation" version="1.0.6.0-RC3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\..\build\release\radical.windows.Presentation.CastleWindsor\lib\" target="lib\" />
+    <file src="..\..\..\build\release\radical.windows.Presentation\readme.txt" target="readme.txt" />
+  </files>
+</package>

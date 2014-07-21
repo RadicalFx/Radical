@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical", "src\nuget\Radical\Radical.nuproj", "{EC83887C-A2E1-4769-8AA0-FF8FA106DB40}"
+EndProject
+Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Windows", "src\nuget\Radical.Windows\Radical.Windows.nuproj", "{C0839A63-1571-49CD-AE59-4042DB01478C}"
+EndProject
+Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Windows.Presentation", "src\nuget\Radical.Windows.Presentation\Radical.Windows.Presentation.nuproj", "{14EF774C-241F-45AA-B625-4598D6C3133E}"
+EndProject
+Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Windows.Presentation.CastleWindsor", "src\nuget\Radical.Windows.Presentation.CastleWindsor\Radical.Windows.Presentation.CastleWindsor.nuproj", "{FD538470-B83A-4055-AF01-E1885FBBBAA0}"
+EndProject
+Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Extensions.CastleWindsor", "src\nuget\Radical.Extensions.CastleWindsor\Radical.Extensions.CastleWindsor.nuproj", "{0ED4E6F2-006C-4E54-9396-566BE245B1DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC83887C-A2E1-4769-8AA0-FF8FA106DB40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC83887C-A2E1-4769-8AA0-FF8FA106DB40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC83887C-A2E1-4769-8AA0-FF8FA106DB40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC83887C-A2E1-4769-8AA0-FF8FA106DB40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0839A63-1571-49CD-AE59-4042DB01478C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0839A63-1571-49CD-AE59-4042DB01478C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0839A63-1571-49CD-AE59-4042DB01478C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0839A63-1571-49CD-AE59-4042DB01478C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14EF774C-241F-45AA-B625-4598D6C3133E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14EF774C-241F-45AA-B625-4598D6C3133E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14EF774C-241F-45AA-B625-4598D6C3133E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14EF774C-241F-45AA-B625-4598D6C3133E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ED4E6F2-006C-4E54-9396-566BE245B1DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ED4E6F2-006C-4E54-9396-566BE245B1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ED4E6F2-006C-4E54-9396-566BE245B1DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ED4E6F2-006C-4E54-9396-566BE245B1DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

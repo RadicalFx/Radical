@@ -139,7 +139,7 @@ if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45"
 )
 
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetName).*" /B /Y
-copy "$(SolutionDir)readme.txt" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
+copy "$(SolutionDir)readme.md" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>
