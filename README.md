@@ -22,3 +22,7 @@ In order to fully build the solution from source code the Expression Blend SDK i
 For projects targeting .Net framework 3.5 the Blend 3 SDK is required:
 
 * http://www.microsoft.com/en-us/download/details.aspx?id=22829
+
+In order to build the "Radical NuGet Packages" solution the NuBuild extension is required:
+
+* http://visualstudiogallery.msdn.microsoft.com/3efbfdea-7d51-4d45-a954-74a2df51c5d0
