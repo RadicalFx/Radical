@@ -79,19 +79,19 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
       <Project>{E7F67B82-F777-4BE7-B774-57BB44DB3EB8}</Project>
-      <Name>Radical.Extensions.Castle %28Extensions\net40\Radical.Extensions.Castle%29</Name>
+      <Name>Radical.Extensions.Castle</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
       <Project>{591AD4DF-2FAD-4451-8A8A-5EF36ED2A2AC}</Project>
-      <Name>Radical.Windows.Presentation %28net40\Radical.Windows.Presentation%29</Name>
+      <Name>Radical.Windows.Presentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
       <Project>{8AD2DC17-392C-4BBE-B34B-11A3ACB9DC86}</Project>
-      <Name>Radical.Windows %28net40\Radical.Windows%29</Name>
+      <Name>Radical.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}</Project>
-      <Name>Radical %28net40\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
