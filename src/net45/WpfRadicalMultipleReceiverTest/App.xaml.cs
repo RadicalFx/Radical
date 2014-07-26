@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using Topics.Radical.Windows.Presentation.Boot;
 using WpfRadicalMultipleReceiver.Presentation;
+using Topics.Radical;
+using Topics.Radical.Windows.Presentation.ComponentModel;
 
 namespace WpfRadicalMultipleReceiver
 {
@@ -17,7 +19,12 @@ namespace WpfRadicalMultipleReceiver
     {
         public App()
         {
-            var bootstrapper = new WindsorApplicationBootstrapper<MainView>();
+            var bootstrapper = new WindsorApplicationBootstrapper<MainView>()
+                .OnBoot( container =>
+                {
+                    var c = container.GetService<IConventionsHandler>();
+                    c.DefaultViewDataContextSearchBehavior = ViewDataContextSearchBehavior.LocalOnly;
+                } );
         }
     }
 }

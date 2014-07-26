@@ -199,6 +199,8 @@ Project("{E09DD79A-4488-4AB9-8D3F-A7EEE78BF432}") = "Radical.Windows.Presentatio
 		{E72F0DF7-1725-4F64-AAFF-00208CD7553E} = {E72F0DF7-1725-4F64-AAFF-00208CD7553E}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfRadicalMultipleReceiver", "src\net45\WpfRadicalMultipleReceiverTest\WpfRadicalMultipleReceiver.csproj", "{6D09BE30-0E66-46B9-AC74-09771AEFD15B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -849,6 +851,16 @@ Global
 		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Release|ARM.ActiveCfg = Release|Any CPU
 		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Release|x64.ActiveCfg = Release|Any CPU
 		{FD538470-B83A-4055-AF01-E1885FBBBAA0}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Release|x64.ActiveCfg = Release|Any CPU
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -920,6 +932,7 @@ Global
 		{C0839A63-1571-49CD-AE59-4042DB01478C} = {557CC2FF-843C-4096-B12B-6F9A8884FA3E}
 		{14EF774C-241F-45AA-B625-4598D6C3133E} = {557CC2FF-843C-4096-B12B-6F9A8884FA3E}
 		{FD538470-B83A-4055-AF01-E1885FBBBAA0} = {557CC2FF-843C-4096-B12B-6F9A8884FA3E}
+		{6D09BE30-0E66-46B9-AC74-09771AEFD15B} = {BC8F0174-00B4-4E03-8A1F-8D14BE6C80EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
