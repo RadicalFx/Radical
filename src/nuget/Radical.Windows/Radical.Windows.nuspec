@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Radical.Windows</id>
-    <version>1.3.14.0-RC2</version>
+    <version>1.3.14.0</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>Mauro Servienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
@@ -14,7 +14,7 @@
     <language>en-US</language>
     <tags>Radical Radical.Windows</tags>
     <dependencies>
-      <dependency id="Radical" version="1.4.2.0-RC2" />
+      <dependency id="Radical" version="1.4.3.1" />
     </dependencies>
   </metadata>
   <files>
