@@ -27,7 +27,7 @@ namespace Topics.Radical.Validation
 
 		internal class SourceInfo
 		{
-			public readonly static SourceInfo Empty = new SourceInfo( "", "", MemberTypes.Custom );
+			public readonly static SourceInfo Empty = new SourceInfo();
 
 			private StackFrame frame;
 			private bool lazy;
@@ -52,14 +52,20 @@ namespace Topics.Radical.Validation
 			/// <summary>
 			/// Initializes a new instance of the <see cref="SourceInfo"/> class.
 			/// </summary>
-			/// <param name="methodName">Name of the method.</param>
-			/// <param name="className">Name of the class.</param>
-			/// <param name="sourceType">Type of the source.</param>
-			private SourceInfo( String methodName, String className, MemberTypes sourceType )
+			private SourceInfo()
 			{
-				this._methodName = methodName;
-				this._className = className;
-				this._sourceType = sourceType;
+				this._methodName = "";
+				this._className = "";
+				this._sourceType = MemberTypes.Custom;
+
+                /*
+                 * this .ctor is called only to create the Empty instance
+                 * the loaded == true means that at runtime the "EnsureDataAreLoaded"
+                 * method will be skipped since there is nothing to load, this is the
+                 * Empty instance in the end :-)
+                 * Fixes: https://github.com/RadicalFx/radical/issues/70
+                 */
+                this.loaded = true;
 			}
 
 			private SourceInfo( StackFrame frame, bool lazy )
