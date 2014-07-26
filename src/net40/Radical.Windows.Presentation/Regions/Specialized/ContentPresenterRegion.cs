@@ -54,7 +54,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 			if ( previous != null )
 			{
 				RegionService.Conventions
-					.GetViewDataContext( previous )
+                    .GetViewDataContext( previous, RegionService.Conventions.DefaultViewDataContextSearchBehavior )
 					.As<IExpectViewClosingCallback>( i => i.OnViewClosing( args ) );
 			}
 

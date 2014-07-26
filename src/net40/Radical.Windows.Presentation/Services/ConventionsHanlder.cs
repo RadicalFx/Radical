@@ -55,7 +55,7 @@ namespace Topics.Radical.Windows.Presentation.Services
 
 			this.ViewReleaseHandler = v =>
 			{
-				var vm = this.GetViewDataContext( v );
+				var vm = this.GetViewDataContext( v, ViewDataContextSearchBehavior.LocalOnly );
 				if ( vm != null )
 				{
 					this.releaser.Release( vm );
@@ -65,7 +65,7 @@ namespace Topics.Radical.Windows.Presentation.Services
 					}
 				}
 
-			    this.DetachViewBehaviors( v );
+				this.DetachViewBehaviors( v );
 
 				this.releaser.Release( v );
 			};
@@ -98,23 +98,48 @@ namespace Topics.Radical.Windows.Presentation.Services
 				return window;
 			};
 
-			this.ViewHasDataContext = view =>
+			this.ViewHasDataContext = ( view, behavior ) =>
 			{
-				return this.GetViewDataContext( view ) != null;
+				return this.GetViewDataContext( view, behavior ) != null;
 			};
 
-			this.GetViewDataContext = view =>
+			this.GetViewDataContext = ( view, behavior ) =>
 			{
-				if ( view is FrameworkElement )
+				if ( behavior == ViewDataContextSearchBehavior.Legacy )
 				{
-					return ( ( FrameworkElement )view ).DataContext;
-				}
+					if ( view is FrameworkElement )
+					{
+						return ( ( FrameworkElement )view ).DataContext;
+					}
 #if !SILVERLIGHT
-				else if ( view is FrameworkContentElement )
-				{
-					return ( ( FrameworkContentElement )view ).DataContext;
-				}
+					else if ( view is FrameworkContentElement )
+					{
+						return ( ( FrameworkContentElement )view ).DataContext;
+					}
 #endif
+				}
+				else
+				{
+					if ( view is FrameworkElement )
+					{
+						var dc = view.ReadLocalValue( FrameworkElement.DataContextProperty );
+						if ( dc != DependencyProperty.UnsetValue )
+						{
+							return dc;
+						}
+					}
+#if !SILVERLIGHT
+					else if ( view is FrameworkContentElement )
+					{
+						var dc = view.ReadLocalValue( FrameworkContentElement.DataContextProperty );
+						if ( dc != DependencyProperty.UnsetValue )
+						{
+							return dc;
+						}
+					}
+#endif
+				}
+
 				return null;
 			};
 
@@ -229,12 +254,12 @@ namespace Topics.Radical.Windows.Presentation.Services
 #if !SILVERLIGHT
 			this.DetachViewBehaviors = view =>
 			{
-				var bhv = Interaction.GetBehaviors(view);
-				if (view is Window)
+				var bhv = Interaction.GetBehaviors( view );
+				if ( view is Window )
 				{
 					bhv.OfType<WindowLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
 				}
-				else if (view is FrameworkElement)
+				else if ( view is FrameworkElement )
 				{
 					bhv.OfType<FrameworkElementLifecycleNotificationsBehavior>().ToList().ForEach( x => bhv.Remove( x ) );
 				}
@@ -329,7 +354,7 @@ namespace Topics.Radical.Windows.Presentation.Services
 		/// <value>
 		/// The logic that determines if view has data context.
 		/// </value>
-		public Predicate<DependencyObject> ViewHasDataContext { get; set; }
+		public Func<DependencyObject, ViewDataContextSearchBehavior, Boolean> ViewHasDataContext { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that sets the view data context.
@@ -345,7 +370,7 @@ namespace Topics.Radical.Windows.Presentation.Services
 		/// <value>
 		/// The logic that gets view data context.
 		/// </value>
-		public Func<DependencyObject, Object> GetViewDataContext { get; set; }
+		public Func<DependencyObject, ViewDataContextSearchBehavior, Object> GetViewDataContext { get; set; }
 
 		/// <summary>
 		/// Tries to hook closed event of an the element in the visual tree that hosts this given view.
@@ -422,10 +447,41 @@ namespace Topics.Radical.Windows.Presentation.Services
 		public Action<DependencyObject> ViewReleaseHandler { get; set; }
 
 
-		public Func<DependencyObject, bool> ShouldUnregisterRegionManagerOfView{ get; set; }
+        /// <summary>
+        /// Gets or sets the handler that determines if a region manager for the given view should be un-registered, the default behavior is that the region manager should be realsed if the view is not a singleton view.
+        /// </summary>
+        /// <value>
+        /// The un-register region manager handler.
+        /// </value>
+		public Func<DependencyObject, bool> ShouldUnregisterRegionManagerOfView { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handler that determines if a view should be relased, the default behavior is that the view is released if not a singleton view.
+        /// </summary>
+        /// <value>
+        /// The view release handler.
+        /// </value>
 		public Func<DependencyObject, bool> ShouldReleaseView { get; set; }
 
+        /// <summary>
+        /// Gets or sets the handler that determines if a view model should be automatically unsubscribed from all the subscriptions when its view is relased, the default behavior is that the view model is unsubscribed if the view is not a singleton view.
+        /// </summary>
+        /// <value>
+        /// The unsubscribe handler.
+        /// </value>
 		public Func<DependencyObject, bool> ShouldUnsubscribeViewModelOnRelease { get; set; }
-	}
+
+
+        /// <summary>
+        /// Gets or sets the default view data context search behavior.
+        /// </summary>
+        /// <value>
+        /// The default view data context search behavior.
+        /// </value>
+        public ViewDataContextSearchBehavior DefaultViewDataContextSearchBehavior
+        {
+            get;
+            set;
+        }
+    }
 }
