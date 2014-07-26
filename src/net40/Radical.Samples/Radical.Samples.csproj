@@ -350,7 +350,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\net45\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
       <Project>{25797064-a7eb-4589-92a5-1bb9bc9f380c}</Project>
-      <Name>Radical.Extensions.Castle %28Extensions\net45\Radical.Extensions.Castle%29</Name>
+      <Name>Radical.Extensions.Castle</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\net45\Radical.Windows.Presentation.CastleWindsor\Radical.Windows.Presentation.CastleWindsor.csproj">
       <Project>{1b898ae6-9d4a-492c-b9ca-95272a6c6ff1}</Project>

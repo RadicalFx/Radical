@@ -169,11 +169,11 @@
     </ProjectReference>
     <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
       <Project>{A4A5D575-77FB-4D1E-9B37-DCA8587E33D7}</Project>
-      <Name>Radical.Windows %28wp8\Radical.Windows%29</Name>
+      <Name>Radical.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{145DD07F-9C4C-42B0-B3C3-B539E9112E5F}</Project>
-      <Name>Radical %28wp8\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

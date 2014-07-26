@@ -112,15 +112,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
       <Project>{767fad7d-a6cf-426e-ac34-6ea187c76ff9}</Project>
-      <Name>Radical.Windows.Presentation %28net45\Radical.Windows.Presentation%29</Name>
+      <Name>Radical.Windows.Presentation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
       <Project>{135504b6-2a47-4e30-994e-60bc49477091}</Project>
-      <Name>Radical.Windows %28net45\Radical.Windows%29</Name>
+      <Name>Radical.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{db4e99f1-3cbe-4e76-9197-d6f884a0f618}</Project>
-      <Name>Radical %28net45\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -113,11 +113,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Radical.Windows\Radical.Windows.csproj">
       <Project>{2FC39244-FCF8-4DB8-995E-1DC1AF72BD71}</Project>
-      <Name>Radical.Windows %28sl50\Radical.Windows%29</Name>
+      <Name>Radical.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Radical\Radical.csproj">
       <Project>{12369004-8AB7-45B0-82AD-0A5C47AE897B}</Project>
-      <Name>Radical %28sl50\Radical%29</Name>
+      <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
