@@ -11,15 +11,68 @@ namespace Test.Radical.Validation
 		[TestMethod]
 		public void ensure_getFullErrorMessage_should_contain_all_relevant_information()
 		{
-			var obj = Ensure.That( "" );
-			String actual = obj.GetFullErrorMessage( "validator specific message" );
+            var bak = Ensure.SourceInfoLoadStrategy;
+            try
+            {
+                Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Load;
+                var obj = Ensure.That( "" );
+                String actual = obj.GetFullErrorMessage( "validator specific message" );
 
-			var containsClassName = actual.Contains( typeof( ValidatorTest ).Name );
-			var containsMethodName = actual.Contains( typeof( ValidatorTest ).Name );
+                var containsClassName = actual.Contains( typeof( ValidatorTest ).Name );
+                var containsMethodName = actual.Contains( typeof( ValidatorTest ).Name );
 
-			containsClassName.Should().Be.True();
-			containsMethodName.Should().Be.True();
+                containsClassName.Should().Be.True();
+                containsMethodName.Should().Be.True();
+            }
+            finally
+            {
+                Ensure.SourceInfoLoadStrategy = bak;
+            }
 		}
+
+        [TestMethod]
+        public void ensure_getFullErrorMessage_w_Skip_should_not_contain_any_information()
+        {
+            var bak = Ensure.SourceInfoLoadStrategy;
+            try
+            {
+                Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Skip;
+                var obj = Ensure.That( "" );
+                String actual = obj.GetFullErrorMessage( "validator specific message" );
+
+                var containsClassName = actual.Contains( "" );
+                var containsMethodName = actual.Contains( "" );
+
+                containsClassName.Should().Be.True();
+                containsMethodName.Should().Be.True();
+            }
+            finally
+            {
+                Ensure.SourceInfoLoadStrategy = bak;
+            }
+        }
+
+        [TestMethod]
+        public void ensure_getFullErrorMessage_should_contain_all_relevant_information_event_w_lazy_load()
+        {
+            var bak = Ensure.SourceInfoLoadStrategy;
+            try
+            {
+                Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoad;
+                var obj = Ensure.That( "" );
+                String actual = obj.GetFullErrorMessage( "validator specific message" );
+
+                var containsClassName = actual.Contains( typeof( ValidatorTest ).Name );
+                var containsMethodName = actual.Contains( typeof( ValidatorTest ).Name );
+
+                containsClassName.Should().Be.True();
+                containsMethodName.Should().Be.True();
+            }
+            finally
+            {
+                Ensure.SourceInfoLoadStrategy = bak;
+            }
+        }
 
 		[TestMethod]
 		public void ensure_getFullErrorMessage_should_contain_custom_message()
