@@ -80,7 +80,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that determines if view has data context.
 		/// </value>
-		Predicate<DependencyObject> ViewHasDataContext { get; set; }
+		Func<DependencyObject, ViewDataContextSearchBehavior, Boolean> ViewHasDataContext { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that determines if ViewModel should notify the loaded message.
@@ -112,7 +112,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that gets view data context.
 		/// </value>
-		Func<DependencyObject, Object> GetViewDataContext { get; set; }
+		Func<DependencyObject, ViewDataContextSearchBehavior, Object> GetViewDataContext { get; set; }
 
 		/// <summary>
 		/// Gets or sets the attach view to view model handler.
@@ -160,5 +160,34 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// The detach view behaviors handler.
 		/// </value>
 		Action<DependencyObject> DetachViewBehaviors { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default view data context search behavior.
+        /// </summary>
+        /// <value>
+        /// The default view data context search behavior.
+        /// </value>
+        ViewDataContextSearchBehavior DefaultViewDataContextSearchBehavior { get; set; }
 	}
+
+
+    /// <summary>
+    /// Determines how the DataContext value is searched on a view.
+    /// </summary>
+    public enum ViewDataContextSearchBehavior
+    {
+        /// <summary>
+        /// The DataContext dependency property value is retrieved using the ReadLocalValue
+        /// method of the view and if the returned value is UnsetLocal null is returned to 
+        /// the caller so to ensure that only locally set DataContexts are returned.
+        /// </summary>
+        LocalOnly = 0,
+
+
+        /// <summary>
+        /// The DataContext property of the View element is returned regardless
+        /// of the fact that the dependency property value is inherithed or local.
+        /// </summary>
+        Legacy = 1
+    }
 }

@@ -20,7 +20,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
         static readonly TraceSource logger = new TraceSource( typeof( WindowLifecycleNotificationsBehavior ).FullName );
 
 		readonly IMessageBroker broker;
-		readonly IConventionsHandler conventionsHandler;
+		readonly IConventionsHandler conventions;
 
 		RoutedEventHandler loaded = null;
 		EventHandler activated = null;
@@ -32,14 +32,14 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 		/// Initializes a new instance of the <see cref="WindowLifecycleNotificationsBehavior"/> class.
 		/// </summary>
 		/// <param name="broker">The broker.</param>
-		/// <param name="conventionsHandler">The conventions handler.</param>
-		public WindowLifecycleNotificationsBehavior( IMessageBroker broker, IConventionsHandler conventionsHandler )
+		/// <param name="conventions">The conventions handler.</param>
+		public WindowLifecycleNotificationsBehavior( IMessageBroker broker, IConventionsHandler conventions )
 		{
             Ensure.That( broker ).Named( () => broker ).IsNotNull();
-            Ensure.That( conventionsHandler ).Named( () => conventionsHandler ).IsNotNull();
+            Ensure.That( conventions ).Named( () => conventions ).IsNotNull();
 
 			this.broker = broker;
-			this.conventionsHandler = conventionsHandler;
+			this.conventions = conventions;
 
 			if( !DesignTimeHelper.GetIsInDesignMode() )
 			{
@@ -51,30 +51,33 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                     logger.Debug( "Loaded event raised." );
                     Ensure.That( this.AssociatedObject ).Named( "AssociatedObject" ).IsNotNull();
 
-					if( this.conventionsHandler.ShouldNotifyViewModelLoaded( this.AssociatedObject, this.AssociatedObject.DataContext ) )
+                    var view = this.AssociatedObject;
+                    var dc = this.conventions.GetViewDataContext( view, this.conventions.DefaultViewDataContextSearchBehavior );
+
+					if( this.conventions.ShouldNotifyViewModelLoaded( view, dc ) )
 					{
                         logger.Debug( "ShouldNotifyViewModelLoaded -> true." );
 
-                        this.broker.Broadcast( this, new ViewModelLoaded( this, this.AssociatedObject.DataContext ) );
+                        this.broker.Broadcast( this, new ViewModelLoaded( this, dc ) );
 
                         logger.Debug( "Message broadcasted." );
 					}
 					
-					if ( this.conventionsHandler.ShouldNotifyViewLoaded( this.AssociatedObject ) )
+					if ( this.conventions.ShouldNotifyViewLoaded( view ) )
                     {
                         logger.Debug( "ShouldNotifyViewLoaded -> true." );
 
-                        this.broker.Broadcast( this, new ViewLoaded( this, this.AssociatedObject ));
+                        this.broker.Broadcast( this, new ViewLoaded( this, view ));
 
                         logger.Debug( "Message broadcasted." );
                     }
 
-					var dc = this.AssociatedObject.DataContext as IExpectViewLoadedCallback;
-					if( dc != null )
+					var temp = dc as IExpectViewLoadedCallback;
+                    if ( temp != null )
 					{
                         logger.Debug( "DataContext is IExpectViewLoadedCallback." );
 
-						dc.OnViewLoaded();
+                        temp.OnViewLoaded();
 
                         logger.Debug( "DataContext.OnViewLoaded() invoked." );
 					}
@@ -84,17 +87,20 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
 				this.activated = ( s, e ) =>
 				{
-                    if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyActivatedAttribute>() )
+                    var view = this.AssociatedObject;
+                    var dc = this.conventions.GetViewDataContext( view, this.conventions.DefaultViewDataContextSearchBehavior );
+
+                    if ( dc != null && dc.GetType().IsAttributeDefined<NotifyActivatedAttribute>() )
                     {
-                        this.broker.Broadcast( this, new ViewModelActivated( this, this.AssociatedObject.DataContext ) );
+                        this.broker.Broadcast( this, new ViewModelActivated( this, dc ) );
                     }
 
-					var dc = this.AssociatedObject.DataContext as IExpectViewActivatedCallback;
-					if( dc != null )
+					var temp = dc as IExpectViewActivatedCallback;
+					if( temp != null )
 					{
                         logger.Debug( "DataContext is IExpectViewActivatedCallback." );
 
-						dc.OnViewActivated();
+						temp.OnViewActivated();
 
                         logger.Debug( "DataContext.OnViewActivated() invoked." );
 					}
@@ -106,17 +112,20 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 				{
                     logger.Debug( "Rendered event raised." );
 
-					if( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyShownAttribute>() )
+                    var view = this.AssociatedObject;
+                    var dc = this.conventions.GetViewDataContext( view, this.conventions.DefaultViewDataContextSearchBehavior );
+
+					if( dc != null && dc.GetType().IsAttributeDefined<NotifyShownAttribute>() )
 					{
-                        this.broker.Broadcast( this, new ViewModelShown( this, this.AssociatedObject.DataContext ) );
+                        this.broker.Broadcast( this, new ViewModelShown( this, dc ) );
 					}
 
-					var dc = this.AssociatedObject.DataContext as IExpectViewShownCallback;
-					if( dc != null )
+					var temp = dc as IExpectViewShownCallback;
+					if( temp != null )
 					{
                         logger.Debug( "DataContext is IExpectViewShownCallback." );
 
-						dc.OnViewShown();
+						temp.OnViewShown();
 
                         logger.Debug( "DataContext.OnViewShown() invoked." );
 					}
@@ -129,22 +138,25 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 				{
                     logger.Debug( "Closed event raised." );
 
-					if ( this.AssociatedObject.DataContext != null && this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyClosedAttribute>() )
+                    var view = this.AssociatedObject;
+                    var dc = this.conventions.GetViewDataContext( view, this.conventions.DefaultViewDataContextSearchBehavior );
+
+					if ( dc != null && dc.GetType().IsAttributeDefined<NotifyClosedAttribute>() )
 					{
-                        this.broker.Broadcast( this, new ViewModelClosed( this, this.AssociatedObject.DataContext ) );
+                        this.broker.Broadcast( this, new ViewModelClosed( this, dc ) );
 					}
 
-					var dc = this.AssociatedObject.DataContext as IExpectViewClosedCallback;
-					if( dc != null )
+					var temp = dc as IExpectViewClosedCallback;
+					if( temp != null )
 					{
                         logger.Debug( "DataContext is IExpectViewClosedCallback." );
 
-						dc.OnViewClosed();
+						temp.OnViewClosed();
 
                         logger.Debug( "DataContext.OnViewClosed() invoked." );
 					}
 
-					this.conventionsHandler.ViewReleaseHandler( this.AssociatedObject );
+					this.conventions.ViewReleaseHandler( view );
 				};
 
 
@@ -154,20 +166,15 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 				{
                     logger.Debug( "Closing event raised." );
 
-					//if( this.AssociatedObject.DataContext.GetType().IsAttributeDefined<NotifyClosingAttribute>() )
-					//{
-					//    var message = new ViewModelClosing( this, ( IViewModel )this.AssociatedObject.DataContext );
+                    var view = this.AssociatedObject;
+                    var dc = this.conventions.GetViewDataContext( view, this.conventions.DefaultViewDataContextSearchBehavior );
 
-					//    //è asioncrono bisognerbbe marcarlo con asyn e qui fare await..oppure fare un dispatch
-					//    this.broker.Broadcast( message );
-					//}
-
-					var dc = this.AssociatedObject.DataContext as IExpectViewClosingCallback;
-					if( dc != null )
+					var temp = dc as IExpectViewClosingCallback;
+					if( temp != null )
 					{
                         logger.Debug( "DataContext is IExpectViewClosingCallback." );
 
-						dc.OnViewClosing( e );
+						temp.OnViewClosing( e );
 
                         logger.Debug( "DataContext.OnViewClosing() invoked." );
 					}

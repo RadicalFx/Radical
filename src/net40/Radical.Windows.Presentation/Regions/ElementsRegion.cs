@@ -105,7 +105,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 #if !SILVERLIGHT
 
 			RegionService.Conventions
-				.GetViewDataContext( view )
+                .GetViewDataContext( view, RegionService.Conventions.DefaultViewDataContextSearchBehavior )
 				.As<IExpectViewClosingCallback>( i => i.OnViewClosing( args ) );
 
 #endif

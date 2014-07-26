@@ -1,0 +1,20 @@
+﻿<Window x:Class="WpfRadicalMultipleReceiver.Presentation.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:rg="http://schemas.topics.it/wpf/radical/windows/presentation/regions"
+        Title="MainView" Height="640" Width="800">
+    
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Button Content="Open Another Master View" Command="{Binding OpenAnotherMasterViewCommand}"/>
+
+        <TabControl Grid.Row="1" rg:RegionService.Region="{rg:TabControlRegion Name=MainTabRegion}" />
+
+    </Grid>
+    
+</Window>
