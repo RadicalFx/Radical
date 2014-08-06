@@ -248,7 +248,7 @@ namespace Topics.Radical.Windows.Presentation.Regions
 
 				if ( RegionService.Conventions.ShouldReleaseView( view ) )
 				{
-					RegionService.Conventions.ViewReleaseHandler( view );
+					RegionService.Conventions.ViewReleaseHandler( view, ViewReleaseBehavior.Default );
 				}
 			}
 		}
