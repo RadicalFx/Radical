@@ -30,7 +30,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The view release handler.
 		/// </value>
-		Action<DependencyObject> ViewReleaseHandler { get; set; }
+        Action<DependencyObject, ViewReleaseBehavior> ViewReleaseHandler { get; set; }
 
 		/// <summary>
 		/// Gets or sets the handler that determines if a region manager for the given view should be un-registered, the default behavior is that the region manager should be realsed if the view is not a singleton view.
@@ -189,5 +189,22 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
         /// of the fact that the dependency property value is inherithed or local.
         /// </summary>
         Legacy = 1
+    }
+
+    /// <summary>
+    /// Define the View release behavior
+    /// </summary>
+    public enum ViewReleaseBehavior
+    {
+        /// <summary>
+        /// The view, and thus the ViewModel, is released only if no <see cref="ViewManualReleaseAttribute"/> is defined on the View.
+        /// </summary>
+        Default = 0,
+
+
+        /// <summary>
+        /// The view, and thus the ViewModel, is released regardless of the <see cref="ViewManualReleaseAttribute"/> that can be defined on the View.
+        /// </summary>
+        Force = 1
     }
 }

@@ -169,6 +169,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ValidationBehavior.cs">
       <Link>ComponentModel\ValidationBehavior.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ViewManualReleaseAttribute.cs">
+      <Link>ComponentModel\ViewManualReleaseAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\DependencyObjectExtensions.cs">
       <Link>DependencyObjectExtensions.cs</Link>
     </Compile>
