@@ -24,28 +24,28 @@ using Topics.Radical.Diagnostics;
 
 namespace Topics.Radical.Windows.Presentation.Boot
 {
-	/// <summary>
-	/// The application bootstrapper. Provides a way to dramatically simplifly the
-	/// application boot process.
-	/// </summary>
-	public abstract class ApplicationBootstrapper : IServiceProvider
-	{
+    /// <summary>
+    /// The application bootstrapper. Provides a way to dramatically simplifly the
+    /// application boot process.
+    /// </summary>
+    public abstract class ApplicationBootstrapper : IServiceProvider
+    {
 
 #if !SILVERLIGHT
 		static readonly TraceSource logger = new TraceSource( typeof( ApplicationBootstrapper ).Name );
 #endif
 
-		IServiceProvider serviceProvider;
-		AggregateCatalog catalog;
-		CompositionContainer compositionContainer;
+        IServiceProvider serviceProvider;
+        AggregateCatalog catalog;
+        CompositionContainer compositionContainer;
 
-		Boolean isAutoBootEnabled = true;
-		Boolean isBootCompleted;
+        Boolean isAutoBootEnabled = true;
+        Boolean isBootCompleted;
 
-		private Action<IServiceProvider> bootCompletedHandler;
-		private Action<ApplicationShutdownArgs> shutdownHandler;
-		private Action<IServiceProvider> bootHandler;
-		private Func<IEnumerable<ComposablePartCatalog>> catalogDefinitionHandler;
+        private Action<IServiceProvider> bootCompletedHandler;
+        private Action<ApplicationShutdownArgs> shutdownHandler;
+        private Action<IServiceProvider> bootHandler;
+        private Func<IEnumerable<ComposablePartCatalog>> catalogDefinitionHandler;
 
 #if !SILVERLIGHT
 		ShutdownMode? mode = null;
@@ -54,12 +54,12 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		SingletonApplicationScope singleton = SingletonApplicationScope.NotSupported;
 #endif
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ApplicationBootstrapper"/> class.
-		/// </summary>
-		protected ApplicationBootstrapper()
-		{
-			var commandLine = CommandLine.GetCurrent();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationBootstrapper"/> class.
+        /// </summary>
+        protected ApplicationBootstrapper()
+        {
+            var commandLine = CommandLine.GetCurrent();
 
 #if !SILVERLIGHT
 			if ( commandLine.Contains( "radical-wait-for-debugger" ) && !Debugger.IsAttached )
@@ -84,17 +84,17 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			}
 #endif
 
-			this.DefineCatalogs = () =>
-			{
-				var tmp = new List<ComposablePartCatalog>();
+            this.DefineCatalogs = () =>
+            {
+                var tmp = new List<ComposablePartCatalog>();
 
-				if ( this.catalogDefinitionHandler != null )
-				{
-					tmp.AddRange( this.catalogDefinitionHandler() );
-				}
+                if ( this.catalogDefinitionHandler != null )
+                {
+                    tmp.AddRange( this.catalogDefinitionHandler() );
+                }
 
 #if SILVERLIGHT
-				tmp.Add( new DeploymentCatalog() );
+                tmp.Add( new DeploymentCatalog() );
 #else
 				var entry = Assembly.GetEntryAssembly();
 
@@ -116,16 +116,16 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				tmp.Add( new AssemblyCatalog( entry ) );
 #endif
 
-				return tmp;
-			};
+                return tmp;
+            };
 
-			Application.Current.Startup += ( s, e ) =>
-			{
-				if ( this.isAutoBootEnabled )
-				{
-					this.OnBoot();
-				}
-			};
+            Application.Current.Startup += ( s, e ) =>
+            {
+                if ( this.isAutoBootEnabled )
+                {
+                    this.OnBoot();
+                }
+            };
 
 #if !SILVERLIGHT
 
@@ -148,136 +148,136 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 #endif
 
-			Application.Current.Exit += ( s, e ) =>
-			{
-				if ( !this.IsShuttingDown )
-				{
+            Application.Current.Exit += ( s, e ) =>
+            {
+                if ( !this.IsShuttingDown )
+                {
 #if !SILVERLIGHT
 					var reason = this.IsSessionEnding ? ApplicationShutdownReason.SessionEnding : ApplicationShutdownReason.ApplicationRequest;
 					this.OnShutdownCore( reason );
 #else
-					this.OnShutdownCore( ApplicationShutdownReason.ApplicationRequest );
+                    this.OnShutdownCore( ApplicationShutdownReason.ApplicationRequest );
 #endif
-				}
-			};
-		}
+                }
+            };
+        }
 
-		/// <summary>
-		/// Disables the auto boot.
-		/// </summary>
-		public ApplicationBootstrapper DisableAutoBoot()
-		{
-			this.isAutoBootEnabled = false;
+        /// <summary>
+        /// Disables the auto boot.
+        /// </summary>
+        public ApplicationBootstrapper DisableAutoBoot()
+        {
+            this.isAutoBootEnabled = false;
 
-			return this;
-		}
+            return this;
+        }
 
-		/// <summary>
-		/// Creates the IoC service provider.
-		/// </summary>
-		/// <returns>The IoC service provider.</returns>
-		protected abstract IServiceProvider CreateServiceProvider();
+        /// <summary>
+        /// Creates the IoC service provider.
+        /// </summary>
+        /// <returns>The IoC service provider.</returns>
+        protected abstract IServiceProvider CreateServiceProvider();
 
-		/// <summary>
-		/// Gets or sets the on create aggregate catalog func.
-		/// </summary>
-		/// <value>
-		/// The on create aggregate catalog.
-		/// </value>
-		public Func<IEnumerable<ComposablePartCatalog>> DefineCatalogs { get; set; }
+        /// <summary>
+        /// Gets or sets the on create aggregate catalog func.
+        /// </summary>
+        /// <value>
+        /// The on create aggregate catalog.
+        /// </value>
+        public Func<IEnumerable<ComposablePartCatalog>> DefineCatalogs { get; set; }
 
-		/// <summary>
-		/// Called in order to inject custom catalogs.
-		/// </summary>
-		/// <param name="catalogDefinitionHandler">The catalog definition handler.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper OnCatalogDefinition( Func<IEnumerable<ComposablePartCatalog>> catalogDefinitionHandler )
-		{
-			this.catalogDefinitionHandler = catalogDefinitionHandler;
+        /// <summary>
+        /// Called in order to inject custom catalogs.
+        /// </summary>
+        /// <param name="catalogDefinitionHandler">The catalog definition handler.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper OnCatalogDefinition( Func<IEnumerable<ComposablePartCatalog>> catalogDefinitionHandler )
+        {
+            this.catalogDefinitionHandler = catalogDefinitionHandler;
 
-			return this;
-		}
+            return this;
+        }
 
-		/// <summary>
-		/// Creates the aggregate catalog.
-		/// </summary>
-		/// <param name="serviceProvider">The service provider.</param>
-		/// <returns>
-		/// The aggregate catalog.
-		/// </returns>
-		protected virtual AggregateCatalog CreateAggregateCatalog( IServiceProvider serviceProvider )
-		{
-			var catalogs = this.DefineCatalogs().ToArray();
+        /// <summary>
+        /// Creates the aggregate catalog.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>
+        /// The aggregate catalog.
+        /// </returns>
+        protected virtual AggregateCatalog CreateAggregateCatalog( IServiceProvider serviceProvider )
+        {
+            var catalogs = this.DefineCatalogs().ToArray();
 
-			return new AggregateCatalog( catalogs );
-		}
+            return new AggregateCatalog( catalogs );
+        }
 
-		/// <summary>
-		/// Creates the composition container.
-		/// </summary>
-		/// <param name="catalog">The catalog.</param>
-		/// <param name="serviceProvider">The service provider.</param>
-		/// <returns>
-		/// The composition container.
-		/// </returns>
-		protected virtual CompositionContainer CreateCompositionContainer( AggregateCatalog catalog, IServiceProvider serviceProvider )
-		{
-			return new CompositionContainer( catalog );
-		}
+        /// <summary>
+        /// Creates the composition container.
+        /// </summary>
+        /// <param name="catalog">The catalog.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>
+        /// The composition container.
+        /// </returns>
+        protected virtual CompositionContainer CreateCompositionContainer( AggregateCatalog catalog, IServiceProvider serviceProvider )
+        {
+            return new CompositionContainer( catalog );
+        }
 
-		/// <summary>
-		/// Setups the UI composition engine.
-		/// </summary>
-		/// <param name="serviceProvider">The service provider.</param>
-		protected virtual void SetupUICompositionEngine( IServiceProvider serviceProvider )
-		{
+        /// <summary>
+        /// Setups the UI composition engine.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        protected virtual void SetupUICompositionEngine( IServiceProvider serviceProvider )
+        {
 #if !WINDOWS_PHONE_8
-			RegionService.CurrentService = serviceProvider.GetService<IRegionService>();
+            RegionService.CurrentService = serviceProvider.GetService<IRegionService>();
 #endif
-			RegionService.Conventions = serviceProvider.GetService<IConventionsHandler>();
-		}
+            RegionService.Conventions = serviceProvider.GetService<IConventionsHandler>();
+        }
 
-		/// <summary>
-		/// Called when the composition container has been composed.
-		/// </summary>
-		/// <param name="container">The container.</param>
-		/// <param name="serviceProvider">The service provider.</param>
-		protected virtual void OnCompositionContainerComposed( CompositionContainer container, IServiceProvider serviceProvider )
-		{
+        /// <summary>
+        /// Called when the composition container has been composed.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        protected virtual void OnCompositionContainerComposed( CompositionContainer container, IServiceProvider serviceProvider )
+        {
 
-		}
+        }
 
-		Action<Boot.BootstrapConventions> onBeforeInstall;
+        Action<Boot.BootstrapConventions> onBeforeInstall;
 
-		/// <summary>
-		/// Called before the install and boot process begins, right after the service provider creation.
-		/// </summary>
-		/// <param name="onBeforeInstall">The on before install.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper OnBeforeInstall( Action<Boot.BootstrapConventions> onBeforeInstall )
-		{
-			this.onBeforeInstall = onBeforeInstall;
+        /// <summary>
+        /// Called before the install and boot process begins, right after the service provider creation.
+        /// </summary>
+        /// <param name="onBeforeInstall">The on before install.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper OnBeforeInstall( Action<Boot.BootstrapConventions> onBeforeInstall )
+        {
+            this.onBeforeInstall = onBeforeInstall;
 
-			return this;
-		}
+            return this;
+        }
 
-		void OnBoot()
-		{
-			this.serviceProvider = this.CreateServiceProvider();
+        void OnBoot()
+        {
+            this.serviceProvider = this.CreateServiceProvider();
 
-			if ( this.onBeforeInstall != null ) 
-			{
-				var conventions = this.serviceProvider.GetService<Boot.BootstrapConventions>();
-				this.onBeforeInstall( conventions );
-			}
+            if ( this.onBeforeInstall != null )
+            {
+                var conventions = this.serviceProvider.GetService<Boot.BootstrapConventions>();
+                this.onBeforeInstall( conventions );
+            }
 
-			this.catalog = this.CreateAggregateCatalog( this.serviceProvider );
-			this.compositionContainer = this.CreateCompositionContainer( this.catalog, this.serviceProvider );
+            this.catalog = this.CreateAggregateCatalog( this.serviceProvider );
+            this.compositionContainer = this.CreateCompositionContainer( this.catalog, this.serviceProvider );
 
-			this.compositionContainer.ComposeParts( this );
+            this.compositionContainer.ComposeParts( this );
 
-			this.OnCompositionContainerComposed( this.compositionContainer, this.serviceProvider );
-			this.SetupUICompositionEngine( this.serviceProvider );
+            this.OnCompositionContainerComposed( this.compositionContainer, this.serviceProvider );
+            this.SetupUICompositionEngine( this.serviceProvider );
 
 #if !SILVERLIGHT
 
@@ -288,66 +288,66 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 #endif
 
-			this.InitializeCurrentPrincipal();
-			this.InitializeCultures();
+            this.InitializeCurrentPrincipal();
+            this.InitializeCultures();
 
-			this.OnBoot( this.serviceProvider );
+            this.OnBoot( this.serviceProvider );
 
-			if ( !this.IsShuttingDown )
-			{
-				this.OnBootCompleted( this.serviceProvider );
-				this.isBootCompleted = true;
-			}
-		}
+            if ( !this.IsShuttingDown )
+            {
+                this.OnBootCompleted( this.serviceProvider );
+                this.isBootCompleted = true;
+            }
+        }
 
-		Func<CultureInfo> currentCultureHandler = () => CultureInfo.CurrentCulture;
+        Func<CultureInfo> currentCultureHandler = () => CultureInfo.CurrentCulture;
 
-		/// <summary>
-		/// Usings as current culture.
-		/// </summary>
-		/// <param name="currentCultureHandler">The current culture handler.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper UsingAsCurrentCulture( Func<CultureInfo> currentCultureHandler )
-		{
-			this.currentCultureHandler = currentCultureHandler;
+        /// <summary>
+        /// Usings as current culture.
+        /// </summary>
+        /// <param name="currentCultureHandler">The current culture handler.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper UsingAsCurrentCulture( Func<CultureInfo> currentCultureHandler )
+        {
+            this.currentCultureHandler = currentCultureHandler;
 
-			return this;
-		}
+            return this;
+        }
 
-		Func<CultureInfo> currentUICultureHandler = () => CultureInfo.CurrentUICulture;
+        Func<CultureInfo> currentUICultureHandler = () => CultureInfo.CurrentUICulture;
 
-		/// <summary>
-		/// Usings as current UI culture.
-		/// </summary>
-		/// <param name="currentUICultureHandler">The current UI culture handler.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper UsingAsCurrentUICulture( Func<CultureInfo> currentUICultureHandler )
-		{
-			this.currentUICultureHandler = currentUICultureHandler;
+        /// <summary>
+        /// Usings as current UI culture.
+        /// </summary>
+        /// <param name="currentUICultureHandler">The current UI culture handler.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper UsingAsCurrentUICulture( Func<CultureInfo> currentUICultureHandler )
+        {
+            this.currentUICultureHandler = currentUICultureHandler;
 
-			return this;
-		}
+            return this;
+        }
 
-		/// <summary>
-		/// Initializes the current principal.
-		/// </summary>
-		protected virtual void InitializeCurrentPrincipal()
-		{
+        /// <summary>
+        /// Initializes the current principal.
+        /// </summary>
+        protected virtual void InitializeCurrentPrincipal()
+        {
 #if !SILVERLIGHT
 			Thread.CurrentPrincipal = new WindowsPrincipal( WindowsIdentity.GetCurrent() );
 #endif
-		}
+        }
 
-		/// <summary>
-		/// Initializes the cultures.
-		/// </summary>
-		protected virtual void InitializeCultures()
-		{
-			var currentCulture = this.currentCultureHandler();
-			var currentUICulture = this.currentUICultureHandler();
+        /// <summary>
+        /// Initializes the cultures.
+        /// </summary>
+        protected virtual void InitializeCultures()
+        {
+            var currentCulture = this.currentCultureHandler();
+            var currentUICulture = this.currentUICultureHandler();
 
-			Thread.CurrentThread.CurrentCulture = currentCulture;
-			Thread.CurrentThread.CurrentUICulture = currentUICulture;
+            Thread.CurrentThread.CurrentCulture = currentCulture;
+            Thread.CurrentThread.CurrentUICulture = currentUICulture;
 
 #if !SILVERLIGHT
 			var xmlLang = XmlLanguage.GetLanguage( currentCulture.IetfLanguageTag );
@@ -367,7 +367,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				typeMetadata: new FrameworkPropertyMetadata( fd )
 			);
 #endif
-		}
+        }
 
 #if !SILVERLIGHT
 
@@ -417,12 +417,12 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 #endif
 
-		/// <summary>
-		/// Called in order to execute the boot process.
-		/// </summary>
-		/// <param name="serviceProvider">The service provider.</param>
-		protected virtual void OnBoot( IServiceProvider serviceProvider )
-		{
+        /// <summary>
+        /// Called in order to execute the boot process.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        protected virtual void OnBoot( IServiceProvider serviceProvider )
+        {
 #if !SILVERLIGHT
 
 			var broker = serviceProvider.GetService<IMessageBroker>();
@@ -446,23 +446,23 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				this.OnShutdownCore( ApplicationShutdownReason.MultipleInstanceNotAllowed );
 			}
 #else
-			if( this.bootHandler != null )
-			{
-				this.bootHandler( serviceProvider );
-			}
+            if ( this.bootHandler != null )
+            {
+                this.bootHandler( serviceProvider );
+            }
 #endif
-		}
+        }
 
-		/// <summary>
-		/// Boots this instance.
-		/// </summary>
-		public void Boot()
-		{
-			if ( !this.isAutoBootEnabled && !this.isBootCompleted )
-			{
-				this.OnBoot();
-			}
-		}
+        /// <summary>
+        /// Boots this instance.
+        /// </summary>
+        public void Boot()
+        {
+            if ( !this.isAutoBootEnabled && !this.isBootCompleted )
+            {
+                this.OnBoot();
+            }
+        }
 
 #if !SILVERLIGHT
 		/// <summary>
@@ -474,32 +474,32 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		}
 #endif
 
-		/// <summary>
-		/// Called when the boot process has been completed.
-		/// </summary>
-		/// <param name="serviceProvider">The service provider.</param>
-		protected virtual void OnBootCompleted( IServiceProvider serviceProvider )
-		{
-			var broker = serviceProvider.TryGetService<IMessageBroker>();
-			if ( broker != null )
-			{
-				broker.Broadcast( this, new ApplicationBootCompleted( this ) );
-			}
+        /// <summary>
+        /// Called when the boot process has been completed.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        protected virtual void OnBootCompleted( IServiceProvider serviceProvider )
+        {
+            var broker = serviceProvider.TryGetService<IMessageBroker>();
+            if ( broker != null )
+            {
+                broker.Broadcast( this, new ApplicationBootCompleted( this ) );
+            }
 
-			if ( this.bootCompletedHandler != null )
-			{
-				this.bootCompletedHandler( serviceProvider );
-			}
-		}
+            if ( this.bootCompletedHandler != null )
+            {
+                this.bootCompletedHandler( serviceProvider );
+            }
+        }
 
-		void OnShutdownCore( ApplicationShutdownReason reason )
-		{
+        void OnShutdownCore( ApplicationShutdownReason reason )
+        {
 #if !SILVERLIGHT
 			var canceled = false;
 #endif
 
-			try
-			{
+            try
+            {
 #if !SILVERLIGHT
 				if ( reason == ApplicationShutdownReason.UserRequest && this.isBootCompleted )
 				{
@@ -519,35 +519,35 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				}
 #endif
 
-				this.IsShuttingDown = true;
+                this.IsShuttingDown = true;
 
-				if ( this.isBootCompleted )
-				{
-					this.GetService<IMessageBroker>().Broadcast( this, new ApplicationShutdown( this, reason ) );
-				}
+                if ( this.isBootCompleted )
+                {
+                    this.GetService<IMessageBroker>().Broadcast( this, new ApplicationShutdown( this, reason ) );
+                }
 
-				var args = new ApplicationShutdownArgs()
-				{
-					Reason = reason,
-					IsBootCompleted = this.isBootCompleted
-				};
+                var args = new ApplicationShutdownArgs()
+                {
+                    Reason = reason,
+                    IsBootCompleted = this.isBootCompleted
+                };
 
-				this.OnShutdown( args );
+                this.OnShutdown( args );
 
-				if ( this.shutdownHandler != null )
-				{
-					this.shutdownHandler( args );
-				}
+                if ( this.shutdownHandler != null )
+                {
+                    this.shutdownHandler( args );
+                }
 
-				if ( this.isBootCompleted )
-				{
-					this.catalog.Dispose();
-					this.compositionContainer.Dispose();
-					if ( this.serviceProvider is IDisposable )
-					{
-						( ( IDisposable )this.serviceProvider ).Dispose();
-					}
-				}
+                if ( this.isBootCompleted )
+                {
+                    this.catalog.Dispose();
+                    this.compositionContainer.Dispose();
+                    if ( this.serviceProvider is IDisposable )
+                    {
+                        ( ( IDisposable )this.serviceProvider ).Dispose();
+                    }
+                }
 
 #if !SILVERLIGHT
 
@@ -558,9 +558,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				}
 #endif
 
-			}
-			finally
-			{
+            }
+            finally
+            {
 #if !SILVERLIGHT
 				if ( !canceled && reason != ApplicationShutdownReason.ApplicationRequest )
 				{
@@ -568,22 +568,38 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				}
 #endif
 
-				this.catalog = null;
-				this.compositionContainer = null;
-				this.serviceProvider = null;
+#if !SILVERLIGHT
 
-				RegionService.CurrentService = null;
-				RegionService.Conventions = null;
-			}
-		}
+                if ( !canceled )
+                {
 
-		/// <summary>
-		/// Called when the application shutdowns.
-		/// </summary>
-		protected virtual void OnShutdown( ApplicationShutdownArgs e )
-		{
+                    this.catalog = null;
+                    this.compositionContainer = null;
+                    this.serviceProvider = null;
 
-		}
+                    RegionService.CurrentService = null;
+                    RegionService.Conventions = null;
+                }
+#else
+
+                this.catalog = null;
+                this.compositionContainer = null;
+                this.serviceProvider = null;
+
+                RegionService.CurrentService = null;
+                RegionService.Conventions = null;
+
+#endif
+            }
+        }
+
+        /// <summary>
+        /// Called when the application shutdowns.
+        /// </summary>
+        protected virtual void OnShutdown( ApplicationShutdownArgs e )
+        {
+
+        }
 
 #if !SILVERLIGHT
 
@@ -625,16 +641,16 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 #endif
 
-		/// <summary>
-		/// Called when the application is booting.
-		/// </summary>
-		/// <param name="bootHandler">The boot handler.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper OnBoot( Action<IServiceProvider> bootHandler )
-		{
-			this.bootHandler = bootHandler;
-			return this;
-		}
+        /// <summary>
+        /// Called when the application is booting.
+        /// </summary>
+        /// <param name="bootHandler">The boot handler.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper OnBoot( Action<IServiceProvider> bootHandler )
+        {
+            this.bootHandler = bootHandler;
+            return this;
+        }
 
 #if !SILVERLIGHT
 
@@ -677,50 +693,50 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 #endif
 
-		/// <summary>
-		/// Gets a value indicating whether this application is shutting down.
-		/// </summary>
-		/// <value>
-		/// 	<c>true</c> if this application is shutting down; otherwise, <c>false</c>.
-		/// </value>
-		protected Boolean IsShuttingDown
-		{
-			get;
-			private set;
-		}
+        /// <summary>
+        /// Gets a value indicating whether this application is shutting down.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this application is shutting down; otherwise, <c>false</c>.
+        /// </value>
+        protected Boolean IsShuttingDown
+        {
+            get;
+            private set;
+        }
 
-		/// <summary>
-		/// Called when the boot process is completed.
-		/// </summary>
-		/// <param name="bootCompletedHandler">The boot completed handler.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper OnBootCompleted( Action<IServiceProvider> bootCompletedHandler )
-		{
-			this.bootCompletedHandler = bootCompletedHandler;
-			return this;
-		}
+        /// <summary>
+        /// Called when the boot process is completed.
+        /// </summary>
+        /// <param name="bootCompletedHandler">The boot completed handler.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper OnBootCompleted( Action<IServiceProvider> bootCompletedHandler )
+        {
+            this.bootCompletedHandler = bootCompletedHandler;
+            return this;
+        }
 
-		/// <summary>
-		/// Called when the application is shuting down.
-		/// </summary>
-		/// <param name="shutdownHandler">The shutdown handler.</param>
-		/// <returns></returns>
-		public ApplicationBootstrapper OnShutdown( Action<ApplicationShutdownArgs> shutdownHandler )
-		{
-			this.shutdownHandler = shutdownHandler;
-			return this;
-		}
+        /// <summary>
+        /// Called when the application is shuting down.
+        /// </summary>
+        /// <param name="shutdownHandler">The shutdown handler.</param>
+        /// <returns></returns>
+        public ApplicationBootstrapper OnShutdown( Action<ApplicationShutdownArgs> shutdownHandler )
+        {
+            this.shutdownHandler = shutdownHandler;
+            return this;
+        }
 
-		/// <summary>
-		/// Gets the service object of the specified type.
-		/// </summary>
-		/// <param name="serviceType">An object that specifies the type of service object to get.</param>
-		/// <returns>
-		/// A service object of type <paramref name="serviceType"/>.-or- null if there is no service object of type <paramref name="serviceType"/>.
-		/// </returns>
-		public object GetService( Type serviceType )
-		{
-			return this.serviceProvider.GetService( serviceType );
-		}
-	}
+        /// <summary>
+        /// Gets the service object of the specified type.
+        /// </summary>
+        /// <param name="serviceType">An object that specifies the type of service object to get.</param>
+        /// <returns>
+        /// A service object of type <paramref name="serviceType"/>.-or- null if there is no service object of type <paramref name="serviceType"/>.
+        /// </returns>
+        public object GetService( Type serviceType )
+        {
+            return this.serviceProvider.GetService( serviceType );
+        }
+    }
 }
