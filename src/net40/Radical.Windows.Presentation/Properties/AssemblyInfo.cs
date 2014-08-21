@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 //)]
 
 //This is the real build number used for references
-[assembly: AssemblyVersion( "1.9.0.0" )]
+[assembly: AssemblyVersion( "1.9.0.1" )]
 
 //This build number should always be equal to the used AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.9.0.0" )]
+[assembly: AssemblyFileVersion( "1.9.0.1" )]
