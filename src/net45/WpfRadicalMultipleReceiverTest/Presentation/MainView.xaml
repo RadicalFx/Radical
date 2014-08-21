@@ -8,12 +8,14 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Button Content="Open Another Master View" Command="{Binding OpenAnotherMasterViewCommand}"/>
+        <Button Content="Shutdown App" Grid.Row="1" Command="{Binding ShutdownAppCommand}"/>
 
-        <TabControl Grid.Row="1" rg:RegionService.Region="{rg:TabControlRegion Name=MainTabRegion}" />
+        <TabControl Grid.Row="2" rg:RegionService.Region="{rg:TabControlRegion Name=MainTabRegion}" />
 
     </Grid>
     
