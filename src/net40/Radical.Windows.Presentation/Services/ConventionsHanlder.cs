@@ -332,6 +332,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The view model type resolver.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<Type, Type> ResolveViewModelType { get; set; }
 
         /// <summary>
@@ -340,6 +341,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The view type resolver.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<Type, Type> ResolveViewType { get; set; }
 
         /// <summary>
@@ -348,8 +350,10 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The window finder.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<Object, Window> FindHostingWindowOf { get; set; }
 
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, Window> FindWindowOf { get; set; }
 
         /// <summary>
@@ -358,6 +362,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The logic that determines if view has data context.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, ViewDataContextSearchBehavior, Boolean> ViewHasDataContext { get; set; }
 
         /// <summary>
@@ -366,6 +371,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The logic that sets the view data context.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Action<DependencyObject, Object> SetViewDataContext { get; set; }
 
         /// <summary>
@@ -374,6 +380,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The logic that gets view data context.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, ViewDataContextSearchBehavior, Object> GetViewDataContext { get; set; }
 
         /// <summary>
@@ -383,6 +390,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <returns>
         /// The element, that supports closed notifications, in the visual tree that hosts the given view; otherwise <c>null</c>.
         ///   </returns>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, Action<DependencyObject>, DependencyObject> TryHookClosedEventOfHostOf { get; set; }
 
 
@@ -392,6 +400,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The convention that determines if the given FrameworkElement is a hosting view.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<FrameworkElement, bool> IsHostingView { get; set; }
 
         /// <summary>
@@ -400,6 +409,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The attach view to view model handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Action<DependencyObject, object> AttachViewToViewModel { get; set; }
 
         /// <summary>
@@ -408,6 +418,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The get view of view model handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<object, DependencyObject> GetViewOfViewModel { get; set; }
 
         /// <summary>
@@ -416,6 +427,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The attach view behaviors handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Action<DependencyObject> AttachViewBehaviors { get; set; }
 
         /// <summary>
@@ -424,6 +436,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The detach view behaviors handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Action<DependencyObject> DetachViewBehaviors { get; set; }
 
         /// <summary>
@@ -432,6 +445,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The logic that determines if ViewModel should notify the loaded message.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, Object, Boolean> ShouldNotifyViewModelLoaded { get; set; }
 
         /// <summary>
@@ -440,6 +454,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The logic that determines if View should notify the loaded message.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, Boolean> ShouldNotifyViewLoaded { get; set; }
 
         /// <summary>
@@ -448,6 +463,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The view release handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Action<DependencyObject, ViewReleaseBehavior> ViewReleaseHandler { get; set; }
 
 
@@ -457,6 +473,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The un-register region manager handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, bool> ShouldUnregisterRegionManagerOfView { get; set; }
 
         /// <summary>
@@ -465,6 +482,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The view release handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, bool> ShouldReleaseView { get; set; }
 
         /// <summary>
@@ -473,6 +491,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The unsubscribe handler.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public Func<DependencyObject, bool> ShouldUnsubscribeViewModelOnRelease { get; set; }
 
 
@@ -482,6 +501,7 @@ namespace Topics.Radical.Windows.Presentation.Services
         /// <value>
         /// The default view data context search behavior.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         public ViewDataContextSearchBehavior DefaultViewDataContextSearchBehavior
         {
             get;

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Radical.Windows.Presentation.CastleWindsor</id>
-    <version>1.2.0.0</version>
+    <version>1.2.0.1-Beta</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>Mauro Servienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
@@ -14,9 +14,9 @@
     <language>en-US</language>
     <tags>Radical Radical.Windows</tags>
     <dependencies>
-      <dependency id="Castle.Windsor" version="3.1.0" />
-      <dependency id="Radical.Extensions.CastleWindsor" version="2.0.2.1" />
-      <dependency id="Radical.Windows.Presentation" version="1.0.8.1" />
+      <dependency id="Castle.Windsor" version="3.3.0" />
+      <dependency id="Radical.Extensions.CastleWindsor" version="2.0.2.2-Beta" />
+      <dependency id="Radical.Windows.Presentation" version="1.0.8.2-Beta" />
     </dependencies>
   </metadata>
   <files>

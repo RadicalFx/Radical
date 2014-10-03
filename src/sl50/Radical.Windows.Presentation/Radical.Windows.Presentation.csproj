@@ -112,6 +112,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IExpectViewLoadedCallback.cs">
       <Link>ComponentModel\IExpectViewLoadedCallback.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IgnorePropertyInjectionAttribue.cs">
+      <Link>ComponentModel\IgnorePropertyInjectionAttribue.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\IRegionInjectionHandler.cs">
       <Link>ComponentModel\IRegionInjectionHandler.cs</Link>
     </Compile>

@@ -20,19 +20,24 @@ namespace Topics.Radical.Windows.Presentation.Boot.Installers
 		/// <param name="store">The configuration store.</param>
 		public void Install( Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store )
 		{
+            var conventions = container.Resolve<BootstrapConventions>();
+
 			container.Register( 
 				Component.For<IRegionManagerFactory>()
 					.ImplementedBy<RegionManagerFactory>()
-					.Overridable(),
+					.Overridable()
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection ),
 
 				Component.For<IRegionService>()
 					.ImplementedBy<RegionService>()
-					.Overridable(),
+					.Overridable()
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection ),
 				
 				Component.For<IRegionManager>()
 					.ImplementedBy<RegionManager>()
 					.LifeStyle.Is( LifestyleType.Transient )
-					.Overridable() 
+					.Overridable()
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection )
 			);
 		}
 	}

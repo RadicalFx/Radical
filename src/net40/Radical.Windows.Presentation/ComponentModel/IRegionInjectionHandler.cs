@@ -13,7 +13,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The inject handler.
 		/// </value>
-		Action<Func<DependencyObject>, IRegion> Inject { get; set; }
+		[IgnorePropertyInjectionAttribue]
+        Action<Func<DependencyObject>, IRegion> Inject { get; set; }
 
 		/// <summary>
 		/// Gets the views interested in the region identified by the given name.
