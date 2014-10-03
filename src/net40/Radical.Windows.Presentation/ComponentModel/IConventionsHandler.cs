@@ -14,7 +14,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The view model type resolver.
 		/// </value>
-		Func<Type, Type> ResolveViewModelType { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<Type, Type> ResolveViewModelType { get; set; }
 
 		/// <summary>
 		/// Gets or sets the view type resolver that can resolve the view type given the view model type.
@@ -22,7 +23,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The view type resolver.
 		/// </value>
-		Func<Type, Type> ResolveViewType { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<Type, Type> ResolveViewType { get; set; }
 
 		/// <summary>
 		/// Gets or sets the view release handler that is responsible to release views and view models.
@@ -30,6 +32,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The view release handler.
 		/// </value>
+        [IgnorePropertyInjectionAttribue]
         Action<DependencyObject, ViewReleaseBehavior> ViewReleaseHandler { get; set; }
 
 		/// <summary>
@@ -38,7 +41,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The un-register region manager handler.
 		/// </value>
-		Func<DependencyObject, Boolean> ShouldUnregisterRegionManagerOfView { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Boolean> ShouldUnregisterRegionManagerOfView { get; set; }
 
 		/// <summary>
 		/// Gets or sets the handler that determines if a view should be relased, the default behavior is that the view is released if not a singleton view.
@@ -46,7 +50,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The view release handler.
 		/// </value>
-		Func<DependencyObject, Boolean> ShouldReleaseView { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Boolean> ShouldReleaseView { get; set; }
 
 		/// <summary>
 		/// Gets or sets the handler that determines if a view model should be automatically unsubscribed from all the subscriptions when its view is relased, the default behavior is that the view model is unsubscribed if the view is not a singleton view.
@@ -54,7 +59,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The unsubscribe handler.
 		/// </value>
-		Func<DependencyObject, Boolean> ShouldUnsubscribeViewModelOnRelease { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Boolean> ShouldUnsubscribeViewModelOnRelease { get; set; }
 
 #if !WINDOWS_PHONE
 		/// <summary>
@@ -63,7 +69,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The window finder.
 		/// </value>
-		Func<Object, Window> FindHostingWindowOf { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<Object, Window> FindHostingWindowOf { get; set; }
 
 		/// <summary>
 		/// Gets or sets the View -> window finder, that given a View finds the root hosting Window for the given View.
@@ -71,7 +78,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The find window of.
 		/// </value>
-		Func<DependencyObject, Window> FindWindowOf { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Window> FindWindowOf { get; set; }
 #endif
 		
 		/// <summary>
@@ -80,7 +88,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that determines if view has data context.
 		/// </value>
-		Func<DependencyObject, ViewDataContextSearchBehavior, Boolean> ViewHasDataContext { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, ViewDataContextSearchBehavior, Boolean> ViewHasDataContext { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that determines if ViewModel should notify the loaded message.
@@ -88,7 +97,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that determines if ViewModel should notify the loaded message.
 		/// </value>
-		Func<DependencyObject, Object, Boolean> ShouldNotifyViewModelLoaded { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Object, Boolean> ShouldNotifyViewModelLoaded { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that determines if View should notify the loaded message.
@@ -96,7 +106,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that determines if View should notify the loaded message.
 		/// </value>
-		Func<DependencyObject, Boolean> ShouldNotifyViewLoaded { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Boolean> ShouldNotifyViewLoaded { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that sets the view data context.
@@ -104,7 +115,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that sets the view data context.
 		/// </value>
-		Action<DependencyObject, Object> SetViewDataContext { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Action<DependencyObject, Object> SetViewDataContext { get; set; }
 
 		/// <summary>
 		/// Gets or sets the logic that gets view data context.
@@ -112,7 +124,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The logic that gets view data context.
 		/// </value>
-		Func<DependencyObject, ViewDataContextSearchBehavior, Object> GetViewDataContext { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, ViewDataContextSearchBehavior, Object> GetViewDataContext { get; set; }
 
 		/// <summary>
 		/// Gets or sets the attach view to view model handler.
@@ -120,7 +133,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The attach view to view model handler.
 		/// </value>
-		Action<DependencyObject, Object> AttachViewToViewModel { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Action<DependencyObject, Object> AttachViewToViewModel { get; set; }
 
 		/// <summary>
 		/// Gets the view of the given view model.
@@ -128,14 +142,16 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The get view of view model handler.
 		/// </value>
-		Func<Object, DependencyObject> GetViewOfViewModel { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<Object, DependencyObject> GetViewOfViewModel { get; set; }
 
 		/// <summary>
 		/// Tries to hook closed event of an the element in the visual tree that hosts this given view.
 		/// If the hook succedeed the given callback will be called once the hosting element is closed.
 		/// </summary>
 		/// <returns>The element, that supports closed notifications, in the visual tree that hosts the given view; otherwise <c>null</c>.</returns>
-		Func<DependencyObject, Action<DependencyObject>, DependencyObject> TryHookClosedEventOfHostOf { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<DependencyObject, Action<DependencyObject>, DependencyObject> TryHookClosedEventOfHostOf { get; set; }
 
 		/// <summary>
 		/// Gets or sets the convention that determines if the given FrameworkElement is a hosting view.
@@ -143,7 +159,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The convention that determines if the given FrameworkElement is a hosting view.
 		/// </value>
-		Func<FrameworkElement, Boolean> IsHostingView { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Func<FrameworkElement, Boolean> IsHostingView { get; set; }
 
 		/// <summary>
 		/// Gets an opportunity to attach behaviors to the view.
@@ -151,7 +168,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The attach view behaviors handler.
 		/// </value>
-		Action<DependencyObject> AttachViewBehaviors { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Action<DependencyObject> AttachViewBehaviors { get; set; }
 
 		/// <summary>
 		/// Gets an opportunity to detach behaviors from the view.
@@ -159,7 +177,8 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <value>
 		/// The detach view behaviors handler.
 		/// </value>
-		Action<DependencyObject> DetachViewBehaviors { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        Action<DependencyObject> DetachViewBehaviors { get; set; }
 
         /// <summary>
         /// Gets or sets the default view data context search behavior.
@@ -167,6 +186,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
         /// <value>
         /// The default view data context search behavior.
         /// </value>
+        [IgnorePropertyInjectionAttribue]
         ViewDataContextSearchBehavior DefaultViewDataContextSearchBehavior { get; set; }
 	}
 

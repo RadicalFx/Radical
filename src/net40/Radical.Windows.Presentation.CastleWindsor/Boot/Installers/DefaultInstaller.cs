@@ -26,6 +26,8 @@ namespace Topics.Radical.Windows.Presentation.Boot.Installers
 		/// <param name="store">The configuration store.</param>
 		public void Install( Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store )
 		{
+            var conventions = container.Resolve<BootstrapConventions>();
+
             container.Register
             (
                 Component.For<TraceSource>()
@@ -38,29 +40,33 @@ namespace Topics.Radical.Windows.Presentation.Boot.Installers
                         return new TraceSource( name );
                     } )
                     .LifeStyle.Is( LifestyleType.Singleton )
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection )
             );
 
 			container.Register(
 				Component.For<Application>()
 					.UsingFactoryMethod( () => Application.Current )
-					.LifeStyle.Is( LifestyleType.Singleton ),
+                    .LifeStyle.Is( LifestyleType.Singleton )
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection ),
 
 				Component.For<Dispatcher>()
 					.UsingFactoryMethod( () => Application.Current.Dispatcher )
 					.LifeStyle.Is( LifestyleType.Singleton )
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection )
 			);
 
-			container.Register(
-				Component.For<IDispatcher>()
-					.ImplementedBy<WpfDispatcher>()
-					.LifeStyle.Is( LifestyleType.Singleton )
-					.Overridable(),
+            container.Register(
+                Component.For<IDispatcher>()
+                    .ImplementedBy<WpfDispatcher>()
+                    .LifeStyle.Is( LifestyleType.Singleton )
+                    .Overridable(),
 
-				Component.For<IMessageBroker>()
-					.ImplementedBy<MessageBroker>()
-					.LifeStyle.Is( LifestyleType.Singleton )
-					.Overridable()
-			);
+                Component.For<IMessageBroker>()
+                    .ImplementedBy<MessageBroker>()
+                    .LifeStyle.Is( LifestyleType.Singleton )
+                    .Overridable()
+                    .PropertiesIgnore( conventions.IgnorePropertyInjection )
+            );
 		}
 	}
 }

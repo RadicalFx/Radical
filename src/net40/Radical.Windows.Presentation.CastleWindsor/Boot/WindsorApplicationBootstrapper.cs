@@ -36,10 +36,10 @@ namespace Topics.Radical.Windows.Presentation.Boot
             {
                 SubSystemHandler = ( s, hs ) =>
                 {
-                    if ( hs.Any( h => h.ComponentModel.IsOverridable() ) )
+                    if( hs.Any( h => h.ComponentModel.IsOverridable() ) )
                     {
                         var nonOverridable = hs.Except( hs.Where( h => h.ComponentModel.IsOverridable() ) );
-                        if ( nonOverridable.Any() )
+                        if( nonOverridable.Any() )
                         {
                             return nonOverridable.Single();
                         }
@@ -56,9 +56,20 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
             var wrapper = new ServiceProviderWrapper( this.container );
 
-            this.container.Register( Component.For<IServiceProvider>().Instance( wrapper ) );
+            var bootConventions = new BootstrapConventions();
+
+            this.container.Register(
+                Component.For<IServiceProvider>()
+                    .Instance( wrapper )
+                    .Properties( pi => bootConventions.IgnorePropertyInjection( pi ) ) 
+            );
             this.container.Register( Component.For<IWindsorContainer>().Instance( this.container ) );
-            this.container.Register( Component.For<Boot.BootstrapConventions>() );
+            this.container.Register
+            (
+                Component.For<BootstrapConventions>()
+                    .Instance( bootConventions )
+                    .Properties( pi => bootConventions.IgnorePropertyInjection( pi ) ) 
+            );
 
             this.container.AddFacility<Castle.Facilities.SubscribeToMessageFacility>();
             this.container.AddFacility<InjectViewInRegionFacility>();
@@ -87,9 +98,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
             base.OnBootCompleted( serviceProvider );
 
             var callbacks = this.container.ResolveAll<IExpectBootCallback>();
-            if ( callbacks != null && callbacks.Any() )
+            if( callbacks != null && callbacks.Any() )
             {
-                foreach ( var cb in callbacks )
+                foreach( var cb in callbacks )
                 {
                     cb.OnBootCompleted();
                 }
@@ -100,12 +111,12 @@ namespace Topics.Radical.Windows.Presentation.Boot
         {
             base.OnShutdown( e );
 
-            if ( e.IsBootCompleted )
+            if( e.IsBootCompleted )
             {
                 var callbacks = this.container.ResolveAll<IExpectShutdownCallback>();
-                if ( callbacks != null && callbacks.Any() )
+                if( callbacks != null && callbacks.Any() )
                 {
-                    foreach ( var cb in callbacks )
+                    foreach( var cb in callbacks )
                     {
                         cb.OnShutdown( e.Reason );
                     }

@@ -98,7 +98,8 @@ namespace Topics.Radical.Windows.Presentation.Services
 		/// <value>
 		/// The inject handler.
 		/// </value>
-		public Action<Func<System.Windows.DependencyObject>, ComponentModel.IRegion> Inject
+        [IgnorePropertyInjectionAttribue]
+        public Action<Func<System.Windows.DependencyObject>, ComponentModel.IRegion> Inject
 		{
 			get;
 			set;
