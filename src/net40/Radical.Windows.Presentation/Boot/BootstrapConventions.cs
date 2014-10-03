@@ -6,6 +6,7 @@ using Topics.Radical.ComponentModel;
 using Topics.Radical.ComponentModel.Messaging;
 using Topics.Radical.Linq;
 using Topics.Radical.Reflection;
+using Topics.Radical.Windows.Presentation.ComponentModel;
 
 #if !WINDOWS_PHONE_8
 using Topics.Radical.Windows.Presentation.ComponentModel.Regions;
@@ -105,6 +106,12 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			};
 
 			this.IncludeAssemblyInContainerScan = assembly => true;
+
+            this.IgnorePropertyInjection = pi => 
+            {
+                var isDefined = pi.IsAttributeDefined<IgnorePropertyInjectionAttribue>();
+                return isDefined;
+            };
 #endif
 		}
 
@@ -114,7 +121,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The type of the is concrete.
 		/// </value>
-		public Predicate<Type> IsConcreteType { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Predicate<Type> IsConcreteType { get; set; }
 
 		/// <summary>
 		/// Gets or sets the is service.
@@ -122,7 +130,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is service.
 		/// </value>
-		public Predicate<Type> IsService { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Predicate<Type> IsService { get; set; }
 
 		/// <summary>
 		/// Gets or sets the select service contracts.
@@ -130,7 +139,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The select service contracts.
 		/// </value>
-		public Func<Type, IEnumerable<Type>> SelectServiceContracts { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<Type, IEnumerable<Type>> SelectServiceContracts { get; set; }
 
 		/// <summary>
 		/// Gets or sets the is message handler.
@@ -138,7 +148,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is message handler.
 		/// </value>
-		public Predicate<Type> IsMessageHandler { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Predicate<Type> IsMessageHandler { get; set; }
 
 		/// <summary>
 		/// Gets or sets the select message handler contracts.
@@ -146,7 +157,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The select message handler contracts.
 		/// </value>
-		public Func<Type, IEnumerable<Type>> SelectMessageHandlerContracts { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<Type, IEnumerable<Type>> SelectMessageHandlerContracts { get; set; }
 
 		/// <summary>
 		/// Gets or sets the is view.
@@ -154,7 +166,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is view.
 		/// </value>
-		public Predicate<Type> IsView { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Predicate<Type> IsView { get; set; }
 
 		/// <summary>
 		/// Gets or sets the is view model.
@@ -162,7 +175,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is view model.
 		/// </value>
-		public Predicate<Type> IsViewModel { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Predicate<Type> IsViewModel { get; set; }
 
 		/// <summary>
 		/// Gets or sets the is shell view.
@@ -170,7 +184,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is shell view.
 		/// </value>
-		public Func<IEnumerable<Type>, Type, Boolean> IsShellView { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<IEnumerable<Type>, Type, Boolean> IsShellView { get; set; }
 
 		/// <summary>
 		/// Gets or sets the is shell view model.
@@ -178,7 +193,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is shell view model.
 		/// </value>
-		public Func<IEnumerable<Type>, Type, Boolean> IsShellViewModel { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<IEnumerable<Type>, Type, Boolean> IsShellViewModel { get; set; }
 
 		/// <summary>
 		/// Gets or sets the select view contracts.
@@ -186,7 +202,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The select view contracts.
 		/// </value>
-		public Func<Type, IEnumerable<Type>> SelectViewContracts { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<Type, IEnumerable<Type>> SelectViewContracts { get; set; }
 
 		/// <summary>
 		/// Gets or sets the select view model contracts.
@@ -194,7 +211,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The select view model contracts.
 		/// </value>
-		public Func<Type, IEnumerable<Type>> SelectViewModelContracts { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<Type, IEnumerable<Type>> SelectViewModelContracts { get; set; }
 
 #if !WINDOWS_PHONE_8
 		/// <summary>
@@ -203,7 +221,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The get interested region name if any.
 		/// </value>
-		public Func<Type, String> GetInterestedRegionNameIfAny { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<Type, String> GetInterestedRegionNameIfAny { get; set; }
 #endif
 
 		/// <summary>
@@ -212,7 +231,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The is excluded.
 		/// </value>
-		public Func<Type, Boolean> IsExcluded { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Func<Type, Boolean> IsExcluded { get; set; }
 
 #if !SILVERLIGHT
 
@@ -222,7 +242,8 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The assembly file scan patterns.
 		/// </value>
-		public Func<Assembly, IEnumerable<String>> AssemblyFileScanPatterns{get;set;}
+        [IgnorePropertyInjectionAttribue]
+        public Func<Assembly, IEnumerable<String>> AssemblyFileScanPatterns { get; set; }
 
 		/// <summary>
 		/// Gets or sets the include assembly in container scan.
@@ -230,7 +251,17 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <value>
 		/// The include assembly in container scan.
 		/// </value>
-		public Predicate<Assembly> IncludeAssemblyInContainerScan { get; set; }
+        [IgnorePropertyInjectionAttribue]
+        public Predicate<Assembly> IncludeAssemblyInContainerScan { get; set; }
+
+        /// <summary>
+        /// Gets or sets the predicate that determines if a property is injectable or not.
+        /// </summary>
+        /// <value>
+        /// The injectable properties predicate.
+        /// </value>
+        [IgnorePropertyInjectionAttribue]
+        public Func<PropertyInfo, Boolean> IgnorePropertyInjection { get; set; }
 
 #endif
 	}

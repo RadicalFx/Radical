@@ -79,6 +79,7 @@
     <Compile Include="Boot\SingletonApplicationStartupArgs.cs" />
     <Compile Include="ComponentModel\IReleaseComponents.cs" />
     <Compile Include="ComponentModel\IViewModelResolver.cs" />
+    <Compile Include="ComponentModel\IgnorePropertyInjectionAttribue.cs" />
     <Compile Include="ComponentModel\ViewManualReleaseAttribute.cs" />
     <Compile Include="ComponentModel\NotifyActivatedAttribute.cs" />
     <Compile Include="ComponentModel\NotifyClosedAttribute.cs" />
