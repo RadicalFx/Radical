@@ -20,6 +20,11 @@ namespace Test.Radical.Extensions.Castle
                 get;
                 set;
             }
+
+            public void SetSenderForBackwardCompatibility(object sender)
+            {
+                this.Sender = sender;
+            }
         }
 
         class AnotherSampleMessage : IMessage
@@ -28,6 +33,11 @@ namespace Test.Radical.Extensions.Castle
             {
                 get;
                 set;
+            }
+
+            public void SetSenderForBackwardCompatibility(object sender)
+            {
+                this.Sender = sender;
             }
         }
 

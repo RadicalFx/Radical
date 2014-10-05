@@ -7,9 +7,17 @@ namespace Topics.Radical.Messaging
 	/// <summary>
 	/// A concrete message.
 	/// </summary>
-    [Obsolete( "The Radical message broker now supports POCO messages.", false )]
+	[Obsolete( "The Radical message broker now supports POCO messages.", false )]
 	public abstract class Message : IMessage
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Message"/> class.
+		/// </summary>
+		protected Message()
+		{
+
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Message"/> class.
 		/// </summary>
@@ -29,6 +37,21 @@ namespace Topics.Radical.Messaging
 		{
 			get;
 			private set;
+		}
+
+		void ILegacyMessageCompatibility.SetSenderForBackwardCompatibility( object sender )
+		{
+			Ensure.That( this.Sender )
+				.WithMessage( "Invalid sender" )
+				.If( s =>
+				{
+					return s != null && s != sender;
+				} )
+				.ThenThrow( e =>
+				{
+					return new ArgumentException( e.GetFullErrorMessage() );
+				} );
+			this.Sender = sender;
 		}
 	}
 }
