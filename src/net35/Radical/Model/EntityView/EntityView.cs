@@ -2003,16 +2003,18 @@ namespace Topics.Radical.Model
             return this.AddPropertyMapping( pd );
         }
 
-        /// <summary>
-        /// Adds a property mapping using the specified display name, the supplied property type and the supplied getter.
-        /// </summary>
-        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
-        /// <param name="customPropertyType">Type of the custom property.</param>
-        /// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
-        /// <returns>
-        /// A reference to the dinamically generated property.
-        /// </returns>
-        /// <remarks>Using this overload implicitly creates a read-only property because no setter has been supplied.</remarks>
+		/// <summary>
+		/// Adds a property mapping using the specified display name, the supplied property type and the supplied getter.
+		/// </summary>
+		/// <typeparam name="TProperty">The type of the property.</typeparam>
+		/// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+		/// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
+		/// <returns>
+		/// A reference to the dinamically generated property.
+		/// </returns>
+		/// <remarks>
+		/// Using this overload implicitly creates a read-only property because no setter has been supplied.
+		/// </remarks>
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
             String customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter )
@@ -2028,16 +2030,16 @@ namespace Topics.Radical.Model
             return this.AddPropertyMapping( customPropertyName, getter, null, defaultValueInterceptor );
         }
 
-        /// <summary>
-        /// Adds a property mapping using the specified display name, the supplied property type and the supplied getter and setter.
-        /// </summary>
-        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
-        /// <param name="customPropertyType">The type of the new custom property.</param>
-        /// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
-        /// <param name="setter">A delegate to call in order to set the value of the dinamically generated property.</param>
-        /// <returns>
-        /// A reference to the dinamically generated property.
-        /// </returns>
+		/// <summary>
+		/// Adds a property mapping using the specified display name, the supplied property type and the supplied getter and setter.
+		/// </summary>
+		/// <typeparam name="TProperty">The type of the property.</typeparam>
+		/// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+		/// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
+		/// <param name="setter">A delegate to call in order to set the value of the dinamically generated property.</param>
+		/// <returns>
+		/// A reference to the dinamically generated property.
+		/// </returns>
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
             String customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
