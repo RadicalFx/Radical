@@ -63,12 +63,12 @@ namespace Topics.Radical.Model
 		/// <summary>
 		/// Compares two objects and returns a item indicating whether one is less than, equal to, or greater than the other.
 		/// </summary>
-		/// <param name="a">The first object to compare.</param>
-		/// <param name="b">The second object to compare.</param>
+		/// <param name="x">The first object to compare.</param>
+		/// <param name="y">The second object to compare.</param>
 		/// <returns>
-		/// Value Condition Less than zero<paramref name="x"/> is less than <paramref name="y"/>.Zero<paramref name="x"/> equals <paramref name="y"/>.Greater than zero<paramref name="x"/> is greater than <paramref name="y"/>.
+		/// Value Condition Less than zero<paramref name="x" /> is less than <paramref name="y" />.Zero<paramref name="x" /> equals <paramref name="y" />.Greater than zero<paramref name="x" /> is greater than <paramref name="y" />.
 		/// </returns>
-		protected virtual Int32 OnCompare( IEntityItemView<T> a, IEntityItemView<T> b )
+		protected virtual Int32 OnCompare( IEntityItemView<T> x, IEntityItemView<T> y )
 		{
 			/*
 			 * Il confronto viene fatto scorrendo tutti
@@ -87,8 +87,8 @@ namespace Topics.Radical.Model
 			{
 				ListSortDescription sd = this.SortDescriptions[ 0 ];
 
-				object valueX = sd.PropertyDescriptor.GetValue( a );
-				object valueY = sd.PropertyDescriptor.GetValue( b );
+				object valueX = sd.PropertyDescriptor.GetValue( x );
+				object valueY = sd.PropertyDescriptor.GetValue( y );
 
 				retVal = EntityItemViewSortComparer<T>.Compare( valueX, valueY, sd.SortDirection );
 			}
@@ -98,8 +98,8 @@ namespace Topics.Radical.Model
 				{
 					if( retVal == 0 )
 					{
-						object valueX = sd.PropertyDescriptor.GetValue( a );
-						object valueY = sd.PropertyDescriptor.GetValue( b );
+						object valueX = sd.PropertyDescriptor.GetValue( x );
+						object valueY = sd.PropertyDescriptor.GetValue( y );
 
 						retVal = EntityItemViewSortComparer<T>.Compare( valueX, valueY, sd.SortDirection );
 					}

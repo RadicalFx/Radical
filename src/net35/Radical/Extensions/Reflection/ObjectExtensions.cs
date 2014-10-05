@@ -7,10 +7,12 @@ namespace Topics.Radical.Reflection
 	/// <summary>
 	/// Defines a delegate.
 	/// </summary>
-	/// <typeparam name="T">The type of the return value.</typeparam>
-	/// <returns>A value of type T.</returns>
+	/// <returns>A value.</returns>
 	public delegate Object Function();
 
+	/// <summary>
+	/// Object extensions for Fast property getters based on Lambda Expressions.
+	/// </summary>
 	public static class ObjectExtensions
 	{
 		/// <summary>
