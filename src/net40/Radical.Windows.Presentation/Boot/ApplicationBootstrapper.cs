@@ -475,6 +475,13 @@ namespace Topics.Radical.Windows.Presentation.Boot
 #endif
 
         /// <summary>
+        /// Called to ask to the concrete container to resolve all the registered components of type T.
+        /// </summary>
+        /// <typeparam name="T">The type to resolve.</typeparam>
+        /// <returns>A list of resolved types.</returns>
+        protected abstract IEnumerable<T> ResolveAll<T>();
+
+        /// <summary>
         /// Called when the boot process has been completed.
         /// </summary>
         /// <param name="serviceProvider">The service provider.</param>
@@ -489,6 +496,15 @@ namespace Topics.Radical.Windows.Presentation.Boot
             if ( this.bootCompletedHandler != null )
             {
                 this.bootCompletedHandler( serviceProvider );
+            }
+
+            var callbacks = this.ResolveAll<IExpectBootCallback>();
+            if ( callbacks != null && callbacks.Any() )
+            {
+                foreach ( var cb in callbacks )
+                {
+                    cb.OnBootCompleted();
+                }
             }
         }
 
@@ -524,6 +540,14 @@ namespace Topics.Radical.Windows.Presentation.Boot
                 if ( this.isBootCompleted )
                 {
                     this.GetService<IMessageBroker>().Broadcast( this, new ApplicationShutdown( this, reason ) );
+                    var callbacks = this.ResolveAll<IExpectShutdownCallback>();
+                    if ( callbacks != null && callbacks.Any() )
+                    {
+                        foreach ( var cb in callbacks )
+                        {
+                            cb.OnShutdown( reason );
+                        }
+                    }
                 }
 
                 var args = new ApplicationShutdownArgs()
@@ -598,7 +622,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
         /// </summary>
         protected virtual void OnShutdown( ApplicationShutdownArgs e )
         {
-
+            
         }
 
 #if !SILVERLIGHT
