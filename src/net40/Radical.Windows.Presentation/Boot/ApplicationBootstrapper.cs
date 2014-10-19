@@ -296,6 +296,27 @@ namespace Topics.Radical.Windows.Presentation.Boot
             if ( !this.IsShuttingDown )
             {
                 this.OnBootCompleted( this.serviceProvider );
+
+                var broker = serviceProvider.TryGetService<IMessageBroker>();
+                if ( broker != null )
+                {
+                    broker.Broadcast( this, new ApplicationBootCompleted( this ) );
+                }
+
+                if ( this.bootCompletedHandler != null )
+                {
+                    this.bootCompletedHandler( serviceProvider );
+                }
+
+                var callbacks = this.ResolveAll<IExpectBootCallback>();
+                if ( callbacks != null && callbacks.Any() )
+                {
+                    foreach ( var cb in callbacks )
+                    {
+                        cb.OnBootCompleted();
+                    }
+                }
+
                 this.isBootCompleted = true;
             }
         }
@@ -487,25 +508,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
         /// <param name="serviceProvider">The service provider.</param>
         protected virtual void OnBootCompleted( IServiceProvider serviceProvider )
         {
-            var broker = serviceProvider.TryGetService<IMessageBroker>();
-            if ( broker != null )
-            {
-                broker.Broadcast( this, new ApplicationBootCompleted( this ) );
-            }
-
-            if ( this.bootCompletedHandler != null )
-            {
-                this.bootCompletedHandler( serviceProvider );
-            }
-
-            var callbacks = this.ResolveAll<IExpectBootCallback>();
-            if ( callbacks != null && callbacks.Any() )
-            {
-                foreach ( var cb in callbacks )
-                {
-                    cb.OnBootCompleted();
-                }
-            }
+            
         }
 
         void OnShutdownCore( ApplicationShutdownReason reason )
