@@ -36,6 +36,13 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <returns>The requested region manager</returns>
 		IRegionManager GetKnownRegionManager<TView>() where TView : DependencyObject;
 
+        /// <summary>
+        /// Finds a region manager given a custom search logic.
+        /// </summary>
+        /// <param name="filter">A predicate executed for all the registered region managers.</param>
+        /// <returns>The found region manager or null.</returns>
+        IRegionManager FindRegionManager( Func<DependencyObject, IRegionManager, Boolean> filter );
+
 		/// <summary>
 		/// Registers a new region manager for the given owner.
 		/// </summary>

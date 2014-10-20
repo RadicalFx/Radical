@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 [assembly: Guid( "563eca05-7315-4417-90f8-cf3f4202962c" )]
 
 //This is the real build number used for references
-[assembly: AssemblyVersion( "1.2.0.1" )]
+[assembly: AssemblyVersion( "1.2.0.2" )]
 
 //This build number should always be equal to the used AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.2.0.1" )]
+[assembly: AssemblyFileVersion( "1.2.0.2" )]
