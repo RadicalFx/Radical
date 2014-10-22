@@ -61,11 +61,13 @@ namespace Topics.Radical.Windows.Presentation.Services
                     var vm = this.GetViewDataContext( view, ViewDataContextSearchBehavior.LocalOnly );
                     if ( vm != null )
                     {
-                        this.releaser.Release( vm );
-                        if ( this.ShouldUnsubscribeViewModelOnRelease( view ) )
+						this.SetViewDataContext( view, null );
+						if ( this.ShouldUnsubscribeViewModelOnRelease( view ) )
                         {
                             this.broker.Unsubscribe( vm );
                         }
+
+						this.releaser.Release( vm );
                     }
 
                     this.DetachViewBehaviors( view );

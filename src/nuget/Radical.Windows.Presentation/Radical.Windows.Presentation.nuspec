@@ -3,7 +3,7 @@
   <metadata>
     <id>Radical.Windows.Presentation</id>
     <title>Radical Windows Presentation</title>
-    <version>1.9.0.3-alfa-1</version>
+    <version>1.9.0.3-alfa-2</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
@@ -32,7 +32,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\..\..\build\release\radical.windows.Presentation\lib\" target="lib\" />
-    <file src="..\..\..\build\release\radical.windows.Presentation\readme.txt" target="readme.txt" />
+    <file src="..\..\..\build\$configuration$\radical.windows.Presentation\lib\" target="lib\" />
+    <file src="..\..\..\build\$configuration$\radical.windows.Presentation\readme.txt" target="readme.txt" />
   </files>
 </package>
