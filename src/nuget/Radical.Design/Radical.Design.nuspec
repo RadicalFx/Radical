@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\..\build\release\Radical.Design\lib\" target="lib\" />
+    <file src="..\..\..\build\$configuration$\Radical.Design\lib\" target="lib\" />
   </files>
 </package>

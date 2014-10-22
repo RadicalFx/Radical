@@ -19,6 +19,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\..\build\release\radical.windows\lib\" target="lib\" />
+    <file src="..\..\..\build\$configuration$\radical.windows\lib\" target="lib\" />
   </files>
 </package>
