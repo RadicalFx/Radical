@@ -11,29 +11,29 @@ namespace Test.Radical.Windows.Messaging
 	[TestClass]
 	public class MessageBrokerTests
 	{
-		class TestMessage : Message
+		class LegacyTestMessage : Message
 		{
-			public TestMessage() { }
+			public LegacyTestMessage() { }
 
-			public TestMessage( Object sender )
+			public LegacyTestMessage( Object sender )
 				: base( sender )
 			{
 
 			}
 		}
 
-		class MessageDerivedFromTestMessage : TestMessage
+		class LegacyMessageDerivedFromLegacyTestMessage : LegacyTestMessage
 		{
-			public MessageDerivedFromTestMessage( Object sender )
+			public LegacyMessageDerivedFromLegacyTestMessage( Object sender )
 				: base( sender )
 			{
 
 			}
 		}
 
-		class AnotherTestMessage : Message
+		class LegacyAnotherTestMessage : Message
 		{
-			public AnotherTestMessage( Object sender )
+			public LegacyAnotherTestMessage( Object sender )
 				: base( sender )
 			{
 
@@ -56,6 +56,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_unsubscribe_specific_subscriber_should_remove_only_subscriptions_for_that_subscriber()
 		{
 			const int expected = 1;
@@ -67,20 +68,21 @@ namespace Test.Radical.Windows.Messaging
 			var subscriber1 = new Object();
 			var subscriber2 = new Object();
 
-			target.Subscribe<TestMessage>( subscriber1, msg => { actual++; } );
-			target.Subscribe<TestMessage>( subscriber1, msg => { actual++; } );
-			target.Subscribe<TestMessage>( subscriber1, msg => { actual++; } );
+			target.Subscribe<LegacyTestMessage>( subscriber1, msg => { actual++; } );
+			target.Subscribe<LegacyTestMessage>( subscriber1, msg => { actual++; } );
+			target.Subscribe<LegacyTestMessage>( subscriber1, msg => { actual++; } );
 
-			target.Subscribe<TestMessage>( subscriber2, msg => { actual++; } );
+			target.Subscribe<LegacyTestMessage>( subscriber2, msg => { actual++; } );
 
 			target.Unsubscribe( subscriber1 );
 
-			target.Dispatch( new TestMessage( this ) );
+			target.Dispatch( new LegacyTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( expected );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_unsubscribe_specific_subscriber_should_remove_only_subscriptions_for_that_subscriber()
 		{
 			const int expected = 1;
@@ -106,6 +108,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_unsubscribe_specific_subscriber_and_specific_messageType_should_remove_only_subscriptions_for_that_subscriber()
 		{
 			const int expected = 1;
@@ -116,17 +119,18 @@ namespace Test.Radical.Windows.Messaging
 
 			var subscriber = new Object();
 
-			target.Subscribe<TestMessage>( subscriber, msg => { actual++; } );
-			target.Subscribe<AnotherTestMessage>( subscriber, msg => { actual++; } );
+			target.Subscribe<LegacyTestMessage>( subscriber, msg => { actual++; } );
+			target.Subscribe<LegacyAnotherTestMessage>( subscriber, msg => { actual++; } );
 
-			target.Unsubscribe<AnotherTestMessage>( subscriber );
+			target.Unsubscribe<LegacyAnotherTestMessage>( subscriber );
 
-			target.Dispatch( new TestMessage( this ) );
+			target.Dispatch( new LegacyTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( expected );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_unsubscribe_specific_subscriber_and_specific_messageType_should_remove_only_subscriptions_for_that_subscriber()
 		{
 			const int expected = 1;
@@ -148,15 +152,17 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_Dispatch_valid_message_should_not_fail()
 		{
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Dispatch( new TestMessage( this ) );
+			broker.Dispatch( new LegacyTestMessage( this ) );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_Dispatch_valid_message_should_not_fail()
 		{
 			var dispatcher = new NullDispatcher();
@@ -166,6 +172,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_subscribe_using_null_action_should_raise_ArgumentNullException()
 		{
 			Executing.This( () =>
@@ -173,12 +180,13 @@ namespace Test.Radical.Windows.Messaging
 				var dispatcher = new NullDispatcher();
 				var broker = new MessageBroker( dispatcher );
 
-				broker.Subscribe<TestMessage>( this, ( Action<TestMessage> )null );
+				broker.Subscribe<LegacyTestMessage>( this, ( Action<LegacyTestMessage> )null );
 			} )
 			.Should().Throw<ArgumentNullException>();
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_subscribe_using_null_action_should_raise_ArgumentNullException()
 		{
 			Executing.This( () =>
@@ -192,15 +200,17 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_Subscribe_based_on_message_type_should_not_fail()
 		{
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<TestMessage>( this, m => { } );
+			broker.Subscribe<LegacyTestMessage>( this, m => { } );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_Subscribe_based_on_message_type_should_not_fail()
 		{
 			var dispatcher = new NullDispatcher();
@@ -210,6 +220,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_subscribe_normal_should_notify()
 		{
 			var expected = true;
@@ -218,8 +229,8 @@ namespace Test.Radical.Windows.Messaging
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<TestMessage>( this, msg => actual = true );
-			broker.Dispatch( new TestMessage( this ) );
+			broker.Subscribe<LegacyTestMessage>( this, msg => actual = true );
+			broker.Dispatch( new LegacyTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( expected );
 		}
@@ -240,6 +251,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_MIXED_subscribe_POCO_normal_should_notify_IMessage()
 		{
 			var expected = true;
@@ -249,12 +261,13 @@ namespace Test.Radical.Windows.Messaging
 			var broker = new MessageBroker( dispatcher );
 
 			broker.Subscribe<Object>( this, ( s, msg ) => actual = true );
-			broker.Dispatch( new TestMessage( this ) );
+			broker.Dispatch( new LegacyTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( expected );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_MIXED_subscribe_IMessage_normal_should_not_notify_POCO()
 		{
 			var expected = false;
@@ -270,6 +283,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_broadcast_using_more_then_one_subscriber_should_call_on_different_thread()
 		{
 			TestRunner.Execute( ApartmentState.MTA, () =>
@@ -284,19 +298,19 @@ namespace Test.Radical.Windows.Messaging
 				var dispatcher = new NullDispatcher();
 				var broker = new MessageBroker( dispatcher );
 
-				broker.Subscribe<TestMessage>( this, msg =>
+				broker.Subscribe<LegacyTestMessage>( this, msg =>
 				{
 					s1ThreadId = Thread.CurrentThread.ManagedThreadId;
 					h1.Set();
 				} );
 
-				broker.Subscribe<TestMessage>( this, msg =>
+				broker.Subscribe<LegacyTestMessage>( this, msg =>
 				{
 					s2ThreadId = Thread.CurrentThread.ManagedThreadId;
 					h2.Set();
 				} );
 
-				broker.Broadcast( new TestMessage( this ) );
+				broker.Broadcast( new LegacyTestMessage( this ) );
 
 				ManualResetEvent.WaitAll( new[] { h1, h2 } );
 
@@ -306,6 +320,7 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_broadcast_using_more_then_one_subscriber_should_call_on_different_thread()
 		{
 			TestRunner.Execute( ApartmentState.MTA, () =>
@@ -395,7 +410,7 @@ namespace Test.Radical.Windows.Messaging
 			var broker = new MessageBroker( dispatcher );
 
 			broker.Subscribe<IMessage>( this, msg => actual = true );
-			broker.Dispatch( new TestMessage( this ) );
+			broker.Dispatch( new LegacyTestMessage( this ) );
 
 			actual.Should().Be.True();
 		}
@@ -425,8 +440,8 @@ namespace Test.Radical.Windows.Messaging
 			var broker = new MessageBroker( dispatcher );
 
 			broker.Subscribe<IMessage>( this, msg => actual++ );
-			broker.Dispatch( new TestMessage( this ) );
-			broker.Dispatch( new AnotherTestMessage( this ) );
+			broker.Dispatch( new LegacyTestMessage( this ) );
+			broker.Dispatch( new LegacyAnotherTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( 2 );
 		}
@@ -458,7 +473,7 @@ namespace Test.Radical.Windows.Messaging
 
 			broker.Subscribe<Object>( this, ( s, msg ) => actual++ );
 			broker.Dispatch( this, new PocoTestMessage() );
-			broker.Dispatch( new AnotherTestMessage( this ) );
+			broker.Dispatch( new LegacyAnotherTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( 2 );
 		}
@@ -472,9 +487,9 @@ namespace Test.Radical.Windows.Messaging
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<TestMessage>( this, msg => actual++ );
-			broker.Dispatch( new MessageDerivedFromTestMessage( this ) );
-			broker.Dispatch( new AnotherTestMessage( this ) );
+			broker.Subscribe<LegacyTestMessage>( this, msg => actual++ );
+			broker.Dispatch( new LegacyMessageDerivedFromLegacyTestMessage( this ) );
+			broker.Dispatch( new LegacyAnotherTestMessage( this ) );
 
 			actual.Should().Be.EqualTo( 1 );
 		}
@@ -516,6 +531,7 @@ namespace Test.Radical.Windows.Messaging
 		//}
 
 		[TestMethod, Ignore]
+		[TestCategory( "MessageBroker" )]
 		[ExpectedException( typeof( ArgumentException ) )]
 		public void messageBroker_broadcast_should_report_expected_exception()
 		{
@@ -524,14 +540,14 @@ namespace Test.Radical.Windows.Messaging
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<TestMessage>( this, msg =>
+			broker.Subscribe<LegacyTestMessage>( this, msg =>
 			{
 				throw new ArgumentException();
 			} );
 
 			try
 			{
-				broker.Broadcast( new TestMessage( this ) );
+				broker.Broadcast( new LegacyTestMessage( this ) );
 
 				h.WaitOne();
 			}
@@ -550,32 +566,85 @@ namespace Test.Radical.Windows.Messaging
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_should_dispatch_non_POCO_message()
 		{
+			var received = false;
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
-			broker.Subscribe<TestMessage>( this, msg => { } );
-			broker.Dispatch( this, new TestMessage() );
+
+			broker.Subscribe<LegacyTestMessage>( this, msg =>
+			{
+				received = true;
+			} );
+
+			broker.Dispatch( this, new LegacyTestMessage() );
+			Assert.IsTrue( received );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
+		public void messageBroker_POCO_should_dispatch_non_POCO_message_and_subscribe_as_POCO()
+		{
+			var received = false;
+			var dispatcher = new NullDispatcher();
+			var broker = new MessageBroker( dispatcher );
+
+			broker.Subscribe<LegacyTestMessage>( this, ( s, msg ) =>
+			{
+				received = true;
+			} );
+
+			broker.Dispatch( this, new LegacyTestMessage() );
+			Assert.IsTrue( received );
+		}
+
+		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_should_broadcast_non_POCO_message()
 		{
+			var received = false;
 			var h = new ManualResetEvent( false );
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
-			
-			broker.Subscribe<TestMessage>( this, msg =>
+
+			broker.Subscribe<LegacyTestMessage>( this, msg =>
 			{
+				received = true;
 				h.Set();
 			} );
 
-			broker.Broadcast( this, new TestMessage() );
+			broker.Broadcast( this, new LegacyTestMessage() );
 
 			h.WaitOne();
+
+			Assert.IsTrue( received );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
+		public void messageBroker_POCO_should_broadcast_non_POCO_message_and_subscribe_as_POCO()
+		{
+			var received = false;
+			var h = new ManualResetEvent( false );
+			var dispatcher = new NullDispatcher();
+			var broker = new MessageBroker( dispatcher );
+
+			broker.Subscribe<LegacyTestMessage>( this, ( s, msg ) =>
+			{
+				received = true;
+				h.Set();
+			} );
+
+			broker.Broadcast( this, new LegacyTestMessage() );
+
+			h.WaitOne();
+
+			Assert.IsTrue( received );
+		}
+
+		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_should_dispatch_non_POCO_message_with_correct_Sender()
 		{
 			Object expected = this;
@@ -584,17 +653,18 @@ namespace Test.Radical.Windows.Messaging
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<TestMessage>( this, msg =>
+			broker.Subscribe<LegacyTestMessage>( this, msg =>
 			{
 				actual = msg.Sender;
 			} );
 
-			broker.Dispatch( this, new TestMessage() );
+			broker.Dispatch( this, new LegacyTestMessage() );
 
 			Assert.AreEqual( expected, actual );
 		}
 
 		[TestMethod]
+		[TestCategory( "MessageBroker" )]
 		public void messageBroker_POCO_should_broadcast_non_POCO_message_with_correct_Sender()
 		{
 			Object expected = this;
@@ -604,13 +674,13 @@ namespace Test.Radical.Windows.Messaging
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<TestMessage>( this, msg =>
+			broker.Subscribe<LegacyTestMessage>( this, msg =>
 			{
 				actual = msg.Sender;
 				h.Set();
 			} );
 
-			broker.Broadcast( this, new TestMessage() );
+			broker.Broadcast( this, new LegacyTestMessage() );
 
 			h.WaitOne();
 

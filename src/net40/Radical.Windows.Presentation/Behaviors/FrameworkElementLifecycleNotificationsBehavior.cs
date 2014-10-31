@@ -36,12 +36,12 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
                     if ( this.conventions.ShouldNotifyViewModelLoaded( view, dc ) )
                     {
-                        this.broker.Broadcast( this, new ViewModelLoaded( this, dc ) );
+                        this.broker.Broadcast( this, new ViewModelLoaded( dc ) );
                     }
 
                     if ( this.conventions.ShouldNotifyViewLoaded( view ) )
                     {
-                        this.broker.Broadcast( this, new ViewLoaded( this, view ) );
+                        this.broker.Broadcast( this, new ViewLoaded( view ) );
                     }
 
                     var temp = dc as IExpectViewLoadedCallback;

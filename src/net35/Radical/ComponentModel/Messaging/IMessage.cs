@@ -17,7 +17,7 @@ namespace Topics.Radical.ComponentModel.Messaging
     /// An IMessage is the minum contract that a message needs to implement
     /// in order to be managed by an <c>IMessageBroker</c>.
     /// </summary>
-    [Obsolete( "The Radical message broker now supports POCO messages.", false )]
+    [Obsolete( "The Radical message broker now supports POCO messages, will be removed in the next version.", false )]
     public interface IMessage : ILegacyMessageCompatibility
     {
         /// <summary>

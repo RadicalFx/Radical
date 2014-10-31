@@ -7,7 +7,7 @@ namespace Topics.Radical.Messaging
 	/// <summary>
 	/// A concrete message.
 	/// </summary>
-	[Obsolete( "The Radical message broker now supports POCO messages.", false )]
+	[Obsolete( "The Radical message broker now supports POCO messages, will be removed in the next version.", false )]
 	public abstract class Message : IMessage
 	{
 		/// <summary>
@@ -22,6 +22,7 @@ namespace Topics.Radical.Messaging
 		/// Initializes a new instance of the <see cref="Message"/> class.
 		/// </summary>
 		/// <param name="sender">The sender.</param>
+		[Obsolete( "The Radical message broker now supports POCO messages, use the default contructor, will be removed in the next version.", false )]
 		protected Message( Object sender )
 		{
 			Ensure.That( sender ).Named( "sender" ).IsNotNull();

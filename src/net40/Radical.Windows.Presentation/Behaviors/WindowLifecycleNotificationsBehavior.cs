@@ -58,7 +58,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 					{
                         logger.Debug( "ShouldNotifyViewModelLoaded -> true." );
 
-                        this.broker.Broadcast( this, new ViewModelLoaded( this, dc ) );
+                        this.broker.Broadcast( this, new ViewModelLoaded( dc ) );
 
                         logger.Debug( "Message broadcasted." );
 					}
@@ -67,7 +67,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
                     {
                         logger.Debug( "ShouldNotifyViewLoaded -> true." );
 
-                        this.broker.Broadcast( this, new ViewLoaded( this, view ));
+                        this.broker.Broadcast( this, new ViewLoaded( view ));
 
                         logger.Debug( "Message broadcasted." );
                     }
@@ -92,7 +92,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
                     if ( dc != null && dc.GetType().IsAttributeDefined<NotifyActivatedAttribute>() )
                     {
-                        this.broker.Broadcast( this, new ViewModelActivated( this, dc ) );
+                        this.broker.Broadcast( this, new ViewModelActivated( dc ) );
                     }
 
 					var temp = dc as IExpectViewActivatedCallback;
@@ -117,7 +117,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
 					if( dc != null && dc.GetType().IsAttributeDefined<NotifyShownAttribute>() )
 					{
-                        this.broker.Broadcast( this, new ViewModelShown( this, dc ) );
+                        this.broker.Broadcast( this, new ViewModelShown( dc ) );
 					}
 
 					var temp = dc as IExpectViewShownCallback;
@@ -143,7 +143,7 @@ namespace Topics.Radical.Windows.Presentation.Behaviors
 
 					if ( dc != null && dc.GetType().IsAttributeDefined<NotifyClosedAttribute>() )
 					{
-                        this.broker.Broadcast( this, new ViewModelClosed( this, dc ) );
+                        this.broker.Broadcast( this, new ViewModelClosed(  dc ) );
 					}
 
 					var temp = dc as IExpectViewClosedCallback;

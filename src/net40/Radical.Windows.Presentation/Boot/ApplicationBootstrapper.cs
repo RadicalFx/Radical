@@ -483,7 +483,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
             var broker = serviceProvider.TryGetService<IMessageBroker>();
             if ( broker != null )
             {
-                broker.Broadcast( this, new ApplicationBootCompleted( this ) );
+                broker.Broadcast( this, new ApplicationBootCompleted() );
             }
 
             if ( this.bootCompletedHandler != null )
@@ -504,7 +504,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				if ( reason == ApplicationShutdownReason.UserRequest && this.isBootCompleted )
 				{
 					//messaggio per notificare ed eventualmente cancellare
-					var msg = new ApplicationShutdownRequested( this, reason );
+					var msg = new ApplicationShutdownRequested( reason );
 
 					var broker = this.GetService<IMessageBroker>();
 					broker.Dispatch( this, msg );
@@ -513,7 +513,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
 					if ( canceled )
 					{
-						broker.Broadcast( this, new ApplicationShutdownCanceled( this, reason ) );
+						broker.Broadcast( this, new ApplicationShutdownCanceled( reason ) );
 						return;
 					}
 				}
@@ -523,7 +523,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 
                 if ( this.isBootCompleted )
                 {
-                    this.GetService<IMessageBroker>().Broadcast( this, new ApplicationShutdown( this, reason ) );
+                    this.GetService<IMessageBroker>().Broadcast( this, new ApplicationShutdown( reason ) );
                 }
 
                 var args = new ApplicationShutdownArgs()
