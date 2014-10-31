@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Radical.Extensions.CastleWindsor</id>
-    <version>2.0.2.2-Beta</version>
+    <version>2.1.0.0-alfa</version>
     <title>Radical CastleWindsor Extensions</title>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>

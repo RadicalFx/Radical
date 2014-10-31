@@ -40,7 +40,7 @@ namespace Topics.Radical.Windows.Presentation.Boot.Installers
                     .WithService.Select( ( type, baseTypes ) => conventions.SelectViewModelContracts( type ) )
                     .Configure( r =>
                     {
-                        r.Properties( PropertyFilter.IgnoreAll );
+                        r.PropertiesIgnore( conventions.IgnoreViewModelPropertyInjection );
 
                         var services = this.GetServices( r );
 
@@ -63,7 +63,7 @@ namespace Topics.Radical.Windows.Presentation.Boot.Installers
                     .WithService.Select( ( type, baseTypes ) => conventions.SelectViewContracts( type ) )
                     .Configure( r =>
                     {
-                        r.Properties( PropertyFilter.IgnoreAll );
+						r.PropertiesIgnore( conventions.IgnoreViewPropertyInjection );
 
                         var services = this.GetServices( r );
 

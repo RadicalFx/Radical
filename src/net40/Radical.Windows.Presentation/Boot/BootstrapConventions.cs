@@ -112,6 +112,16 @@ namespace Topics.Radical.Windows.Presentation.Boot
                 var isDefined = pi.IsAttributeDefined<IgnorePropertyInjectionAttribue>();
                 return isDefined;
             };
+
+			this.IgnoreViewPropertyInjection = pi =>
+			{
+				return true;
+			};
+
+			this.IgnoreViewModelPropertyInjection = pi =>
+			{
+				return true;
+			};
 #endif
 		}
 
@@ -262,6 +272,24 @@ namespace Topics.Radical.Windows.Presentation.Boot
         /// </value>
         [IgnorePropertyInjectionAttribue]
         public Func<PropertyInfo, Boolean> IgnorePropertyInjection { get; set; }
+
+		/// <summary>
+		/// Gets or sets the predicate that determines if a property of a View is injectable or not.
+		/// </summary>
+		/// <value>
+		/// The injectable properties predicate.
+		/// </value>
+		[IgnorePropertyInjectionAttribue]
+		public Func<PropertyInfo, Boolean> IgnoreViewPropertyInjection { get; set; }
+
+		/// <summary>
+		/// Gets or sets the predicate that determines if a property of a ViewModel is injectable or not.
+		/// </summary>
+		/// <value>
+		/// The injectable properties predicate.
+		/// </value>
+		[IgnorePropertyInjectionAttribue]
+		public Func<PropertyInfo, Boolean> IgnoreViewModelPropertyInjection { get; set; }
 
 #endif
 	}
