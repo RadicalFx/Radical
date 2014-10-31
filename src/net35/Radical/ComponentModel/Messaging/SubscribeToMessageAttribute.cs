@@ -9,6 +9,7 @@ namespace Topics.Radical.ComponentModel.Messaging
 	/// specifically extended to handle ths scenario.
 	/// </summary>
 	[AttributeUsage( AttributeTargets.Class, AllowMultiple = true )]
+	[Obsolete( "Not required anymore, will be removed in the version.", false )]
 	public sealed class SubscribeToMessageAttribute : Attribute
 	{
 		/// <summary>
@@ -17,7 +18,7 @@ namespace Topics.Radical.ComponentModel.Messaging
 		/// <param name="messageType">Type of the message.</param>
 		public SubscribeToMessageAttribute( Type messageType )
 		{
-			if( !typeof( IMessage ).IsAssignableFrom( messageType ) )
+			if ( !typeof( IMessage ).IsAssignableFrom( messageType ) )
 			{
 				throw new ArgumentException( Resources.Exceptions.SubscribeToMessageAttributeInvalidMessageType );
 			}
