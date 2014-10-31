@@ -18,10 +18,10 @@ using System.Runtime.CompilerServices;
 [assembly: CLSCompliant( true )]
 
 //This is the real build number used for references
-[assembly: AssemblyVersion( "1.4.3.1" )]
+[assembly: AssemblyVersion( "1.5.0.0" )]
 
 //This build number should always be equal to the used AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.4.3.1" )]
+[assembly: AssemblyFileVersion( "1.5.0.0" )]
 
 [assembly: NeutralResourcesLanguage( "en-US", UltimateResourceFallbackLocation.MainAssembly )]
 
