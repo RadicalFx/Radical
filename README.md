@@ -12,6 +12,10 @@ The Radical framework is not tight to WPF/Silverlight/WP/WinRT but some part of 
 
 The latest release can be found on NuGet: http://nuget.org/packages?q=radical
 
+### Q&A
+
+Do you have any questions about Radical? [We hope to have enough answers](https://groups.google.com/forum/#!forum/radical-mvvm-framework)! :smile:
+
 ### Notes
 
 In order to fully build the solution from source code the Expression Blend SDK is required:

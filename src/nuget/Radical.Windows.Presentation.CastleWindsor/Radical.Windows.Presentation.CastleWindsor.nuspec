@@ -2,9 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Radical.Windows.Presentation.CastleWindsor</id>
-    <version>1.2.0.1-Beta</version>
+    <title>Radical Windows Presentation CastleWindsor</title>
+    <version>1.2.0.2-alfa-1</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
-    <owners>Mauro Servienti</owners>
+    <owners>radical,mauroservienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
     <projectUrl>https://github.com/RadicalFx/radical</projectUrl>
     <iconUrl>http://www.topics.it/siteimages/Radical.nuget.png</iconUrl>
@@ -20,7 +21,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\..\build\release\radical.windows.Presentation.CastleWindsor\lib\" target="lib\" />
-    <file src="..\..\..\build\release\radical.windows.Presentation.CastleWindsor\readme.txt" target="readme.txt" />
+    <file src="..\..\..\build\$configuration$\radical.windows.Presentation.CastleWindsor\lib\" target="lib\" />
+    <file src="..\..\..\build\$configuration$\radical.windows.Presentation.CastleWindsor\readme.txt" target="readme.txt" />
   </files>
 </package>

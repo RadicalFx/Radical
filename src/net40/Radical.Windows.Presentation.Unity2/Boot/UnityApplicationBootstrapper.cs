@@ -81,35 +81,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			return true;
 		}
 
-		protected override void OnBootCompleted( IServiceProvider serviceProvider )
-		{
-			base.OnBootCompleted( serviceProvider );
-
-			var callbacks = this.container.ResolveAll<IExpectBootCallback>();
-			if ( callbacks != null && callbacks.Any() )
-			{
-				foreach ( var cb in callbacks )
-				{
-					cb.OnBootCompleted();
-				}
-			}
-		}
-
-		protected override void OnShutdown( ApplicationShutdownArgs e )
-		{
-			base.OnShutdown( e );
-
-			if ( e.IsBootCompleted )
-			{
-				var callbacks = this.container.ResolveAll<IExpectShutdownCallback>();
-				if ( callbacks != null && callbacks.Any() )
-				{
-					foreach ( var cb in callbacks )
-					{
-						cb.OnShutdown( e.Reason );
-					}
-				}
-			}
-		}
+        protected override IEnumerable<T> ResolveAll<T>()
+        {
+            return this.container.ResolveAll<T>();
+        }
 	}
 }
