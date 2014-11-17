@@ -3,7 +3,7 @@
   <metadata>
     <id>Radical.Windows.Presentation.CastleWindsor</id>
     <title>Radical Windows Presentation CastleWindsor</title>
-    <version>1.3.0.0-alfa</version>
+    <version>1.3.0.0</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
@@ -16,8 +16,8 @@
     <tags>Radical Radical.Windows</tags>
     <dependencies>
       <dependency id="Castle.Windsor" version="3.3.0" />
-      <dependency id="Radical.Extensions.CastleWindsor" version="2.1.0.0-alfa" />
-      <dependency id="Radical.Windows.Presentation" version="1.10.0.0-alfa" />
+      <dependency id="Radical.Extensions.CastleWindsor" version="2.1.0.0" />
+      <dependency id="Radical.Windows.Presentation" version="1.10.0.0" />
     </dependencies>
   </metadata>
   <files>
