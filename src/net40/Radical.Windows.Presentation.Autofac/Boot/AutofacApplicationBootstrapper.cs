@@ -124,35 +124,10 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			return true;
 		}
 
-		protected override void OnBootCompleted( IServiceProvider serviceProvider )
-		{
-			base.OnBootCompleted( serviceProvider );
-
-			var callbacks = this.container.Resolve<IEnumerable<IExpectBootCallback>>();
-			if ( callbacks != null && callbacks.Any() )
-			{
-				foreach ( var cb in callbacks )
-				{
-					cb.OnBootCompleted();
-				}
-			}
-		}
-
-		protected override void OnShutdown( ApplicationShutdownArgs e )
-		{
-			base.OnShutdown( e );
-
-			if ( e.IsBootCompleted )
-			{
-				var callbacks = this.container.Resolve<IEnumerable<IExpectShutdownCallback>>();
-				if ( callbacks != null && callbacks.Any() )
-				{
-					foreach ( var cb in callbacks )
-					{
-						cb.OnShutdown( e.Reason );
-					}
-				}
-			}
-		}
+        protected override IEnumerable<T> ResolveAll<T>()
+        {
+            //http://stackoverflow.com/questions/1406148/autofac-resolve-all-instances-of-a-type
+            return this.container.Resolve<IEnumerable<T>>();
+        }
 	}
 }

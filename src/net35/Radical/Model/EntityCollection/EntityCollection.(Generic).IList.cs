@@ -77,19 +77,17 @@ namespace Topics.Radical.Model
 		}
 
 		/// <summary>
-		/// Inserts an item to the <see cref="T:System.Collections.IList"/> at the specified index.
+		/// Inserts an item to the <see cref="T:System.Collections.IList" /> at the specified index.
 		/// </summary>
-		/// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
-		/// <param name="value">The <see cref="T:System.Object"/> to insert into the <see cref="T:System.Collections.IList"/>.</param>
-		/// <exception cref="T:System.ArgumentOutOfRangeException">
-		/// 	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
-		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-		/// <exception cref="T:System.NullReferenceException">
-		/// 	<paramref name="value"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
-		void IList.Insert( Int32 index, object value )
+		/// <param name="index">The zero-based index at which <paramref name="item" /> should be inserted.</param>
+		/// <param name="item">The <see cref="T:System.Object" /> to insert into the <see cref="T:System.Collections.IList" />.</param>
+		/// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index" /> is not a valid index in the <see cref="T:System.Collections.IList" />.</exception>
+		/// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList" /> is read-only.-or- The <see cref="T:System.Collections.IList" /> has a fixed size.</exception>
+		/// <exception cref="T:System.NullReferenceException"><paramref name="item" /> is null reference in the <see cref="T:System.Collections.IList" />.</exception>
+		void IList.Insert( Int32 index, object item )
 		{
 			this.EnsureNotDisposed();
-			this.Insert( index, ( T )value );
+			this.Insert( index, ( T )item );
 		}
 
 		/// <summary>

@@ -85,6 +85,11 @@ namespace Topics.Radical.Presentation.EntityView
 				} );
 
 			this.Items = new EntityView<Person>( data );
+			this.Items.AddingNew += ( s, e ) =>
+			{
+				e.NewItem = new Person( "--empty--" );
+			};
+
 		}
 
 		public IEntityView<Person> Items { get; private set; }

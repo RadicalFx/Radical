@@ -9,12 +9,22 @@ namespace Topics.Radical.Windows.Presentation.Messaging
 	/// </summary>
 	public class ApplicationShutdown : Message
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ApplicationShutdown" /> class.
+		/// </summary>
+		/// <param name="reason">The reason.</param>
+		public ApplicationShutdown( Boot.ApplicationShutdownReason reason)
+		{
+			this.Reason = reason;
+		}
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationShutdown" /> class.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="reason">The reason.</param>
-        public ApplicationShutdown( Object sender, Boot.ApplicationShutdownReason reason )
+		[Obsolete( "The Radical message broker now supports POCO messages, use the default contructor, will be removed in the next version.", false )]
+		public ApplicationShutdown( Object sender, Boot.ApplicationShutdownReason reason )
             : base( sender )
         {
             this.Reason = reason;

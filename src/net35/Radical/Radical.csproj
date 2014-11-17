@@ -507,7 +507,9 @@
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Messaging\Radical Full.vssettings" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Entity PropertySystem.cd" />
     <None Include="Migrated rules for Radical.ruleset" />

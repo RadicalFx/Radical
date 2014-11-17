@@ -2,9 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Radical.Windows</id>
-    <version>1.3.14.0</version>
+    <title>Radical Windows</title>
+    <version>1.3.14.1</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
-    <owners>Mauro Servienti</owners>
+    <owners>radical,mauroservienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
     <projectUrl>https://github.com/RadicalFx/radical</projectUrl>
     <iconUrl>http://www.topics.it/siteimages/Radical.nuget.png</iconUrl>
@@ -14,10 +15,10 @@
     <language>en-US</language>
     <tags>Radical Radical.Windows</tags>
     <dependencies>
-      <dependency id="Radical" version="1.4.3.1" />
+      <dependency id="Radical" version="1.5.0.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\..\build\release\radical.windows\lib\" target="lib\" />
+    <file src="..\..\..\build\$configuration$\radical.windows\lib\" target="lib\" />
   </files>
 </package>

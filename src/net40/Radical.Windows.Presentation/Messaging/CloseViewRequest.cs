@@ -14,9 +14,11 @@ namespace Topics.Radical.Windows.Presentation.Messaging
 		/// </summary>
 		/// <param name="viewOwner">The view owner.</param>
 		public CloseViewRequest( Object viewOwner )
-			: this( viewOwner, viewOwner )
 		{
-
+			this.ViewOwner = viewOwner;
+#if !SILVERLIGHT
+			this.DialogResult = null;
+#endif
 		}
 
 		/// <summary>
@@ -24,6 +26,7 @@ namespace Topics.Radical.Windows.Presentation.Messaging
 		/// </summary>
 		/// <param name="sender">The sender.</param>
 		/// <param name="viewOwner">The view owner.</param>
+		[Obsolete( "The Radical message broker now supports POCO messages, use the default contructor, will be removed in the next version.", false )]
 		public CloseViewRequest( Object sender, Object viewOwner )
 			: base( sender )
 		{

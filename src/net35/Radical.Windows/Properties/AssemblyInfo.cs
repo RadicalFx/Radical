@@ -12,10 +12,10 @@ using System.Windows;
 [assembly: AssemblyCulture( "" )]
 
 //This is the real build number used for references
-[assembly: AssemblyVersion( "1.3.14.0" )]
+[assembly: AssemblyVersion( "1.3.14.1" )]
 
 //This build number should always be equal to the used AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.3.14.0" )]
+[assembly: AssemblyFileVersion( "1.3.14.1" )]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

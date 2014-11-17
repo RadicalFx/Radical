@@ -13,7 +13,7 @@ namespace Topics.Radical.Windows.Threading
 		readonly Wpf.Dispatcher dispatcher;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Dispatcher"/> class.
+		/// Initializes a new instance of the <see cref="WpfDispatcher"/> class.
 		/// </summary>
 		/// <param name="dispatcher">The wrapped Wpf dispatcher.</param>
 		public WpfDispatcher( Wpf.Dispatcher dispatcher )
