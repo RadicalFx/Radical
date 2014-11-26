@@ -10,7 +10,7 @@ The Radical framework is not tight to WPF/Silverlight/WP/WinRT but some part of 
 
 ### Release
 
-The latest release can be found on NuGet: http://nuget.org/packages?q=radical
+The latest release can be found on NuGet: http://www.nuget.org/profiles/radical
 
 ### Q&A
 
