@@ -6,6 +6,7 @@ using Topics.Radical.Messaging;
 using Topics.Radical.Threading;
 using Topics.Radical.ComponentModel.Messaging;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Test.Radical.Windows.Messaging
 {
@@ -383,7 +384,7 @@ namespace Test.Radical.Windows.Messaging
 					{
 						this.test();
 					}
-					catch ( Exception e )
+					catch( Exception e )
 					{
 						Console.WriteLine( e );
 						this.ex = e;
@@ -394,7 +395,7 @@ namespace Test.Radical.Windows.Messaging
 				worker.Start();
 				worker.Join();
 
-				if ( this.ex != null )
+				if( this.ex != null )
 				{
 					throw this.ex;
 				}
@@ -694,13 +695,14 @@ namespace Test.Radical.Windows.Messaging
 		{
 			Exception failure = null;
 			var wh = new ManualResetEvent( false );
+			var run = true;
 
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
 			var subscriberThread1 = new Thread( payload =>
 			{
-				while ( true )
+				while( run )
 				{
 					try
 					{
@@ -709,9 +711,9 @@ namespace Test.Radical.Windows.Messaging
 							Thread.Sleep( 10 );
 						} );
 					}
-					catch ( Exception e )
+					catch( Exception e )
 					{
-						lock ( this )
+						lock( this )
 						{
 							failure = e;
 							wh.Set();
@@ -720,24 +722,25 @@ namespace Test.Radical.Windows.Messaging
 						}
 					}
 				}
+
 			} );
 			subscriberThread1.IsBackground = true;
 			subscriberThread1.Start();
 
 			var subscriberThread2 = new Thread( payload =>
 			{
-				while ( true )
+				while( run )
 				{
 					try
 					{
 						broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) =>
 						{
-							Thread.Sleep( 10 );
+							Thread.Sleep( 8 );
 						} );
 					}
-					catch ( Exception e )
+					catch( Exception e )
 					{
-						lock ( this )
+						lock( this )
 						{
 							failure = e;
 							wh.Set();
@@ -746,21 +749,22 @@ namespace Test.Radical.Windows.Messaging
 						break;
 					}
 				}
+
 			} );
 			subscriberThread2.IsBackground = true;
 			subscriberThread2.Start();
 
 			var broadcastThread1 = new Thread( payload =>
 			{
-				while ( true )
+				while( run )
 				{
 					try
 					{
 						broker.Broadcast( this, new PocoTestMessage() );
 					}
-					catch ( Exception e )
+					catch( Exception e )
 					{
-						lock ( this )
+						lock( this )
 						{
 							failure = e;
 							wh.Set();
@@ -773,7 +777,18 @@ namespace Test.Radical.Windows.Messaging
 			broadcastThread1.IsBackground = true;
 			broadcastThread1.Start();
 
-			wh.WaitOne();
+			var timeout = 15;
+			var signaled = wh.WaitOne( TimeSpan.FromSeconds( timeout ) );
+			if( !signaled )
+			{
+				Trace.WriteLine( String.Format( "Run without any issue for {0} seconds.", timeout ) );
+			}
+
+			run = false;
+
+			subscriberThread1.Join();
+			subscriberThread2.Join();
+			broadcastThread1.Join();
 
 			Assert.IsNull( failure, failure != null ? failure.ToString() : "--" );
 
