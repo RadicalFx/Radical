@@ -5,6 +5,8 @@ using SharpTestsEx;
 using Topics.Radical.Messaging;
 using Topics.Radical.Threading;
 using Topics.Radical.ComponentModel.Messaging;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Test.Radical.Windows.Messaging
 {
@@ -382,7 +384,7 @@ namespace Test.Radical.Windows.Messaging
 					{
 						this.test();
 					}
-					catch ( Exception e )
+					catch( Exception e )
 					{
 						Console.WriteLine( e );
 						this.ex = e;
@@ -393,7 +395,7 @@ namespace Test.Radical.Windows.Messaging
 				worker.Start();
 				worker.Join();
 
-				if ( this.ex != null )
+				if( this.ex != null )
 				{
 					throw this.ex;
 				}
@@ -685,6 +687,111 @@ namespace Test.Radical.Windows.Messaging
 			h.WaitOne();
 
 			Assert.AreEqual( expected, actual );
+		}
+
+		[TestMethod]
+		[TestCategory( "MessageBroker" )]
+		public void MessageBroker_broadcast_from_multiple_thread_should_not_fail()
+		{
+			Exception failure = null;
+			var wh = new ManualResetEvent( false );
+			var run = true;
+
+			var dispatcher = new NullDispatcher();
+			var broker = new MessageBroker( dispatcher );
+
+			var subscriberThread1 = new Thread( payload =>
+			{
+				while( run )
+				{
+					try
+					{
+						broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) =>
+						{
+							Thread.Sleep( 10 );
+						} );
+					}
+					catch( Exception e )
+					{
+						lock( this )
+						{
+							failure = e;
+							wh.Set();
+
+							break;
+						}
+					}
+				}
+
+			} );
+			subscriberThread1.IsBackground = true;
+			subscriberThread1.Start();
+
+			var subscriberThread2 = new Thread( payload =>
+			{
+				while( run )
+				{
+					try
+					{
+						broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) =>
+						{
+							Thread.Sleep( 8 );
+						} );
+					}
+					catch( Exception e )
+					{
+						lock( this )
+						{
+							failure = e;
+							wh.Set();
+						}
+
+						break;
+					}
+				}
+
+			} );
+			subscriberThread2.IsBackground = true;
+			subscriberThread2.Start();
+
+			var broadcastThread1 = new Thread( payload =>
+			{
+				while( run )
+				{
+					try
+					{
+						broker.Broadcast( this, new PocoTestMessage() );
+					}
+					catch( Exception e )
+					{
+						lock( this )
+						{
+							failure = e;
+							wh.Set();
+						}
+
+						break;
+					}
+				}
+			} );
+			broadcastThread1.IsBackground = true;
+			broadcastThread1.Start();
+
+			var timeout = 15;
+			var signaled = wh.WaitOne( TimeSpan.FromSeconds( timeout ) );
+			if( !signaled )
+			{
+				Trace.WriteLine( String.Format( "Run without any issue for {0} seconds.", timeout ) );
+			}
+
+			run = false;
+
+			subscriberThread1.Join();
+			subscriberThread2.Join();
+			broadcastThread1.Join();
+
+			Assert.IsNull( failure, failure != null ? failure.ToString() : "--" );
+
 		}
 	}
 }

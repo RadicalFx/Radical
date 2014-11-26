@@ -122,14 +122,89 @@ namespace Topics.Radical.ComponentModel.Messaging
         void Subscribe<T>( Object subscriber, Object sender, InvocationModel invocationModel, Action<T> callback )
 			where T : class, IMessage;
 
-        void Subscribe( object subscriber, object sender, Type messageType, Action<object, object> callback );
-        void Subscribe( object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback );
-        void Subscribe( object subscriber, Type messageType, Action<object, object> callback );
-        void Subscribe( object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback );
-        void Subscribe<T>( object subscriber, Action<object, T> callback );
-        void Subscribe<T>( object subscriber, object sender, Action<object, T> callback );
-        void Subscribe<T>( object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback );
-        void Subscribe<T>( object subscriber, InvocationModel invocationModel, Action<object, T> callback );
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback only
+		/// if the sender is the specified reference.
+		/// </summary>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="sender">The sender filter.</param>
+		/// <param name="messageType">Type of the message.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe( object subscriber, object sender, Type messageType, Action<object, object> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback only
+		/// if the sender is the specified reference.
+		/// </summary>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="sender">The sender filter.</param>
+		/// <param name="messageType">Type of the message.</param>
+		/// <param name="invocationModel">The invocation model.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe( object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback only.
+		/// </summary>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="messageType">Type of the message.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe( object subscriber, Type messageType, Action<object, object> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback only.
+		/// </summary>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="messageType">Type of the message.</param>
+		/// <param name="invocationModel">The invocation model.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe( object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback.
+		/// </summary>
+		/// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe<T>( object subscriber, Action<object, T> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback only
+		/// if the sender is the specified reference.
+		/// </summary>
+		/// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="sender">The sender filter.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe<T>( object subscriber, object sender, Action<object, T> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback only
+		/// if the sender is the specified reference.
+		/// </summary>
+		/// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="sender">The sender filter.</param>
+		/// <param name="invocationModel">The invocation model.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe<T>( object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback );
+
+		/// <summary>
+		/// Subscribes the given subscriber to notifications of the
+		/// given type of message using the supplied callback.
+		/// </summary>
+		/// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+		/// <param name="subscriber">The subscriber.</param>
+		/// <param name="invocationModel">The invocation model.</param>
+		/// <param name="callback">The callback.</param>
+		void Subscribe<T>( object subscriber, InvocationModel invocationModel, Action<object, T> callback );
 
 		/// <summary>
 		/// Unsubscribes the specified subscriber from all the subcscriptions.

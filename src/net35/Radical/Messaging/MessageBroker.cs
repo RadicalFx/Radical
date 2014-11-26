@@ -381,7 +381,6 @@ namespace Topics.Radical.Messaging
 		/// <param name="subscriber">The subscriber.</param>
 		/// <param name="sender">The sender.</param>
 		public void Unsubscribe<T>( object subscriber, object sender )
-		//where T : class, IMessage
 		{
 			Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
 			Ensure.That( sender ).Named( "sender" ).IsNotNull();
@@ -395,20 +394,6 @@ namespace Topics.Radical.Messaging
 			}
 		}
 
-		//public void ___Unsubscribe<T>( object subscriber, object sender )
-		//{
-		//    Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
-		//    Ensure.That( sender ).Named( "sender" ).IsNotNull();
-
-		//    if ( this.msgSubsIndex.ContainsKey( typeof( T ) ) )
-		//    {
-		//        var allMessageSubscriptions = this.msgSubsIndex[ typeof( T ) ];
-		//        allMessageSubscriptions.Where( subscription => Object.Equals( subscriber, subscription.Subscriber ) && Object.Equals( sender, subscription.Sender ) )
-		//            .ToList()
-		//            .ForEach( subscription => allMessageSubscriptions.Remove( subscription ) );
-		//    }
-		//}
-
 		/// <summary>
 		/// Unsubscribes the specified subscriber from the subcscription to the supplied IMessage type.
 		/// </summary>
@@ -416,7 +401,6 @@ namespace Topics.Radical.Messaging
 		/// <param name="subscriber">The subscriber.</param>
 		/// <param name="callback">The callback to unsubscribe.</param>
 		public void Unsubscribe<T>( object subscriber, Delegate callback )
-		//where T : class, IMessage
 		{
 			Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
 			Ensure.That( callback ).Named( "callback" ).IsNotNull();
@@ -434,32 +418,13 @@ namespace Topics.Radical.Messaging
 			}
 		}
 
-		//public void ___Unsubscribe<T>( object subscriber, Delegate callback )
-		//{
-		//    Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
-		//    Ensure.That( callback ).Named( "callback" ).IsNotNull();
-
-		//    if ( this.msgSubsIndex.ContainsKey( typeof( T ) ) )
-		//    {
-		//        var allMessageSubscriptions = this.msgSubsIndex[ typeof( T ) ];
-		//        allMessageSubscriptions.Where( subscription =>
-		//        {
-		//            return Object.Equals( subscriber, subscription.Subscriber )
-		//                && Object.Equals( callback, subscription.GetAction() );
-		//        } )
-		//        .ToList()
-		//        .ForEach( subscription => allMessageSubscriptions.Remove( subscription ) );
-		//    }
-		//}
-
 		IEnumerable<ISubscription> GetSubscriptionsFor( Type messageType, Object sender )
 		{
-			var subscribtions = this.msgSubsIndex
+			var subscriptions = this.msgSubsIndex
 				.Where( kvp => messageType.Is( kvp.Key ) )
 				.SelectMany( kvp => kvp.Value );
 
-			//var subscribtions = this.msgSubsIndex[ messageType ];
-			var effectiveSubscribers = subscribtions.Where( s => s.Sender == null || s.Sender == sender )
+			var effectiveSubscribers = subscriptions.Where( s => s.Sender == null || s.Sender == sender )
 											.OrderByDescending( s => s.Priority )
 											.AsReadOnly();
 
