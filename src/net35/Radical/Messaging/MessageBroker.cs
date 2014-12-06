@@ -47,7 +47,7 @@ namespace Topics.Radical.Messaging
 #endif
 
 #if FX40
-        TaskFactory factory = null;
+		TaskFactory factory = null;
 #endif
 
 		readonly IDispatcher dispatcher;
@@ -57,6 +57,7 @@ namespace Topics.Radical.Messaging
 		/// and whose value is the list of Subscriptions for that message type
 		/// </summary>
 		readonly List<SubscriptionsContainer> msgSubsIndex = null;
+		readonly ReaderWriterLockSlim msgSubsIndexLock = new ReaderWriterLockSlim();
 
 		//Dictionary<String, IScopedMessageBroker> topics = new Dictionary<string, IScopedMessageBroker>();
 
@@ -72,44 +73,65 @@ namespace Topics.Radical.Messaging
 			this.msgSubsIndex = new List<SubscriptionsContainer>();
 
 #if FX40
-            this.factory = new TaskFactory();
+			this.factory = new TaskFactory();
 #endif
 		}
 
 #if FX40
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MessageBroker"/> class.
-        /// </summary>
-        /// <param name="dispatcher">The dispatcher.</param>
-        /// <param name="factory">The factory.</param>
-        public MessageBroker( IDispatcher dispatcher, TaskFactory factory )
-        {
-            Ensure.That( dispatcher ).Named( "dispatcher" ).IsNotNull();
-            Ensure.That( factory ).Named( () => factory ).IsNotNull();
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MessageBroker"/> class.
+		/// </summary>
+		/// <param name="dispatcher">The dispatcher.</param>
+		/// <param name="factory">The factory.</param>
+		public MessageBroker( IDispatcher dispatcher, TaskFactory factory )
+		{
+			Ensure.That( dispatcher ).Named( "dispatcher" ).IsNotNull();
+			Ensure.That( factory ).Named( () => factory ).IsNotNull();
 
-            this.dispatcher = dispatcher;
-            this.factory = factory;
+			this.dispatcher = dispatcher;
+			this.factory = factory;
 			this.msgSubsIndex = new List<SubscriptionsContainer>();
-        }
+		}
 
 #endif
 
 		void SubscribeCore( Type messageType, ISubscription subscription )
 		{
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterUpgradeableReadLock();
+			try
 			{
-				if( this.msgSubsIndex.Any( sc => sc.MessageType == messageType ) )
+				if ( this.msgSubsIndex.Any( sc => sc.MessageType == messageType ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == messageType ).Subscriptions;
-					allMessageSubscriptions.Add( subscription );
+					msgSubsIndexLock.EnterWriteLock();
+					try
+					{
+						allMessageSubscriptions.Add(subscription);
+					}
+					finally
+					{
+						msgSubsIndexLock.ExitWriteLock();
+					}
 				}
 				else
 				{
-					var sc = new SubscriptionsContainer( messageType );
-					sc.Subscriptions.Add( subscription );
-					this.msgSubsIndex.Add( sc );
+					msgSubsIndexLock.EnterWriteLock();
+					try
+					{
+						var sc = new SubscriptionsContainer(messageType);
+						sc.Subscriptions.Add(subscription);
+						this.msgSubsIndex.Add(sc);
+					}
+					finally
+					{
+						msgSubsIndexLock.ExitWriteLock();
+					}
 				}
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitUpgradeableReadLock();
 			}
 		}
 
@@ -387,24 +409,48 @@ namespace Topics.Radical.Messaging
 		{
 			Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
 
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterUpgradeableReadLock();
+			try
 			{
-				foreach( var subscription in this.msgSubsIndex )
+				foreach ( var subscription in this.msgSubsIndex )
 				{
 					var count = subscription.Subscriptions.Count;
-					for( var k = count; k > 0; k-- )
+					for ( var k = count; k > 0; k-- )
 					{
-						var sub = subscription.Subscriptions[ k - 1 ];
-						if( sub.Subscriber == subscriber )
+						var sub = subscription.Subscriptions[k - 1];
+						if ( sub.Subscriber == subscriber )
 						{
-							subscription.Subscriptions.Remove( sub );
+							msgSubsIndexLock.EnterWriteLock();
+							try
+							{
+								subscription.Subscriptions.Remove( sub );
+							}
+							finally
+							{
+								msgSubsIndexLock.ExitWriteLock();
+							}
 						}
 					}
 				}
 
 				this.msgSubsIndex.Where( msgSubscriptions => msgSubscriptions.Subscriptions.Count == 0 )
 					.ToList()
-					.ForEach( kvp => this.msgSubsIndex.Remove( kvp ) );
+					.ForEach( kvp =>
+					{
+						msgSubsIndexLock.EnterWriteLock();
+						try
+						{
+							this.msgSubsIndex.Remove( kvp );
+						}
+						finally
+						{
+							msgSubsIndexLock.ExitWriteLock();
+						}
+					} );
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitUpgradeableReadLock();
 			}
 		}
 
@@ -419,19 +465,35 @@ namespace Topics.Radical.Messaging
 			Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
 			Ensure.That( sender ).Named( () => sender ).IsNotNull();
 
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterUpgradeableReadLock();
+			try
 			{
 				this.msgSubsIndex.Where( msgSubscriptions =>
 				{
 					return msgSubscriptions.Subscriptions.Where( subscription =>
 					{
 						return Object.Equals( subscription.Subscriber, subscriber )
-							&& Object.Equals( subscription.Sender, sender );
+							   && Object.Equals( subscription.Sender, sender );
 					} )
 					.Any();
 				} )
 				.ToList()
-				.ForEach( kvp => this.msgSubsIndex.Remove( kvp ) );
+				.ForEach( kvp =>
+				{
+					msgSubsIndexLock.EnterWriteLock();
+					try
+					{
+						this.msgSubsIndex.Remove( kvp );
+					}
+					finally
+					{
+						msgSubsIndexLock.ExitWriteLock();
+					}
+				} );
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitUpgradeableReadLock();
 			}
 		}
 
@@ -444,9 +506,10 @@ namespace Topics.Radical.Messaging
 		{
 			Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
 
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterUpgradeableReadLock();
+			try
 			{
-				if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+				if ( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
 					allMessageSubscriptions.Where( subscription =>
@@ -454,8 +517,23 @@ namespace Topics.Radical.Messaging
 						return Object.Equals( subscriber, subscription.Subscriber );
 					} )
 					.ToList()
-					.ForEach( subscription => allMessageSubscriptions.Remove( subscription ) );
+					.ForEach( subscription =>
+					{
+						msgSubsIndexLock.EnterWriteLock();
+						try
+						{
+							allMessageSubscriptions.Remove( subscription );
+						}
+						finally
+						{
+							msgSubsIndexLock.ExitWriteLock();
+						}
+					} );
 				}
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitUpgradeableReadLock();
 			}
 		}
 
@@ -471,19 +549,36 @@ namespace Topics.Radical.Messaging
 			Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
 			Ensure.That( sender ).Named( "sender" ).IsNotNull();
 
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterUpgradeableReadLock();
+			try
 			{
-				if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+				if ( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
 					allMessageSubscriptions.Where( subscription =>
 					{
 						return Object.Equals( subscriber, subscription.Subscriber )
-							&& Object.Equals( sender, subscription.Sender );
+							   && Object.Equals( sender, subscription.Sender );
 					} )
 					.ToList()
-					.ForEach( subscription => allMessageSubscriptions.Remove( subscription ) );
+					.ForEach( subscription =>
+					{
+						msgSubsIndexLock.EnterWriteLock();
+						try
+						{
+							allMessageSubscriptions.Remove( subscription );
+						}
+						finally
+						{
+							msgSubsIndexLock.ExitWriteLock();
+						}
+
+					} );
 				}
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitUpgradeableReadLock();
 			}
 		}
 
@@ -498,35 +593,56 @@ namespace Topics.Radical.Messaging
 			Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
 			Ensure.That( callback ).Named( "callback" ).IsNotNull();
 
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterUpgradeableReadLock();
+			try
 			{
-				if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+				if ( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
 					allMessageSubscriptions.Where( subscription =>
 					{
 						return Object.Equals( subscriber, subscription.Subscriber )
-							&& Object.Equals( callback, subscription.GetAction() );
+							   && Object.Equals( callback, subscription.GetAction() );
 					} )
 					.ToList()
-					.ForEach( subscription => allMessageSubscriptions.Remove( subscription ) );
+					.ForEach( subscription =>
+					{
+						msgSubsIndexLock.EnterWriteLock();
+						try
+						{
+							allMessageSubscriptions.Remove( subscription );
+						}
+						finally
+						{
+							msgSubsIndexLock.ExitWriteLock();
+						}
+					} );
 				}
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitUpgradeableReadLock();
 			}
 		}
 
 		IEnumerable<ISubscription> GetSubscriptionsFor( Type messageType, Object sender )
 		{
-			lock( this.msgSubsIndex )
+			msgSubsIndexLock.EnterReadLock();
+			try
 			{
 				var subscriptions = this.msgSubsIndex
-					.Where( kvp => messageType.Is( kvp.MessageType ) )
-					.SelectMany( kvp => kvp.Subscriptions );
+										.Where( kvp => messageType.Is( kvp.MessageType ) )
+										.SelectMany( kvp => kvp.Subscriptions );
 
 				var effectiveSubscribers = subscriptions.Where( s => s.Sender == null || s.Sender == sender )
-												.OrderByDescending( s => s.Priority )
-												.AsReadOnly();
+														.OrderByDescending( s => s.Priority )
+														.AsReadOnly();
 
 				return effectiveSubscribers;
+			}
+			finally
+			{
+				msgSubsIndexLock.ExitReadLock();
 			}
 		}
 
@@ -636,13 +752,13 @@ namespace Topics.Radical.Messaging
 			if( subscriptions.Any() )
 			{
 #if FX40
-                subscriptions.ForEach( sub =>
-                {
-                    this.factory.StartNew( () =>
-                    {
-                        sub.Invoke( message.Sender, message );
-                    } );
-                } );
+				subscriptions.ForEach( sub =>
+				{
+					this.factory.StartNew( () =>
+					{
+						sub.Invoke( message.Sender, message );
+					} );
+				} );
 #else
 				subscriptions.ForEach( sub => ThreadPool.QueueUserWorkItem( o =>
 				{
@@ -666,13 +782,13 @@ namespace Topics.Radical.Messaging
 			if( subscriptions.Any() )
 			{
 #if FX40
-                subscriptions.ForEach( sub =>
-                {
-                    this.factory.StartNew( () =>
-                    {
-                        sub.Invoke( sender, message );
-                    } );
-                } );
+				subscriptions.ForEach( sub =>
+				{
+					this.factory.StartNew( () =>
+					{
+						sub.Invoke( sender, message );
+					} );
+				} );
 #else
 				subscriptions.ForEach( sub => ThreadPool.QueueUserWorkItem( o =>
 				{
