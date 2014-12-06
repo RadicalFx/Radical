@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpTestsEx;
+using Topics.Radical.Linq;
 using Topics.Radical.Messaging;
 using Topics.Radical.Threading;
 using Topics.Radical.ComponentModel.Messaging;
@@ -700,60 +702,22 @@ namespace Test.Radical.Windows.Messaging
 			var dispatcher = new NullDispatcher();
 			var broker = new MessageBroker( dispatcher );
 
-			var subscriberThread1 = new Thread( payload =>
+			// do some metrics to find a good number of subscription to let the pub do a long running
+			const int metricsCount = 100;
+			for (int i = 0; i < metricsCount; i++) broker.Subscribe<PocoTestMessage>(this, (sender, msg) => { });
+			var sw = Stopwatch.StartNew();
+			broker.Broadcast(this, new PocoTestMessage());
+			sw.Stop();
+			const int longRunningTiming = 100;
+			var subCountForLongRunning = (longRunningTiming / sw.ElapsedMilliseconds) * metricsCount;
+			Trace.WriteLine(string.Format("Need {0} subscriptions to run for at least {1} ms. {2} took {3} ms.", subCountForLongRunning, longRunningTiming, metricsCount, sw.ElapsedMilliseconds));
+
+			for (int i = 0; i < subCountForLongRunning - metricsCount; i++)
 			{
-				while( run )
-				{
-					try
-					{
-						broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) =>
-						{
-							Thread.Sleep( 10 );
-						} );
-					}
-					catch( Exception e )
-					{
-						lock( this )
-						{
-							failure = e;
-							wh.Set();
+				broker.Subscribe<PocoTestMessage>(this, (sender, msg) => { });
+			}
 
-							break;
-						}
-					}
-				}
-
-			} );
-			subscriberThread1.IsBackground = true;
-			subscriberThread1.Start();
-
-			var subscriberThread2 = new Thread( payload =>
-			{
-				while( run )
-				{
-					try
-					{
-						broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) =>
-						{
-							Thread.Sleep( 8 );
-						} );
-					}
-					catch( Exception e )
-					{
-						lock( this )
-						{
-							failure = e;
-							wh.Set();
-						}
-
-						break;
-					}
-				}
-
-			} );
-			subscriberThread2.IsBackground = true;
-			subscriberThread2.Start();
-
+			// this will take approximately 100 ms to do 1 broadcast
 			var broadcastThread1 = new Thread( payload =>
 			{
 				while( run )
@@ -777,7 +741,35 @@ namespace Test.Radical.Windows.Messaging
 			broadcastThread1.IsBackground = true;
 			broadcastThread1.Start();
 
-			var timeout = 15;
+			// this should istantly throw an error because the broadcasting is enumerating the subscriptions and should take 100 ms to enumerate them all
+			var subscriberThread1 = new Thread(payload =>
+			{
+				while (run)
+				{
+					try
+					{
+						broker.Subscribe<PocoTestMessage>(this, (sender, msg) =>
+						{
+							Thread.Sleep(10);
+						});
+					}
+					catch (Exception e)
+					{
+						lock (this)
+						{
+							failure = e;
+							wh.Set();
+
+							break;
+						}
+					}
+				}
+
+			});
+			subscriberThread1.IsBackground = true;
+			subscriberThread1.Start();
+
+			var timeout = 1;
 			var signaled = wh.WaitOne( TimeSpan.FromSeconds( timeout ) );
 			if( !signaled )
 			{
@@ -787,8 +779,6 @@ namespace Test.Radical.Windows.Messaging
 			run = false;
 
 			subscriberThread1.Join();
-			subscriberThread2.Join();
-			broadcastThread1.Join();
 
 			Assert.IsNull( failure, failure != null ? failure.ToString() : "--" );
 
