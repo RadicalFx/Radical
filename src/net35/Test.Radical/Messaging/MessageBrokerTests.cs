@@ -704,11 +704,20 @@ namespace Test.Radical.Windows.Messaging
 
 			// do some metrics to find a good number of subscription to let the pub do a long running
 			const int metricsCount = 100;
-			for (int i = 0; i < metricsCount; i++) broker.Subscribe<PocoTestMessage>(this, (sender, msg) => { });
+			for( int i = 0; i < metricsCount; i++ )
+			{
+				broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) => { } );
+			}
+			
 			var sw = Stopwatch.StartNew();
 			broker.Broadcast(this, new PocoTestMessage());
 			sw.Stop();
+			
 			const int longRunningTiming = 100;
+			var elapsedMilliseconds = sw.ElapsedMilliseconds == 0
+				? longRunningTiming
+				: sw.ElapsedMilliseconds;
+
 			var subCountForLongRunning = (longRunningTiming / sw.ElapsedMilliseconds) * metricsCount;
 			Trace.WriteLine(string.Format("Need {0} subscriptions to run for at least {1} ms. {2} took {3} ms.", subCountForLongRunning, longRunningTiming, metricsCount, sw.ElapsedMilliseconds));
 
