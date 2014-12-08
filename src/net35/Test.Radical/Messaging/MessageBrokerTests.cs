@@ -718,7 +718,7 @@ namespace Test.Radical.Windows.Messaging
 				? longRunningTiming
 				: sw.ElapsedMilliseconds;
 
-			var subCountForLongRunning = (longRunningTiming / sw.ElapsedMilliseconds) * metricsCount;
+			var subCountForLongRunning = (longRunningTiming / elapsedMilliseconds) * metricsCount;
 			Trace.WriteLine(string.Format("Need {0} subscriptions to run for at least {1} ms. {2} took {3} ms.", subCountForLongRunning, longRunningTiming, metricsCount, sw.ElapsedMilliseconds));
 
 			for (int i = 0; i < subCountForLongRunning - metricsCount; i++)
