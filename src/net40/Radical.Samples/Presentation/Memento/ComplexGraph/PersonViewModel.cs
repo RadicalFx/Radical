@@ -52,15 +52,15 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 			return vm;
 		}
 
-		protected override void OnMementoChanged( ComponentModel.ChangeTracking.IChangeTrackingService newMemento, ComponentModel.ChangeTracking.IChangeTrackingService oldMemmento )
+		protected override void OnMementoChanged( ComponentModel.ChangeTracking.IChangeTrackingService newMemento, ComponentModel.ChangeTracking.IChangeTrackingService oldMemento )
 		{
-			base.OnMementoChanged( newMemento, oldMemmento );
+			base.OnMementoChanged( newMemento, oldMemento );
 
 			var im = ( IMemento )this.Addresses.DataSource;
 
-			if( oldMemmento != null )
+			if( oldMemento != null )
 			{
-				oldMemmento.Detach( im );
+				oldMemento.Detach( im );
 			}
 
 			if( newMemento != null )
