@@ -281,18 +281,18 @@ namespace Topics.Radical.Windows.Presentation
         /// Called when the <see cref="IChangeTrackingService"/> changes.
         /// </summary>
         /// <param name="newMemento">The new memento service.</param>
-        /// <param name="oldMemmento">The old memmento service.</param>
-        protected override void OnMementoChanged( IChangeTrackingService newMemento, IChangeTrackingService oldMemmento )
+        /// <param name="oldMemento">The old memmento service.</param>
+        protected override void OnMementoChanged( IChangeTrackingService newMemento, IChangeTrackingService oldMemento )
         {
-            base.OnMementoChanged( newMemento, oldMemmento );
+            base.OnMementoChanged( newMemento, oldMemento );
 
-            if ( oldMemmento != null && !oldMemmento.IsDisposed)
+            if ( oldMemento != null && !oldMemento.IsDisposed)
             {
-                oldMemmento.AcceptingChanges -= new EventHandler<CancelEventArgs>( OnAcceptingChanges );
-                oldMemmento.RejectingChanges -= new EventHandler<CancelEventArgs>( OnRejectingChanges );
+                oldMemento.AcceptingChanges -= new EventHandler<CancelEventArgs>( OnAcceptingChanges );
+                oldMemento.RejectingChanges -= new EventHandler<CancelEventArgs>( OnRejectingChanges );
 
-                oldMemmento.ChangesAccepted -= new EventHandler( OnChangesAccepted );
-                oldMemmento.ChangesRejected -= new EventHandler( OnChangesRejected );
+                oldMemento.ChangesAccepted -= new EventHandler( OnChangesAccepted );
+                oldMemento.ChangesRejected -= new EventHandler( OnChangesRejected );
             }
 
 			if ( newMemento != null && !newMemento.IsDisposed )

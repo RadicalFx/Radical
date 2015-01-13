@@ -42,7 +42,7 @@ namespace Topics.Radical
 				 * non è ancora stato chiamato su questi oggetti
 				 */
 				this.allEntries.Clear();
-				this.releasedInstances.Clear();
+				this.trackedSingletons.Clear();
 
 				foreach ( var facility in this.facilities )
 				{
@@ -83,7 +83,7 @@ namespace Topics.Radical
 		}
 
 		readonly IList<IContainerEntry> allEntries = new List<IContainerEntry>();
-		readonly IDictionary<IContainerEntry, Object> releasedInstances = new Dictionary<IContainerEntry, Object>();
+		readonly IDictionary<IContainerEntry, Object> trackedSingletons = new Dictionary<IContainerEntry, Object>();
 		readonly IList<IPuzzleContainerFacility> facilities = new List<IPuzzleContainerFacility>();
 
 		/// <summary>
@@ -273,9 +273,9 @@ namespace Topics.Radical
 
 		Object ResolveEntry( IContainerEntry entry )
 		{
-			if ( entry.Lifestyle == Lifestyle.Singleton && this.releasedInstances.ContainsKey( entry ) )
+			if ( entry.Lifestyle == Lifestyle.Singleton && this.trackedSingletons.ContainsKey( entry ) )
 			{
-				return this.releasedInstances[ entry ];
+				return this.trackedSingletons[ entry ];
 			}
 
 			Object instance = null;
@@ -371,7 +371,7 @@ namespace Topics.Radical
 
 				if ( entry.Lifestyle == Lifestyle.Singleton )
 				{
-					this.releasedInstances.Add( entry, instance );
+					this.trackedSingletons.Add( entry, instance );
 				}
 			}
 
