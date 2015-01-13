@@ -5,18 +5,6 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 {
 	public class AddressViewModel : MementoEntity
 	{
-		internal PersonViewModel ParentViewModel
-		{
-			get;
-			set;
-		}
-
-		internal Person Parent
-		{
-			get;
-			set;
-		}
-
 		public void Initialize( Address address, Boolean registerAsTransient )
 		{
 			if( registerAsTransient )
