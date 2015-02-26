@@ -91,11 +91,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// <summary>
 		/// Called in order to execute the concrete validation process on the given property.
 		/// </summary>
+		/// <param name="ruleSet">The rule set.</param>
 		/// <param name="propertyName">Name of the property.</param>
 		/// <returns>
 		/// A list of <seealso cref="ValidationError" />.
 		/// </returns>
-		protected override IEnumerable<ValidationError> OnValidateProperty( string propertyName )
+		protected override IEnumerable<ValidationError> OnValidateProperty(String ruleSet, string propertyName )
 		{
 			var errors = new List<ValidationError>();
 
