@@ -56,9 +56,16 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		protected override IEnumerable<ValidationError> OnValidateProperty( String ruleSet, string propertyName )
 		{
-			//manca il concetto di ruleSet in questo caso
 			var validator = this.validators.SingleOrDefault( v => v.RuleSet == ruleSet );
-			return base.OnValidateProperty( ruleSet, propertyName );
+			if( validator != null )
+			{
+				var result = validator.Validate( this.entity, propertyName );
+				return result.Errors;
+			}
+
+			return new ValidationError[ 0 ];
+
+			//return base.OnValidateProperty( ruleSet, propertyName );
 		}
 	}
 }

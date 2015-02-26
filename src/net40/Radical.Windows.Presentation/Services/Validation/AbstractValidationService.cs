@@ -67,7 +67,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// <returns>
 		/// The validation error message if any; otherwise a null or empty string.
 		/// </returns>
-		public String ValidateRuleSet( String ruleSet, String propertyName ) 
+		public String ValidateRuleSet( String ruleSet, String propertyName )
 		{
 			if( !this.ValidationCalledOnceFor( propertyName ) )
 			{
@@ -149,7 +149,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		protected virtual void OnStatusChanged( EventArgs e )
 		{
 			var h = this.StatusChanged;
-			if ( h != null )
+			if( h != null )
 			{
 				h( this, e );
 			}
@@ -162,7 +162,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		protected virtual void OnResetted( EventArgs e )
 		{
 			var h = this.Resetted;
-			if ( h != null )
+			if( h != null )
 			{
 				h( this, e );
 			}
@@ -187,12 +187,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		{
 			Ensure.That( errors ).Named( () => errors ).IsNotNull();
 
-			if ( this.MergeValidationErrors )
+			if( this.MergeValidationErrors )
 			{
-				foreach ( var error in errors )
+				foreach( var error in errors )
 				{
 					var actual = this._validationErrors.SingleOrDefault( ve => ve.Key == error.Key );
-					if ( actual != null )
+					if( actual != null )
 					{
 						actual.AddProblems( error.DetectedProblems.ToArray() );
 					}
@@ -236,7 +236,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		public virtual Boolean ValidateRuleSet( String ruleSet )
 		{
-			if ( this.IsValidationSuspended )
+			if( this.IsValidationSuspended )
 			{
 				return this.IsValid;
 			}
@@ -249,7 +249,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 
 			this.IsValid = result.None();
 
-			if ( this.IsValid != isValidBeforeValidation || !this.IsValid )
+			if( this.IsValid != isValidBeforeValidation || !this.IsValid )
 			{
 				this.OnStatusChanged( EventArgs.Empty );
 			}
@@ -276,7 +276,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		protected virtual IEnumerable<ValidationError> OnValidateProperty( String ruleSet, String propertyName )
 		{
-			if ( !this.IsValidationSuspended && !this.Validate() )
+			if( !this.IsValidationSuspended && !this.ValidateRuleSet( ruleSet ) )
 			{
 				/*
 				 * Se la validazione fallisce dobbiamo capire se è fallita
@@ -347,7 +347,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// <returns>A disposable instance to automatically resume validation on dispose.</returns>
 		public IDisposable SuspendValidation()
 		{
-			if ( !this.IsValidationSuspended )
+			if( !this.IsValidationSuspended )
 			{
 				this.IsValidationSuspended = true;
 				this.suspender = new ValidationSuspender( () => this.ResumeValidation() );
@@ -361,7 +361,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </summary>
 		public void ResumeValidation()
 		{
-			if ( this.IsValidationSuspended )
+			if( this.IsValidationSuspended )
 			{
 				this.IsValidationSuspended = false;
 				this.suspender = null;
@@ -408,11 +408,11 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			get { return this._mergeValidationErrors; }
 			set
 			{
-				if ( value != this.MergeValidationErrors )
+				if( value != this.MergeValidationErrors )
 				{
 					this._mergeValidationErrors = value;
 
-					if ( this.ValidationErrors.Any() )
+					if( this.ValidationErrors.Any() )
 					{
 						//reset the errors if any so the have them gruoped
 						var actual = this.ValidationErrors.ToArray();
