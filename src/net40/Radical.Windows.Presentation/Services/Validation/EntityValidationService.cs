@@ -35,6 +35,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		protected override IEnumerable<ValidationError> OnValidate( String ruleSet )
 		{
+			//TODO: è sbagliato che venga preso un singolo validatore se ruleSet è null, dovrebbero essere presi tutti
 			var validator = this.validators.SingleOrDefault( v => v.RuleSet == ruleSet );
 			if( validator != null )
 			{
@@ -43,6 +44,31 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			}
 
 			return new ValidationError[ 0 ];
+		}
+
+		/// <summary>
+		/// Called in order to execute the concrete validation process on the given property.
+		/// </summary>
+		/// <param name="ruleSet">The rule set.</param>
+		/// <param name="propertyName">Name of the property.</param>
+		/// <returns>
+		/// A list of <seealso cref="ValidationError" />.
+		/// </returns>
+		protected override IEnumerable<ValidationError> OnValidateProperty( String ruleSet, string propertyName )
+		{
+			var validator = this.validators.SingleOrDefault( v => v.RuleSet == ruleSet );
+			if( validator != null )
+			{
+				var result = validator.Validate( this.entity, propertyName );
+				if( !result.IsValid )
+				{
+					return result.Errors.Where( e => e.Key == propertyName );
+				}
+			}
+
+			return new ValidationError[ 0 ];
+
+			//return base.OnValidateProperty( ruleSet, propertyName );
 		}
 	}
 }
