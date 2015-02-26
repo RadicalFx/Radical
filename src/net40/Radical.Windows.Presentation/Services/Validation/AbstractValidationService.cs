@@ -56,7 +56,20 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		public String Validate( String propertyName )
 		{
-			if ( !this.ValidationCalledOnceFor( propertyName ) )
+			return this.ValidateRuleSet( null, propertyName );
+		}
+
+		/// <summary>
+		/// Starts the validation process.
+		/// </summary>
+		/// <param name="ruleSet">The rule set.</param>
+		/// <param name="propertyName">The name of the property to validate.</param>
+		/// <returns>
+		/// The validation error message if any; otherwise a null or empty string.
+		/// </returns>
+		public String ValidateRuleSet( String ruleSet, String propertyName ) 
+		{
+			if( !this.ValidationCalledOnceFor( propertyName ) )
 			{
 				/*
 				 * Se non abbiamo mai validato la proprietà significa che siamo 
@@ -69,14 +82,14 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 				return null;
 			}
 
-			if ( this.IsValidationSuspended )
+			if( this.IsValidationSuspended )
 			{
 				return null;
 			}
 
 			var isValidBeforeValidation = this.IsValid;
 
-			var results = this.OnValidateProperty( propertyName );
+			var results = this.OnValidateProperty( ruleSet, propertyName );
 
 			var toBeRemoved = this._validationErrors
 				.Where( e => e.Key == propertyName )
@@ -88,12 +101,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			var shouldTriggerStatusChanged = toBeRemoved.Any() || results.Any();
 			this.IsValid = this.ValidationErrors.None();
 
-			if ( this.IsValid != isValidBeforeValidation || shouldTriggerStatusChanged )
+			if( this.IsValid != isValidBeforeValidation || shouldTriggerStatusChanged )
 			{
 				this.OnStatusChanged( EventArgs.Empty );
 			}
 
-			if ( results.Any() )
+			if( results.Any() )
 			{
 				var error = results.Select( err => err.ToString() )
 					.First();
@@ -256,11 +269,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// <summary>
 		/// Called in order to execute the concrete validation process on the given property.
 		/// </summary>
+		/// <param name="ruleSet">The rule set.</param>
 		/// <param name="propertyName">Name of the property.</param>
 		/// <returns>
 		/// A list of <seealso cref="ValidationError" />.
 		/// </returns>
-		protected virtual IEnumerable<ValidationError> OnValidateProperty( String propertyName )
+		protected virtual IEnumerable<ValidationError> OnValidateProperty( String ruleSet, String propertyName )
 		{
 			if ( !this.IsValidationSuspended && !this.Validate() )
 			{

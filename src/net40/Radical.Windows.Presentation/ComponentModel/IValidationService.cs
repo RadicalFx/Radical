@@ -56,6 +56,14 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		String Validate( String propertyName );
 
 		/// <summary>
+		/// Starts the validation process.
+		/// </summary>
+		/// <param name="ruleSet">The rule set.</param>
+		/// <param name="propertyName">The name of the property to validate.</param>
+		/// <returns>The validation error message if any; otherwise a null or empty string.</returns>
+		String ValidateRuleSet( String ruleSet, String propertyName );
+
+		/// <summary>
 		/// Gets the validation errors.
 		/// </summary>
 		/// <value>All the validation errors.</value>
