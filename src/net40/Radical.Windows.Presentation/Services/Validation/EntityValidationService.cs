@@ -60,7 +60,10 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			if( validator != null )
 			{
 				var result = validator.Validate( this.entity, propertyName );
-				return result.Errors;
+				if( !result.IsValid )
+				{
+					return result.Errors.Where( e => e.Key == propertyName );
+				}
 			}
 
 			return new ValidationError[ 0 ];
