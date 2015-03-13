@@ -8,12 +8,10 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 {
 	public class PersonViewModel : MementoEntity
 	{
-		private Person SourceEntity;
+		MementoEntityCollection<AddressViewModel> addressesDataSource;
 
 		public void Initialize( Person person, Boolean registerAsTransient )
 		{
-			this.SourceEntity = person;
-
 			if( registerAsTransient )
 			{
 				this.RegisterTransient();
@@ -22,15 +20,14 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 			this.SetInitialPropertyValue( () => this.FirstName, person.FirstName );
 			this.SetInitialPropertyValue( () => this.LastName, person.LastName );
 
-			this.Addresses = new MementoEntityCollection<AddressViewModel>().DefaultView;
-			this.Addresses.DataSource
-				.CastTo<IEntityCollection<AddressViewModel>>()
-				.BulkLoad( this.SourceEntity.Addresses, a =>
+			this.addressesDataSource = new MementoEntityCollection<AddressViewModel>();
+			this.addressesDataSource.BulkLoad( person.Addresses, a =>
 				{
 					var vm = this.CreateAddressViewModel( a, registerAsTransient );
 					return vm;
 				} );
 
+			this.Addresses = this.addressesDataSource.DefaultView;
 			this.Addresses.AddingNew += ( s, e ) =>
 			{
 				var vm = this.CreateAddressViewModel( null, true );
@@ -44,28 +41,23 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 		{
 			var vm = new AddressViewModel();
 
-			vm.ParentViewModel = this;
-			vm.Parent = this.SourceEntity;
-
 			vm.Initialize( a, registerAsTransient );
 
 			return vm;
 		}
 
-		protected override void OnMementoChanged( ComponentModel.ChangeTracking.IChangeTrackingService newMemento, ComponentModel.ChangeTracking.IChangeTrackingService oldMemmento )
+		protected override void OnMementoChanged( ComponentModel.ChangeTracking.IChangeTrackingService newMemento, ComponentModel.ChangeTracking.IChangeTrackingService oldMemento )
 		{
-			base.OnMementoChanged( newMemento, oldMemmento );
+			base.OnMementoChanged( newMemento, oldMemento );
 
-			var im = ( IMemento )this.Addresses.DataSource;
-
-			if( oldMemmento != null )
+			if( oldMemento != null )
 			{
-				oldMemmento.Detach( im );
+				oldMemento.Detach( this.addressesDataSource );
 			}
 
 			if( newMemento != null )
 			{
-				newMemento.Attach( im );
+				newMemento.Attach( this.addressesDataSource );
 			}
 		}
 

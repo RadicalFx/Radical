@@ -28,7 +28,7 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 				.AddMonitor( observer );
 
 			this.CreateNewAddressCommand = DelegateCommand.Create()
-				.OnExecute( o => 
+				.OnExecute( o =>
 				{
 					var address = this.Entity.Addresses.AddNew();
 					this.SelectedAddress = address;
@@ -36,7 +36,7 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 
 			this.DeleteAddressCommand = DelegateCommand.Create()
 				.OnCanExecute( o => this.SelectedAddress != null )
-				.OnExecute( o => 
+				.OnExecute( o =>
 				{
 					this.SelectedAddress.Delete();
 					this.SelectedAddress = this.Entity.Addresses.FirstOrDefault();
@@ -77,20 +77,6 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 			this.Entity = entity;
 		}
 
-		private PersonViewModel _entity = null;
-		public PersonViewModel Entity
-		{
-			get { return this._entity; }
-			private set
-			{
-				if( value != this.Entity )
-				{
-					this._entity = value;
-					this.OnPropertyChanged( () => this.Entity );
-				}
-			}
-		}
-
 		public ICommand UndoCommand { get; private set; }
 
 		public ICommand RedoCommand { get; private set; }
@@ -99,18 +85,16 @@ namespace Topics.Radical.Presentation.Memento.ComplexGraph
 
 		public ICommand DeleteAddressCommand { get; private set; }
 
-		private IEntityItemView<AddressViewModel> _selectedAddress = null;
+		public PersonViewModel Entity
+		{
+			get { return this.GetPropertyValue( () => this.Entity ); }
+			private set { this.SetPropertyValue( () => this.Entity, value ); }
+		}
+
 		public IEntityItemView<AddressViewModel> SelectedAddress
 		{
-			get { return this._selectedAddress; }
-			set
-			{
-				if( value != this.SelectedAddress )
-				{
-					this._selectedAddress = value;
-					this.OnPropertyChanged( () => this.SelectedAddress );
-				}
-			}
+			get { return this.GetPropertyValue( () => this.SelectedAddress ); }
+			private set { this.SetPropertyValue( () => this.SelectedAddress, value ); }
 		}
 	}
 }

@@ -13,7 +13,22 @@
             <RowDefinition Height="30*" />
         </Grid.RowDefinitions>
 
-        <TextBox Text="{markup:EditorBinding Path=Text}" Grid.Row="0" Margin="33,47,220,0" Height="25" VerticalAlignment="Top" />
+<TextBox Text="{markup:EditorBinding Path=Text}" Grid.Row="0" Margin="33,47,220,0" Height="25" VerticalAlignment="Top">
+    <Validation.ErrorTemplate>
+        <ControlTemplate>
+            <DockPanel>
+                <AdornedElementPlaceholder DockPanel.Dock="Left" />
+                <ItemsControl ItemsSource="{Binding}" DockPanel.Dock="Right">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ErrorContent}" Foreground="Red"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </ControlTemplate>
+    </Validation.ErrorTemplate>
+</TextBox>
 
         <ListBox Grid.Row="1" Grid.IsSharedSizeScope="True" ItemsSource="{Binding Path=ValidationErrors}">
             <ListBox.ItemTemplate>

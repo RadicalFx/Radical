@@ -320,8 +320,8 @@ namespace Topics.Radical.Model
         /// Called when the <see cref="IChangeTrackingService"/> changes.
         /// </summary>
         /// <param name="newMemento">The new memento service.</param>
-        /// <param name="oldMemmento">The old memmento service.</param>
-        protected virtual void OnMementoChanged( IChangeTrackingService newMemento, IChangeTrackingService oldMemmento )
+        /// <param name="oldMemento">The old memmento service.</param>
+        protected virtual void OnMementoChanged( IChangeTrackingService newMemento, IChangeTrackingService oldMemento )
         {
 
         }
