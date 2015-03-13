@@ -27,8 +27,9 @@ namespace Topics.Radical.Presentation.Validation
 	[Sample( Title = "DataAnnotation Validation", Category = Categories.Validation )]
 	class ValidationSampleViewModel :
 		AbstractValidationSampleViewModel,
-		ICanBeValidated,
-		IRequireValidationCallback<ValidationSampleViewModel>
+		//ICanBeValidated,
+		IRequireValidationCallback<ValidationSampleViewModel>,
+		INotifyDataErrorInfo
 	{
 		public ValidationSampleViewModel()
 		{
@@ -44,7 +45,7 @@ namespace Topics.Radical.Presentation.Validation
 
 		protected override IValidationService GetValidationService()
 		{
-			return new DataAnnotationValidationService<ValidationSampleViewModel>( this )
+			var svc = new DataAnnotationValidationService<ValidationSampleViewModel>( this )
 			{
 				MergeValidationErrors = this.MergeErrors
 			}.AddRule
@@ -53,9 +54,28 @@ namespace Topics.Radical.Presentation.Validation
 				error: ctx => "must be equal to 'foo'",
 				rule: ctx => ctx.Entity.Text == "foo"
 			);
+
+			svc.StatusChanged += ( s, e ) =>
+			{
+				var h = this.ErrorsChanged;
+				if( h != null )
+				{
+					h( this, new DataErrorsChangedEventArgs( null ) );
+				}
+			};
+			svc.Resetted += ( s, e ) =>
+			{
+				var h = this.ErrorsChanged;
+				if( h != null )
+				{
+					h( this, new DataErrorsChangedEventArgs( null ) );
+				}
+			};
+
+			return svc;
 		}
 
-		
+
 
 		[DisplayName( "Esempio" )]
 		public Int32 Sample
@@ -80,6 +100,24 @@ namespace Topics.Radical.Presentation.Validation
 		public void RunValidation()
 		{
 			this.Validate( ValidationBehavior.TriggerValidationErrorsOnFailure );
+		}
+
+		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+		public System.Collections.IEnumerable GetErrors( string propertyName )
+		{
+			if( this.ValidationService.MergeValidationErrors )
+			{
+				//bho :-)
+			}
+
+			var temp = this.ValidationErrors.Where( e => e.Key == propertyName ).ToArray();
+			return temp;
+		}
+
+		public bool HasErrors
+		{
+			get { return !this.IsValid; }
 		}
 	}
 }

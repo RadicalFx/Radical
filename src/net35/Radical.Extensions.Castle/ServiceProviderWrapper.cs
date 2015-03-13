@@ -10,8 +10,17 @@ namespace Castle
     /// Wraps the <see cref="IWindsorContainer"/> in order to provide
     /// a legacy <see cref="IServiceProvider"/> instance.
     /// </summary>
-    public class ServiceProviderWrapper : IServiceProvider
+    public class ServiceProviderWrapper : IServiceProvider, IDisposable
     {
+		void IDisposable.Dispose()
+		{
+			if( this.Container != null ) 
+			{
+				this.Container.Dispose();
+				this.Container = null;
+			}
+		}
+
 		/// <summary>
 		/// Gets the container.
 		/// </summary>
@@ -47,5 +56,5 @@ namespace Castle
 
             return null;
         }
-    }
+	}
 }
