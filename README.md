@@ -1,3 +1,6 @@
+[![Stories in Ready](https://badge.waffle.io/Radicalfx/Radical.png?label=ready&title=Ready)](http://waffle.io/Radicalfx/Radical)
+--
+
 ![Radical logo](Radical.png)
 
 # Radical
