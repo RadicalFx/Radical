@@ -8,16 +8,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		WindsorApplicationBootstrapper 
 		where TShellView : Window
 	{
-		protected override void OnBootCompleted( IServiceProvider serviceProvider )
+		public WindsorApplicationBootstrapper()
 		{
-			var mainView = serviceProvider.GetService<IViewResolver>()
-				.GetView<TShellView>();
-
-			Application.Current.MainWindow = mainView;
-
-			mainView.Show();
-
-			base.OnBootCompleted( serviceProvider );
+			this.UsingAsShell<TShellView>();
 		}
 	}
 }

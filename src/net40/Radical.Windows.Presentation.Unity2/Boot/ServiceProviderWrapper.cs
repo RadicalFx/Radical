@@ -7,9 +7,44 @@ using Microsoft.Practices.Unity;
 
 namespace Topics.Radical.Windows.Presentation.Boot
 {
-	class ServiceProviderWrapper : IServiceProvider
+	class ServiceProviderWrapper : IServiceProvider, IDisposable
 	{
-		IUnityContainer container;
+		#region IDisposable Members
+
+		/// <summary>
+		/// Releases unmanaged resources and performs other cleanup operations before the
+		/// <see cref="Entity"/> is reclaimed by garbage collection.
+		/// </summary>
+		~ServiceProviderWrapper()
+		{
+			this.Dispose( false );
+		}
+
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+		protected virtual void Dispose( Boolean disposing )
+		{
+			if( this.Container != null )
+			{
+				this.Container.Dispose();
+				this.Container = null;
+			}
+		}
+
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose( true );
+			GC.SuppressFinalize( this );
+		}
+
+		#endregion
+
+		public IUnityContainer Container { get; private set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ServiceProviderWrapper" /> class.
@@ -17,7 +52,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// <param name="container">The container.</param>
 		public ServiceProviderWrapper( IUnityContainer container )
 		{
-			this.container = container;
+			this.Container = container;
 		}
 
 		/// <summary>
@@ -31,9 +66,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// </returns>
 		public object GetService( Type serviceType )
 		{
-			if ( this.container.IsRegistered( serviceType ) )
+			if ( this.Container.IsRegistered( serviceType ) )
 			{
-				return this.container.Resolve( serviceType );
+				return this.Container.Resolve( serviceType );
 			}
 
 			return null;
