@@ -16,7 +16,7 @@ namespace Castle
 
 		/// <summary>
 		/// Releases unmanaged resources and performs other cleanup operations before the
-		/// <see cref="Entity"/> is reclaimed by garbage collection.
+		/// <see cref="ServiceProviderWrapper"/> is reclaimed by garbage collection.
 		/// </summary>
 		~ServiceProviderWrapper()
 		{
