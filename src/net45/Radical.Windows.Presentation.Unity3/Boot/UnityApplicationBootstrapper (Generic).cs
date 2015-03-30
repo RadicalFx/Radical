@@ -9,16 +9,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		UnityApplicationBootstrapper 
 		where TShellView : Window
 	{
-		protected override void OnBootCompleted( IServiceProvider serviceProvider )
+		public UnityApplicationBootstrapper()
 		{
-			var mainView = serviceProvider.GetService<IViewResolver>()
-				.GetView<TShellView>();
-
-			Application.Current.MainWindow = mainView;
-
-			mainView.Show();
-
-			base.OnBootCompleted( serviceProvider );
+			this.UsingAsShell<TShellView>();
 		}
 	}
 }
