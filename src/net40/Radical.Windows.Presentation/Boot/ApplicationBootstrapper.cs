@@ -642,6 +642,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 					if( t.IsFaulted )
 					{
 						this.OnUnhandledException( t.Exception );
+						throw t.Exception;
 					}
 
 					showShell();
