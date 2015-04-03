@@ -195,7 +195,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		SplashScreenConfiguration splashScreenConfiguration = new SplashScreenConfiguration();
 
 		/// <summary>
-		/// Enables splash screen support
+		/// Enables splash screen support.
 		/// </summary>
 		/// <param name="config">The splash screen configuration.</param>
 		/// <returns></returns>
@@ -613,7 +613,11 @@ namespace Topics.Radical.Windows.Presentation.Boot
 					var remaining = this.splashScreenConfiguration.MinimumDelay - elapsed;
 					if( remaining > 0 )
 					{
+#if FX40
 						Thread.Sleep( remaining );
+#else
+						Task.Delay( remaining );
+#endif
 					}
 				};
 
