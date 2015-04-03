@@ -22,11 +22,7 @@ namespace Castle.Facilities
     {
         static readonly TraceSource logger = new TraceSource( typeof( SubscribeToMessageFacility ).FullName );
 
-#if FX40
-        IList<Tuple<String, IHandler>> buffer = new List<Tuple<String, IHandler>>();
-#else
-		IList<Values<String, IHandler>> buffer = new List<Values<String, IHandler>>();
-#endif
+		IList<Tuple<String, IHandler>> buffer = new List<Tuple<String, IHandler>>();
         Boolean isMessageBrokerRegistered = false;
 
         void Attach( String key, IHandler h )

@@ -101,10 +101,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
-      <Project>{e7f67b82-f777-4be7-b774-57bb44db3eb8}</Project>
-      <Name>Radical.Extensions.Castle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Radical.Windows.Presentation.CastleWindsor\Radical.Windows.Presentation.CastleWindsor.csproj">
       <Project>{e72f0df7-1725-4f64-aaff-00208cd7553e}</Project>
       <Name>Radical.Windows.Presentation.CastleWindsor</Name>
