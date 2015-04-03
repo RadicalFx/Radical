@@ -34,7 +34,7 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		public SizeToContent SizeToContent { get; set; }
 		
 		/// <summary>
-		/// The splash screen startup location, the default value is <c>CenterOwner</c>.
+		/// The splash screen startup location, the default value is <c>CenterScreen</c>.
 		/// </summary>
 		public WindowStartupLocation WindowStartupLocation { get; set; }
 		
