@@ -163,7 +163,6 @@
     <Compile Include="Validation\EnsureTest.cs" />
     <Compile Include="Validation\GuidEnsureExtensionTest.cs" />
     <Compile Include="Validation\StringEnsureExtensionTest.cs" />
-    <Compile Include="ValuesTest.cs" />
     <Compile Include="WeakReferenceTest.cs" />
   </ItemGroup>
   <ItemGroup>
