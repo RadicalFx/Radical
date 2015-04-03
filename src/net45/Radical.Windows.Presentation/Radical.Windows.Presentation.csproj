@@ -110,6 +110,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\SingletonApplicationStartupArgs.cs">
       <Link>Boot\SingletonApplicationStartupArgs.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\Boot\SplashScreenConfiguration.cs">
+      <Link>Boot\SplashScreenConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\ComponentModel\ICanBeValidated.cs">
       <Link>ComponentModel\ICanBeValidated.cs</Link>
     </Compile>
@@ -332,6 +335,12 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Services\ViewResolver.cs">
       <Link>Services\ViewResolver.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\SplashScreenView.xaml.cs">
+      <Link>SplashScreenView.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\SplashScreenViewModel.cs">
+      <Link>SplashScreenViewModel.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Tracing.cs">
       <Link>Tracing.cs</Link>
     </Compile>
@@ -354,7 +363,13 @@
       <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="..\..\net40\Radical.Windows.Presentation\SplashScreenView.xaml">
+      <Link>SplashScreenView.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45". (

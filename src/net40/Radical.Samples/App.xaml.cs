@@ -11,6 +11,7 @@ namespace Topics.Radical
 		public App()
 		{
 			var bootstrapper = new WindsorApplicationBootstrapper<Presentation.MainView>()
+				.EnableSplashScreen()
 				.OnBoot( container =>
 				{
 					var w = ( ServiceProviderWrapper )container;

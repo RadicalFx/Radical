@@ -21,6 +21,7 @@ using Topics.Radical.Helpers;
 using System.Diagnostics;
 using Topics.Radical.Diagnostics;
 using Topics.Radical.Validation;
+using System.Threading.Tasks;
 #endif
 
 namespace Topics.Radical.Windows.Presentation.Boot
@@ -186,6 +187,26 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				.Is<Window>();
 
 			this.shellViewType = shellViewType;
+
+			return this;
+		}
+
+		private bool isSplashScreenEnabled = false;
+		SplashScreenConfiguration splashScreenConfiguration = new SplashScreenConfiguration();
+
+		/// <summary>
+		/// Enables splash screen support.
+		/// </summary>
+		/// <param name="config">The splash screen configuration.</param>
+		/// <returns></returns>
+		public ApplicationBootstrapper EnableSplashScreen( SplashScreenConfiguration config = null )
+		{
+			if( config != null )
+			{
+				this.splashScreenConfiguration = config;
+			}
+
+			this.isSplashScreenEnabled = true;
 
 			return this;
 		}
@@ -540,12 +561,97 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				.WithMessage( "Shell type is not defined, please call the UsingAsShell<TShellView>() configuration method." )
 				.IsNotNull();
 
-			var mainView = ( Window )serviceProvider.GetService<IViewResolver>()
-				.GetView( this.shellViewType );
+			var resolver = serviceProvider.GetService<IViewResolver>();
 
-			Application.Current.MainWindow = mainView;
+			Func<Window> showSplash = () =>
+			{
+				var splashScreen = ( Window )resolver.GetView( this.splashScreenConfiguration.SplashScreenViewType );
+				Application.Current.MainWindow = splashScreen;
 
-			mainView.Show();
+				splashScreen.WindowStartupLocation = this.splashScreenConfiguration.WindowStartupLocation;
+				if( this.splashScreenConfiguration.MinWidth.HasValue )
+				{
+					splashScreen.MinWidth = this.splashScreenConfiguration.MinWidth.Value;
+				}
+
+				if( this.splashScreenConfiguration.MinHeight.HasValue )
+				{
+					splashScreen.MinHeight = this.splashScreenConfiguration.MinHeight.Value;
+				}
+
+				splashScreen.WindowStyle = this.splashScreenConfiguration.WindowStyle;
+				splashScreen.SizeToContent = this.splashScreenConfiguration.SizeToContent;
+				switch( splashScreen.SizeToContent )
+				{
+					case SizeToContent.Manual:
+						splashScreen.Width = this.splashScreenConfiguration.Width;
+						splashScreen.Height = this.splashScreenConfiguration.Height;
+						break;
+
+					case SizeToContent.Height:
+						splashScreen.Width = this.splashScreenConfiguration.Width;
+						break;
+
+					case SizeToContent.Width:
+						splashScreen.Height = this.splashScreenConfiguration.Height;
+						break;
+				}
+
+				splashScreen.Show();
+
+				return splashScreen;
+			};
+
+			Action showShell = () =>
+			{
+				var mainView = ( Window )resolver.GetView( this.shellViewType );
+				Application.Current.MainWindow = mainView;
+
+				mainView.Show();
+			};
+
+			if( this.isSplashScreenEnabled )
+			{
+				var splashScreen = showSplash();
+
+				Action action = () =>
+				{
+					var sw = Stopwatch.StartNew();
+					this.splashScreenConfiguration.StartupAsyncWork( serviceProvider );
+					sw.Stop();
+					var elapsed = ( Int32 )sw.ElapsedMilliseconds;
+					var remaining = this.splashScreenConfiguration.MinimumDelay - elapsed;
+					if( remaining > 0 )
+					{
+#if FX40
+						Thread.Sleep( remaining );
+#else
+						Task.Delay( remaining );
+#endif
+					}
+				};
+
+#if FX40
+				var startup = Task.Factory.StartNew( action );
+#else
+				var startup = Task.Run( action );
+#endif
+				
+				startup.ContinueWith( t =>
+				{
+					if( t.IsFaulted )
+					{
+						this.OnUnhandledException( t.Exception );
+					}
+
+					showShell();
+					splashScreen.Close();
+				}, TaskScheduler.FromCurrentSynchronizationContext() );
+			}
+			else
+			{
+				showShell();
+			}
 		}
 
 		void OnShutdownCore( ApplicationShutdownReason reason )
