@@ -14,8 +14,10 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// </summary>
 		public SplashScreenConfiguration()
 		{
-			this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 			this.SizeToContent = SizeToContent.WidthAndHeight;
+			this.MinWidth = 485;
+			this.MinHeight = 335;
 			this.WindowStyle = WindowStyle.None;
 			this.MinimumDelay = 1500;
 			this.SplashScreenViewType = typeof( SplashScreenView );
@@ -65,5 +67,15 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		/// Defines the default view that Radical use to host the splash screen content.
 		/// </summary>
 		public Type SplashScreenViewType { get; set; }
+
+		/// <summary>
+		/// The Minimum Width of the splash screen window. The default value is 585.
+		/// </summary>
+		public Double? MinWidth { get; set; }
+
+		/// <summary>
+		/// The Minimum Height of the splash screen window. The default value is 335.
+		/// </summary>
+		public Double? MinHeight { get; set; }
 	}
 }

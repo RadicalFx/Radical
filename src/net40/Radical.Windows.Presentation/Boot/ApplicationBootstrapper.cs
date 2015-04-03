@@ -569,6 +569,16 @@ namespace Topics.Radical.Windows.Presentation.Boot
 				Application.Current.MainWindow = splashScreen;
 
 				splashScreen.WindowStartupLocation = this.splashScreenConfiguration.WindowStartupLocation;
+				if( this.splashScreenConfiguration.MinWidth.HasValue )
+				{
+					splashScreen.MinWidth = this.splashScreenConfiguration.MinWidth.Value;
+				}
+
+				if( this.splashScreenConfiguration.MinHeight.HasValue )
+				{
+					splashScreen.MinHeight = this.splashScreenConfiguration.MinHeight.Value;
+				}
+
 				splashScreen.WindowStyle = this.splashScreenConfiguration.WindowStyle;
 				splashScreen.SizeToContent = this.splashScreenConfiguration.SizeToContent;
 				switch( splashScreen.SizeToContent )

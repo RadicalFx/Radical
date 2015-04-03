@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:rg="clr-namespace:Topics.Radical.Windows.Presentation.Regions"
-        Title="" SizeToContent="WidthAndHeight">
+        Title="">
     <Grid>
         <ContentPresenter rg:RegionService.Region="{rg:ContentPresenterRegion Name=SplashScreenContent}" />
     </Grid>
