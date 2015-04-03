@@ -477,7 +477,7 @@ namespace Radical.Tests
 
         [TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
-        public void TODO_PuzzleContainer_entryBuilder_should_support_contract_forwarding()
+        public void PuzzleContainer_entryBuilder_should_support_contract_forwarding()
 		{
             //TODO: Not yet implemented
             var entry = EntryBuilder.For<IFoo>()
@@ -494,7 +494,7 @@ namespace Radical.Tests
 
         [TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
-        public void TODO_PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_transient_types()
+        public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_transient_types()
 		{
             //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
@@ -517,7 +517,7 @@ namespace Radical.Tests
 
         [TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
-        public void TODO_PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_singleton_types()
+        public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_singleton_types()
 		{
             //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
@@ -535,7 +535,7 @@ namespace Radical.Tests
 
         [TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
-        public void TODO_PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_instances()
+        public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_instances()
 		{
             //TODO: Not yet implemented
             var entry = EntryBuilder.For<IFoo>()
@@ -554,7 +554,7 @@ namespace Radical.Tests
         [TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
 		[ExpectedException( typeof( ArgumentOutOfRangeException ) )]
-        public void TODO_PuzzleContainer_entryBuilder_should_fail_if_implementation_does_not_support_one_of_the_contracts()
+        public void PuzzleContainer_entryBuilder_should_fail_if_implementation_does_not_support_one_of_the_contracts()
 		{
             //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
@@ -567,7 +567,7 @@ namespace Radical.Tests
 
 		[TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
-        public void TODO_PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_factory_method()
+        public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_factory_method()
 		{
             //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
@@ -587,7 +587,7 @@ namespace Radical.Tests
         [TestMethod, Ignore]
 		[TestCategory( "PuzzleContainer" )]
 		[ExpectedException( typeof( ArgumentException ) )]
-        public void TODO_PuzzleContainer_entryBuilder_should_fail_if_validation_does_not_succeed()
+        public void PuzzleContainer_entryBuilder_should_fail_if_validation_does_not_succeed()
 		{
             //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>();
