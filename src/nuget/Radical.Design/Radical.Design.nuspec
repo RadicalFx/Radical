@@ -6,9 +6,9 @@
     <title>Radical Design</title>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>
-    <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
+    <licenseUrl>https://github.com/RadicalFx/radical/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/RadicalFx/radical</projectUrl>
-    <iconUrl>http://www.topics.it/siteimages/Radical.nuget.png</iconUrl>
+    <iconUrl>https://github.com/RadicalFx/radical/blob/master/Radical.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Radical Framework for WPF Design Time Data</description>
     <summary />
