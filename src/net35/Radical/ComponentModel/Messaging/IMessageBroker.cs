@@ -276,7 +276,7 @@ namespace Topics.Radical.ComponentModel.Messaging
 		/// </summary>
 		/// <param name="sender">The sender.</param>
 		/// <param name="message">The message.</param>
-		Task BroadcastAsync( Object sender, Object message );
+		System.Threading.Tasks.Task BroadcastAsync( Object sender, Object message );
 
 #endif
 
