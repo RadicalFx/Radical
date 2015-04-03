@@ -3,5 +3,5 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 1607
 //This is the build number used to publish the NuGet package.
-[assembly: AssemblyInformationalVersion( "1.3.1.0-Vegan-RC" )]
+[assembly: AssemblyInformationalVersion( "1.3.1.0" )]
 #pragma warning restore 1607
