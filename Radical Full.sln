@@ -143,6 +143,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "src\net40\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical.Windows", "src\net40\Test.Radical.Windows\Test.Radical.Windows.csproj", "{20FC6C18-4C37-4BAE-9482-B77B4664D058}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "src\net45\Test.Radical\Test.Radical.csproj", "{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -535,6 +537,16 @@ Global
 		{20FC6C18-4C37-4BAE-9482-B77B4664D058}.Release|ARM.ActiveCfg = Release|Any CPU
 		{20FC6C18-4C37-4BAE-9482-B77B4664D058}.Release|x64.ActiveCfg = Release|Any CPU
 		{20FC6C18-4C37-4BAE-9482-B77B4664D058}.Release|x86.ActiveCfg = Release|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|x64.ActiveCfg = Release|Any CPU
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -589,6 +601,7 @@ Global
 		{FD027A4B-4D31-4DAB-9250-8A5CA4E32732} = {4D938E88-567A-4F81-A0E4-A56650C81053}
 		{240098B2-2092-4EB7-955C-15154052F6E7} = {667F5571-5118-4BDB-A011-BFB5DEAE389C}
 		{20FC6C18-4C37-4BAE-9482-B77B4664D058} = {667F5571-5118-4BDB-A011-BFB5DEAE389C}
+		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A} = {FD027A4B-4D31-4DAB-9250-8A5CA4E32732}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
