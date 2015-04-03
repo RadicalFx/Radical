@@ -9,7 +9,7 @@ namespace Test.Radical.Validation
 	public class ValidatorTest
 	{
 		[TestMethod]
-		public void ensure_getFullErrorMessage_should_contain_all_relevant_information()
+		public void ensure_getFullErrorMessage_should_contain_ClassName()
 		{
             var bak = Ensure.SourceInfoLoadStrategy;
             try
@@ -19,10 +19,8 @@ namespace Test.Radical.Validation
                 String actual = obj.GetFullErrorMessage( "validator specific message" );
 
                 var containsClassName = actual.Contains( typeof( ValidatorTest ).Name );
-                var containsMethodName = actual.Contains( typeof( ValidatorTest ).Name );
-
+				
                 containsClassName.Should().Be.True();
-                containsMethodName.Should().Be.True();
             }
             finally
             {
@@ -30,30 +28,28 @@ namespace Test.Radical.Validation
             }
 		}
 
-        [TestMethod]
-        public void ensure_getFullErrorMessage_w_Skip_should_not_contain_any_information()
-        {
-            var bak = Ensure.SourceInfoLoadStrategy;
-            try
-            {
-                Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Skip;
-                var obj = Ensure.That( "" );
-                String actual = obj.GetFullErrorMessage( "validator specific message" );
+		[TestMethod]
+		public void ensure_getFullErrorMessage_should_contain_MethodName()
+		{
+			var bak = Ensure.SourceInfoLoadStrategy;
+			try
+			{
+				Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Load;
+				var obj = Ensure.That( "" );
+				String actual = obj.GetFullErrorMessage( "validator specific message" );
 
-                var containsClassName = actual.Contains( "" );
-                var containsMethodName = actual.Contains( "" );
+				var containsMethodName = actual.Contains( "ensure_getFullErrorMessage_should_contain_MethodName" );
 
-                containsClassName.Should().Be.True();
-                containsMethodName.Should().Be.True();
-            }
-            finally
-            {
-                Ensure.SourceInfoLoadStrategy = bak;
-            }
-        }
+				containsMethodName.Should().Be.True();
+			}
+			finally
+			{
+				Ensure.SourceInfoLoadStrategy = bak;
+			}
+		}
 
         [TestMethod]
-        public void ensure_getFullErrorMessage_should_contain_all_relevant_information_event_w_lazy_load()
+        public void ensure_getFullErrorMessage_should_contain_ClassName_even_w_lazy_load()
         {
             var bak = Ensure.SourceInfoLoadStrategy;
             try
@@ -73,6 +69,26 @@ namespace Test.Radical.Validation
                 Ensure.SourceInfoLoadStrategy = bak;
             }
         }
+
+		[TestMethod]
+		public void ensure_getFullErrorMessage_should_contain_MethodName_even_w_lazy_load()
+		{
+			var bak = Ensure.SourceInfoLoadStrategy;
+			try
+			{
+				Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoad;
+				var obj = Ensure.That( "" );
+				String actual = obj.GetFullErrorMessage( "validator specific message" );
+
+				var containsMethodName = actual.Contains( "ensure_getFullErrorMessage_should_contain_MethodName_even_w_lazy_load" );
+
+				containsMethodName.Should().Be.True();
+			}
+			finally
+			{
+				Ensure.SourceInfoLoadStrategy = bak;
+			}
+		}
 
 		[TestMethod]
 		public void ensure_getFullErrorMessage_should_contain_custom_message()
