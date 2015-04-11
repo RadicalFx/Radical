@@ -303,16 +303,32 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			return this.ValidationErrors.Select( ve => ve.Key ).AsReadOnly();
 		}
 
+		/// <summary>
+		/// Clears the validation state resetting to its default valid value.
+		/// </summary>
+		public void Reset() 
+		{
+			this.Reset( ValidationResetBehavior.All );
+		}
 
 		/// <summary>
 		/// Clears the validation state resetting to its default valid value.
 		/// </summary>
-		public virtual void Reset()
+		/// <param name="resetBehavior">The reset behavior.</param>
+		public virtual void Reset( ValidationResetBehavior resetBehavior )
 		{
-			this._validationErrors.Clear();
+			if( ( resetBehavior & ValidationResetBehavior.ErrorsOnly ) == ValidationResetBehavior.ErrorsOnly )
+			{
+				this._validationErrors.Clear();
+			}
+
 			this.IsValid = true;
-			this.validationCalledOnce.Clear();
-			//this.OnStatusChanged( EventArgs.Empty );
+
+			if( ( resetBehavior & ValidationResetBehavior.ValidationTracker ) == ValidationResetBehavior.ValidationTracker )
+			{
+				this.validationCalledOnce.Clear();
+			}
+
 			this.OnResetted( EventArgs.Empty );
 		}
 

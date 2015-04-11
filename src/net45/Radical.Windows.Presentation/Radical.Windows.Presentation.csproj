@@ -339,6 +339,7 @@
       <Link>Wait.cs</Link>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <Compile Include="ComponentModel\IRequireValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
 <TextBox Text="{markup:EditorBinding Path=Text}" Grid.Row="0" Margin="33,47,220,0" Height="25" VerticalAlignment="Top">
-    <Validation.ErrorTemplate>
+    <!--<Validation.ErrorTemplate>
         <ControlTemplate>
             <DockPanel>
                 <AdornedElementPlaceholder DockPanel.Dock="Left" />
@@ -27,7 +27,7 @@
                 </ItemsControl>
             </DockPanel>
         </ControlTemplate>
-    </Validation.ErrorTemplate>
+    </Validation.ErrorTemplate>-->
 </TextBox>
 
         <ListBox Grid.Row="1" Grid.IsSharedSizeScope="True" ItemsSource="{Binding Path=ValidationErrors}">
@@ -51,12 +51,32 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Text="This is validated while writing" HorizontalAlignment="Left" Margin="33,26,0,0" VerticalAlignment="Top"/>
+        <TextBlock Text="These are validated while writing" HorizontalAlignment="Left" Margin="33,26,0,0" VerticalAlignment="Top"/>
         <Button Content="Click to run full validation" 
                 HorizontalAlignment="Left" 
                 Command="{markup:AutoCommandBinding Path=RunValidation}"
-                Margin="33,77,0,0" VerticalAlignment="Top" MinWidth="75"/>
-        <CheckBox Content="Merge errors" IsChecked="{Binding Path=MergeErrors}" HorizontalAlignment="Left" Margin="33,102,0,0" VerticalAlignment="Top"/>
+                Margin="33,177,0,0" VerticalAlignment="Top" MinWidth="75"/>
+        <CheckBox Content="Merge errors" IsChecked="{Binding Path=MergeErrors}" HorizontalAlignment="Left" Margin="33,202,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{markup:EditorBinding Path=AnotherText}" Grid.Row="0" Margin="33,87,220,0" Height="25" VerticalAlignment="Top">
+            <!--<Validation.ErrorTemplate>
+        <ControlTemplate>
+            <DockPanel>
+                <AdornedElementPlaceholder DockPanel.Dock="Left" />
+                <ItemsControl ItemsSource="{Binding}" DockPanel.Dock="Right">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ErrorContent}" Foreground="Red"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </ControlTemplate>
+    </Validation.ErrorTemplate>-->
+        </TextBox>
+        <Button Content="Reset validation" 
+        	HorizontalAlignment="Left" 
+        	Command="{markup:AutoCommandBinding Path=ResetValidation}"
+        	Margin="177,177,0,0" VerticalAlignment="Top" MinWidth="75"/>
 
     </Grid>
 </UserControl>

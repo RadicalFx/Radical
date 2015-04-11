@@ -30,6 +30,22 @@ namespace Topics.Radical.Windows.Presentation
 		[Bindable( false )]
 		System.Windows.DependencyObject IViewModel.View { get; set; }
 
+		/// <summary>
+		/// Raises the <see cref="E:PropertyChanged" /> event.
+		/// </summary>
+		/// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
+		protected override void OnPropertyChanged( PropertyChangedEventArgs e )
+		{
+			base.OnPropertyChanged( e );
+
+#if FX45
+			if( this is IRequireValidation && this.RunValidationOnPropertyChanged && !this.IsResettingValidation )
+			{
+				this.ValidateProperty( e.PropertyName );
+			}
+#endif
+		}
+
 		IValidationService _validationService;
 
 		/// <summary>
@@ -50,6 +66,10 @@ namespace Topics.Radical.Windows.Presentation
 						{
 							this.ValidationErrors.Add( error );
 						}
+
+#if FX45
+						this.OnErrorsChanged( null );
+#endif
 					};
 
 					this._validationService.Resetted += ( s, e ) =>
@@ -59,6 +79,10 @@ namespace Topics.Radical.Windows.Presentation
 							.GetProperties()
 							.Select( p => p.Name )
 							.ForEach( p => this.OnPropertyChanged( p ) );
+
+#if FX45
+						this.OnErrorsChanged( null );
+#endif
 					};
 				}
 
@@ -82,35 +106,17 @@ namespace Topics.Radical.Windows.Presentation
 		/// </summary>
 		protected AbstractViewModel()
 		{
-			
+#if FX45
+			this.RunValidationOnPropertyChanged = true;
+#endif
 		}
-
-		//protected virtual void OnLoading()
-		//{
-
-		//}
-
-		//protected virtual void OnLoaded()
-		//{
-
-		//}
-
-		///// <summary>
-		///// Gets or sets a value indicating whether this instance is loaded.
-		///// </summary>
-		///// <value><c>true</c> if this instance is loaded; otherwise, <c>false</c>.</value>
-		//protected Boolean IsLoaded
-		//{
-		//    get;
-		//    private set;
-		//}
 
 		/// <summary>
 		/// Signals the object that initialization is starting.
 		/// </summary>
 		void ISupportInitialize.BeginInit()
 		{
-			//this.OnLoading();
+
 		}
 
 		/// <summary>
@@ -118,9 +124,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// </summary>
 		void ISupportInitialize.EndInit()
 		{
-			//this.OnLoaded();
 
-			//this.IsLoaded = true;
 		}
 
 		/// <summary>
@@ -140,21 +144,28 @@ namespace Topics.Radical.Windows.Presentation
 		[Bindable( false )]
 		public virtual String this[ String propertyName ]
 		{
-			get
+			get { return this.ValidateProperty( propertyName ); }
+		}
+
+		/// <summary>
+		/// Validates the given property.
+		/// </summary>
+		/// <param name="propertyName">Name of the property.</param>
+		/// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
+		protected virtual String ValidateProperty( String propertyName ) 
+		{
+			var wasValid = this.IsValid;
+
+			var error = this.ValidationService.Validate( propertyName );
+
+			if( this.IsValid != wasValid )
 			{
-				var wasValid = this.IsValid;
-
-				var error = this.ValidationService.Validate( propertyName );
-
-				if( this.IsValid != wasValid )
-				{
-					this.OnPropertyChanged( () => this.IsValid );
-				}
-
-				this.OnValidated();
-
-				return error;
+				this.OnPropertyChanged( () => this.IsValid );
 			}
+
+			this.OnValidated();
+
+			return error;
 		}
 
 		/// <summary>
@@ -175,9 +186,9 @@ namespace Topics.Radical.Windows.Presentation
 		/// <value>The validation errors.</value>
 		public virtual ObservableCollection<ValidationError> ValidationErrors
 		{
-			get 
+			get
 			{
-				if ( this._validationErrors == null ) 
+				if( this._validationErrors == null )
 				{
 					this._validationErrors = new ObservableCollection<ValidationError>();
 				}
@@ -192,7 +203,7 @@ namespace Topics.Radical.Windows.Presentation
 		/// <returns><c>True</c> if this instance is valid; otherwise <c>false</c>.</returns>
 		public Boolean Validate()
 		{
-			return this.Validate(null, ValidationBehavior.Default );
+			return this.Validate( null, ValidationBehavior.Default );
 		}
 
 		/// <summary>
@@ -310,6 +321,75 @@ namespace Topics.Radical.Windows.Presentation
 
 			this.FocusedElementKey = focusedElementKey;
 		}
+
+#if FX45
+
+		/// <summary>
+		/// <c>True</c> if the current ValidationService is resetting the validation status; Otherwise <c>false</c>.
+		/// </summary>
+		protected Boolean IsResettingValidation { get; set; }
+
+		/// <summary>
+		/// Resets the validation status.
+		/// </summary>
+		public virtual void ResetValidation()
+		{
+			this.IsResettingValidation = true;
+			this.ValidationService.Reset( ValidationResetBehavior.ErrorsOnly );
+			this.IsResettingValidation = false;
+		}
+
+		/// <summary>
+		/// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
+		/// </summary>
+		protected Boolean RunValidationOnPropertyChanged { get; set; }
+
+		/// <summary>
+		/// Occurs when errors change.
+		/// </summary>
+		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+		/// <summary>
+		/// Raises the ErrorsChanged event.
+		/// </summary>
+		/// <param name="propertyName">Name of the property.</param>
+		protected void OnErrorsChanged( String propertyName )
+		{
+			var h = this.ErrorsChanged;
+			if( h != null )
+			{
+				h( this, new DataErrorsChangedEventArgs( propertyName ) );
+			}
+		}
+
+		/// <summary>
+		/// Gets the errors.
+		/// </summary>
+		/// <param name="propertyName">Name of the property.</param>
+		/// <returns></returns>
+		public System.Collections.IEnumerable GetErrors( string propertyName )
+		{
+			var temp = this.ValidationErrors.Where( e => e.Key == propertyName ).ToArray();
+			return temp;
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether this instance has errors.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if this instance has errors; otherwise, <c>false</c>.
+		/// </value>
+		[Bindable( false )]
+		public bool HasErrors
+		{
+			get
+			{
+				var hasErrors = !this.IsValid;
+				return hasErrors;
+			}
+		}
+
+#endif
 	}
 
 	//class MyColl<T> : ObservableCollection<T>

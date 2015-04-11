@@ -6,6 +6,28 @@ using Topics.Radical.Validation;
 namespace Topics.Radical.Windows.Presentation.ComponentModel
 {
 	/// <summary>
+	/// Determines the reset behavior.
+	/// </summary>
+	[Flags]
+	public enum ValidationResetBehavior
+	{
+		/// <summary>
+		/// Resets only the errors collection.
+		/// </summary>
+		ErrorsOnly,
+
+		/// <summary>
+		/// Resets only the validation tracker that tracks if validation for properties has been called at least once.
+		/// </summary>
+		ValidationTracker,
+
+		/// <summary>
+		/// Resets both the validation tracker and the errors collection.
+		/// </summary>
+		All = ErrorsOnly | ValidationTracker
+	}
+
+	/// <summary>
 	/// Defines a validation service that can be used to validate an entity or a ViewModel.
 	/// </summary>
 	public interface IValidationService
@@ -73,6 +95,12 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// Clears the validation state resetting to it its default valid value.
 		/// </summary>
 		void Reset();
+
+		/// <summary>
+		/// Clears the validation state resetting to it its default valid value.
+		/// </summary>
+		/// <param name="resetBehavior">The reset behavior.</param>
+		void Reset(ValidationResetBehavior resetBehavior);
 
 		/// <summary>
 		/// Gets a value indicating whether the validation process is suspended.

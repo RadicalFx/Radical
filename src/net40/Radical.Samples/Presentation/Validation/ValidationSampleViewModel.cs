@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Topics.Radical.ComponentModel;
 using Topics.Radical.ComponentModel.Validation;
 using Topics.Radical.Validation;
@@ -22,59 +23,66 @@ namespace Topics.Radical.Presentation.Validation
 			get { return this.GetPropertyValue( () => this.Text ); }
 			set { this.SetPropertyValue( () => this.Text, value ); }
 		}
+
+		[Required( AllowEmptyStrings = false )]
+		[DisplayName( "Altro Testo" )]
+		public String AnotherText
+		{
+			get { return this.GetPropertyValue( () => this.AnotherText ); }
+			set { this.SetPropertyValue( () => this.AnotherText, value ); }
+		}
 	}
 
-	public interface IRequireValidation : INotifyDataErrorInfo
-	{
-		/// <summary>
-		/// Gets a value indicating whether this instance is valid.
-		/// </summary>
-		/// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-		Boolean IsValid { get; }
+	//public interface IRequireAsyncValidation : INotifyDataErrorInfo
+	//{
+	//	/// <summary>
+	//	/// Gets a value indicating whether this instance is valid.
+	//	/// </summary>
+	//	/// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
+	//	Boolean IsValid { get; }
 
-		/// <summary>
-		/// Gets the validation errors.
-		/// </summary>
-		/// <value>The validation errors.</value>
-		ObservableCollection<ValidationError> ValidationErrors { get; }
+	//	/// <summary>
+	//	/// Gets the validation errors.
+	//	/// </summary>
+	//	/// <value>The validation errors.</value>
+	//	ObservableCollection<ValidationError> ValidationErrors { get; }
 
-		/// <summary>
-		/// Validates this instance.
-		/// </summary>
-		/// <returns><c>true</c> if this instance is valid; otherwise, <c>false</c>.</returns>
-		Boolean Validate();
+	//	/// <summary>
+	//	/// Validates this instance.
+	//	/// </summary>
+	//	/// <returns><c>true</c> if this instance is valid; otherwise, <c>false</c>.</returns>
+	//	Task<Boolean> ValidateAsync();
 
-		/// <summary>
-		/// Validates this instance.
-		/// </summary>
-		/// <param name="behavior">The behavior.</param>
-		/// <returns>
-		///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
-		/// </returns>
-		Boolean Validate( ValidationBehavior behavior );
+	//	/// <summary>
+	//	/// Validates this instance.
+	//	/// </summary>
+	//	/// <param name="behavior">The behavior.</param>
+	//	/// <returns>
+	//	///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
+	//	/// </returns>
+	//	Task<Boolean> ValidateAsync( ValidationBehavior behavior );
 
-		/// <summary>
-		/// Validates this instance.
-		/// </summary>
-		/// <param name="ruleSet">The rule set.</param>
-		/// <param name="behavior">The behavior.</param>
-		/// <returns>
-		///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
-		/// </returns>
-		Boolean Validate( String ruleSet, ValidationBehavior behavior );
+	//	/// <summary>
+	//	/// Validates this instance.
+	//	/// </summary>
+	//	/// <param name="ruleSet">The rule set.</param>
+	//	/// <param name="behavior">The behavior.</param>
+	//	/// <returns>
+	//	///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
+	//	/// </returns>
+	//	Task<Boolean> ValidateAsync( String ruleSet, ValidationBehavior behavior );
 
-		/// <summary>
-		/// Occurs when when the validation process is completed.
-		/// </summary>
-		event EventHandler Validated;
+	//	/// <summary>
+	//	/// Occurs when when the validation process is completed.
+	//	/// </summary>
+	//	event EventHandler Validated;
 
-		/// <summary>
-		/// Triggers the validation process on this instances forcing all the invalid
-		/// fields to notify their invalid status.
-		/// </summary>
-		void TriggerValidation();
-	}
-
+	//	/// <summary>
+	//	/// Triggers the validation process on this instances forcing all the invalid
+	//	/// fields to notify their invalid status.
+	//	/// </summary>
+	//	void TriggerValidation();
+	//}
 
 	[Sample( Title = "DataAnnotation Validation", Category = Categories.Validation )]
 	class ValidationSampleViewModel :
@@ -106,27 +114,8 @@ namespace Topics.Radical.Presentation.Validation
 				rule: ctx => ctx.Entity.Text == "foo"
 			);
 
-			svc.StatusChanged += ( s, e ) =>
-			{
-				var h = this.ErrorsChanged;
-				if( h != null )
-				{
-					h( this, new DataErrorsChangedEventArgs( null ) );
-				}
-			};
-			svc.Resetted += ( s, e ) =>
-			{
-				var h = this.ErrorsChanged;
-				if( h != null )
-				{
-					h( this, new DataErrorsChangedEventArgs( null ) );
-				}
-			};
-
 			return svc;
 		}
-
-
 
 		[DisplayName( "Esempio" )]
 		public Int32 Sample
@@ -151,24 +140,6 @@ namespace Topics.Radical.Presentation.Validation
 		public void RunValidation()
 		{
 			this.Validate( ValidationBehavior.TriggerValidationErrorsOnFailure );
-		}
-
-		public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-		public System.Collections.IEnumerable GetErrors( string propertyName )
-		{
-			if( this.ValidationService.MergeValidationErrors )
-			{
-				//bho :-)
-			}
-
-			var temp = this.ValidationErrors.Where( e => e.Key == propertyName ).ToArray();
-			return temp;
-		}
-
-		public bool HasErrors
-		{
-			get { return !this.IsValid; }
 		}
 	}
 }
