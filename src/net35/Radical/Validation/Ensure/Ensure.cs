@@ -42,7 +42,11 @@ namespace Topics.Radical.Validation
 				SourceInfo si = SourceInfo.Empty;
 				if ( st.FrameCount > 0 )
 				{
+#if DEBUG
+					var frame = st.GetFrame( 1 );
+#else
 					var frame = st.GetFrame( 0 );
+#endif
 					si = new SourceInfo( frame, lazy );
 				}
 

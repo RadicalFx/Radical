@@ -2,20 +2,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Radical.Extensions.CastleWindsor</id>
-    <version>2.1.1.0-Vegan-RC</version>
+    <version>2.1.1.0</version>
     <title>Radical CastleWindsor Extensions</title>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>
-    <licenseUrl>https://github.com/RadicalFx/radical/blob/develop/license.md</licenseUrl>
+    <licenseUrl>https://github.com/RadicalFx/radical/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/RadicalFx/radical</projectUrl>
-    <iconUrl>http://www.topics.it/siteimages/Radical.nuget.png</iconUrl>
+    <iconUrl>https://github.com/RadicalFx/radical/blob/master/Radical.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Radical Extensions for Castle Windsor</description>
     <summary />
     <language>en-US</language>
     <tags>Radical, Castle Windsor, Radical.Extensions.CastleWindsor, Windsor</tags>
     <dependencies>
-      <dependency id="Radical" version="1.5.1.0-Vegan-RC" />
+      <dependency id="Radical" version="1.5.1.0" />
       <dependency id="Castle.Windsor" version="3.3.0" />
     </dependencies>
   </metadata>

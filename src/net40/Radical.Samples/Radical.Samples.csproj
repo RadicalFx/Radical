@@ -200,6 +200,9 @@
     <Compile Include="Presentation\Memento\SimpleGraph\SimpleGraphView.xaml.cs">
       <DependentUpon>SimpleGraphView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\Partial\SplashScreenContent\SplashView.xaml.cs">
+      <DependentUpon>SplashView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\TabControlRegion\AlphaView.xaml.cs">
       <DependentUpon>AlphaView.xaml</DependentUpon>
     </Compile>
@@ -307,6 +310,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Presentation\Partial\SplashScreenContent\SplashView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\TabControlRegion\AlphaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,10 +357,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\net45\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
-      <Project>{25797064-a7eb-4589-92a5-1bb9bc9f380c}</Project>
-      <Name>Radical.Extensions.Castle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\net45\Radical.Windows.Presentation.CastleWindsor\Radical.Windows.Presentation.CastleWindsor.csproj">
       <Project>{1b898ae6-9d4a-492c-b9ca-95272a6c6ff1}</Project>
       <Name>Radical.Windows.Presentation.CastleWindsor</Name>
@@ -389,7 +392,9 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

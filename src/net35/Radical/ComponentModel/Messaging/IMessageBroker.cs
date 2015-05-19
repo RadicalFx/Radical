@@ -269,6 +269,17 @@ namespace Topics.Radical.ComponentModel.Messaging
         /// <param name="message">The message.</param>
         void Broadcast( Object sender, Object message );
 
+#if FX45
+		/// <summary>
+		/// Broadcasts the specified message in an asynchronus manner without
+		/// waiting for the execution of the subscribers.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="message">The message.</param>
+		System.Threading.Tasks.Task BroadcastAsync( Object sender, Object message );
+
+#endif
+
         /// <summary>
         /// Broadcasts the specified message in an asynchronus manner without
         /// waiting for the execution of the subscribers.

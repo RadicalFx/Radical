@@ -163,7 +163,6 @@
     <Compile Include="Validation\EnsureTest.cs" />
     <Compile Include="Validation\GuidEnsureExtensionTest.cs" />
     <Compile Include="Validation\StringEnsureExtensionTest.cs" />
-    <Compile Include="ValuesTest.cs" />
     <Compile Include="WeakReferenceTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Radical\Radical.csproj">
-      <Project>{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}</Project>
+      <Project>{b48b5bec-de0f-4310-9a36-ff9c07d77acf}</Project>
       <Name>Radical</Name>
     </ProjectReference>
   </ItemGroup>

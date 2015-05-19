@@ -101,13 +101,13 @@ namespace Topics.Radical.Messaging
 			msgSubsIndexLock.EnterUpgradeableReadLock();
 			try
 			{
-				if ( this.msgSubsIndex.Any( sc => sc.MessageType == messageType ) )
+				if( this.msgSubsIndex.Any( sc => sc.MessageType == messageType ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == messageType ).Subscriptions;
 					msgSubsIndexLock.EnterWriteLock();
 					try
 					{
-						allMessageSubscriptions.Add(subscription);
+						allMessageSubscriptions.Add( subscription );
 					}
 					finally
 					{
@@ -119,9 +119,9 @@ namespace Topics.Radical.Messaging
 					msgSubsIndexLock.EnterWriteLock();
 					try
 					{
-						var sc = new SubscriptionsContainer(messageType);
-						sc.Subscriptions.Add(subscription);
-						this.msgSubsIndex.Add(sc);
+						var sc = new SubscriptionsContainer( messageType );
+						sc.Subscriptions.Add( subscription );
+						this.msgSubsIndex.Add( sc );
 					}
 					finally
 					{
@@ -412,13 +412,13 @@ namespace Topics.Radical.Messaging
 			msgSubsIndexLock.EnterUpgradeableReadLock();
 			try
 			{
-				foreach ( var subscription in this.msgSubsIndex )
+				foreach( var subscription in this.msgSubsIndex )
 				{
 					var count = subscription.Subscriptions.Count;
-					for ( var k = count; k > 0; k-- )
+					for( var k = count; k > 0; k-- )
 					{
-						var sub = subscription.Subscriptions[k - 1];
-						if ( sub.Subscriber == subscriber )
+						var sub = subscription.Subscriptions[ k - 1 ];
+						if( sub.Subscriber == subscriber )
 						{
 							msgSubsIndexLock.EnterWriteLock();
 							try
@@ -509,7 +509,7 @@ namespace Topics.Radical.Messaging
 			msgSubsIndexLock.EnterUpgradeableReadLock();
 			try
 			{
-				if ( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+				if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
 					allMessageSubscriptions.Where( subscription =>
@@ -552,7 +552,7 @@ namespace Topics.Radical.Messaging
 			msgSubsIndexLock.EnterUpgradeableReadLock();
 			try
 			{
-				if ( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+				if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
 					allMessageSubscriptions.Where( subscription =>
@@ -596,7 +596,7 @@ namespace Topics.Radical.Messaging
 			msgSubsIndexLock.EnterUpgradeableReadLock();
 			try
 			{
-				if ( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+				if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
 				{
 					var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
 					allMessageSubscriptions.Where( subscription =>
@@ -798,5 +798,41 @@ namespace Topics.Radical.Messaging
 #endif
 			}
 		}
+
+#if FX45
+		/// <summary>
+		/// Broadcasts the specified message in an asynchronus manner without
+		/// waiting for the execution of the subscribers.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="message">The message.</param>
+		public Task BroadcastAsync( Object sender, Object message )
+		{
+			Ensure.That( message ).Named( () => message ).IsNotNull();
+			Ensure.That( sender ).Named( () => sender ).IsNotNull();
+
+			message.As<IRequireToBeValid>( m => m.Validate() );
+			message.As<ILegacyMessageCompatibility>( m => m.SetSenderForBackwardCompatibility( sender ) );
+
+			var subscriptions = this.GetSubscriptionsFor( message.GetType(), sender );
+
+			var tasks = new List<Task>();
+			if( subscriptions.Any() )
+			{
+				subscriptions.ForEach( sub =>
+				{
+					var temp = this.factory.StartNew( () =>
+					{
+						sub.Invoke( sender, message );
+					} );
+					tasks.Add( temp );
+				} );
+
+			}
+
+			return Task.WhenAll( tasks.ToArray() );
+		}
+
+#endif
 	}
 }

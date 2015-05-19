@@ -5,9 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "Radical.Extensions.Castle" )]
+[assembly: AssemblyTitle( "Test.Radical" )]
 [assembly: AssemblyDescription( "" )]
 [assembly: AssemblyConfiguration( "" )]
+[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyProduct( "Test.Radical" )]
+[assembly: AssemblyCopyright( "Copyright ©  2015" )]
+[assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -16,6 +20,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible( false )]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid( "095af521-6e35-40c8-8a3b-fc7aed610d94" )]
+[assembly: Guid( "80dd5301-4c81-43d2-a09b-7881946d315b" )]
 
-[assembly: AssemblyVersion( "2.1.1.0" )]
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion( "1.0.0.0" )]
+[assembly: AssemblyFileVersion( "1.0.0.0" )]
