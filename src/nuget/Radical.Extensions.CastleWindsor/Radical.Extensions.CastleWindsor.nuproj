@@ -16,5 +16,13 @@
   <ItemGroup>
     <Compile Include="Radical.Extensions.CastleWindsor.nuspec" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="tools\install.ps1">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tools" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\NuBuild\v1\NuBuild.targets" />
 </Project>

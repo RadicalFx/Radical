@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Radical.Extensions.CastleWindsor</id>
-    <version>2.1.1.0</version>
+    <version>3.0.0.0-Democracy-Alfa</version>
     <title>Radical CastleWindsor Extensions</title>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>
@@ -14,12 +14,8 @@
     <summary />
     <language>en-US</language>
     <tags>Radical, Castle Windsor, Radical.Extensions.CastleWindsor, Windsor</tags>
-    <dependencies>
-      <dependency id="Radical" version="1.5.1.0" />
-      <dependency id="Castle.Windsor" version="3.3.0" />
-    </dependencies>
   </metadata>
   <files>
-    <file src="..\..\..\build\$configuration$\Radical.Extensions.Castle\lib\" target="lib\" />
+    <file src="tools\install.ps1" target="tools\" />
   </files>
 </package>
