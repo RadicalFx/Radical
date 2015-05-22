@@ -99,7 +99,7 @@ namespace Topics.Radical.Windows.Behaviors
                         var propertyPath = this.PassingIn.Substring( indexOfFirstDot + 1 ).Split( '.' );
                         var property = propertyPath.First();
 
-                        args = referencedObject.GetType().GetProperty( property ).GetValue( e, null );
+                        args = referencedObject.GetType().GetProperty(property).GetValue( referencedObject, null);
                     }
                     else if ( this.PassingIn.Equals( "$args", StringComparison.OrdinalIgnoreCase ) )
                     {
