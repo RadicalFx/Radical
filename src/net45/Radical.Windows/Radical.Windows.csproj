@@ -147,6 +147,9 @@
     <Compile Include="..\..\net35\Radical.Windows\Presentation\Behaviors\DragDropBehavior\DragDropOperationArgs.cs">
       <Link>Presentation\Behaviors\DragDropBehavior\DragDropOperationArgs.cs</Link>
     </Compile>
+    <Compile Include="..\..\net35\Radical.Windows\Presentation\Behaviors\DragDropBehavior\DragEnterArgs.cs">
+      <Link>Presentation\Behaviors\DragDropBehavior\DragEnterArgs.cs</Link>
+    </Compile>
     <Compile Include="..\..\net35\Radical.Windows\Presentation\Behaviors\DragDropBehavior\DragOverArgs.cs">
       <Link>Presentation\Behaviors\DragDropBehavior\DragOverArgs.cs</Link>
     </Compile>

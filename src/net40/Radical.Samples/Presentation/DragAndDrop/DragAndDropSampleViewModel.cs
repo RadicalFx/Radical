@@ -24,6 +24,11 @@ namespace Topics.Radical.Presentation.DragAndDrop
 			this.RightPersons = new ObservableCollection<Person>();
 		}
 
+		public void DragEnter( DragEnterArgs e ) 
+		{
+
+		}
+
 		public void DropPerson( DropArgs e )
 		{
 			if ( e.Data.GetDataPresent( "left/person" ) )

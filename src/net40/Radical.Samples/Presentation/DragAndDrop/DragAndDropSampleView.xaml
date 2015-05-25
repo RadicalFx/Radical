@@ -15,6 +15,7 @@
         
         <ListBox ItemsSource="{Binding Path=LeftPersons}" 
                  behaviors:DragDropManager.OnDropCommand="{markup:AutoCommandBinding Path=DropPerson}"
+                 behaviors:DragDropManager.OnDragEnterCommand="{markup:AutoCommandBinding Path=DragEnter}"
                  SelectedItem="{Binding Path=LeftSelectedPerson}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
