@@ -470,11 +470,18 @@ namespace Topics.Radical.Windows.Behaviors
 					{
 						var dropTarget = DragDropManager.FindDropTarget( os );
 
+						Point position = new Point( 0, 0 );
+						if( os is IInputElement )
+						{
+							position = args.GetPosition( ( IInputElement )os );
+						}
+
 						var cmdArgs = new DragOverArgs(
 							args.Data,
 							args.KeyStates,
 							dropTarget,
-							args.AllowedEffects );
+							args.AllowedEffects,
+							position );
 
 						var result = command.CanExecute( cmdArgs );
 						if( !result )
