@@ -10,18 +10,20 @@ namespace Topics.Radical.Windows.Behaviors
 	public class DragOverArgs : DragDropOperationArgs
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="DragOverArgs"/> class.
+		/// Initializes a new instance of the <see cref="DragOverArgs" /> class.
 		/// </summary>
 		/// <param name="data">The data.</param>
 		/// <param name="keyStates">The key states.</param>
 		/// <param name="dropTarget">The drop target.</param>
 		/// <param name="allowedEffects">The allowed effects.</param>
-		public DragOverArgs( IDataObject data, DragDropKeyStates keyStates, Object dropTarget, DragDropEffects allowedEffects )
+		/// <param name="position">The position.</param>
+		public DragOverArgs( IDataObject data, DragDropKeyStates keyStates, Object dropTarget, DragDropEffects allowedEffects, Point position )
 			: base( data, keyStates, dropTarget )
 		{
 			Ensure.That( allowedEffects ).Named( "allowedEffects" ).IsTrue( v => v.IsDefined() );
 
 			this.AllowedEffects = allowedEffects;
+			this.Position = position;
 		}
 
 		/// <summary>
@@ -35,5 +37,11 @@ namespace Topics.Radical.Windows.Behaviors
 		/// </summary>
 		/// <value>The effects.</value>
 		public DragDropEffects Effects { get; set; }
+
+		/// <summary>
+		/// Gets the Position.
+		/// </summary>
+		/// <value>The position.</value>
+		public Point Position { get; private set; }
 	}
 }
