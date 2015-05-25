@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
 using Topics.Radical.Validation;
+using System.Windows.Controls;
 
 namespace Topics.Radical.Windows.Behaviors
 {
@@ -337,8 +338,8 @@ namespace Topics.Radical.Windows.Behaviors
 
 		static Object FindDropTarget( DependencyObject originalSource )
 		{
-			var element = DragDropManager.FindDropTargetContainer(  originalSource );
-			if( element != null ) 
+			var element = DragDropManager.FindDropTargetContainer( originalSource );
+			if( element != null )
 			{
 				return DragDropManager.GetDropTarget( element );
 			}
@@ -370,7 +371,7 @@ namespace Topics.Radical.Windows.Behaviors
 		static ICommand FindDropCommand( DependencyObject originalSource )
 		{
 			var element = DragDropManager.FindDropCommandHolder( originalSource );
-			if( element != null ) 
+			if( element != null )
 			{
 				return DragDropManager.GetOnDropCommand( element );
 			}
@@ -391,7 +392,7 @@ namespace Topics.Radical.Windows.Behaviors
 		static ICommand FindDragEnterCommand( DependencyObject originalSource )
 		{
 			var element = DragDropManager.FindDragEnterCommandHolder( originalSource );
-			if ( element != null )
+			if( element != null )
 			{
 				return DragDropManager.GetOnDragEnterCommand( element );
 			}
@@ -412,7 +413,7 @@ namespace Topics.Radical.Windows.Behaviors
 		static ICommand FindDragLeaveCommand( DependencyObject originalSource )
 		{
 			var element = DragDropManager.FindDragLeaveCommandHolder( originalSource );
-			if ( element != null )
+			if( element != null )
 			{
 				return DragDropManager.GetOnDragLeaveCommand( element );
 			}
@@ -430,12 +431,21 @@ namespace Topics.Radical.Windows.Behaviors
 				var ui = ( UIElement )d;
 
 				ui.AllowDrop = true;
+				var ctrl = ui as Control;
+				if( ctrl != null )
+				{
+					var bkg = ctrl.GetValue( ItemsControl.BackgroundProperty );
+					if( bkg == null ) 
+					{
+						ctrl.SetValue( ItemsControl.BackgroundProperty, Brushes.Transparent );
+					}
+				}
 
-				ui.DragEnter += ( s, args ) => 
+				ui.DragEnter += ( s, args ) =>
 				{
 					var os = ( DependencyObject )args.OriginalSource;
 					var command = DragDropManager.FindDragEnterCommand( os );
-					if ( command != null && command.CanExecute( null ) ) 
+					if( command != null && command.CanExecute( null ) )
 					{
 						command.Execute( null );
 					}
@@ -445,7 +455,7 @@ namespace Topics.Radical.Windows.Behaviors
 				{
 					var os = ( DependencyObject )args.OriginalSource;
 					var command = DragDropManager.FindDragLeaveCommand( os );
-					if ( command != null && command.CanExecute( null ) )
+					if( command != null && command.CanExecute( null ) )
 					{
 						command.Execute( null );
 					}
@@ -456,7 +466,7 @@ namespace Topics.Radical.Windows.Behaviors
 					var os = ( DependencyObject )args.OriginalSource;
 
 					var command = DragDropManager.FindDropCommand( os );
-					if ( command != null )
+					if( command != null )
 					{
 						var dropTarget = DragDropManager.FindDropTarget( os );
 
@@ -467,13 +477,13 @@ namespace Topics.Radical.Windows.Behaviors
 							args.AllowedEffects );
 
 						var result = command.CanExecute( cmdArgs );
-						if ( !result )
+						if( !result )
 						{
 							args.Effects = cmdArgs.Effects;
 							args.Handled = true;
 						}
 					}
-					else 
+					else
 					{
 						args.Effects = args.AllowedEffects;
 						args.Handled = true;
@@ -483,8 +493,8 @@ namespace Topics.Radical.Windows.Behaviors
 				ui.Drop += ( s, args ) =>
 				{
 					var os = ( DependencyObject )args.OriginalSource;
-					
-					var command = DragDropManager.FindDropCommand( os ); 
+
+					var command = DragDropManager.FindDropCommand( os );
 					if( command != null )
 					{
 						var dropTarget = DragDropManager.FindDropTarget( os );
