@@ -17,6 +17,8 @@ The Radical framework is not tight to WPF but some part of it can be freely used
 
 The latest release can be found on NuGet: http://www.nuget.org/profiles/radical
 
+Development feed is available at: https://www.myget.org/F/radical-development/api/v2
+
 ### Q&A
 
 Do you have any questions about Radical? [We hope to have enough answers](https://groups.google.com/forum/#!forum/radical-mvvm-framework)! :smile:
