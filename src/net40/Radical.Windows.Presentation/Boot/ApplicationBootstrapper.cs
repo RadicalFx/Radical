@@ -310,9 +310,27 @@ namespace Topics.Radical.Windows.Presentation.Boot
 			return this;
 		}
 
+		Action<IServiceProvider> onServiceProviderCreated;
+
+		/// <summary>
+		/// Called when the service provider is created.
+		/// </summary>
+		/// <param name="onServiceProviderCreated">The on service provider created.</param>
+		/// <returns></returns>
+		public ApplicationBootstrapper OnServiceProviderCreated( Action<IServiceProvider> onServiceProviderCreated )
+		{
+			this.onServiceProviderCreated = onServiceProviderCreated;
+
+			return this;
+		}
+
 		void OnBoot()
 		{
 			this.serviceProvider = this.CreateServiceProvider();
+			if( this.onServiceProviderCreated != null ) 
+			{
+				this.onServiceProviderCreated( this.serviceProvider );
+			}
 
 			if( this.onBeforeInstall != null )
 			{

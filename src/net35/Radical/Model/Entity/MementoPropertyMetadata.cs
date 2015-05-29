@@ -6,23 +6,6 @@ using Topics.Radical.ComponentModel.ChangeTracking;
 
 namespace Topics.Radical.Model
 {
-    //public static class MementoPropertyMetadataBuilder
-    //{
-    //    public class TypedMementoPropertyMetadataBuilder<T>
-    //    {
-    //        public MementoPropertyMetadata<TValue> And<TValue>( Expression<Func<T, TValue>> property )
-    //        {
-    //            var name = property.GetMemberName();
-    //            return new MementoPropertyMetadata<TValue>( name );
-    //        }
-    //    }
-
-    //    public static TypedMementoPropertyMetadataBuilder<T> For<T>()
-    //    {
-    //        return new TypedMementoPropertyMetadataBuilder<T>();
-    //    }
-    //}
-
     public static class MementoPropertyMetadata
     {
         public static MementoPropertyMetadata<T> Create<T>( Object propertyOwner, Expression<Func<T>> property )

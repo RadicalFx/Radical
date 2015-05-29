@@ -8,25 +8,42 @@ using System.Reflection;
 
 namespace Topics.Radical.Model
 {
-    //public static class PropertyMetadataBuilder
-    //{
-    //    public class TypedPropertyMetadataBuilder<T>
-    //    {
-    //        public PropertyMetadata<TValue> And<TValue>( Expression<Func<T, TValue>> property )
-    //        {
-    //            var name = property.GetMemberName();
-    //            return new PropertyMetadata<TValue>( name );
-    //        }
-    //    }
-
-    //    public static TypedPropertyMetadataBuilder<T> For<T>()
-    //    {
-    //        return new TypedPropertyMetadataBuilder<T>();
-    //    }
-    //}
-
-    public abstract class PropertyMetadata
+    public abstract class PropertyMetadata : IDisposable
     {
+        #region IDisposable Members
+
+        /// <summary>
+        /// Releases unmanaged resources and performs other cleanup operations before the
+        /// <see cref="PropertyMetadata"/> is reclaimed by garbage collection.
+        /// </summary>
+        ~PropertyMetadata()
+        {
+            this.Dispose( false );
+        }
+        
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose( Boolean disposing )
+        {
+            if ( disposing )
+            {
+                this.cascadeChangeNotifications.Clear();   
+            }
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose( true );
+            GC.SuppressFinalize( this );
+        }
+
+        #endregion
+
         /// <summary>
         /// Creates the metadata for specified property.
         /// </summary>
@@ -57,28 +74,28 @@ namespace Topics.Radical.Model
         }
 
 #if WINDOWS_PHONE
-		readonly List<String> cascadeChangeNotifications = new List<String>();
+        readonly List<String> cascadeChangeNotifications = new List<String>();
 #else
         readonly HashSet<String> cascadeChangeNotifications = new HashSet<String>();
 #endif
 
-		readonly Object propertyOwner;
-		PropertyInfo _property;
+        readonly Object propertyOwner;
+        PropertyInfo _property;
 
-		protected PropertyInfo Property 
-		{
-			get 
-			{
-				if ( this._property == null ) 
-				{
-					this._property = this.propertyOwner
-						.GetType()
-						.GetProperty( this.PropertyName );
-				}
+        protected PropertyInfo Property 
+        {
+            get 
+            {
+                if ( this._property == null ) 
+                {
+                    this._property = this.propertyOwner
+                        .GetType()
+                        .GetProperty( this.PropertyName );
+                }
 
-				return this._property;
-			} 
-		}
+                return this._property;
+            } 
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyMetadata" /> class.
