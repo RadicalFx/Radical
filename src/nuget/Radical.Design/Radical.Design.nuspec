@@ -8,7 +8,7 @@
     <owners>radical,mauroservienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/master/license.md</licenseUrl>
     <projectUrl>https://github.com/RadicalFx/radical</projectUrl>
-    <iconUrl>https://github.com/RadicalFx/radical/blob/master/Radical.png</iconUrl>
+    <iconUrl>http://radical.topics.it/img/radical-ico.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Radical Framework for WPF Design Time Data</description>
     <summary />

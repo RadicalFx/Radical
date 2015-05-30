@@ -11,7 +11,7 @@ Radical is an infrastructure framework whose primary role is to help in the deve
 
 In the [documentation](https://github.com/RadicalFx/radical/wiki)  there are a lot of articles that details the Radical concepts and give some guidences on how to use it.
 
-The Radical framework is not tight to WPF but some part of it can be freely used, and will be valuable, even in services and web applications.
+The Radical framework is not tied to WPF but some part of it can be freely used, and will be valuable, even in services and web applications.
 
 ### Release
 
