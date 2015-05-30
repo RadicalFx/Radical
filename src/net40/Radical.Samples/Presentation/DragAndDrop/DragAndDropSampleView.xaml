@@ -13,9 +13,13 @@
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
         <ListBox ItemsSource="{Binding Path=LeftPersons}" 
-                 behaviors:DragDropManager.OnDropCommand="{markup:AutoCommandBinding Path=DropPerson}"
-                 behaviors:DragDropManager.OnDragEnterCommand="{markup:AutoCommandBinding Path=DragEnter}"
+                 behaviors:DragDropManager.OnDropCommand="{Binding Path=DropPerson}"
                  SelectedItem="{Binding Path=LeftSelectedPerson}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -26,7 +30,7 @@
         </ListBox>
 
         <ListBox ItemsSource="{Binding Path=RightPersons}"
-                 behaviors:DragDropManager.OnDropCommand="{markup:AutoCommandBinding Path=DropPerson}"
+                 behaviors:DragDropManager.OnDropCommand="{Binding Path=DropPerson}"
                  SelectedItem="{Binding Path=RightSelectedPerson}" Grid.Column="1">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -36,5 +40,10 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="{Binding Path=X}" />
+            <TextBlock Text="{Binding Path=Y}" />
+        </StackPanel>
+        
     </Grid>
 </UserControl>

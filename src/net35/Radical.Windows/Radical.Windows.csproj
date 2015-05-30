@@ -255,7 +255,6 @@ if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35"
 
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\$(TargetName).*" /B /Y
 copy "$(TargetDir)System.Windows.Interactivity.*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\System.Windows.Interactivity.*" /B /Y
-copy "$(SolutionDir)readme.txt" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\$(TargetFileName).config"</PostBuildEvent>
     <PreBuildEvent>if exist "$(DXSDK_DIR)Utilities\Bin\x86\fxc.exe" "$(DXSDK_DIR)Utilities\Bin\x86\fxc.exe" /T ps_2_0 /E main /Fo"$(ProjectDir)Presentation\Resources\Effects\GrayscaleEffect.ps" "$(ProjectDir)Presentation\Resources\Effects\GrayscaleEffect.fx"</PreBuildEvent>

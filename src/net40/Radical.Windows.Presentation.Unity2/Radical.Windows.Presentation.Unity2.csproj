@@ -110,7 +110,6 @@ if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40"
 )
 
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetName).*" /B /Y
-copy "$(SolutionDir)readme.md" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>
