@@ -74,10 +74,11 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        public void ViewModel_as_INotifyDataErrorInfo_with_validation_service_should_ignore_first_validation_attempt()
+        public void ViewModel_as_INotifyDataErrorInfo_with_validation_service_should_not_ignore_first_validation_attempt()
         {
             var sut = new TestViewModel();
             sut.ValidationService = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.Validate();
 
             var errors = sut.GetErrors( "FirstName" ).OfType<Object>();
 
@@ -103,6 +104,7 @@ namespace Test.Radical.Windows.Presentation
             sut.ValidationService = new DataAnnotationValidationService<TestViewModel>( sut );
 
             var errors = sut.GetErrors( "FirstName" ).OfType<Object>();
+            errors = sut.GetErrors( "FirstName" ).OfType<Object>();
             errors = sut.GetErrors( "FirstName" ).OfType<Object>();
 
             Assert.AreEqual( 0, errors.Count() );
