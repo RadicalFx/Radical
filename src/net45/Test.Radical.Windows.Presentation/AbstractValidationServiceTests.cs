@@ -22,11 +22,6 @@ namespace Test.Radical.Windows.Presentation
 				this.errorsToReturnUnderTest = errorsToReturnUnderTest;
 			}
 
-			protected override bool ValidationCalledOnceFor( string propertyName )
-			{
-				return true;
-			}
-
 			protected override IEnumerable<ValidationError> OnValidate( string ruleSet )
 			{
 				return this.errorsToReturnUnderTest;
@@ -42,7 +37,6 @@ namespace Test.Radical.Windows.Presentation
 			var expected = new[] { new ValidationError( propName, propName, new[] { "--fake--" } ) };
 			var sut = new TestValidationService( expected );
 
-			//sut.Validate( propName ); //first time is skipped by default for each property
 			sut.Validate( propName );
 
 			Assert.AreEqual( sut.ValidationErrors.Count(), expected.Length );
