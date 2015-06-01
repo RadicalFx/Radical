@@ -15,9 +15,9 @@ using Topics.Radical.Windows.Presentation.Services.Validation;
 namespace Test.Radical.Windows.Presentation
 {
     [TestClass]
-    public class AbstractViewModelTests
+    public class AbstractMementoViewModelTests
     {
-        abstract class TestViewModel : AbstractViewModel
+        abstract class TestViewModel : AbstractMementoViewModel
         {
             IValidationService _validationService;
             Boolean? _forceIsValidationEnabledTo;
@@ -82,7 +82,6 @@ namespace Test.Radical.Windows.Presentation
         {
 
         }
-
         [TestMethod]
         [TestCategory( "AbstractViewModel" )]
         public void AbstractViewModel_with_no_validation_service_always_validates_to_true()
@@ -420,7 +419,7 @@ namespace Test.Radical.Windows.Presentation
             sut.ValidateUsing(
                 new DataAnnotationValidationService<TestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
-            
+
             var isValid = sut.Validate();
 
             Assert.IsFalse( isValid );

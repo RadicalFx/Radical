@@ -36,14 +36,40 @@ namespace Topics.Radical.Windows.Presentation
         /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected override void OnPropertyChanged( PropertyChangedEventArgs e )
         {
-            base.OnPropertyChanged( e );
-
 #if FX45
-            if( this is IRequireValidation && this.RunValidationOnPropertyChanged && !this.IsResettingValidation )
+            if( this.IsValidationEnabled
+                && this.RunValidationOnPropertyChanged
+                && !this.IsResettingValidation )
+            {
+                this.ValidateProperty( e.PropertyName );
+            }
+#else
+            if( this.IsValidationEnabled && this.RunValidationOnPropertyChanged )
             {
                 this.ValidateProperty( e.PropertyName );
             }
 #endif
+
+            base.OnPropertyChanged( e );
+        }
+
+        /// <summary>
+        /// Gets a value indication if validation is enabled or not.
+        /// </summary>
+        protected virtual Boolean IsValidationEnabled
+        {
+            get
+            {
+#if FX45
+                return this is IDataErrorInfo 
+                    || this is ICanBeValidated
+                    || this is INotifyDataErrorInfo
+                    || this is IRequireValidation;
+#else
+                return this is IDataErrorInfo
+                    || this is ICanBeValidated;
+#endif
+            }
         }
 
         IValidationService _validationService;
@@ -106,9 +132,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         protected AbstractViewModel()
         {
-#if FX45
             this.RunValidationOnPropertyChanged = true;
-#endif
         }
 
         /// <summary>
@@ -144,7 +168,15 @@ namespace Topics.Radical.Windows.Presentation
         [Bindable( false )]
         public virtual String this[ String propertyName ]
         {
-            get { return this.ValidateProperty( propertyName ); }
+            get
+            {
+                var error = this.ValidationErrors
+                    .Where( e => e.Key == propertyName )
+                    .Select( err => err.ToString() )
+                    .FirstOrDefault();
+
+                return error;
+            }
         }
 
         /// <summary>
@@ -152,7 +184,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
-        protected virtual String ValidateProperty( String propertyName ) 
+        protected virtual String ValidateProperty( String propertyName )
         {
             var wasValid = this.IsValid;
 
@@ -228,12 +260,19 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
         {
+            var wasValid = this.IsValid;
+
             this.ValidationService.ValidateRuleSet( ruleSet );
             this.OnValidated();
 
             if( behavior == ValidationBehavior.TriggerValidationErrorsOnFailure && !this.ValidationService.IsValid )
             {
                 this.TriggerValidation();
+            }
+
+            if( this.IsValid != wasValid )
+            {
+                this.OnPropertyChanged( () => this.IsValid );
             }
 
             return this.ValidationService.IsValid;
@@ -322,6 +361,11 @@ namespace Topics.Radical.Windows.Presentation
             this.FocusedElementKey = focusedElementKey;
         }
 
+        /// <summary>
+        /// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
+        /// </summary>
+        protected Boolean RunValidationOnPropertyChanged { get; set; }
+
 #if FX45
 
         /// <summary>
@@ -338,11 +382,6 @@ namespace Topics.Radical.Windows.Presentation
             this.ValidationService.Reset( ValidationResetBehavior.ErrorsOnly );
             this.IsResettingValidation = false;
         }
-
-        /// <summary>
-        /// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
-        /// </summary>
-        protected Boolean RunValidationOnPropertyChanged { get; set; }
 
         /// <summary>
         /// Occurs when errors change.
