@@ -24,28 +24,28 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			this.MergeValidationErrors = false;
 		}
 
-		readonly HashSet<String> validationCalledOnce = new HashSet<String>();
+        //readonly HashSet<String> validationCalledOnce = new HashSet<String>();
 
-		/// <summary>
-		/// Called in order to understand if the validation for the 
-		/// supplied property has already been called at least one time.
-		/// </summary>
-		/// <param name="propertyName">Name of the property.</param>
-		/// <returns><c>True</c> if the supplied property has been validated at least once; otherwise <c>false</c>.</returns>
-		protected virtual Boolean ValidationCalledOnceFor( String propertyName )
-		{
-			return this.validationCalledOnce.Contains( propertyName );
-		}
+        ///// <summary>
+        ///// Called in order to understand if the validation for the 
+        ///// supplied property has already been called at least one time.
+        ///// </summary>
+        ///// <param name="propertyName">Name of the property.</param>
+        ///// <returns><c>True</c> if the supplied property has been validated at least once; otherwise <c>false</c>.</returns>
+        //protected virtual Boolean ValidationCalledOnceFor( String propertyName )
+        //{
+        //    return this.validationCalledOnce.Contains( propertyName );
+        //}
 
-		/// <summary>
-		/// Registers that the validation process has been called 
-		/// at least once for the supplied property.
-		/// </summary>
-		/// <param name="propertyName">Name of the property.</param>
-		protected virtual void RegisterValidationCalledOnceFor( String propertyName )
-		{
-			this.validationCalledOnce.Add( propertyName );
-		}
+        ///// <summary>
+        ///// Registers that the validation process has been called 
+        ///// at least once for the supplied property.
+        ///// </summary>
+        ///// <param name="propertyName">Name of the property.</param>
+        //protected virtual void RegisterValidationCalledOnceFor( String propertyName )
+        //{
+        //    this.validationCalledOnce.Add( propertyName );
+        //}
 
 		/// <summary>
 		/// Validates the specified property.
@@ -69,18 +69,18 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		public String ValidateRuleSet( String ruleSet, String propertyName )
 		{
-			if( !this.ValidationCalledOnceFor( propertyName ) )
-			{
-				/*
-				 * Se non abbiamo mai validato la proprietà significa che siamo 
-				 * allo startup della Window e il motore di validazione di WPF 
-				 * viene triggherato per ogni "set" di ogni binding. Dato che non
-				 * ci interessa visualizzare la Window come non valida sin da 
-				 * subito evitiamo la validazione al primo controllo.
-				 */
-				this.RegisterValidationCalledOnceFor( propertyName );
-				return null;
-			}
+            //if( !this.ValidationCalledOnceFor( propertyName ) )
+            //{
+            //    /*
+            //     * Se non abbiamo mai validato la proprietà significa che siamo 
+            //     * allo startup della Window e il motore di validazione di WPF 
+            //     * viene triggherato per ogni "set" di ogni binding. Dato che non
+            //     * ci interessa visualizzare la Window come non valida sin da 
+            //     * subito evitiamo la validazione al primo controllo.
+            //     */
+            //    this.RegisterValidationCalledOnceFor( propertyName );
+            //    return null;
+            //}
 
 			if( this.IsValidationSuspended )
 			{
@@ -324,10 +324,10 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 
 			this.IsValid = true;
 
-			if( ( resetBehavior & ValidationResetBehavior.ValidationTracker ) == ValidationResetBehavior.ValidationTracker )
-			{
-				this.validationCalledOnce.Clear();
-			}
+            //if( ( resetBehavior & ValidationResetBehavior.ValidationTracker ) == ValidationResetBehavior.ValidationTracker )
+            //{
+            //    this.validationCalledOnce.Clear();
+            //}
 
 			this.OnResetted( EventArgs.Empty );
 		}

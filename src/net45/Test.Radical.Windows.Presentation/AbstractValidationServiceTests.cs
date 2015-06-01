@@ -22,19 +22,14 @@ namespace Test.Radical.Windows.Presentation
 				this.errorsToReturnUnderTest = errorsToReturnUnderTest;
 			}
 
-			protected override bool ValidationCalledOnceFor( string propertyName )
-			{
-				return true;
-			}
-
 			protected override IEnumerable<ValidationError> OnValidate( string ruleSet )
 			{
 				return this.errorsToReturnUnderTest;
 			}
 		}
 
-		[TestMethod]
-		[TestCategory( "AbstractValidationService" )]
+		[TestMethod]        
+        [TestCategory( "AbstractValidationService" ), TestCategory( "Validation" )]
 		public void AbstractValidationService_validate_property_using_entity_with_non_valid_property_should_report_expected_errors()
 		{
 			var propName = "TestProperty";
@@ -42,7 +37,6 @@ namespace Test.Radical.Windows.Presentation
 			var expected = new[] { new ValidationError( propName, propName, new[] { "--fake--" } ) };
 			var sut = new TestValidationService( expected );
 
-			//sut.Validate( propName ); //first time is skipped by default for each property
 			sut.Validate( propName );
 
 			Assert.AreEqual( sut.ValidationErrors.Count(), expected.Length );
@@ -50,7 +44,7 @@ namespace Test.Radical.Windows.Presentation
 		}
 
 		[TestMethod]
-		[TestCategory( "AbstractValidationService" )]
+        [TestCategory( "AbstractValidationService" ), TestCategory( "Validation" )]
 		public void AbstractValidationService_StatusChanged_event_should_be_triggered_each_time_errors_list_changes_even_if_validity_does_not_change()
 		{
 			var actual = 0;
