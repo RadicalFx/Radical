@@ -84,7 +84,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_with_no_validation_service_always_validates_to_true()
         {
             var sut = new SampleTestViewModel();
@@ -94,7 +94,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_with_no_validation_service_is_always_validat()
         {
             var sut = new SampleTestViewModel();
@@ -104,7 +104,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_with_no_validation_service_has_no_errors()
         {
             var sut = new SampleTestViewModel();
@@ -115,7 +115,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_with_validation_service_should_generate_expected_errors()
         {
             var sut = new SampleTestViewModel();
@@ -128,7 +128,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_as_IDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid()
         {
             var sut = new SampleTestViewModel();
@@ -141,7 +141,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_as_IDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid_even_if_called_multiple_times()
         {
             var sut = new SampleTestViewModel();
@@ -156,7 +156,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_as_INotifyDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid()
         {
             var sut = new SampleTestViewModel();
@@ -169,7 +169,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_as_INotifyDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid_even_if_called_multiple_times()
         {
             var sut = new SampleTestViewModel();
@@ -184,7 +184,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_INotifyDataErrorInfo_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsINotifyDataErrorInfo();
@@ -192,7 +192,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_IDataErrorInfo_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsIDataErrorInfo();
@@ -200,7 +200,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_ICanBeValidated_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsICanBeValidated();
@@ -208,7 +208,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_IRequireValidation_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsIRequireValidation();
@@ -216,7 +216,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_PropertyChanged_is_raised_GetErrors_should_contain_expected_errors()
         {
             IEnumerable<Object> errors = null;
@@ -236,7 +236,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_PropertyChanged_is_raised_Error_indexer_should_contain_expected_errors()
         {
             String errors = null;
@@ -256,7 +256,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_PropertyChanged_is_raised_IsValid_should_be_false()
         {
             Boolean isValid = true;
@@ -276,7 +276,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_PropertyChanged_is_raised_ValidationErrors_should_contain_expected_errors()
         {
             ObservableCollection<ValidationError> errors = null;
@@ -297,7 +297,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validation_status_changes_ErrorsChanged_should_be_raised()
         {
             bool raised = false;
@@ -317,7 +317,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validation_status_changes_Validated_should_be_raised()
         {
             bool raised = false;
@@ -337,7 +337,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validation_is_reset_ErrorsChanged_should_be_raised()
         {
             bool raised = false;
@@ -357,7 +357,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validation_status_changes_PropertyChanged_for_IsValid_property_should_be_raised()
         {
             bool raised = false;
@@ -380,7 +380,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validation_status_changes_PropertyChanged_for_HasErrors_property_should_be_raised()
         {
             bool raised = false;
@@ -403,7 +403,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validating_entire_entity_PropertyChanged_for_HasErrors_property_should_be_raised()
         {
             bool raised = false;
@@ -428,7 +428,7 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
         public void AbstractViewModel_when_validating_entire_entity_PropertyChanged_for_IsValid_property_should_be_raised()
         {
             bool raised = false;

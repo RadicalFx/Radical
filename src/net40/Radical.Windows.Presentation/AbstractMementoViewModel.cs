@@ -27,8 +27,50 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>
         /// The view.
         /// </value>
-		[Bindable( false )]
-		System.Windows.DependencyObject IViewModel.View { get; set; }
+        [Bindable( false )]
+        System.Windows.DependencyObject IViewModel.View { get; set; }
+
+        /// <summary>
+        /// Raises the <see cref="E:PropertyChanged" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
+        protected override void OnPropertyChanged( PropertyChangedEventArgs e )
+        {
+#if FX45
+            if( this.IsValidationEnabled
+                && this.RunValidationOnPropertyChanged
+                && !this.IsResettingValidation )
+            {
+                this.ValidateProperty( e.PropertyName );
+            }
+#else
+            if( this.IsValidationEnabled && this.RunValidationOnPropertyChanged )
+            {
+                this.ValidateProperty( e.PropertyName );
+            }
+#endif
+
+            base.OnPropertyChanged( e );
+        }
+
+        /// <summary>
+        /// Gets a value indication if validation is enabled or not.
+        /// </summary>
+        protected virtual Boolean IsValidationEnabled
+        {
+            get
+            {
+#if FX45
+                return this is IDataErrorInfo 
+                    || this is ICanBeValidated
+                    || this is INotifyDataErrorInfo
+                    || this is IRequireValidation;
+#else
+                return this is IDataErrorInfo
+                    || this is ICanBeValidated;
+#endif
+            }
+        }
 
         IValidationService _validationService;
 
@@ -50,6 +92,11 @@ namespace Topics.Radical.Windows.Presentation
                         {
                             this.ValidationErrors.Add( error );
                         }
+
+#if FX45
+                        this.OnErrorsChanged( null );
+                        this.OnPropertyChanged( () => this.HasErrors );
+#endif
                     };
 
                     this._validationService.Resetted += ( s, e ) =>
@@ -59,6 +106,11 @@ namespace Topics.Radical.Windows.Presentation
                             .GetProperties()
                             .Select( p => p.Name )
                             .ForEach( p => this.OnPropertyChanged( p ) );
+
+#if FX45
+                        this.OnErrorsChanged( null );
+                        this.OnPropertyChanged( () => this.HasErrors );
+#endif
                     };
                 }
 
@@ -84,6 +136,7 @@ namespace Topics.Radical.Windows.Presentation
             : base( ChangeTrackingRegistration.AsTransient )
         {
             this.ValidationErrors = new ObservableCollection<ValidationError>();
+            this.RunValidationOnPropertyChanged = true;
         }
 
         /// <summary>
@@ -94,6 +147,7 @@ namespace Topics.Radical.Windows.Presentation
             : base( registration )
         {
             this.ValidationErrors = new ObservableCollection<ValidationError>();
+            this.RunValidationOnPropertyChanged = true;
         }
 
         /// <summary>
@@ -102,7 +156,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>The error.</value>
         /// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
         [Bindable(false)]
-		public virtual String Error
+        public virtual String Error
         {
             get { return null; }
         }
@@ -110,32 +164,50 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Gets the error message, if any, for the property with the given name.
         /// </summary>
-		[Bindable( false )]
-		public virtual String this[ String propertyName ]
+        [Bindable( false )]
+        public virtual String this[ String propertyName ]
         {
             get
             {
-                var wasValid = this.IsValid;
-
-                var error = this.ValidationService.Validate( propertyName );
-
-                if ( this.IsValid != wasValid )
-                {
-                    this.OnPropertyChanged( () => this.IsValid );
-                }
-
-                this.OnValidated();
+                var error = this.ValidationErrors
+                    .Where( e => e.Key == propertyName )
+                    .Select( err => err.ToString() )
+                    .FirstOrDefault();
 
                 return error;
             }
         }
 
         /// <summary>
+        /// Validates the given property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
+        protected virtual String ValidateProperty( String propertyName )
+        {
+            var wasValid = this.IsValid;
+
+            var error = this.ValidationService.Validate( propertyName );
+
+            if( this.IsValid != wasValid )
+            {
+                this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                this.OnPropertyChanged( () => this.HasErrors );
+#endif
+            }
+
+            this.OnValidated();
+
+            return error;
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
         /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-		[Bindable( false )]
-		public virtual Boolean IsValid
+        [Bindable( false )]
+        public virtual Boolean IsValid
         {
             get { return this.ValidationService.IsValid; }
         }
@@ -144,8 +216,8 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets the validation errors if any.
         /// </summary>
         /// <value>The validation errors.</value>
-		[Bindable( false )]
-		public virtual ObservableCollection<ValidationError> ValidationErrors
+        [Bindable( false )]
+        public virtual ObservableCollection<ValidationError> ValidationErrors
         {
             get;
             private set;
@@ -182,12 +254,22 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
         {
+            var wasValid = this.IsValid;
+
             this.ValidationService.ValidateRuleSet( ruleSet );
             this.OnValidated();
 
             if ( behavior == ValidationBehavior.TriggerValidationErrorsOnFailure && !this.ValidationService.IsValid )
             {
                 this.TriggerValidation();
+            }
+
+            if( this.IsValid != wasValid )
+            {
+                this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                this.OnPropertyChanged( () => this.HasErrors );
+#endif
             }
 
             return this.ValidationService.IsValid;
@@ -257,7 +339,7 @@ namespace Topics.Radical.Windows.Presentation
                 oldMemento.ChangesRejected -= new EventHandler( OnChangesRejected );
             }
 
-			if ( newMemento != null && !newMemento.IsDisposed )
+            if ( newMemento != null && !newMemento.IsDisposed )
             {
                 newMemento.AcceptingChanges += new EventHandler<CancelEventArgs>( OnAcceptingChanges );
                 newMemento.RejectingChanges += new EventHandler<CancelEventArgs>( OnRejectingChanges );
@@ -321,41 +403,115 @@ namespace Topics.Radical.Windows.Presentation
 
         }
 
-		/// <summary>
-		/// Gets or sets the focused element key.
-		/// </summary>
-		/// <value>
-		/// The focused element key.
-		/// </value>
-		[MementoPropertyMetadata( TrackChanges = false )]
-		[Bindable( false )]
-		public String FocusedElementKey
-		{
-			get { return this.GetPropertyValue( () => this.FocusedElementKey ); }
-			set { this.SetPropertyValue( () => this.FocusedElementKey, value ); }
-		}
+        /// <summary>
+        /// Gets or sets the focused element key.
+        /// </summary>
+        /// <value>
+        /// The focused element key.
+        /// </value>
+        [MementoPropertyMetadata( TrackChanges = false )]
+        [Bindable( false )]
+        public String FocusedElementKey
+        {
+            get { return this.GetPropertyValue( () => this.FocusedElementKey ); }
+            set { this.SetPropertyValue( () => this.FocusedElementKey, value ); }
+        }
 
-		/// <summary>
-		/// Moves the focus to.
-		/// </summary>
-		/// <param name="property">The property.</param>
-		protected virtual void MoveFocusTo<T>( Expression<Func<T>> property )
-		{
-			this.EnsureNotDisposed();
+        /// <summary>
+        /// Moves the focus to.
+        /// </summary>
+        /// <param name="property">The property.</param>
+        protected virtual void MoveFocusTo<T>( Expression<Func<T>> property )
+        {
+            this.EnsureNotDisposed();
 
-			var propertyName = property.GetMemberName();
-			this.MoveFocusTo( propertyName );
-		}
+            var propertyName = property.GetMemberName();
+            this.MoveFocusTo( propertyName );
+        }
 
-		/// <summary>
-		/// Moves the focus to.
-		/// </summary>
-		/// <param name="focusedElementKey">The focused element key.</param>
-		protected virtual void MoveFocusTo( String focusedElementKey )
-		{
-			this.EnsureNotDisposed();
+        /// <summary>
+        /// Moves the focus to.
+        /// </summary>
+        /// <param name="focusedElementKey">The focused element key.</param>
+        protected virtual void MoveFocusTo( String focusedElementKey )
+        {
+            this.EnsureNotDisposed();
 
-			this.FocusedElementKey = focusedElementKey;
-		}
+            this.FocusedElementKey = focusedElementKey;
+        }
+
+        /// <summary>
+        /// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
+        /// </summary>
+        protected Boolean RunValidationOnPropertyChanged { get; set; }
+
+#if FX45
+
+        /// <summary>
+        /// <c>True</c> if the current ValidationService is resetting the validation status; Otherwise <c>false</c>.
+        /// </summary>
+        protected Boolean IsResettingValidation { get; set; }
+
+        /// <summary>
+        /// Resets the validation status.
+        /// </summary>
+        public virtual void ResetValidation()
+        {
+            this.IsResettingValidation = true;
+            this.ValidationService.Reset( ValidationResetBehavior.ErrorsOnly );
+            this.IsResettingValidation = false;
+        }
+
+        /// <summary>
+        /// Occurs when errors change.
+        /// </summary>
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        /// <summary>
+        /// Raises the ErrorsChanged event.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        protected void OnErrorsChanged( String propertyName )
+        {
+            var h = this.ErrorsChanged;
+            if( h != null )
+            {
+                h( this, new DataErrorsChangedEventArgs( propertyName ) );
+            }
+        }
+
+        /// <summary>
+        /// Gets the errors.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns></returns>
+        public System.Collections.IEnumerable GetErrors( string propertyName )
+        {
+            if( String.IsNullOrEmpty( propertyName ) ) 
+            {
+                return this.ValidationErrors.ToArray();
+            }
+
+            var temp = this.ValidationErrors.Where( e => e.Key == propertyName ).ToArray();
+            return temp;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance has errors.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance has errors; otherwise, <c>false</c>.
+        /// </value>
+        [Bindable( false )]
+        public bool HasErrors
+        {
+            get
+            {
+                var hasErrors = !this.IsValid;
+                return hasErrors;
+            }
+        }
+
+#endif
     }
 }

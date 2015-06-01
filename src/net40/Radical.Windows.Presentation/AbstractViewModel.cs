@@ -95,6 +95,7 @@ namespace Topics.Radical.Windows.Presentation
 
 #if FX45
                         this.OnErrorsChanged( null );
+                        this.OnPropertyChanged( () => this.HasErrors );
 #endif
                     };
 
@@ -108,6 +109,7 @@ namespace Topics.Radical.Windows.Presentation
 
 #if FX45
                         this.OnErrorsChanged( null );
+                        this.OnPropertyChanged( () => this.HasErrors );
 #endif
                     };
                 }
@@ -132,6 +134,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         protected AbstractViewModel()
         {
+            this.ValidationErrors = new ObservableCollection<ValidationError>();
             this.RunValidationOnPropertyChanged = true;
         }
 
@@ -193,6 +196,9 @@ namespace Topics.Radical.Windows.Presentation
             if( this.IsValid != wasValid )
             {
                 this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                this.OnPropertyChanged( () => this.HasErrors );
+#endif
             }
 
             this.OnValidated();
@@ -210,23 +216,15 @@ namespace Topics.Radical.Windows.Presentation
             get { return this.ValidationService.IsValid; }
         }
 
-        ObservableCollection<ValidationError> _validationErrors;
-
         /// <summary>
         /// Gets the validation errors if any.
         /// </summary>
         /// <value>The validation errors.</value>
+        [Bindable( false )]
         public virtual ObservableCollection<ValidationError> ValidationErrors
         {
-            get
-            {
-                if( this._validationErrors == null )
-                {
-                    this._validationErrors = new ObservableCollection<ValidationError>();
-                }
-
-                return this._validationErrors;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -273,6 +271,9 @@ namespace Topics.Radical.Windows.Presentation
             if( this.IsValid != wasValid )
             {
                 this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                this.OnPropertyChanged( () => this.HasErrors );
+#endif
             }
 
             return this.ValidationService.IsValid;

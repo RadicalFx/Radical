@@ -83,8 +83,8 @@ namespace Test.Radical.Windows.Presentation
 
         }
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_with_no_validation_service_always_validates_to_true()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_with_no_validation_service_always_validates_to_true()
         {
             var sut = new SampleTestViewModel();
             var isValid = sut.Validate();
@@ -93,8 +93,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_with_no_validation_service_is_always_validat()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_with_no_validation_service_is_always_validat()
         {
             var sut = new SampleTestViewModel();
             var isValid = sut.IsValid;
@@ -103,8 +103,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_with_no_validation_service_has_no_errors()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_with_no_validation_service_has_no_errors()
         {
             var sut = new SampleTestViewModel();
             sut.Validate();
@@ -114,8 +114,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_with_validation_service_should_generate_expected_errors()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_with_validation_service_should_generate_expected_errors()
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
@@ -127,8 +127,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_as_IDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_as_IDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid()
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
@@ -140,8 +140,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_as_IDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid_even_if_called_multiple_times()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_as_IDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid_even_if_called_multiple_times()
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
@@ -155,8 +155,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_as_INotifyDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_as_INotifyDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid()
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
@@ -168,8 +168,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_as_INotifyDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid_even_if_called_multiple_times()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_as_INotifyDataErrorInfo_with_validation_service_invalid_property_not_validated_is_valid_even_if_called_multiple_times()
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
@@ -183,40 +183,40 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_INotifyDataErrorInfo_IsValidationEnabled_should_be_true()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_INotifyDataErrorInfo_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsINotifyDataErrorInfo();
             Assert.IsTrue( sut.Test_IsValidationEnabled );
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_IDataErrorInfo_IsValidationEnabled_should_be_true()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_IDataErrorInfo_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsIDataErrorInfo();
             Assert.IsTrue( sut.Test_IsValidationEnabled );
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_ICanBeValidated_IsValidationEnabled_should_be_true()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_ICanBeValidated_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsICanBeValidated();
             Assert.IsTrue( sut.Test_IsValidationEnabled );
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_IRequireValidation_IsValidationEnabled_should_be_true()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_IRequireValidation_IsValidationEnabled_should_be_true()
         {
             var sut = new ImplementsIRequireValidation();
             Assert.IsTrue( sut.Test_IsValidationEnabled );
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_PropertyChanged_is_raised_GetErrors_should_contain_expected_errors()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_PropertyChanged_is_raised_GetErrors_should_contain_expected_errors()
         {
             IEnumerable<Object> errors = null;
 
@@ -235,8 +235,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_PropertyChanged_is_raised_Error_indexer_should_contain_expected_errors()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_PropertyChanged_is_raised_Error_indexer_should_contain_expected_errors()
         {
             String errors = null;
 
@@ -255,8 +255,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_PropertyChanged_is_raised_IsValid_should_be_false()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_PropertyChanged_is_raised_IsValid_should_be_false()
         {
             Boolean isValid = true;
 
@@ -275,8 +275,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_PropertyChanged_is_raised_ValidationErrors_should_contain_expected_errors()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_PropertyChanged_is_raised_ValidationErrors_should_contain_expected_errors()
         {
             ObservableCollection<ValidationError> errors = null;
 
@@ -296,8 +296,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validation_status_changes_ErrorsChanged_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validation_status_changes_ErrorsChanged_should_be_raised()
         {
             bool raised = false;
 
@@ -316,8 +316,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validation_status_changes_Validated_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validation_status_changes_Validated_should_be_raised()
         {
             bool raised = false;
 
@@ -336,8 +336,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validation_is_reset_ErrorsChanged_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validation_is_reset_ErrorsChanged_should_be_raised()
         {
             bool raised = false;
 
@@ -356,8 +356,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validation_status_changes_PropertyChanged_for_IsValid_property_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validation_status_changes_PropertyChanged_for_IsValid_property_should_be_raised()
         {
             bool raised = false;
 
@@ -379,8 +379,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validation_status_changes_PropertyChanged_for_HasErrors_property_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validation_status_changes_PropertyChanged_for_HasErrors_property_should_be_raised()
         {
             bool raised = false;
 
@@ -402,8 +402,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validating_entire_entity_PropertyChanged_for_HasErrors_property_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validating_entire_entity_PropertyChanged_for_HasErrors_property_should_be_raised()
         {
             bool raised = false;
 
@@ -427,8 +427,8 @@ namespace Test.Radical.Windows.Presentation
         }
 
         [TestMethod]
-        [TestCategory( "AbstractViewModel" )]
-        public void AbstractViewModel_when_validating_entire_entity_PropertyChanged_for_IsValid_property_should_be_raised()
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" )]
+        public void AbstractMementoViewModel_when_validating_entire_entity_PropertyChanged_for_IsValid_property_should_be_raised()
         {
             bool raised = false;
 
