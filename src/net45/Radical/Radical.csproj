@@ -720,6 +720,9 @@
     <Compile Include="..\..\net35\Radical\Model\InsertEventArgs.cs">
       <Link>Model\InsertEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\..\net35\Radical\Model\NeverNotifyPropertyChangedAttribute.cs">
+      <Link>Model\NeverNotifyPropertyChangedAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\..\net35\Radical\Model\NullDataContext.cs">
       <Link>Model\NullDataContext.cs</Link>
     </Compile>

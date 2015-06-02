@@ -140,7 +140,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// <summary>
 		/// Occurs when this service is resetted.
 		/// </summary>
-		public event EventHandler Resetted;
+		public event EventHandler ValidationReset;
 
 		/// <summary>
 		/// Raises the <see cref="E:StatusChanged"/> event.
@@ -156,12 +156,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:Resetted"/> event.
+        /// Raises the <see cref="E:ValidationReset"/> event.
 		/// </summary>
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-		protected virtual void OnResetted( EventArgs e )
+		protected virtual void OnValidationReset( EventArgs e )
 		{
-			var h = this.Resetted;
+			var h = this.ValidationReset;
 			if( h != null )
 			{
 				h( this, e );
@@ -329,7 +329,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
             //    this.validationCalledOnce.Clear();
             //}
 
-			this.OnResetted( EventArgs.Empty );
+			this.OnValidationReset( EventArgs.Empty );
 		}
 
 		class ValidationSuspender : IDisposable
@@ -435,7 +435,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 						this._validationErrors.Clear();
 						this.AddValidationErrors( actual );
 
-						this.OnResetted( EventArgs.Empty );
+						this.OnValidationReset( EventArgs.Empty );
 					}
 				}
 			}

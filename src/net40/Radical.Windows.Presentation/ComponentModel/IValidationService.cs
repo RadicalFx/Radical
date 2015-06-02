@@ -47,7 +47,7 @@ namespace Topics.Radical.Windows.Presentation.ComponentModel
 		/// <summary>
 		/// Occurs when this service is resetted.
 		/// </summary>
-		event EventHandler Resetted;
+		event EventHandler ValidationReset;
 
 		/// <summary>
 		/// Gets the invalid properties.
