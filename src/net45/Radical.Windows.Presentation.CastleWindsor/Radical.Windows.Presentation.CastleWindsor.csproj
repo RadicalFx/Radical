@@ -25,7 +25,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;FX40;FX45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -34,7 +34,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;FX40;FX45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -90,11 +90,38 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Boot\WindsorApplicationBootstrapper.cs">
       <Link>Boot\WindsorApplicationBootstrapper.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Facilities\MissingRequiredDependencyException.cs">
+      <Link>Facilities\MissingRequiredDependencyException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Facilities\RequiredDependencyFacility.cs">
+      <Link>Facilities\RequiredDependencyFacility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Facilities\SubscribeToMessageFacility.cs">
+      <Link>Facilities\SubscribeToMessageFacility.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\MicroKernel\Lifestyle\TrulyTransientLifestyleManager.cs">
+      <Link>MicroKernel\Lifestyle\TrulyTransientLifestyleManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\MicroKernel\Releasers\TrulyTransientReleasePolicy.cs">
+      <Link>MicroKernel\Releasers\TrulyTransientReleasePolicy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\MicroKernel\Releasers\TrulyTransientReleasePolicyBehavior.cs">
+      <Link>MicroKernel\Releasers\TrulyTransientReleasePolicyBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\MicroKernel\SubSystems\Naming\DelegateNamingSubSystem.cs">
+      <Link>MicroKernel\SubSystems\Naming\DelegateNamingSubSystem.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Properties\NugetInfo.cs">
       <Link>Properties\NugetInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\RequiredDependencyAttribute.cs">
+      <Link>RequiredDependencyAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\ServiceProviderWrapper.cs">
+      <Link>ServiceProviderWrapper.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Services\ComponentReleaser.cs">
       <Link>Services\ComponentReleaser.cs</Link>
@@ -102,12 +129,11 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Tracing.cs">
       <Link>Tracing.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation.CastleWindsor\Windsor\ContainerExtensions.cs">
+      <Link>Windsor\ContainerExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Radical.Extensions.Castle\Radical.Extensions.Castle.csproj">
-      <Project>{25797064-a7eb-4589-92a5-1bb9bc9f380c}</Project>
-      <Name>Radical.Extensions.Castle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Radical.Windows.Presentation\Radical.Windows.Presentation.csproj">
       <Project>{767fad7d-a6cf-426e-ac34-6ea187c76ff9}</Project>
       <Name>Radical.Windows.Presentation</Name>
@@ -139,7 +165,6 @@ if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45"
 )
 
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetName).*" /B /Y
-copy "$(SolutionDir)readme.md" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net45\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>

@@ -48,7 +48,12 @@ namespace Topics.Radical.Model
                 }
 
                 this.valuesBag.Clear();
-                //this.initialValuesBag.Clear();
+
+                foreach( var item in this.propertiesMetadata.Values )
+                {
+                    item.Dispose();
+                }
+
                 this.propertiesMetadata.Clear();
             }
 
@@ -321,47 +326,47 @@ namespace Topics.Radical.Model
             propertiesMetadata.Add( metadata.PropertyName, metadata );
         }
 
-		class NotificationSuspension<T> : IDisposable
-		{
-			public void Dispose()
-			{
-				this.Property.EnableChangesNotifications();
-			}
+        class NotificationSuspension<T> : IDisposable
+        {
+            public void Dispose()
+            {
+                this.Property.EnableChangesNotifications();
+            }
 
-			public PropertyMetadata<T> Property { get; set; }
-		}
+            public PropertyMetadata<T> Property { get; set; }
+        }
 
-		/// <summary>
-		/// Suspends notifications for the given property.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="property">The property.</param>
-		/// <returns></returns>
-		protected IDisposable SuspendNotificationsOf<T>( Expression<Func<T>> property ) 
-		{
-			var md = this.GetPropertyMetadata( property );
-			md.DisableChangesNotifications();
+        /// <summary>
+        /// Suspends notifications for the given property.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="property">The property.</param>
+        /// <returns></returns>
+        protected IDisposable SuspendNotificationsOf<T>( Expression<Func<T>> property ) 
+        {
+            var md = this.GetPropertyMetadata( property );
+            md.DisableChangesNotifications();
 
-			return new NotificationSuspension<T>()
-			{
-				Property = md 
-			};
-		}
+            return new NotificationSuspension<T>()
+            {
+                Property = md 
+            };
+        }
 
-		/// <summary>
-		/// Resumes notifications for the given property.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="property">The property.</param>
-		protected void ResumeNotificationsFor<T>( Expression<Func<T>> property ) 
-		{
-			var md = this.GetPropertyMetadata( property );
-			md.EnableChangesNotifications();
-		}
+        /// <summary>
+        /// Resumes notifications for the given property.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="property">The property.</param>
+        protected void ResumeNotificationsFor<T>( Expression<Func<T>> property ) 
+        {
+            var md = this.GetPropertyMetadata( property );
+            md.EnableChangesNotifications();
+        }
 
-		//protected IDisposable SuspendNotificationsOf( String property ) { }
+        //protected IDisposable SuspendNotificationsOf( String property ) { }
 
-		//protected void ResumeNotificationsFor<T>( String property ) { }
+        //protected void ResumeNotificationsFor<T>( String property ) { }
 
         //protected virtual void AddMetadata<T>( Expression<Func<T>> property, Action<PropertyMetadata<T>> interceptor )
         //{

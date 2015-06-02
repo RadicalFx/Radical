@@ -263,6 +263,9 @@
     <Compile Include="..\..\net35\Radical.Windows\Presentation\Converters\NullToVisibilityConverter.cs">
       <Link>Presentation\Converters\NullToVisibilityConverter.cs</Link>
     </Compile>
+    <Compile Include="..\..\net35\Radical.Windows\Presentation\Converters\TimeSpanToKeyTimeConverter.cs">
+      <Link>Presentation\Converters\TimeSpanToKeyTimeConverter.cs</Link>
+    </Compile>
     <Compile Include="..\..\net35\Radical.Windows\Presentation\Effects\GrayscaleEffect.cs">
       <Link>Presentation\Effects\GrayscaleEffect.cs</Link>
     </Compile>
@@ -368,7 +371,6 @@ if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40"
 
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetName).*" /B /Y
 copy "$(TargetDir)System.Windows.Interactivity.*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\System.Windows.Interactivity.*" /B /Y
-copy "$(SolutionDir)readme.txt" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>

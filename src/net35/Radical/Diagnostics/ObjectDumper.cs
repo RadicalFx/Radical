@@ -87,7 +87,7 @@ namespace Topics.Radical.Diagnostics
         {
             if( s != null )
             {
-                Debug.Write( s );
+                //Debug.Write( s );
                 this.builder.Append( s );
                 //this.pos += s.Length;
             }
@@ -97,7 +97,7 @@ namespace Topics.Radical.Diagnostics
         {
             if( s != null )
             {
-                Debug.WriteLine( s );
+                //Debug.WriteLine( s );
                 this.builder.AppendLine( s );
                 //this.pos += s.Length;
             }
@@ -110,7 +110,7 @@ namespace Topics.Radical.Diagnostics
 
         void WriteLine()
         {
-            Debug.WriteLine( "" );
+            //Debug.WriteLine( "" );
             this.builder.AppendLine();
             //this.pos = 0;
         }

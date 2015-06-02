@@ -11,396 +11,521 @@ using Topics.Radical.Windows.Presentation.Services.Validation;
 
 namespace Topics.Radical.Windows.Presentation
 {
-	/// <summary>
-	/// A base abstract ViewModel with builtin support for validation, error notification.
-	/// </summary>
-	public abstract class AbstractViewModel :
-		Entity,
-		IViewModel,
-		ISupportInitialize
-	{
-		/// <summary>
-		/// Gets or sets the view. The view property is intended only for
-		/// infrastructural purpose. It is required to hold the one-to-one
-		/// relation beteewn the view and the view model.
-		/// </summary>
-		/// <value>
-		/// The view.
-		/// </value>
-		[Bindable( false )]
-		System.Windows.DependencyObject IViewModel.View { get; set; }
+    /// <summary>
+    /// A base abstract ViewModel with builtin support for validation, error notification.
+    /// </summary>
+    public abstract class AbstractViewModel :
+        Entity,
+        IViewModel,
+        ISupportInitialize
+    {
+        /// <summary>
+        /// Gets or sets the view. The view property is intended only for
+        /// infrastructural purpose. It is required to hold the one-to-one
+        /// relation beteewn the view and the view model.
+        /// </summary>
+        /// <value>
+        /// The view.
+        /// </value>
+        [Bindable( false )]
+        System.Windows.DependencyObject IViewModel.View { get; set; }
 
-		IValidationService _validationService;
+        /// <summary>
+        /// Raises the <see cref="E:PropertyChanged" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
+        protected override void OnPropertyChanged( PropertyChangedEventArgs e )
+        {
+#if FX45
+            if( this.IsValidationEnabled
+                && this.RunValidationOnPropertyChanged
+                && !this.IsResettingValidation )
+            {
+                this.ValidateProperty( e.PropertyName );
+            }
+#else
+            if( this.IsValidationEnabled && this.RunValidationOnPropertyChanged )
+            {
+                this.ValidateProperty( e.PropertyName );
+            }
+#endif
 
-		/// <summary>
-		/// Gets the validation service.
-		/// </summary>
-		/// <value>The validation service.</value>
-		protected IValidationService ValidationService
-		{
-			get
-			{
-				if( this._validationService == null )
-				{
-					this._validationService = this.GetValidationService();
-					this._validationService.StatusChanged += ( s, e ) =>
-					{
-						this.ValidationErrors.Clear();
-						foreach( var error in this._validationService.ValidationErrors )
-						{
-							this.ValidationErrors.Add( error );
-						}
-					};
+            base.OnPropertyChanged( e );
+        }
 
-					this._validationService.Resetted += ( s, e ) =>
-					{
-						this.ValidationErrors.Clear();
-						this.GetType()
-							.GetProperties()
-							.Select( p => p.Name )
-							.ForEach( p => this.OnPropertyChanged( p ) );
-					};
-				}
+        /// <summary>
+        /// Gets a value indication if validation is enabled or not.
+        /// </summary>
+        protected virtual Boolean IsValidationEnabled
+        {
+            get
+            {
+#if FX45
+                return this is IDataErrorInfo 
+                    || this is ICanBeValidated
+                    || this is INotifyDataErrorInfo
+                    || this is IRequireValidation;
+#else
+                return this is IDataErrorInfo
+                    || this is ICanBeValidated;
+#endif
+            }
+        }
 
-				return this._validationService;
-			}
-		}
+        IValidationService _validationService;
 
-		/// <summary>
-		/// Gets the validation service, this method is called once the first time
-		/// the validation service is accessed, inheritors should override this method
-		/// in order to provide a <see cref="IValidationService"/> implementation.
-		/// </summary>
-		/// <returns>The validation service to use to validate this view model.</returns>
-		protected virtual IValidationService GetValidationService()
-		{
-			return NullValidationService.Instance;
-		}
+        /// <summary>
+        /// Gets the validation service.
+        /// </summary>
+        /// <value>The validation service.</value>
+        protected IValidationService ValidationService
+        {
+            get
+            {
+                if( this._validationService == null )
+                {
+                    this._validationService = this.GetValidationService();
+                    this._validationService.StatusChanged += ( s, e ) =>
+                    {
+                        this.ValidationErrors.Clear();
+                        foreach( var error in this._validationService.ValidationErrors )
+                        {
+                            this.ValidationErrors.Add( error );
+                        }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="AbstractViewModel"/> class.
-		/// </summary>
-		protected AbstractViewModel()
-		{
-			
-		}
+#if FX45
+                        this.OnErrorsChanged( null );
+                        this.OnPropertyChanged( () => this.HasErrors );
+#endif
+                    };
 
-		//protected virtual void OnLoading()
-		//{
+                    this._validationService.Resetted += ( s, e ) =>
+                    {
+                        this.ValidationErrors.Clear();
+                        this.GetType()
+                            .GetProperties()
+                            .Select( p => p.Name )
+                            .ForEach( p => this.OnPropertyChanged( p ) );
 
-		//}
+#if FX45
+                        this.OnErrorsChanged( null );
+                        this.OnPropertyChanged( () => this.HasErrors );
+#endif
+                    };
+                }
 
-		//protected virtual void OnLoaded()
-		//{
+                return this._validationService;
+            }
+        }
 
-		//}
+        /// <summary>
+        /// Gets the validation service, this method is called once the first time
+        /// the validation service is accessed, inheritors should override this method
+        /// in order to provide a <see cref="IValidationService"/> implementation.
+        /// </summary>
+        /// <returns>The validation service to use to validate this view model.</returns>
+        protected virtual IValidationService GetValidationService()
+        {
+            return NullValidationService.Instance;
+        }
 
-		///// <summary>
-		///// Gets or sets a value indicating whether this instance is loaded.
-		///// </summary>
-		///// <value><c>true</c> if this instance is loaded; otherwise, <c>false</c>.</value>
-		//protected Boolean IsLoaded
-		//{
-		//    get;
-		//    private set;
-		//}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbstractViewModel"/> class.
+        /// </summary>
+        protected AbstractViewModel()
+        {
+            this.ValidationErrors = new ObservableCollection<ValidationError>();
+            this.RunValidationOnPropertyChanged = true;
+        }
 
-		/// <summary>
-		/// Signals the object that initialization is starting.
-		/// </summary>
-		void ISupportInitialize.BeginInit()
-		{
-			//this.OnLoading();
-		}
+        /// <summary>
+        /// Signals the object that initialization is starting.
+        /// </summary>
+        void ISupportInitialize.BeginInit()
+        {
 
-		/// <summary>
-		/// Signals the object that initialization is complete.
-		/// </summary>
-		void ISupportInitialize.EndInit()
-		{
-			//this.OnLoaded();
+        }
 
-			//this.IsLoaded = true;
-		}
+        /// <summary>
+        /// Signals the object that initialization is complete.
+        /// </summary>
+        void ISupportInitialize.EndInit()
+        {
 
-		/// <summary>
-		/// Gets the error.
-		/// </summary>
-		/// <value>The error.</value>
-		/// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
-		[Bindable( false )]
-		public virtual String Error
-		{
-			get { return null; }
-		}
+        }
 
-		/// <summary>
-		/// Gets the error message, if any, for the property with the given name.
-		/// </summary>
-		[Bindable( false )]
-		public virtual String this[ String propertyName ]
-		{
-			get
-			{
-				var wasValid = this.IsValid;
+        /// <summary>
+        /// Gets the error.
+        /// </summary>
+        /// <value>The error.</value>
+        /// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
+        [Bindable( false )]
+        public virtual String Error
+        {
+            get { return null; }
+        }
 
-				var error = this.ValidationService.Validate( propertyName );
+        /// <summary>
+        /// Gets the error message, if any, for the property with the given name.
+        /// </summary>
+        [Bindable( false )]
+        public virtual String this[ String propertyName ]
+        {
+            get
+            {
+                var error = this.ValidationErrors
+                    .Where( e => e.Key == propertyName )
+                    .Select( err => err.ToString() )
+                    .FirstOrDefault();
 
-				if( this.IsValid != wasValid )
-				{
-					this.OnPropertyChanged( () => this.IsValid );
-				}
+                return error;
+            }
+        }
 
-				this.OnValidated();
+        /// <summary>
+        /// Validates the given property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
+        protected virtual String ValidateProperty( String propertyName )
+        {
+            var wasValid = this.IsValid;
 
-				return error;
-			}
-		}
+            var error = this.ValidationService.Validate( propertyName );
 
-		/// <summary>
-		/// Gets a value indicating whether this instance is valid.
-		/// </summary>
-		/// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-		[Bindable( false )]
-		public virtual Boolean IsValid
-		{
-			get { return this.ValidationService.IsValid; }
-		}
+            if( this.IsValid != wasValid )
+            {
+                this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                this.OnPropertyChanged( () => this.HasErrors );
+#endif
+            }
 
-		ObservableCollection<ValidationError> _validationErrors;
+            this.OnValidated();
 
-		/// <summary>
-		/// Gets the validation errors if any.
-		/// </summary>
-		/// <value>The validation errors.</value>
-		public virtual ObservableCollection<ValidationError> ValidationErrors
-		{
-			get 
-			{
-				if ( this._validationErrors == null ) 
-				{
-					this._validationErrors = new ObservableCollection<ValidationError>();
-				}
+            return error;
+        }
 
-				return this._validationErrors;
-			}
-		}
+        /// <summary>
+        /// Gets a value indicating whether this instance is valid.
+        /// </summary>
+        /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
+        [Bindable( false )]
+        public virtual Boolean IsValid
+        {
+            get { return this.ValidationService.IsValid; }
+        }
 
-		/// <summary>
-		/// Validates this instance.
-		/// </summary>
-		/// <returns><c>True</c> if this instance is valid; otherwise <c>false</c>.</returns>
-		public Boolean Validate()
-		{
-			return this.Validate(null, ValidationBehavior.Default );
-		}
+        /// <summary>
+        /// Gets the validation errors if any.
+        /// </summary>
+        /// <value>The validation errors.</value>
+        [Bindable( false )]
+        public virtual ObservableCollection<ValidationError> ValidationErrors
+        {
+            get;
+            private set;
+        }
 
-		/// <summary>
-		/// Validates this instance.
-		/// </summary>
-		/// <param name="behavior">The behavior.</param>
-		/// <returns>
-		///   <c>True</c> if this instance is valid; otherwise <c>false</c>.
-		/// </returns>
-		public Boolean Validate( ValidationBehavior behavior )
-		{
-			return this.Validate( null, behavior );
-		}
+        /// <summary>
+        /// Validates this instance.
+        /// </summary>
+        /// <returns><c>True</c> if this instance is valid; otherwise <c>false</c>.</returns>
+        public Boolean Validate()
+        {
+            return this.Validate( null, ValidationBehavior.Default );
+        }
 
-		/// <summary>
-		/// Validates this instance.
-		/// </summary>
-		/// <param name="ruleSet">The rule set.</param>
-		/// <param name="behavior">The behavior.</param>
-		/// <returns>
-		///   <c>True</c> if this instance is valid; otherwise <c>false</c>.
-		/// </returns>
-		public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
-		{
-			this.ValidationService.ValidateRuleSet( ruleSet );
-			this.OnValidated();
+        /// <summary>
+        /// Validates this instance.
+        /// </summary>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        ///   <c>True</c> if this instance is valid; otherwise <c>false</c>.
+        /// </returns>
+        public Boolean Validate( ValidationBehavior behavior )
+        {
+            return this.Validate( null, behavior );
+        }
 
-			if( behavior == ValidationBehavior.TriggerValidationErrorsOnFailure && !this.ValidationService.IsValid )
-			{
-				this.TriggerValidation();
-			}
+        /// <summary>
+        /// Validates this instance.
+        /// </summary>
+        /// <param name="ruleSet">The rule set.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        ///   <c>True</c> if this instance is valid; otherwise <c>false</c>.
+        /// </returns>
+        public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
+        {
+            var wasValid = this.IsValid;
 
-			return this.ValidationService.IsValid;
-		}
+            this.ValidationService.ValidateRuleSet( ruleSet );
+            this.OnValidated();
 
-		/// <summary>
-		/// Occurs when the validation process terminates.
-		/// </summary>
-		public event EventHandler Validated;
+            if( behavior == ValidationBehavior.TriggerValidationErrorsOnFailure && !this.ValidationService.IsValid )
+            {
+                this.TriggerValidation();
+            }
 
-		/// <summary>
-		/// Raises the Validated event.
-		/// </summary>
-		protected virtual void OnValidated()
-		{
-			if( this.Validated != null )
-			{
-				this.Validated( this, EventArgs.Empty );
-			}
-		}
+            if( this.IsValid != wasValid )
+            {
+                this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                this.OnPropertyChanged( () => this.HasErrors );
+#endif
+            }
 
-		/// <summary>
-		/// Triggers the validation.
-		/// </summary>
-		public virtual void TriggerValidation()
-		{
-			if( !this.IsTriggeringValidation )
-			{
-				this.IsTriggeringValidation = true;
+            return this.ValidationService.IsValid;
+        }
 
-				foreach( var invalid in this.ValidationService.GetInvalidProperties() )
-				{
-					this.OnPropertyChanged( invalid );
-				}
+        /// <summary>
+        /// Occurs when the validation process terminates.
+        /// </summary>
+        public event EventHandler Validated;
 
-				this.IsTriggeringValidation = false;
-			}
-		}
+        /// <summary>
+        /// Raises the Validated event.
+        /// </summary>
+        protected virtual void OnValidated()
+        {
+            if( this.Validated != null )
+            {
+                this.Validated( this, EventArgs.Empty );
+            }
+        }
 
-		/// <summary>
-		/// Gets or sets a value indicating whether this instance is triggering validation.
-		/// </summary>
-		/// <value>
-		/// 	<c>true</c> if this instance is triggering validation; otherwise, <c>false</c>.
-		/// </value>
-		protected virtual Boolean IsTriggeringValidation
-		{
-			get;
-			private set;
-		}
+        /// <summary>
+        /// Triggers the validation.
+        /// </summary>
+        public virtual void TriggerValidation()
+        {
+            if( !this.IsTriggeringValidation )
+            {
+                this.IsTriggeringValidation = true;
 
-		/// <summary>
-		/// Gets or sets the focused element key.
-		/// </summary>
-		/// <value>
-		/// The focused element key.
-		/// </value>
-		[Bindable( false )]
-		[MementoPropertyMetadata( TrackChanges = false )]
-		public String FocusedElementKey
-		{
-			get { return this.GetPropertyValue( () => this.FocusedElementKey ); }
-			set { this.SetPropertyValue( () => this.FocusedElementKey, value ); }
-		}
+                foreach( var invalid in this.ValidationService.GetInvalidProperties() )
+                {
+                    this.OnPropertyChanged( invalid );
+                }
 
-		/// <summary>
-		/// Moves the focus to.
-		/// </summary>
-		/// <param name="property">The property.</param>
-		protected virtual void MoveFocusTo<T>( Expression<Func<T>> property )
-		{
-			this.EnsureNotDisposed();
+                this.IsTriggeringValidation = false;
+            }
+        }
 
-			var propertyName = property.GetMemberName();
-			this.MoveFocusTo( propertyName );
-		}
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is triggering validation.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is triggering validation; otherwise, <c>false</c>.
+        /// </value>
+        protected virtual Boolean IsTriggeringValidation
+        {
+            get;
+            private set;
+        }
 
-		/// <summary>
-		/// Moves the focus to.
-		/// </summary>
-		/// <param name="focusedElementKey">The focused element key.</param>
-		protected virtual void MoveFocusTo( String focusedElementKey )
-		{
-			this.EnsureNotDisposed();
+        /// <summary>
+        /// Gets or sets the focused element key.
+        /// </summary>
+        /// <value>
+        /// The focused element key.
+        /// </value>
+        [Bindable( false )]
+        [MementoPropertyMetadata( TrackChanges = false )]
+        public String FocusedElementKey
+        {
+            get { return this.GetPropertyValue( () => this.FocusedElementKey ); }
+            set { this.SetPropertyValue( () => this.FocusedElementKey, value ); }
+        }
 
-			this.FocusedElementKey = focusedElementKey;
-		}
-	}
+        /// <summary>
+        /// Moves the focus to.
+        /// </summary>
+        /// <param name="property">The property.</param>
+        protected virtual void MoveFocusTo<T>( Expression<Func<T>> property )
+        {
+            this.EnsureNotDisposed();
 
-	//class MyColl<T> : ObservableCollection<T>
-	//{
-	//    class DefferedNotification : IDisposable
-	//    {
-	//        private MyColl<T> myColl;
+            var propertyName = property.GetMemberName();
+            this.MoveFocusTo( propertyName );
+        }
 
-	//        public DefferedNotification( MyColl<T> myColl )
-	//        {
-	//            this.myColl = myColl;
-	//        }
+        /// <summary>
+        /// Moves the focus to.
+        /// </summary>
+        /// <param name="focusedElementKey">The focused element key.</param>
+        protected virtual void MoveFocusTo( String focusedElementKey )
+        {
+            this.EnsureNotDisposed();
 
-	//        void IDisposable.Dispose()
-	//        {
-	//            myColl.OnCollectionChanged( new System.Collections.Specialized.NotifyCollectionChangedEventArgs( System.Collections.Specialized.NotifyCollectionChangedAction.Add, this.itemsQueue ) );
-	//            foreach( var e in this.propertiesQueue )
-	//            {
-	//                myColl.OnPropertyChanged( e );
-	//            }
+            this.FocusedElementKey = focusedElementKey;
+        }
 
-	//            this.ClearQueues();
-	//            this.IsDeferring = false;
-	//        }
+        /// <summary>
+        /// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
+        /// </summary>
+        protected Boolean RunValidationOnPropertyChanged { get; set; }
 
-	//        System.Collections.Generic.List<T> itemsQueue = new System.Collections.Generic.List<T>();
-	//        System.Collections.Generic.List<PropertyChangedEventArgs> propertiesQueue = new System.Collections.Generic.List<PropertyChangedEventArgs>();
+#if FX45
 
-	//        internal void AddToNotificationQueue( System.Collections.Generic.IEnumerable<T> range )
-	//        {
-	//            this.itemsQueue.AddRange( range );
-	//        }
+        /// <summary>
+        /// <c>True</c> if the current ValidationService is resetting the validation status; Otherwise <c>false</c>.
+        /// </summary>
+        protected Boolean IsResettingValidation { get; set; }
 
-	//        internal void AddToNotificationQueue( PropertyChangedEventArgs e )
-	//        {
-	//            this.propertiesQueue.Add( e );
-	//        }
+        /// <summary>
+        /// Resets the validation status.
+        /// </summary>
+        public virtual void ResetValidation()
+        {
+            this.IsResettingValidation = true;
+            this.ValidationService.Reset( ValidationResetBehavior.ErrorsOnly );
+            this.IsResettingValidation = false;
+        }
 
-	//        void ClearQueues()
-	//        {
-	//            this.itemsQueue.Clear();
-	//            this.propertiesQueue.Clear();
-	//        }
+        /// <summary>
+        /// Occurs when errors change.
+        /// </summary>
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-	//        internal Boolean IsDeferring { get; private set; }
+        /// <summary>
+        /// Raises the ErrorsChanged event.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        protected void OnErrorsChanged( String propertyName )
+        {
+            var h = this.ErrorsChanged;
+            if( h != null )
+            {
+                h( this, new DataErrorsChangedEventArgs( propertyName ) );
+            }
+        }
 
-	//        internal IDisposable StartDefer()
-	//        {
-	//            this.IsDeferring = true;
-	//            return this;
-	//        }
-	//    }
+        /// <summary>
+        /// Gets the errors.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns></returns>
+        public System.Collections.IEnumerable GetErrors( string propertyName )
+        {
+            if( String.IsNullOrEmpty( propertyName ) ) 
+            {
+                return this.ValidationErrors.ToArray();
+            }
 
-	//    readonly DefferedNotification defferedNotification = null;
+            var temp = this.ValidationErrors.Where( e => e.Key == propertyName ).ToArray();
+            return temp;
+        }
 
-	//    public MyColl()
-	//    {
-	//        this.defferedNotification = new DefferedNotification( this );
-	//    }
+        /// <summary>
+        /// Gets a value indicating whether this instance has errors.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance has errors; otherwise, <c>false</c>.
+        /// </value>
+        [Bindable( false )]
+        public bool HasErrors
+        {
+            get
+            {
+                var hasErrors = !this.IsValid;
+                return hasErrors;
+            }
+        }
 
-	//    public void AddRange( System.Collections.Generic.IEnumerable<T> range )
-	//    {
-	//        using( this.defferedNotification.StartDefer() )
-	//        {
-	//            foreach( var t in range )
-	//            {
-	//                this.Add( t );
-	//            }
+#endif
+    }
 
-	//            this.defferedNotification.AddToNotificationQueue( range );
-	//        }
-	//    }
+    //class MyColl<T> : ObservableCollection<T>
+    //{
+    //    class DefferedNotification : IDisposable
+    //    {
+    //        private MyColl<T> myColl;
 
-	//    protected override void OnPropertyChanged( PropertyChangedEventArgs e )
-	//    {
-	//        if( this.defferedNotification.IsDeferring )
-	//        {
-	//            this.defferedNotification.AddToNotificationQueue( e );
-	//        }
-	//        else
-	//        {
-	//            base.OnPropertyChanged( e );
-	//        }
-	//    }
+    //        public DefferedNotification( MyColl<T> myColl )
+    //        {
+    //            this.myColl = myColl;
+    //        }
 
-	//    protected override void OnCollectionChanged( System.Collections.Specialized.NotifyCollectionChangedEventArgs e )
-	//    {
-	//        if( !this.defferedNotification.IsDeferring )
-	//        {
-	//            base.OnCollectionChanged( e );
-	//        }
-	//    }
-	//}
+    //        void IDisposable.Dispose()
+    //        {
+    //            myColl.OnCollectionChanged( new System.Collections.Specialized.NotifyCollectionChangedEventArgs( System.Collections.Specialized.NotifyCollectionChangedAction.Add, this.itemsQueue ) );
+    //            foreach( var e in this.propertiesQueue )
+    //            {
+    //                myColl.OnPropertyChanged( e );
+    //            }
+
+    //            this.ClearQueues();
+    //            this.IsDeferring = false;
+    //        }
+
+    //        System.Collections.Generic.List<T> itemsQueue = new System.Collections.Generic.List<T>();
+    //        System.Collections.Generic.List<PropertyChangedEventArgs> propertiesQueue = new System.Collections.Generic.List<PropertyChangedEventArgs>();
+
+    //        internal void AddToNotificationQueue( System.Collections.Generic.IEnumerable<T> range )
+    //        {
+    //            this.itemsQueue.AddRange( range );
+    //        }
+
+    //        internal void AddToNotificationQueue( PropertyChangedEventArgs e )
+    //        {
+    //            this.propertiesQueue.Add( e );
+    //        }
+
+    //        void ClearQueues()
+    //        {
+    //            this.itemsQueue.Clear();
+    //            this.propertiesQueue.Clear();
+    //        }
+
+    //        internal Boolean IsDeferring { get; private set; }
+
+    //        internal IDisposable StartDefer()
+    //        {
+    //            this.IsDeferring = true;
+    //            return this;
+    //        }
+    //    }
+
+    //    readonly DefferedNotification defferedNotification = null;
+
+    //    public MyColl()
+    //    {
+    //        this.defferedNotification = new DefferedNotification( this );
+    //    }
+
+    //    public void AddRange( System.Collections.Generic.IEnumerable<T> range )
+    //    {
+    //        using( this.defferedNotification.StartDefer() )
+    //        {
+    //            foreach( var t in range )
+    //            {
+    //                this.Add( t );
+    //            }
+
+    //            this.defferedNotification.AddToNotificationQueue( range );
+    //        }
+    //    }
+
+    //    protected override void OnPropertyChanged( PropertyChangedEventArgs e )
+    //    {
+    //        if( this.defferedNotification.IsDeferring )
+    //        {
+    //            this.defferedNotification.AddToNotificationQueue( e );
+    //        }
+    //        else
+    //        {
+    //            base.OnPropertyChanged( e );
+    //        }
+    //    }
+
+    //    protected override void OnCollectionChanged( System.Collections.Specialized.NotifyCollectionChangedEventArgs e )
+    //    {
+    //        if( !this.defferedNotification.IsDeferring )
+    //        {
+    //            base.OnCollectionChanged( e );
+    //        }
+    //    }
+    //}
 }

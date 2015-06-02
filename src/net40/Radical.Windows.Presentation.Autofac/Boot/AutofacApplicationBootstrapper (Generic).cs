@@ -8,16 +8,9 @@ namespace Topics.Radical.Windows.Presentation.Boot
 		AutofacApplicationBootstrapper 
 		where TShellView : Window
 	{
-		protected override void OnBootCompleted( IServiceProvider serviceProvider )
+		public AutofacApplicationBootstrapper()
 		{
-			var mainView = serviceProvider.GetService<IViewResolver>()
-				.GetView<TShellView>();
-
-			Application.Current.MainWindow = mainView;
-
-			mainView.Show();
-
-			base.OnBootCompleted( serviceProvider );
+			this.UsingAsShell<TShellView>();
 		}
 	}
 }

@@ -68,6 +68,7 @@
     <Compile Include="Behaviors\FrameworkElementLifecycleNotificationsBehavior.cs" />
     <Compile Include="Behaviors\DependencyObjectCloseHandlerBehavior.cs" />
     <Compile Include="Behaviors\WindowLifecycleNotificationsBehavior.cs" />
+    <Compile Include="Boot\SplashScreenConfiguration.cs" />
     <Compile Include="Boot\ApplicationBootstrapper.cs" />
     <Compile Include="Boot\ApplicationShutdownArgs.cs" />
     <Compile Include="Boot\ApplicationShutdownReason.cs" />
@@ -157,6 +158,10 @@
     <Compile Include="AbstractViewModel.cs" />
     <Compile Include="Services\ViewResolver.cs" />
     <Compile Include="DependencyObjectExtensions.cs" />
+    <Compile Include="SplashScreenView.xaml.cs">
+      <DependentUpon>SplashScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreenViewModel.cs" />
     <Compile Include="Tracing.cs" />
     <Compile Include="Wait.cs" />
   </ItemGroup>
@@ -175,6 +180,12 @@
     <None Include="packages.config" />
     <None Include="Regions Class Diagram.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <Page Include="SplashScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40". (
@@ -190,7 +201,6 @@ if not exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40"
 )
 
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetName).*" /B /Y
-copy "$(SolutionDir)readme.md" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\readme.txt" /B /Y
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>
