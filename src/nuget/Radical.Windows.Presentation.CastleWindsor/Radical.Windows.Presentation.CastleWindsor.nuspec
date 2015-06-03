@@ -20,6 +20,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\..\build\$configuration$\radical.windows.Presentation.CastleWindsor\lib\" target="lib\" />
+    <file src="..\..\build\$configuration$\radical.windows.Presentation.CastleWindsor\lib\" target="lib\" />
   </files>
 </package>
