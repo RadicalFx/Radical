@@ -3,7 +3,7 @@
   <metadata>
     <id>Radical</id>
     <title>Radical</title>
-    <version>1.5.2.0-Democracy-Beta-1</version>
+    <version>1.5.2.0-Democracy-Beta-2</version>
     <authors>Mauro Servienti, Enos Recanati, Michael Denny</authors>
     <owners>radical,mauroservienti</owners>
     <licenseUrl>https://github.com/RadicalFx/radical/blob/master/license.md</licenseUrl>
@@ -16,6 +16,6 @@
     <tags>Radical</tags>
   </metadata>
   <files>
-    <file src="..\..\..\build\$configuration$\radical\lib\" target="lib\" />
+    <file src="..\..\build\$configuration$\radical\lib\" target="lib\" />
   </files>
 </package>

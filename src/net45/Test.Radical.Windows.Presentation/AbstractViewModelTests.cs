@@ -451,5 +451,17 @@ namespace Test.Radical.Windows.Presentation
             Assert.IsFalse( isValid );
             Assert.IsTrue( raised );
         }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_merge_errors_changes_it_should_not_fail()
+        {
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+
+            sut.Validate();
+            svc.MergeValidationErrors = !svc.MergeValidationErrors;
+        }
     }
 }
