@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
       <Link>Properties\Radical.AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Design Time Properties\DynamicDesignTimeProperty.cs" />
