@@ -349,6 +349,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ComponentModel\IRequireValidation.cs" />
+    <Compile Include="PropertyValidationState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

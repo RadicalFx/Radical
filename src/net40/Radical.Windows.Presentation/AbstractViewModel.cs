@@ -41,7 +41,9 @@ namespace Topics.Radical.Windows.Presentation
             if( this.IsValidationEnabled
                 && this.RunValidationOnPropertyChanged
                 && !this.IsResettingValidation
-                && !this.IsTriggeringValidation )
+                && !this.IsTriggeringValidation
+                && !this.SkipPropertyValidation( e.PropertyName )
+                && !this.validationState.IsValidatingProperty( e.PropertyName ) )
             {
                 this.ValidateProperty( e.PropertyName );
             }
@@ -49,7 +51,7 @@ namespace Topics.Radical.Windows.Presentation
             base.OnPropertyChanged( e );
         }
 
-        Boolean SkipPropertyChangedNotification( String propertyName )
+        Boolean SkipPropertyValidation( String propertyName )
         {
             var pi = this.GetType().GetProperty( propertyName );
             if( pi == null )
@@ -124,7 +126,7 @@ namespace Topics.Radical.Windows.Presentation
                         this.ValidationErrors.Clear();
                         this.GetType()
                             .GetProperties()
-                            .Where( p => !SkipPropertyChangedNotification( p.Name ) )
+                            .Where( p => !SkipPropertyValidation( p.Name ) )
                             .Select( p => p.Name )
                             .ForEach( p => this.OnPropertyChanged( p ) );
 
@@ -212,24 +214,71 @@ namespace Topics.Radical.Windows.Presentation
         /// Validates the given property.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        /// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
-        protected virtual String ValidateProperty( String propertyName )
+        /// <returns>
+        /// The first validation error, if any; Otherwise <c>null</c>.
+        /// </returns>
+        protected String ValidateProperty( String propertyName )
         {
-            var wasValid = this.IsValid;
+            return this.ValidateProperty( propertyName, ValidationBehavior.Default );
+        }
 
-            var error = this.ValidationService.Validate( propertyName );
+        PropertyValidationState validationState = new PropertyValidationState();
 
-            if( this.IsValid != wasValid )
+        /// <summary>
+        /// Validates the given property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        /// The first validation error, if any; Otherwise <c>null</c>.
+        /// </returns>
+        protected virtual String ValidateProperty( String propertyName, ValidationBehavior behavior )
+        {
+            if( this.ValidationService.IsValidationSuspended )
             {
-                this.OnPropertyChanged( () => this.IsValid );
-#if FX45
-                this.OnPropertyChanged( () => this.HasErrors );
-#endif
+                return null;
             }
 
-            this.OnValidated();
+            using( this.validationState.BeginPropertyValidation( propertyName ) )
+            {
+                var wasValid = this.IsValid;
 
-            return error;
+                var beforeDetectedProblems = this.ValidationService.ValidationErrors
+                    .Where( ve => ve.Key == propertyName )
+                    .SelectMany( ve => ve.DetectedProblems )
+                    .OrderBy( dp => dp )
+                    .ToArray();
+
+                var error = this.ValidationService.Validate( propertyName );
+
+                var afterDetectedProblems = this.ValidationService.ValidationErrors
+                    .Where( ve => ve.Key == propertyName )
+                    .SelectMany( ve => ve.DetectedProblems )
+                    .OrderBy( dp => dp )
+                    .ToArray();
+
+                var validationStatusChanged = !beforeDetectedProblems.SequenceEqual( afterDetectedProblems );
+                if( validationStatusChanged && behavior == ValidationBehavior.TriggerValidationErrorsOnFailure )
+                {
+                    this.OnPropertyChanged( propertyName );
+
+#if FX45
+                    this.OnErrorsChanged( propertyName );
+#endif
+                }
+
+                if( this.IsValid != wasValid )
+                {
+                    this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                    this.OnPropertyChanged( () => this.HasErrors );
+#endif
+                }
+
+                this.OnValidated();
+
+                return error;
+            }
         }
 
         /// <summary>
@@ -284,6 +333,11 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
         {
+            if( this.ValidationService.IsValidationSuspended )
+            {
+                return this.ValidationService.IsValid;
+            }
+
             var wasValid = this.IsValid;
 
             this.ValidationService.ValidateRuleSet( ruleSet );
