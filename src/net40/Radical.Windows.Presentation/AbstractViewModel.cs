@@ -212,12 +212,44 @@ namespace Topics.Radical.Windows.Presentation
         /// Validates the given property.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        /// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
-        protected virtual String ValidateProperty( String propertyName )
+        /// <returns>
+        /// The first validation error, if any; Otherwise <c>null</c>.
+        /// </returns>
+        protected String ValidateProperty( String propertyName ) 
         {
+            return this.ValidateProperty( propertyName, ValidationBehavior.Default );
+        }
+
+        /// <summary>
+        /// Validates the given property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        /// The first validation error, if any; Otherwise <c>null</c>.
+        /// </returns>
+        protected virtual String ValidateProperty( String propertyName, ValidationBehavior behavior )
+        {
+            if( this.ValidationService.IsValidationSuspended ) 
+            {
+                return null;
+            }
+
             var wasValid = this.IsValid;
+            var wasPropertyValid = !this.ValidationService
+                .GetInvalidProperties()
+                .Any( p => p == propertyName );
 
             var error = this.ValidationService.Validate( propertyName );
+
+            var isPropertyValid = !this.ValidationService
+                .GetInvalidProperties()
+                .Any( p => p == propertyName );
+
+            if( wasPropertyValid != isPropertyValid ) 
+            {
+                this.OnPropertyChanged( propertyName );
+            }
 
             if( this.IsValid != wasValid )
             {
@@ -284,6 +316,11 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
         {
+            if( this.ValidationService.IsValidationSuspended ) 
+            {
+                return this.ValidationService.IsValid;
+            }
+
             var wasValid = this.IsValid;
 
             this.ValidationService.ValidateRuleSet( ruleSet );

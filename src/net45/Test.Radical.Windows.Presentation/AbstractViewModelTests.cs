@@ -51,6 +51,16 @@ namespace Test.Radical.Windows.Presentation
             }
 
             public Boolean Test_IsValidationEnabled { get { return this.IsValidationEnabled; } }
+
+            public String Test_ValidateProperty( String propertyName )
+            {
+                return this.Test_ValidateProperty( propertyName, ValidationBehavior.Default );
+            }
+
+            public String Test_ValidateProperty( String propertyName, ValidationBehavior behavior )
+            {
+                return this.ValidateProperty( propertyName, behavior );
+            }
         }
 
         class SampleTestViewModel : TestViewModel
@@ -420,7 +430,7 @@ namespace Test.Radical.Windows.Presentation
             sut.ValidateUsing(
                 new DataAnnotationValidationService<TestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
-            
+
             var isValid = sut.Validate();
 
             Assert.IsFalse( isValid );
@@ -462,6 +472,138 @@ namespace Test.Radical.Windows.Presentation
 
             sut.Validate();
             svc.MergeValidationErrors = !svc.MergeValidationErrors;
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_PropertyChanged_event_should_not_be_raised()
+        {
+            List<String> raised = new List<string>();
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.PropertyChanged += ( s, e ) => raised.Add( e.PropertyName );
+
+            sut.Test_ValidateProperty( propName );
+
+            Assert.IsFalse( raised.Contains( propName ) );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_with_Trigger_berhavior_PropertyChanged_event_should_be_raised()
+        {
+            List<String> raised = new List<string>();
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.PropertyChanged += ( s, e ) => raised.Add( e.PropertyName );
+
+            sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+
+            Assert.IsTrue( raised.Contains( propName ) );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_with_Trigger_berhavior_ErrorsChanged_event_should_not_be_raised()
+        {
+            List<String> raised = new List<string>();
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.ErrorsChanged += ( s, e ) => raised.Add( e.PropertyName );
+
+            sut.Test_ValidateProperty( propName );
+
+            Assert.IsFalse( raised.Contains( propName ) );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_with_Trigger_berhavior_ErrorsChanged_event_should_be_raised()
+        {
+            List<String> raised = new List<string>();
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.ErrorsChanged += ( s, e ) => raised.Add( e.PropertyName );
+
+            sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+
+            Assert.IsTrue( raised.Contains( propName ) );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_with_Trigger_berhavior_ErrorsChanged_event_should_be_raised_if_the_status_of_errors_changes()
+        {
+            List<String> raised = new List<string>();
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.ErrorsChanged += ( s, e ) => raised.Add( e.PropertyName );
+
+            sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+
+            using( svc.SuspendValidation() ) //so that we can change a property without triggering the validation process
+            {
+                sut.NotNullNotEmpty = "";
+            }
+
+            sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+
+            Assert.IsTrue( raised.Count( p => p == propName ) == 2 );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_and_Validation_is_suspended_Validated_event_should_not_be_raised()
+        {
+            Boolean raised = false;
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.Validated += ( s, e ) => raised= true;
+
+            using( svc.SuspendValidation() ) //so that we can change a property without triggering the validation process
+            {
+                sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+            }
+
+            Assert.IsFalse( raised );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_Validate_and_Validation_is_suspended_Validated_event_should_not_be_raised()
+        {
+            Boolean raised = false;
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.Validated += ( s, e ) => raised = true;
+
+            using( svc.SuspendValidation() ) //so that we can change a property without triggering the validation process
+            {
+                sut.Validate();
+            }
+
+            Assert.IsFalse( raised );
         }
     }
 }
