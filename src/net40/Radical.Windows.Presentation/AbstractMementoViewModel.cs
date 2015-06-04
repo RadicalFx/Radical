@@ -41,7 +41,9 @@ namespace Topics.Radical.Windows.Presentation
             if( this.IsValidationEnabled
                 && this.RunValidationOnPropertyChanged
                 && !this.IsResettingValidation
-                && !this.IsTriggeringValidation )
+                && !this.IsTriggeringValidation
+                && !SkipPropertyValidation( e.PropertyName )
+                && !this.validationState.IsValidatingProperty( e.PropertyName ) )
             {
                 this.ValidateProperty( e.PropertyName );
             }
@@ -49,7 +51,7 @@ namespace Topics.Radical.Windows.Presentation
             base.OnPropertyChanged( e );
         }
 
-        Boolean SkipPropertyChangedNotification( String propertyName )
+        Boolean SkipPropertyValidation( String propertyName )
         {
             var pi = this.GetType().GetProperty( propertyName );
             if( pi == null )
@@ -74,7 +76,7 @@ namespace Topics.Radical.Windows.Presentation
             get
             {
 #if FX45
-                return this is IDataErrorInfo 
+                return this is IDataErrorInfo
                     || this is ICanBeValidated
                     || this is INotifyDataErrorInfo
                     || this is IRequireValidation;
@@ -96,13 +98,13 @@ namespace Topics.Radical.Windows.Presentation
         {
             get
             {
-                if ( this._validationService == null )
+                if( this._validationService == null )
                 {
                     this._validationService = this.GetValidationService();
                     this._validationService.StatusChanged += ( s, e ) =>
                     {
                         this.ValidationErrors.Clear();
-                        foreach ( var error in this._validationService.ValidationErrors )
+                        foreach( var error in this._validationService.ValidationErrors )
                         {
                             this.ValidationErrors.Add( error );
                         }
@@ -116,7 +118,7 @@ namespace Topics.Radical.Windows.Presentation
                     this._validationService.ValidationReset += ( s, e ) =>
                     {
                         var shouldSetStatus = !this.IsResettingValidation;
-                        if( shouldSetStatus ) 
+                        if( shouldSetStatus )
                         {
                             this.IsResettingValidation = true;
                         }
@@ -124,7 +126,7 @@ namespace Topics.Radical.Windows.Presentation
                         this.ValidationErrors.Clear();
                         this.GetType()
                             .GetProperties()
-                            .Where( p => !SkipPropertyChangedNotification( p.Name ) )
+                            .Where( p => !SkipPropertyValidation( p.Name ) )
                             .Select( p => p.Name )
                             .ForEach( p => this.OnPropertyChanged( p ) );
 
@@ -181,7 +183,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         /// <value>The error.</value>
         /// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
-        [Bindable(false)]
+        [Bindable( false )]
         [NeverNotifyPropertyChangedAttribute]
         public virtual String Error
         {
@@ -218,6 +220,8 @@ namespace Topics.Radical.Windows.Presentation
             return this.ValidateProperty( propertyName, ValidationBehavior.Default );
         }
 
+        PropertyValidationState validationState = new PropertyValidationState();
+
         /// <summary>
         /// Validates the given property.
         /// </summary>
@@ -228,33 +232,51 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         protected virtual String ValidateProperty( String propertyName, ValidationBehavior behavior )
         {
-            var wasValid = this.IsValid;
-            var wasPropertyValid = this.ValidationService
-                .GetInvalidProperties()
-                .Any( p => p == propertyName );
-
-            var error = this.ValidationService.Validate( propertyName );
-
-            var isPropertyValid = this.ValidationService
-                .GetInvalidProperties()
-                .Any( p => p == propertyName );
-
-            if( wasPropertyValid != isPropertyValid )
+            if( this.ValidationService.IsValidationSuspended )
             {
-                this.OnPropertyChanged( propertyName );
+                return null;
             }
 
-            if( this.IsValid != wasValid )
+            using( this.validationState.BeginPropertyValidation( propertyName ) )
             {
-                this.OnPropertyChanged( () => this.IsValid );
+                var wasValid = this.IsValid;
+                
+                var beforeDetectedProblems = this.ValidationService.ValidationErrors
+                   .Where( ve => ve.Key == propertyName )
+                   .SelectMany( ve => ve.DetectedProblems )
+                   .OrderBy( dp => dp )
+                   .ToArray();
+
+                var error = this.ValidationService.Validate( propertyName );
+
+                var afterDetectedProblems = this.ValidationService.ValidationErrors
+                    .Where( ve => ve.Key == propertyName )
+                    .SelectMany( ve => ve.DetectedProblems )
+                    .OrderBy( dp => dp )
+                    .ToArray();
+
+                var validationStatusChanged = !beforeDetectedProblems.SequenceEqual( afterDetectedProblems );
+                if( validationStatusChanged && behavior == ValidationBehavior.TriggerValidationErrorsOnFailure )
+                {
+                    this.OnPropertyChanged( propertyName );
+
 #if FX45
-                this.OnPropertyChanged( () => this.HasErrors );
+                    this.OnErrorsChanged( propertyName );
 #endif
+                }
+
+                if( this.IsValid != wasValid )
+                {
+                    this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                    this.OnPropertyChanged( () => this.HasErrors );
+#endif
+                }
+
+                this.OnValidated();
+
+                return error;
             }
-
-            this.OnValidated();
-
-            return error;
         }
 
         /// <summary>
@@ -311,12 +333,17 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
         {
+            if( this.ValidationService.IsValidationSuspended )
+            {
+                return this.ValidationService.IsValid;
+            }
+
             var wasValid = this.IsValid;
 
             this.ValidationService.ValidateRuleSet( ruleSet );
             this.OnValidated();
 
-            if ( behavior == ValidationBehavior.TriggerValidationErrorsOnFailure && !this.ValidationService.IsValid )
+            if( behavior == ValidationBehavior.TriggerValidationErrorsOnFailure && !this.ValidationService.IsValid )
             {
                 this.TriggerValidation();
             }
@@ -342,7 +369,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         protected virtual void OnValidated()
         {
-            if ( this.Validated != null )
+            if( this.Validated != null )
             {
                 this.Validated( this, EventArgs.Empty );
             }
@@ -353,11 +380,11 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         public virtual void TriggerValidation()
         {
-            if ( !this.IsTriggeringValidation )
+            if( !this.IsTriggeringValidation )
             {
                 this.IsTriggeringValidation = true;
 
-                foreach ( var invalid in this.ValidationService.GetInvalidProperties() )
+                foreach( var invalid in this.ValidationService.GetInvalidProperties() )
                 {
                     this.OnPropertyChanged( invalid );
                 }
@@ -388,7 +415,7 @@ namespace Topics.Radical.Windows.Presentation
         {
             base.OnMementoChanged( newMemento, oldMemento );
 
-            if ( oldMemento != null && !oldMemento.IsDisposed)
+            if( oldMemento != null && !oldMemento.IsDisposed )
             {
                 oldMemento.AcceptingChanges -= new EventHandler<CancelEventArgs>( OnAcceptingChanges );
                 oldMemento.RejectingChanges -= new EventHandler<CancelEventArgs>( OnRejectingChanges );
@@ -397,7 +424,7 @@ namespace Topics.Radical.Windows.Presentation
                 oldMemento.ChangesRejected -= new EventHandler( OnChangesRejected );
             }
 
-            if ( newMemento != null && !newMemento.IsDisposed )
+            if( newMemento != null && !newMemento.IsDisposed )
             {
                 newMemento.AcceptingChanges += new EventHandler<CancelEventArgs>( OnAcceptingChanges );
                 newMemento.RejectingChanges += new EventHandler<CancelEventArgs>( OnRejectingChanges );
@@ -548,7 +575,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <returns></returns>
         public System.Collections.IEnumerable GetErrors( string propertyName )
         {
-            if( String.IsNullOrEmpty( propertyName ) ) 
+            if( String.IsNullOrEmpty( propertyName ) )
             {
                 return this.ValidationErrors.ToArray();
             }

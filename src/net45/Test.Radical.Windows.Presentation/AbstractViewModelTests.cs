@@ -558,12 +558,36 @@ namespace Test.Radical.Windows.Presentation
 
             using( svc.SuspendValidation() ) //so that we can change a property without triggering the validation process
             {
-                sut.NotNullNotEmpty = "";
+                sut.NotNullNotEmpty = "qwertyqwerty";
             }
 
             sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
 
             Assert.IsTrue( raised.Count( p => p == propName ) == 2 );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractViewModel" ), TestCategory( "Validation" )]
+        public void AbstractViewModel_When_ValidateProperty_with_Trigger_berhavior_PropertyChanged_event_should_be_raised_if_the_status_of_errors_changes()
+        {
+            List<String> raised = new List<string>();
+            var propName = "NotNullNotEmpty";
+
+            var sut = new SampleTestViewModel();
+            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.PropertyChanged += ( s, e ) => raised.Add( e.PropertyName );
+
+            sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+
+            using( svc.SuspendValidation() ) //so that we can change a property without triggering the validation process
+            {
+                sut.NotNullNotEmpty = "qwertyqwerty";//this raises 1 PropertyChanged
+            }
+
+            sut.Test_ValidateProperty( propName, ValidationBehavior.TriggerValidationErrorsOnFailure );
+
+            Assert.AreEqual( 3, raised.Count( p => p == propName ) );
         }
 
         [TestMethod]
@@ -576,7 +600,7 @@ namespace Test.Radical.Windows.Presentation
             var sut = new SampleTestViewModel();
             var svc = new DataAnnotationValidationService<TestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
-            sut.Validated += ( s, e ) => raised= true;
+            sut.Validated += ( s, e ) => raised = true;
 
             using( svc.SuspendValidation() ) //so that we can change a property without triggering the validation process
             {
