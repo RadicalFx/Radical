@@ -300,7 +300,9 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		public virtual IEnumerable<String> GetInvalidProperties()
 		{
-			return this.ValidationErrors.Select( ve => ve.Key ).AsReadOnly();
+			return this.ValidationErrors.Select( ve => ve.Key )
+                .Distinct()
+                .AsReadOnly();
 		}
 
 		/// <summary>
