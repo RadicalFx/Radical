@@ -24,28 +24,28 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 			this.MergeValidationErrors = false;
 		}
 
-		readonly HashSet<String> validationCalledOnce = new HashSet<String>();
+        //readonly HashSet<String> validationCalledOnce = new HashSet<String>();
 
-		/// <summary>
-		/// Called in order to understand if the validation for the 
-		/// supplied property has already been called at least one time.
-		/// </summary>
-		/// <param name="propertyName">Name of the property.</param>
-		/// <returns><c>True</c> if the supplied property has been validated at least once; otherwise <c>false</c>.</returns>
-		protected virtual Boolean ValidationCalledOnceFor( String propertyName )
-		{
-			return this.validationCalledOnce.Contains( propertyName );
-		}
+        ///// <summary>
+        ///// Called in order to understand if the validation for the 
+        ///// supplied property has already been called at least one time.
+        ///// </summary>
+        ///// <param name="propertyName">Name of the property.</param>
+        ///// <returns><c>True</c> if the supplied property has been validated at least once; otherwise <c>false</c>.</returns>
+        //protected virtual Boolean ValidationCalledOnceFor( String propertyName )
+        //{
+        //    return this.validationCalledOnce.Contains( propertyName );
+        //}
 
-		/// <summary>
-		/// Registers that the validation process has been called 
-		/// at least once for the supplied property.
-		/// </summary>
-		/// <param name="propertyName">Name of the property.</param>
-		protected virtual void RegisterValidationCalledOnceFor( String propertyName )
-		{
-			this.validationCalledOnce.Add( propertyName );
-		}
+        ///// <summary>
+        ///// Registers that the validation process has been called 
+        ///// at least once for the supplied property.
+        ///// </summary>
+        ///// <param name="propertyName">Name of the property.</param>
+        //protected virtual void RegisterValidationCalledOnceFor( String propertyName )
+        //{
+        //    this.validationCalledOnce.Add( propertyName );
+        //}
 
 		/// <summary>
 		/// Validates the specified property.
@@ -69,18 +69,18 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		public String ValidateRuleSet( String ruleSet, String propertyName )
 		{
-			if( !this.ValidationCalledOnceFor( propertyName ) )
-			{
-				/*
-				 * Se non abbiamo mai validato la proprietà significa che siamo 
-				 * allo startup della Window e il motore di validazione di WPF 
-				 * viene triggherato per ogni "set" di ogni binding. Dato che non
-				 * ci interessa visualizzare la Window come non valida sin da 
-				 * subito evitiamo la validazione al primo controllo.
-				 */
-				this.RegisterValidationCalledOnceFor( propertyName );
-				return null;
-			}
+            //if( !this.ValidationCalledOnceFor( propertyName ) )
+            //{
+            //    /*
+            //     * Se non abbiamo mai validato la proprietà significa che siamo 
+            //     * allo startup della Window e il motore di validazione di WPF 
+            //     * viene triggherato per ogni "set" di ogni binding. Dato che non
+            //     * ci interessa visualizzare la Window come non valida sin da 
+            //     * subito evitiamo la validazione al primo controllo.
+            //     */
+            //    this.RegisterValidationCalledOnceFor( propertyName );
+            //    return null;
+            //}
 
 			if( this.IsValidationSuspended )
 			{
@@ -140,7 +140,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// <summary>
 		/// Occurs when this service is resetted.
 		/// </summary>
-		public event EventHandler Resetted;
+		public event EventHandler ValidationReset;
 
 		/// <summary>
 		/// Raises the <see cref="E:StatusChanged"/> event.
@@ -156,12 +156,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		}
 
 		/// <summary>
-		/// Raises the <see cref="E:Resetted"/> event.
+        /// Raises the <see cref="E:ValidationReset"/> event.
 		/// </summary>
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-		protected virtual void OnResetted( EventArgs e )
+		protected virtual void OnValidationReset( EventArgs e )
 		{
-			var h = this.Resetted;
+			var h = this.ValidationReset;
 			if( h != null )
 			{
 				h( this, e );
@@ -300,7 +300,9 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 		/// </returns>
 		public virtual IEnumerable<String> GetInvalidProperties()
 		{
-			return this.ValidationErrors.Select( ve => ve.Key ).AsReadOnly();
+			return this.ValidationErrors.Select( ve => ve.Key )
+                .Distinct()
+                .AsReadOnly();
 		}
 
 		/// <summary>
@@ -324,12 +326,12 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 
 			this.IsValid = true;
 
-			if( ( resetBehavior & ValidationResetBehavior.ValidationTracker ) == ValidationResetBehavior.ValidationTracker )
-			{
-				this.validationCalledOnce.Clear();
-			}
+            //if( ( resetBehavior & ValidationResetBehavior.ValidationTracker ) == ValidationResetBehavior.ValidationTracker )
+            //{
+            //    this.validationCalledOnce.Clear();
+            //}
 
-			this.OnResetted( EventArgs.Empty );
+			this.OnValidationReset( EventArgs.Empty );
 		}
 
 		class ValidationSuspender : IDisposable
@@ -435,7 +437,7 @@ namespace Topics.Radical.Windows.Presentation.Services.Validation
 						this._validationErrors.Clear();
 						this.AddValidationErrors( actual );
 
-						this.OnResetted( EventArgs.Empty );
+						this.OnValidationReset( EventArgs.Empty );
 					}
 				}
 			}
