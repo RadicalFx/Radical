@@ -29,7 +29,7 @@ namespace Topics.Radical.Windows.Presentation
         /// The view.
         /// </value>
         [Bindable( false )]
-        [NeverNotifyPropertyChanged]
+        [SkipPropertyValidation]
         System.Windows.DependencyObject IViewModel.View { get; set; }
 
         /// <summary>
@@ -41,7 +41,9 @@ namespace Topics.Radical.Windows.Presentation
             if( this.IsValidationEnabled
                 && this.RunValidationOnPropertyChanged
                 && !this.IsResettingValidation
-                && !this.IsTriggeringValidation )
+                && !this.IsTriggeringValidation
+                && !this.SkipPropertyValidation( e.PropertyName )
+                && !this.validationState.IsValidatingProperty( e.PropertyName ) )
             {
                 this.ValidateProperty( e.PropertyName );
             }
@@ -49,7 +51,7 @@ namespace Topics.Radical.Windows.Presentation
             base.OnPropertyChanged( e );
         }
 
-        Boolean SkipPropertyChangedNotification( String propertyName )
+        Boolean SkipPropertyValidation( String propertyName )
         {
             var pi = this.GetType().GetProperty( propertyName );
             if( pi == null )
@@ -59,7 +61,7 @@ namespace Topics.Radical.Windows.Presentation
 
             if( pi != null )
             {
-                return pi.IsAttributeDefined<NeverNotifyPropertyChangedAttribute>();
+                return pi.IsAttributeDefined<SkipPropertyValidationAttribute>();
             }
 
             return false;
@@ -68,7 +70,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Gets a value indication if validation is enabled or not.
         /// </summary>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected virtual Boolean IsValidationEnabled
         {
             get
@@ -91,7 +93,7 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets the validation service.
         /// </summary>
         /// <value>The validation service.</value>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected IValidationService ValidationService
         {
             get
@@ -124,7 +126,7 @@ namespace Topics.Radical.Windows.Presentation
                         this.ValidationErrors.Clear();
                         this.GetType()
                             .GetProperties()
-                            .Where( p => !SkipPropertyChangedNotification( p.Name ) )
+                            .Where( p => !SkipPropertyValidation( p.Name ) )
                             .Select( p => p.Name )
                             .ForEach( p => this.OnPropertyChanged( p ) );
 
@@ -185,7 +187,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         /// <value>The error.</value>
         /// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
-        [Bindable( false ), NeverNotifyPropertyChangedAttribute]
+        [Bindable( false ), SkipPropertyValidation]
         public virtual String Error
         {
             get { return null; }
@@ -194,7 +196,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Gets the error message, if any, for the property with the given name.
         /// </summary>
-        [Bindable( false ), NeverNotifyPropertyChangedAttribute]
+        [Bindable( false ), SkipPropertyValidation]
         public virtual String this[ String propertyName ]
         {
             get
@@ -212,31 +214,78 @@ namespace Topics.Radical.Windows.Presentation
         /// Validates the given property.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        /// <returns>The first validation error, if any; Otherwise <c>null</c>.</returns>
-        protected virtual String ValidateProperty( String propertyName )
+        /// <returns>
+        /// The first validation error, if any; Otherwise <c>null</c>.
+        /// </returns>
+        protected String ValidateProperty( String propertyName )
         {
-            var wasValid = this.IsValid;
+            return this.ValidateProperty( propertyName, ValidationBehavior.Default );
+        }
 
-            var error = this.ValidationService.Validate( propertyName );
+        PropertyValidationState validationState = new PropertyValidationState();
 
-            if( this.IsValid != wasValid )
+        /// <summary>
+        /// Validates the given property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="behavior">The behavior.</param>
+        /// <returns>
+        /// The first validation error, if any; Otherwise <c>null</c>.
+        /// </returns>
+        protected virtual String ValidateProperty( String propertyName, ValidationBehavior behavior )
+        {
+            if( this.ValidationService.IsValidationSuspended )
             {
-                this.OnPropertyChanged( () => this.IsValid );
-#if FX45
-                this.OnPropertyChanged( () => this.HasErrors );
-#endif
+                return null;
             }
 
-            this.OnValidated();
+            using( this.validationState.BeginPropertyValidation( propertyName ) )
+            {
+                var wasValid = this.IsValid;
 
-            return error;
+                var beforeDetectedProblems = this.ValidationService.ValidationErrors
+                    .Where( ve => ve.Key == propertyName )
+                    .SelectMany( ve => ve.DetectedProblems )
+                    .OrderBy( dp => dp )
+                    .ToArray();
+
+                var error = this.ValidationService.Validate( propertyName );
+
+                var afterDetectedProblems = this.ValidationService.ValidationErrors
+                    .Where( ve => ve.Key == propertyName )
+                    .SelectMany( ve => ve.DetectedProblems )
+                    .OrderBy( dp => dp )
+                    .ToArray();
+
+                var validationStatusChanged = !beforeDetectedProblems.SequenceEqual( afterDetectedProblems );
+                if( validationStatusChanged && behavior == ValidationBehavior.TriggerValidationErrorsOnFailure )
+                {
+                    this.OnPropertyChanged( propertyName );
+
+#if FX45
+                    this.OnErrorsChanged( propertyName );
+#endif
+                }
+
+                if( this.IsValid != wasValid )
+                {
+                    this.OnPropertyChanged( () => this.IsValid );
+#if FX45
+                    this.OnPropertyChanged( () => this.HasErrors );
+#endif
+                }
+
+                this.OnValidated();
+
+                return error;
+            }
         }
 
         /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
         /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-        [Bindable( false ), NeverNotifyPropertyChangedAttribute]
+        [Bindable( false ), SkipPropertyValidation]
         public virtual Boolean IsValid
         {
             get { return this.ValidationService.IsValid; }
@@ -246,7 +295,7 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets the validation errors if any.
         /// </summary>
         /// <value>The validation errors.</value>
-        [Bindable( false ), NeverNotifyPropertyChangedAttribute]
+        [Bindable( false ), SkipPropertyValidation]
         public virtual ObservableCollection<ValidationError> ValidationErrors
         {
             get;
@@ -284,6 +333,11 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         public virtual Boolean Validate( String ruleSet, ValidationBehavior behavior )
         {
+            if( this.ValidationService.IsValidationSuspended )
+            {
+                return this.ValidationService.IsValid;
+            }
+
             var wasValid = this.IsValid;
 
             this.ValidationService.ValidateRuleSet( ruleSet );
@@ -345,7 +399,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>
         /// 	<c>true</c> if this instance is triggering validation; otherwise, <c>false</c>.
         /// </value>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected virtual Boolean IsTriggeringValidation
         {
             get;
@@ -358,7 +412,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>
         /// The focused element key.
         /// </value>
-        [Bindable( false ), NeverNotifyPropertyChangedAttribute]
+        [Bindable( false ), SkipPropertyValidation]
         [MementoPropertyMetadata( TrackChanges = false )]
         public String FocusedElementKey
         {
@@ -392,13 +446,13 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
         /// </summary>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected Boolean RunValidationOnPropertyChanged { get; set; }
 
         /// <summary>
         /// <c>True</c> if the current ValidationService is resetting the validation status; Otherwise <c>false</c>.
         /// </summary>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected Boolean IsResettingValidation { get; private set; }
 
 #if FX45
@@ -454,7 +508,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <c>true</c> if this instance has errors; otherwise, <c>false</c>.
         /// </value>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public bool HasErrors
         {
             get

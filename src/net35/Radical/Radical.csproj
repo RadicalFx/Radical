@@ -156,7 +156,7 @@
     <Compile Include="Threading\AsyncWorker\AsyncErrorEventArgs.cs" />
     <Compile Include="Threading\AsyncWorker\IWorkerStatus.cs" />
     <Compile Include="Threading\AsyncWorker\IExecutableWorker.cs" />
-    <Compile Include="Model\NeverNotifyPropertyChangedAttribute.cs" />
+    <Compile Include="Model\SkipPropertyValidationAttribute.cs" />
     <Compile Include="Validation\ValidationTools.cs" />
     <Compile Include="Validation\ValidatorBaseFactory.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
