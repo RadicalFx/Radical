@@ -263,6 +263,9 @@
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\XmlnsDefinitions.cs">
       <Link>Properties\XmlnsDefinitions.cs</Link>
     </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\PropertyValidationState.cs">
+      <Link>PropertyValidationState.cs</Link>
+    </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\ContentRegion.cs">
       <Link>Regions\ContentRegion.cs</Link>
     </Compile>
@@ -349,7 +352,6 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ComponentModel\IRequireValidation.cs" />
-    <Compile Include="PropertyValidationState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

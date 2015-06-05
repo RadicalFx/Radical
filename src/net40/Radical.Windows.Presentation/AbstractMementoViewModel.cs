@@ -29,7 +29,7 @@ namespace Topics.Radical.Windows.Presentation
         /// The view.
         /// </value>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         System.Windows.DependencyObject IViewModel.View { get; set; }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Topics.Radical.Windows.Presentation
 
             if( pi != null )
             {
-                return pi.IsAttributeDefined<NeverNotifyPropertyChangedAttribute>();
+                return pi.IsAttributeDefined<SkipPropertyValidationAttribute>();
             }
 
             return false;
@@ -70,7 +70,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Gets a value indication if validation is enabled or not.
         /// </summary>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected virtual Boolean IsValidationEnabled
         {
             get
@@ -93,7 +93,7 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets the validation service.
         /// </summary>
         /// <value>The validation service.</value>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected IValidationService ValidationService
         {
             get
@@ -184,7 +184,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>The error.</value>
         /// <remarks>Used only in order to satisfy IDataErrorInfo interface implementation, the default implementation always returns null.</remarks>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public virtual String Error
         {
             get { return null; }
@@ -194,7 +194,7 @@ namespace Topics.Radical.Windows.Presentation
         /// Gets the error message, if any, for the property with the given name.
         /// </summary>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public virtual String this[ String propertyName ]
         {
             get
@@ -284,7 +284,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public virtual Boolean IsValid
         {
             get { return this.ValidationService.IsValid; }
@@ -295,7 +295,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </summary>
         /// <value>The validation errors.</value>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public virtual ObservableCollection<ValidationError> ValidationErrors
         {
             get;
@@ -399,7 +399,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <value>
         /// 	<c>true</c> if this instance is triggering validation; otherwise, <c>false</c>.
         /// </value>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected virtual Boolean IsTriggeringValidation
         {
             get;
@@ -496,7 +496,7 @@ namespace Topics.Radical.Windows.Presentation
         /// </value>
         [MementoPropertyMetadata( TrackChanges = false )]
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public String FocusedElementKey
         {
             get { return this.GetPropertyValue( () => this.FocusedElementKey ); }
@@ -529,13 +529,13 @@ namespace Topics.Radical.Windows.Presentation
         /// <summary>
         /// Determines if each time a property changes the validation process should be run. The default value is <c>true</c>.
         /// </summary>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected Boolean RunValidationOnPropertyChanged { get; set; }
 
         /// <summary>
         /// <c>True</c> if the current ValidationService is resetting the validation status; Otherwise <c>false</c>.
         /// </summary>
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         protected Boolean IsResettingValidation { get; private set; }
 
 #if FX45
@@ -591,7 +591,7 @@ namespace Topics.Radical.Windows.Presentation
         /// <c>true</c> if this instance has errors; otherwise, <c>false</c>.
         /// </value>
         [Bindable( false )]
-        [NeverNotifyPropertyChangedAttribute]
+        [SkipPropertyValidation]
         public bool HasErrors
         {
             get
