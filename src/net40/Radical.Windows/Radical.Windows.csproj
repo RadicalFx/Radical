@@ -44,7 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net40-client\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net40-client\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -55,7 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
       <Link>Properties\Radical.AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\net35\Radical.Windows\CommandEvent.cs">

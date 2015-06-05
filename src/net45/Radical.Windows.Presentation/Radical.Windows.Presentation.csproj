@@ -52,7 +52,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -62,7 +62,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
       <Link>Properties\Radical.AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\AbstractMementoViewModel.cs">
@@ -262,6 +262,9 @@
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Properties\XmlnsDefinitions.cs">
       <Link>Properties\XmlnsDefinitions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\net40\Radical.Windows.Presentation\PropertyValidationState.cs">
+      <Link>PropertyValidationState.cs</Link>
     </Compile>
     <Compile Include="..\..\net40\Radical.Windows.Presentation\Regions\ContentRegion.cs">
       <Link>Regions\ContentRegion.cs</Link>

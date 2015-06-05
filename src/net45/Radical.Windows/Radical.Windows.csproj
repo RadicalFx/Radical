@@ -47,7 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity">
-      <HintPath>..\..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xaml" />
@@ -59,7 +59,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\lib\Radical.AssemblyInfo.cs">
+    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
       <Link>Properties\Radical.AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="..\..\net35\Radical.Windows\CommandEvent.cs">
