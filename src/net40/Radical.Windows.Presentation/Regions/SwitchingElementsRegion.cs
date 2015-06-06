@@ -49,12 +49,23 @@ namespace Topics.Radical.Windows.Presentation.Regions
 		/// </summary>
 		protected virtual void OnActiveContentChanged()
 		{
-			if( this.ActiveContentChanged != null )
+		    var h = this.ActiveContentChanged;
+			if( h != null )
 			{
-				this.ActiveContentChanged( this, new ActiveContentChangedEventArgs( this.ActiveContent, this.PreviousActiveContent ) );
+				h( this, new ActiveContentChangedEventArgs( this.ActiveContent, this.PreviousActiveContent ) );
 			}
 
-			if( this.ActiveContent != this.PreviousActiveContent )
+		    if (RegionService.Conventions != null)
+		    {
+		        var vm = RegionService.Conventions
+                    .GetViewDataContext(this.ActiveContent, ViewDataContextSearchBehavior.LocalOnly) as IExpectViewActivatedCallback;
+		        if (vm != null)
+		        {
+		            vm.OnViewActivated();
+		        }
+		    }
+
+		    if( this.ActiveContent != this.PreviousActiveContent )
 			{
 				this.PreviousActiveContent = this.ActiveContent;
 			}
