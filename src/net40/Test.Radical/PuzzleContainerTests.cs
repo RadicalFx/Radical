@@ -6,7 +6,7 @@ using Topics.Radical;
 using Topics.Radical.ComponentModel;
 using Topics.Radical.Reflection;
 
-namespace Radical.Tests
+namespace Test.Radical
 {
 	[TestClass]
 	public class PuzzleContainerTests
