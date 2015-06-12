@@ -435,7 +435,7 @@ namespace Topics.Radical.Windows.Behaviors
 				if( ctrl != null )
 				{
 					var bkg = ctrl.GetValue( ItemsControl.BackgroundProperty );
-					if( bkg == null ) 
+					if( bkg == null )
 					{
 						ctrl.SetValue( ItemsControl.BackgroundProperty, Brushes.Transparent );
 					}
@@ -445,9 +445,19 @@ namespace Topics.Radical.Windows.Behaviors
 				{
 					var os = ( DependencyObject )args.OriginalSource;
 					var command = DragDropManager.FindDragEnterCommand( os );
-					if( command != null && command.CanExecute( null ) )
+					if( command != null )
 					{
-						command.Execute( null );
+						var dropTarget = DragDropManager.FindDropTarget( os );
+						var cmdArgs = new DragEnterArgs(
+							args.Data,
+							args.KeyStates,
+							dropTarget,
+							args.AllowedEffects );
+
+						if( command.CanExecute( cmdArgs ) )
+						{
+							command.Execute( cmdArgs );
+						}
 					}
 				};
 
