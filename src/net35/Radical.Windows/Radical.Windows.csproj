@@ -113,6 +113,7 @@
     <Compile Include="Presentation\Behaviors\AutoComplete\ChoosenItemBinding.cs" />
     <Compile Include="Presentation\Behaviors\AutoComplete\ImplicitItemsFilter.cs" />
     <Compile Include="Presentation\Behaviors\BusyStatusManager\MultiThreadingBusyAdorner.cs" />
+    <Compile Include="Presentation\Behaviors\DragDropBehavior\DragLeaveArgs.cs" />
     <Compile Include="Presentation\Behaviors\DragDropBehavior\DragEnterArgs.cs" />
     <Compile Include="Presentation\Behaviors\DragDropBehavior\DropArgs.cs" />
     <Compile Include="Presentation\Behaviors\DragDropBehavior\DragOverArgs.cs" />
