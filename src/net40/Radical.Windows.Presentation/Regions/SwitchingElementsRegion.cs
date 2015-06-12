@@ -55,20 +55,33 @@ namespace Topics.Radical.Windows.Presentation.Regions
                 h( this, new ActiveContentChangedEventArgs( this.ActiveContent, this.PreviousActiveContent ) );
             }
 
-            if (RegionService.Conventions != null)
+            var vm = this.TryGetViewModel( this.ActiveContent ) as IExpectViewActivatedCallback;
+            if( vm != null )
             {
-                var vm = RegionService.Conventions
-                    .GetViewDataContext(this.ActiveContent, ViewDataContextSearchBehavior.LocalOnly) as IExpectViewActivatedCallback;
-                if (vm != null)
-                {
-                    vm.OnViewActivated();
-                }
+                vm.OnViewActivated();
             }
 
             if( this.ActiveContent != this.PreviousActiveContent )
             {
                 this.PreviousActiveContent = this.ActiveContent;
             }
+        }
+
+        /// <summary>
+        /// Tries the get view model.
+        /// </summary>
+        /// <param name="view">The view.</param>
+        /// <returns></returns>
+        protected virtual Object TryGetViewModel( DependencyObject view )
+        {
+            if( RegionService.Conventions != null )
+            {
+                var vm = RegionService.Conventions.GetViewDataContext( view, ViewDataContextSearchBehavior.LocalOnly );
+
+                return vm;
+            }
+
+            return null;
         }
 
         /// <summary>
