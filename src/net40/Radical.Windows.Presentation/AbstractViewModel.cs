@@ -51,7 +51,12 @@ namespace Topics.Radical.Windows.Presentation
             base.OnPropertyChanged( e );
         }
 
-        Boolean SkipPropertyValidation( String propertyName )
+        /// <summary>
+        /// Determines if property validation should be skipped for the given property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns></returns>
+        protected virtual Boolean SkipPropertyValidation( String propertyName )
         {
             var pi = this.GetType().GetProperty( propertyName );
             if( pi == null )
@@ -234,9 +239,11 @@ namespace Topics.Radical.Windows.Presentation
         /// </returns>
         protected virtual String ValidateProperty( String propertyName, ValidationBehavior behavior )
         {
+            String error = null;
+
             if( this.ValidationService.IsValidationSuspended )
             {
-                return null;
+                return error;
             }
 
             using( this.validationState.BeginPropertyValidation( propertyName ) )
@@ -249,7 +256,7 @@ namespace Topics.Radical.Windows.Presentation
                     .OrderBy( dp => dp )
                     .ToArray();
 
-                var error = this.ValidationService.Validate( propertyName );
+                error = this.ValidationService.Validate( propertyName );
 
                 var afterDetectedProblems = this.ValidationService.ValidationErrors
                     .Where( ve => ve.Key == propertyName )
@@ -274,11 +281,11 @@ namespace Topics.Radical.Windows.Presentation
                     this.OnPropertyChanged( () => this.HasErrors );
 #endif
                 }
-
-                this.OnValidated();
-
-                return error;
             }
+
+            this.OnValidated();
+
+            return error;
         }
 
         /// <summary>
