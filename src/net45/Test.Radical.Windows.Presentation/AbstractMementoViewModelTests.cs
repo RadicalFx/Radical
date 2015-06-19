@@ -5,8 +5,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Topics.Radical.ChangeTracking;
+using Topics.Radical.ComponentModel.ChangeTracking;
+using Topics.Radical.ComponentModel.Validation;
 using Topics.Radical.Validation;
 using Topics.Radical.Windows.Presentation;
 using Topics.Radical.Windows.Presentation.ComponentModel;
@@ -61,6 +65,16 @@ namespace Test.Radical.Windows.Presentation
             {
                 return this.ValidateProperty( propertyName, behavior );
             }
+
+            public void Test_RaisePropertyChanged<T>( Expression<Func<T>> property ) 
+            {
+                this.OnPropertyChanged( property );
+            }
+
+            public void Test_SetInitialPropertyValue<T>( Expression<Func<T>> property, T value ) 
+            {
+                this.SetInitialPropertyValue( property, value );
+            }
         }
 
         class SampleTestViewModel : TestViewModel
@@ -72,7 +86,36 @@ namespace Test.Radical.Windows.Presentation
                 get { return this.GetPropertyValue( () => this.NotNullNotEmpty ); }
                 set { this.SetPropertyValue( () => this.NotNullNotEmpty, value ); }
             }
+
+            public String Another
+            {
+                get { return this.GetPropertyValue( () => this.Another ); }
+                set { this.SetPropertyValue( () => this.Another, value ); }
+            }
+
+            public String AnotherOne
+            {
+                get { return this.GetPropertyValue( () => this.AnotherOne ); }
+                set { this.SetPropertyValue( () => this.AnotherOne, value ); }
+            }
+
+            public String OnceMore
+            {
+                get { return this.GetPropertyValue( () => this.OnceMore ); }
+                set { this.SetPropertyValue( () => this.OnceMore, value ); }
+            }
         }
+
+        class SampleTestViewModelWithValidationCallback : SampleTestViewModel, IRequireValidationCallback<SampleTestViewModelWithValidationCallback>
+        {
+            public Action<ValidationContext<SampleTestViewModelWithValidationCallback>> Test_OnValidate { get; set; }
+
+            public void OnValidate( ValidationContext<SampleTestViewModelWithValidationCallback> context )
+            {
+                this.Test_OnValidate( context );
+            }
+        }
+
 
         class ImplementsIDataErrorInfo : TestViewModel, IDataErrorInfo
         {
@@ -130,7 +173,7 @@ namespace Test.Radical.Windows.Presentation
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ) );
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ) );
             sut.Validate();
             var errors = sut.ValidationErrors;
 
@@ -143,7 +186,7 @@ namespace Test.Radical.Windows.Presentation
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ) );
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ) );
 
             var error = sut[ "NotNullNotEmpty" ];
 
@@ -156,7 +199,7 @@ namespace Test.Radical.Windows.Presentation
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ) );
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ) );
 
             var error = sut[ "NotNullNotEmpty" ];
             error = sut[ "NotNullNotEmpty" ];
@@ -171,7 +214,7 @@ namespace Test.Radical.Windows.Presentation
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ) );
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ) );
 
             var errors = sut.GetErrors( "NotNullNotEmpty" ).OfType<Object>();
 
@@ -184,7 +227,7 @@ namespace Test.Radical.Windows.Presentation
         {
             var sut = new SampleTestViewModel();
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ) );
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ) );
 
             var errors = sut.GetErrors( "NotNullNotEmpty" ).OfType<Object>();
             errors = sut.GetErrors( "NotNullNotEmpty" ).OfType<Object>();
@@ -238,7 +281,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ) );
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ) );
             sut.NotNullNotEmpty = "";
 
             Assert.IsNotNull( errors );
@@ -258,7 +301,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -278,7 +321,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -298,7 +341,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -319,7 +362,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -339,7 +382,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -359,7 +402,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.ResetValidation();
 
@@ -382,7 +425,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -405,7 +448,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
             sut.NotNullNotEmpty = "";
 
@@ -428,7 +471,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
 
             var isValid = sut.Validate();
@@ -453,7 +496,7 @@ namespace Test.Radical.Windows.Presentation
             };
 
             sut.ValidateUsing(
-                new DataAnnotationValidationService<TestViewModel>( sut ),
+                new DataAnnotationValidationService<SampleTestViewModel>( sut ),
                 forceIsValidationEnabledTo: true );
 
             var isValid = sut.Validate();
@@ -467,7 +510,7 @@ namespace Test.Radical.Windows.Presentation
         public void AbstractViewModel_When_merge_errors_changes_it_should_not_fail()
         {
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
 
             sut.Validate();
@@ -482,7 +525,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.PropertyChanged += ( s, e ) => raised.Add( e.PropertyName );
 
@@ -499,7 +542,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.PropertyChanged += ( s, e ) => raised.Add( e.PropertyName );
 
@@ -516,7 +559,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.ErrorsChanged += ( s, e ) => raised.Add( e.PropertyName );
 
@@ -533,7 +576,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.ErrorsChanged += ( s, e ) => raised.Add( e.PropertyName );
 
@@ -550,7 +593,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.ErrorsChanged += ( s, e ) => raised.Add( e.PropertyName );
 
@@ -574,7 +617,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.PropertyChanged += ( s, e ) => raised.Add( e.PropertyName );
 
@@ -598,7 +641,7 @@ namespace Test.Radical.Windows.Presentation
             var propName = "NotNullNotEmpty";
 
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.Validated += ( s, e ) => raised = true;
 
@@ -615,10 +658,9 @@ namespace Test.Radical.Windows.Presentation
         public void AbstractMementoViewModel_When_Validate_and_Validation_is_suspended_Validated_event_should_not_be_raised()
         {
             Boolean raised = false;
-            var propName = "NotNullNotEmpty";
-
+            
             var sut = new SampleTestViewModel();
-            var svc = new DataAnnotationValidationService<TestViewModel>( sut );
+            var svc = new DataAnnotationValidationService<SampleTestViewModel>( sut );
             sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
             sut.Validated += ( s, e ) => raised = true;
 
@@ -628,6 +670,59 @@ namespace Test.Radical.Windows.Presentation
             }
 
             Assert.IsFalse( raised );
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" ), TestCategory( "Issue#176" )]
+        public void AbstractMementoViewModel_it_should_be_possible_to_change_a_validatable_property_at_custom_validation_time()
+        {
+            var sut = new SampleTestViewModelWithValidationCallback();
+            var svc = DataAnnotationValidationService.CreateFor( sut );
+
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.Test_OnValidate = ctx => 
+            {
+                sut.AnotherOne = "fail";
+            };
+
+            sut.NotNullNotEmpty = "a value";
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" ), TestCategory( "Issue#176" )]
+        public void AbstractMementoViewModel_it_should_be_possible_to_change_a_validatable_property_in_a_custom_validation_rule()
+        {
+            var sut = new SampleTestViewModel();
+            var svc = DataAnnotationValidationService.CreateFor( sut );
+            svc.AddRule(
+                property: () => sut.NotNullNotEmpty,
+                error: ctx => "error",
+                rule: ctx =>
+                {
+                    sut.AnotherOne = "fail";
+
+                    return true;
+                } );
+
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+
+            sut.NotNullNotEmpty = "a value";
+        }
+
+        [TestMethod]
+        [TestCategory( "AbstractMementoViewModel" ), TestCategory( "Validation" ), TestCategory( "Issue#177" )]
+        public void AbstractMementoViewModel_it_should_be_possible_to_change_a_validatable_property_in_the_validated_event()
+        {
+            var sut = new SampleTestViewModel();
+            var svc = DataAnnotationValidationService.CreateFor( sut );
+
+            sut.ValidateUsing( svc, forceIsValidationEnabledTo: true );
+            sut.Validated += ( s, e ) =>
+            {
+                sut.AnotherOne = "fail";
+            };
+
+            sut.NotNullNotEmpty = "a value";
         }
     }
 }
