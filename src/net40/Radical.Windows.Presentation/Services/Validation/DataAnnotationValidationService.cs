@@ -13,6 +13,23 @@ using System.ComponentModel;
 
 namespace Topics.Radical.Windows.Presentation.Services.Validation
 {
+    /// <summary>
+    /// DataAnnotationValidationService factory.
+    /// </summary>
+    public static class DataAnnotationValidationService 
+    {
+        /// <summary>
+        /// Creates a new DataAnnotationValidationService instance for the given entity..
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <returns></returns>
+        public static DataAnnotationValidationService<TEntity> CreateFor<TEntity>( TEntity entity ) 
+        {
+            return new DataAnnotationValidationService<TEntity>( entity );
+        }
+    }
+
 	/// <summary>
 	/// Validation service specialized to validates entities 
 	/// decorated with the DataAnnotation attributes.

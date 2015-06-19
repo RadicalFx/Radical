@@ -141,13 +141,7 @@ namespace Topics.Radical.Model
 
         protected void OnPropertyChanged<T>( Expression<Func<T>> property )
         {
-            this.EnsureNotDisposed();
-
-            PropertyChangedEventHandler h = this.Events[ propertyChangedEventKey ] as PropertyChangedEventHandler;
-            if ( h != null )
-            {
-                this.OnPropertyChanged( new PropertyChangedEventArgs( property.GetMemberName() ) );
-            }
+            this.OnPropertyChanged( new PropertyChangedEventArgs( property.GetMemberName() ) );
         }
 
         #endregion
