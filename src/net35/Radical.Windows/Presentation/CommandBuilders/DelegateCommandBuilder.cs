@@ -70,25 +70,25 @@ namespace Topics.Radical.Windows.CommandBuilders
 		/// <returns></returns>
 		public virtual Boolean TryGenerateCommandData( PropertyPath path, Object dataContext, out CommandData data )
 		{
-            var propertyPath = path.Path;
-            var nestedProperties = propertyPath
-                .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-            var propertyLevel = 0;
-            while (dataContext != null && propertyLevel < nestedProperties.Length-1)
-            {
-                var currentProperty = nestedProperties[propertyLevel];
-                var dataContextType = dataContext.GetType();
-                var pi = dataContextType.GetProperty(currentProperty);
-                if (pi == null)
-                {
-                    logger.Error("Cannot find any property named: {0}.", currentProperty);
-                    dataContext = null;
-                    break;
-                }
-                dataContext = pi.GetValue(dataContext, null);
-                propertyLevel++;
-                propertyPath = nestedProperties[propertyLevel];
-            }
+			var propertyPath = path.Path;
+			var nestedProperties = propertyPath
+				.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+			var propertyLevel = 0;
+			while (dataContext != null && propertyLevel < nestedProperties.Length-1)
+			{
+				var currentProperty = nestedProperties[propertyLevel];
+				var dataContextType = dataContext.GetType();
+				var pi = dataContextType.GetProperty(currentProperty);
+				if (pi == null)
+				{
+					logger.Error("Cannot find any property named: {0}.", currentProperty);
+					dataContext = null;
+					break;
+				}
+				dataContext = pi.GetValue(dataContext, null);
+				propertyLevel++;
+				propertyPath = nestedProperties[propertyLevel];
+			}
 
 			if ( dataContext == null )
 			{
