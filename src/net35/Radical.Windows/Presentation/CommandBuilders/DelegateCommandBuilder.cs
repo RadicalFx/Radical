@@ -70,15 +70,33 @@ namespace Topics.Radical.Windows.CommandBuilders
 		/// <returns></returns>
 		public virtual Boolean TryGenerateCommandData( PropertyPath path, Object dataContext, out CommandData data )
 		{
-			//WARN: does not work if using a nested binding such as: Property.Foo.Bar
-			//var dataContext = this.GetDataContext( target );
+            var propertyPath = path.Path;
+            var nestedProperties = propertyPath
+                .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            var propertyLevel = 0;
+            while (dataContext != null && propertyLevel < nestedProperties.Length-1)
+            {
+                var currentProperty = nestedProperties[propertyLevel];
+                var dataContextType = dataContext.GetType();
+                var pi = dataContextType.GetProperty(currentProperty);
+                if (pi == null)
+                {
+                    logger.Error("Cannot find any property named: {0}.", currentProperty);
+                    dataContext = null;
+                    break;
+                }
+                dataContext = pi.GetValue(dataContext, null);
+                propertyLevel++;
+                propertyPath = nestedProperties[propertyLevel];
+            }
+
 			if ( dataContext == null )
 			{
 				data = null;
 				return false;
 			}
 
-			var methodName = GetExpectedMethodName( path.Path );
+			var methodName = GetExpectedMethodName( propertyPath );
 			var factName = String.Concat( "Can", methodName );
 			var properties = dataContext.GetType().GetProperties();
 
