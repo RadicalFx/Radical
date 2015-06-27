@@ -110,6 +110,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical.Windows.Presen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical.Windows.Presentation.CastleWindsor", "net40\Test.Radical.Windows.Presentation.CastleWindsor\Test.Radical.Windows.Presentation.CastleWindsor.csproj", "{D8CBEDAB-2991-47DA-82F0-D748C0AFB11A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35", "net35", "{876AAE43-D461-4261-BE26-1AF1593FE770}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -481,6 +483,7 @@ Global
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A} = {FD7E428B-8FDB-4EEA-95E6-28598703E605}
 		{30EB1357-554D-432C-A01A-8B3145A8C119} = {FD7E428B-8FDB-4EEA-95E6-28598703E605}
 		{D8CBEDAB-2991-47DA-82F0-D748C0AFB11A} = {667F5571-5118-4BDB-A011-BFB5DEAE389C}
+		{876AAE43-D461-4261-BE26-1AF1593FE770} = {4D938E88-567A-4F81-A0E4-A56650C81053}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
