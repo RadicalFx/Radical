@@ -8,7 +8,12 @@ using System.Runtime.CompilerServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "Radical" )]
-[assembly: AssemblyDescription( "" )]
+[assembly: AssemblyDescription( "Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern." )]
+[assembly: AssemblyCompany( "topics.it" )]
+[assembly: AssemblyProduct( "Radical Framework" )]
+[assembly: AssemblyCopyright( "Copyright ©  2015" )]
+[assembly: AssemblyTrademark( "" )]
+
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCulture( "" )]
 

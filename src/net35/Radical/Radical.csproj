@@ -82,9 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
-      <Link>Properties\Radical.AssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="ComponentModel\ChangeTracking\IPropertyValueChange.cs" />
     <Compile Include="AnalyticsService.cs" />
     <Compile Include="ComponentModel\Container\ComponentRegisteredEventArgs.cs" />
@@ -513,7 +510,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Entity PropertySystem.cd" />
-    <None Include="Migrated rules for Radical.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

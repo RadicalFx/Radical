@@ -49,9 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
-      <Link>Properties\Radical.AssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\net35\Radical\AnalyticsService.cs">
       <Link>AnalyticsService.cs</Link>
     </Compile>
