@@ -510,6 +510,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Entity PropertySystem.cd" />
+    <None Include="GitVersionConfig.yaml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
