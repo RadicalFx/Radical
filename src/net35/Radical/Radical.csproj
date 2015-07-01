@@ -35,6 +35,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>14778b9f</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -149,7 +150,6 @@
       <DependentUpon>EntityCollection.%28Generic%29.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Entity\PropertyMetadata %28Generic%29.cs" />
-    <Compile Include="Properties\NugetInfo.cs" />
     <Compile Include="Threading\AsyncWorker\AsyncErrorEventArgs.cs" />
     <Compile Include="Threading\AsyncWorker\IWorkerStatus.cs" />
     <Compile Include="Threading\AsyncWorker\IExecutableWorker.cs" />
@@ -510,6 +510,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Entity PropertySystem.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -562,4 +563,13 @@ copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)build\$(ConfigurationName)\$(P
 copy "$(TargetDir)it-IT\$(TargetName).resources.*" "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\it-IT\$(TargetName).resources.*" /B /Y
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net35\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets" Condition="Exists('..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets'))" />
+    <Error Condition="!Exists('..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets" Condition="Exists('..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets')" />
 </Project>

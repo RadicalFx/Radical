@@ -19,15 +19,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: ComVisible( false )]
 [assembly: Guid( "ac1104e2-8764-42ea-80aa-bfd22bc6a89f" )]
-
 [assembly: CLSCompliant( true )]
-
-//This is the real build number used for references
-[assembly: AssemblyVersion( "1.5.2.1" )]
-
-//This build number should always be equal to the one used in AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.5.2.1" )]
-
 [assembly: NeutralResourcesLanguage( "en-US", UltimateResourceFallbackLocation.MainAssembly )]
 
 //[assembly: InternalsVisibleTo( "Test.Radical, PublicKey=002400000480000094"
