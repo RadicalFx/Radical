@@ -16,6 +16,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>34e1e6ff</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,9 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\lib\Radical.AssemblyInfo.cs">
-      <Link>Properties\Radical.AssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\net35\Radical\AnalyticsService.cs">
       <Link>AnalyticsService.cs</Link>
     </Compile>
@@ -780,9 +778,6 @@
     <Compile Include="..\..\net35\Radical\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\net35\Radical\Properties\NugetInfo.cs">
-      <Link>Properties\NugetInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\net35\Radical\Resources\Exceptions.Designer.cs">
       <Link>Resources\Exceptions.Designer.cs</Link>
       <DependentUpon>Exceptions.resx</DependentUpon>
@@ -966,6 +961,9 @@
       <Link>Resources\Labels.resx</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if exist "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40". (
@@ -995,6 +993,15 @@ copy "$(TargetDir)it-IT\$(TargetName).resources.*" "$(SolutionDir)build\$(Config
 
 del "$(SolutionDir)build\$(ConfigurationName)\$(ProjectName)\lib\net40\$(TargetFileName).config"</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets'))" />
+    <Error Condition="!Exists('..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets" Condition="Exists('..\..\packages\NuGetPackager.0.5.5\build\NuGetPackager.targets')" />
+  <Import Project="..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets" Condition="Exists('..\..\packages\GitVersionTask.3.0.0-beta0004\Build\GitVersionTask.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

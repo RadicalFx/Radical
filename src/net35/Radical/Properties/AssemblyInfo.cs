@@ -8,21 +8,18 @@ using System.Runtime.CompilerServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "Radical" )]
-[assembly: AssemblyDescription( "" )]
+[assembly: AssemblyDescription( "Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern." )]
+[assembly: AssemblyCompany( "topics.it" )]
+[assembly: AssemblyProduct( "Radical Framework" )]
+[assembly: AssemblyCopyright( "Copyright ©  2015" )]
+[assembly: AssemblyTrademark( "" )]
+
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCulture( "" )]
 
 [assembly: ComVisible( false )]
 [assembly: Guid( "ac1104e2-8764-42ea-80aa-bfd22bc6a89f" )]
-
 [assembly: CLSCompliant( true )]
-
-//This is the real build number used for references
-[assembly: AssemblyVersion( "1.5.2.1" )]
-
-//This build number should always be equal to the one used in AssemblyVersion, currently is not used.
-[assembly: AssemblyFileVersion( "1.5.2.1" )]
-
 [assembly: NeutralResourcesLanguage( "en-US", UltimateResourceFallbackLocation.MainAssembly )]
 
 //[assembly: InternalsVisibleTo( "Test.Radical, PublicKey=002400000480000094"
