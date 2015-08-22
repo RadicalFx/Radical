@@ -16,6 +16,6 @@
     <tags>Radical</tags>
   </metadata>
   <files>
-    <file src="..\..\build\$configuration$\radical\lib\" target="lib\" />
+    <file src="..\build\$configuration$\radical\lib\" target="lib\" />
   </files>
 </package>
