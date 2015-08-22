@@ -2,7 +2,7 @@
 #     DEVELOPMENT BRANCH
 #
 # build in Debug mode and deploy to MyGet.org as pre-release
-- version: 1.8.0-alpha1+{build}
+- version: 1.5.2-alpha1+{build}
   branches:
     only:
     - development
@@ -44,7 +44,7 @@
 #     MASTER BRANCH
 #
 # build in Release mode and deploy to NuGet.org
-- version: 1.8.0+{build}
+- version: 1.5.2+{build}
   branches:
     only:
     - master
