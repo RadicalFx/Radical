@@ -1,0 +1,82 @@
+#
+#     DEVELOPMENT BRANCH
+#
+# build in Debug mode and deploy to MyGet.org as pre-release
+- version: 1.8.0-alpha1+{build}
+  branches:
+    only:
+    - development
+  configuration: Debug
+  platform: Any CPU
+  cache:
+  - src\packages -> src\**\packages.config
+  install:
+  - ps: .\appveyor-buildversion.ps1
+  assembly_info:
+    patch: true
+    file: '**\AssemblyInfo.*'
+    assembly_version: '$(assembly_version)'
+    assembly_file_version: '$(assembly_file_version)'
+    assembly_informational_version: '$(assembly_informational_version)'
+  before_build:
+  - nuget restore "src\Radical.sln"
+  build:
+    project: src\Radical.sln
+    verbosity: minimal
+  after_build:
+  - md "src\build\nuget"
+  - nuget pack "src\nuget\Radical\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+  test:
+    categories:
+      except:
+      - ObjectDumper
+      - AsyncWorker
+  artifacts:
+  - path: src\build\Debug
+  - path: src\build\nuget\*.nupkg
+  deploy:
+  - provider: Environment
+    name: MyGet feed
+    on:
+      branch: development
+
+#
+#     MASTER BRANCH
+#
+# build in Release mode and deploy to NuGet.org
+- version: 1.8.0+{build}
+  branches:
+    only:
+    - master
+  configuration: Release
+  platform: Any CPU
+  cache:
+  - src\packages -> src\**\packages.config
+  install:
+  - ps: .\appveyor-buildversion.ps1
+  assembly_info:
+    patch: true
+    file: '**\AssemblyInfo.*'
+    assembly_version: '$(assembly_version)'
+    assembly_file_version: '$(assembly_file_version)'
+    assembly_informational_version: '$(assembly_informational_version)'
+  before_build:
+  - nuget restore "src\Radical.sln"
+  build:
+    project: src\Radical.sln
+    verbosity: minimal
+  after_build:
+  - md "src\build\nuget"
+  - nuget pack "src\nuget\Radical\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+  test:
+    categories:
+      except:
+      - ObjectDumper
+  artifacts:
+  - path: src\build\Release
+  - path: src\build\nuget\*.nupkg
+  deploy:
+  - provider: Environment
+    name: MyGet feed
+    on:
+      branch: master
