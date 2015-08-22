@@ -25,7 +25,7 @@
     verbosity: minimal
   after_build:
   - md "src\build\nuget"
-  - nuget pack "src\nuget\Radical\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+  - nuget pack "src\nuget\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
   test:
     categories:
       except:
@@ -67,7 +67,7 @@
     verbosity: minimal
   after_build:
   - md "src\build\nuget"
-  - nuget pack "src\nuget\Radical\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+  - nuget pack "src\nuget\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
   test:
     categories:
       except:
