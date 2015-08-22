@@ -5,7 +5,7 @@
 - version: 1.8.0-alpha1+{build}
   branches:
     only:
-    - deploy-development
+    - development
   configuration: Debug
   platform: Any CPU
   cache:
@@ -38,7 +38,7 @@
   - provider: Environment
     name: MyGet feed
     on:
-      branch: deploy-development
+      branch: development
 
 #
 #     MASTER BRANCH
@@ -47,7 +47,7 @@
 - version: 1.8.0+{build}
   branches:
     only:
-    - deploy
+    - master
   configuration: Release
   platform: Any CPU
   cache:
@@ -79,4 +79,4 @@
   - provider: Environment
     name: MyGet feed
     on:
-      branch: deploy
+      branch: master
