@@ -5,7 +5,7 @@
 - version: 1.5.2-alpha1+{build}
   branches:
     only:
-    - development
+    - develop
   configuration: Debug
   platform: Any CPU
   cache:
@@ -38,7 +38,7 @@
   - provider: Environment
     name: MyGet feed
     on:
-      branch: development
+      branch: develop
 
 #
 #     MASTER BRANCH
