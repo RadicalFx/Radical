@@ -8,10 +8,12 @@
     - develop
   configuration: Debug
   platform: Any CPU
+  environment:
+    use_build_number_in_packages: true
   cache:
   - src\packages -> src\**\packages.config
   install:
-  - ps: .\appveyor-buildversion.ps1
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/RadicalFx/Radical.Build/master/appveyor-buildversion.ps1'))
   assembly_info:
     patch: true
     file: '**\AssemblyInfo.*'
@@ -53,7 +55,7 @@
   cache:
   - src\packages -> src\**\packages.config
   install:
-  - ps: .\appveyor-buildversion.ps1
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/RadicalFx/Radical.Build/master/appveyor-buildversion.ps1'))
   assembly_info:
     patch: true
     file: '**\AssemblyInfo.*'
