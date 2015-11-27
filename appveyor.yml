@@ -28,6 +28,8 @@
   after_build:
   - md "src\build\nuget"
   - nuget pack "src\nuget\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+  pull_requests:
+    do_not_increment_build_number: true
   test:
     categories:
       except:
@@ -70,6 +72,8 @@
   after_build:
   - md "src\build\nuget"
   - nuget pack "src\nuget\Radical.nuspec" -Version "%package_version%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
+  pull_requests:
+    do_not_increment_build_number: true
   test:
     categories:
       except:
