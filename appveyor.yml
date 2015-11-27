@@ -46,7 +46,7 @@
 #     MASTER BRANCH
 #
 # build in Release mode and deploy to NuGet.org
-- version: 1.5.2+{build}
+- version: 1.5.3+{build}
   branches:
     only:
     - master
