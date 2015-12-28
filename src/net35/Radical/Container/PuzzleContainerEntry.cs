@@ -109,12 +109,18 @@ namespace Topics.Radical
 			return this;
 		}
 
-		/// <summary>
-		/// Defines the type that implements the service.
-		/// </summary>
-		/// <param name="componentType">The type of the component.</param>
-		/// <returns>This entry instance.</returns>
-		IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy( Type componentType )
+        IPuzzleContainerEntry IPuzzleContainerEntry.Forward(Type forwardedType)
+        {
+            this.AddService(forwardedType);
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the type that implements the service.
+        /// </summary>
+        /// <param name="componentType">The type of the component.</param>
+        /// <returns>This entry instance.</returns>
+        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy( Type componentType )
 		{
 			this.ImplementedBy( componentType );
 			return this;
