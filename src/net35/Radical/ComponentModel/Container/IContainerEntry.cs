@@ -55,10 +55,5 @@ namespace Topics.Radical.ComponentModel
         /// An indication is this component is overridable.
         /// </value>
         Boolean IsOverridable { get; }
-
-		/// <summary>
-		/// Validates this instance ensuring that the .
-		/// </summary>
-		void Validate();
 	}
 }
