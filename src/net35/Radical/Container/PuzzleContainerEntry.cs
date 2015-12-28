@@ -105,15 +105,22 @@ namespace Topics.Radical
 
 		IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.Forward<TForwarded>()
 		{
+            this.AddService(typeof(TForwarded));
 			return this;
 		}
 
-		/// <summary>
-		/// Defines the type that implements the service.
-		/// </summary>
-		/// <param name="componentType">The type of the component.</param>
-		/// <returns>This entry instance.</returns>
-		IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy( Type componentType )
+        IPuzzleContainerEntry IPuzzleContainerEntry.Forward(Type forwardedType)
+        {
+            this.AddService(forwardedType);
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the type that implements the service.
+        /// </summary>
+        /// <param name="componentType">The type of the component.</param>
+        /// <returns>This entry instance.</returns>
+        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy( Type componentType )
 		{
 			this.ImplementedBy( componentType );
 			return this;
@@ -126,7 +133,7 @@ namespace Topics.Radical
 		/// <returns>This entry instance.</returns>
 		IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy<TComponent>()
 		{
-			this.ImplementedBy( typeof( TComponent ).GetType() );
+			this.ImplementedBy( typeof( TComponent ) );
 			return this;
 		}
 
@@ -211,10 +218,5 @@ namespace Topics.Radical
         }
 
         public bool IsOverridable { get; private set; }
-
-		public void Validate() 
-		{
-			
-		}
 	}
 }

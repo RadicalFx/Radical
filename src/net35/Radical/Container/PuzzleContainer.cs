@@ -105,7 +105,6 @@ namespace Topics.Radical
 		public IPuzzleContainer Register( IContainerEntry entry )
 		{
 			Ensure.That( entry ).Named( "entry" ).IsNotNull();
-			entry.Validate();
 
 			allEntries.Add( entry );
 

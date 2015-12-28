@@ -475,11 +475,10 @@ namespace Test.Radical
 		{
 		}
 
-        [TestMethod, Ignore]
+        [TestMethod]
 		[TestCategory( "PuzzleContainer" )]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding()
 		{
-            //TODO: Not yet implemented
             var entry = EntryBuilder.For<IFoo>()
 				.Forward<IBar>()
 				.ImplementedBy<TypeWithMultipleContracts>();
@@ -492,11 +491,10 @@ namespace Test.Radical
 			Assert.IsTrue( actual );
 		}
 
-        [TestMethod, Ignore]
+        [TestMethod]
 		[TestCategory( "PuzzleContainer" )]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_transient_types()
 		{
-            //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
 				.Forward<IBar>()
 				.ImplementedBy<TypeWithMultipleContracts>()
@@ -511,15 +509,16 @@ namespace Test.Radical
 			Assert.IsNotNull( iBar );
 			Assert.IsNotNull( iFoo );
 
+            Assert.AreNotEqual(iBar, iFoo);
+
 			Assert.IsTrue( iBar.GetType().Is<TypeWithMultipleContracts>() );
 			Assert.IsTrue( iFoo.GetType().Is<TypeWithMultipleContracts>() );
 		}
 
-        [TestMethod, Ignore]
+        [TestMethod]
 		[TestCategory( "PuzzleContainer" )]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_singleton_types()
 		{
-            //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
 				.Forward<IBar>()
 				.ImplementedBy<TypeWithMultipleContracts>();
@@ -533,11 +532,10 @@ namespace Test.Radical
 			Assert.AreEqual( iBar, iFoo );
 		}
 
-        [TestMethod, Ignore]
+        [TestMethod]
 		[TestCategory( "PuzzleContainer" )]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_instances()
 		{
-            //TODO: Not yet implemented
             var entry = EntryBuilder.For<IFoo>()
 				.Forward<IBar>()
 				.UsingInstance( new TypeWithMultipleContracts() );
@@ -551,25 +549,10 @@ namespace Test.Radical
             Assert.AreEqual( iBar, iFoo );
 		}
 
-        [TestMethod, Ignore]
-		[TestCategory( "PuzzleContainer" )]
-		[ExpectedException( typeof( ArgumentOutOfRangeException ) )]
-        public void PuzzleContainer_entryBuilder_should_fail_if_implementation_does_not_support_one_of_the_contracts()
-		{
-            //TODO: Not yet implemented
-			var entry = EntryBuilder.For<IFoo>()
-				.Forward<IAmNotUsed>()
-				.UsingInstance( new TypeWithMultipleContracts() );
-
-			var sut = new PuzzleContainer();
-			sut.Register( entry );
-		}
-
-		[TestMethod, Ignore]
+		[TestMethod]
 		[TestCategory( "PuzzleContainer" )]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_factory_method()
 		{
-            //TODO: Not yet implemented
 			var entry = EntryBuilder.For<IFoo>()
 				.Forward<IBar>()
 				.UsingFactory( () => new TypeWithMultipleContracts() )
@@ -582,16 +565,6 @@ namespace Test.Radical
 			var iFoo = sut.Resolve<IFoo>();
 
 			Assert.AreEqual( iBar, iFoo );
-		}
-
-        [TestMethod, Ignore]
-		[TestCategory( "PuzzleContainer" )]
-		[ExpectedException( typeof( ArgumentException ) )]
-        public void PuzzleContainer_entryBuilder_should_fail_if_validation_does_not_succeed()
-		{
-            //TODO: Not yet implemented
-			var entry = EntryBuilder.For<IFoo>();
-			entry.Validate();
 		}
 	}
 }
