@@ -566,5 +566,34 @@ namespace Test.Radical
 
 			Assert.AreEqual( iBar, iFoo );
 		}
-	}
+
+        class DisposableFoo : IFoo, IDisposable
+        {
+            public Boolean Disposed { get; private set; }
+
+            public void Dispose()
+            {
+                this.Disposed = true;
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("PuzzleContainer")]
+        public void PuzzleContainer_at_dispose_should_dispose_singleton_references()
+        {
+            var entry = EntryBuilder.For<IFoo>()
+                .ImplementedBy<DisposableFoo>()
+                .WithLifestyle(Lifestyle.Singleton);
+
+            var sut = new PuzzleContainer();
+            sut.Register(entry);
+
+            var iFoo = (DisposableFoo)sut.Resolve<IFoo>();
+
+            sut.Dispose();
+
+            Assert.IsTrue(iFoo.Disposed);
+        }
+
+    }
 }
