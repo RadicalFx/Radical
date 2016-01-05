@@ -96,6 +96,11 @@ namespace Topics.Radical.ComponentModel
         /// <returns>The resolved service instance.</returns>
         TService Resolve<TService>();
 
-        //void SetupWith( Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors );
+        /// <summary>
+        /// Setups the container using the supplied setup descriptors.
+        /// </summary>
+        /// <param name="knownTypesProvider">The known types provider.</param>
+        /// <param name="descriptors">The descriptors.</param>
+        void SetupWith( Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors );
     }
 }
