@@ -6,7 +6,7 @@ using System.Reflection;
 //using Topics.Radical.Validation;
 using Topics.Radical.ComponentModel;
 using Topics.Radical.Validation;
-//using Topics.Radical.Linq;
+using Topics.Radical.Linq;
 
 namespace Topics.Radical
 {
@@ -42,6 +42,12 @@ namespace Topics.Radical
                  * non è ancora stato chiamato su questi oggetti
                  */
                 this.allEntries.Clear();
+
+                this.trackedSingletons.Values
+                    .OfType<IDisposable>()
+                    .ToArray()
+                    .ForEach(d => d.Dispose());
+
                 this.trackedSingletons.Clear();
 
                 foreach ( var facility in this.facilities )
