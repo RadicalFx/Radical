@@ -7,23 +7,23 @@ using Topics.Radical.ComponentModel;
 
 namespace Topics.Radical
 {
-	public class PuzzleContainerServiceProviderFacade : IServiceProvider
-	{
-		readonly IPuzzleContainer container;
+    public class PuzzleContainerServiceProviderFacade : IServiceProvider
+    {
+        readonly IPuzzleContainer container;
 
-		public PuzzleContainerServiceProviderFacade( IPuzzleContainer container )
-		{
-			this.container = container;
-		}
+        public PuzzleContainerServiceProviderFacade(IPuzzleContainer container)
+        {
+            this.container = container;
+        }
 
-		public object GetService( Type serviceType )
-		{
-			if( this.container.IsRegistered( serviceType.GetType() ) )
-			{
-				return this.container.Resolve( serviceType.GetType() );
-			}
+        public object GetService(Type serviceType)
+        {
+            if(this.container.IsRegistered(serviceType))
+            {
+                return this.container.Resolve(serviceType);
+            }
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }
