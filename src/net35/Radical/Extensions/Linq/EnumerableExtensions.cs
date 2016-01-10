@@ -225,8 +225,7 @@ namespace Topics.Radical.Linq
 				return tmp.AsReadOnly();
 			}
 
-			var retVal = list as Topics.Radical.ComponentModel.IReadOnlyCollection<T> ?? new ReadOnlyCollection<T>( list );
-			return retVal;
+			return new ReadOnlyCollection<T>(list);
 		}
 
 		/// <summary>
