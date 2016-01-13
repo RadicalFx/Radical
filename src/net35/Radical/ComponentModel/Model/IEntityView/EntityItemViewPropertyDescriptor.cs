@@ -185,7 +185,7 @@ namespace Topics.Radical.ComponentModel
             //else
             //{
             //    return false;
-            //}	
+            //}    
 
             #endregion
         }
@@ -222,18 +222,18 @@ namespace Topics.Radical.ComponentModel
             return this.GetValueCore( oiv );
         }
 
-		//Topics.Radical.Reflection.Function<Object> fastGetter = null;
+        //Topics.Radical.Reflection.Function<Object> fastGetter = null;
 
         protected virtual object GetValueCore( IEntityItemView<T> component )
         {
-			//if( fastGetter == null ) 
-			//{
-			//    fastGetter = Topics.Radical.Reflection.ObjectExtensions.CreateFastPropertyGetter( component.EntityItem, this.Property );
-			//}
+            //if( fastGetter == null ) 
+            //{
+            //    fastGetter = Topics.Radical.Reflection.ObjectExtensions.CreateFastPropertyGetter( component.EntityItem, this.Property );
+            //}
 
-			//return fastGetter();
+            //return fastGetter();
 
-			return this.Property.GetValue( component.EntityItem, null );
+            return this.Property.GetValue( component.EntityItem, null );
         }
 
         /// <summary>

@@ -2,20 +2,20 @@
 
 namespace Topics.Radical.Threading
 {
-	internal interface IRunnableWorkerConfiguration
-	{
-		Delegate AsyncHandler { get; set; }
+    internal interface IRunnableWorkerConfiguration
+    {
+        Delegate AsyncHandler { get; set; }
 
-		void ThresholdReached();
+        void ThresholdReached();
 
-		void Validate();
+        void Validate();
 
-		bool ExecuteBefore();
+        bool ExecuteBefore();
 
-		void ExecuteAsync();
+        void ExecuteAsync();
 
-		void ExecuteAfter();
+        void ExecuteAfter();
 
-		bool ExecuteError( Exception exception );
-	}
+        bool ExecuteError( Exception exception );
+    }
 }

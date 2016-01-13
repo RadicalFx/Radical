@@ -57,7 +57,7 @@ namespace Topics.Radical.Model
         /// Gets or sets a value indicating whether this instance is detached.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance is detached; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is detached; otherwise, <c>false</c>.
         /// </value>
         public Boolean IsDetached
         {
@@ -70,7 +70,7 @@ namespace Topics.Radical.Model
         /// as underlying data storage or not
         /// </summary>
         /// <item>
-        /// 	<collection>true</collection> if this instance is array based; otherwise, <collection>false</collection>.
+        ///     <collection>true</collection> if this instance is array based; otherwise, <collection>false</collection>.
         /// </item>
         public Boolean IsArrayBased
         {
@@ -179,10 +179,10 @@ namespace Topics.Radical.Model
         #region DataSource Collection EventHandlers
 
         /*
-		 * Gestisce l'evento che viene scatenato 
-		 * quando la collection sottostante notifica
-		 * che ci sono modifiche al suo interno.
-		 */
+         * Gestisce l'evento che viene scatenato 
+         * quando la collection sottostante notifica
+         * che ci sono modifiche al suo interno.
+         */
         void OnDataSourceCollectionChanged( object sender, CollectionChangedEventArgs<T> e )
         {
             Int32 oldIndex;
@@ -666,7 +666,7 @@ namespace Topics.Radical.Model
         /// Gets a item indicating whether this instance is currently filtered.
         /// </summary>
         /// <item>
-        /// 	<collection>true</collection> if this instance is filtered; otherwise, <collection>false</collection>.
+        ///     <collection>true</collection> if this instance is filtered; otherwise, <collection>false</collection>.
         /// </item>
         public Boolean IsFiltered
         {
@@ -693,7 +693,7 @@ namespace Topics.Radical.Model
             get { return this.Filter.ToString(); }
             set
             {
-				var msg = String.Format( "Setting '{0}' directly as Filter is not supported.", value ?? "<null>");
+                var msg = String.Format( "Setting '{0}' directly as Filter is not supported.", value ?? "<null>");
                 throw new NotSupportedException( msg );
                 //TODO: IBindingListView.Instance
                 /* Bisogna capire se siamo in grado data 
@@ -778,12 +778,12 @@ namespace Topics.Radical.Model
                 {
                     /*
                      * Se il filtro sta per cambiare:
-                     *	- impostiamo la nuova istanza
-                     *	- ricostruiamo gli indici in modo
-                     *	  da applicare le modifiche
-                     *	- comunichiamo al mondo sia il reset della lista
-                     *	  che un evento custom che informa che il filtro
-                     *	  è cambiato
+                     *    - impostiamo la nuova istanza
+                     *    - ricostruiamo gli indici in modo
+                     *      da applicare le modifiche
+                     *    - comunichiamo al mondo sia il reset della lista
+                     *      che un evento custom che informa che il filtro
+                     *      è cambiato
                      */
                     this._filter = value;
 
@@ -930,7 +930,7 @@ namespace Topics.Radical.Model
         /// <param name="property">The <see cref="T:System.ComponentModel.PropertyDescriptor"/> to sort by.</param>
         /// <param name="direction">One of the <see cref="T:System.ComponentModel.ListSortDirection"/> values.</param>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public void ApplySort( PropertyDescriptor property, ListSortDirection direction )
         {
             ListSortDescription[] sorts = new ListSortDescription[] { new ListSortDescription( property, direction ) };
@@ -1066,7 +1066,7 @@ namespace Topics.Radical.Model
         /// Removes any sort applied using <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/>.
         /// </summary>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public void RemoveSort()
         {
             this.ApplySort( new ListSortDescriptionCollection() );
@@ -1078,7 +1078,7 @@ namespace Topics.Radical.Model
         /// <item></item>
         /// <returns>true if <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/> has been called and <see cref="M:System.ComponentModel.IBindingList.RemoveSort"/> has not been called; otherwise, false.</returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public Boolean IsSorted
         {
             get { return ( this.SortDescriptions.Count > 0 || this.IsCustomComparer ); }
@@ -1090,7 +1090,7 @@ namespace Topics.Radical.Model
         /// <item></item>
         /// <returns>One of the <see cref="T:System.ComponentModel.ListSortDirection"/> values.</returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public ListSortDirection SortDirection
         {
             get
@@ -1112,7 +1112,7 @@ namespace Topics.Radical.Model
         /// <item></item>
         /// <returns>The <see cref="T:System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.</returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public PropertyDescriptor SortProperty
         {
             get
@@ -1239,11 +1239,11 @@ namespace Topics.Radical.Model
         /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
         /// <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
         /// <exception cref="T:System.ArgumentNullException">
-        /// 	<paramref name="array"/> is null. </exception>
+        ///     <paramref name="array"/> is null. </exception>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// 	<paramref name="index"/> is less than zero. </exception>
+        ///     <paramref name="index"/> is less than zero. </exception>
         /// <exception cref="T:System.ArgumentException">
-        /// 	<paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
+        ///     <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
         void ICollection.CopyTo( Array array, Int32 index )
         {
@@ -1433,10 +1433,10 @@ namespace Topics.Radical.Model
         /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
         /// <param name="item">The <see cref="T:System.Object"/> to insert into the <see cref="T:System.Collections.IList"/>.</param>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// 	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
+        ///     <paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
         /// <exception cref="T:System.NullReferenceException">
-        /// 	<paramref name="item"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
+        ///     <paramref name="item"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
         void IList.Insert( Int32 index, object item )
         {
             throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Insert" ) );
@@ -1522,7 +1522,7 @@ namespace Topics.Radical.Model
         /// </summary>
         /// <param name="index">The zero-based index of the item to remove.</param>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// 	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
+        ///     <paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
         void IList.RemoveAt( Int32 index )
         {
@@ -1654,7 +1654,7 @@ namespace Topics.Radical.Model
         /// </summary>
         /// <returns>The item added to the list.</returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.AllowNew"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.AllowNew"/> is false. </exception>
         object IBindingList.AddNew()
         {
             return this.AddNew();
@@ -1835,7 +1835,7 @@ namespace Topics.Radical.Model
         /// The default item is <collection>true</collection>
         /// </summary>
         /// <item>
-        /// 	<collection>true</collection> if this instance must auto generate properties; otherwise, <collection>false</collection>.
+        ///     <collection>true</collection> if this instance must auto generate properties; otherwise, <collection>false</collection>.
         /// </item>
         public Boolean AutoGenerateProperties
         {
@@ -2003,18 +2003,18 @@ namespace Topics.Radical.Model
             return this.AddPropertyMapping( pd );
         }
 
-		/// <summary>
-		/// Adds a property mapping using the specified display name, the supplied property type and the supplied getter.
-		/// </summary>
-		/// <typeparam name="TProperty">The type of the property.</typeparam>
-		/// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
-		/// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
-		/// <returns>
-		/// A reference to the dinamically generated property.
-		/// </returns>
-		/// <remarks>
-		/// Using this overload implicitly creates a read-only property because no setter has been supplied.
-		/// </remarks>
+        /// <summary>
+        /// Adds a property mapping using the specified display name, the supplied property type and the supplied getter.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
+        /// <returns>
+        /// A reference to the dinamically generated property.
+        /// </returns>
+        /// <remarks>
+        /// Using this overload implicitly creates a read-only property because no setter has been supplied.
+        /// </remarks>
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
             String customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter )
@@ -2030,16 +2030,16 @@ namespace Topics.Radical.Model
             return this.AddPropertyMapping( customPropertyName, getter, null, defaultValueInterceptor );
         }
 
-		/// <summary>
-		/// Adds a property mapping using the specified display name, the supplied property type and the supplied getter and setter.
-		/// </summary>
-		/// <typeparam name="TProperty">The type of the property.</typeparam>
-		/// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
-		/// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
-		/// <param name="setter">A delegate to call in order to set the value of the dinamically generated property.</param>
-		/// <returns>
-		/// A reference to the dinamically generated property.
-		/// </returns>
+        /// <summary>
+        /// Adds a property mapping using the specified display name, the supplied property type and the supplied getter and setter.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
+        /// <param name="setter">A delegate to call in order to set the value of the dinamically generated property.</param>
+        /// <returns>
+        /// A reference to the dinamically generated property.
+        /// </returns>
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
             String customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
@@ -2258,7 +2258,7 @@ namespace Topics.Radical.Model
         /// The index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor"/>.
         /// </returns>
         /// <exception cref="T:System.NotSupportedException">
-        /// 	<see cref="P:System.ComponentModel.IBindingList.SupportsSearching"/> is false. </exception>
+        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSearching"/> is false. </exception>
         public Int32 Find( PropertyDescriptor property, object key )
         {
             return this.Indexer.Find( property, key );
@@ -2293,7 +2293,7 @@ namespace Topics.Radical.Model
         /// has already been called.
         /// </summary>
         /// <item>
-        /// 	<collection>true</collection> if this instance is adding new; otherwise, <collection>false</collection>.
+        ///     <collection>true</collection> if this instance is adding new; otherwise, <collection>false</collection>.
         /// </item>
         public Boolean IsAddingNew
         {
@@ -2305,7 +2305,7 @@ namespace Topics.Radical.Model
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified item is a pending new item; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified item is a pending new item; otherwise, <c>false</c>.
         /// </returns>
         protected Boolean IsInAddingNewQueue( T item )
         {

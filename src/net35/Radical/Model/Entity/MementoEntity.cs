@@ -330,7 +330,7 @@ namespace Topics.Radical.Model
         /// Gets a item indicating whether there is an active change tracking service.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if there is an active change tracking service; otherwise, <c>false</c>.
+        ///     <c>true</c> if there is an active change tracking service; otherwise, <c>false</c>.
         /// </value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1822:MarkMembersAsStatic" )]
         protected virtual Boolean IsTracking

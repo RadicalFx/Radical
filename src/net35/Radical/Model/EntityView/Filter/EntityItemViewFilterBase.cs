@@ -26,7 +26,7 @@ namespace Topics.Radical.Model
         /// </summary>
         /// <param name="item">The item to test.</param>
         /// <returns>
-        /// 	<collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
+        ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
         public abstract Boolean ShouldInclude( T item );
 
@@ -37,7 +37,7 @@ namespace Topics.Radical.Model
         /// </summary>
         /// <param name="item">The item to test.</param>
         /// <returns>
-        /// 	<collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
+        ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
         bool IEntityItemViewFilter.ShouldInclude( object item )
         {

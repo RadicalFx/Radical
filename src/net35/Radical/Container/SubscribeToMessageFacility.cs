@@ -62,8 +62,8 @@ namespace Topics.Radical
 
             //logger.Verbose
             //(
-            //	"\tSubscribing to message: {0}",
-            //	messageType.ToString( "SN" )
+            //    "\tSubscribing to message: {0}",
+            //    messageType.ToString( "SN" )
             //);
 
             if(genericHandler.Is<IMessageHandler>())
@@ -74,9 +74,9 @@ namespace Topics.Radical
 
                     //logger.Verbose
                     //(
-                    //	"Dispatching message {0} to IMessageHandler {1}",
-                    //	msg.GetType().ToString( "SN" ),
-                    //	handler.GetType().ToString( "SN" )
+                    //    "Dispatching message {0} to IMessageHandler {1}",
+                    //    msg.GetType().ToString( "SN" ),
+                    //    handler.GetType().ToString( "SN" )
                     //);
 
                     if(handler.ShouldHandle(msg))
@@ -93,9 +93,9 @@ namespace Topics.Radical
 
                     //logger.Verbose
                     //(
-                    //	"Dispatching message {0} to IMessageHandler {1}",
-                    //	msg.GetType().ToString( "SN" ),
-                    //	handler.GetType().ToString( "SN" )
+                    //    "Dispatching message {0} to IMessageHandler {1}",
+                    //    msg.GetType().ToString( "SN" ),
+                    //    handler.GetType().ToString( "SN" )
                     //);
 
                     if(handler.ShouldHandle(s, msg))
@@ -143,9 +143,9 @@ namespace Topics.Radical
                     {
                         //logger.Verbose
                         //(
-                        //	"Registered component is IMessageHandler: {0}/{1}, but no broker yet registered. buffering...",
-                        //	h.Service.ToString( "SN" ),
-                        //	h.ComponentModel.Implementation.ToString( "SN" )
+                        //    "Registered component is IMessageHandler: {0}/{1}, but no broker yet registered. buffering...",
+                        //    h.Service.ToString( "SN" ),
+                        //    h.ComponentModel.Implementation.ToString( "SN" )
                         //);
 
 #if FX35
@@ -158,9 +158,9 @@ namespace Topics.Radical
                     {
                         //logger.Verbose
                         //(
-                        //	"Registered component is IMessageHandler: {0}/{1}",
-                        //	h.Service.ToString( "SN" ),
-                        //	h.ComponentModel.Implementation.ToString( "SN" )
+                        //    "Registered component is IMessageHandler: {0}/{1}",
+                        //    h.Service.ToString( "SN" ),
+                        //    h.ComponentModel.Implementation.ToString( "SN" )
                         //);
 
                         this.Attach( container, e.Entry.Key, e.Entry );
