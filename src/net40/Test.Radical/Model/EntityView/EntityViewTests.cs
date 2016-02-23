@@ -1,116 +1,116 @@
 ﻿namespace Test.Radical.Model
 {
-	using System;
-	using System.Linq;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using SharpTestsEx;
-	using Topics.Radical.ComponentModel;
-	using Topics.Radical.Model;
+    using System;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using SharpTestsEx;
+    using Topics.Radical.ComponentModel;
+    using Topics.Radical.Model;
 
-	[TestClass]
-	public class EntityViewTests
-	{
-		[TestMethod]
-		public void entityView_custom_property_mapping_shuold_set_and_get_custom_values_as_expected()
-		{
-			var expected = "Hello World!";
+    [TestClass]
+    public class EntityViewTests
+    {
+        [TestMethod]
+        public void entityView_custom_property_mapping_shuold_set_and_get_custom_values_as_expected()
+        {
+            var expected = "Hello World!";
 
-			EntityItemViewValueGetter<Object, String> getter = e =>
-			{
-				return e.Item.GetCustomValue<String>( e.PropertyName );
-			};
+            EntityItemViewValueGetter<Object, String> getter = e =>
+            {
+                return e.Item.GetCustomValue<String>( e.PropertyName );
+            };
 
-			EntityItemViewValueSetter<Object, String> setter = e =>
-			{
-				e.Item.SetCustomValue( e.PropertyName, e.Value );
-			};
+            EntityItemViewValueSetter<Object, String> setter = e =>
+            {
+                e.Item.SetCustomValue( e.PropertyName, e.Value );
+            };
 
-			var target = new EntityView<Object>( new[] { new Object() } );
-			target.AddPropertyMapping<String>( "Foo", getter, setter );
+            var target = new EntityView<Object>( new[] { new Object() } );
+            target.AddPropertyMapping<String>( "Foo", getter, setter );
 
-			target.First().SetCustomValue( "Foo", expected );
-			var actual = target.First().GetCustomValue<String>( "Foo" );
+            target.First().SetCustomValue( "Foo", expected );
+            var actual = target.First().GetCustomValue<String>( "Foo" );
 
-			actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
-		}
+            actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
+        }
 
-		[TestMethod]
-		public void entityView_getCustomPropertyValue_using_never_used_custom_property_should_use_initial_value_interceptor_once()
-		{
-			var expected = 1;
-			var actual = 0;
-			Func<String> interceptor = () =>
-			{
-				actual++;
-				return "initial value";
-			};
+        [TestMethod]
+        public void entityView_getCustomPropertyValue_using_never_used_custom_property_should_use_initial_value_interceptor_once()
+        {
+            var expected = 1;
+            var actual = 0;
+            Func<String> interceptor = () =>
+            {
+                actual++;
+                return "initial value";
+            };
 
-			var target = new EntityView<Object>( new[] { new Object() } );
-			target.AddPropertyMapping<String>( "Foo", e =>
-			{
-				return e.Item.GetCustomValue<String>( e.PropertyName );
-			}, interceptor );
+            var target = new EntityView<Object>( new[] { new Object() } );
+            target.AddPropertyMapping<String>( "Foo", e =>
+            {
+                return e.Item.GetCustomValue<String>( e.PropertyName );
+            }, interceptor );
 
-			var item = target.FirstOrDefault();
-			item.GetCustomValue<String>( "Foo" );
-			item.GetCustomValue<String>( "Foo" );
-			item.GetCustomValue<String>( "Foo" );
+            var item = target.FirstOrDefault();
+            item.GetCustomValue<String>( "Foo" );
+            item.GetCustomValue<String>( "Foo" );
+            item.GetCustomValue<String>( "Foo" );
 
-			actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
-		}
+            actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
+        }
 
-		[TestMethod]
-		public void entityView_getCustomPropertyValue_should_return_initial_interceptor_value()
-		{
-			var expected = "initial value";
-			var actual = "";
+        [TestMethod]
+        public void entityView_getCustomPropertyValue_should_return_initial_interceptor_value()
+        {
+            var expected = "initial value";
+            var actual = "";
 
-			Func<String> interceptor = () =>
-			{
-				return expected;
-			};
+            Func<String> interceptor = () =>
+            {
+                return expected;
+            };
 
-			var target = new EntityView<Object>( new[] { new Object() } );
-			target.AddPropertyMapping<String>( "Foo", e =>
-			{
-				return e.Item.GetCustomValue<String>( e.PropertyName );
-			}, interceptor );
+            var target = new EntityView<Object>( new[] { new Object() } );
+            target.AddPropertyMapping<String>( "Foo", e =>
+            {
+                return e.Item.GetCustomValue<String>( e.PropertyName );
+            }, interceptor );
 
-			var item = target.FirstOrDefault();
-			actual = item.GetCustomValue<String>( "Foo" );
+            var item = target.FirstOrDefault();
+            actual = item.GetCustomValue<String>( "Foo" );
 
-			actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
-		}
+            actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
+        }
 
-		[TestMethod]
-		public void entityView_removePropertyMapping_should_remove_property_value()
-		{
-			var value = "Hello world!";
+        [TestMethod]
+        public void entityView_removePropertyMapping_should_remove_property_value()
+        {
+            var value = "Hello world!";
 
-			EntityItemViewValueGetter<Object, String> getter = e =>
-			{
-				return e.Item.GetCustomValue<String>( e.PropertyName );
-			};
+            EntityItemViewValueGetter<Object, String> getter = e =>
+            {
+                return e.Item.GetCustomValue<String>( e.PropertyName );
+            };
 
-			EntityItemViewValueSetter<Object, String> setter = e =>
-			{
-				e.Item.SetCustomValue( e.PropertyName, e.Value );
-			};
+            EntityItemViewValueSetter<Object, String> setter = e =>
+            {
+                e.Item.SetCustomValue( e.PropertyName, e.Value );
+            };
 
-			var target = new EntityView<Object>( new[] { new Object() } );
-			target.AddPropertyMapping<String>( "Foo", getter, setter );
+            var target = new EntityView<Object>( new[] { new Object() } );
+            target.AddPropertyMapping<String>( "Foo", getter, setter );
 
-			var item = target.First();
-			item.SetCustomValue<String>( "Foo", value );
+            var item = target.First();
+            item.SetCustomValue<String>( "Foo", value );
 
-			target.RemovePropertyMapping( "Foo" );
-			target.AddPropertyMapping<String>( "Foo", getter, setter );
+            target.RemovePropertyMapping( "Foo" );
+            target.AddPropertyMapping<String>( "Foo", getter, setter );
 
-			var actual = target.First().GetCustomValue<String>( "Foo" );
+            var actual = target.First().GetCustomValue<String>( "Foo" );
 
-			actual.Should( "Not yet implemented" ).Not.Be.EqualTo( value );
-			actual.Should( "Not yet implemented" ).Be.Null();
-		}
+            actual.Should( "Not yet implemented" ).Not.Be.EqualTo( value );
+            actual.Should( "Not yet implemented" ).Be.Null();
+        }
 
         [TestMethod]
         public void entityView_removePropertyMapping_should_remove_property_value_even_on_more_then_one_element()
@@ -147,5 +147,5 @@
             actualFirst.Should().Be.Null();
             actualLast.Should().Be.Null();
         }
-	}
+    }
 }

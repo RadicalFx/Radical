@@ -2,8 +2,8 @@
 
 namespace Topics.Radical.ComponentModel
 {
-	public interface IHaveTimestamp<T>
-	{
-		Timestamp<T> Timestamp { get; set; }
-	}
+    public interface IHaveTimestamp<T>
+    {
+        Timestamp<T> Timestamp { get; set; }
+    }
 }

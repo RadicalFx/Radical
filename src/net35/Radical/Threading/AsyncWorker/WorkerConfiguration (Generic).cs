@@ -3,75 +3,75 @@ using Topics.Radical.Validation;
 
 namespace Topics.Radical.Threading
 {
-	abstract class WorkerConfiguration<T, TResult> : 
-		IRunnableWorkerConfiguration, 
-		IWorkerConfiguration
-	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="WorkerConfiguration&lt;T, TResult&gt;"/> class.
-		/// </summary>
-		/// <param name="arguments">The arguments.</param>
-		protected WorkerConfiguration( WorkerArgs<T, TResult> arguments )
-		{
-			this.WorkerArguments = arguments;
-		}
+    abstract class WorkerConfiguration<T, TResult> : 
+        IRunnableWorkerConfiguration, 
+        IWorkerConfiguration
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkerConfiguration&lt;T, TResult&gt;"/> class.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
+        protected WorkerConfiguration( WorkerArgs<T, TResult> arguments )
+        {
+            this.WorkerArguments = arguments;
+        }
 
-		public WorkerArgs<T, TResult> WorkerArguments { get; private set; }
+        public WorkerArgs<T, TResult> WorkerArguments { get; private set; }
 
-		public Action<IAsyncErrorArgs> Error
-		{
-			get;
-			set;
-		}
+        public Action<IAsyncErrorArgs> Error
+        {
+            get;
+            set;
+        }
 
-		public WarningThreshold WarningThreshold
-		{
-			get;
-			set;
-		}
+        public WarningThreshold WarningThreshold
+        {
+            get;
+            set;
+        }
 
-		public void ThresholdReached()
-		{
-			this.WarningThreshold.Handler();
-		}
+        public void ThresholdReached()
+        {
+            this.WarningThreshold.Handler();
+        }
 
-		public void Validate()
-		{
-			if( this.WarningThreshold != null )
-			{
-				Ensure.That( this.WarningThreshold.Handler )
-					.Named( "WarningThreshold.Handler" )
-					.IsNotNull();
-			}
+        public void Validate()
+        {
+            if( this.WarningThreshold != null )
+            {
+                Ensure.That( this.WarningThreshold.Handler )
+                    .Named( "WarningThreshold.Handler" )
+                    .IsNotNull();
+            }
 
-			Ensure.That( this.AsyncHandler ).IsNotNull();
+            Ensure.That( this.AsyncHandler ).IsNotNull();
 
-			this.OnValidate();
-		}
+            this.OnValidate();
+        }
 
-		public Delegate AsyncHandler { get; set; }
+        public Delegate AsyncHandler { get; set; }
 
-		protected virtual void OnValidate()
-		{
+        protected virtual void OnValidate()
+        {
  
-		}
+        }
 
-		public abstract bool ExecuteBefore();
+        public abstract bool ExecuteBefore();
 
-		public abstract void ExecuteAsync();
+        public abstract void ExecuteAsync();
 
-		public abstract void ExecuteAfter();
+        public abstract void ExecuteAfter();
 
-		public virtual bool ExecuteError( Exception exception )
-		{
-			var ea = new WorkerErrorArgs( exception );
+        public virtual bool ExecuteError( Exception exception )
+        {
+            var ea = new WorkerErrorArgs( exception );
 
-			if( this.Error != null )
-			{
-				this.Error( ea );
-			}
+            if( this.Error != null )
+            {
+                this.Error( ea );
+            }
 
-			return ea.Handled;
-		}
-	}
+            return ea.Handled;
+        }
+    }
 }

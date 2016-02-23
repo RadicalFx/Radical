@@ -47,7 +47,7 @@ namespace Topics.Radical.ComponentModel
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <returns>
-        /// 	<c>true</c> if the given service type is registered; otherwise, <c>false</c>.
+        ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
         Boolean IsRegistered<TService>();
 
@@ -56,7 +56,7 @@ namespace Topics.Radical.ComponentModel
         /// </summary>
         /// <param name="serviceType">The type of the service.</param>
         /// <returns>
-        /// 	<c>true</c> if the given service type is registered; otherwise, <c>false</c>.
+        ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
         Boolean IsRegistered( Type serviceType );
 

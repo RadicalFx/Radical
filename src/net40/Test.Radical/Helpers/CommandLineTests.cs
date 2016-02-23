@@ -240,33 +240,33 @@
         {
             var target = new CommandLine( new[] { "-s=foo=bar" } );
             
-			String actual;
-			target.TryGetValue( "s", out actual );
+            String actual;
+            target.TryGetValue( "s", out actual );
 
-			actual.Should().Be.EqualTo( "foo=bar" );
+            actual.Should().Be.EqualTo( "foo=bar" );
         }
 
-		class UserDefinition
-		{
-			[CommandLineArgument( "username", IsRequired = true, Aliases = new[] { "u" } )]
-			public String Username { get; set; }
+        class UserDefinition
+        {
+            [CommandLineArgument( "username", IsRequired = true, Aliases = new[] { "u" } )]
+            public String Username { get; set; }
 
-			[CommandLineArgument( "password", IsRequired = true, Aliases = new[] { "p" } )]
-			public String Password { get; set; }
+            [CommandLineArgument( "password", IsRequired = true, Aliases = new[] { "p" } )]
+            public String Password { get; set; }
 
-			[CommandLineArgument( "administrator", IsRequired = false, Aliases = new[] { "a", "admin" } )]
-			public Boolean AsAdmin { get; set; }
-		}
+            [CommandLineArgument( "administrator", IsRequired = false, Aliases = new[] { "a", "admin" } )]
+            public Boolean AsAdmin { get; set; }
+        }
 
-		[TestMethod]
-		[TestCategory( "CommandLine" )]
-		public void CommandLine_as_using_valid_source_with_parameter_without_value_should_correctly_transalte_to_bool()
-		{
-			var target = new CommandLine( new[] { "username=Mauro", "password=P@ssw0rd", "admin=True" } );
-			var actual = target.As<UserDefinition>();
+        [TestMethod]
+        [TestCategory( "CommandLine" )]
+        public void CommandLine_as_using_valid_source_with_parameter_without_value_should_correctly_transalte_to_bool()
+        {
+            var target = new CommandLine( new[] { "username=Mauro", "password=P@ssw0rd", "admin=True" } );
+            var actual = target.As<UserDefinition>();
 
-			actual.Username.Should().Be.EqualTo("Mauro");
-			actual.Password.Should().Be.EqualTo( "P@ssw0rd" );
-		}
+            actual.Username.Should().Be.EqualTo("Mauro");
+            actual.Password.Should().Be.EqualTo( "P@ssw0rd" );
+        }
     }
 }

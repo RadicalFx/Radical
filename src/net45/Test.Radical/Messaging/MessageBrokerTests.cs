@@ -11,44 +11,44 @@ using System.Diagnostics;
 
 namespace Test.Radical.Windows.Messaging
 {
-	[TestClass]
-	public class MessageBrokerTests
-	{
-		class PocoTestMessage
-		{
+    [TestClass]
+    public class MessageBrokerTests
+    {
+        class PocoTestMessage
+        {
 
-		}
+        }
 
-		[TestMethod]
-		[TestCategory( "MessageBroker" )]
-		public async Task messageBroker_POCO_broadcast_async_should_not_fail()
-		{
-			var expected = 4;
-			var actual = 0;
+        [TestMethod]
+        [TestCategory( "MessageBroker" )]
+        public async Task messageBroker_POCO_broadcast_async_should_not_fail()
+        {
+            var expected = 4;
+            var actual = 0;
 
-			var dispatcher = new NullDispatcher();
-			var broker = new MessageBroker( dispatcher );
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker( dispatcher );
 
-			broker.Subscribe<PocoTestMessage>( this, ( s, msg ) =>
-			{
-				actual++;
-			} );
+            broker.Subscribe<PocoTestMessage>( this, ( s, msg ) =>
+            {
+                actual++;
+            } );
 
-			broker.Subscribe<PocoTestMessage>( this, ( s, msg ) =>
-			{
-				actual++;
-			} );
+            broker.Subscribe<PocoTestMessage>( this, ( s, msg ) =>
+            {
+                actual++;
+            } );
 
-			broker.Subscribe<PocoTestMessage>( this, ( s, msg ) =>
-			{
-				actual++;
-			} );
+            broker.Subscribe<PocoTestMessage>( this, ( s, msg ) =>
+            {
+                actual++;
+            } );
 
-			await broker.BroadcastAsync( this, new PocoTestMessage() );
-			
-			actual++;
+            await broker.BroadcastAsync( this, new PocoTestMessage() );
+            
+            actual++;
 
-			Assert.AreEqual( expected, actual );
-		}
-	}
+            Assert.AreEqual( expected, actual );
+        }
+    }
 }

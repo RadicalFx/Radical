@@ -376,7 +376,7 @@ namespace Topics.Radical.Model
         /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <returns>
-        /// 	<c>true</c> if metadata for the specified property has been set; otherwise, <c>false</c>.
+        ///     <c>true</c> if metadata for the specified property has been set; otherwise, <c>false</c>.
         /// </returns>
         protected virtual Boolean HasMetadata<T>( Expression<Func<T>> property )
         {

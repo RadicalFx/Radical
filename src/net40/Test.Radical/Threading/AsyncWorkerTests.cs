@@ -1,11 +1,11 @@
 ﻿namespace Test.Radical.Threading
 {
-	using System;
-	using System.Threading;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using SharpTestsEx;
-	using Topics.Radical.Threading;
-	using Topics.Radical.ComponentModel;
+    using System;
+    using System.Threading;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using SharpTestsEx;
+    using Topics.Radical.Threading;
+    using Topics.Radical.ComponentModel;
 
     [TestClass]
     public class AsyncWorkerTests
@@ -466,7 +466,7 @@
 
             var actual = wa.WaitOne( 500 );
 
-            //			var actual = asyncAction.AsyncWaitHandle.WaitOne( 15 );
+            //            var actual = asyncAction.AsyncWaitHandle.WaitOne( 15 );
 
             actual.Should().Be.True();
         }
