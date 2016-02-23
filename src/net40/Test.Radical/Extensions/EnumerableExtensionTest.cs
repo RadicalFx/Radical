@@ -6,7 +6,6 @@ namespace Test.Radical.Extensions
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SharpTestsEx;
-    using Topics.Radical.Collections;
     using Topics.Radical.Linq;
     using System.Linq;
 
@@ -60,15 +59,6 @@ namespace Test.Radical.Extensions
             IEnumerable<Int32> actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly( source );
 
             Assert.IsNotNull( actual );
-        }
-
-        [TestMethod()]
-        public void AsReadOnly_if_source_is_readOnly_result_is_source()
-        {
-            var source = new Topics.Radical.Collections.ReadOnlyCollection<Int32>( new[] { 0, 1, 2 } );
-            IEnumerable<Int32> actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly( source );
-
-            Assert.AreEqual( source, actual );
         }
 
         [TestMethod]
@@ -203,6 +193,59 @@ namespace Test.Radical.Extensions
 
             actual.Should().Have.SameValuesAs( source );
             actual.Should().Not.Have.SameSequenceAs( source );
+        }
+
+
+
+
+        [TestMethod]
+        public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_list()
+        {
+            var source = new List<String>();
+            var actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly( source );
+
+            Assert.AreNotEqual(source, actual);
+            Assert.AreNotSame(source, actual);
+        }
+
+        [TestMethod]
+        public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_radical_read_only_collection()
+        {
+            var source = new Topics.Radical.Collections.ReadOnlyCollection<String>( new[] { "" } );
+            var actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly(source);
+
+            Assert.AreNotEqual(source, actual);
+            Assert.AreNotSame(source, actual);
+        }
+
+        [TestMethod]
+        public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_net_read_only_collection()
+        {
+            var source = new System.Collections.ObjectModel.ReadOnlyCollection<String>(new[] { "" });
+            var actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly(source);
+
+            Assert.AreNotEqual(source, actual);
+            Assert.AreNotSame(source, actual);
+        }
+
+        [TestMethod]
+        public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_dictionary_keys()
+        {
+            var source = new Dictionary<Object, Object>();
+            var actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly(source.Keys);
+
+            Assert.AreNotEqual(source.Keys, actual);
+            Assert.AreNotSame(source.Keys, actual);
+        }
+
+        [TestMethod]
+        public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_dictionary_values()
+        {
+            var source = new Dictionary<Object, Object>();
+            var actual = Topics.Radical.Linq.EnumerableExtensions.AsReadOnly(source.Values);
+
+            Assert.AreNotEqual(source.Values, actual);
+            Assert.AreNotSame(source.Values, actual);
         }
     }
 
