@@ -6,126 +6,126 @@ using Topics.Radical;
 
 namespace Test.Radical.Exceptions
 {
-	/// <summary>
-	///This is a test class for RadicalExceptionTest and is intended
-	///to contain all RadicalExceptionTest Unit Tests
-	///</summary>
-	[TestClass()]
-	public class RadicalExceptionTest
-	{
-		private TestContext testContextInstance;
-		public TestContext TestContext
-		{
-			get
-			{
-				return testContextInstance;
-			}
-			set
-			{
-				testContextInstance = value;
-			}
-		}
+    /// <summary>
+    ///This is a test class for RadicalExceptionTest and is intended
+    ///to contain all RadicalExceptionTest Unit Tests
+    ///</summary>
+    [TestClass()]
+    public class RadicalExceptionTest
+    {
+        private TestContext testContextInstance;
+        public TestContext TestContext
+        {
+            get
+            {
+                return testContextInstance;
+            }
+            set
+            {
+                testContextInstance = value;
+            }
+        }
 
-		#region Additional test attributes
-		// 
-		//You can use the following additional attributes as you write your tests:
-		//
-		//Use ClassInitialize to run code before running the first test in the class
-		//[ClassInitialize()]
-		//public static void MyClassInitialize(TestContext testContext)
-		//{
-		//}
-		//
-		//Use ClassCleanup to run code after all tests in a class have run
-		//[ClassCleanup()]
-		//public static void MyClassCleanup()
-		//{
-		//}
-		//
-		//Use TestInitialize to run code before running each test
-		//[TestInitialize()]
-		//public void MyTestInitialize()
-		//{
-		//}
-		//
-		//Use TestCleanup to run code after each test has run
-		//[TestCleanup()]
-		//public void MyTestCleanup()
-		//{
-		//}
-		//
-		#endregion
+        #region Additional test attributes
+        // 
+        //You can use the following additional attributes as you write your tests:
+        //
+        //Use ClassInitialize to run code before running the first test in the class
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
+        //
+        //Use ClassCleanup to run code after all tests in a class have run
+        //[ClassCleanup()]
+        //public static void MyClassCleanup()
+        //{
+        //}
+        //
+        //Use TestInitialize to run code before running each test
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
+        //
+        //Use TestCleanup to run code after each test has run
+        //[TestCleanup()]
+        //public void MyTestCleanup()
+        //{
+        //}
+        //
+        #endregion
 
-		protected virtual Exception CreateMock()
-		{
-			return new RadicalException();
-		}
+        protected virtual Exception CreateMock()
+        {
+            return new RadicalException();
+        }
 
-		protected virtual Exception CreateMock( String message )
-		{
-			return new RadicalException( message );
-		}
+        protected virtual Exception CreateMock( String message )
+        {
+            return new RadicalException( message );
+        }
 
-		protected virtual Exception CreateMock( String message, Exception innerException )
-		{
-			return new RadicalException( message, innerException );
-		}
+        protected virtual Exception CreateMock( String message, Exception innerException )
+        {
+            return new RadicalException( message, innerException );
+        }
 
-		protected Exception Process( Exception source )
-		{
-			using( MemoryStream ms = new MemoryStream() )
-			{
-				BinaryFormatter formatter = new BinaryFormatter();
-				formatter.Serialize( ms, source );
+        protected Exception Process( Exception source )
+        {
+            using( MemoryStream ms = new MemoryStream() )
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize( ms, source );
 
-				ms.Position = 0;
+                ms.Position = 0;
 
-				Object resVal = formatter.Deserialize( ms );
-				return resVal as Exception;
-			}
-		}
+                Object resVal = formatter.Deserialize( ms );
+                return resVal as Exception;
+            }
+        }
 
-		protected virtual void AssertAreEqual( Exception ex1, Exception ex2 )
-		{
+        protected virtual void AssertAreEqual( Exception ex1, Exception ex2 )
+        {
 
-		}
+        }
 
-		[TestMethod()]
-		public void ctor_default()
-		{
-			Exception target = this.CreateMock();
-			Assert.IsNotNull( target );
-		}
+        [TestMethod()]
+        public void ctor_default()
+        {
+            Exception target = this.CreateMock();
+            Assert.IsNotNull( target );
+        }
 
-		[TestMethod()]
-		public void serialization()
-		{
-			Exception expected = this.CreateMock();
-			Exception target = this.Process( expected );
+        [TestMethod()]
+        public void serialization()
+        {
+            Exception expected = this.CreateMock();
+            Exception target = this.Process( expected );
 
-			AssertAreEqual( expected, target );
-		}
+            AssertAreEqual( expected, target );
+        }
 
-		[TestMethod()]
-		public void ctor_string()
-		{
-			String expectedMessage = "message";
-			Exception target = this.CreateMock( expectedMessage );
+        [TestMethod()]
+        public void ctor_string()
+        {
+            String expectedMessage = "message";
+            Exception target = this.CreateMock( expectedMessage );
 
-			Assert.AreEqual<String>( expectedMessage, target.Message );
-			Assert.IsNull( target.InnerException );
-		}
+            Assert.AreEqual<String>( expectedMessage, target.Message );
+            Assert.IsNull( target.InnerException );
+        }
 
-		[TestMethod()]
-		public void ctor_string_innerException()
-		{
-			String expectedMessage = "message";
-			Exception expectedInnerException = new StackOverflowException();
+        [TestMethod()]
+        public void ctor_string_innerException()
+        {
+            String expectedMessage = "message";
+            Exception expectedInnerException = new StackOverflowException();
 
-			Exception target = this.CreateMock( expectedMessage, expectedInnerException );
+            Exception target = this.CreateMock( expectedMessage, expectedInnerException );
 
-			Assert.AreEqual<String>( expectedMessage, target.Message );
-			Assert.AreEqual<Exception>( expectedInnerException, target.InnerException );
-		}
-	}
+            Assert.AreEqual<String>( expectedMessage, target.Message );
+            Assert.AreEqual<Exception>( expectedInnerException, target.InnerException );
+        }
+    }
 }

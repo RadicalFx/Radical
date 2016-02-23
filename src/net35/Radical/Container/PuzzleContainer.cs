@@ -223,7 +223,7 @@ namespace Topics.Radical
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <returns>
-        /// 	<c>true</c> if the given service type is registered; otherwise, <c>false</c>.
+        ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
         public Boolean IsRegistered<TService>()
         {
@@ -235,7 +235,7 @@ namespace Topics.Radical
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified type is registered; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified type is registered; otherwise, <c>false</c>.
         /// </returns>
         public Boolean IsRegistered( Type type )
         {
