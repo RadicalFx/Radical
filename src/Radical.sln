@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDD1DA5D-B3A3-4274-9F83-4ACDE54C34EF}"
 	ProjectSection(SolutionItems) = preProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "net45\Test.Radical\Test.Radical.csproj", "{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35", "net35", "{876AAE43-D461-4261-BE26-1AF1593FE770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "net35\Test.Radical\Test.Radical.csproj", "{31CC206D-2014-4612-811E-82B198385343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,22 @@ Global
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|ARM.ActiveCfg = Release|Any CPU
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|x64.ActiveCfg = Release|Any CPU
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|x86.ActiveCfg = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|ARM.Build.0 = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|x64.Build.0 = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Debug|x86.Build.0 = Debug|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|ARM.ActiveCfg = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|ARM.Build.0 = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|x64.ActiveCfg = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|x64.Build.0 = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|x86.ActiveCfg = Release|Any CPU
+		{31CC206D-2014-4612-811E-82B198385343}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +132,7 @@ Global
 		{FD7E428B-8FDB-4EEA-95E6-28598703E605} = {4D938E88-567A-4F81-A0E4-A56650C81053}
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A} = {FD7E428B-8FDB-4EEA-95E6-28598703E605}
 		{876AAE43-D461-4261-BE26-1AF1593FE770} = {4D938E88-567A-4F81-A0E4-A56650C81053}
+		{31CC206D-2014-4612-811E-82B198385343} = {876AAE43-D461-4261-BE26-1AF1593FE770}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
