@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Topics.Radical.ComponentModel
 {
-	public interface IPuzzleSetupDescriptor
-	{
-		void Setup( IPuzzleContainer container, Func<IEnumerable<Type>> knownTypesProvider );
-	}
+    public interface IPuzzleSetupDescriptor
+    {
+        void Setup( IPuzzleContainer container, Func<IEnumerable<Type>> knownTypesProvider );
+    }
 }

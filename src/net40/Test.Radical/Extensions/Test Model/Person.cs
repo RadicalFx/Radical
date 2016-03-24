@@ -5,23 +5,23 @@ using System.Text;
 
 namespace Test.Radical.Extensions
 {
-	class  Person
-	{
-		public Address Address { get; set; }
-		public Person ()
-		{
+    class  Person
+    {
+        public Address Address { get; set; }
+        public Person ()
+        {
 
-		}
+        }
 
-		public Person(String privateValue)
-		{
-			this.privateValue = privateValue;
-		}
+        public Person(String privateValue)
+        {
+            this.privateValue = privateValue;
+        }
 
-		protected String privateValue { get; private set; }
+        protected String privateValue { get; private set; }
 
-		public int Age { get; set; }
-		public String Name { get; set; }
-		
-	}
+        public int Age { get; set; }
+        public String Name { get; set; }
+        
+    }
 }

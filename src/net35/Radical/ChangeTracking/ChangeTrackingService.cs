@@ -61,60 +61,63 @@
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose( Boolean disposing )
         {
-            if ( disposing )
+            if (!this.IsDisposed)
             {
-                /*
-                 * Se disposing è 'true' significa che dispose
-                 * è stato invocato direttamentente dall'utente
-                 * è quindi lecito accedere ai 'field' e ad 
-                 * eventuali reference perchè sicuramente Finalize
-                 * non è ancora stato chiamato su questi oggetti
-                 * 
-                 * Staminchia...
-                 */
-                //this.RejectChangesCore( false );
-
-                this.backwardChangesStack.ForEach( c => this.OnUnwire( c ) );
-                this.forwardChangesStack.ForEach( c => this.OnUnwire( c ) );
-                
-                this.iComponentEntities.ForEach( ic =>
+                if (disposing)
                 {
-                    if ( ic != null )
+                    /*
+                     * Se disposing è 'true' significa che dispose
+                     * è stato invocato direttamentente dall'utente
+                     * è quindi lecito accedere ai 'field' e ad 
+                     * eventuali reference perchè sicuramente Finalize
+                     * non è ancora stato chiamato su questi oggetti
+                     * 
+                     * Staminchia...
+                     */
+                    //this.RejectChangesCore( false );
+
+                    this.backwardChangesStack.ForEach(c => this.OnUnwire(c));
+                    this.forwardChangesStack.ForEach(c => this.OnUnwire(c));
+
+                    this.iComponentEntities.ForEach(ic =>
                     {
-                        ic.Disposed -= this.onComponentDisposed;
+                        if (ic != null)
+                        {
+                            ic.Disposed -= this.onComponentDisposed;
+                        }
+                    });
+
+                    this.backwardChangesStack.Clear();
+                    this.forwardChangesStack.Clear();
+                    this.transientEntities.Clear();
+                    this.iComponentEntities.Clear();
+
+                    if (this.Site != null && this.Site.Container != null)
+                    {
+                        this.Site.Container.Remove(this);
                     }
-                } );
 
-                this.backwardChangesStack.Clear();
-                this.forwardChangesStack.Clear();
-                this.transientEntities.Clear();
-                this.iComponentEntities.Clear();
-
-                if ( this.Site != null && this.Site.Container != null )
-                {
-                    this.Site.Container.Remove( this );
+                    if (this._events != null)
+                    {
+                        this.Events.Dispose();
+                    }
                 }
 
-                if ( this._events != null )
-                {
-                    this.Events.Dispose();
-                }
+                this.onChangeCommitted = null;
+                this.onChangeRejected = null;
+                this.onComponentDisposed = null;
+                this.tryUnregisterTransient = null;
+
+                this._events = null;
+                this.Site = null;
+
+                this.backwardChangesStack = null;
+                this.forwardChangesStack = null;
+                this.transientEntities = null;
+                this.iComponentEntities = null;
+
+                this.IsDisposed = true;
             }
-
-            this.onChangeCommitted = null;
-            this.onChangeRejected = null;
-            this.onComponentDisposed = null;
-            this.tryUnregisterTransient = null;
-
-            this._events = null;
-            this.Site = null;
-
-            this.backwardChangesStack = null;
-            this.forwardChangesStack = null;
-            this.transientEntities = null;
-            this.iComponentEntities = null;
-
-			this.IsDisposed = true;
 
             this.OnDisposed();
         }
@@ -357,8 +360,8 @@
             /*
              * Siamo in grado di fare la revert:
              * - se il bookmark è valido e...;
-             *		* se la posizione del bookmark è diversa dall'ultima modifica nel backwardChangesStack
-             *		* oppure se nel bookmark ci sono delle entity registrate transient dopo la creazione del bookmark stesso
+             *        * se la posizione del bookmark è diversa dall'ultima modifica nel backwardChangesStack
+             *        * oppure se nel bookmark ci sono delle entity registrate transient dopo la creazione del bookmark stesso
              */
             lock ( SyncRoot )
             {
@@ -728,7 +731,7 @@
         /// Gets a value indicating whether this instance has transient entities.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance has transient entities; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance has transient entities; otherwise, <c>false</c>.
         /// </value>
         public Boolean HasTransientEntities
         {
@@ -1084,7 +1087,7 @@
         /// Gets a value indicating whether this instance is suspended.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance is suspended; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is suspended; otherwise, <c>false</c>.
         /// </value>
         public Boolean IsSuspended
         {
@@ -1344,9 +1347,9 @@
             return this.BeginAtomicOperation( AddChangeBehavior.Default );
         }
 
-		/// <summary>
-		/// Whether this component is disposed or not.
-		/// </summary>
-		public bool IsDisposed { get; private set; }
-	}
+        /// <summary>
+        /// Whether this component is disposed or not.
+        /// </summary>
+        public bool IsDisposed { get; private set; }
+    }
 }
