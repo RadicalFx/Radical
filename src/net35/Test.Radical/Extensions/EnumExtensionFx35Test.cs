@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
+using Topics.Radical;
 
 namespace Test.Radical.Extensions
 {
@@ -27,7 +27,7 @@ namespace Test.Radical.Extensions
             var testCase = FlaggedTestEnum.Value1 | FlaggedTestEnum.Value2;
             var actual = testCase.HasFlag(FlaggedTestEnum.Value1);
 
-            actual.Should().Be.True();
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace Test.Radical.Extensions
             var testCase = FlaggedTestEnum.Value1 | FlaggedTestEnum.Value2;
             var actual = testCase.HasFlag(FlaggedTestEnum.Value8);
 
-            actual.Should().Be.False();
+            Assert.IsFalse(actual);
         }
     }
 }
