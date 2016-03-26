@@ -108,6 +108,7 @@
     <Compile Include="Diagnostics\EnsurePreviewExtensions.cs" />
     <Compile Include="Diagnostics\New.cs" />
     <Compile Include="Enumerations\Attributes\ResourceAssemblyLocationBehavior.cs" />
+    <Compile Include="Extensions\EnumExtensionsFx35.cs" />
     <Compile Include="Helpers\CommandLineArgumentAttribute.cs" />
     <Compile Include="ChangeTracking\Advisory\AdvisedAction.cs" />
     <Compile Include="ChangeTracking\Advisory\Advisory.cs" />
