@@ -7,6 +7,7 @@
     only:
     - develop
 
+  skip_tags: true
   configuration: Debug
   platform: Any CPU
 
@@ -54,6 +55,7 @@
     only:
     - master
 
+  skip_tags: true
   configuration: Release
   platform: Any CPU
 
@@ -90,5 +92,14 @@
   deploy:
   - provider: Environment
     name: NuGet public feed
+    on:
+      branch: master
+      
+  - provider: GitHub    
+    release: $(GitVersion_NuGetVersion)
+    description: 'Release v$(GitVersion_NuGetVersion)'
+    auth_token:
+      secure: 2ijF4OfPYfIUTunubL/Z04ogADL9sx/gKW1jMRNJnAa1OpHZpSvCKmP0gvNs8C7h
+    artifact: /.*\.nupkg/, src\build\Release.zip
     on:
       branch: master
