@@ -1,3 +1,4 @@
 branches:
   develop:
-    tag: beta
+    tag: alpha
+    prevent-increment-of-merged-branch-version: true

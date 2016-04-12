@@ -94,7 +94,7 @@
     name: NuGet public feed
     on:
       branch: master
-      
+
   - provider: GitHub    
     release: $(GitVersion_NuGetVersion)
     description: 'Release v$(GitVersion_NuGetVersion)'
