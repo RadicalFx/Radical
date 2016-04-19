@@ -46,6 +46,7 @@ namespace Topics.Radical.Observers
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <returns>This monitor instance.</returns>
+        [Obsolete("Use the POCO overload not constrained to the IMessage interface", false)]
         public MessageBrokerMonitor WaitFor<TMessage>() where TMessage : class, IMessage
         {
             return this.WaitFor<TMessage>( m => true );
@@ -58,6 +59,7 @@ namespace Topics.Radical.Observers
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>
         /// <returns>This monitor instance.</returns>
+        [Obsolete("Use the POCO overload not constrained to the IMessage interface", false)]
         public MessageBrokerMonitor WaitFor<TMessage>( Func<TMessage, Boolean> filter ) where TMessage : class, IMessage
         {
             this.broker.Subscribe<TMessage>( this, ( msg ) =>
