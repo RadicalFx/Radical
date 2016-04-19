@@ -47,9 +47,9 @@ namespace Topics.Radical.Observers
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <returns>This monitor instance.</returns>
         [Obsolete("Use the POCO overload not constrained to the IMessage interface", false)]
-        public MessageBrokerMonitor WaitFor<TMessage>() where TMessage : class, IMessage
+        public MessageBrokerMonitor WaitFor<TMessage>( InvocationModel invocationModel = InvocationModel.Default ) where TMessage : class, IMessage
         {
-            return this.WaitFor<TMessage>( m => true );
+            return this.WaitFor<TMessage>( m => true, invocationModel );
         }
 
         /// <summary>
@@ -58,11 +58,12 @@ namespace Topics.Radical.Observers
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>
+        /// <param name="invocationModel">The invocation model.</param>
         /// <returns>This monitor instance.</returns>
         [Obsolete("Use the POCO overload not constrained to the IMessage interface", false)]
-        public MessageBrokerMonitor WaitFor<TMessage>( Func<TMessage, Boolean> filter ) where TMessage : class, IMessage
+        public MessageBrokerMonitor WaitFor<TMessage>( Func<TMessage, Boolean> filter, InvocationModel invocationModel = InvocationModel.Default ) where TMessage : class, IMessage
         {
-            this.broker.Subscribe<TMessage>( this, ( msg ) =>
+            this.broker.Subscribe<TMessage>( this, invocationModel, ( msg ) =>
             {
                 if ( filter( msg ) )
                 {
@@ -79,9 +80,9 @@ namespace Topics.Radical.Observers
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>() where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>( InvocationModel invocationModel = InvocationModel.Default ) where TMessage : class
         {
-            return this.WaitingFor<TMessage>( m => true );
+            return this.WaitingFor<TMessage>( m => true, invocationModel );
         }
 
         /// <summary>
@@ -90,10 +91,11 @@ namespace Topics.Radical.Observers
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>
+        /// <param name="invocationModel">The invocation model.</param>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>( Func<TMessage, Boolean> filter ) where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>( Func<TMessage, Boolean> filter, InvocationModel invocationModel = InvocationModel.Default ) where TMessage : class
         {
-            this.broker.Subscribe<TMessage>( this, ( sender, msg ) =>
+            this.broker.Subscribe<TMessage>( this, invocationModel, ( sender, msg ) =>
             {
                 if ( filter( msg ) )
                 {
