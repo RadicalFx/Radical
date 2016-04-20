@@ -44,4 +44,3 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Test.Radical35")]
 [assembly: InternalsVisibleTo("Test.Radical40")]
 [assembly: InternalsVisibleTo("Test.Radical45")]
-[assembly: InternalsVisibleTo("Test.Radical.Windows")]
