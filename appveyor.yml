@@ -36,6 +36,10 @@
     do_not_increment_build_number: true
 
   test:
+    assemblies:
+    - '**\net35\**\Test*.dll'
+    - '**\net40\**\Test*.dll'
+    - '**\net45\**\Test*.dll'
     categories:
       except:
       - ObjectDumper
@@ -84,6 +88,10 @@
     do_not_increment_build_number: true
 
   test:
+    assemblies:
+    - '**\net35\**\Test*.dll'
+    - '**\net40\**\Test*.dll'
+    - '**\net45\**\Test*.dll'
     categories:
       except:
       - ObjectDumper
