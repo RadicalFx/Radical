@@ -37,7 +37,9 @@
 
   test:
     assemblies:
-    - '**\Test*.dll'
+    - '**\net35\**\Test*.dll'
+    - '**\net40\**\Test*.dll'
+    - '**\net45\**\Test*.dll'
     categories:
       except:
       - ObjectDumper
@@ -87,7 +89,9 @@
 
   test:
     assemblies:
-    - '**\Test*.dll'
+    - '**\net35\**\Test*.dll'
+    - '**\net40\**\Test*.dll'
+    - '**\net45\**\Test*.dll'
     categories:
       except:
       - ObjectDumper
