@@ -36,6 +36,8 @@
     do_not_increment_build_number: true
 
   test:
+    assemblies:
+    - '**\Test*.dll
     categories:
       except:
       - ObjectDumper
@@ -84,6 +86,8 @@
     do_not_increment_build_number: true
 
   test:
+    assemblies:
+    - '**\Test*.dll
     categories:
       except:
       - ObjectDumper
