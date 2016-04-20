@@ -12,7 +12,7 @@
         public void iconUriHelper_buildPackUri_normal_should_behave_as_expected()
         {
             var relativeUri = "/relativeUri";
-            var expected = "pack://application:,,,/Test.Radical;component/relativeUri";
+            var expected = "pack://application:,,,/Test.Radical40;component/relativeUri";
 
             var actual = Topics.Radical.StringExtensions.AsPackUri( relativeUri );
             actual.Should().Be.EqualTo( expected );
