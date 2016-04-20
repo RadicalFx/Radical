@@ -42,4 +42,5 @@ using System.Runtime.CompilerServices;
 //                               + "7DEF4030016BCFBFE46AB2" )]
 
 [assembly: InternalsVisibleTo( "Test.Radical" )]
+[assembly: InternalsVisibleTo( "Test.Radical40" )]
 [assembly: InternalsVisibleTo( "Test.Radical.Windows" )]
