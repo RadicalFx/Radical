@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Test.Radical.Extensions
 {
-	class Address
-	{
-		public String Street { get; set; }
-	}
+    class Address
+    {
+        public String Street { get; set; }
+    }
 }

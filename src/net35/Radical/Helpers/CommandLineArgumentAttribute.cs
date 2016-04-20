@@ -38,7 +38,7 @@ namespace Topics.Radical.Helpers
         /// Gets or sets a value indicating whether this command line argument is required.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this command line argument is required; otherwise, <c>false</c>.
+        ///     <c>true</c> if this command line argument is required; otherwise, <c>false</c>.
         /// </value>
         public Boolean IsRequired { get; set; }
 

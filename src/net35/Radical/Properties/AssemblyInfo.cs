@@ -22,10 +22,6 @@ using System.Runtime.CompilerServices;
 [assembly: CLSCompliant( true )]
 [assembly: NeutralResourcesLanguage( "en-US", UltimateResourceFallbackLocation.MainAssembly )]
 
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
-
 //[assembly: InternalsVisibleTo( "Test.Radical, PublicKey=002400000480000094"
 //                               + "0000000602000000240000525341310004000001"
 //                               + "000100EBA94E6B3B1AC27D45D5F6F68D5DE3A935"

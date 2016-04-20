@@ -6,454 +6,464 @@ using System.Reflection;
 //using Topics.Radical.Validation;
 using Topics.Radical.ComponentModel;
 using Topics.Radical.Validation;
-//using Topics.Radical.Linq;
+using Topics.Radical.Linq;
 
 namespace Topics.Radical
 {
-	/// <summary>
-	/// The Puzzle inversion of control container.
-	/// </summary>
-	public class PuzzleContainer : IPuzzleContainer
-	{
-		#region IDisposable Members
+    /// <summary>
+    /// The Puzzle inversion of control container.
+    /// </summary>
+    public class PuzzleContainer : IPuzzleContainer
+    {
+        #region IDisposable Members
 
-		/// <summary>
-		/// Releases unmanaged resources and performs other cleanup operations before the
-		/// <see cref="PuzzleContainer"/> is reclaimed by garbage collection.
-		/// </summary>
-		~PuzzleContainer()
-		{
-			this.Dispose( false );
-		}
+        /// <summary>
+        /// Releases unmanaged resources and performs other cleanup operations before the
+        /// <see cref="PuzzleContainer"/> is reclaimed by garbage collection.
+        /// </summary>
+        ~PuzzleContainer()
+        {
+            this.Dispose( false );
+        }
 
-		/// <summary>
-		/// Releases unmanaged and - optionally - managed resources
-		/// </summary>
-		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected virtual void Dispose( Boolean disposing )
-		{
-			if ( disposing )
-			{
-				/*
-				 * Se disposing è 'true' significa che dispose
-				 * è stato invocato direttamentente dall'utente
-				 * è quindi lecito accedere ai 'field' e ad 
-				 * eventuali reference perchè sicuramente Finalize
-				 * non è ancora stato chiamato su questi oggetti
-				 */
-				this.allEntries.Clear();
-				this.trackedSingletons.Clear();
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose( Boolean disposing )
+        {
+            if ( disposing )
+            {
+                /*
+                 * Se disposing è 'true' significa che dispose
+                 * è stato invocato direttamentente dall'utente
+                 * è quindi lecito accedere ai 'field' e ad 
+                 * eventuali reference perchè sicuramente Finalize
+                 * non è ancora stato chiamato su questi oggetti
+                 */
+                this.allEntries.Clear();
 
-				foreach ( var facility in this.facilities )
-				{
-					facility.Teardown( this );
-				}
-				//this.facilities.ForEach( f => f.Teardown( this ) );
-				this.facilities.Clear();
-			}
-		}
+                this.trackedSingletons.Values
+                    .OfType<IDisposable>()
+                    .ToArray()
+                    .ForEach(d => d.Dispose());
 
-		/// <summary>
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose( true );
-			GC.SuppressFinalize( this );
-		}
+                this.trackedSingletons.Clear();
 
-		#endregion
+                foreach ( var facility in this.facilities )
+                {
+                    facility.Teardown( this );
+                }
+                //this.facilities.ForEach( f => f.Teardown( this ) );
+                this.facilities.Clear();
+            }
+        }
 
-		/// <summary>
-		/// Occurs when a component is registered in this container.
-		/// </summary>
-		public event EventHandler<ComponentRegisteredEventArgs> ComponentRegistered;
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose( true );
+            GC.SuppressFinalize( this );
+        }
 
-		/// <summary>
-		/// Raises the <see cref="E:ComponentRegistered"/> event.
-		/// </summary>
-		/// <param name="e">The <see cref="Topics.Radical.ComponentModel.ComponentRegisteredEventArgs"/> instance containing the event data.</param>
-		protected virtual void OnComponentRegistered( ComponentRegisteredEventArgs e )
-		{
-			var h = this.ComponentRegistered;
-			if ( h != null )
-			{
-				h( this, e );
-			}
-		}
+        #endregion
 
-		readonly IList<IContainerEntry> allEntries = new List<IContainerEntry>();
-		readonly IDictionary<IContainerEntry, Object> trackedSingletons = new Dictionary<IContainerEntry, Object>();
-		readonly IList<IPuzzleContainerFacility> facilities = new List<IPuzzleContainerFacility>();
+        /// <summary>
+        /// Occurs when a component is registered in this container.
+        /// </summary>
+        public event EventHandler<ComponentRegisteredEventArgs> ComponentRegistered;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="PuzzleContainer"/> class.
-		/// </summary>
-		public PuzzleContainer()
-		{
-			//this.Register
-			//(
-			//    EntryBuilder.For<IServiceProvider>().UsingInstance( this )
-			//);
-		}
+        /// <summary>
+        /// Raises the <see cref="E:ComponentRegistered"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Topics.Radical.ComponentModel.ComponentRegisteredEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnComponentRegistered( ComponentRegisteredEventArgs e )
+        {
+            var h = this.ComponentRegistered;
+            if ( h != null )
+            {
+                h( this, e );
+            }
+        }
 
-		/// <summary>
-		/// Registers the specified entry in this container.
-		/// </summary>
-		/// <param name="entry">The entry to register.</param>
-		/// <returns>This container instance.</returns>
-		public IPuzzleContainer Register( IContainerEntry entry )
-		{
-			Ensure.That( entry ).Named( "entry" ).IsNotNull();
-			entry.Validate();
+        readonly IList<IContainerEntry> allEntries = new List<IContainerEntry>();
+        readonly IDictionary<IContainerEntry, Object> trackedSingletons = new Dictionary<IContainerEntry, Object>();
+        readonly IList<IPuzzleContainerFacility> facilities = new List<IPuzzleContainerFacility>();
 
-			allEntries.Add( entry );
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PuzzleContainer"/> class.
+        /// </summary>
+        public PuzzleContainer()
+        {
+            //this.Register
+            //(
+            //    EntryBuilder.For<IServiceProvider>().UsingInstance( this )
+            //);
+        }
 
-			this.OnComponentRegistered( new ComponentRegisteredEventArgs( entry ) );
+        /// <summary>
+        /// Registers the specified entry in this container.
+        /// </summary>
+        /// <param name="entry">The entry to register.</param>
+        /// <returns>This container instance.</returns>
+        public IPuzzleContainer Register( IContainerEntry entry )
+        {
+            Ensure.That( entry ).Named( "entry" ).IsNotNull();
 
-			return this;
-		}
+            allEntries.Add( entry );
 
-		/// <summary>
-		/// Registers all the specified entries.
-		/// </summary>
-		/// <param name="entries">The entries to register.</param>
-		/// <returns>This container instance.</returns>
-		public IPuzzleContainer Register( IEnumerable<IContainerEntry> entries )
-		{
-			Ensure.That( entries )
-				.Named( "entries" )
-				.IsNotNull();
+            this.OnComponentRegistered( new ComponentRegisteredEventArgs( entry ) );
 
-			foreach ( var entry in entries )
-			{
-				this.Register( entry );
-			}
+            return this;
+        }
 
-			return this;
-		}
+        /// <summary>
+        /// Registers all the specified entries.
+        /// </summary>
+        /// <param name="entries">The entries to register.</param>
+        /// <returns>This container instance.</returns>
+        public IPuzzleContainer Register( IEnumerable<IContainerEntry> entries )
+        {
+            Ensure.That( entries )
+                .Named( "entries" )
+                .IsNotNull();
 
-		/// <summary>
-		/// Resolves the specified service type.
-		/// </summary>
-		/// <typeparam name="TService">The type of the service.</typeparam>
-		/// <returns>The resolved service instance.</returns>
-		public TService Resolve<TService>()
-		{
-			return ( TService )this.Resolve( typeof( TService ) );
-		}
+            foreach ( var entry in entries )
+            {
+                this.Register( entry );
+            }
 
-		/// <summary>
-		/// Resolves the specified service type.
-		/// </summary>
-		/// <param name="serviceType">The Type of the service.</param>
-		/// <returns>The resolved service instance.</returns>
-		public object Resolve( Type serviceType )
-		{
-			Ensure.That( serviceType )
-				.Named( "serviceType" )
-				.IsNotNull()
-				.IsTrue( t => this.IsRegistered( t ) );
+            return this;
+        }
 
-			var entry = this.GetAllEntriesFor( serviceType )
-				.Where( e => !e.IsOverridable )
-				.FirstOrDefault()
-				.Return( e => e, () =>
-				{
-					return this.GetAllEntriesFor( serviceType )
-						.FirstOrDefault();
-				} );
+        /// <summary>
+        /// Resolves the specified service type.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <returns>The resolved service instance.</returns>
+        public TService Resolve<TService>()
+        {
+            return ( TService )this.Resolve( typeof( TService ) );
+        }
 
-			return this.ResolveEntry( entry );
-		}
+        /// <summary>
+        /// Resolves the specified service type.
+        /// </summary>
+        /// <param name="serviceType">The Type of the service.</param>
+        /// <returns>The resolved service instance.</returns>
+        public object Resolve( Type serviceType )
+        {
+            Ensure.That( serviceType )
+                .Named( "serviceType" )
+                .IsNotNull()
+                .IsTrue( t => this.IsRegistered( t ) );
 
-		public object Resolve( String key, Type serviceType )
-		{
-			Ensure.That( key ).Named( () => key )
-				.IsNotNullNorEmpty();
+            var entry = this.GetAllEntriesFor( serviceType )
+                .Where( e => !e.IsOverridable )
+                .FirstOrDefault()
+                .Return( e => e, () =>
+                {
+                    return this.GetAllEntriesFor( serviceType )
+                        .FirstOrDefault();
+                } );
 
-			Ensure.That( serviceType )
-				.Named( "serviceType" )
-				.IsNotNull()
-				.IsTrue( t => this.IsRegistered( t ) );
+            return this.ResolveEntry( entry );
+        }
 
-			var entry = this.GetEntryFor( key, serviceType );
+        public object Resolve( String key, Type serviceType )
+        {
+            Ensure.That( key ).Named( () => key )
+                .IsNotNullNorEmpty();
 
-			return this.ResolveEntry( entry );
-		}
+            Ensure.That( serviceType )
+                .Named( "serviceType" )
+                .IsNotNull()
+                .IsTrue( t => this.IsRegistered( t ) );
 
-		public IEnumerable<T> ResolveAll<T>()
-		{
-			var ti = typeof( T );
+            var entry = this.GetEntryFor( key, serviceType );
 
-			return this.ResolveAllCore( ti ).Cast<T>();
-		}
+            return this.ResolveEntry( entry );
+        }
 
-		public IEnumerable<Object> ResolveAll( Type t )
-		{
-			return this.ResolveAllCore( t ).Cast<Object>();
-		}
+        public IEnumerable<T> ResolveAll<T>()
+        {
+            var ti = typeof( T );
 
-		private Array ResolveAllCore( Type serviceType )
-		{
-			//Ensure.That( serviceType )
-			//    .Named( () => serviceType )
-			//    .IsNotNull()
-			//    .IsTrue( t => this.IsRegistered( t ) );
+            return this.ResolveAllCore( ti ).Cast<T>();
+        }
 
-			var all = this.GetAllEntriesFor( serviceType ).ToArray();
-			var tmp = Array.CreateInstance( serviceType, all.Length );
-			for ( var i = 0; i < all.Length; i++ )
-			{
-				var entry = all[ i ];
-				var obj = this.ResolveEntry( entry );
-				tmp.SetValue( obj, i );
-			}
+        public IEnumerable<Object> ResolveAll( Type t )
+        {
+            return this.ResolveAllCore( t ).Cast<Object>();
+        }
 
-			return tmp;
-		}
+        private Array ResolveAllCore( Type serviceType )
+        {
+            //Ensure.That( serviceType )
+            //    .Named( () => serviceType )
+            //    .IsNotNull()
+            //    .IsTrue( t => this.IsRegistered( t ) );
 
-		/// <summary>
-		/// Determines whether the given service type is registered.
-		/// </summary>
-		/// <typeparam name="TService">The type of the service.</typeparam>
-		/// <returns>
-		/// 	<c>true</c> if the given service type is registered; otherwise, <c>false</c>.
-		/// </returns>
-		public Boolean IsRegistered<TService>()
-		{
-			return this.IsRegistered( typeof( TService ) );
-		}
+            var all = this.GetAllEntriesFor( serviceType ).ToArray();
+            var tmp = Array.CreateInstance( serviceType, all.Length );
+            for ( var i = 0; i < all.Length; i++ )
+            {
+                var entry = all[ i ];
+                var obj = this.ResolveEntry( entry );
+                tmp.SetValue( obj, i );
+            }
 
-		/// <summary>
-		/// Determines whether the specified type is registered.
-		/// </summary>
-		/// <param name="type">The type.</param>
-		/// <returns>
-		/// 	<c>true</c> if the specified type is registered; otherwise, <c>false</c>.
-		/// </returns>
-		public Boolean IsRegistered( Type type )
-		{
-			return type != null && this.allEntries
-				.Any( x =>
-				{
-					return x.Component == type ||
-					(
-						x.Services.Any( s => s == type ) &&
-						(
-							x.Component != null ||
-							x.Factory != null
-						)
-					);
-				} );
-		}
+            return tmp;
+        }
 
-		IEnumerable<IContainerEntry> GetAllEntriesFor( Type type )
-		{
-			return this.allEntries.Where( x =>
-			{
-				return x.Component == type ||
-				(
-					x.Services.Any( s => s == type ) &&
-					(
-						x.Component != null ||
-						x.Factory != null
-					)
-				);
-			} );
-		}
+        /// <summary>
+        /// Determines whether the given service type is registered.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <returns>
+        ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
+        /// </returns>
+        public Boolean IsRegistered<TService>()
+        {
+            return this.IsRegistered( typeof( TService ) );
+        }
 
-		IContainerEntry GetEntryFor( String key, Type type )
-		{
-			return this.allEntries.FirstOrDefault( x =>
-			{
-				return x.Key == key && x.Services.Any( s => s == type );
-			} );
-		}
+        /// <summary>
+        /// Determines whether the specified type is registered.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified type is registered; otherwise, <c>false</c>.
+        /// </returns>
+        public Boolean IsRegistered( Type type )
+        {
+            return type != null && this.allEntries
+                .Any( x =>
+                {
+                    return x.Component == type ||
+                    (
+                        x.Services.Any( s => s == type ) &&
+                        (
+                            x.Component != null ||
+                            x.Factory != null
+                        )
+                    );
+                } );
+        }
 
-		Object ResolveEntry( IContainerEntry entry )
-		{
-			if ( entry.Lifestyle == Lifestyle.Singleton && this.trackedSingletons.ContainsKey( entry ) )
-			{
-				return this.trackedSingletons[ entry ];
-			}
+        IEnumerable<IContainerEntry> GetAllEntriesFor( Type type )
+        {
+            return this.allEntries.Where( x =>
+            {
+                return x.Component == type ||
+                (
+                    x.Services.Any( s => s == type ) &&
+                    (
+                        x.Component != null ||
+                        x.Factory != null
+                    )
+                );
+            } );
+        }
 
-			Object instance = null;
+        IContainerEntry GetEntryFor( String key, Type type )
+        {
+            return this.allEntries.FirstOrDefault( x =>
+            {
+                return x.Key == key && x.Services.Any( s => s == type );
+            } );
+        }
 
-			if ( entry.Factory != null )
-			{
-				instance = entry.Factory.DynamicInvoke();
-			}
-			else
-			{
-				var ctor = entry.Component
-					.GetConstructors()
-					.FirstOrDefault( x =>
-					{
-						return !x.IsStatic && x.GetParameters()
-							.All( y =>
-							{
-								var pti = y.ParameterType;
+        Object ResolveEntry( IContainerEntry entry )
+        {
+            if ( entry.Lifestyle == Lifestyle.Singleton && this.trackedSingletons.ContainsKey( entry ) )
+            {
+                return this.trackedSingletons[ entry ];
+            }
 
-								if ( entry.Parameters.ContainsKey( y.Name ) && pti.IsAssignableFrom( entry.Parameters[ y.Name ].GetType() ) )
-								{
-									return true;
-								}
+            Object instance = null;
 
-								if ( this.IsRegistered( pti ) )
-								{
-									return true;
-								}
+            if ( entry.Factory != null )
+            {
+                instance = entry.Factory.DynamicInvoke();
+            }
+            else
+            {
+                var ctor = entry.Component
+                    .GetConstructors()
+                    .FirstOrDefault( x =>
+                    {
+                        return !x.IsStatic && x.GetParameters()
+                            .All( y =>
+                            {
+                                var pti = y.ParameterType;
 
-								if ( pti.IsArray && pti.HasElementType )
-								{
-									var eti = pti.GetElementType();
+                                if ( entry.Parameters.ContainsKey( y.Name ) && pti.IsAssignableFrom( entry.Parameters[ y.Name ].GetType() ) )
+                                {
+                                    return true;
+                                }
 
-									return this.IsRegistered( eti );
-								}
+                                if ( this.IsRegistered( pti ) )
+                                {
+                                    return true;
+                                }
 
-								if ( pti.IsGenericType )
-								{
-									//is "IEnumerable"
-								}
+                                if ( pti.IsArray && pti.HasElementType )
+                                {
+                                    var eti = pti.GetElementType();
 
-								return false;
-							} );
-					} );
+                                    return this.IsRegistered( eti );
+                                }
 
-				Ensure.That( ctor )
-					.Named( "ctor" )
-					.WithMessage( "Cannot find any valid constructor fot type {0}.", entry.Component.FullName )
-					.IsNotNull();
+                                if ( pti.IsGenericType )
+                                {
+                                    //is "IEnumerable"
+                                }
 
-				var ctorParams = ctor.GetParameters();
-				var pars = new Object[ ctorParams.Length ];
-				for ( int i = 0; i < pars.Length; i++ )
-				{
-					var p = ctorParams[ i ];
-					if ( entry.Parameters.ContainsKey( p.Name ) )
-					{
-						pars[ i ] = entry.Parameters[ p.Name ];
-					}
-					else
-					{
-						var pti = p.ParameterType;
-						if ( pti.IsArray && pti.HasElementType )
-						{
-							var eti = pti.GetElementType();
-							var all = this.ResolveAll( eti );
-							pars[ i ] = all;
-						}
-						else
-						{
-							pars[ i ] = this.Resolve( pti );
-						}
-					}
-				}
+                                return false;
+                            } );
+                    } );
 
-				instance = ctor.Invoke( pars );
-			}
+                Ensure.That( ctor )
+                    .Named( "ctor" )
+                    .WithMessage( "Cannot find any valid constructor fot type {0}.", entry.Component.FullName )
+                    .IsNotNull();
 
-			if ( instance != null )
-			{
-				foreach ( var x in entry.Parameters )
-				{
-					var prop = entry.Component.GetProperties().SingleOrDefault( p => p.Name == x.Key );
-					if ( prop != null && prop.CanWrite && prop.PropertyType.IsAssignableFrom( x.Value.GetType() ) )
-					{
-						prop.SetValue( instance, x.Value, null );
-					}
-				}
+                var ctorParams = ctor.GetParameters();
+                var pars = new Object[ ctorParams.Length ];
+                for ( int i = 0; i < pars.Length; i++ )
+                {
+                    var p = ctorParams[ i ];
+                    if ( entry.Parameters.ContainsKey( p.Name ) )
+                    {
+                        pars[ i ] = entry.Parameters[ p.Name ];
+                    }
+                    else
+                    {
+                        var pti = p.ParameterType;
+                        if ( pti.IsArray && pti.HasElementType )
+                        {
+                            var eti = pti.GetElementType();
+                            var all = this.ResolveAll( eti );
+                            pars[ i ] = all;
+                        }
+                        else
+                        {
+                            pars[ i ] = this.Resolve( pti );
+                        }
+                    }
+                }
 
-				//qui si potrebbe ipotizzare un qualcosa di simile a castle
-				//che cerca di risolvere le proprietà pubbliche esposte dal tipo
-				//appena risolto.
+                instance = ctor.Invoke( pars );
+            }
 
-				if ( entry.Lifestyle == Lifestyle.Singleton )
-				{
-					this.trackedSingletons.Add( entry, instance );
-				}
-			}
+            if ( instance != null )
+            {
+                foreach ( var x in entry.Parameters )
+                {
+                    var prop = entry.Component.GetProperties().SingleOrDefault( p => p.Name == x.Key );
+                    if ( prop != null && prop.CanWrite && prop.PropertyType.IsAssignableFrom( x.Value.GetType() ) )
+                    {
+                        prop.SetValue( instance, x.Value, null );
+                    }
+                }
 
-			return instance;
-		}
+                //qui si potrebbe ipotizzare un qualcosa di simile a castle
+                //che cerca di risolvere le proprietà pubbliche esposte dal tipo
+                //appena risolto.
 
-		/// <summary>
-		/// Gets the service object of the specified type.
-		/// </summary>
-		/// <param name="serviceType">An object that specifies the type of service object to get.</param>
-		/// <returns>
-		/// A service object of type <paramref name="serviceType"/>.-or- null if there is no service object of type <paramref name="serviceType"/>.
-		/// </returns>
-		public object GetService( Type serviceType )
-		{
-			if ( this.IsRegistered( serviceType ) )
-			{
-				var service = this.Resolve( serviceType );
+                if ( entry.Lifestyle == Lifestyle.Singleton )
+                {
+                    this.trackedSingletons.Add( entry, instance );
+                }
+            }
 
-				return service;
-			}
-			return null;
-		}
+            return instance;
+        }
 
-		/// <summary>
-		/// Adds the given facility instance to this container.
-		/// </summary>
-		/// <param name="facility">The facility.</param>
-		/// <returns>This container instance.</returns>
-		public IPuzzleContainer AddFacility( IPuzzleContainerFacility facility )
-		{
-			Ensure.That( facility ).Named( () => facility ).IsNotNull();
+        /// <summary>
+        /// Gets the service object of the specified type.
+        /// </summary>
+        /// <param name="serviceType">An object that specifies the type of service object to get.</param>
+        /// <returns>
+        /// A service object of type <paramref name="serviceType"/>.-or- null if there is no service object of type <paramref name="serviceType"/>.
+        /// </returns>
+        public object GetService( Type serviceType )
+        {
+            if ( this.IsRegistered( serviceType ) )
+            {
+                var service = this.Resolve( serviceType );
 
-			facility.Initialize( this );
-			this.facilities.Add( facility );
+                return service;
+            }
+            return null;
+        }
 
-			return this;
-		}
+        /// <summary>
+        /// Adds the given facility instance to this container.
+        /// </summary>
+        /// <param name="facility">The facility.</param>
+        /// <returns>This container instance.</returns>
+        public IPuzzleContainer AddFacility( IPuzzleContainerFacility facility )
+        {
+            Ensure.That( facility ).Named( () => facility ).IsNotNull();
 
-		/// <summary>
-		/// Adds a new facility.
-		/// </summary>
-		/// <typeparam name="TFacility">The type of the facility.</typeparam>
-		/// <returns>This container instance.</returns>
-		public IPuzzleContainer AddFacility<TFacility>() where TFacility : IPuzzleContainerFacility
-		{
-			/*
-			 * si potrebbe ipotizzare di "registrare" TFacility e poi risolverlo
-			 * in modo da permettere alla facility a sua volta di avere dipendenze
-			 * l'inghippo è che tipicamente una facility viene aggiunta all'inizio
-			 */
-			Ensure.That( typeof( TFacility ) )
-				.WithMessage( "Cannot register an interface." )
-				.IsFalse( t => t.IsInterface )
-				.WithMessage( "Cannot register an abstract class." )
-				.IsFalse( t => t.IsAbstract );
+            facility.Initialize( this );
+            this.facilities.Add( facility );
 
-			var facility = ( IPuzzleContainerFacility )Activator.CreateInstance<TFacility>();
+            return this;
+        }
 
-			return this.AddFacility( facility );
-		}
+        /// <summary>
+        /// Adds a new facility.
+        /// </summary>
+        /// <typeparam name="TFacility">The type of the facility.</typeparam>
+        /// <returns>This container instance.</returns>
+        public IPuzzleContainer AddFacility<TFacility>() where TFacility : IPuzzleContainerFacility
+        {
+            /*
+             * si potrebbe ipotizzare di "registrare" TFacility e poi risolverlo
+             * in modo da permettere alla facility a sua volta di avere dipendenze
+             * l'inghippo è che tipicamente una facility viene aggiunta all'inizio
+             */
+            Ensure.That( typeof( TFacility ) )
+                .WithMessage( "Cannot register an interface." )
+                .IsFalse( t => t.IsInterface )
+                .WithMessage( "Cannot register an abstract class." )
+                .IsFalse( t => t.IsAbstract );
 
-		/// <summary>
-		/// Gets all the installed facilities.
-		/// </summary>
-		/// <returns>A readonly list of all the installed facilities.</returns>
-		public IEnumerable<IPuzzleContainerFacility> GetFacilities()
-		{
-			return this.facilities;
-			//return this.facilities.AsReadOnly();
-		}
+            var facility = ( IPuzzleContainerFacility )Activator.CreateInstance<TFacility>();
 
-		//public void SetupWith( Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors )
-		//{
-		//	if ( descriptors != null )
-		//	{
-		//		foreach ( var d in descriptors )
-		//		{
-		//			d.Setup( this, knownTypesProvider );
-		//		}
-		//	}
-		//}
-	}
+            return this.AddFacility( facility );
+        }
+
+        /// <summary>
+        /// Gets all the installed facilities.
+        /// </summary>
+        /// <returns>A readonly list of all the installed facilities.</returns>
+        public IEnumerable<IPuzzleContainerFacility> GetFacilities()
+        {
+            return this.facilities;
+            //return this.facilities.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Setups the container using the supplied setup descriptors.
+        /// </summary>
+        /// <param name="knownTypesProvider">The known types provider.</param>
+        /// <param name="descriptors">The descriptors.</param>
+        public void SetupWith(Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors)
+        {
+            if(descriptors != null)
+            {
+                foreach(var d in descriptors)
+                {
+                    d.Setup(this, knownTypesProvider);
+                }
+            }
+        }
+    }
 
 }

@@ -1433,10 +1433,10 @@
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.TrackingServiceStateChanged += ( sender, args ) => { actual++; };
 
-            Person p = new Person( svc );	//raise
-            p.Name = "Mau";					//raise
-            p.Name = "Mau";					//no changes, no raise
-            p.Name = "Mauro";				//raise
+            Person p = new Person( svc );    //raise
+            p.Name = "Mau";                    //raise
+            p.Name = "Mau";                    //no changes, no raise
+            p.Name = "Mauro";                //raise
 
             Assert.AreEqual<Int32>( expected, actual );
         }
