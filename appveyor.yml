@@ -37,7 +37,7 @@
 
   test:
     assemblies:
-    - '**\Test*.dll
+    - '**\Test*.dll'
     categories:
       except:
       - ObjectDumper
@@ -87,7 +87,7 @@
 
   test:
     assemblies:
-    - '**\Test*.dll
+    - '**\Test*.dll'
     categories:
       except:
       - ObjectDumper
