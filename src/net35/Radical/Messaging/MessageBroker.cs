@@ -30,7 +30,7 @@ namespace Topics.Radical.Messaging
     {
         class SubscriptionsContainer
         {
-            public SubscriptionsContainer( Type messageType )
+            public SubscriptionsContainer(Type messageType)
             {
                 this.MessageType = messageType;
                 this.Subscriptions = new List<ISubscription>();
@@ -42,7 +42,7 @@ namespace Topics.Radical.Messaging
         }
 
 #if !SILVERLIGHT
-        static readonly TraceSource logger = new TraceSource( typeof( MessageBroker ).FullName );
+        static readonly TraceSource logger = new TraceSource(typeof(MessageBroker).FullName);
         //        static readonly ILog logger = LogManager.GetLogger( typeof( MessageBroker ) );
 #endif
 
@@ -65,9 +65,9 @@ namespace Topics.Radical.Messaging
         /// Initializes a new instance of the <see cref="MessageBroker"/> class.
         /// </summary>
         /// <param name="dispatcher">The dispatcher.</param>
-        public MessageBroker( IDispatcher dispatcher )
+        public MessageBroker(IDispatcher dispatcher)
         {
-            Ensure.That( dispatcher ).Named( "dispatcher" ).IsNotNull();
+            Ensure.That(dispatcher).Named("dispatcher").IsNotNull();
 
             this.dispatcher = dispatcher;
             this.msgSubsIndex = new List<SubscriptionsContainer>();
@@ -84,10 +84,10 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <param name="dispatcher">The dispatcher.</param>
         /// <param name="factory">The factory.</param>
-        public MessageBroker( IDispatcher dispatcher, TaskFactory factory )
+        public MessageBroker(IDispatcher dispatcher, TaskFactory factory)
         {
-            Ensure.That( dispatcher ).Named( "dispatcher" ).IsNotNull();
-            Ensure.That( factory ).Named( () => factory ).IsNotNull();
+            Ensure.That(dispatcher).Named("dispatcher").IsNotNull();
+            Ensure.That(factory).Named(() => factory).IsNotNull();
 
             this.dispatcher = dispatcher;
             this.factory = factory;
@@ -96,18 +96,18 @@ namespace Topics.Radical.Messaging
 
 #endif
 
-        void SubscribeCore( Type messageType, ISubscription subscription )
+        void SubscribeCore(Type messageType, ISubscription subscription)
         {
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if( this.msgSubsIndex.Any( sc => sc.MessageType == messageType ) )
+                if (this.msgSubsIndex.Any(sc => sc.MessageType == messageType))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == messageType ).Subscriptions;
+                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == messageType).Subscriptions;
                     msgSubsIndexLock.EnterWriteLock();
                     try
                     {
-                        allMessageSubscriptions.Add( subscription );
+                        allMessageSubscriptions.Add(subscription);
                     }
                     finally
                     {
@@ -119,9 +119,9 @@ namespace Topics.Radical.Messaging
                     msgSubsIndexLock.EnterWriteLock();
                     try
                     {
-                        var sc = new SubscriptionsContainer( messageType );
-                        sc.Subscriptions.Add( subscription );
-                        this.msgSubsIndex.Add( sc );
+                        var sc = new SubscriptionsContainer(messageType);
+                        sc.Subscriptions.Add(subscription);
+                        this.msgSubsIndex.Add(sc);
                     }
                     finally
                     {
@@ -142,10 +142,10 @@ namespace Topics.Radical.Messaging
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe<T>( object subscriber, Action<T> callback )
+        public void Subscribe<T>(object subscriber, Action<T> callback)
             where T : class, IMessage
         {
-            this.Subscribe<T>( subscriber, InvocationModel.Default, callback );
+            this.Subscribe<T>(subscriber, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -155,9 +155,9 @@ namespace Topics.Radical.Messaging
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>( object subscriber, Action<Object, T> callback )
+        public void Subscribe<T>(object subscriber, Action<Object, T> callback)
         {
-            this.Subscribe<T>( subscriber, InvocationModel.Default, callback );
+            this.Subscribe<T>(subscriber, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -169,10 +169,10 @@ namespace Topics.Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>( object subscriber, object sender, Action<T> callback )
+        public void Subscribe<T>(object subscriber, object sender, Action<T> callback)
             where T : class, IMessage
         {
-            this.Subscribe<T>( subscriber, sender, InvocationModel.Default, callback );
+            this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -184,9 +184,9 @@ namespace Topics.Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>( object subscriber, object sender, Action<Object, T> callback )
+        public void Subscribe<T>(object subscriber, object sender, Action<Object, T> callback)
         {
-            this.Subscribe<T>( subscriber, sender, InvocationModel.Default, callback );
+            this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -196,9 +196,9 @@ namespace Topics.Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe( object subscriber, Type messageType, Action<IMessage> callback )
+        public void Subscribe(object subscriber, Type messageType, Action<IMessage> callback)
         {
-            this.Subscribe( subscriber, messageType, InvocationModel.Default, callback );
+            this.Subscribe(subscriber, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -208,9 +208,9 @@ namespace Topics.Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe( object subscriber, Type messageType, Action<Object, Object> callback )
+        public void Subscribe(object subscriber, Type messageType, Action<Object, Object> callback)
         {
-            this.Subscribe( subscriber, messageType, InvocationModel.Default, callback );
+            this.Subscribe(subscriber, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -222,9 +222,9 @@ namespace Topics.Radical.Messaging
         /// <param name="sender">The sender.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe( object subscriber, object sender, Type messageType, Action<IMessage> callback )
+        public void Subscribe(object subscriber, object sender, Type messageType, Action<IMessage> callback)
         {
-            this.Subscribe( subscriber, sender, messageType, InvocationModel.Default, callback );
+            this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -236,9 +236,9 @@ namespace Topics.Radical.Messaging
         /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe( object subscriber, object sender, Type messageType, Action<Object, Object> callback )
+        public void Subscribe(object subscriber, object sender, Type messageType, Action<Object, Object> callback)
         {
-            this.Subscribe( subscriber, sender, messageType, InvocationModel.Default, callback );
+            this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -249,14 +249,14 @@ namespace Topics.Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe<T>( object subscriber, InvocationModel invocationModel, Action<T> callback ) where T : class, IMessage
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<T> callback) where T : class, IMessage
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new GenericSubscription<T>( subscriber, callback, invocationModel, this.dispatcher );
+            var subscription = new GenericSubscription<T>(subscriber, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( typeof( T ), subscription );
+            this.SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
@@ -267,14 +267,14 @@ namespace Topics.Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>( object subscriber, InvocationModel invocationModel, Action<Object, T> callback )
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<Object, T> callback)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new PocoSubscription<T>( subscriber, callback, invocationModel, this.dispatcher );
+            var subscription = new PocoSubscription<T>(subscriber, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( typeof( T ), subscription );
+            this.SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
@@ -285,15 +285,15 @@ namespace Topics.Radical.Messaging
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe( object subscriber, Type messageType, InvocationModel invocationModel, Action<IMessage> callback )
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<IMessage> callback)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( messageType ).Named( () => messageType ).IsNotNull().IsTrue( o => o.Is<IMessage>() );
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new GenericSubscription<IMessage>( subscriber, callback, invocationModel, this.dispatcher );
+            var subscription = new GenericSubscription<IMessage>(subscriber, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( messageType, subscription );
+            this.SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -304,15 +304,15 @@ namespace Topics.Radical.Messaging
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe( object subscriber, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback )
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( messageType ).Named( () => messageType ).IsNotNull(); //.IsTrue( o => o.Is<IMessage>() );
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(messageType).Named(() => messageType).IsNotNull(); //.IsTrue( o => o.Is<IMessage>() );
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new PocoSubscription( subscriber, callback, invocationModel, this.dispatcher );
+            var subscription = new PocoSubscription(subscriber, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( messageType, subscription );
+            this.SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -325,16 +325,16 @@ namespace Topics.Radical.Messaging
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe( object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<IMessage> callback )
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<IMessage> callback)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
-            Ensure.That( messageType ).Named( () => messageType ).IsNotNull().IsTrue( o => o.Is<IMessage>() );
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new GenericSubscription<IMessage>( subscriber, sender, callback, invocationModel, this.dispatcher );
+            var subscription = new GenericSubscription<IMessage>(subscriber, sender, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( messageType, subscription );
+            this.SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -347,16 +347,16 @@ namespace Topics.Radical.Messaging
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe( object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback )
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
-            Ensure.That( messageType ).Named( () => messageType ).IsNotNull().IsTrue( o => o.Is<IMessage>() );
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new PocoSubscription( subscriber, sender, callback, invocationModel, this.dispatcher );
+            var subscription = new PocoSubscription(subscriber, sender, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( messageType, subscription );
+            this.SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -369,15 +369,15 @@ namespace Topics.Radical.Messaging
         /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>( object subscriber, object sender, InvocationModel invocationModel, Action<T> callback ) where T : class, IMessage
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<T> callback) where T : class, IMessage
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new GenericSubscription<T>( subscriber, sender, callback, invocationModel, this.dispatcher );
+            var subscription = new GenericSubscription<T>(subscriber, sender, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( typeof( T ), subscription );
+            this.SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
@@ -390,40 +390,40 @@ namespace Topics.Radical.Messaging
         /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>( object subscriber, object sender, InvocationModel invocationModel, Action<Object, T> callback )
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<Object, T> callback)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
-            Ensure.That( callback ).Named( () => callback ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new PocoSubscription<T>( subscriber, sender, callback, invocationModel, this.dispatcher );
+            var subscription = new PocoSubscription<T>(subscriber, sender, callback, invocationModel, this.dispatcher);
 
-            this.SubscribeCore( typeof( T ), subscription );
+            this.SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
         /// Unsubscribes the specified subscriber from all the subcscriptions.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
-        public void Unsubscribe( object subscriber )
+        public void Unsubscribe(object subscriber)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                foreach( var subscription in this.msgSubsIndex )
+                foreach (var subscription in this.msgSubsIndex)
                 {
                     var count = subscription.Subscriptions.Count;
-                    for( var k = count; k > 0; k-- )
+                    for (var k = count; k > 0; k--)
                     {
-                        var sub = subscription.Subscriptions[ k - 1 ];
-                        if( sub.Subscriber == subscriber )
+                        var sub = subscription.Subscriptions[k - 1];
+                        if (sub.Subscriber == subscriber)
                         {
                             msgSubsIndexLock.EnterWriteLock();
                             try
                             {
-                                subscription.Subscriptions.Remove( sub );
+                                subscription.Subscriptions.Remove(sub);
                             }
                             finally
                             {
@@ -433,20 +433,20 @@ namespace Topics.Radical.Messaging
                     }
                 }
 
-                this.msgSubsIndex.Where( msgSubscriptions => msgSubscriptions.Subscriptions.Count == 0 )
+                this.msgSubsIndex.Where(msgSubscriptions => msgSubscriptions.Subscriptions.Count == 0)
                     .ToList()
-                    .ForEach( kvp =>
-                    {
-                        msgSubsIndexLock.EnterWriteLock();
-                        try
-                        {
-                            this.msgSubsIndex.Remove( kvp );
-                        }
-                        finally
-                        {
-                            msgSubsIndexLock.ExitWriteLock();
-                        }
-                    } );
+                    .ForEach(kvp =>
+                   {
+                       msgSubsIndexLock.EnterWriteLock();
+                       try
+                       {
+                           this.msgSubsIndex.Remove(kvp);
+                       }
+                       finally
+                       {
+                           msgSubsIndexLock.ExitWriteLock();
+                       }
+                   });
             }
             finally
             {
@@ -460,36 +460,36 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender.</param>
-        public void Unsubscribe( Object subscriber, Object sender )
+        public void Unsubscribe(Object subscriber, Object sender)
         {
-            Ensure.That( subscriber ).Named( () => subscriber ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                this.msgSubsIndex.Where( msgSubscriptions =>
-                {
-                    return msgSubscriptions.Subscriptions.Where( subscription =>
-                    {
-                        return Object.Equals( subscription.Subscriber, subscriber )
-                               && Object.Equals( subscription.Sender, sender );
-                    } )
-                    .Any();
-                } )
+                this.msgSubsIndex.Where(msgSubscriptions =>
+               {
+                   return msgSubscriptions.Subscriptions.Where(subscription =>
+                   {
+                       return Object.Equals(subscription.Subscriber, subscriber)
+                              && Object.Equals(subscription.Sender, sender);
+                   })
+                   .Any();
+               })
                 .ToList()
-                .ForEach( kvp =>
-                {
-                    msgSubsIndexLock.EnterWriteLock();
-                    try
-                    {
-                        this.msgSubsIndex.Remove( kvp );
-                    }
-                    finally
-                    {
-                        msgSubsIndexLock.ExitWriteLock();
-                    }
-                } );
+                .ForEach(kvp =>
+               {
+                   msgSubsIndexLock.EnterWriteLock();
+                   try
+                   {
+                       this.msgSubsIndex.Remove(kvp);
+                   }
+                   finally
+                   {
+                       msgSubsIndexLock.ExitWriteLock();
+                   }
+               });
             }
             finally
             {
@@ -502,33 +502,33 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        public void Unsubscribe<T>( object subscriber )
+        public void Unsubscribe<T>(object subscriber)
         {
-            Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
+            Ensure.That(subscriber).Named("subscriber").IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+                if (this.msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
-                    allMessageSubscriptions.Where( subscription =>
-                    {
-                        return Object.Equals( subscriber, subscription.Subscriber );
-                    } )
+                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
+                    allMessageSubscriptions.Where(subscription =>
+                   {
+                       return Object.Equals(subscriber, subscription.Subscriber);
+                   })
                     .ToList()
-                    .ForEach( subscription =>
-                    {
-                        msgSubsIndexLock.EnterWriteLock();
-                        try
-                        {
-                            allMessageSubscriptions.Remove( subscription );
-                        }
-                        finally
-                        {
-                            msgSubsIndexLock.ExitWriteLock();
-                        }
-                    } );
+                    .ForEach(subscription =>
+                   {
+                       msgSubsIndexLock.EnterWriteLock();
+                       try
+                       {
+                           allMessageSubscriptions.Remove(subscription);
+                       }
+                       finally
+                       {
+                           msgSubsIndexLock.ExitWriteLock();
+                       }
+                   });
                 }
             }
             finally
@@ -544,36 +544,36 @@ namespace Topics.Radical.Messaging
         /// <typeparam name="T">The message type filter.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender.</param>
-        public void Unsubscribe<T>( object subscriber, object sender )
+        public void Unsubscribe<T>(object subscriber, object sender)
         {
-            Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
-            Ensure.That( sender ).Named( "sender" ).IsNotNull();
+            Ensure.That(subscriber).Named("subscriber").IsNotNull();
+            Ensure.That(sender).Named("sender").IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+                if (this.msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
-                    allMessageSubscriptions.Where( subscription =>
-                    {
-                        return Object.Equals( subscriber, subscription.Subscriber )
-                               && Object.Equals( sender, subscription.Sender );
-                    } )
+                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
+                    allMessageSubscriptions.Where(subscription =>
+                   {
+                       return Object.Equals(subscriber, subscription.Subscriber)
+                              && Object.Equals(sender, subscription.Sender);
+                   })
                     .ToList()
-                    .ForEach( subscription =>
-                    {
-                        msgSubsIndexLock.EnterWriteLock();
-                        try
-                        {
-                            allMessageSubscriptions.Remove( subscription );
-                        }
-                        finally
-                        {
-                            msgSubsIndexLock.ExitWriteLock();
-                        }
+                    .ForEach(subscription =>
+                   {
+                       msgSubsIndexLock.EnterWriteLock();
+                       try
+                       {
+                           allMessageSubscriptions.Remove(subscription);
+                       }
+                       finally
+                       {
+                           msgSubsIndexLock.ExitWriteLock();
+                       }
 
-                    } );
+                   });
                 }
             }
             finally
@@ -588,35 +588,35 @@ namespace Topics.Radical.Messaging
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback to unsubscribe.</param>
-        public void Unsubscribe<T>( object subscriber, Delegate callback )
+        public void Unsubscribe<T>(object subscriber, Delegate callback)
         {
-            Ensure.That( subscriber ).Named( "subscriber" ).IsNotNull();
-            Ensure.That( callback ).Named( "callback" ).IsNotNull();
+            Ensure.That(subscriber).Named("subscriber").IsNotNull();
+            Ensure.That(callback).Named("callback").IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if( this.msgSubsIndex.Any( sc => sc.MessageType == typeof( T ) ) )
+                if (this.msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single( sc => sc.MessageType == typeof( T ) ).Subscriptions;
-                    allMessageSubscriptions.Where( subscription =>
-                    {
-                        return Object.Equals( subscriber, subscription.Subscriber )
-                               && Object.Equals( callback, subscription.GetAction() );
-                    } )
+                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
+                    allMessageSubscriptions.Where(subscription =>
+                   {
+                       return Object.Equals(subscriber, subscription.Subscriber)
+                              && Object.Equals(callback, subscription.GetAction());
+                   })
                     .ToList()
-                    .ForEach( subscription =>
-                    {
-                        msgSubsIndexLock.EnterWriteLock();
-                        try
-                        {
-                            allMessageSubscriptions.Remove( subscription );
-                        }
-                        finally
-                        {
-                            msgSubsIndexLock.ExitWriteLock();
-                        }
-                    } );
+                    .ForEach(subscription =>
+                   {
+                       msgSubsIndexLock.EnterWriteLock();
+                       try
+                       {
+                           allMessageSubscriptions.Remove(subscription);
+                       }
+                       finally
+                       {
+                           msgSubsIndexLock.ExitWriteLock();
+                       }
+                   });
                 }
             }
             finally
@@ -625,17 +625,17 @@ namespace Topics.Radical.Messaging
             }
         }
 
-        IEnumerable<ISubscription> GetSubscriptionsFor( Type messageType, Object sender )
+        IEnumerable<ISubscription> GetSubscriptionsFor(Type messageType, Object sender)
         {
             msgSubsIndexLock.EnterReadLock();
             try
             {
                 var subscriptions = this.msgSubsIndex
-                                        .Where( kvp => messageType.Is( kvp.MessageType ) )
-                                        .SelectMany( kvp => kvp.Subscriptions );
+                                        .Where(kvp => messageType.Is(kvp.MessageType))
+                                        .SelectMany(kvp => kvp.Subscriptions);
 
-                var effectiveSubscribers = subscriptions.Where( s => s.Sender == null || s.Sender == sender )
-                                                        .OrderByDescending( s => s.Priority )
+                var effectiveSubscribers = subscriptions.Where(s => s.Sender == null || s.Sender == sender)
+                                                        .OrderByDescending(s => s.Priority)
                                                         .AsReadOnly();
 
                 return effectiveSubscribers;
@@ -654,12 +654,12 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <typeparam name="T">The type of the message.</typeparam>
         /// <param name="message">The message.</param>
-        public void Dispatch<T>( T message )
+        public void Dispatch<T>(T message)
             where T : class, IMessage
         {
             //Ensure.That( message ).Named( () => message ).IsNotNull();
 
-            this.Dispatch( typeof( T ), message );
+            this.Dispatch(typeof(T), message);
         }
 
         /// <summary>
@@ -667,11 +667,11 @@ namespace Topics.Radical.Messaging
         /// the execution of all the subscribers.
         /// </summary>
         /// <param name="message">The message to dispatch.</param>
-        public void Dispatch( IMessage message )
+        public void Dispatch(IMessage message)
         {
-            Ensure.That( message ).Named( () => message ).IsNotNull();
+            Ensure.That(message).Named(() => message).IsNotNull();
 
-            this.Dispatch( message.GetType(), message );
+            this.Dispatch(message.GetType(), message);
         }
 
         /// <summary>
@@ -680,45 +680,45 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <param name="messageType">The Type of the message to dispatch.</param>
         /// <param name="message">The message to dispatch.</param>
-        public void Dispatch( Type messageType, IMessage message )
+        public void Dispatch(Type messageType, IMessage message)
         {
-            Ensure.That( messageType ).Named( () => messageType ).IsNotNull();
-            Ensure.That( message ).Named( () => message ).IsNotNull().IsTrue( m => m.GetType().Is( messageType ) );
+            Ensure.That(messageType).Named(() => messageType).IsNotNull();
+            Ensure.That(message).Named(() => message).IsNotNull().IsTrue(m => m.GetType().Is(messageType));
 
-            message.As<IRequireToBeValid>( m => m.Validate() );
+            message.As<IRequireToBeValid>(m => m.Validate());
 
-            var subscriptions = this.GetSubscriptionsFor( messageType, message.Sender );
+            var subscriptions = this.GetSubscriptionsFor(messageType, message.Sender);
             var anySubscription = subscriptions.Any();
 
-            if( !anySubscription )
+            if (!anySubscription)
             {
-                logger.Warning( "No Subscribers for the given message type: {0}", messageType.ToString( "SN" ) );
+                logger.Warning("No Subscribers for the given message type: {0}", messageType.ToString("SN"));
             }
             else
             {
-                subscriptions.ForEach( subscription => subscription.DirectInvoke( message.Sender, message ) );
+                subscriptions.ForEach(subscription => subscription.DirectInvoke(message.Sender, message));
             }
         }
 
-        public void Dispatch( Object sender, Object message )
+        public void Dispatch(Object sender, Object message)
         {
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
-            Ensure.That( message ).Named( () => message ).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(message).Named(() => message).IsNotNull();
 
-            message.As<IRequireToBeValid>( m => m.Validate() );
-            message.As<ILegacyMessageCompatibility>( m => m.SetSenderForBackwardCompatibility( sender ) );
+            message.As<IRequireToBeValid>(m => m.Validate());
+            message.As<ILegacyMessageCompatibility>(m => m.SetSenderForBackwardCompatibility(sender));
 
             var messageType = message.GetType();
-            var subscriptions = this.GetSubscriptionsFor( messageType, sender );
+            var subscriptions = this.GetSubscriptionsFor(messageType, sender);
             var anySubscription = subscriptions.Any();
 
-            if( !anySubscription )
+            if (!anySubscription)
             {
-                logger.Warning( "No Subscribers for the given message type: {0}", messageType.ToString( "SN" ) );
+                logger.Warning("No Subscribers for the given message type: {0}", messageType.ToString("SN"));
             }
             else
             {
-                subscriptions.ForEach( subscription => subscription.DirectInvoke( sender, message ) );
+                subscriptions.ForEach(subscription => subscription.DirectInvoke(sender, message));
             }
         }
 #endif
@@ -729,10 +729,10 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <typeparam name="T">The type of the message.</typeparam>
         /// <param name="message">The message.</param>
-        public void Broadcast<T>( T message )
+        public void Broadcast<T>(T message)
             where T : class, IMessage
         {
-            this.Broadcast( typeof( T ), message );
+            this.Broadcast(typeof(T), message);
         }
 
         /// <summary>
@@ -741,24 +741,24 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="message">The message.</param>
-        public void Broadcast( Type messageType, IMessage message )
+        public void Broadcast(Type messageType, IMessage message)
         {
-            Ensure.That( message ).Named( "message" ).IsNotNull();
+            Ensure.That(message).Named("message").IsNotNull();
 
-            message.As<IRequireToBeValid>( m => m.Validate() );
+            message.As<IRequireToBeValid>(m => m.Validate());
 
-            var subscriptions = this.GetSubscriptionsFor( messageType, message.Sender );
+            var subscriptions = this.GetSubscriptionsFor(messageType, message.Sender);
 
-            if( subscriptions.Any() )
+            if (subscriptions.Any())
             {
 #if FX40
-                subscriptions.ForEach( sub =>
-                {
-                    this.factory.StartNew( () =>
-                    {
-                        sub.Invoke( message.Sender, message );
-                    } );
-                } );
+                subscriptions.ForEach(sub =>
+               {
+                   this.factory.StartNew(() =>
+                   {
+                       sub.Invoke(message.Sender, message);
+                   });
+               });
 #else
                 subscriptions.ForEach( sub => ThreadPool.QueueUserWorkItem( o =>
                 {
@@ -769,26 +769,26 @@ namespace Topics.Radical.Messaging
             }
         }
 
-        public void Broadcast( Object sender, Object message )
+        public void Broadcast(Object sender, Object message)
         {
-            Ensure.That( message ).Named( () => message ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
+            Ensure.That(message).Named(() => message).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
 
-            message.As<IRequireToBeValid>( m => m.Validate() );
-            message.As<ILegacyMessageCompatibility>( m => m.SetSenderForBackwardCompatibility( sender ) );
+            message.As<IRequireToBeValid>(m => m.Validate());
+            message.As<ILegacyMessageCompatibility>(m => m.SetSenderForBackwardCompatibility(sender));
 
-            var subscriptions = this.GetSubscriptionsFor( message.GetType(), sender );
+            var subscriptions = this.GetSubscriptionsFor(message.GetType(), sender);
 
-            if( subscriptions.Any() )
+            if (subscriptions.Any())
             {
 #if FX40
-                subscriptions.ForEach( sub =>
-                {
-                    this.factory.StartNew( () =>
-                    {
-                        sub.Invoke( sender, message );
-                    } );
-                } );
+                subscriptions.ForEach(sub =>
+               {
+                   this.factory.StartNew(() =>
+                   {
+                       sub.Invoke(sender, message);
+                   });
+               });
 #else
                 subscriptions.ForEach( sub => ThreadPool.QueueUserWorkItem( o =>
                 {
@@ -806,31 +806,48 @@ namespace Topics.Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public Task BroadcastAsync( Object sender, Object message )
+        public Task BroadcastAsync(Object sender, Object message)
         {
-            Ensure.That( message ).Named( () => message ).IsNotNull();
-            Ensure.That( sender ).Named( () => sender ).IsNotNull();
+            Ensure.That(message).Named(() => message).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
 
-            message.As<IRequireToBeValid>( m => m.Validate() );
-            message.As<ILegacyMessageCompatibility>( m => m.SetSenderForBackwardCompatibility( sender ) );
+            message.As<IRequireToBeValid>(m => m.Validate());
+            message.As<ILegacyMessageCompatibility>(m => m.SetSenderForBackwardCompatibility(sender));
 
-            var subscriptions = this.GetSubscriptionsFor( message.GetType(), sender );
+            var subscriptions = this.GetSubscriptionsFor(message.GetType(), sender);
 
             var tasks = new List<Task>();
-            if( subscriptions.Any() )
+            if (subscriptions.Any())
             {
-                subscriptions.ForEach( sub =>
-                {
-                    var temp = this.factory.StartNew( () =>
-                    {
-                        sub.Invoke( sender, message );
-                    } );
-                    tasks.Add( temp );
-                } );
+                subscriptions.ForEach(sub =>
+               {
+                   var _as = sub as IAsyncSubscription;
+                   if (_as != null)
+                   {
+                       tasks.Add(_as.InvokeAsync(sender, message));
+                   }
+                   else
+                   {
+                       tasks.Add(this.factory.StartNew(() =>
+                       {
+                           sub.Invoke(sender, message);
+                       }));
+                   }
+               });
 
             }
 
-            return Task.WhenAll( tasks.ToArray() );
+            return Task.WhenAll(tasks.ToArray());
+        }
+
+        public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
+        {
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
+
+            var subscription = new PocoAsyncSubscription<T>(subscriber, callback, InvocationModel.Default, this.dispatcher);
+
+            this.SubscribeCore(typeof(T), subscription);
         }
 
 #endif
