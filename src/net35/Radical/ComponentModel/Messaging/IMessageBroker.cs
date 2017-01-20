@@ -173,6 +173,19 @@ namespace Topics.Radical.ComponentModel.Messaging
         /// <param name="callback">The callback.</param>
         void Subscribe<T>( object subscriber, Action<object, T> callback );
 
+#if FX45
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callback">The callback.</param>
+        void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task> callback);
+
+#endif
+
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback only

@@ -50,5 +50,74 @@ namespace Test.Radical.Windows.Messaging
 
             Assert.AreEqual( expected, actual );
         }
+
+        [TestMethod]
+        [TestCategory("MessageBroker")]
+        public async Task messageBroker_async_subscription_POCO_broadcast_async_should_not_fail()
+        {
+            var expected = 4;
+            var actual = 0;
+
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
+
+            broker.Subscribe<PocoTestMessage>(this, async (s, msg) =>
+            {
+                await Task.FromResult(false);
+                actual++;
+            });
+
+            broker.Subscribe<PocoTestMessage>(this, async (s, msg) =>
+            {
+                await Task.FromResult(false);
+                actual++;
+            });
+
+            broker.Subscribe<PocoTestMessage>(this, async (s, msg) =>
+            {
+                await Task.FromResult(false);
+                actual++;
+            });
+
+            await broker.BroadcastAsync(this, new PocoTestMessage());
+
+            actual++;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [TestCategory("MessageBroker")]
+        public async Task messageBroker_mixed_async_subscription_POCO_broadcast_async_should_not_fail()
+        {
+            var expected = 4;
+            var actual = 0;
+
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
+
+            broker.Subscribe<PocoTestMessage>(this, async (s, msg) =>
+            {
+                await Task.FromResult(false);
+                actual++;
+            });
+
+            broker.Subscribe<PocoTestMessage>(this, async (s, msg) =>
+            {
+                await Task.FromResult(false);
+                actual++;
+            });
+
+            broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
+            {
+                actual++;
+            });
+
+            await broker.BroadcastAsync(this, new PocoTestMessage());
+
+            actual++;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

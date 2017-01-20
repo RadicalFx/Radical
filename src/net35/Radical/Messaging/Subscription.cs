@@ -38,6 +38,103 @@ namespace Topics.Radical.Messaging
         void DirectInvoke( Object sender, Object message );
     }
 
+#if FX45
+
+    interface IAsyncSubscription : ISubscription
+    {
+        /// <summary>
+        /// The subscriber invocation model is based on the <see cref="InvocationModel" /> property.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        System.Threading.Tasks.Task InvokeAsync(Object sender, Object message);
+
+        /// <summary>
+        /// The subscriber is invoked in the same thread of the dispatcher.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        System.Threading.Tasks.Task DirectInvokeAsync(Object sender, Object message);
+    }
+
+    class PocoAsyncSubscription<T> : IAsyncSubscription
+    {
+        readonly IDispatcher dispatcher;
+        readonly Func<Object, T, System.Threading.Tasks.Task> action;
+
+        public PocoAsyncSubscription(Object subscriber, Func<Object, T, System.Threading.Tasks.Task> action, InvocationModel invocationModel, IDispatcher dispatcher)
+        {
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(action).Named(() => action).IsNotNull();
+            Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
+            Ensure.That(invocationModel).Is(InvocationModel.Default);
+
+            this.Subscriber = subscriber;
+            this.action = action;
+            this.Sender = null;
+            this.InvocationModel = invocationModel;
+            this.dispatcher = dispatcher;
+
+            this.Priority = SubscriptionPriority.Normal;
+        }
+
+        //public PocoSubscription(Object subscriber, Object sender, Action<Object, T> action, InvocationModel invocationModel, IDispatcher dispatcher)
+        //{
+        //    Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+        //    Ensure.That(sender).Named(() => sender).IsNotNull();
+        //    Ensure.That(action).Named(() => action).IsNotNull();
+        //    Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
+
+        //    this.Subscriber = subscriber;
+        //    this.action = action;
+        //    this.Sender = sender;
+        //    this.InvocationModel = invocationModel;
+        //    this.dispatcher = dispatcher;
+
+        //    this.Priority = SubscriptionPriority.Normal;
+        //}
+
+        public Delegate GetAction()
+        {
+            return this.action;
+        }
+
+        public Object Subscriber { get; private set; }
+
+        public Object Sender { get; private set; }
+
+        public InvocationModel InvocationModel { get; private set; }
+
+        public SubscriptionPriority Priority { get; private set; }
+
+        public void Invoke(Object sender, Object message)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void DirectInvoke(Object sender, Object message)
+        {
+            throw new NotSupportedException();
+        }
+
+        static System.Threading.Tasks.Task InvokeCoreAsync(IDispatcher dispatcher, Func<Object, T, System.Threading.Tasks.Task> action, Object sender, T message, InvocationModel type)
+        {
+            return action(sender, message);
+        }
+
+        public System.Threading.Tasks.Task InvokeAsync(object sender, object message)
+        {
+            return InvokeCoreAsync(this.dispatcher, this.action, sender, (T)message, InvocationModel.Default);
+        }
+
+        public System.Threading.Tasks.Task DirectInvokeAsync(object sender, object message)
+        {
+            return InvokeCoreAsync(this.dispatcher, this.action, sender, (T)message, InvocationModel.Default);
+        }
+    }
+
+#endif
+
     public enum SubscriptionPriority
     {
         Highest = 3,

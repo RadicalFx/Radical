@@ -7,20 +7,20 @@ using System.Runtime.CompilerServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "Radical" )]
-[assembly: AssemblyDescription( "Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern." )]
-[assembly: AssemblyCompany( "topics.it" )]
-[assembly: AssemblyProduct( "Radical Framework" )]
-[assembly: AssemblyCopyright( "Copyright ©  2015" )]
-[assembly: AssemblyTrademark( "" )]
+[assembly: AssemblyTitle("Radical")]
+[assembly: AssemblyDescription("Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern.")]
+[assembly: AssemblyCompany("topics.it")]
+[assembly: AssemblyProduct("Radical Framework")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyTrademark("")]
 
-[assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCulture( "" )]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCulture("")]
 
-[assembly: ComVisible( false )]
-[assembly: Guid( "ac1104e2-8764-42ea-80aa-bfd22bc6a89f" )]
-[assembly: CLSCompliant( true )]
-[assembly: NeutralResourcesLanguage( "en-US", UltimateResourceFallbackLocation.MainAssembly )]
+[assembly: ComVisible(false)]
+[assembly: Guid("ac1104e2-8764-42ea-80aa-bfd22bc6a89f")]
+[assembly: CLSCompliant(true)]
+[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 
 //[assembly: InternalsVisibleTo( "Test.Radical, PublicKey=002400000480000094"
 //                               + "0000000602000000240000525341310004000001"
@@ -41,5 +41,6 @@ using System.Runtime.CompilerServices;
 //                               + "C758F8DDD622AA7C59E03C61D9A3C94D978DE834"
 //                               + "7DEF4030016BCFBFE46AB2" )]
 
-[assembly: InternalsVisibleTo( "Test.Radical" )]
-[assembly: InternalsVisibleTo( "Test.Radical.Windows" )]
+[assembly: InternalsVisibleTo("Test.Radical35")]
+[assembly: InternalsVisibleTo("Test.Radical40")]
+[assembly: InternalsVisibleTo("Test.Radical45")]
