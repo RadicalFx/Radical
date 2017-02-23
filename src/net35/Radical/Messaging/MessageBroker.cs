@@ -269,12 +269,7 @@ namespace Topics.Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<Object, T> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new PocoSubscription<T>(subscriber, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(typeof(T), subscription);
+            this.Subscribe<T>(subscriber, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -306,13 +301,7 @@ namespace Topics.Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull(); //.IsTrue( o => o.Is<IMessage>() );
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new PocoSubscription(subscriber, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(messageType, subscription);
+            this.Subscribe(subscriber, messageType, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -349,14 +338,7 @@ namespace Topics.Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new PocoSubscription(subscriber, sender, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(messageType, subscription);
+            this.Subscribe(subscriber, sender, messageType, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -392,13 +374,7 @@ namespace Topics.Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<Object, T> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new PocoSubscription<T>(subscriber, sender, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(typeof(T), subscription);
+            this.Subscribe<T>(subscriber, sender, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -696,7 +672,9 @@ namespace Topics.Radical.Messaging
             }
             else
             {
-                subscriptions.ForEach(subscription => subscription.DirectInvoke(message.Sender, message));
+                subscriptions
+                    .Where(sub => sub.ShouldInvoke(message.Sender, message))
+                    .ForEach(subscription => subscription.DirectInvoke(message.Sender, message));
             }
         }
 
@@ -718,7 +696,9 @@ namespace Topics.Radical.Messaging
             }
             else
             {
-                subscriptions.ForEach(subscription => subscription.DirectInvoke(sender, message));
+                subscriptions
+                    .Where(sub => sub.ShouldInvoke(sender, message))
+                    .ForEach(subscription => subscription.DirectInvoke(sender, message));
             }
         }
 #endif
@@ -751,21 +731,24 @@ namespace Topics.Radical.Messaging
 
             if (subscriptions.Any())
             {
+
+                subscriptions.Where(sub => sub.ShouldInvoke(message.Sender, message))
+                    .ForEach(sub =>
+                    {
 #if FX40
-                subscriptions.ForEach(sub =>
-               {
-                   this.factory.StartNew(() =>
-                   {
-                       sub.Invoke(message.Sender, message);
-                   });
-               });
+                        this.factory.StartNew(() =>
+                        {
+                            sub.Invoke(message.Sender, message);
+                        });
 #else
-                subscriptions.ForEach( sub => ThreadPool.QueueUserWorkItem( o =>
-                {
-                    var msg = ( IMessage )o;
-                    sub.Invoke( msg.Sender, msg );
-                }, message ) );
+                        ThreadPool.QueueUserWorkItem( o =>
+                        {
+                            var msg = ( IMessage )o;
+                            sub.Invoke( msg.Sender, msg );
+                        }, message );
 #endif
+                    });
+
             }
         }
 
@@ -781,21 +764,23 @@ namespace Topics.Radical.Messaging
 
             if (subscriptions.Any())
             {
+
+                subscriptions.Where(sub => sub.ShouldInvoke(sender, message))
+                    .ForEach(sub =>
+                    {
 #if FX40
-                subscriptions.ForEach(sub =>
-               {
-                   this.factory.StartNew(() =>
-                   {
-                       sub.Invoke(sender, message);
-                   });
-               });
+                        this.factory.StartNew(() =>
+                        {
+                            sub.Invoke(sender, message);
+                        });
 #else
-                subscriptions.ForEach( sub => ThreadPool.QueueUserWorkItem( o =>
-                {
-                    var state = ( Object[] )o;
-                    sub.Invoke( state[ 0 ], state[ 1 ] );
-                }, new[] { sender, message } ) );
+                        ThreadPool.QueueUserWorkItem( o =>
+                        {
+                            var state = ( Object[] )o;
+                            sub.Invoke( state[ 0 ], state[ 1 ] );
+                        }, new[] { sender, message } );
 #endif
+                    });
             }
         }
 
@@ -819,21 +804,23 @@ namespace Topics.Radical.Messaging
             var tasks = new List<Task>();
             if (subscriptions.Any())
             {
-                subscriptions.ForEach(sub =>
-               {
-                   var _as = sub as IAsyncSubscription;
-                   if (_as != null)
-                   {
-                       tasks.Add(_as.InvokeAsync(sender, message));
-                   }
-                   else
-                   {
-                       tasks.Add(this.factory.StartNew(() =>
-                       {
-                           sub.Invoke(sender, message);
-                       }));
-                   }
-               });
+                subscriptions
+                    .Where(sub => sub.ShouldInvoke(sender, message))
+                    .ForEach(sub =>
+                    {
+                        var _as = sub as IAsyncSubscription;
+                        if (_as != null)
+                        {
+                            tasks.Add(_as.InvokeAsync(sender, message));
+                        }
+                        else
+                        {
+                            tasks.Add(this.factory.StartNew(() =>
+                            {
+                                sub.Invoke(sender, message);
+                            }));
+                        }
+                    });
 
             }
 
@@ -842,14 +829,87 @@ namespace Topics.Radical.Messaging
 
         public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
+            this.Subscribe(subscriber, (s, msg) => Task.FromResult(true), callback);
+        }
 
-            var subscription = new PocoAsyncSubscription<T>(subscriber, callback, InvocationModel.Default, this.dispatcher);
+        public void Subscribe<T>(object subscriber, Func<object, T, Task<bool>> callbackFilter, Func<object, T, Task> callback)
+        {
+            Ensure.That(subscriber).Named("subscriber").IsNotNull();
+            Ensure.That(callbackFilter).Named("callbackFilter").IsNotNull();
+            Ensure.That(callback).Named("callback").IsNotNull();
+
+            var subscription = new PocoAsyncSubscription<T>(subscriber, callback, callbackFilter, InvocationModel.Default, this.dispatcher);
 
             this.SubscribeCore(typeof(T), subscription);
         }
 
 #endif
+        public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
+            Ensure.That(callback).Named(() => callback).IsNotNull();
+            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+
+            var subscription = new PocoSubscription(subscriber, sender, callback, callbackFilter, invocationModel, this.dispatcher);
+
+            this.SubscribeCore(messageType, subscription);
+        }
+
+        public void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            this.Subscribe(subscriber, messageType, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(messageType).Named(() => messageType).IsNotNull(); //.IsTrue( o => o.Is<IMessage>() );
+            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
+
+            var subscription = new PocoSubscription(subscriber, callback, callbackFilter, invocationModel, this.dispatcher);
+
+            this.SubscribeCore(messageType, subscription);
+        }
+
+        public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            this.Subscribe<T>(subscriber, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
+            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+
+            var subscription = new PocoSubscription<T>(subscriber, sender, callback, callbackFilter, invocationModel, this.dispatcher);
+
+            this.SubscribeCore(typeof(T), subscription);
+        }
+
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(callback).Named(() => callback).IsNotNull();
+            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+
+            var subscription = new PocoSubscription<T>(subscriber, callback, callbackFilter, invocationModel, this.dispatcher);
+
+            this.SubscribeCore(typeof(T), subscription);
+        }
     }
 }

@@ -793,24 +793,23 @@ namespace Test.Radical.Windows.Messaging
 
         }
 
-        //[TestMethod]
-        //[TestCategory("MessageBroker")]
-        //public void messageBroker_POCO_should_respect_should_handle_predicate()
-        //{
-        //    object expected = new PocoTestMessage();
-        //    object actual = null;
+        [TestMethod]
+        [TestCategory("MessageBroker")]
+        public void messageBroker_POCO_should_respect_should_handle_predicate()
+        {
+            bool actual = false;
 
-        //    var dispatcher = new NullDispatcher();
-        //    var broker = new MessageBroker(dispatcher);
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
 
-        //    broker.Subscribe<PocoTestMessage>(this, (s,msg) => false, (s,msg) =>
-        //    {
-        //        actual = msg;
-        //    });
+            broker.Subscribe<PocoTestMessage>(this, (s, msg) => false, (s, msg) =>
+            {
+                actual = true;
+            });
 
-        //    broker.Dispatch(this, expected);
+            broker.Dispatch(this, new PocoTestMessage());
 
-        //    Assert.IsNull(actual);
-        //}
+            Assert.IsFalse(actual);
+        }
     }
 }
