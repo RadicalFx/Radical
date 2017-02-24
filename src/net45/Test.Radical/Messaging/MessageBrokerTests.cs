@@ -119,5 +119,25 @@ namespace Test.Radical.Windows.Messaging
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        [TestCategory("MessageBroker")]
+        public async Task messageBroker_async_POCO_should_respect_should_handle_predicate()
+        {
+            bool actual = false;
+
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
+
+            broker.Subscribe<PocoTestMessage>(this, (s, msg) => false, async (s, msg) =>
+            {
+                actual = true;
+                await Task.FromResult(0);
+            });
+
+            await broker.BroadcastAsync(this, new PocoTestMessage());
+
+            Assert.IsFalse(actual);
+        }
     }
 }

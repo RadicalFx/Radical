@@ -520,7 +520,7 @@ namespace Test.Radical.Windows.Messaging
         //public void should_raise_ArgumentException()
         //{
         //    var actual = 0;
-        //    var expected =1; 
+        //    var expected =1;
 
         //    var dispatcher = new NullDispatcher();
         //    var broker = new MessageBroker( dispatcher );
@@ -708,11 +708,11 @@ namespace Test.Radical.Windows.Messaging
             {
                 broker.Subscribe<PocoTestMessage>( this, ( sender, msg ) => { } );
             }
-            
+
             var sw = Stopwatch.StartNew();
             broker.Broadcast(this, new PocoTestMessage());
             sw.Stop();
-            
+
             const int longRunningTiming = 100;
             var elapsedMilliseconds = sw.ElapsedMilliseconds == 0
                 ? longRunningTiming
@@ -791,6 +791,25 @@ namespace Test.Radical.Windows.Messaging
 
             Assert.IsNull( failure, failure != null ? failure.ToString() : "--" );
 
+        }
+
+        [TestMethod]
+        [TestCategory("MessageBroker")]
+        public void messageBroker_POCO_should_respect_should_handle_predicate()
+        {
+            bool actual = false;
+
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
+
+            broker.Subscribe<PocoTestMessage>(this, (s, msg) => false, (s, msg) =>
+            {
+                actual = true;
+            });
+
+            broker.Dispatch(this, new PocoTestMessage());
+
+            Assert.IsFalse(actual);
         }
     }
 }
