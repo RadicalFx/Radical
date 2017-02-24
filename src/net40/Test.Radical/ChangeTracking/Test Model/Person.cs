@@ -98,5 +98,16 @@ namespace Test.Radical.ChangeTracking
                 }
             }
         }
+
+        public String FirstName
+        {
+            get { return this.GetPropertyValue(() => this.FirstName); }
+            set { this.SetPropertyValue(() => this.FirstName, value); }
+        }
+
+        public void SetInitialPropertyValue<T>(string propertyName, T value)
+        {
+            base.SetInitialPropertyValue<T>(propertyName, value);
+        }
     }
 }

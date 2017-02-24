@@ -2290,5 +2290,69 @@
 
             actual.Should().Be.EqualTo( expected );
         }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_a()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+
+            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+
+            Assert.IsFalse(actual.IsChanged);
+            Assert.IsFalse(actual.IsValueChanged);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_b()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue("FirstName", "Mauro");
+
+            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+
+            Assert.IsFalse(actual.IsChanged);
+            Assert.IsFalse(actual.IsValueChanged);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_c()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue("FirstName", "Mauro");
+
+            person.FirstName = "this is different";
+
+            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+
+            Assert.IsTrue(actual.IsChanged);
+            Assert.IsTrue(actual.IsValueChanged);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_d()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue("FirstName", "Mauro");
+
+            person.FirstName = "this is different";
+            person.FirstName = "Mauro";
+
+            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+
+            Assert.IsTrue(actual.IsChanged);
+            Assert.IsFalse(actual.IsValueChanged);
+        }
     }
 }
