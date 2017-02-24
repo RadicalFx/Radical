@@ -752,6 +752,12 @@ namespace Topics.Radical.Messaging
             }
         }
 
+        /// <summary>
+        /// Broadcasts the specified message in an asynchronus manner without
+        /// waiting for the execution of the subscribers.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
         public void Broadcast(Object sender, Object message)
         {
             Ensure.That(message).Named(() => message).IsNotNull();
@@ -827,11 +833,26 @@ namespace Topics.Radical.Messaging
             return Task.WhenAll(tasks.ToArray());
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
         {
             this.Subscribe(subscriber, (s, msg) => Task.FromResult(true), callback);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Func<object, T, Task<bool>> callbackFilter, Func<object, T, Task> callback)
         {
             Ensure.That(subscriber).Named("subscriber").IsNotNull();
@@ -844,11 +865,32 @@ namespace Topics.Radical.Messaging
         }
 
 #endif
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback only
+        /// if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
             this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callbackFilter, callback);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback only
+        /// if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
@@ -862,11 +904,28 @@ namespace Topics.Radical.Messaging
             this.SubscribeCore(messageType, subscription);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback only.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
             this.Subscribe(subscriber, messageType, InvocationModel.Default, callbackFilter, callback);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback only.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
@@ -879,16 +938,45 @@ namespace Topics.Radical.Messaging
             this.SubscribeCore(messageType, subscription);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
             this.Subscribe<T>(subscriber, InvocationModel.Default, callbackFilter, callback);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback only
+        /// if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
             this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback only
+        /// if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
@@ -901,6 +989,15 @@ namespace Topics.Radical.Messaging
             this.SubscribeCore(typeof(T), subscription);
         }
 
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
