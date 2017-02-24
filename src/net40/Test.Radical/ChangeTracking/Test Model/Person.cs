@@ -4,6 +4,7 @@ namespace Test.Radical.ChangeTracking
 {
     using System;
     using System.ComponentModel;
+    using System.Linq.Expressions;
     using Topics.Radical.ComponentModel.ChangeTracking;
     using Topics.Radical.Model;
 
@@ -108,6 +109,11 @@ namespace Test.Radical.ChangeTracking
         public void SetInitialPropertyValue<T>(string propertyName, T value)
         {
             base.SetInitialPropertyValue<T>(propertyName, value);
+        }
+
+        public void SetInitialPropertyValue<T>(Expression<Func<T>> property, T value)
+        {
+            base.SetInitialPropertyValue<T>(property, value);
         }
     }
 }

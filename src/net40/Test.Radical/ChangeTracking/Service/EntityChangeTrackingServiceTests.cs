@@ -2293,13 +2293,13 @@
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
-        public void changeTrackingService_getPropertyState_a()
+        public void changeTrackingService_getPropertyState_should_ignore_untouched_entity()
         {
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
 
-            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+            var actual = memento.GetPropertyState(person, p=>p.FirstName);
 
             Assert.IsFalse(actual.IsChanged);
             Assert.IsFalse(actual.IsValueChanged);
@@ -2307,14 +2307,14 @@
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
-        public void changeTrackingService_getPropertyState_b()
+        public void changeTrackingService_getPropertyState_should_ignore_inital_property_value()
         {
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue("FirstName", "Mauro");
+            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
 
-            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+            var actual = memento.GetPropertyState(person, p => p.FirstName);
 
             Assert.IsFalse(actual.IsChanged);
             Assert.IsFalse(actual.IsValueChanged);
@@ -2322,16 +2322,16 @@
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
-        public void changeTrackingService_getPropertyState_c()
+        public void changeTrackingService_getPropertyState_should_detect_property_changes_and_value_changes()
         {
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue("FirstName", "Mauro");
+            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
 
             person.FirstName = "this is different";
 
-            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+            var actual = memento.GetPropertyState(person, p => p.FirstName);
 
             Assert.IsTrue(actual.IsChanged);
             Assert.IsTrue(actual.IsValueChanged);
@@ -2339,19 +2339,37 @@
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
-        public void changeTrackingService_getPropertyState_d()
+        public void changeTrackingService_getPropertyState_should_detect_property_changes_and_value_equal_to_original()
         {
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue("FirstName", "Mauro");
+            person.SetInitialPropertyValue(()=>person.FirstName, "Mauro");
 
             person.FirstName = "this is different";
             person.FirstName = "Mauro";
 
-            var actual = memento.GetPropertyState<Person, string>(person, "FirstName");
+            var actual = memento.GetPropertyState(person, p => p.FirstName);
 
             Assert.IsTrue(actual.IsChanged);
+            Assert.IsFalse(actual.IsValueChanged);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_is_idempotent_always_using_same_value()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+
+            person.FirstName = "Mauro";
+            person.FirstName = "Mauro";
+
+            var actual = memento.GetPropertyState(person, p => p.FirstName);
+
+            Assert.IsFalse(actual.IsChanged);
             Assert.IsFalse(actual.IsValueChanged);
         }
     }
