@@ -1372,8 +1372,16 @@
             TProperty originalValue;
             if (TryGetOriginalValue(propertyName, out originalValue))
             {
-                //this can be optimized if entity is "Entity"
-                var actualValue = (TProperty)property.GetValue(entity, null);
+                TProperty actualValue;
+                var e = entity as Model.Entity;
+                if (e != null)
+                {
+                    actualValue = e.GetPropertyValue<TProperty>(propertyName);
+                }
+                else
+                {
+                    actualValue = (TProperty)property.GetValue(entity, null);
+                }
 
                 state.IsChanged = true;
                 state.IsValueChanged = !object.Equals(originalValue, actualValue);

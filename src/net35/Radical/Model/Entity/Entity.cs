@@ -482,7 +482,7 @@ namespace Topics.Radical.Model
         /// <typeparam name="T">The property value type.</typeparam>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>The requested property value.</returns>
-        protected virtual T GetPropertyValue<T>( String propertyName )
+        protected internal virtual T GetPropertyValue<T>( String propertyName )
         {
             PropertyValue actual;
             if ( this.valuesBag.TryGetValue( propertyName, out actual ) )
