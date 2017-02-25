@@ -1354,12 +1354,32 @@
         /// </summary>
         public bool IsDisposed { get; private set; }
 
-        public PropertyState GetPropertyState<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property)
+        /// <summary>
+        /// Gets the state of the given entity property.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="property">The property to inspect.</param>
+        /// <returns>
+        /// The actual property state.
+        /// </returns>
+        public EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property)
         {
-            return GetPropertyState<TEntity, TProperty>(entity, property.GetMemberName());
+            return GetEntityPropertyState<TEntity, TProperty>(entity, property.GetMemberName());
         }
 
-        public PropertyState GetPropertyState<TEntity, TProperty>(TEntity entity, string propertyName)
+        /// <summary>
+        /// Gets the state of the given entity property.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>
+        /// The actual property state.
+        /// </returns>
+        public EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, string propertyName)
         {
             var property = entity.GetType().GetProperty(propertyName);
 
@@ -1367,11 +1387,13 @@
                 .WithMessage("Cannot find property: {0}", propertyName)
                 .IsNotNull();
 
-            var state = new PropertyState();
+            var state = EntityPropertyStates.None;
 
             TProperty originalValue;
             if (TryGetOriginalValue(propertyName, out originalValue))
             {
+                state |= EntityPropertyStates.Changed;
+
                 TProperty actualValue;
                 var e = entity as Model.Entity;
                 if (e != null)
@@ -1383,8 +1405,10 @@
                     actualValue = (TProperty)property.GetValue(entity, null);
                 }
 
-                state.IsChanged = true;
-                state.IsValueChanged = !object.Equals(originalValue, actualValue);
+                if (!object.Equals(originalValue, actualValue))
+                {
+                    state |= EntityPropertyStates.ValueChanged;
+                }
             }
 
             return state;
@@ -1405,11 +1429,5 @@
             value = default(T);
             return false;
         }
-    }
-
-    public class PropertyState
-    {
-        public bool IsChanged { get; internal set; }
-        public bool IsValueChanged { get; internal set; }
     }
 }

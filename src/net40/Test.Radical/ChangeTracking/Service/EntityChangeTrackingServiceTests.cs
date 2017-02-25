@@ -2299,10 +2299,11 @@
 
             var person = new Person(memento);
 
-            var actual = memento.GetPropertyState(person, p=>p.FirstName);
+            var actual = memento.GetEntityPropertyState(person, p=>p.FirstName);
 
-            Assert.IsFalse(actual.IsChanged);
-            Assert.IsFalse(actual.IsValueChanged);
+            Assert.IsFalse((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+            Assert.IsTrue(actual == EntityPropertyStates.None);
         }
 
         [TestMethod]
@@ -2314,10 +2315,11 @@
             var person = new Person(memento);
             person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
 
-            var actual = memento.GetPropertyState(person, p => p.FirstName);
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
 
-            Assert.IsFalse(actual.IsChanged);
-            Assert.IsFalse(actual.IsValueChanged);
+            Assert.IsFalse((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+            Assert.IsTrue(actual == EntityPropertyStates.None);
         }
 
         [TestMethod]
@@ -2331,10 +2333,10 @@
 
             person.FirstName = "this is different";
 
-            var actual = memento.GetPropertyState(person, p => p.FirstName);
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
 
-            Assert.IsTrue(actual.IsChanged);
-            Assert.IsTrue(actual.IsValueChanged);
+            Assert.IsTrue((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsTrue((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
         }
 
         [TestMethod]
@@ -2349,10 +2351,10 @@
             person.FirstName = "this is different";
             person.FirstName = "Mauro";
 
-            var actual = memento.GetPropertyState(person, p => p.FirstName);
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
 
-            Assert.IsTrue(actual.IsChanged);
-            Assert.IsFalse(actual.IsValueChanged);
+            Assert.IsTrue((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
         }
 
         [TestMethod]
@@ -2367,10 +2369,10 @@
             person.FirstName = "Mauro";
             person.FirstName = "Mauro";
 
-            var actual = memento.GetPropertyState(person, p => p.FirstName);
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
 
-            Assert.IsFalse(actual.IsChanged);
-            Assert.IsFalse(actual.IsValueChanged);
+            Assert.IsFalse((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
         }
     }
 }

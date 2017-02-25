@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq.Expressions;
 
     /// <summary>
     /// Provides change tracking functionalities.
@@ -223,5 +224,27 @@
         /// is another active atomic operation.</exception>
         /// <returns>The newly created atomic operation.</returns>
         IAtomicOperation BeginAtomicOperation();
+
+        /// <summary>
+        /// Gets the state of the given entity property.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="property">The property to inspect.</param>
+        /// <returns>The actual property state.</returns>
+        EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> property);
+
+        /// <summary>
+        /// Gets the state of the given entity property.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <returns>
+        /// The actual property state.
+        /// </returns>
+        EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, string propertyName);
     }
 }

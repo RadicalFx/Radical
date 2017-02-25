@@ -126,6 +126,9 @@
     <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\Change Rejected, Committed Args\RejectedEventArgs.cs">
       <Link>ComponentModel\ChangeTracking\Change Rejected, Committed Args\RejectedEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\EntityPropertyStates.cs">
+      <Link>ComponentModel\ChangeTracking\EntityPropertyStates.cs</Link>
+    </Compile>
     <Compile Include="..\..\net35\Radical\ComponentModel\ChangeTracking\EntityTrackingStates.cs">
       <Link>ComponentModel\ChangeTracking\EntityTrackingStates.cs</Link>
     </Compile>
