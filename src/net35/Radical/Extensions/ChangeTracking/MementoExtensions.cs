@@ -1,6 +1,7 @@
 namespace Topics.Radical.ChangeTracking
 {
     using System;
+    using System.Linq.Expressions;
     using Topics.Radical.ComponentModel.ChangeTracking;
 
     /// <summary>
@@ -49,6 +50,30 @@ namespace Topics.Radical.ChangeTracking
             var state = memento.GetEntityState( entity );
 
             return ( state & EntityTrackingStates.HasBackwardChanges ) == EntityTrackingStates.HasBackwardChanges;
+        }
+
+        /// <summary>
+        /// Determines whether the property value of the given entity is changed compared to its original value.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="property">The property.</param>
+        /// <returns>
+        ///   <c>true</c> if property value is changed; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="System.ArgumentException">Memento ChangeTrackingService is null</exception>
+        public static bool IsPropertyValueChanged<TEntity, TProperty>(this TEntity entity, Expression<Func<TEntity, TProperty>> property) where TEntity : IMemento
+        {
+            var memento = entity.Memento;
+            if (memento == null)
+            {
+                throw new ArgumentException("Memento ChangeTrackingService is null");
+            }
+
+            var state = memento.GetEntityPropertyState(entity, property);
+
+            return ((state & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
         }
     }
 }
