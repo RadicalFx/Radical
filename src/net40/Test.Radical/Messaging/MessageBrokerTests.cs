@@ -811,5 +811,16 @@ namespace Test.Radical.Windows.Messaging
 
             Assert.IsFalse(actual);
         }
+
+        [TestMethod]
+        [TestCategory("MessageBroker")]
+        //BUG: https://github.com/RadicalFx/Radical/issues/241
+        public void messageBroker_should_allow_POCO_subscriptions_and_not_IMessage_ones()
+        {
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
+
+            broker.Subscribe(this, this, typeof(PocoTestMessage), InvocationModel.Default, (s, msg) => false, (s, msg) =>{ /* NOP */ });
+        }
     }
 }
