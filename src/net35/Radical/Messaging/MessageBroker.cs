@@ -895,7 +895,7 @@ namespace Topics.Radical.Messaging
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
             Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
+            Ensure.That(messageType).Named(() => messageType).IsNotNull();
             Ensure.That(callback).Named(() => callback).IsNotNull();
             Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
 
@@ -929,7 +929,7 @@ namespace Topics.Radical.Messaging
         public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull(); //.IsTrue( o => o.Is<IMessage>() );
+            Ensure.That(messageType).Named(() => messageType).IsNotNull();
             Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
             Ensure.That(callback).Named(() => callback).IsNotNull();
 
