@@ -2290,5 +2290,89 @@
 
             actual.Should().Be.EqualTo( expected );
         }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_should_ignore_untouched_entity()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+
+            var actual = memento.GetEntityPropertyState(person, p=>p.FirstName);
+
+            Assert.IsFalse((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+            Assert.IsTrue(actual == EntityPropertyStates.None);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_should_ignore_inital_property_value()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
+
+            Assert.IsFalse((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+            Assert.IsTrue(actual == EntityPropertyStates.None);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_should_detect_property_changes_and_value_changes()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+
+            person.FirstName = "this is different";
+
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
+
+            Assert.IsTrue((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsTrue((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_should_detect_property_changes_and_value_equal_to_original()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue(()=>person.FirstName, "Mauro");
+
+            person.FirstName = "this is different";
+            person.FirstName = "Mauro";
+
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
+
+            Assert.IsTrue((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+        }
+
+        [TestMethod]
+        [TestCategory("ChangeTracking")]
+        public void changeTrackingService_getPropertyState_is_idempotent_always_using_same_value()
+        {
+            var memento = new ChangeTrackingService();
+
+            var person = new Person(memento);
+            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+
+            person.FirstName = "Mauro";
+            person.FirstName = "Mauro";
+
+            var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
+
+            Assert.IsFalse((actual & EntityPropertyStates.Changed) == EntityPropertyStates.Changed);
+            Assert.IsFalse((actual & EntityPropertyStates.ValueChanged) == EntityPropertyStates.ValueChanged);
+        }
     }
 }

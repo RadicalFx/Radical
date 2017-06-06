@@ -90,6 +90,7 @@
     <Compile Include="ChangeCommittedArgsTests.cs" />
     <Compile Include="Diagnostics\ObjectDumperTests.cs" />
     <Compile Include="Extensions\ArrayExtensionsTests.cs" />
+    <Compile Include="Extensions\ChangeTrackingServiceExtensionsTests.cs" />
     <Compile Include="Extensions\DateTimeExtensionsTests.cs" />
     <Compile Include="Extensions\Reflection\ObjectExtensionsTests.cs" />
     <Compile Include="Extensions\Test Model\Address.cs" />

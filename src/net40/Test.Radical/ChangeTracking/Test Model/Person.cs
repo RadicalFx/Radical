@@ -4,6 +4,7 @@ namespace Test.Radical.ChangeTracking
 {
     using System;
     using System.ComponentModel;
+    using System.Linq.Expressions;
     using Topics.Radical.ComponentModel.ChangeTracking;
     using Topics.Radical.Model;
 
@@ -97,6 +98,22 @@ namespace Test.Radical.ChangeTracking
                     this._name = value;
                 }
             }
+        }
+
+        public String FirstName
+        {
+            get { return this.GetPropertyValue(() => this.FirstName); }
+            set { this.SetPropertyValue(() => this.FirstName, value); }
+        }
+
+        public void SetInitialPropertyValue<T>(string propertyName, T value)
+        {
+            base.SetInitialPropertyValue<T>(propertyName, value);
+        }
+
+        public void SetInitialPropertyValue<T>(Expression<Func<T>> property, T value)
+        {
+            base.SetInitialPropertyValue<T>(property, value);
         }
     }
 }
