@@ -1,8 +1,8 @@
-#load "packages/simple-targets-csx.5.2.1/simple-targets.csx"
+#r "packages/Bullseye.1.0.0-rc.5/lib/netstandard2.0/Bullseye.dll"
 #load "scripts/cmd.csx"
 
 using System;
-using static SimpleTargets;
+using static Bullseye.Targets;
 
 var vswhere = "packages/vswhere.2.1.4/tools/vswhere.exe";
 var nuget = ".nuget/v4.3.0/NuGet.exe";
@@ -10,11 +10,9 @@ string msBuild = null;
 
 var solutions = Directory.EnumerateFiles(".", "*.sln", SearchOption.AllDirectories);
 
-var targets = new TargetDictionary();
+Add("default", DependsOn("build"));
 
-targets.Add("default", DependsOn("build"));
-
-targets.Add(
+Add(
     "restore",
     () =>
     {
@@ -24,11 +22,11 @@ targets.Add(
         }
     });
 
-targets.Add(
+Add(
     "find-msbuild",
     () => msBuild = $"{ReadCmd(vswhere, "-latest -requires Microsoft.Component.MSBuild -property installationPath").Trim()}/MSBuild/15.0/Bin/MSBuild.exe");
 
-targets.Add(
+Add(
     "build",
     DependsOn("find-msbuild", "restore"),
     () =>
@@ -39,4 +37,4 @@ targets.Add(
         }
     });
 
-Run(Args, targets);
+Run(Args);
