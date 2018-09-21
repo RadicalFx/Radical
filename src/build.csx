@@ -1,8 +1,9 @@
-#load "packages/simple-targets-csx.5.2.1/simple-targets.csx"
-#load "scripts/cmd.csx"
+#r "packages/Bullseye.1.0.0-rc.5/lib/netstandard2.0/Bullseye.dll"
+#r "packages/SimpleExec.2.2.0/lib/netstandard2.0/SimpleExec.dll"
 
 using System;
-using static SimpleTargets;
+using static Bullseye.Targets;
+using static SimpleExec.Command;
 
 var vswhere = "packages/vswhere.2.1.4/tools/vswhere.exe";
 var nuget = ".nuget/v4.3.0/NuGet.exe";
@@ -10,33 +11,31 @@ string msBuild = null;
 
 var solutions = Directory.EnumerateFiles(".", "*.sln", SearchOption.AllDirectories);
 
-var targets = new TargetDictionary();
+Add("default", DependsOn("build"));
 
-targets.Add("default", DependsOn("build"));
-
-targets.Add(
+Add(
     "restore",
     () =>
     {
         foreach (var solution in solutions)
         {
-            Cmd(nuget, $"restore {solution}");
+            Run(nuget, $"restore {solution}");
         }
     });
 
-targets.Add(
+Add(
     "find-msbuild",
-    () => msBuild = $"{ReadCmd(vswhere, "-latest -requires Microsoft.Component.MSBuild -property installationPath").Trim()}/MSBuild/15.0/Bin/MSBuild.exe");
+    () => msBuild = $"{Read(vswhere, "-latest -requires Microsoft.Component.MSBuild -property installationPath").Trim()}/MSBuild/15.0/Bin/MSBuild.exe");
 
-targets.Add(
+Add(
     "build",
     DependsOn("find-msbuild", "restore"),
     () =>
     {
         foreach (var solution in solutions)
         {
-            Cmd(msBuild, $"{solution} /p:Configuration=Debug /nologo /m /v:m /nr:false");
+            Run(msBuild, $"{solution} /p:Configuration=Debug /nologo /m /v:m /nr:false");
         }
     });
 
-Run(Args, targets);
+Run(Args);
