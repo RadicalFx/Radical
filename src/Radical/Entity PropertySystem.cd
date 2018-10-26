@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Radical.Model.PropertyValue">
+    <Position X="0.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entity\PropertyValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Radical.Model.PropertyValue&lt;T&gt;">
+    <Position X="0.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Model\Entity\PropertyValue (Generic).cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Radical.Model.PropertyMetadata">
+    <Position X="3.5" Y="0.75" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAIgAAIAMAAAAAAAgDAAAA=</HashCode>
+      <FileName>Model\Entity\PropertyMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Radical.Model.PropertyMetadata&lt;T&gt;">
+    <Position X="6.75" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entity\PropertyMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Radical.Model.MementoPropertyMetadata&lt;T&gt;">
+    <Position X="9.5" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Model\Entity\MementoPropertyMetadata.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
