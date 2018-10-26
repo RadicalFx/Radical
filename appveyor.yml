@@ -1,105 +1,53 @@
-#
-#     DEVELOPMENT BRANCH
-#
-# build in Debug mode and deploy to MyGet.org as pre-release
+image: Visual Studio 2017
+skip_branch_with_pr: true
+skip_tags: true
+pull_requests:
+  do_not_increment_build_number: true
 
-- branches:
-    only:
-    - develop
-
-  skip_tags: true
-  configuration: Debug
-  platform: Any CPU
-
-  environment:
-    use_build_number_in_packages: true
-
-  artifacts:
-    - path: src\build\Debug
-    - path: src\build\nuget\*.nupkg
-
-  cache:
-    - src\packages -> src\**\packages.config
-
-  before_build:
-    - nuget restore "src\Radical.sln"
-
-  build:
-    project: src\Radical.sln
-    verbosity: minimal
-
-  after_build:
-    - md "src\build\nuget"
-    - nuget pack "src\nuget\Radical.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
-
-  pull_requests:
-    do_not_increment_build_number: true
-
-  test:
-    categories:
-      except:
+test:
+  categories:
+    except:
       - ObjectDumper
       - AsyncWorker
 
-  deploy:
-  - provider: Environment
-    name: MyGet feed
-    on:
-      branch: develop
+for:
 
-#
-#   MASTER BRANCH
-#
-# build in Release mode and deploy to NuGet.org
-- branches:
+-
+  branches:
     only:
-    - master
+      - develop
 
-  skip_tags: true
-  configuration: Release
-  platform: Any CPU
+  build_script:
+    - cmd: Build.cmd
+  
+  artifacts:
+    - path: build\Debug
+    - path: nugets\*.nupkg
 
-  environment:
-    use_build_number_in_packages: true
+  deploy:
+    - provider: Environment
+      name: MyGet feed
+      artifact: /.*\.nupkg/
+-
+  branches:
+    only:
+      - master
+
+  build_script:
+    - cmd: Build.cmd release
 
   artifacts:
-    - path: src\build\Release
-    - path: src\build\nuget\*.nupkg
-
-  cache:
-    - src\packages -> src\**\packages.config
-
-  before_build:
-    - nuget restore "src\Radical.sln"
-
-  build:
-    project: src\Radical.sln
-    verbosity: minimal
-
-  after_build:
-    - md "src\build\nuget"
-    - nuget pack "src\nuget\Radical.nuspec" -Version "%GitVersion_NuGetVersion%" -Properties "configuration=%CONFIGURATION%" -OutputDirectory "src\build\nuget"
-
-  pull_requests:
-    do_not_increment_build_number: true
-
-  test:
-    categories:
-      except:
-      - ObjectDumper
-      - AsyncWorker
+    - path: build\Release
+    - path: nugets\*.nupkg
 
   deploy:
-  - provider: Environment
-    name: NuGet public feed
-    on:
-      branch: master
+    - provider: Environment
+      name: NuGet public feed
+      artifact: /.*\.nupkg/
 
-  - provider: GitHub    
-    release: $(GitVersion_NuGetVersion)
-    description: 'Release v$(GitVersion_NuGetVersion)'
-    auth_token:
-      secure: 2ijF4OfPYfIUTunubL/Z04ogADL9sx/gKW1jMRNJnAa1OpHZpSvCKmP0gvNs8C7h
-    artifact: /.*\.nupkg/, src\build\Release.zip
-    on:
-      branch: master
+    - provider: GitHub    
+      release: $(GitVersion_NuGetVersion)
+      description: 'Release v$(GitVersion_NuGetVersion)'
+      auth_token:
+        secure: 2ijF4OfPYfIUTunubL/Z04ogADL9sx/gKW1jMRNJnAa1OpHZpSvCKmP0gvNs8C7h
+      artifact: /.*\.nupkg/, build\Release.zip
