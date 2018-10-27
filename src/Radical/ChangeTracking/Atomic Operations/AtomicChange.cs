@@ -9,11 +9,7 @@ namespace Radical.ChangeTracking
     sealed class AtomicChange : IChange
     {
         Dictionary<Object, Boolean> transientEntities = new Dictionary<Object, Boolean>();
-#if FX40
         List<Tuple<IChange, AddChangeBehavior>> changes = new List<Tuple<IChange, AddChangeBehavior>>();
-#else
-        List<Values<IChange, AddChangeBehavior>> changes = new List<Values<IChange, AddChangeBehavior>>();
-#endif
 
         /// <summary>
         /// Adds the specified change.
@@ -22,12 +18,7 @@ namespace Radical.ChangeTracking
         /// <param name="behavior">The behavior.</param>
         public void Add( IChange change, AddChangeBehavior behavior )
         {
-#if FX40
             this.changes.Add( new Tuple<IChange, AddChangeBehavior>( change, behavior ) );
-#else
-            this.changes.Add( new Values<IChange, AddChangeBehavior>( change, behavior ) );
-#endif
-
         }
 
         /// <summary>
@@ -70,11 +61,7 @@ namespace Radical.ChangeTracking
                 }
             }
 
-#if FX40
             var isChanged = this.changes.Any( c => Object.Equals( c.Item1.Owner, entity ) );
-#else
-            var isChanged = this.changes.Any( c => Object.Equals( c.Value1.Owner, entity ) );
-#endif
             if( isChanged )
             {
                 var changed = EntityTrackingStates.HasBackwardChanges | EntityTrackingStates.HasForwardChanges;
@@ -90,12 +77,7 @@ namespace Radical.ChangeTracking
         /// <returns>A list of changed entities.</returns>
         public IEnumerable<object> GetChangedEntities()
         {
-
-#if FX40
             var tmp = this.changes.SelectMany( c => c.Item1.GetChangedEntities() );
-#else
-            var tmp = this.changes.SelectMany( c => c.Value1.GetChangedEntities() );
-#endif
 
             return tmp;
         }
@@ -108,11 +90,7 @@ namespace Radical.ChangeTracking
         {
             foreach( var c in this.changes )
             {
-#if FX40
                 c.Item1.Commit( reason );
-#else
-                c.Value1.Commit( reason );
-#endif
             }
 
             this.OnCommitted( new CommittedEventArgs( reason ) );
@@ -160,11 +138,7 @@ namespace Radical.ChangeTracking
             var reversed = this.changes.ToArray().Reverse();
             foreach( var c in reversed )
             {
-#if FX40
                 c.Item1.Reject( reason );
-#else
-                c.Value1.Reject( reason );
-#endif
             }
 
             this.OnRejected( new RejectedEventArgs( reason ) );
@@ -222,16 +196,9 @@ namespace Radical.ChangeTracking
              * importante per il changedItem
              * che stiamo considerando.
              */
-#if FX40
             var actions = this.changes
                 .Where( v => v.Item1.Owner == changedItem )
                 .Select( v => v.Item1.GetAdvisedAction( changedItem ) );
-#else
-            var actions = this.changes
-                .Where( v => v.Value1.Owner == changedItem )
-                .Select( v => v.Value1.GetAdvisedAction( changedItem ) );
-#endif
-
 
             return actions.Last();
         }
