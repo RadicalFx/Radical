@@ -10,15 +10,8 @@ using Radical.Linq;
 using Radical.Reflection;
 using System.Diagnostics;
 using Radical.Conversions;
-
-#if !SILVERLIGHT
-//using log4net;
 using Radical.Diagnostics;
-#endif
-
-#if FX40
 using System.Threading.Tasks;
-#endif
 
 namespace Radical.Messaging
 {
@@ -41,14 +34,8 @@ namespace Radical.Messaging
             public List<ISubscription> Subscriptions { get; private set; }
         }
 
-#if !SILVERLIGHT
         static readonly TraceSource logger = new TraceSource(typeof(MessageBroker).FullName);
-        //        static readonly ILog logger = LogManager.GetLogger( typeof( MessageBroker ) );
-#endif
-
-#if FX40
         TaskFactory factory = null;
-#endif
 
         readonly IDispatcher dispatcher;
 
@@ -72,12 +59,8 @@ namespace Radical.Messaging
             this.dispatcher = dispatcher;
             this.msgSubsIndex = new List<SubscriptionsContainer>();
 
-#if FX40
             this.factory = new TaskFactory();
-#endif
         }
-
-#if FX40
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBroker"/> class.
@@ -93,8 +76,6 @@ namespace Radical.Messaging
             this.factory = factory;
             this.msgSubsIndex = new List<SubscriptionsContainer>();
         }
-
-#endif
 
         void SubscribeCore(Type messageType, ISubscription subscription)
         {
@@ -137,19 +118,6 @@ namespace Radical.Messaging
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe<T>(object subscriber, Action<T> callback)
-            where T : class, IMessage
-        {
-            this.Subscribe<T>(subscriber, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
@@ -158,21 +126,6 @@ namespace Radical.Messaging
         public void Subscribe<T>(object subscriber, Action<Object, T> callback)
         {
             this.Subscribe<T>(subscriber, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the 
-        /// given type of IMessage using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, Action<T> callback)
-            where T : class, IMessage
-        {
-            this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -191,18 +144,6 @@ namespace Radical.Messaging
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe(object subscriber, Type messageType, Action<IMessage> callback)
-        {
-            this.Subscribe(subscriber, messageType, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback only.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
@@ -211,20 +152,6 @@ namespace Radical.Messaging
         public void Subscribe(object subscriber, Type messageType, Action<Object, Object> callback)
         {
             this.Subscribe(subscriber, messageType, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, Action<IMessage> callback)
-        {
-            this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -243,24 +170,6 @@ namespace Radical.Messaging
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<T> callback) where T : class, IMessage
-        {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new GenericSubscription<T>(subscriber, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(typeof(T), subscription);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
@@ -270,25 +179,6 @@ namespace Radical.Messaging
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<Object, T> callback)
         {
             this.Subscribe<T>(subscriber, invocationModel, (s, msg) => true, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<IMessage> callback)
-        {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new GenericSubscription<IMessage>(subscriber, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -306,28 +196,6 @@ namespace Radical.Messaging
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback to invoke in order to notify the message arrival.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<IMessage> callback)
-        {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull().IsTrue(o => o.Is<IMessage>());
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new GenericSubscription<IMessage>(subscriber, sender, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(messageType, subscription);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback only
         /// if the sender is the specified reference.
         /// </summary>
@@ -339,27 +207,6 @@ namespace Radical.Messaging
         public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
         {
             this.Subscribe(subscriber, sender, messageType, invocationModel, (s, msg) => true, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of IMessage using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<T> callback) where T : class, IMessage
-        {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-
-            var subscription = new GenericSubscription<T>(subscriber, sender, callback, invocationModel, this.dispatcher);
-
-            this.SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
@@ -622,69 +469,12 @@ namespace Radical.Messaging
             }
         }
 
-#if !SILVERLIGHT
-
-        /// <summary>
-        /// Dispatches the specified message in a synchronus manner waiting for 
-        /// the execution of all the subscribers.
-        /// </summary>
-        /// <typeparam name="T">The type of the message.</typeparam>
-        /// <param name="message">The message.</param>
-        public void Dispatch<T>(T message)
-            where T : class, IMessage
-        {
-            //Ensure.That( message ).Named( () => message ).IsNotNull();
-
-            this.Dispatch(typeof(T), message);
-        }
-
-        /// <summary>
-        /// Dispatches the specified message in a synchronus manner waiting for
-        /// the execution of all the subscribers.
-        /// </summary>
-        /// <param name="message">The message to dispatch.</param>
-        public void Dispatch(IMessage message)
-        {
-            Ensure.That(message).Named(() => message).IsNotNull();
-
-            this.Dispatch(message.GetType(), message);
-        }
-
-        /// <summary>
-        /// Dispatches the specified message in a synchronus manner waiting for
-        /// the execution of all the subscribers.
-        /// </summary>
-        /// <param name="messageType">The Type of the message to dispatch.</param>
-        /// <param name="message">The message to dispatch.</param>
-        public void Dispatch(Type messageType, IMessage message)
-        {
-            Ensure.That(messageType).Named(() => messageType).IsNotNull();
-            Ensure.That(message).Named(() => message).IsNotNull().IsTrue(m => m.GetType().Is(messageType));
-
-            message.As<IRequireToBeValid>(m => m.Validate());
-
-            var subscriptions = this.GetSubscriptionsFor(messageType, message.Sender);
-            var anySubscription = subscriptions.Any();
-
-            if (!anySubscription)
-            {
-                logger.Warning("No Subscribers for the given message type: {0}", messageType.ToString("SN"));
-            }
-            else
-            {
-                subscriptions
-                    .Where(sub => sub.ShouldInvoke(message.Sender, message))
-                    .ForEach(subscription => subscription.DirectInvoke(message.Sender, message));
-            }
-        }
-
         public void Dispatch(Object sender, Object message)
         {
             Ensure.That(sender).Named(() => sender).IsNotNull();
             Ensure.That(message).Named(() => message).IsNotNull();
 
             message.As<IRequireToBeValid>(m => m.Validate());
-            message.As<ILegacyMessageCompatibility>(m => m.SetSenderForBackwardCompatibility(sender));
 
             var messageType = message.GetType();
             var subscriptions = this.GetSubscriptionsFor(messageType, sender);
@@ -701,56 +491,6 @@ namespace Radical.Messaging
                     .ForEach(subscription => subscription.DirectInvoke(sender, message));
             }
         }
-#endif
-
-        /// <summary>
-        /// Broadcasts the specified message in an asynchronus manner without
-        /// waiting for the execution of the subscribers.
-        /// </summary>
-        /// <typeparam name="T">The type of the message.</typeparam>
-        /// <param name="message">The message.</param>
-        public void Broadcast<T>(T message)
-            where T : class, IMessage
-        {
-            this.Broadcast(typeof(T), message);
-        }
-
-        /// <summary>
-        /// Broadcasts the specified message in an asynchronus manner without
-        /// waiting for the execution of the subscribers.
-        /// </summary>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="message">The message.</param>
-        public void Broadcast(Type messageType, IMessage message)
-        {
-            Ensure.That(message).Named("message").IsNotNull();
-
-            message.As<IRequireToBeValid>(m => m.Validate());
-
-            var subscriptions = this.GetSubscriptionsFor(messageType, message.Sender);
-
-            if (subscriptions.Any())
-            {
-
-                subscriptions.Where(sub => sub.ShouldInvoke(message.Sender, message))
-                    .ForEach(sub =>
-                    {
-#if FX40
-                        this.factory.StartNew(() =>
-                        {
-                            sub.Invoke(message.Sender, message);
-                        });
-#else
-                        ThreadPool.QueueUserWorkItem( o =>
-                        {
-                            var msg = ( IMessage )o;
-                            sub.Invoke( msg.Sender, msg );
-                        }, message );
-#endif
-                    });
-
-            }
-        }
 
         /// <summary>
         /// Broadcasts the specified message in an asynchronus manner without
@@ -764,7 +504,6 @@ namespace Radical.Messaging
             Ensure.That(sender).Named(() => sender).IsNotNull();
 
             message.As<IRequireToBeValid>(m => m.Validate());
-            message.As<ILegacyMessageCompatibility>(m => m.SetSenderForBackwardCompatibility(sender));
 
             var subscriptions = this.GetSubscriptionsFor(message.GetType(), sender);
 
@@ -774,23 +513,14 @@ namespace Radical.Messaging
                 subscriptions.Where(sub => sub.ShouldInvoke(sender, message))
                     .ForEach(sub =>
                     {
-#if FX40
                         this.factory.StartNew(() =>
                         {
                             sub.Invoke(sender, message);
                         });
-#else
-                        ThreadPool.QueueUserWorkItem( o =>
-                        {
-                            var state = ( Object[] )o;
-                            sub.Invoke( state[ 0 ], state[ 1 ] );
-                        }, new[] { sender, message } );
-#endif
                     });
             }
         }
 
-#if FX45
         /// <summary>
         /// Broadcasts the specified message in an asynchronus manner without
         /// waiting for the execution of the subscribers.
@@ -803,7 +533,6 @@ namespace Radical.Messaging
             Ensure.That(sender).Named(() => sender).IsNotNull();
 
             message.As<IRequireToBeValid>(m => m.Validate());
-            message.As<ILegacyMessageCompatibility>(m => m.SetSenderForBackwardCompatibility(sender));
 
             var subscriptions = this.GetSubscriptionsFor(message.GetType(), sender);
 
@@ -864,7 +593,6 @@ namespace Radical.Messaging
             this.SubscribeCore(typeof(T), subscription);
         }
 
-#endif
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback only
