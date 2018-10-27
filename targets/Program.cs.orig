@@ -13,7 +13,11 @@ internal class Program
             solution => Cmd("dotnet", $"build \"{solution}\" --configuration Debug"));
 
 	    Target(
+<<<<<<< HEAD
+            "release",
+=======
             "release"
+>>>>>>> typo
             Directory.EnumerateFiles("src", "*.sln", SearchOption.AllDirectories),
             solution => Cmd("dotnet", $"build \"{solution}\" --configuration Release"));
 
