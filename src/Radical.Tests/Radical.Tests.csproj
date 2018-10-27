@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ApprovalTests" Version="3.0.18" NoWarn="NU1701" />
-    <PackageReference Include="ApprovalUtilities" Version="3.0.18" NoWarn="NU1701" />
+    <PackageReference Include="ApprovalTests" Version="3.0.15" NoWarn="NU1701" />
+    <PackageReference Include="ApprovalUtilities" Version="3.0.15" NoWarn="NU1701" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
     <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
