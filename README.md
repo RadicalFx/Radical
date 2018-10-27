@@ -10,6 +10,12 @@ In the [documentation](http://docs.radicalframework.com/) there are a lot of art
 
 The Radical framework is not tied to WPF but some part of it can be freely used, and will be valuable, even in services and web applications.
 
+### Build Dependencies
+
+Requirements on the developer machine. Optional:
+
+* DirectX SDK
+
 ### Release
 
 The latest release can be found on NuGet: http://www.nuget.org/profiles/radical
