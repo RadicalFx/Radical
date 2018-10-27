@@ -12,8 +12,8 @@ internal class Program
             Directory.EnumerateFiles("src", "*.sln", SearchOption.AllDirectories),
             solution => Cmd("dotnet", $"build \"{solution}\" --configuration Debug"));
 
-	Target(
-            "release",
+	    Target(
+            "release"
             Directory.EnumerateFiles("src", "*.sln", SearchOption.AllDirectories),
             solution => Cmd("dotnet", $"build \"{solution}\" --configuration Release"));
 
