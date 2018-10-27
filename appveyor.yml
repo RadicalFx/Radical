@@ -21,7 +21,7 @@ for:
     - cmd: Build.cmd
   
   artifacts:
-    - path: build\Debug
+    - path: build
     - path: nugets\*.nupkg
 
   deploy:
@@ -37,7 +37,7 @@ for:
     - cmd: Build.cmd release
 
   artifacts:
-    - path: build\Release
+    - path: build
     - path: nugets\*.nupkg
 
   deploy:

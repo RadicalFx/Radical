@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <OutputPath>..\..\build</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup>
