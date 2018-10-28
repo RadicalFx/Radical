@@ -4,6 +4,13 @@ skip_tags: true
 pull_requests:
   do_not_increment_build_number: true
 
+build_script:
+  - cmd: Build.cmd
+  
+artifacts:
+  - path: build
+  - path: nugets\*.nupkg
+
 test:
   categories:
     except:
@@ -17,13 +24,6 @@ for:
     only:
       - develop
 
-  build_script:
-    - cmd: Build.cmd
-  
-  artifacts:
-    - path: build
-    - path: nugets\*.nupkg
-
   deploy:
     - provider: Environment
       name: MyGet feed
@@ -35,10 +35,6 @@ for:
 
   build_script:
     - cmd: Build.cmd release
-
-  artifacts:
-    - path: build
-    - path: nugets\*.nupkg
 
   deploy:
     - provider: Environment
