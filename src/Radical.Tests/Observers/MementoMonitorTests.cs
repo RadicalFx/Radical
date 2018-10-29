@@ -1,11 +1,11 @@
 ﻿namespace Radical.Tests.Observers
 {
-    using System;
+    using FakeItEasy;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rhino.Mocks;
-    using SharpTestsEx;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Observers;
+    using SharpTestsEx;
+    using System;
 
     [TestClass]
     public class MementoMonitorTests
@@ -16,15 +16,14 @@
             var expected = 1;
             var actual = 0;
 
-            var svc = MockRepository.GenerateStub<IChangeTrackingService>();
-            var raiser = svc.GetEventRaiser( obj => obj.TrackingServiceStateChanged += null );
+            var svc = A.Fake<IChangeTrackingService>();
 
-            var target = new MementoMonitor( svc );
-            target.Changed += ( s, e ) => actual++;
+            var target = new MementoMonitor(svc);
+            target.Changed += (s, e) => actual++;
 
-            raiser.Raise( svc, EventArgs.Empty );
+            svc.TrackingServiceStateChanged += Raise.With(sender: svc, e: EventArgs.Empty);
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }
