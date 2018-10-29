@@ -1,5 +1,6 @@
 ﻿//extern alias tpx;
 
+using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel;
 using System;
@@ -11,19 +12,15 @@ namespace Radical.Tests
     {
         Timestamp CreateMock()
         {
-            MockRepository m = new MockRepository();
-            Timestamp ts = m.PartialMock<Timestamp>();
+            var ts = A.Fake<Timestamp>();
 
-            ts.Stub(obj => obj.Equals(null))
-                .IgnoreArguments()
-                .Repeat.Once()
-                .Return(true);
+            A.CallTo(() => ts.Equals(null))
+                .Returns(true)
+                .NumberOfTimes(1);
 
-            ts.Stub(obj => obj.GetHashCode())
-                .Repeat.Once()
-                .Return(0);
-
-            ts.Replay();
+            A.CallTo(() => ts.GetHashCode())
+                .Returns(0)
+                .NumberOfTimes(1);
 
             return ts;
         }
