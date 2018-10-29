@@ -1,8 +1,8 @@
 ﻿//extern alias tpx;
 
+using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel.ChangeTracking;
-using Rhino.Mocks;
 using SharpTestsEx;
 using System;
 
@@ -11,19 +11,14 @@ namespace Radical.Tests
     [TestClass()]
     public class ChangeArgsTests
     {
-        protected virtual ChangeEventArgs<T> CreateMock<T>(Object entity, T cachedValue, IChange source)
-        {
-            return new ChangeEventArgs<T>(entity, cachedValue, source);
-        }
-
         [TestMethod]
         public void changeArgs_generic_ctor_normal_should_correctly_set_values()
         {
             var entity = new Object();
             var cachedValue = new GenericParameterHelper();
-            var iChange = MockRepository.GenerateStub<IChange>();
+            var iChange = A.Dummy<IChange>();
 
-            var target = this.CreateMock<GenericParameterHelper>(entity, cachedValue, iChange);
+            var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
 
             target.Entity.Should().Be.EqualTo(entity);
             target.CachedValue.Should().Be.EqualTo(cachedValue);
@@ -36,9 +31,9 @@ namespace Radical.Tests
         {
             Object entity = null;
             var cachedValue = new GenericParameterHelper();
-            var iChange = MockRepository.GenerateStub<IChange>();
+            var iChange = A.Dummy<IChange>();
 
-            var target = this.CreateMock<GenericParameterHelper>(entity, cachedValue, iChange);
+            var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
         }
 
         [TestMethod]
@@ -49,7 +44,7 @@ namespace Radical.Tests
             var cachedValue = new GenericParameterHelper();
             IChange iChange = null;
 
-            var target = this.CreateMock<GenericParameterHelper>(entity, cachedValue, iChange);
+            var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
         }
     }
 }

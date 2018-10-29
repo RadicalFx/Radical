@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
-using Radical.Model;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel;
+using Radical.Model;
 using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.Model
 {
@@ -18,19 +17,19 @@ namespace Radical.Tests.Model
             MockRepository mocks = new MockRepository();
 
             var filter = mocks.PartialMock<EntityItemViewFilterBase<GenericParameterHelper>>();
-            filter.Expect( obj => obj.ShouldInclude( expected ) )
-                .Return( true )
+            filter.Expect(obj => obj.ShouldInclude(expected))
+                .Return(true)
                 .Repeat.Once();
             filter.Replay();
 
-            var target = ( IEntityItemViewFilter )filter;
-            target.ShouldInclude( expected );
+            var target = (IEntityItemViewFilter)filter;
+            target.ShouldInclude(expected);
 
             filter.VerifyAllExpectations();
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentException ) )]
+        [ExpectedException(typeof(ArgumentException))]
         public void entityItemViewFilterBase_interface_shouldInclude_using_invalid_type_should_raise_ArgumentException()
         {
             MockRepository mocks = new MockRepository();
@@ -38,12 +37,12 @@ namespace Radical.Tests.Model
             var filter = mocks.PartialMock<EntityItemViewFilterBase<GenericParameterHelper>>();
             filter.Replay();
 
-            var target = ( IEntityItemViewFilter )filter;
-            target.ShouldInclude( new Object() );
+            var target = (IEntityItemViewFilter)filter;
+            target.ShouldInclude(new Object());
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void entityItemViewFilterBase_interface_shouldInclude_using_null_reference_should_raise_ArgumentNullException()
         {
             MockRepository mocks = new MockRepository();
@@ -51,8 +50,8 @@ namespace Radical.Tests.Model
             var filter = mocks.PartialMock<EntityItemViewFilterBase<GenericParameterHelper>>();
             filter.Replay();
 
-            var target = ( IEntityItemViewFilter )filter;
-            target.ShouldInclude( null );
+            var target = (IEntityItemViewFilter)filter;
+            target.ShouldInclude(null);
         }
 
         [TestMethod]
@@ -67,7 +66,7 @@ namespace Radical.Tests.Model
 
             var actual = target.ToString();
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }
