@@ -1,2 +1,0 @@
-AsyncDelay=1000			
-	Adds a delay, in milliseconds, to the async engine, only if in debug build
