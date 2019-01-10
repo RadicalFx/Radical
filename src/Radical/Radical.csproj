@@ -19,8 +19,20 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <MinVerMinimumMajorMinor>2</MinVerMinimumMajorMinor>
+  </PropertyGroup>
+
+  <Target Name="ApVeyorPullRequestsTarget" AfterTargets="MinVer" Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''" >
+    <PropertyGroup>
+      <PackageVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)-PR.$(APPVEYOR_PULL_REQUEST_NUMBER).$(MinVerPreRelease)</PackageVersion>
+      <PackageVersion Condition="'$(MinVerBuildMetadata)' != ''">$(PackageVersion)+$(MinVerBuildMetadata)</PackageVersion>
+      <Version>$(PackageVersion)</Version>
+    </PropertyGroup>
+  </Target>
+
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0">
+    <PackageReference Include="MinVer" Version="1.0.0-beta.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
