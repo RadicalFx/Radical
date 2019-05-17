@@ -40,14 +40,10 @@ namespace Radical
             {
                 if (IsEnabled && UserActionTrackingHandler != null)
                 {
-#if FX40
-                System.Threading.Tasks.Task.Factory.StartNew( () =>
-                {
-                    UserActionTrackingHandler( action );
-                } );
-#else
-                    UserActionTrackingHandler.BeginInvoke(action, new AsyncCallback(r => { }), null);
-#endif
+                    System.Threading.Tasks.Task.Factory.StartNew(() =>
+                   {
+                       UserActionTrackingHandler(action);
+                   });
                 }
             }
 
