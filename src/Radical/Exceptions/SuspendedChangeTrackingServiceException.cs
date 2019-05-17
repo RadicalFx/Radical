@@ -9,12 +9,9 @@
     /// In order to prevent the exception the caller should check the <c>IsSuspended</c>
     /// property of the service.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable] 
-#endif
     public class SuspendedChangeTrackingServiceException : RadicalException
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="SuspendedChangeTrackingServiceException"/> class.
         /// </summary>
@@ -25,7 +22,6 @@
         {
 
         } 
-#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SuspendedChangeTrackingServiceException"/> class.

@@ -68,11 +68,9 @@ namespace Radical
                             assembly = Assembly.GetCallingAssembly();
                             break;
 
-#if !SILVERLIGHT
                         case ResourceAssemblyLocationBehavior.UseEntryAssembly:
                             assembly = Assembly.GetEntryAssembly();
                             break;
-#endif
 
                         case ResourceAssemblyLocationBehavior.ByAssemblyName:
                         default:
