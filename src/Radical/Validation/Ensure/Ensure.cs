@@ -167,15 +167,11 @@ namespace Radical.Validation
         {
             var si = SourceInfo.Empty;
 
-#if !SILVERLIGHT
-
             if ( strategy != Validation.SourceInfoLoadStrategy.Skip ) 
             {
                 var lazy = strategy == Validation.SourceInfoLoadStrategy.LazyLoad;
                 si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: lazy );
             }
-
-#endif
 
             return new Ensure<T>( obj, si );
         }
