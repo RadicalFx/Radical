@@ -5,11 +5,7 @@ using System.Reflection;
 using System.ComponentModel;
 using Radical.Reflection;
 using System.Diagnostics;
-
-#if !SILVERLIGHT
-//using log4net;
 using Radical.Diagnostics;
-#endif
 
 namespace Radical.Observers
 {
@@ -18,10 +14,8 @@ namespace Radical.Observers
     /// </summary>
     public abstract class AbstractMonitor : IMonitor
     {
-#if !SILVERLIGHT
-        static readonly TraceSource logger = new TraceSource( typeof( IMonitor ).FullName );
-        //        static readonly ILog logger = LogManager.GetLogger( typeof( AbstractMonitor ) );
-#endif
+        static readonly TraceSource logger = new TraceSource(typeof(IMonitor).FullName);
+
         /// <summary>
         /// Occurs when the source monitored by this monitor changes.
         /// </summary>
@@ -32,51 +26,34 @@ namespace Radical.Observers
         /// </summary>
         protected virtual void OnChanged()
         {
-            if( this.Dispatcher != null && !this.Dispatcher.IsSafe )
+            if (this.Dispatcher != null && !this.Dispatcher.IsSafe)
             {
-                this.Dispatcher.Dispatch( () => this.OnChanged() );
+                this.Dispatcher.Dispatch(() => this.OnChanged());
             }
             else
             {
-
-#if !SILVERLIGHT
-
-                if( this.WeakSource == null )
+                if (this.WeakSource == null)
                 {
                     logger.Warning
                     (
-                        "Raising the Changed event even if the monitored source is null. ({0})", 
-                        this.GetType().ToString( "SN" )
+                        "Raising the Changed event even if the monitored source is null. ({0})",
+                        this.GetType().ToString("SN")
                     );
                 }
 
-                if( this.WeakSource != null && !this.WeakSource.IsAlive )
+                if (this.WeakSource != null && !this.WeakSource.IsAlive)
                 {
                     logger.Warning
                     (
-                        "Raising the Changed event even if the monitored source is not alive anymore. ({0})", 
-                        this.GetType().ToString( "SN" )
+                        "Raising the Changed event even if the monitored source is not alive anymore. ({0})",
+                        this.GetType().ToString("SN")
                     );
                 }
-
-//                logger.WarnIf
-//                (
-//                    this.WeakSource == null,
-//                    "Raising the Changed event even if the monitored source is null. ({0})", this.GetType().ToString( "SN" )
-//                );
-
-//                logger.WarnIf
-//                ( 
-//                    this.WeakSource != null && !this.WeakSource.IsAlive, 
-//                    "Raising the Changed event even if the monitored source is not alive anymore. ({0})", this.GetType().ToString( "SN" ) 
-//                );
-
-#endif
 
                 var handler = this.Changed;
-                if( handler != null )
+                if (handler != null)
                 {
-                    handler( this, EventArgs.Empty );
+                    handler(this, EventArgs.Empty);
                 }
             }
         }
@@ -108,7 +85,7 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="AbstractMonitor"/> class.
         /// </summary>
         /// <param name="dispatcher">The dispatcher.</param>
-        protected AbstractMonitor( IDispatcher dispatcher )
+        protected AbstractMonitor(IDispatcher dispatcher)
         {
             this.Dispatcher = dispatcher;
         }
@@ -117,11 +94,11 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="AbstractMonitor"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected AbstractMonitor( Object source )
+        protected AbstractMonitor(Object source)
         {
-            Ensure.That( source ).Named( "source" ).IsNotNull();
+            Ensure.That(source).Named("source").IsNotNull();
 
-            this.StartMonitoring( source );
+            this.StartMonitoring(source);
         }
 
         /// <summary>
@@ -129,8 +106,8 @@ namespace Radical.Observers
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="dispatcher">The dispatcher.</param>
-        protected AbstractMonitor( Object source, IDispatcher dispatcher )
-            : this( source )
+        protected AbstractMonitor(Object source, IDispatcher dispatcher)
+            : this(source)
         {
             this.Dispatcher = dispatcher;
         }
@@ -141,20 +118,20 @@ namespace Radical.Observers
         /// Starts monitoring the given source object.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected virtual void StartMonitoring( Object source )
+        protected virtual void StartMonitoring(Object source)
         {
-            this.WeakSource = new WeakReference( source );
+            this.WeakSource = new WeakReference(source);
 
-            disposed = ( s, e ) =>
+            disposed = (s, e) =>
             {
-                ( ( IComponent )s ).Disposed -= disposed;
+                ((IComponent)s).Disposed -= disposed;
                 disposed = null;
 
-                this.StopMonitoring( true );
+                this.StopMonitoring(true);
             };
 
             var ic = source as IComponent;
-            if( ic != null )
+            if (ic != null)
             {
                 ic.Disposed += disposed;
             }
@@ -175,20 +152,20 @@ namespace Radical.Observers
         /// </summary>
         public void StopMonitoring()
         {
-            this.StopMonitoring( false );
+            this.StopMonitoring(false);
         }
 
-        void StopMonitoring( Boolean targetDisposed )
+        void StopMonitoring(Boolean targetDisposed)
         {
-            this.OnStopMonitoring( targetDisposed );
+            this.OnStopMonitoring(targetDisposed);
 
-            if( !targetDisposed &&
+            if (!targetDisposed &&
                 this.disposed != null &&
                 this.WeakSource != null &&
-                this.WeakSource.IsAlive )
+                this.WeakSource.IsAlive)
             {
                 var ic = this.WeakSource.Target as IComponent;
-                if( ic != null )
+                if (ic != null)
                 {
                     ic.Disposed -= disposed;
                 }
@@ -201,6 +178,6 @@ namespace Radical.Observers
         /// Called in order to allow inheritors to stop the monitoring operations.
         /// </summary>
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
-        protected abstract void OnStopMonitoring( Boolean targetDisposed );
+        protected abstract void OnStopMonitoring(Boolean targetDisposed);
     }
 }

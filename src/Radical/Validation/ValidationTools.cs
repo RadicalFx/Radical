@@ -19,8 +19,6 @@ namespace Radical.Validation
         {
             var displayName = propertyName;
 
-#if FX35 || FX40 || FX45
-
             //Duplicate code in ValidatorBase
             var pi = entity.GetType().GetProperty( propertyName );
             if ( pi != null && pi.IsAttributeDefined<DisplayNameAttribute>() )
@@ -28,7 +26,6 @@ namespace Radical.Validation
                 var a = pi.GetAttribute<DisplayNameAttribute>();
                 displayName = a.DisplayName;
             }
-#endif
 
             return displayName;
         }
