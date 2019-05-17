@@ -9,12 +9,9 @@
     /// Exception raised to notify that the <see cref="Radical.ComponentModel.ContractAttribute"/>
     /// cannot be found on the searched entity.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable] 
-#endif
     public class MissingContractAttributeException : RadicalException
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
         /// </summary>
@@ -26,7 +23,6 @@
             Type targetType = ( Type )info.GetValue( "targetType", typeof( Type ) );
             this.TargetType = targetType;
         } 
-#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
@@ -77,7 +73,6 @@
             private set;
         }
 
-#if !SILVERLIGHT
         /// <summary>
         /// When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
         /// </summary>
@@ -97,6 +92,5 @@
 
             info.AddValue( "targetType", this.TargetType, typeof( Type ) );
         } 
-#endif
     }
 }

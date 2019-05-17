@@ -6,12 +6,9 @@
     /// <summary>
     /// A base exception class for all Radical exceptions.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable] 
-#endif
     public class RadicalException : Exception
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="RadicalException"/> class.
         /// </summary>
@@ -22,7 +19,6 @@
         {
 
         } 
-#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RadicalException"/> class.
