@@ -30,7 +30,6 @@
         /// <value><c>true</c> if this.instace allo the creation of new items; otherwise, <c>false</c>.</value>
         Boolean AllowNew { get; }
 
-#if !SILVERLIGHT
 
         /// <summary>
         /// Gets the default view.
@@ -44,7 +43,6 @@
         /// <returns>An instance of a view.</returns>
         IEntityView<T> CreateView();
 
-#endif
 
         /// <summary>
         /// Moves the specified item, identified by the <paramref name="oldIndex"/> parameter,

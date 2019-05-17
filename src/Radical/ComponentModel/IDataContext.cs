@@ -74,7 +74,6 @@ namespace Radical.ComponentModel
         /// <returns>The begun transaction.</returns>
         ITransaction BeginTransaction();
 
-#if !WINDOWS_PHONE
 
         /// <summary>
         /// Begins a new transaction with the specified isolation lavel.
@@ -83,7 +82,6 @@ namespace Radical.ComponentModel
         /// <returns>The begun transaction.</returns>
         ITransaction BeginTransaction( System.Data.IsolationLevel isolationLevel );
 
-#endif
 
         /// <summary>
         /// Gets the transaction.
