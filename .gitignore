@@ -19,6 +19,7 @@ build/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+/src/Radical.Tests/API/APIApprovals.Approve_API.received.txt
 
 # ReSharper is a .NET coding add-in
 _ReSharper*/
