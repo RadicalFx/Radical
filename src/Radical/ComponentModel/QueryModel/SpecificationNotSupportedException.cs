@@ -7,9 +7,7 @@
     /// The excpetion raised when the infrastructure cannot find any
     /// engine for a given specification.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public class SpecificationNotSupportedException : Exception
     {
         /// <summary>
@@ -41,7 +39,6 @@
 
         }
 
-#if !SILVERLIGHT
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecificationNotSupportedException"/> class.
@@ -60,6 +57,5 @@
 
         }
 
-#endif
     }
 }

@@ -41,7 +41,6 @@ namespace Radical.ComponentModel
         /// <param name="action">The action to dispatch.</param>
         void Dispatch<T1, T2>( T1 arg1, T2 arg2, Action<T1, T2> action );
 
-#if !SILVERLIGHT
 
         /// <summary>
         /// Safely dispatches the specified Func delegate.
@@ -51,7 +50,6 @@ namespace Radical.ComponentModel
         /// <returns>The result of Func invocation.</returns>
         TResult Dispatch<TResult>( Func<TResult> func );
 
-#endif
 
         /// <summary>
         /// Gets a value indicating whether the caller can safely call a target method without using this dispatcher.
