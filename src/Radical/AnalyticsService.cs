@@ -61,9 +61,6 @@ namespace Radical
             public AnalyticsEvent()
             {
                 this.ExecutedOn = DateTimeOffset.Now;
-#if !SILVERLIGHT && !NETFX_CORE
-                this.Identity = Thread.CurrentPrincipal.Identity;
-#endif
             }
 
             public DateTimeOffset ExecutedOn { get; set; }
@@ -71,9 +68,6 @@ namespace Radical
             public String Name { get; set; }
 
             public Object Data { get; set; }
-#if !SILVERLIGHT && !NETFX_CORE
-            public IIdentity Identity { get; set; }
-#endif
         }
     }
 }
