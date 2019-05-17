@@ -94,9 +94,7 @@ namespace Radical.Model
         /// <summary>
         /// Occurs when a property item changes.
         /// </summary>
-#if !SILVERLIGHT
         [field: NonSerialized]
-#endif
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -155,9 +153,7 @@ namespace Radical.Model
         /// <summary>
         /// Notifies that an edit operation has begun.
         /// </summary>
-#if !SILVERLIGHT
         [field: NonSerialized]
-#endif
         public event EventHandler EditBegun;
 
         protected virtual void OnEditBegun()
@@ -171,9 +167,7 @@ namespace Radical.Model
         /// <summary>
         /// Notifies that an edit operation has benn canceled.
         /// </summary>
-#if !SILVERLIGHT
         [field: NonSerialized]
-#endif
         public event EventHandler EditCanceled;
         protected virtual void OnEditCanceled()
         {
@@ -186,9 +180,7 @@ namespace Radical.Model
         /// <summary>
         /// Notifies that an edit operation has ended.
         /// </summary>
-#if !SILVERLIGHT
         [field: NonSerialized]
-#endif
         public event EventHandler EditEnded;
         protected virtual void OnEditEnded()
         {
@@ -311,8 +303,6 @@ namespace Radical.Model
             return ( ( ICustomTypeDescriptor )this ).GetProperties( null );
         }
 
-#if !SILVERLIGHT
-
         AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
             return AttributeCollection.Empty;
@@ -332,8 +322,6 @@ namespace Radical.Model
         {
             return null;
         }
-
-#endif
 
         String ICustomTypeDescriptor.GetClassName()
         {
