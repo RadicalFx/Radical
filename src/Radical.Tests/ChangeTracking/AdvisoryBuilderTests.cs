@@ -3,10 +3,10 @@
     using System;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rhino.Mocks;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.ChangeTracking;
     using SharpTestsEx;
+    using FakeItEasy;
 
     [TestClass]
     public class AdvisoryBuilderTests
@@ -52,22 +52,20 @@
             var entity = new Object();
             var entityState = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove | EntityTrackingStates.HasBackwardChanges;
 
-            var c1 = MockRepository.GenerateStub<IChange>();
-            c1.Expect( obj => obj.GetChangedEntities() ).Return( new Object[] { entity } );
-            c1.Expect( obj => obj.GetAdvisedAction( entity ) ).Return( ProposedActions.Update | ProposedActions.Create );
-            c1.Replay();
+            var c1 = A.Fake<IChange>();
+            A.CallTo( () => c1.GetChangedEntities()).Return( _ => new Object[] { entity } );
+            A.CallTo(() => c1.GetAdvisedAction( entity ) ).Return( _ => ProposedActions.Update | ProposedActions.Create );
+            //c1.Replay();
 
-            var c2 = MockRepository.GenerateStub<IChange>();
-            c2.Expect( obj => obj.GetChangedEntities() ).Return( new Object[] { entity } );
-            c2.Expect( obj => obj.GetAdvisedAction( entity ) ).Return( ProposedActions.Update | ProposedActions.Create );
-            c2.Replay();
+            var c2 = A.Fake<IChange>();
+            A.CallTo(() => c2.GetChangedEntities() ).Return(_ => new Object[] { entity } );
+            A.CallTo(() => c2.GetAdvisedAction( entity ) ).Return(_ => ProposedActions.Update | ProposedActions.Create );
 
             var cSet = new ChangeSet( new IChange[] { c1, c2 } );
 
-            var svc = MockRepository.GenerateStub<IChangeTrackingService>();
-            svc.Expect( obj => obj.GetEntityState( entity ) ).Return( entityState );
-            svc.Expect( obj => obj.GetEntities( EntityTrackingStates.IsTransient, true ) ).Return( new Object[ 0 ] );
-            svc.Replay();
+            var svc = A.Fake<IChangeTrackingService>();
+            A.CallTo(() => svc.GetEntityState( entity ) ).Return(_ => entityState );
+            A.CallTo(() => svc.GetEntities( EntityTrackingStates.IsTransient, true ) ).Return(_ => new Object[ 0 ] );
 
             var actual = new AdvisoryBuilder( new ChangeSetDistinctVisitor() );
             IAdvisory advisory = actual.GenerateAdvisory( svc, cSet );
