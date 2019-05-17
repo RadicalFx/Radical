@@ -40,10 +40,8 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
-#if !SILVERLIGHT
         [Browsable( false )]
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         ISite IComponent.Site
         {
             get

@@ -10,9 +10,7 @@ using Radical.Validation;
 namespace Radical.Model
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly" )]
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public class MementoEntityCollection<T> : EntityCollection<T>, IMemento
     {
         #region IMemento<TMemento> members
@@ -162,8 +160,6 @@ namespace Radical.Model
 
         }
 
-#if !SILVERLIGHT
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
@@ -175,39 +171,27 @@ namespace Radical.Model
 
         }
 
-#endif
-
         #endregion
-#if !SILVERLIGHT
+
         [NonSerialized]
-#endif
         RejectCallback<ItemChangedDescriptor<T>> itemAddedRejectCallback = null;
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         RejectCallback<ItemMovedDescriptor<T>> itemMovedRejectCallback = null;
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         RejectCallback<ItemChangedDescriptor<T>> itemRemovedRejectCallback = null;
-#if !SILVERLIGHT
+
         [NonSerialized]
-#endif
         RejectCallback<ItemChangedDescriptor<T>> itemInsertedRejectCallback = null;
-#if !SILVERLIGHT
+
         [NonSerialized]
-#endif
         RejectCallback<ItemReplacedDescriptor<T>> itemReplacedRejectCallback = null;
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         RejectCallback<CollectionRangeDescriptor<T>> collectionClearedRejectCallback = null;
-#if !SILVERLIGHT
+
         [NonSerialized]
-#endif
         RejectCallback<CollectionRangeDescriptor<T>> collectionAddRangeRejectCallback = null;
 
         /// <summary>
@@ -681,8 +665,6 @@ namespace Radical.Model
             }
         }
 
-#if !SILVERLIGHT
-
         /// <summary>
         /// Runs when the entire object graph has been deserialized.
         /// </summary>
@@ -704,8 +686,6 @@ namespace Radical.Model
             this.ResumeCaching();
             base.OnDeserializationCompleted( info, context );
         }
-
-#endif
 
         //WARN: non siamo in grado di cachare un eventuale cambiamento di Sort o il Reverse
     }
