@@ -15,9 +15,7 @@ namespace Radical.Model
     /// The <c>MementoEntity</c> class provides full support for the change tracking
     /// model exposed by the <see cref="IChangeTrackingService"/> interface.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public abstract class MementoEntity :
         Entity,
         IMemento
@@ -262,10 +260,7 @@ namespace Radical.Model
         /// features provider.
         /// </summary>
         /// <value>The change tracking service.</value>
-#if !SILVERLIGHT
-
         [Bindable( BindableSupport.No )]
-#endif
         IChangeTrackingService IMemento.Memento
         {
             get

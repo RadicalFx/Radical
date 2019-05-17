@@ -73,11 +73,7 @@ namespace Radical.Model
             return new PropertyMetadata<T>( propertyOwner, propertyName );
         }
 
-#if WINDOWS_PHONE
-        readonly List<String> cascadeChangeNotifications = new List<String>();
-#else
         readonly HashSet<String> cascadeChangeNotifications = new HashSet<String>();
-#endif
 
         readonly Object propertyOwner;
         PropertyInfo _property;

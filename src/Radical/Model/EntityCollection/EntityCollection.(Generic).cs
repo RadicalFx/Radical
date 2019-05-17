@@ -15,14 +15,10 @@ using System.Linq.Expressions;
 namespace Radical.Model
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly" )]
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public partial class EntityCollection<T> :
-#if !SILVERLIGHT
         ISerializable, 
         IDeserializationCallback,
-#endif
         IEntityCollection<T>,
         IList,
         ICollection,
@@ -32,9 +28,7 @@ namespace Radical.Model
         ISite
     {
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         private EventHandlerList _events;
 
         /// <summary>
@@ -705,11 +699,7 @@ namespace Radical.Model
             this.Storage.Reverse();
         }
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
-
-#if !SILVERLIGHT
         private IEntityView<T> _defaultView;
 
         /// <summary>
@@ -750,7 +740,6 @@ namespace Radical.Model
             this.EnsureNotDisposed();
             return new EntityView<T>( this );
         }
-#endif
 
         /// <summary>
         /// Creates a new instance of the type managed by this collection.
