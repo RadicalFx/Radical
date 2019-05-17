@@ -56,18 +56,6 @@ namespace Radical.Validation
         /// <value>The validation errors.</value>
         public IEnumerable<ValidationError> Errors { get; private set; }
 
-        /// <summary>
-        /// Adds a new error for the given key with the supplied detected problems.
-        /// </summary>
-        /// <typeparam name="T">The type of the validated property.</typeparam>
-        /// <param name="key">The key the represents the name of the validated property.</param>
-        /// <param name="detectedProblems">The detected problems.</param>
-        [Obsolete( "Use the overload without the evil 'params' keyword using an explicit array: new[] { 'your error text here' }.", error: true )]
-        public void AddError<T>( Expression<Func<T>> key, params String[] detectedProblems )
-        {
-            var error = ValidationError.Create<T>( key, key.GetMemberName(), detectedProblems );
-            this.AddError( error );
-        }
 
         /// <summary>
         /// Adds the error.
