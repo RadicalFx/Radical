@@ -193,12 +193,6 @@ namespace Radical
             where T :  class { }
         public static TInput If<TInput>(this TInput o, System.Func<TInput, bool> evaluator)
             where TInput :  class { }
-        [System.ObsoleteAttribute()]
-        public static T IfNotNullDo<T>(this T obj, System.Action<T> action) { }
-        [System.ObsoleteAttribute()]
-        public static T IfNullDo<T>(this T obj, System.Action action) { }
-        [System.ObsoleteAttribute()]
-        public static T Intercept<T>(this T obj, System.Action<T> interceptor) { }
         public static TSource InterceptAs<TSource, TDestination>(this TSource obj, System.Action<TDestination> interceptor)
             where TSource :  class
             where TDestination :  class { }
@@ -1273,14 +1267,6 @@ namespace Radical.Conversions
     public class static ConvertExtensions
     {
         public static Radical.Observable<T> AsObservable<T>(this T value) { }
-        [System.ObsoleteAttribute()]
-        public static bool ToBoolean(this string value) { }
-        [System.ObsoleteAttribute()]
-        public static decimal ToDecimal(this string value) { }
-        [System.ObsoleteAttribute()]
-        public static decimal ToDecimal(this double value) { }
-        [System.ObsoleteAttribute()]
-        public static int ToInt32(this string value) { }
     }
     public class static KeyConversionExtensions
     {
@@ -1352,16 +1338,6 @@ namespace Radical.Diagnostics
         public static void Information(this System.Diagnostics.TraceSource source, int eventId, string format, params object[] args) { }
         public static void Information(this System.Diagnostics.TraceSource source, string message) { }
         public static void Information(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, int eventId, string message) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, int eventId, string format, params object[] args) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, string message) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, string format, System.Func<object[]> args) { }
         public static void Warning(this System.Diagnostics.TraceSource source, string message) { }
         public static void Warning(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
     }
@@ -2464,9 +2440,6 @@ namespace Radical.Validation
         public ValidationResults(System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> errors) { }
         public System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> Errors { get; }
         public bool IsValid { get; }
-        [System.ObsoleteAttribute("Use the overload without the evil \'params\' keyword using an explicit array: new[]" +
-            " { \'your error text here\' }.", true)]
-        public void AddError<T>(System.Linq.Expressions.Expression<System.Func<T>> key, params string[] detectedProblems) { }
         public void AddError<T>(System.Linq.Expressions.Expression<System.Func<T>> key, string displayName, string[] detectedProblems) { }
         public void AddError(Radical.Validation.ValidationError error) { }
         public override string ToString() { }

@@ -9,23 +9,6 @@ namespace Radical
     /// </summary>
     public static class ObjectExtensions
     {
-        /// <summary>
-        /// Exposes the specified object in order to provide a fluent interface
-        /// based access to objects that does not support fluent interfaces.
-        /// </summary>
-        /// <typeparam name="T">The type of the object.</typeparam>
-        /// <param name="obj">The current object.</param>
-        /// <param name="interceptor">The delagate used to intercept the exposition.</param>
-        /// <returns>The originally exposed object.</returns>
-        [Obsolete]
-        public static T Intercept<T>( this T obj, Action<T> interceptor )
-        {
-            Ensure.That( interceptor ).Named( "interceptor" ).IsNotNull();
-
-            interceptor( obj );
-
-            return obj;
-        }
 
         /// <summary>
         /// Exposes the specified object, trying to cast it to the destination type,
@@ -57,41 +40,6 @@ namespace Radical
             return obj;
         }
 
-        /// <summary>
-        /// Executes the given action is the source object is not null.
-        /// </summary>
-        /// <typeparam name="T">The type of the source object.</typeparam>
-        /// <param name="obj">The source object.</param>
-        /// <param name="action">The action to execute.</param>
-        /// <returns>The source object instance.</returns>
-        [Obsolete]
-        public static T IfNotNullDo<T>( this T obj, Action<T> action )
-        {
-            if( obj != null )
-            {
-                action( obj );
-            }
-
-            return obj;
-        }
-
-        /// <summary>
-        /// Executes the given action is the source object is null.
-        /// </summary>
-        /// <typeparam name="T">The type of the source object.</typeparam>
-        /// <param name="obj">The source object.</param>
-        /// <param name="action">The action to execute.</param>
-        /// <returns>The source object instance.</returns>
-        [Obsolete]
-        public static T IfNullDo<T>( this T obj, Action action )
-        {
-            if( obj == null )
-            {
-                action();
-            }
-
-            return obj;
-        }
 
         /// <summary>
         /// Executes the supplied delegate only if the given predicate returns true.
