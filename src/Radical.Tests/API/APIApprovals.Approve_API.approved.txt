@@ -304,16 +304,9 @@ namespace Radical.Analytics
     public class AnalyticsEvent
     {
         public AnalyticsEvent() { }
-        public object Data { get; set; }
+        public System.Collections.Generic.IDictionary<string, object> Data { get; set; }
         public System.DateTimeOffset ExecutedOn { get; set; }
-        public System.Security.Principal.IIdentity Identity { get; set; }
         public string Name { get; set; }
-    }
-    public class static AnalyticsServices
-    {
-        public static bool IsEnabled { get; set; }
-        public static System.Action<Radical.Analytics.AnalyticsEvent> UserActionTrackingHandler { get; set; }
-        public static void TrackUserActionAsync(Radical.Analytics.AnalyticsEvent action) { }
     }
 }
 namespace Radical.ChangeTracking
