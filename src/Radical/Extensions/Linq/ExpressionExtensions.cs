@@ -23,8 +23,6 @@ namespace Radical.Linq
                 return member.Name;
             }
 
-#if FX45 || FX40
-
             var unary = source.Body as UnaryExpression;
             if ( unary != null && unary.Operand is MemberExpression ) 
             {
@@ -33,10 +31,6 @@ namespace Radical.Linq
             }
 
             throw new NotSupportedException( "Only MemberExpression(s) & Convert UnaryExpressions are supported." );
-#else
-
-            throw new NotSupportedException( "Only MemberExpression(s) are supported." );
-#endif
         }
 
         /// <summary>

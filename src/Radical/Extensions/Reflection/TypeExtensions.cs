@@ -49,13 +49,7 @@ namespace Radical.Reflection
             Ensure.That( type ).Named( "type" ).IsNotNull();
 
             String tName = type.FullName;
-
-#if SILVERLIGHT
-            var assemblyName = new System.Reflection.AssemblyName( type.Assembly.FullName );
-            String aName = assemblyName.Name;
-#else
             String aName = type.Assembly.GetName().Name;
-#endif
 
 
             if( String.Equals( aName, "mscorlib", StringComparison.OrdinalIgnoreCase ) )
