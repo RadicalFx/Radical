@@ -2,6 +2,7 @@
 *.suo
 *.user
 .vs/
+*.orig
 
 # Nuget packages 
 [Pp]ackages/
