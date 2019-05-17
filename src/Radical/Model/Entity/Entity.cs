@@ -7,9 +7,7 @@ using Radical.Validation;
 
 namespace Radical.Model
 {
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public abstract class Entity :
         INotifyPropertyChanged,
         IDisposable
@@ -90,9 +88,7 @@ namespace Radical.Model
 
         #region EventHandlerList
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         private EventHandlerList _events;
 
         /// <summary>

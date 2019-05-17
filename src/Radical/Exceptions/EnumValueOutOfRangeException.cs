@@ -8,12 +8,9 @@
     /// process of an enumeration value determines that the supplied value is not
     /// defined by the enum type that has been validated.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable] 
-#endif
     public class EnumValueOutOfRangeException : ArgumentException
     {
-#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumValueOutOfRangeException"/> class.
         /// </summary>
@@ -24,7 +21,6 @@
         {
 
         } 
-#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumValueOutOfRangeException"/> class.

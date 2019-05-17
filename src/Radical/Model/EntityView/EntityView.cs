@@ -2706,18 +2706,14 @@ namespace Radical.Model
         /// </summary>
         /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
         [Browsable( false )]
-#if !SILVERLIGHT
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         public virtual ISite Site
         {
             get { return this.site; }
             set { this.site = value; }
         }
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         private EventHandlerList _events;
 
         /// <summary>
@@ -2742,9 +2738,7 @@ namespace Radical.Model
         /// </summary>
         /// <value><c>true</c> if [design mode]; otherwise, <c>false</c>.</value>
         [Browsable( false )]
-#if !SILVERLIGHT
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         public virtual bool DesignMode
         {
             get
@@ -2763,9 +2757,7 @@ namespace Radical.Model
         /// </summary>
         /// <value>The container.</value>
         [Browsable( false )]
-#if !SILVERLIGHT
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         public virtual IContainer Container
         {
             get

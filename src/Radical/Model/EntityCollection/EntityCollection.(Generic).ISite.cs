@@ -20,10 +20,8 @@ namespace Radical.Model
         /// Gets a item indicating whether this component is in design mode or not.
         /// </summary>
         /// <item><collection>true</collection> if is in design mode; otherwise, <collection>false</collection>.</item>
-#if !SILVERLIGHT
         [Browsable( false )]
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         Boolean ISite.DesignMode
         {
             get
@@ -42,10 +40,8 @@ namespace Radical.Model
         /// Gets the container.
         /// </summary>
         /// <item>The container.</item>
-#if !SILVERLIGHT
         [Browsable( false )]
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         IContainer ISite.Container
         {
             get
@@ -59,10 +55,8 @@ namespace Radical.Model
             }
         }
 
-#if !SILVERLIGHT
         [Browsable( false )]
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         IComponent ISite.Component
         {
             get
@@ -76,10 +70,8 @@ namespace Radical.Model
             }
         }
 
-#if !SILVERLIGHT
         [Browsable( false )]
         [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
-#endif
         String ISite.Name
         {
             get

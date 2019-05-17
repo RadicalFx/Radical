@@ -16,8 +16,6 @@ namespace Radical.Model
 {
     partial class EntityCollection<T>
     {
-#if !SILVERLIGHT
-
         SerializationInfo serializationInfo = null;
         StreamingContext streamingContext;
 
@@ -106,7 +104,5 @@ namespace Radical.Model
         {
             this.EndInit();
         }
-
-#endif
     }
 }

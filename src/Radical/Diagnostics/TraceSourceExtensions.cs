@@ -28,39 +28,6 @@ namespace Radical.Diagnostics
             source.TraceEvent( TraceEventType.Information, 0, format, args );
         }
 
-        [Obsolete]
-        public static void Verbose( this TraceSource source, Int32 eventId, String message )
-        {
-            source.TraceEvent( TraceEventType.Verbose, eventId, message );
-        }
-
-        [Obsolete]
-        public static void Verbose( this TraceSource source, Int32 eventId, String format, params Object[] args )
-        {
-            source.TraceEvent( TraceEventType.Verbose, eventId, format, args );
-        }
-
-        [Obsolete]
-        public static void Verbose( this TraceSource source, String message )
-        {
-            source.TraceEvent( TraceEventType.Verbose, 0, message );
-        }
-
-        [Obsolete]
-        public static void Verbose( this TraceSource source, String format, params Object[] args )
-        {
-            source.TraceEvent( TraceEventType.Verbose, 0, format, args );
-        }
-
-        [Obsolete]
-        public static void Verbose( this TraceSource source, String format, Func<Object[]> args )
-        {
-            if( source.Switch.ShouldTrace( TraceEventType.Error ) )
-            {
-                source.TraceEvent( TraceEventType.Verbose, 0, format, args() );
-            }
-        }
-
         public static void Debug( this TraceSource source, Int32 eventId, String message )
         {
             source.TraceEvent( TraceEventType.Verbose, eventId, message );

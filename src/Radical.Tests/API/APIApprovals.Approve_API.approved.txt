@@ -193,12 +193,6 @@ namespace Radical
             where T :  class { }
         public static TInput If<TInput>(this TInput o, System.Func<TInput, bool> evaluator)
             where TInput :  class { }
-        [System.ObsoleteAttribute()]
-        public static T IfNotNullDo<T>(this T obj, System.Action<T> action) { }
-        [System.ObsoleteAttribute()]
-        public static T IfNullDo<T>(this T obj, System.Action action) { }
-        [System.ObsoleteAttribute()]
-        public static T Intercept<T>(this T obj, System.Action<T> interceptor) { }
         public static TSource InterceptAs<TSource, TDestination>(this TSource obj, System.Action<TDestination> interceptor)
             where TSource :  class
             where TDestination :  class { }
@@ -296,13 +290,6 @@ namespace Radical
         public SuspendedChangeTrackingServiceException(string message) { }
         public SuspendedChangeTrackingServiceException(string message, System.Exception innerException) { }
     }
-    public sealed class Values<T1, T2>
-    {
-        public Values(T1 value1, T2 value2) { }
-        public T1 Value1 { get; }
-        public T2 Value2 { get; }
-        public override int GetHashCode() { }
-    }
     public class WeakReference<T> : System.WeakReference
         where T :  class
     {
@@ -317,16 +304,9 @@ namespace Radical.Analytics
     public class AnalyticsEvent
     {
         public AnalyticsEvent() { }
-        public object Data { get; set; }
+        public System.Collections.Generic.IDictionary<string, object> Data { get; set; }
         public System.DateTimeOffset ExecutedOn { get; set; }
-        public System.Security.Principal.IIdentity Identity { get; set; }
         public string Name { get; set; }
-    }
-    public class static AnalyticsServices
-    {
-        public static bool IsEnabled { get; set; }
-        public static System.Action<Radical.Analytics.AnalyticsEvent> UserActionTrackingHandler { get; set; }
-        public static void TrackUserActionAsync(Radical.Analytics.AnalyticsEvent action) { }
     }
 }
 namespace Radical.ChangeTracking
@@ -1140,52 +1120,11 @@ namespace Radical.ComponentModel.Messaging
     {
         void Handle(object sender, T message);
     }
-    public interface ILegacyMessageCompatibility
-    {
-        void SetSenderForBackwardCompatibility(object sender);
-    }
-    [System.ObsoleteAttribute("The Radical message broker now supports POCO messages, will be removed in the nex" +
-        "t version.", false)]
-    public interface IMessage : Radical.ComponentModel.Messaging.ILegacyMessageCompatibility
-    {
-        object Sender { get; }
-    }
     public interface IMessageBroker
     {
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Broadcast<T>(T message)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage;
         void Broadcast(object sender, object message);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Broadcast(System.Type messageType, Radical.ComponentModel.Messaging.IMessage message);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Dispatch(Radical.ComponentModel.Messaging.IMessage message);
+        System.Threading.Tasks.Task BroadcastAsync(object sender, object message);
         void Dispatch(object sender, object message);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Dispatch<T>(T message)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage;
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Dispatch(System.Type messageType, Radical.ComponentModel.Messaging.IMessage message);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe<T>(object subscriber, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage;
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe(object subscriber, System.Type messageType, System.Action<Radical.ComponentModel.Messaging.IMessage> callback);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<Radical.ComponentModel.Messaging.IMessage> callback);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe<T>(object subscriber, object sender, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage;
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage;
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<Radical.ComponentModel.Messaging.IMessage> callback);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<Radical.ComponentModel.Messaging.IMessage> callback);
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage;
         void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback);
         void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
         void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback);
@@ -1196,6 +1135,8 @@ namespace Radical.ComponentModel.Messaging
         void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
         void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
@@ -1208,19 +1149,6 @@ namespace Radical.ComponentModel.Messaging
         void Unsubscribe<T>(object subscriber, object sender);
         void Unsubscribe<T>(object subscriber, System.Delegate callback);
     }
-    [System.ObsoleteAttribute("The Radical message broker now supports POCO messages.", false)]
-    public interface IMessageHandler
-    {
-        void Handle(Radical.ComponentModel.Messaging.IMessage message);
-        bool ShouldHandle(Radical.ComponentModel.Messaging.IMessage message);
-    }
-    [Radical.ComponentModel.ContractAttribute()]
-    [System.ObsoleteAttribute("The Radical message broker now supports POCO messages.", false)]
-    public interface IMessageHandler<T> : Radical.ComponentModel.Messaging.IMessageHandler
-        where T : Radical.ComponentModel.Messaging.IMessage
-    {
-        void Handle(T message);
-    }
     public interface INeedSafeSubscription { }
     public enum InvocationModel
     {
@@ -1230,13 +1158,6 @@ namespace Radical.ComponentModel.Messaging
     public interface IRequireToBeValid
     {
         void Validate();
-    }
-    [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.All, AllowMultiple=true)]
-    [System.ObsoleteAttribute("Not required anymore, will be removed in the version.", false)]
-    public sealed class SubscribeToMessageAttribute : System.Attribute
-    {
-        public SubscribeToMessageAttribute(System.Type messageType) { }
-        public System.Type MessageType { get; }
     }
 }
 namespace Radical.ComponentModel.QueryModel
@@ -1339,14 +1260,6 @@ namespace Radical.Conversions
     public class static ConvertExtensions
     {
         public static Radical.Observable<T> AsObservable<T>(this T value) { }
-        [System.ObsoleteAttribute()]
-        public static bool ToBoolean(this string value) { }
-        [System.ObsoleteAttribute()]
-        public static decimal ToDecimal(this string value) { }
-        [System.ObsoleteAttribute()]
-        public static decimal ToDecimal(this double value) { }
-        [System.ObsoleteAttribute()]
-        public static int ToInt32(this string value) { }
     }
     public class static KeyConversionExtensions
     {
@@ -1418,16 +1331,6 @@ namespace Radical.Diagnostics
         public static void Information(this System.Diagnostics.TraceSource source, int eventId, string format, params object[] args) { }
         public static void Information(this System.Diagnostics.TraceSource source, string message) { }
         public static void Information(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, int eventId, string message) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, int eventId, string format, params object[] args) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, string message) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
-        [System.ObsoleteAttribute()]
-        public static void Verbose(this System.Diagnostics.TraceSource source, string format, System.Func<object[]> args) { }
         public static void Warning(this System.Diagnostics.TraceSource source, string message) { }
         public static void Warning(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
     }
@@ -1581,48 +1484,23 @@ namespace Radical.Messaging
         protected virtual bool OnShouldHandle(object sender, T message) { }
         public bool ShouldHandle(object sender, object message) { }
     }
-    [System.ObsoleteAttribute("The Radical message broker now supports POCO messages, will be removed in the nex" +
-        "t version.", false)]
-    public abstract class Message : Radical.ComponentModel.Messaging.ILegacyMessageCompatibility, Radical.ComponentModel.Messaging.IMessage
-    {
-        protected Message() { }
-        [System.ObsoleteAttribute("The Radical message broker now supports POCO messages, use the default contructor" +
-            ", will be removed in the next version.", false)]
-        protected Message(object sender) { }
-        public object Sender { get; }
-    }
     public class MessageBroker : Radical.ComponentModel.Messaging.IMessageBroker
     {
         public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher) { }
-        public void Broadcast<T>(T message)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage { }
-        public void Broadcast(System.Type messageType, Radical.ComponentModel.Messaging.IMessage message) { }
+        public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher, System.Threading.Tasks.TaskFactory factory) { }
         public void Broadcast(object sender, object message) { }
-        public void Dispatch<T>(T message)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage { }
-        public void Dispatch(Radical.ComponentModel.Messaging.IMessage message) { }
-        public void Dispatch(System.Type messageType, Radical.ComponentModel.Messaging.IMessage message) { }
+        public System.Threading.Tasks.Task BroadcastAsync(object sender, object message) { }
         public void Dispatch(object sender, object message) { }
-        public void Subscribe<T>(object subscriber, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage { }
         public void Subscribe<T>(object subscriber, System.Action<object, T> callback) { }
-        public void Subscribe<T>(object subscriber, object sender, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage { }
         public void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback) { }
-        public void Subscribe(object subscriber, System.Type messageType, System.Action<Radical.ComponentModel.Messaging.IMessage> callback) { }
         public void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback) { }
-        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<Radical.ComponentModel.Messaging.IMessage> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback) { }
-        public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage { }
         public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
-        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<Radical.ComponentModel.Messaging.IMessage> callback) { }
         public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
-        public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<Radical.ComponentModel.Messaging.IMessage> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
-        public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<T> callback)
-            where T :  class, Radical.ComponentModel.Messaging.IMessage { }
         public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
@@ -1636,17 +1514,6 @@ namespace Radical.Messaging
         public void Unsubscribe<T>(object subscriber) { }
         public void Unsubscribe<T>(object subscriber, object sender) { }
         public void Unsubscribe<T>(object subscriber, System.Delegate callback) { }
-    }
-    [System.ObsoleteAttribute("The Radical message broker now supports POCO messages, inherits from AbstractMess" +
-        "ageHandler<T> or implement IHandleMessage<T> interface directly.", false)]
-    public abstract class MessageHandler<T> : Radical.ComponentModel.Messaging.IMessageHandler, Radical.ComponentModel.Messaging.IMessageHandler<T>
-        where T :  class, Radical.ComponentModel.Messaging.IMessage
-    {
-        protected MessageHandler() { }
-        public abstract void Handle(T message);
-        public virtual void Handle(Radical.ComponentModel.Messaging.IMessage message) { }
-        protected virtual bool OnShouldHandle(T message) { }
-        public bool ShouldHandle(Radical.ComponentModel.Messaging.IMessage message) { }
     }
     public enum SubscriptionPriority
     {
@@ -2262,18 +2129,6 @@ namespace Radical.Observers
     {
         public MessageBrokerMonitor(Radical.ComponentModel.Messaging.IMessageBroker broker) { }
         protected override void OnStopMonitoring(bool targetDisposed) { }
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        public Radical.Observers.MessageBrokerMonitor WaitFor<TMessage>()
-            where TMessage :  class, Radical.ComponentModel.Messaging.IMessage { }
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        public Radical.Observers.MessageBrokerMonitor WaitFor<TMessage>(Radical.ComponentModel.Messaging.InvocationModel invocationModel)
-            where TMessage :  class, Radical.ComponentModel.Messaging.IMessage { }
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        public Radical.Observers.MessageBrokerMonitor WaitFor<TMessage>(System.Func<TMessage, bool> filter)
-            where TMessage :  class, Radical.ComponentModel.Messaging.IMessage { }
-        [System.ObsoleteAttribute("Use the POCO overload not constrained to the IMessage interface", false)]
-        public Radical.Observers.MessageBrokerMonitor WaitFor<TMessage>(System.Func<TMessage, bool> filter, Radical.ComponentModel.Messaging.InvocationModel invocationModel)
-            where TMessage :  class, Radical.ComponentModel.Messaging.IMessage { }
         public Radical.Observers.MessageBrokerMonitor WaitingFor<TMessage>()
             where TMessage :  class { }
         public Radical.Observers.MessageBrokerMonitor WaitingFor<TMessage>(Radical.ComponentModel.Messaging.InvocationModel invocationModel)
@@ -2386,193 +2241,6 @@ namespace Radical.Reflection
 }
 namespace Radical.Threading
 {
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public sealed class AsyncCancellationToken
-    {
-        public AsyncCancellationToken() { }
-        public bool CancellationPending { get; }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public sealed class AsyncEngine<TArgument, TResult>
-    {
-        public bool IsBusy { get; }
-        public Radical.Threading.AsyncEngine<TArgument, TResult> AndAfterDo(Radical.Threading.ExecutedAction<TArgument, TResult> onExecuted) { }
-        public Radical.Threading.AsyncEngine<TArgument, TResult> ButBeforeDo(Radical.Threading.ExecutingAction<TArgument> onExecuting) { }
-        public void Cancel() { }
-        public Radical.Threading.AsyncEngine<TArgument, TResult> Execute() { }
-        public Radical.Threading.AsyncEngine<TArgument, TResult> IfAnErrorOccurs(Radical.Threading.ErrorAction onError) { }
-        public Radical.Threading.AsyncEngine<TArgument, TResult> OnWarningThresholdReached(System.TimeSpan warningThreshold, System.Action action) { }
-        public Radical.Threading.AsyncEngine<TArgument, TResult> WhenProgressChanges(System.Action<Radical.Threading.ReportProgressArgs> onReportProgress) { }
-    }
-    public class AsyncErrorEventArgs : System.EventArgs
-    {
-        public AsyncErrorEventArgs(System.Exception error) { }
-        public System.Exception Error { get; }
-        public bool Handled { get; set; }
-    }
-    [System.ObsoleteAttribute("Use the Task Parallel Library (TPL) or the new async/await keywords of C# 5.0.", false)]
-    public class static AsyncWorker
-    {
-        public static Radical.Threading.IOuputWorker<TResult> Expecting<TResult>() { }
-        public static Radical.Threading.IOuputWorker<TResult> Expecting<TResult>(TResult sample) { }
-        public static Radical.Threading.IInputWorker<T> Using<T>(T argument) { }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public sealed class AsyncWorker<TArgument>
-    {
-        [System.ObsoleteAttribute("User the new AsyncWorker.")]
-        public Radical.Threading.AsyncWorker<TArgument, TResult> AndExpectingAsResult<TResult>() { }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public sealed class AsyncWorker<TArgument, TResult>
-    {
-        [System.ObsoleteAttribute("User the new AsyncWorker.")]
-        public Radical.Threading.AsyncEngine<TArgument, TResult> WhenExecutedDo(Radical.Threading.ExecutionAction<TArgument, TResult> onExecution) { }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public delegate void ErrorAction(Radical.Threading.ErrorArgs args);
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public class ErrorArgs : System.EventArgs
-    {
-        public ErrorArgs(System.Exception error) { }
-        public System.Exception Error { get; }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public delegate void ExecutedAction<TArgument, TResult>(Radical.Threading.ExecutedArgs<TArgument, TResult> result);
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public class ExecutedArgs<TArgument, TResult> : System.EventArgs
-    {
-        public ExecutedArgs(TArgument argument, TResult result, bool cancelled) { }
-        public TArgument Argument { get; }
-        public bool Cancelled { get; }
-        public TResult Result { get; }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public delegate void ExecutingAction<T>(Radical.Threading.ExecutingArgs<T> argument);
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public class ExecutingArgs<T> : System.ComponentModel.CancelEventArgs
-    {
-        public ExecutingArgs(T argument) { }
-        public T Argument { get; }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public delegate void ExecutionAction<TArgument, TResult>(Radical.Threading.ExecutionArgs<TArgument, TResult> argument);
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public class ExecutionArgs<TArgument, TResult> : System.EventArgs
-    {
-        public TArgument Argument { get; }
-        public Radical.Threading.AsyncCancellationToken CancellationToken { get; }
-        public bool Cancelled { get; set; }
-        public Radical.Threading.ReportProgressAction ReportProgress { get; }
-        public TResult Result { get; set; }
-    }
-    public interface IAfterArgs<T> : Radical.Threading.IAsyncArgs<T> { }
-    public interface IAfterArgs<T, TResult> : Radical.Threading.IAfterArgs<T>, Radical.Threading.IAsyncArgs<T>
-    {
-        TResult Result { get; }
-    }
-    public interface IAsyncArgs<T>
-    {
-        T Argument { get; }
-        bool IsCancellationPending { get; }
-    }
-    public interface IAsyncArgs<T, TResult> : Radical.Threading.IAsyncArgs<T>
-    {
-        TResult Result { get; set; }
-    }
-    public interface IAsyncErrorArgs
-    {
-        System.Exception Error { get; }
-        bool Handled { get; set; }
-    }
-    public interface IBeforeArgs<T> : Radical.Threading.ICancelArgs
-    {
-        T Argument { get; }
-    }
-    public interface ICancelArgs
-    {
-        bool Cancel { get; set; }
-    }
-    public interface IConfiguredInputOutputWorker<T, TResult>
-    {
-        Radical.Threading.IWorker Execute(System.Action<Radical.Threading.IAsyncArgs<T, TResult>> asyncAction);
-        Radical.Threading.IExecutableWorker OnExecute(System.Action<Radical.Threading.IAsyncArgs<T, TResult>> asyncAction);
-    }
-    public interface IConfiguredInputWorker<T>
-    {
-        Radical.Threading.IWorker Execute(System.Action<Radical.Threading.IAsyncArgs<T>> asyncHandler);
-        Radical.Threading.IExecutableWorker OnExecute(System.Action<Radical.Threading.IAsyncArgs<T>> asyncHandler);
-    }
-    public interface IConfiguredOuputWorker<TResult>
-    {
-        Radical.Threading.IWorker Execute(System.Action<Radical.Threading.IOutputAsyncArgs<TResult>> asyncHandler);
-        Radical.Threading.IExecutableWorker OnExecute(System.Action<Radical.Threading.IOutputAsyncArgs<TResult>> asyncHandler);
-    }
-    public interface IExecutableWorker : Radical.Threading.IWorkerStatus
-    {
-        Radical.Threading.IExecutableWorker AddTrigger(Radical.ComponentModel.IMonitor trigger);
-        Radical.Threading.IWorker Execute();
-    }
-    public interface IInputOutputWorker<T, TResult>
-    {
-        Radical.Threading.IConfiguredInputOutputWorker<T, TResult> Configure(System.Action<Radical.Threading.IInputOutputWorkerConfiguration<T, TResult>> cfg);
-        Radical.Threading.IWorker Execute(System.Action<Radical.Threading.IAsyncArgs<T, TResult>> asyncAction);
-        Radical.Threading.IExecutableWorker OnExecute(System.Action<Radical.Threading.IAsyncArgs<T, TResult>> asyncAction);
-    }
-    public interface IInputOutputWorkerConfiguration<T, TResult> : Radical.Threading.IWorkerConfiguration
-    {
-        System.Action<Radical.Threading.IAfterArgs<T, TResult>> After { get; set; }
-        System.Action<Radical.Threading.IBeforeArgs<T>> Before { get; set; }
-    }
-    public interface IInputWorker<T>
-    {
-        Radical.Threading.IInputOutputWorker<T, TResult> AndExpecting<TResult>();
-        Radical.Threading.IInputOutputWorker<T, TResult> AndExpecting<TResult>(TResult sample);
-        Radical.Threading.IConfiguredInputWorker<T> Configure(System.Action<Radical.Threading.IInputWorkerConfiguration<T>> cfg);
-        Radical.Threading.IWorker Execute(System.Action<Radical.Threading.IAsyncArgs<T>> asyncHandler);
-        Radical.Threading.IExecutableWorker OnExecute(System.Action<Radical.Threading.IAsyncArgs<T>> asyncHandler);
-    }
-    public interface IInputWorkerConfiguration<T> : Radical.Threading.IWorkerConfiguration
-    {
-        System.Action<Radical.Threading.IAfterArgs<T>> After { get; set; }
-        System.Action<Radical.Threading.IBeforeArgs<T>> Before { get; set; }
-    }
-    public interface IOuputWorker<TResult>
-    {
-        Radical.Threading.IConfiguredOuputWorker<TResult> Configure(System.Action<Radical.Threading.IOutputWorkerConfiguration<TResult>> cfg);
-        Radical.Threading.IWorker Execute(System.Action<Radical.Threading.IOutputAsyncArgs<TResult>> asyncHandler);
-        Radical.Threading.IExecutableWorker OnExecute(System.Action<Radical.Threading.IOutputAsyncArgs<TResult>> asyncHandler);
-    }
-    public interface IOutputAfterArgs<TResult>
-    {
-        TResult Result { get; }
-    }
-    public interface IOutputAsyncArgs<TResult>
-    {
-        TResult Result { get; set; }
-    }
-    public interface IOutputWorkerConfiguration<TResult> : Radical.Threading.IWorkerConfiguration
-    {
-        System.Action<Radical.Threading.IOutputAfterArgs<TResult>> After { get; set; }
-        System.Action<Radical.Threading.ICancelArgs> Before { get; set; }
-    }
-    public interface IWorker : Radical.Threading.IWorkerStatus
-    {
-        void Cancel();
-    }
-    public interface IWorkerConfiguration
-    {
-        System.Action<Radical.Threading.IAsyncErrorArgs> Error { get; set; }
-        Radical.Threading.WarningThreshold WarningThreshold { get; set; }
-    }
-    public interface IWorkerStatus
-    {
-        System.Threading.WaitHandle AsyncWaitHandle { get; }
-        bool HasCompleted { get; }
-        bool IsBusy { get; }
-        public event System.EventHandler<Radical.Threading.AsyncErrorEventArgs> AsyncError;
-        public event System.EventHandler<Radical.Threading.WorkCompletedEventArgs> Completed;
-    }
     public class LimitedConcurrencyLevelTaskScheduler : System.Threading.Tasks.TaskScheduler
     {
         public LimitedConcurrencyLevelTaskScheduler(int maxDegreeOfParallelism) { }
@@ -2591,33 +2259,6 @@ namespace Radical.Threading
         public void Dispatch<T1, T2>(T1 arg1, T2 arg2, System.Action<T1, T2> action) { }
         public TResult Dispatch<TResult>(System.Func<TResult> func) { }
         public void Invoke(System.Delegate d, params object[] args) { }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public delegate void ReportProgressAction(Radical.Threading.ReportProgressArgs args);
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public class ReportProgressArgs : System.EventArgs
-    {
-        public ReportProgressArgs(int progress) { }
-        public int Progress { get; }
-    }
-    public sealed class WarningThreshold
-    {
-        public WarningThreshold() { }
-        public System.Action Handler { get; set; }
-        public System.TimeSpan Threshold { get; set; }
-    }
-    public class WorkCompletedEventArgs : System.EventArgs
-    {
-        public WorkCompletedEventArgs(bool cancelled) { }
-        public bool Cancelled { get; }
-    }
-    [System.ObsoleteAttribute("User the new AsyncWorker.")]
-    public class static Worker
-    {
-        [System.ObsoleteAttribute("User the new AsyncWorker.")]
-        public static Radical.Threading.AsyncWorker<object, TResult> ExpectingAsResult<TResult>() { }
-        [System.ObsoleteAttribute("User the new AsyncWorker.")]
-        public static Radical.Threading.AsyncWorker<TArgument> UsingAsArgument<TArgument>(TArgument argument) { }
     }
 }
 namespace Radical.Transactions
@@ -2792,9 +2433,6 @@ namespace Radical.Validation
         public ValidationResults(System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> errors) { }
         public System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> Errors { get; }
         public bool IsValid { get; }
-        [System.ObsoleteAttribute("Use the overload without the evil \'params\' keyword using an explicit array: new[]" +
-            " { \'your error text here\' }.", true)]
-        public void AddError<T>(System.Linq.Expressions.Expression<System.Func<T>> key, params string[] detectedProblems) { }
         public void AddError<T>(System.Linq.Expressions.Expression<System.Func<T>> key, string displayName, string[] detectedProblems) { }
         public void AddError(Radical.Validation.ValidationError error) { }
         public override string ToString() { }

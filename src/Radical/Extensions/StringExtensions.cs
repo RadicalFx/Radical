@@ -273,13 +273,7 @@ namespace Radical
                 .IsNotNullNorEmpty();
 
             var assembly = Assembly.GetCallingAssembly();
-
-#if SILVERLIGHT
-            var assemblyName = new System.Reflection.AssemblyName( assembly.FullName );
-            String aName = assemblyName.Name;
-#else
             String aName = assembly.GetName().Name;
-#endif
 
             return resourceRelativeUri.AsPackUri( aName );
         }

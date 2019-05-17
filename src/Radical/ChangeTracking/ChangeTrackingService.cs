@@ -14,9 +14,7 @@
     /// Provides a default implementation of the <see cref="IChangeTrackingService"/>
     /// interface in order to provide change tracking functionalities.
     /// </summary>
-#if !SILVERLIGHT
     [ToolboxItem(false)]
-#endif
     public class ChangeTrackingService : IChangeTrackingService
     {
         /// <summary>
@@ -1275,19 +1273,15 @@
         /// </summary>
         /// <value></value>
         /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
-#if !SILVERLIGHT
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-#endif
         public ISite Site
         {
             get;
             set;
         }
 
-#if !SILVERLIGHT
         [NonSerialized]
-#endif
         private EventHandlerList _events = new EventHandlerList();
 
         /// <summary>

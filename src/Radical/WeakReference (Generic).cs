@@ -9,9 +9,7 @@
     /// that object to be reclaimed by garbage collection.
     /// </summary>
     /// <typeparam name="T">The type of the object that is referenced.</typeparam>
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public class WeakReference<T> : WeakReference where T : class
     {
         /// <summary>
@@ -40,8 +38,6 @@
 
         }
 
-#if !SILVERLIGHT
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WeakReference&lt;T&gt;"/> class.
         /// </summary>
@@ -55,8 +51,6 @@
         {
  
         }
-
-#endif
         
         /// <summary>
         /// Gets or sets the object (the target) referenced by the 

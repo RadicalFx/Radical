@@ -66,7 +66,6 @@ namespace Radical.Helpers
             return values;
         }
 
-#if !SILVERLIGHT
         /// <summary>
         /// Extracts the binding data from the supplied enum type.
         /// </summary>
@@ -98,6 +97,5 @@ namespace Radical.Helpers
 
             return lst.AsReadOnly();
         } 
-#endif
     }
 }

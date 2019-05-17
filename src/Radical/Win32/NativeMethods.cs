@@ -11,16 +11,10 @@ namespace Radical.Win32
     /// </summary>
     public static class NativeMethods
     {
-#if COMPACT_FRAMEWORK 
-                 private const string Kernel32 = "coredll.dll"; 
-                 private const string User32 = "coredll.dll"; 
-                 private const string Gdi32 = "coredll.dll"; 
-#else
         private const string Kernel32 = "kernel32.dll";
         private const string User32 = "user32.dll";
         private const string Gdi32 = "gdi32.dll";
-#endif 
- 
+
 
         //[DllImport( "user32.dll", CharSet = CharSet.Auto )]
         //public static extern IntPtr PostMessage( HandleRef hwnd, Int32 msg, Int32 wparam, Int32 lparam );
@@ -45,7 +39,7 @@ namespace Radical.Win32
 
         //[DllImport( "User32.dll" )]
         //internal static extern int CallNextHookEx( IntPtr hhk, Int32 nCode, Int32 wParam, int lParam );
-                                                    
+
         ////[DllImport( "shell32.dll" )]
         ////internal static extern Boolean Shell_NotifyIcon( uint dwMessage, [In] ref NOTIFYICONDATA pnid );
 
@@ -103,56 +97,56 @@ namespace Radical.Win32
         //    ref FLASHWINFO pfwi 
         //);
 
-        [DllImport( User32, EntryPoint = "GetWindowLong" )]
+        [DllImport(User32, EntryPoint = "GetWindowLong")]
         private static extern int Window_GetLong32(
                 [In] IntPtr hWnd,
-                [In][MarshalAs( UnmanagedType.U4 )] WindowLong index );
+                [In][MarshalAs(UnmanagedType.U4)] WindowLong index);
 
-        [DllImport( User32, EntryPoint = "SetWindowLong" )]
+        [DllImport(User32, EntryPoint = "SetWindowLong")]
         private static extern int Window_SetLong32(
                 [In] IntPtr hWnd,
-                [In][MarshalAs( UnmanagedType.U4 )] WindowLong index,
-                [In] int value );
+                [In][MarshalAs(UnmanagedType.U4)] WindowLong index,
+                [In] int value);
 
-        [DllImport( User32, EntryPoint = "GetWindowLongPtrW" )]
+        [DllImport(User32, EntryPoint = "GetWindowLongPtrW")]
         private static extern IntPtr Window_GetLong64(
                 [In] IntPtr hWnd,
-                [In][MarshalAs( UnmanagedType.U4 )] WindowLong index );
+                [In][MarshalAs(UnmanagedType.U4)] WindowLong index);
 
-        [DllImport( User32, EntryPoint = "SetWindowLongPtrW" )]
+        [DllImport(User32, EntryPoint = "SetWindowLongPtrW")]
         private static extern IntPtr Window_SetLong64(
                 [In] IntPtr hWnd,
-                [In][MarshalAs( UnmanagedType.U4 )] WindowLong index,
-                [In] IntPtr value );
+                [In][MarshalAs(UnmanagedType.U4)] WindowLong index,
+                [In] IntPtr value);
 
         public static IntPtr GetWindowLong(
                 IntPtr hWnd,
-                WindowLong index )
+                WindowLong index)
         {
             // Vista WoW64 does not implement GetWindowLong 
-            if( IntPtr.Size == 4 )
+            if (IntPtr.Size == 4)
             {
-                return ( IntPtr )Window_GetLong32( hWnd, index );
+                return (IntPtr)Window_GetLong32(hWnd, index);
             }
             else
             {
-                return Window_GetLong64( hWnd, index );
+                return Window_GetLong64(hWnd, index);
             }
         }
 
         public static IntPtr SetWindowLong(
                 IntPtr hWnd,
                 WindowLong index,
-                IntPtr value )
+                IntPtr value)
         {
             // Vista WoW64 does not implement SetWindowLong 
-            if( IntPtr.Size == 4 )
+            if (IntPtr.Size == 4)
             {
-                return ( IntPtr )Window_SetLong32( hWnd, index, value.ToInt32() );
+                return (IntPtr)Window_SetLong32(hWnd, index, value.ToInt32());
             }
             else
             {
-                return Window_SetLong64( hWnd, index, value );
+                return Window_SetLong64(hWnd, index, value);
             }
         }
     }

@@ -25,13 +25,10 @@ namespace Radical
         /// </summary>
         UseCallingAssembly,
         
-#if !SILVERLIGHT
-
         /// <summary>
         /// Use the entry assembly.
         /// </summary>
         UseEntryAssembly
 
-#endif
     }
 }
