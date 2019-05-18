@@ -1087,11 +1087,10 @@
         [TestCategory("ChangeTracking")]
         public void service_generate_valid_adivsory_with_valid_iAdvisoryBuilder()
         {
-            IAdvisoryBuilder mock = MockRepository.GenerateMock<IAdvisoryBuilder>();
-            mock.Expect(b => b.GenerateAdvisory(null, null))
-                .IgnoreArguments()
-                .Repeat.Once()
-                .Return(new Advisory(new IAdvisedAction[0]));
+            var mock = A.Fake<IAdvisoryBuilder>();
+            A.CallTo(() => mock.GenerateAdvisory(null, null))
+                .WithAnyArguments()
+                .Returns(new Advisory(new IAdvisedAction[0]));
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1100,7 +1099,8 @@
 
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory(mock);
 
-            mock.VerifyAllExpectations();
+            Assert.IsNotNull(advisory);
+            Assert.AreEqual(0, advisory.Count());
         }
 
         [TestMethod]
@@ -1148,11 +1148,10 @@
             Int32 expected = 2;
             Int32 actual = 0;
 
-            IChangeSetFilter mock = MockRepository.GenerateMock<IChangeSetFilter>();
-            mock.Expect(f => f.ShouldInclude(null))
-                .IgnoreArguments()
-                .Repeat.Times(2)
-                .Return(true);
+            var mock = A.Fake<IChangeSetFilter>();
+            A.CallTo(()=>mock.ShouldInclude(null))
+                .WithAnyArguments()
+                .Returns(true);
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1164,7 +1163,6 @@
             IChangeSet cSet = svc.GetChangeSet(mock);
             actual = cSet.Count;
 
-            mock.VerifyAllExpectations();
             Assert.AreEqual<Int32>(expected, actual);
         }
 
@@ -1946,49 +1944,18 @@
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
-        public void service_set_and_get_iSite()
-        {
-            var expected = MockRepository.GenerateStub<ISite>();
-
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Site = expected;
-
-            svc.Site.Should().Be.EqualTo(expected);
-        }
-
-        [TestMethod]
-        [TestCategory("ChangeTracking")]
-        public void service_on_dispose_remove_itself_from_iSite_container()
-        {
-            var svc = new ChangeTrackingService();
-
-            var iContainer = MockRepository.GenerateMock<IContainer>();
-            iContainer.Expect(obj => obj.Remove(svc)).Repeat.Once();
-
-            var iSite = MockRepository.GenerateStub<ISite>();
-            iSite.Expect(obj => obj.Container).Return(iContainer).Repeat.Any();
-
-            svc.Site = iSite;
-
-            svc.Dispose();
-
-            iContainer.VerifyAllExpectations();
-        }
-
-        [TestMethod]
-        [TestCategory("ChangeTracking")]
         public void service_on_acceptChanges_successfully_commit_a_commitSupported_change()
         {
-            var iChange = MockRepository.GenerateStub<IChange>();
-            iChange.Expect(obj => obj.IsCommitSupported).Return(true);
-            iChange.Expect(obj => obj.Commit(CommitReason.AcceptChanges)).Repeat.Once();
+            var iChange = A.Fake<IChange>();
+            A.CallTo(()=>iChange.IsCommitSupported).Returns(true);
 
             var svc = new ChangeTrackingService();
             svc.Add(iChange, AddChangeBehavior.Default);
 
             svc.AcceptChanges();
 
-            iChange.VerifyAllExpectations();
+            A.CallTo(() => iChange.Commit(CommitReason.AcceptChanges))
+                .MustHaveHappenedOnceExactly();
         }
 
         [TestMethod]

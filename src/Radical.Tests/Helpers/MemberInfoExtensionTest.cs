@@ -2,7 +2,6 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Reflection;
     using Radical.Reflection;
 
     [TestClass()]
