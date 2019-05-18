@@ -6,7 +6,7 @@ namespace Radical.Tests.Model.Entity
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ComponentModel;
     using SharpTestsEx;
-    using Rhino.Mocks;
+    using FakeItEasy;
     using System.ComponentModel;
     using System;
 
@@ -26,23 +26,13 @@ namespace Radical.Tests.Model.Entity
             }
         }
 
-        protected override Entity CreateMock()
-        {
-            return this.CreateTestableEntityMock();
-        }
-
-        protected virtual TestableEntity CreateTestableEntityMock()
-        {
-            return new TestableEntity();
-        }
-
         [TestMethod]
         public void entity_propertyChanged_event_using_propertyChangedEventArgs_raised_with_expected_values()
         {
             var expected = "Foo";
             var actual = String.Empty;
 
-            var target = this.CreateTestableEntityMock();
+            var target = new TestableEntity();
             target.PropertyChanged += ( s, e ) => { actual = e.PropertyName; };
             target.RaisePropertyChanged( new PropertyChangedEventArgs( expected ) );
 
@@ -55,7 +45,7 @@ namespace Radical.Tests.Model.Entity
             var expected = "Foo";
             var actual = String.Empty;
 
-            var target = this.CreateTestableEntityMock();
+            var target = new TestableEntity();
             target.PropertyChanged += ( s, e ) => { actual = e.PropertyName; };
             target.RaisePropertyChanged( expected );
 
@@ -68,7 +58,7 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = "Foo";
 
-            var target = this.CreateTestableEntityMock();
+            var target = new TestableEntity();
             target.Dispose();
             target.RaisePropertyChanged( new PropertyChangedEventArgs( expected ) );
         }
@@ -79,7 +69,7 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = "Foo";
 
-            var target = this.CreateTestableEntityMock();
+            var target = new TestableEntity();
             target.Dispose();
             target.RaisePropertyChanged( expected );
         }
