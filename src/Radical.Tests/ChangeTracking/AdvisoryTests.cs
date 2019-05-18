@@ -2,7 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rhino.Mocks;
+    using FakeItEasy;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using SharpTestsEx;

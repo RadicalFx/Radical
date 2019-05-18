@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
+using FakeItEasy;
 using SharpTestsEx;
 using Radical.ComponentModel.ChangeTracking;
 using Radical.ChangeTracking;
