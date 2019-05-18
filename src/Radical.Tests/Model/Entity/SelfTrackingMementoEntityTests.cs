@@ -76,22 +76,12 @@ namespace Radical.Tests.Model.Entity
     [TestClass]
     public class SelfTrackingMementoEntityTests : SelfTrackingEntityTests
     {
-        protected override Entity CreateMock()
-        {
-            return new MementoMockEntity();
-        }
-
-        protected override Entity CreateMock(string firstName)
-        {
-            return new MementoMockEntity(firstName);
-        }
-
         [TestMethod]
         public void mementoEntity_using_trackingService_should_undo_a_single_change()
         {
             var memento = new ChangeTrackingService();
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MementoMockEntity();
             ((IMemento)target).Memento = memento;
 
             target.FirstName = "Mauro";
@@ -108,7 +98,7 @@ namespace Radical.Tests.Model.Entity
 
             var memento = new ChangeTrackingService();
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MementoMockEntity();
             ((IMemento)target).Memento = memento;
 
             target.FirstName = expected;

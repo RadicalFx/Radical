@@ -12,13 +12,6 @@ namespace Radical.Tests
     {
         const Int32 VALUE = 1000;
 
-        public override Timestamp CreateMock()
-        {
-            Timestamp<Int32> ts = new Timestamp<Int32>( VALUE );
-
-            return this.CreateMock<Int32>( VALUE );
-        }
-
         public Timestamp<T> CreateMock<T>( T initialValue )
         {
             Timestamp<T> ts = new Timestamp<T>( initialValue );
@@ -42,8 +35,7 @@ namespace Radical.Tests
         [TestMethod()]
         public void valueTest()
         {
-            Timestamp ts = this.CreateMock();
-            Timestamp<Int32> target = ( Timestamp<Int32> )ts;
+            var target = new Timestamp<Int32>(VALUE);
 
             Int32 expected = VALUE;
             Int32 actual = target.Value;

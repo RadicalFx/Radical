@@ -11,12 +11,6 @@ namespace Radical.Tests
     {
         Byte[] VALUE = new Byte[] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-        public override Timestamp CreateMock()
-        {
-            ByteArrayTimestamp ts = new ByteArrayTimestamp( VALUE );
-            return ts;
-        }
-
         protected override void AssertGetHashCode( Timestamp ts )
         {
             unchecked
@@ -45,7 +39,7 @@ namespace Radical.Tests
         [TestMethod()]
         public void valueTest()
         {
-            Timestamp ts = this.CreateMock();
+            Timestamp ts = new ByteArrayTimestamp(VALUE);
             ByteArrayTimestamp target = ( ByteArrayTimestamp )ts;
 
             AssertValueAreEqual( VALUE, target );
