@@ -16,9 +16,9 @@
         {
             var expected = new IChange[] 
             {
-                MockRepository.GenerateStub<IChange>(),
-                MockRepository.GenerateStub<IChange>(),
-                MockRepository.GenerateStub<IChange>()
+                A.Fake<IChange>(),
+                A.Fake<IChange>(),
+                A.Fake<IChange>()
             };
 
             var actual = new ChangeSet( expected );

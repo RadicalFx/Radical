@@ -214,8 +214,8 @@ namespace Radical.Tests
         [TestMethod]
         public void genericKey_static_equals_same_reference_should_be_true()
         {
-            Key<String> target = new Key<string>( "Foo" );
-            Boolean actual = Key<String>.Equals( target, target );
+            var target = new Key<string>( "Foo" );
+            bool actual = Key<string>.Equals( target, target );
 
             actual.Should().Be.True();
         }
@@ -223,8 +223,8 @@ namespace Radical.Tests
         [TestMethod]
         public void genericKey_equality_operator_same_reference_should_be_true()
         {
-            Key<String> target = new Key<string>( "Foo" );
-            Boolean actual = target == target;
+            var target = new Key<string>( "Foo" );
+            bool actual = target == target;
 
             actual.Should().Be.True();
         }

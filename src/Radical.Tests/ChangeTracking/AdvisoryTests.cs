@@ -16,9 +16,9 @@
         {
             var expected = new IAdvisedAction[] 
             {
-                MockRepository.GenerateStub<IAdvisedAction>(),
-                MockRepository.GenerateStub<IAdvisedAction>(),
-                MockRepository.GenerateStub<IAdvisedAction>()
+                A.Fake<IAdvisedAction>(),
+                A.Fake<IAdvisedAction>(),
+                A.Fake<IAdvisedAction>()
             };
 
             var actual = new Advisory( expected );

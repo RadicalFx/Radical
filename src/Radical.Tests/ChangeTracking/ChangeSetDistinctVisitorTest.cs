@@ -17,11 +17,11 @@ namespace Radical.Tests.ChangeTracking
             ChangeSetDistinctVisitor target = new ChangeSetDistinctVisitor();
 
             var entities = new Object[] { new Object() };
-            var c1 = MockRepository.GenerateStub<IChange>();
-            c1.Expect( obj => obj.GetChangedEntities() ).Return( entities );
+            var c1 = A.Fake<IChange>();
+            A.CallTo(()=> c1.GetChangedEntities()).Returns( entities );
 
-            var c2 = MockRepository.GenerateStub<IChange>();
-            c2.Expect( obj => obj.GetChangedEntities() ).Return( entities );
+            var c2 = A.Fake<IChange>();
+            A.CallTo(() => c2.GetChangedEntities()).Returns(entities);
 
             IChangeSet cSet = new ChangeSet( new IChange[] { c1, c2 } );
 

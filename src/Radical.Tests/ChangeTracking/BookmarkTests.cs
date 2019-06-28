@@ -74,7 +74,7 @@
         [TestCategory( "ChangeTracking" )]
         public void bookmark_valid_owner_null_change_null_transientEntities_iChangeTrackingService_ctor_valid_transientEntities()
         {
-            IChangeTrackingService mock = MockRepository.GenerateStub<IChangeTrackingService>();
+            IChangeTrackingService mock = A.Fake<IChangeTrackingService>();
             Bookmark bmk = new Bookmark( mock, ( IChange )null, ( IEnumerable<Object> )null );
 
             bmk.TransientEntities.Should().Not.Be.Null();
@@ -85,7 +85,7 @@
         [TestCategory( "ChangeTracking" )]
         public void bookmark_valid_owner_null_iChange_valid_transientEntities_iChangeTrackingService_ctor()
         {
-            IChangeTrackingService mock = MockRepository.GenerateStub<IChangeTrackingService>();
+            IChangeTrackingService mock = A.Fake<IChangeTrackingService>();
             Bookmark bmk = new Bookmark( mock, ( IChange )null, new Object[ 0 ] );
 
             bmk.Position.Should().Be.Null();
@@ -95,8 +95,8 @@
         [TestCategory( "ChangeTracking" )]
         public void bookmark_valid_owner_valid_iChange_valid_transientEntities_iChangeTrackingService_ctor()
         {
-            IChangeTrackingService owner = MockRepository.GenerateStub<IChangeTrackingService>();
-            IChange expected = MockRepository.GenerateStub<IChange>();
+            IChangeTrackingService owner = A.Fake<IChangeTrackingService>();
+            IChange expected = A.Fake<IChange>();
 
             Object[] entities = new Object[] { new Object(), new Object() };
 

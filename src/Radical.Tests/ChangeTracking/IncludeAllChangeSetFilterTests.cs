@@ -24,7 +24,7 @@
         [TestCategory( "ChangeTracking" )]
         public void filter_shouldInclude_is_always_true()
         {
-            var iChange = MockRepository.GenerateStub<IChange>();
+            var iChange = A.Fake<IChange>();
             var target = IncludeAllChangeSetFilter.Instance;
 
             var actual = target.ShouldInclude( iChange );
