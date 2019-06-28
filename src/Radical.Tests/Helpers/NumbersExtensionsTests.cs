@@ -11,8 +11,8 @@
         [TestMethod]
         public void numbersExtensions_isEven_even_number_should_be_true()
         {
-            Int32 target = 0;
-            Boolean actual = NumbersExtensions.IsEven( target );
+            int target = 0;
+            bool actual = NumbersExtensions.IsEven( target );
 
             actual.Should().Be.True();
         }
@@ -20,8 +20,8 @@
         [TestMethod]
         public void numbersExtensions_isEvent_non_even_number_should_be_false()
         {
-            Int32 target = 1;
-            Boolean actual = NumbersExtensions.IsEven( target );
+            int target = 1;
+            bool actual = NumbersExtensions.IsEven( target );
 
             actual.Should().Be.False();
         }

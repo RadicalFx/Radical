@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using Radical.ComponentModel;
+using Radical.Conversions;
 using Radical.Linq;
 using Radical.Validation;
-using Radical.Conversions;
-using Radical.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Radical.Observers
 {
@@ -138,7 +138,7 @@ namespace Radical.Observers
             }
         }
 
-        IDictionary<String, Action<T, String>> propertiesToWatch = new Dictionary<String, Action<T, String>>();
+        IDictionary<string, Action<T, string>> propertiesToWatch = new Dictionary<string, Action<T, string>>();
         IList<AbstractMonitor> observablePropertiesToWatch = new List<AbstractMonitor>();
 
         PropertyChangedEventHandler handler = null;
@@ -163,7 +163,7 @@ namespace Radical.Observers
         {
             handler = ( s, e ) =>
             {
-                Action<T, String> callback;
+                Action<T, string> callback;
                 if( propertiesToWatch.TryGetValue( e.PropertyName, out callback ) )
                 {
                     if( callback != null )
@@ -189,7 +189,7 @@ namespace Radical.Observers
         /// <returns>
         /// Itself, used for fluent programming.
         /// </returns>
-        public PropertyChangedMonitor<T> Observe( String property )
+        public PropertyChangedMonitor<T> Observe( string property )
         {
             Ensure.That( property ).Named( "property" ).IsNotNullNorEmpty();
 
@@ -220,7 +220,7 @@ namespace Radical.Observers
         /// <param name="property">The property.</param>
         /// <param name="callback">The callback.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> Observe<TProperty>( Expression<Func<T, TProperty>> property, Action<T, String> callback )
+        public PropertyChangedMonitor<T> Observe<TProperty>( Expression<Func<T, TProperty>> property, Action<T, string> callback )
         {
             Ensure.That( property ).Named( "property" ).IsNotNull();
 
@@ -233,7 +233,7 @@ namespace Radical.Observers
         /// <param name="propertyName">The property.</param>
         /// <param name="callback">The callback.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> Observe( String propertyName, Action<T, String> callback )
+        public PropertyChangedMonitor<T> Observe( string propertyName, Action<T, string> callback )
         {
             Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
 

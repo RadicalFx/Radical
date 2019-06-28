@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using Radical.ComponentModel.Validation;
+﻿using Radical.ComponentModel.Validation;
 using Radical.Linq;
-using Radical.Reflection;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq.Expressions;
 
 namespace Radical.Validation
 {
@@ -23,7 +21,7 @@ namespace Radical.Validation
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
-        protected virtual String GetPropertyDisplayName(String propertyName, Object entity) 
+        protected virtual string GetPropertyDisplayName(string propertyName, Object entity) 
         {
             return this.tools.GetPropertyDisplayName( propertyName, entity );
         }
@@ -31,13 +29,13 @@ namespace Radical.Validation
         /// <summary>
         /// Gets the rule set.
         /// </summary>
-        public String RuleSet { get; private set; }
+        public string RuleSet { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidatorBase&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="ruleSet">The rule set.</param>
-        public ValidatorBase( String ruleSet )
+        public ValidatorBase( string ruleSet )
         {
             this.RuleSet = ruleSet;
         }

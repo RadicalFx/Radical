@@ -1,11 +1,10 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Radical.ChangeTracking.Specialized;
 using Radical.ComponentModel.ChangeTracking;
 using Radical.Linq;
-using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Radical.Model
 {
@@ -61,7 +60,7 @@ namespace Radical.Model
         /// <value>
         ///     <c>true</c> if there is an active change tracking service; otherwise, <c>false</c>.
         /// </value>
-        protected virtual Boolean IsTracking
+        protected virtual bool IsTracking
         {
             get
             {
@@ -79,14 +78,14 @@ namespace Radical.Model
             this._isCachingSuspended = true;
         }
 
-        Boolean _isCachingSuspended;
+        bool _isCachingSuspended;
         /// <summary>
         /// Gets a value indicating whether caching is suspended.
         /// </summary>
         /// <value>
         ///     <c>true</c> if caching is suspended; otherwise, <c>false</c>.
         /// </value>
-        protected Boolean IsCachingSuspended
+        protected bool IsCachingSuspended
         {
             get
             {
@@ -117,7 +116,7 @@ namespace Radical.Model
         /// notifying to the outside world the changes occurred.
         /// </summary>
         /// <param name="notify">if set to <c>true</c> raises the CollectionChanged event.</param>
-        public override void EndInit( Boolean notify )
+        public override void EndInit( bool notify )
         {
             this.ResumeCaching();
             base.EndInit( notify );
@@ -138,7 +137,7 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="capacity">The initial capacity.</param>
-        public MementoEntityCollection( Int32 capacity )
+        public MementoEntityCollection( int capacity )
             : base( capacity )
         {
 
@@ -549,7 +548,7 @@ namespace Radical.Model
         /// <param name="index">The index.</param>
         /// <param name="newValue">The new item.</param>
         /// <param name="overwrittenValue">The overwritten item.</param>
-        protected override void OnSetValueAtCompleted( Int32 index, T newValue, T overwrittenValue )
+        protected override void OnSetValueAtCompleted( int index, T newValue, T overwrittenValue )
         {
             base.OnSetValueAtCompleted( index, newValue, overwrittenValue );
 
@@ -557,7 +556,7 @@ namespace Radical.Model
             if( !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new ItemReplacedDescriptor<T>( newValue, overwrittenValue, index );
-                var change = new ItemReplacedCollectionChange<T>( this, descriptor, this.itemReplacedRejectCallback, null, String.Empty );
+                var change = new ItemReplacedCollectionChange<T>( this, descriptor, this.itemReplacedRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }
@@ -567,7 +566,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected override void OnAddCompleted( Int32 index, T value )
+        protected override void OnAddCompleted( int index, T value )
         {
             base.OnAddCompleted( index, value );
 
@@ -575,7 +574,7 @@ namespace Radical.Model
             if( !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new ItemChangedDescriptor<T>( value, index );
-                var change = new ItemChangedCollectionChange<T>( this, descriptor, itemAddedRejectCallback, null, String.Empty );
+                var change = new ItemChangedCollectionChange<T>( this, descriptor, itemAddedRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }
@@ -588,7 +587,7 @@ namespace Radical.Model
             if( !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new CollectionRangeDescriptor<T>( addedRange );
-                var change = new AddRangeCollectionChange<T>( this, descriptor, collectionAddRangeRejectCallback, null, String.Empty );
+                var change = new AddRangeCollectionChange<T>( this, descriptor, collectionAddRangeRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }
@@ -599,7 +598,7 @@ namespace Radical.Model
         /// <param name="oldIndex">The old index.</param>
         /// <param name="newIndex">The new index.</param>
         /// <param name="value">The value.</param>
-        protected override void OnMoveCompleted( Int32 oldIndex, Int32 newIndex, T value )
+        protected override void OnMoveCompleted( int oldIndex, int newIndex, T value )
         {
             base.OnMoveCompleted( oldIndex, newIndex, value );
 
@@ -607,7 +606,7 @@ namespace Radical.Model
             if( !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new ItemMovedDescriptor<T>( value, newIndex, oldIndex );
-                var change = new ItemMovedCollectionChange<T>( this, descriptor, itemMovedRejectCallback, null, String.Empty );
+                var change = new ItemMovedCollectionChange<T>( this, descriptor, itemMovedRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }
@@ -624,7 +623,7 @@ namespace Radical.Model
             if( clearedItems.Any() && !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new CollectionRangeDescriptor<T>( clearedItems );
-                var change = new CollectionClearedChange<T>( this, descriptor, collectionClearedRejectCallback, null, String.Empty );
+                var change = new CollectionClearedChange<T>( this, descriptor, collectionClearedRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }
@@ -634,7 +633,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected override void OnInsertCompleted( Int32 index, T value )
+        protected override void OnInsertCompleted( int index, T value )
         {
             base.OnInsertCompleted( index, value );
             this.EnsureNotDisposed();
@@ -642,7 +641,7 @@ namespace Radical.Model
             if( !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new ItemChangedDescriptor<T>( value, index );
-                var change = new ItemChangedCollectionChange<T>( this, descriptor, itemInsertedRejectCallback, null, String.Empty );
+                var change = new ItemChangedCollectionChange<T>( this, descriptor, itemInsertedRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }
@@ -652,7 +651,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="value">The item.</param>
         /// <param name="index">The index.</param>
-        protected override void OnRemoveCompleted( T value, Int32 index )
+        protected override void OnRemoveCompleted( T value, int index )
         {
             base.OnRemoveCompleted( value, index );
             this.EnsureNotDisposed();
@@ -660,7 +659,7 @@ namespace Radical.Model
             if( !this.IsCachingSuspended && this.IsTracking )
             {
                 var descriptor = new ItemChangedDescriptor<T>( value, index );
-                var change = new ItemRemovedCollectionChange<T>( this, descriptor, itemRemovedRejectCallback, null, String.Empty );
+                var change = new ItemRemovedCollectionChange<T>( this, descriptor, itemRemovedRejectCallback, null, string.Empty );
                 this.Memento.Add( change, AddChangeBehavior.Default );
             }
         }

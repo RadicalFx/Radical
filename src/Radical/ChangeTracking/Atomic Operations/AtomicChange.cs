@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Radical.ComponentModel.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Radical.ComponentModel.ChangeTracking;
 
 namespace Radical.ChangeTracking
 {
     sealed class AtomicChange : IChange
     {
-        Dictionary<Object, Boolean> transientEntities = new Dictionary<Object, Boolean>();
+        Dictionary<Object, bool> transientEntities = new Dictionary<Object, bool>();
         List<Tuple<IChange, AddChangeBehavior>> changes = new List<Tuple<IChange, AddChangeBehavior>>();
 
         /// <summary>
@@ -26,7 +25,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <param name="autoRemove">if set to <c>true</c> [auto remove].</param>
-        public void RegisterTransient( Object entity, Boolean autoRemove )
+        public void RegisterTransient( Object entity, bool autoRemove )
         {
             this.transientEntities.Add( entity, autoRemove );
         }
@@ -175,7 +174,7 @@ namespace Radical.ChangeTracking
         /// <value>The description.</value>
         public string Description
         {
-            get { return String.Empty; }
+            get { return string.Empty; }
         }
 
         /// <summary>

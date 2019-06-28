@@ -16,7 +16,7 @@ namespace Radical.Tests.Validation
             {
                 Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Load;
                 var obj = Ensure.That( "" );
-                String actual = obj.GetFullErrorMessage( "validator specific message" );
+                string actual = obj.GetFullErrorMessage( "validator specific message" );
 
                 var containsClassName = actual.Contains( typeof( ValidatorTest ).Name );
                 
@@ -36,7 +36,7 @@ namespace Radical.Tests.Validation
             {
                 Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.Load;
                 var obj = Ensure.That( "" );
-                String actual = obj.GetFullErrorMessage( "validator specific message" );
+                string actual = obj.GetFullErrorMessage( "validator specific message" );
 
                 var containsMethodName = actual.Contains( "ensure_getFullErrorMessage_should_contain_MethodName" );
 
@@ -56,7 +56,7 @@ namespace Radical.Tests.Validation
             {
                 Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoad;
                 var obj = Ensure.That( "" );
-                String actual = obj.GetFullErrorMessage( "validator specific message" );
+                string actual = obj.GetFullErrorMessage( "validator specific message" );
 
                 var containsClassName = actual.Contains( typeof( ValidatorTest ).Name );
                 var containsMethodName = actual.Contains( typeof( ValidatorTest ).Name );
@@ -78,7 +78,7 @@ namespace Radical.Tests.Validation
             {
                 Ensure.SourceInfoLoadStrategy = SourceInfoLoadStrategy.LazyLoad;
                 var obj = Ensure.That( "" );
-                String actual = obj.GetFullErrorMessage( "validator specific message" );
+                string actual = obj.GetFullErrorMessage( "validator specific message" );
 
                 var containsMethodName = actual.Contains( "ensure_getFullErrorMessage_should_contain_MethodName_even_w_lazy_load" );
 
@@ -97,7 +97,7 @@ namespace Radical.Tests.Validation
 
             var obj = Ensure.That( "" ).WithMessage( expected );
 
-            String actual = obj.GetFullErrorMessage( "validator specific message" );
+            string actual = obj.GetFullErrorMessage( "validator specific message" );
 
             actual.Contains( expected ).Should().Be.True();
         }
@@ -125,7 +125,7 @@ namespace Radical.Tests.Validation
         public void ensure_getFullErrorMessage_should_not_be_null()
         {
             var obj = Ensure.That( "" );
-            String actual = obj.GetFullErrorMessage( "validator specific message" );
+            string actual = obj.GetFullErrorMessage( "validator specific message" );
 
             actual.Should().Not.Be.Null();
         }
@@ -267,7 +267,7 @@ namespace Radical.Tests.Validation
 
             try
             {
-                Ensure.That( String.Empty )
+                Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true )
                     .Is( "not-empty" );
             }
@@ -286,9 +286,9 @@ namespace Radical.Tests.Validation
 
             try
             {
-                Ensure.That( String.Empty )
+                Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true )
-                    .IsNot( String.Empty );
+                    .IsNot( string.Empty );
             }
             catch
             {
@@ -305,7 +305,7 @@ namespace Radical.Tests.Validation
 
             try
             {
-                Ensure.That( String.Empty )
+                Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true )
                     .IsTrue( s => s == "not-empty" );
             }
@@ -324,9 +324,9 @@ namespace Radical.Tests.Validation
 
             try
             {
-                Ensure.That( String.Empty )
+                Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true )
-                    .IsFalse( s => s == String.Empty );
+                    .IsFalse( s => s == string.Empty );
             }
             catch
             {
@@ -343,9 +343,9 @@ namespace Radical.Tests.Validation
 
             try
             {
-                Ensure.That( String.Empty )
+                Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true )
-                    .If( s => s == String.Empty )
+                    .If( s => s == string.Empty )
                     .ThenThrow( v => new Exception() );
             }
             catch
@@ -363,7 +363,7 @@ namespace Radical.Tests.Validation
 
             try
             {
-                Ensure.That( String.Empty )
+                Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true )
                     .Throw( new Exception() );
             }

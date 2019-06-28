@@ -1,8 +1,8 @@
 ﻿namespace Radical.ChangeTracking
 {
-    using System.Collections.Generic;
     using Radical.Collections;
     using Radical.ComponentModel.ChangeTracking;
+    using System.Collections.Generic;
 
     /// <summary>
     /// A change set is a readonly list of <see cref="IChange"/> instance.

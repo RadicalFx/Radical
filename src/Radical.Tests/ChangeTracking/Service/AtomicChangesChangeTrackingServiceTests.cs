@@ -87,7 +87,7 @@
             target.Undo();
 
             list.Count.Should().Be.EqualTo( 0 );
-            person.Name.Should().Be.EqualTo( String.Empty );
+            person.Name.Should().Be.EqualTo( string.Empty );
         }
 
         [TestMethod]
@@ -138,7 +138,7 @@
             target.Undo();
 
             list.Count.Should().Be.EqualTo( 0 );
-            person.Name.Should().Be.EqualTo( String.Empty );
+            person.Name.Should().Be.EqualTo( string.Empty );
         }
 
         [TestMethod]

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Radical.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using Radical.Linq;
 using System.Reflection;
 
 namespace Radical.Helpers
@@ -32,7 +30,7 @@ namespace Radical.Helpers
             /// </summary>
             /// <param name="propertyRef">The property ref.</param>
             /// <returns></returns>
-            public String NameOf( Expression<Func<T, Object>> propertyRef )
+            public string NameOf( Expression<Func<T, Object>> propertyRef )
             {
                 return propertyRef.GetMemberName();
             }
@@ -99,7 +97,7 @@ namespace Radical.Helpers
         /// <typeparam name="T">The type of the instance holding the property.</typeparam>
         /// <param name="propertyRef">The property expressed as a Lambda Expression Function on the given instance type.</param>
         /// <returns>The name of the property.</returns>
-        public static String GetPropertyName<T>( Expression<Func<T, Object>> propertyRef )
+        public static string GetPropertyName<T>( Expression<Func<T, Object>> propertyRef )
         {
             return propertyRef.GetMemberName();
         }

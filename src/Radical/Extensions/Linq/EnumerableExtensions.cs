@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Radical.Collections;
+using Radical.Validation;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Radical.Validation;
-using Radical;
-using System.Collections;
-using Radical.ComponentModel;
-using Radical.Collections;
 
 namespace Radical.Linq
 {
@@ -68,7 +65,7 @@ namespace Radical.Linq
         /// <param name="childrenGetter">The delegate to retrieve the children of a given node.</param>
         /// <param name="condition">The condition to usa as filter.</param>
         /// <returns>A flat readonly list of all the items in the source tree that mets the given condition.</returns>
-        public static IEnumerable<T> FindNodes<T>( this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter, Func<T, Boolean> condition )
+        public static IEnumerable<T> FindNodes<T>( this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter, Func<T, bool> condition )
         {
             Ensure.That( source ).Named( "source" ).IsNotNull();
             Ensure.That( childrenGetter ).Named( "childrenGetter" ).IsNotNull();
@@ -94,7 +91,7 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter )
+        public static bool IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter )
             where T : class
         {
             Ensure.That( parents ).Named( "parents" ).IsNotNull();
@@ -114,7 +111,7 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter, Func<T, T, Boolean> comparer )
+        public static bool IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter, Func<T, T, bool> comparer )
         {
             Ensure.That( parents ).Named( "parents" ).IsNotNull();
             Ensure.That( parentGetter ).Named( "parentGetter" ).IsNotNull();
@@ -134,7 +131,7 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter, IEqualityComparer<T> comparer )
+        public static bool IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter, IEqualityComparer<T> comparer )
         {
             Ensure.That( parents ).Named( "parents" ).IsNotNull();
             Ensure.That( parentGetter ).Named( "parentGetter" ).IsNotNull();
@@ -233,7 +230,7 @@ namespace Radical.Linq
         /// </summary>
         /// <param name="source">The source sequence.</param>
         /// <returns><c>True</c> if the sequence contains elements; otherwise <c>false</c>.</returns>
-        public static Boolean Any( this IEnumerable source )
+        public static bool Any( this IEnumerable source )
         {
             Ensure.That( source ).Named( "source" ).IsNotNull();
 
@@ -249,7 +246,7 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>True</c> if the sequence contains no elements; otherwise <c>false</c>.
         /// </returns>
-        public static Boolean None<T>( this IEnumerable<T> source )
+        public static bool None<T>( this IEnumerable<T> source )
         {
             return !source.Any();
         }
@@ -259,7 +256,7 @@ namespace Radical.Linq
         /// </summary>
         /// <param name="source">The source sequence.</param>
         /// <returns><c>True</c> if the sequence contains no elements; otherwise <c>false</c>.</returns>
-        public static Boolean None( this IEnumerable source )
+        public static bool None( this IEnumerable source )
         {
             return !source.Any();
         }

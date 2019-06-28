@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Radical.Validation;
+using System;
 using System.Collections.Generic;
-using Radical.Validation;
 
 namespace Radical
 {
@@ -11,15 +11,15 @@ namespace Radical
     /// <typeparam name="T">The type of the item to compare.</typeparam>
     public sealed class DelegateEqualityComparer<T> : EqualityComparer<T>
     {
-        readonly Func<T, T, Boolean> comparer;
-        readonly Func<T, Int32> hashCodeFunc;
+        readonly Func<T, T, bool> comparer;
+        readonly Func<T, int> hashCodeFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateEqualityComparer&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="comparer">The comparer.</param>
         /// <param name="hashCodeFunc">The hash code func.</param>
-        public DelegateEqualityComparer( Func<T, T, Boolean> comparer, Func<T, Int32> hashCodeFunc )
+        public DelegateEqualityComparer( Func<T, T, bool> comparer, Func<T, int> hashCodeFunc )
         {
             Ensure.That( comparer ).Named( "comparer" ).IsNotNull();
             Ensure.That( hashCodeFunc ).Named( "hashCodeFunc" ).IsNotNull();

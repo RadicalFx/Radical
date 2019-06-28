@@ -53,7 +53,7 @@
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>( attribute, value );
 
-            Assert.AreEqual<String>( attribute.Caption, target.Caption );
+            Assert.AreEqual<string>( attribute.Caption, target.Caption );
         }
 
         [TestMethod()]
@@ -73,7 +73,7 @@
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>( attribute, value );
 
-            Assert.AreEqual<Int32>( attribute.Index, target.Index );
+            Assert.AreEqual<int>( attribute.Index, target.Index );
         }
 
         [TestMethod()]
@@ -101,7 +101,7 @@
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void EnumBinder_string_object_null_description()
         {
-            var description = ( String )null;
+            var description = ( string )null;
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>( description, value );
         }
@@ -110,7 +110,7 @@
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void EnumBinder_string_object_int32_null_description()
         {
-            var description = ( String )null;
+            var description = ( string )null;
             var value = TestEnum.Value2;
             var index = 0;
             var target = new EnumBinder<TestEnum>( description, value, index );
@@ -123,7 +123,7 @@
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>( description, value );
 
-            Assert.AreEqual<String>( description, target.Caption );
+            Assert.AreEqual<string>( description, target.Caption );
         }
 
         [TestMethod()]
@@ -154,7 +154,7 @@
             var index = 0;
             var target = new EnumBinder<TestEnum>( description, value, index );
 
-            Assert.AreEqual<String>( description, target.Caption );
+            Assert.AreEqual<string>( description, target.Caption );
         }
 
         [TestMethod()]

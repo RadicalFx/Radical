@@ -2,7 +2,6 @@ namespace Radical
 {
     using System;
     using System.Linq;
-    using Radical.Validation;
 
     /// <summary>
     /// Helper class that adds functionalities for enumerative types.
@@ -26,7 +25,7 @@ namespace Radical
         /// <summary>
         /// Calls FCL Enum.IsDefined and returns the result.
         /// </summary>
-        public static Boolean IsDefined( this Enum value )
+        public static bool IsDefined( this Enum value )
         {
             var enumType = value.GetType();
             return Enum.IsDefined( enumType, value );
@@ -39,7 +38,7 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if is the attribute is defined; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsDescriptionAttributeDefined( this Enum value )
+        public static bool IsDescriptionAttributeDefined( this Enum value )
         {
             value.EnsureIsDefined();
 
@@ -83,7 +82,7 @@ namespace Radical
         /// <param name="value">The enumeration value to search the attribute on.</param>
         /// <param name="attribute">The <see cref="EnumItemDescriptionAttribute"/> applied to given enumeration value.</param>
         /// <returns><c>True</c> if the operation has been successfully completed, otherwise <c>false</c>.</returns>
-        public static Boolean TryGetDescriptionAttribute( this Enum value, out EnumItemDescriptionAttribute attribute )
+        public static bool TryGetDescriptionAttribute( this Enum value, out EnumItemDescriptionAttribute attribute )
         {
             value.EnsureIsDefined();
 
@@ -106,7 +105,7 @@ namespace Radical
         /// <param name="value">The value to extract caption from.</param>
         /// <returns>The value applied to the <c>Caption</c> property of the <see cref="EnumItemDescriptionAttribute"/>.</returns>
         /// <exception cref="ArgumentException">No <see cref="EnumItemDescriptionAttribute"/> has been defined on the given enum value.</exception>
-        public static String GetCaption( this Enum value )
+        public static string GetCaption( this Enum value )
         {
             var attribute = value.GetDescriptionAttribute();
             return attribute.Caption;
@@ -119,7 +118,7 @@ namespace Radical
         /// <param name="value">The value to extract description from.</param>
         /// <returns>The value applied to the <c>Description</c> property of the <see cref="EnumItemDescriptionAttribute"/>.</returns>
         /// <exception cref="ArgumentException">No <see cref="EnumItemDescriptionAttribute"/> has been defined on the given enum value.</exception>
-        public static String GetDescription( this Enum value )
+        public static string GetDescription( this Enum value )
         {
             var attribute = value.GetDescriptionAttribute();
             return attribute.Description;

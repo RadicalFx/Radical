@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Radical.ComponentModel.QueryModel;
+﻿using Radical.ComponentModel;
 using Radical.Validation;
-using Radical.ComponentModel;
 
 namespace Radical.Model.QueryModel
 {
@@ -34,10 +31,10 @@ namespace Radical.Model.QueryModel
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="System.string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="System.string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

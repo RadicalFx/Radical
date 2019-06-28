@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System;
 using System.Reflection;
 namespace Radical.Validation
 {
@@ -108,7 +107,7 @@ namespace Radical.Validation
             /// Gets the name of the method.
             /// </summary>
             /// <value>The name of the method.</value>
-            public String MethodName 
+            public string MethodName 
             {
                 get 
                 {
@@ -120,7 +119,7 @@ namespace Radical.Validation
             /// Gets the name of the class.
             /// </summary>
             /// <value>The name of the class.</value>
-            public String ClassName
+            public string ClassName
             {
                 get
                 {

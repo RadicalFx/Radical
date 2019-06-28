@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.ComponentModel.ChangeTracking;
+﻿using Radical.ComponentModel.ChangeTracking;
+using System;
 
 namespace Radical.ChangeTracking
 {
     sealed class AtomicOperation : IAtomicOperation
     {
-        Boolean isCompleted = false;
+        bool isCompleted = false;
 
         void OnCompleted( AtomicChange change )
         {
@@ -44,7 +41,7 @@ namespace Radical.ChangeTracking
             this.change.Add( change, behavior );
         }
 
-        public void RegisterTransient( Object entity, Boolean autoRemove )
+        public void RegisterTransient( Object entity, bool autoRemove )
         {
             this.change.RegisterTransient( entity, autoRemove );
         }

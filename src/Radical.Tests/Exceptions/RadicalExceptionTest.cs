@@ -61,12 +61,12 @@ namespace Radical.Tests.Exceptions
             return new RadicalException();
         }
 
-        protected virtual Exception CreateMock( String message )
+        protected virtual Exception CreateMock( string message )
         {
             return new RadicalException( message );
         }
 
-        protected virtual Exception CreateMock( String message, Exception innerException )
+        protected virtual Exception CreateMock( string message, Exception innerException )
         {
             return new RadicalException( message, innerException );
         }
@@ -109,22 +109,22 @@ namespace Radical.Tests.Exceptions
         [TestMethod()]
         public void ctor_string()
         {
-            String expectedMessage = "message";
+            string expectedMessage = "message";
             Exception target = this.CreateMock( expectedMessage );
 
-            Assert.AreEqual<String>( expectedMessage, target.Message );
+            Assert.AreEqual<string>( expectedMessage, target.Message );
             Assert.IsNull( target.InnerException );
         }
 
         [TestMethod()]
         public void ctor_string_innerException()
         {
-            String expectedMessage = "message";
+            string expectedMessage = "message";
             Exception expectedInnerException = new StackOverflowException();
 
             Exception target = this.CreateMock( expectedMessage, expectedInnerException );
 
-            Assert.AreEqual<String>( expectedMessage, target.Message );
+            Assert.AreEqual<string>( expectedMessage, target.Message );
             Assert.AreEqual<Exception>( expectedInnerException, target.InnerException );
         }
     }

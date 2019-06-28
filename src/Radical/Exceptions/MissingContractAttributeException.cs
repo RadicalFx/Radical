@@ -37,7 +37,7 @@
         /// </summary>
         /// <param name="targetType">The target type.</param>
         public MissingContractAttributeException( Type targetType )
-            : this( String.Format( CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName ) )
+            : this( string.Format( CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName ) )
         {
             this.TargetType = targetType;
         }
@@ -46,7 +46,7 @@
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public MissingContractAttributeException( String message )
+        public MissingContractAttributeException( string message )
             : base( message )
         {
 
@@ -57,7 +57,7 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public MissingContractAttributeException( String message, Exception innerException )
+        public MissingContractAttributeException( string message, Exception innerException )
             : base( message, innerException )
         {
 

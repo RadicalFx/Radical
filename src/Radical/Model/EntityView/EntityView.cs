@@ -1,5 +1,8 @@
 namespace Radical.Model
 {
+    using Radical.ComponentModel;
+    using Radical.Linq;
+    using Radical.Validation;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -7,12 +10,8 @@ namespace Radical.Model
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-    using System.Reflection;
-    using Radical.ComponentModel;
-    using Radical.Validation;
-    using Radical.Reflection;
-    using Radical.Linq;
     using System.Linq.Expressions;
+    using System.Reflection;
 
     /// <summary>
     /// A full custom implementation of IBindingListView
@@ -59,7 +58,7 @@ namespace Radical.Model
         /// <value>
         ///     <c>true</c> if this instance is detached; otherwise, <c>false</c>.
         /// </value>
-        public Boolean IsDetached
+        public bool IsDetached
         {
             get;
             private set;
@@ -72,7 +71,7 @@ namespace Radical.Model
         /// <item>
         ///     <collection>true</collection> if this instance is array based; otherwise, <collection>false</collection>.
         /// </item>
-        public Boolean IsArrayBased
+        public bool IsArrayBased
         {
             get;
             private set;
@@ -185,8 +184,8 @@ namespace Radical.Model
          */
         void OnDataSourceCollectionChanged( object sender, CollectionChangedEventArgs<T> e )
         {
-            Int32 oldIndex;
-            Int32 newIndex;
+            int oldIndex;
+            int newIndex;
             RebuildIndexesEventArgs args = new RebuildIndexesEventArgs( e.Index );
 
             switch( e.ChangeType )
@@ -265,7 +264,7 @@ namespace Radical.Model
                      * è già stato rimosso e l'Indexer non è in grado di dirci dove stava.
                      * 
                      * L'unica soluzione che mi viene in mente è che l'Indexer abbia un indice
-                     * che tiene traccia degli indici: Dictionary<Int32, Int32> con 
+                     * che tiene traccia degli indici: Dictionary<int, int> con 
                      * SourceIndex --> ViewIndex
                      * 
                      * Un'altra possibile soluzione è che tra gli arguments ci sia anche un riferimento
@@ -403,7 +402,7 @@ namespace Radical.Model
         //     */
         //    if( this.IsInAddingNewQueue( item ) )
         //    {
-        //        Int32 viewIndex = this.Indexer.IndexOf( item );
+        //        int viewIndex = this.Indexer.IndexOf( item );
         //        this.CancelNew( viewIndex );
         //    }
         //}
@@ -422,7 +421,7 @@ namespace Radical.Model
         //     */
         //    if( this.IsInAddingNewQueue( item ) )
         //    {
-        //        Int32 viewIndex = this.Indexer.IndexOf( item );
+        //        int viewIndex = this.Indexer.IndexOf( item );
         //        this.EndNew( viewIndex );
         //    }
         //}
@@ -431,7 +430,7 @@ namespace Radical.Model
         {
             IEntityItemView<T> obj = ( IEntityItemView<T> )sender;
 
-            Int32 index = this.Indexer.IndexOf( obj );
+            int index = this.Indexer.IndexOf( obj );
             if( index > -1 )
             {
                 /*
@@ -502,7 +501,7 @@ namespace Radical.Model
              * quindi l'indice dell'elemento prima di applicare
              * il filtro
              */
-            Int32 preFilterIndex = this.Indexer.IndexOf( item );
+            int preFilterIndex = this.Indexer.IndexOf( item );
 
             /*
              * Costruiamo un bel RebuildIndexesEventArgs e lo passiamo 
@@ -527,7 +526,7 @@ namespace Radical.Model
              * perchè se gli Indici sono stati ricreati l'istanza (sender)
              * che abbiamo di IEntityItemView non esisterà di certo più
              */
-            Int32 postFilterIndex = this.Indexer.IndexOf( item.EntityItem );
+            int postFilterIndex = this.Indexer.IndexOf( item.EntityItem );
 
             if( postFilterIndex > -1 )
             {
@@ -582,7 +581,7 @@ namespace Radical.Model
         /// Gets a value indicating whether moving elements is allowed in this view.
         /// </summary>
         /// <value><c>true</c> if move is allowed; otherwise, <c>false</c>.</value>
-        public Boolean AllowMove
+        public bool AllowMove
         {
             get { return !this.IsSorted; }
         }
@@ -592,7 +591,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="sourceIndex">Index of the source element to move.</param>
         /// <param name="newIndex">The destination index.</param>
-        public void Move( Int32 sourceIndex, Int32 newIndex )
+        public void Move( int sourceIndex, int newIndex )
         {
             /*
              * Non ha nessun senso "spostare" elementi su un qualcosa 
@@ -621,8 +620,8 @@ namespace Radical.Model
              * gli indici dei rispettivi item nella data source e poi
              * delegare a lei.
              */
-            Int32 sourceIndexInDataSource = this.Indexer.FindObjectIndexInDataSource( sourceIndex );
-            Int32 destinationIndexInDataSource = this.Indexer.FindObjectIndexInDataSource( newIndex );
+            int sourceIndexInDataSource = this.Indexer.FindObjectIndexInDataSource( sourceIndex );
+            int destinationIndexInDataSource = this.Indexer.FindObjectIndexInDataSource( newIndex );
 
             IEntityCollection<T> entityCollection = this.DataSource as IEntityCollection<T>;
             if( entityCollection != null )
@@ -654,9 +653,9 @@ namespace Radical.Model
         /// </summary>
         /// <param name="item">The item to move.</param>
         /// <param name="newIndex">The destination index.</param>
-        public void Move( IEntityItemView<T> item, Int32 newIndex )
+        public void Move( IEntityItemView<T> item, int newIndex )
         {
-            Int32 sourceIndex = this.IndexOf( item );
+            int sourceIndex = this.IndexOf( item );
             this.Move( sourceIndex, newIndex );
         }
 
@@ -668,7 +667,7 @@ namespace Radical.Model
         /// <item>
         ///     <collection>true</collection> if this instance is filtered; otherwise, <collection>false</collection>.
         /// </item>
-        public Boolean IsFiltered
+        public bool IsFiltered
         {
             get { return this.Filter != ViewAllEntityItemViewFilter<T>.Instance; }
         }
@@ -678,7 +677,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the data source supports filtering; otherwise, false. </returns>
-        Boolean IBindingListView.SupportsFiltering
+        bool IBindingListView.SupportsFiltering
         {
             get { return true; }
         }
@@ -688,12 +687,12 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>The string used to filter items out in the item collection returned by the data source. </returns>
-        String IBindingListView.Filter
+        string IBindingListView.Filter
         {
             get { return this.Filter.ToString(); }
             set
             {
-                var msg = String.Format( "Setting '{0}' directly as Filter is not supported.", value ?? "<null>");
+                var msg = string.Format( "Setting '{0}' directly as Filter is not supported.", value ?? "<null>");
                 throw new NotSupportedException( msg );
                 //TODO: IBindingListView.Instance
                 /* Bisogna capire se siamo in grado data 
@@ -825,7 +824,7 @@ namespace Radical.Model
         //        filter = ( IEntityItemViewFilter<T> )ViewAllEntityItemViewFilter<T>.Instance;
         //    }
 
-        //    Boolean filterIsChanged = false;
+        //    bool filterIsChanged = false;
         //    if( this.Filter != filter )
         //    {
         //        this._filter = filter;
@@ -887,7 +886,7 @@ namespace Radical.Model
             return new EntityItemViewSortComparer<T>( this.SortDescriptions );
         }
 
-        Boolean IsCustomComparer = false;
+        bool IsCustomComparer = false;
 
         private IComparer<IEntityItemView<T>> _sortComparer;
         internal IComparer<IEntityItemView<T>> SortComparer
@@ -909,7 +908,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the list supports sorting; otherwise, false.</returns>
-        Boolean IBindingList.SupportsSorting
+        bool IBindingList.SupportsSorting
         {
             get { return this.AllowSort; }
         }
@@ -919,7 +918,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the data source supports advanced sorting; otherwise, false. </returns>
-        Boolean IBindingListView.SupportsAdvancedSorting
+        bool IBindingListView.SupportsAdvancedSorting
         {
             get { return this.AllowSort; }
         }
@@ -945,7 +944,7 @@ namespace Radical.Model
         {
             //this.SortDescriptions = sorts;
 
-            Boolean wasSorted = this.IsSorted;
+            bool wasSorted = this.IsSorted;
 
             this._sortDescriptions = sorts;
 
@@ -978,9 +977,9 @@ namespace Radical.Model
         /// Sorts the data source based on the given sort string.
         /// </summary>
         /// <param name="sort">The sort string in T-Sql format</param>
-        public void ApplySort( String sort )
+        public void ApplySort( string sort )
         {
-            if( String.IsNullOrEmpty( sort ) )
+            if( string.IsNullOrEmpty( sort ) )
             {
                 this.RemoveSort();
             }
@@ -1001,7 +1000,7 @@ namespace Radical.Model
                     //L'eventuale spazio che separa la "SortDirection"
                     var pos = sort.IndexOf( ' ' );
 
-                    String name;
+                    string name;
                     var direction = ListSortDirection.Ascending;
 
                     if( pos == -1 )
@@ -1020,7 +1019,7 @@ namespace Radical.Model
                          * La direzione tutto quello che viene dopo
                          */
                         var dir = sort.Substring( pos + 1 ).Trim();
-                        if( String.Equals( dir, "desc", StringComparison.OrdinalIgnoreCase ) )
+                        if( string.Equals( dir, "desc", StringComparison.OrdinalIgnoreCase ) )
                         {
                             direction = ListSortDirection.Descending;
                         }
@@ -1079,7 +1078,7 @@ namespace Radical.Model
         /// <returns>true if <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/> has been called and <see cref="M:System.ComponentModel.IBindingList.RemoveSort"/> has not been called; otherwise, false.</returns>
         /// <exception cref="T:System.NotSupportedException">
         ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
-        public Boolean IsSorted
+        public bool IsSorted
         {
             get { return ( this.SortDescriptions.Count > 0 || this.IsCustomComparer ); }
         }
@@ -1147,7 +1146,7 @@ namespace Radical.Model
             }
             //private set
             //{
-            //    Boolean wasSorted = this.IsSorted;
+            //    bool wasSorted = this.IsSorted;
 
             //    this._sortDescriptions = value;
 
@@ -1209,7 +1208,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the <see cref="T:System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> events when one of its property values changes; otherwise, false.</returns>
-        public Boolean RaisesItemChangedEvents
+        public bool RaisesItemChangedEvents
         {
             get { return true; }
         }
@@ -1245,7 +1244,7 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentException">
         ///     <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
-        void ICollection.CopyTo( Array array, Int32 index )
+        void ICollection.CopyTo( Array array, int index )
         {
             IEntityItemView<T>[] data = new IEntityItemView<T>[ this.Indexer.Count ];
             this.Indexer.CopyTo( data, index );
@@ -1257,7 +1256,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
-        Boolean ICollection.IsSynchronized
+        bool ICollection.IsSynchronized
         {
             get { return ( ( ICollection )this.DataSource ).IsSynchronized; }
         }
@@ -1277,7 +1276,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.</returns>
-        public Int32 Count
+        public int Count
         {
             get { return this.Indexer.Count; }
         }
@@ -1294,9 +1293,9 @@ namespace Radical.Model
         /// The position into which the new element was inserted.
         /// </returns>
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        Int32 IList.Add( object value )
+        int IList.Add( object value )
         {
-            throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Add" ) );
+            throw new ArgumentException( string.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Add" ) );
         }
 
         /// <summary>
@@ -1305,7 +1304,7 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only. </exception>
         void IList.Clear()
         {
-            throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Clear" ) );
+            throw new ArgumentException( string.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Clear" ) );
         }
 
         /// <summary>
@@ -1315,7 +1314,7 @@ namespace Radical.Model
         /// <returns>
         /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
         /// </returns>
-        Boolean IList.Contains( object value )
+        bool IList.Contains( object value )
         {
             //return ( -1 != this.IndexOf( value as IEntityItemView<T> ) );
 
@@ -1366,7 +1365,7 @@ namespace Radical.Model
         /// <returns>
         /// The index of <paramref name="value"/> if found in the list; otherwise, -1.
         /// </returns>
-        Int32 IList.IndexOf( object value )
+        int IList.IndexOf( object value )
         {
             //return this.IndexOf( value as IEntityItemView<T> );
 
@@ -1399,7 +1398,7 @@ namespace Radical.Model
         /// <returns>
         /// The index of <paramref name="item"/> if found in the list; otherwise, -1.
         /// </returns>
-        public Int32 IndexOf( IEntityItemView<T> item )
+        public int IndexOf( IEntityItemView<T> item )
         {
             if( item != null )
             {
@@ -1422,7 +1421,7 @@ namespace Radical.Model
         /// <returns>
         /// The index of <paramref name="item"/> if found in the list; otherwise, -1.
         /// </returns>
-        public Int32 IndexOf( T item )
+        public int IndexOf( T item )
         {
             return this.Indexer.IndexOf( item );
         }
@@ -1437,9 +1436,9 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
         /// <exception cref="T:System.NullReferenceException">
         ///     <paramref name="item"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
-        void IList.Insert( Int32 index, object item )
+        void IList.Insert( int index, object item )
         {
-            throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Insert" ) );
+            throw new ArgumentException( string.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Insert" ) );
         }
 
         /// <summary>
@@ -1447,7 +1446,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the <see cref="T:System.Collections.IList"/> is read-only; otherwise, false.</returns>
-        Boolean IList.IsReadOnly
+        bool IList.IsReadOnly
         {
             get
             {
@@ -1467,7 +1466,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
-        Boolean IList.IsFixedSize
+        bool IList.IsFixedSize
         {
             get { return this.DataSource.IsFixedSize; }
         }
@@ -1482,7 +1481,7 @@ namespace Radical.Model
             IEntityItemView<T> eiv = item as IEntityItemView<T>;
             if( eiv != null )
             {
-                Int32 eivIndex = this.IndexOf( eiv );
+                int eivIndex = this.IndexOf( eiv );
                 if( eivIndex != -1 )
                 {
                     ( ( IList )this ).RemoveAt( eivIndex );
@@ -1495,7 +1494,7 @@ namespace Radical.Model
             }
             else
             {
-                throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Remove" ) );
+                throw new ArgumentException( string.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Remove" ) );
             }
         }
 
@@ -1524,7 +1523,7 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         ///     <paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        void IList.RemoveAt( Int32 index )
+        void IList.RemoveAt( int index )
         {
             /*
              * L'indice (index) che arriva è l'indice
@@ -1532,7 +1531,7 @@ namespace Radical.Model
              * Recuperiamo dall'Indexer l'indice
              * dell'elemento originale
              */
-            Int32 sourceIndex = this.Indexer.FindObjectIndexInDataSource( index );
+            int sourceIndex = this.Indexer.FindObjectIndexInDataSource( index );
             if( sourceIndex > -1 )
             {
                 /*
@@ -1577,17 +1576,17 @@ namespace Radical.Model
         /// <item></item>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "index" )]
-        public IEntityItemView<T> this[ Int32 index ]
+        public IEntityItemView<T> this[ int index ]
         {
             get { return this.Indexer[ index ]; }
-            set { throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Set Accessor" ), "index" ); }
+            set { throw new ArgumentException( string.Format( CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Set Accessor" ), "index" ); }
         }
 
         /// <summary>
         /// Gets or sets the <see cref="System.Object"/> at the specified index.
         /// </summary>
         /// <item></item>
-        object IList.this[ Int32 index ]
+        object IList.this[ int index ]
         {
             get { return this[ index ]; }
             set { this[ index ] = ( IEntityItemView<T> )value; }
@@ -1634,7 +1633,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if a <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or when an item changes; otherwise, false.</returns>
-        Boolean IBindingList.SupportsChangeNotification
+        bool IBindingList.SupportsChangeNotification
         {
             get { return true; }
         }
@@ -1644,7 +1643,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if the list supports searching using the <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method; otherwise, false.</returns>
-        Boolean IBindingList.SupportsSearching
+        bool IBindingList.SupportsSearching
         {
             get { return true; }
         }
@@ -1660,13 +1659,13 @@ namespace Radical.Model
             return this.AddNew();
         }
 
-        private Boolean _allowEdit = true;
+        private bool _allowEdit = true;
         /// <summary>
         /// Gets whether you can update items in the list.
         /// </summary>
         /// <item></item>
         /// <returns>true if you can update the items in the list; otherwise, false.</returns>
-        public virtual Boolean AllowEdit
+        public virtual bool AllowEdit
         {
             get { return this._allowEdit; }
             set
@@ -1681,13 +1680,13 @@ namespace Radical.Model
             }
         }
 
-        private Boolean _allowNew = true;
+        private bool _allowNew = true;
         /// <summary>
         /// Gets whether you can add items to the list using <see cref="M:System.ComponentModel.IBindingList.AddNew"/>.
         /// </summary>
         /// <item></item>
         /// <returns>true if you can add items to the list using <see cref="M:System.ComponentModel.IBindingList.AddNew"/>; otherwise, false.</returns>
-        public virtual Boolean AllowNew
+        public virtual bool AllowNew
         {
             get
             {
@@ -1716,13 +1715,13 @@ namespace Radical.Model
             }
         }
 
-        private Boolean _allowRemove = true;
+        private bool _allowRemove = true;
         /// <summary>
-        /// Gets whether you can remove items from the list, using <see cref="M:System.Collections.IList.Remove(System.Object)"/> or <see cref="M:System.Collections.IList.RemoveAt(System.Int32)"/>.
+        /// Gets whether you can remove items from the list, using <see cref="M:System.Collections.IList.Remove(System.Object)"/> or <see cref="M:System.Collections.IList.RemoveAt(System.int)"/>.
         /// </summary>
         /// <item></item>
         /// <returns>true if you can remove items from the list; otherwise, false.</returns>
-        public virtual Boolean AllowRemove
+        public virtual bool AllowRemove
         {
             get
             {
@@ -1752,12 +1751,12 @@ namespace Radical.Model
             }
         }
 
-        private Boolean _allowSort = true;
+        private bool _allowSort = true;
         /// <summary>
         /// Gets or sets a value indicating whether this list allow sort.
         /// </summary>
         /// <value><c>true</c> if [allow sort]; otherwise, <c>false</c>.</value>
-        public virtual Boolean AllowSort
+        public virtual bool AllowSort
         {
             get { return this._allowSort; }
             set
@@ -1785,7 +1784,7 @@ namespace Radical.Model
         /// Adds the property with the given name to the indexes used for searching.
         /// </summary>
         /// <param name="propertyName">The name of the property to add to the indexes used for searching.</param>
-        public void AddIndex( String propertyName )
+        public void AddIndex( string propertyName )
         {
             PropertyDescriptor property = TypeDescriptor.GetProperties( typeof( T ) ).Find( propertyName, false );
             this.Indexer.AddIndex( property );
@@ -1804,7 +1803,7 @@ namespace Radical.Model
         /// removes the property with the given name from the indexes used for searching.
         /// </summary>
         /// <param name="propertyName">The name of the property to remove from the indexes used for searching.</param>
-        public void RemoveIndex( String propertyName )
+        public void RemoveIndex( string propertyName )
         {
             PropertyDescriptor property = TypeDescriptor.GetProperties( typeof( T ) ).Find( propertyName, false );
             this.Indexer.RemoveIndex( property );
@@ -1812,7 +1811,7 @@ namespace Radical.Model
 
         #endregion
 
-        public PropertyDescriptor GetProperty( String name )
+        public PropertyDescriptor GetProperty( string name )
         {
             var all = ( ( ITypedList )this ).GetItemProperties( null );
             foreach( PropertyDescriptor property in all )
@@ -1828,7 +1827,7 @@ namespace Radical.Model
 
         #region Custom Property Mappings
 
-        private Boolean _autoGenerateProperties = true;
+        private bool _autoGenerateProperties = true;
 
         /// <summary>
         /// Gets or sets a item indicating whether this instance must auto generate properties.
@@ -1837,7 +1836,7 @@ namespace Radical.Model
         /// <item>
         ///     <collection>true</collection> if this instance must auto generate properties; otherwise, <collection>false</collection>.
         /// </item>
-        public Boolean AutoGenerateProperties
+        public bool AutoGenerateProperties
         {
             get { return this._autoGenerateProperties; }
             set
@@ -1849,20 +1848,20 @@ namespace Radical.Model
             }
         }
 
-        IDictionary<String, EntityItemViewPropertyDescriptor<T>> _customProperties = null;
+        IDictionary<string, EntityItemViewPropertyDescriptor<T>> _customProperties = null;
         
         /// <summary>
         /// Gets the custom properties.
         /// </summary>
         /// <value>The custom properties.</value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures" )]
-        protected IDictionary<String, EntityItemViewPropertyDescriptor<T>> CustomProperties
+        protected IDictionary<string, EntityItemViewPropertyDescriptor<T>> CustomProperties
         {
             get
             {
                 if( this._customProperties == null )
                 {
-                    this._customProperties = new Dictionary<String, EntityItemViewPropertyDescriptor<T>>();
+                    this._customProperties = new Dictionary<string, EntityItemViewPropertyDescriptor<T>>();
                 }
 
                 return this._customProperties;
@@ -1880,19 +1879,19 @@ namespace Radical.Model
             return this.CustomProperties.Values.ToArray<EntityItemViewPropertyDescriptor<T>>();
         }
 
-        public Boolean IsPropertyMappingDefined( String propertyName )
+        public bool IsPropertyMappingDefined( string propertyName )
         {
             return this.CustomProperties.ContainsKey( propertyName );
         }
 
-        public EntityItemViewPropertyDescriptor<T> GetCustomProperty( String name )
+        public EntityItemViewPropertyDescriptor<T> GetCustomProperty( string name )
         {
             return this.CustomProperties[ name ];
         }
 
-        readonly IDictionary<T, IDictionary<String, PropertyValue>> customPropertyValues = new Dictionary<T, IDictionary<String, PropertyValue>>();
+        readonly IDictionary<T, IDictionary<string, PropertyValue>> customPropertyValues = new Dictionary<T, IDictionary<string, PropertyValue>>();
 
-        public TValue GetCustomPropertyValue<TValue>( String customPropertyName, IEntityItemView<T> owner )
+        public TValue GetCustomPropertyValue<TValue>( string customPropertyName, IEntityItemView<T> owner )
         {
             Ensure.That( customPropertyName )
                 .Named( () => customPropertyName )
@@ -1904,7 +1903,7 @@ namespace Radical.Model
             return this.GetCustomPropertyValueCore<TValue>( customPropertyName, owner );
         }
 
-        protected virtual TValue GetCustomPropertyValueCore<TValue>( String customPropertyName, IEntityItemView<T> owner )
+        protected virtual TValue GetCustomPropertyValueCore<TValue>( string customPropertyName, IEntityItemView<T> owner )
         {
             var item = owner.EntityItem;
             if( this.customPropertyValues.ContainsKey( item ) )
@@ -1932,7 +1931,7 @@ namespace Radical.Model
             return default( TValue );
         }
 
-        public void SetCustomPropertyValue<TValue>( String customPropertyName, IEntityItemView<T> owner, TValue value )
+        public void SetCustomPropertyValue<TValue>( string customPropertyName, IEntityItemView<T> owner, TValue value )
         {
             Ensure.That( customPropertyName )
                 .Named( "customPropertyName" )
@@ -1944,7 +1943,7 @@ namespace Radical.Model
             var item = owner.EntityItem;
             if( !this.customPropertyValues.ContainsKey( item ) )
             {
-                this.customPropertyValues.Add( item, new Dictionary<String, PropertyValue>() );
+                this.customPropertyValues.Add( item, new Dictionary<string, PropertyValue>() );
             }
 
             var values = this.customPropertyValues[ item ];
@@ -1983,7 +1982,7 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the dinamically generated property.
         /// </returns>
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping( String propertyName )
+        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping( string propertyName )
         {
             var pd = new EntityItemViewPropertyDescriptor<T>( propertyName );
             return this.AddPropertyMapping( pd );
@@ -1997,7 +1996,7 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the dinamically generated property.
         /// </returns>
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping( String propertyName, String displayName )
+        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping( string propertyName, string displayName )
         {
             var pd = new EntityItemViewPropertyDescriptor<T>( propertyName, displayName );
             return this.AddPropertyMapping( pd );
@@ -2016,14 +2015,14 @@ namespace Radical.Model
         /// Using this overload implicitly creates a read-only property because no setter has been supplied.
         /// </remarks>
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
-            String customPropertyName,
+            string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter )
         {
             return this.AddPropertyMapping( customPropertyName, getter, null, null );
         }
 
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
-            String customPropertyName,
+            string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
             Func<TProperty> defaultValueInterceptor )
         {
@@ -2041,7 +2040,7 @@ namespace Radical.Model
         /// A reference to the dinamically generated property.
         /// </returns>
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
-            String customPropertyName,
+            string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
             EntityItemViewValueSetter<T, TProperty> setter )
         {
@@ -2049,7 +2048,7 @@ namespace Radical.Model
         }
 
         public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
-            String customPropertyName,
+            string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
             EntityItemViewValueSetter<T, TProperty> setter,
             Func<TProperty> defaultValueInterceptor )
@@ -2069,7 +2068,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="customProperty">The custom property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        public virtual Boolean RemovePropertyMapping( EntityItemViewPropertyDescriptor<T> customProperty )
+        public virtual bool RemovePropertyMapping( EntityItemViewPropertyDescriptor<T> customProperty )
         {
             return this.RemovePropertyMapping( customProperty.Name );
         }
@@ -2079,7 +2078,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        public Boolean RemovePropertyMapping( String propertyName )
+        public bool RemovePropertyMapping( string propertyName )
         {
             EntityItemViewPropertyDescriptor<T> customProperty;
             if( this.CustomProperties.TryGetValue( propertyName, out customProperty ) )
@@ -2225,7 +2224,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="listAccessors">An array of <see cref="T:System.ComponentModel.PropertyDescriptor"/> objects, for which the list name is returned. This can be null.</param>
         /// <returns>The name of the list.</returns>
-        String ITypedList.GetListName( PropertyDescriptor[] listAccessors )
+        string ITypedList.GetListName( PropertyDescriptor[] listAccessors )
         {
             return this.OnGetListName( listAccessors );
         }
@@ -2235,14 +2234,14 @@ namespace Radical.Model
         /// </summary>
         /// <param name="listAccessors">An array of <see cref="T:System.ComponentModel.PropertyDescriptor"/> objects, for which the list name is returned. This can be null.</param>
         /// <returns>The name of the list.</returns>
-        protected virtual String OnGetListName( PropertyDescriptor[] listAccessors )
+        protected virtual string OnGetListName( PropertyDescriptor[] listAccessors )
         {
             if( listAccessors == null || listAccessors.Length == 0 )
             {
                 return this.GetType().Name;
             }
 
-            return String.Empty;
+            return string.Empty;
         }
 
         #endregion
@@ -2259,7 +2258,7 @@ namespace Radical.Model
         /// </returns>
         /// <exception cref="T:System.NotSupportedException">
         ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSearching"/> is false. </exception>
-        public Int32 Find( PropertyDescriptor property, object key )
+        public int Find( PropertyDescriptor property, object key )
         {
             return this.Indexer.Find( property, key );
         }
@@ -2272,7 +2271,7 @@ namespace Radical.Model
         /// <returns>
         /// The index of the row that has the given property name set to the given key item.
         /// </returns>
-        public Int32 Find( String propertyName, object key )
+        public int Find( string propertyName, object key )
         {
             PropertyDescriptor pd = TypeDescriptor.GetProperties( typeof( T ) ).Find( propertyName, false );
             if( pd != null )
@@ -2281,7 +2280,7 @@ namespace Radical.Model
             }
             else
             {
-                throw new ArgumentException( String.Format( CultureInfo.CurrentCulture, Resources.Exceptions.PropertyNotFoundException, propertyName ), "propertyName" );
+                throw new ArgumentException( string.Format( CultureInfo.CurrentCulture, Resources.Exceptions.PropertyNotFoundException, propertyName ), "propertyName" );
             }
         }
 
@@ -2295,7 +2294,7 @@ namespace Radical.Model
         /// <item>
         ///     <collection>true</collection> if this instance is adding new; otherwise, <collection>false</collection>.
         /// </item>
-        public Boolean IsAddingNew
+        public bool IsAddingNew
         {
             get { return this.PendingNewItem != null; }
         }
@@ -2307,7 +2306,7 @@ namespace Radical.Model
         /// <returns>
         ///     <c>true</c> if the specified item is a pending new item; otherwise, <c>false</c>.
         /// </returns>
-        protected Boolean IsInAddingNewQueue( T item )
+        protected bool IsInAddingNewQueue( T item )
         {
             return this.IsAddingNew && this.PendingNewItem.EntityItem.Equals( item );
         }
@@ -2443,7 +2442,7 @@ namespace Radical.Model
                 }
                 else
                 {
-                    Int32 index = this.Indexer.Count - 1;
+                    int index = this.Indexer.Count - 1;
                     this.OnListChanged( new ListChangedEventArgs( ListChangedType.ItemAdded, index ) );
                     //this.OnCollectionChanged( new NotifyCollectionChangedEventArgs( NotifyCollectionChangedAction.Add, obj, index ) );
                 }
@@ -2472,7 +2471,7 @@ namespace Radical.Model
         /// Called when EndNew].
         /// </summary>
         /// <param name="index">The index.</param>
-        protected virtual void OnEndNew( Int32 index )
+        protected virtual void OnEndNew( int index )
         {
 
         }
@@ -2500,7 +2499,7 @@ namespace Radical.Model
         /// Ends a pending AddNew operation.
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        public void EndNew( Int32 itemIndex )
+        public void EndNew( int itemIndex )
         {
             if( this.AllowNew && itemIndex > -1 && itemIndex < this.Indexer.Count &&
                 this.PendingNewItem != null && this.Indexer[ itemIndex ] == this.PendingNewItem )
@@ -2584,7 +2583,7 @@ namespace Radical.Model
         /// Called when on CancelNew].
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        protected virtual void OnCancelNew( Int32 itemIndex )
+        protected virtual void OnCancelNew( int itemIndex )
         {
 
         }
@@ -2594,7 +2593,7 @@ namespace Radical.Model
         /// at the specified index.
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        public void CancelNew( Int32 itemIndex )
+        public void CancelNew( int itemIndex )
         {
             if( this.AllowNew && itemIndex > -1 && itemIndex < this.Indexer.Count &&
                 this.PendingNewItem != null && this.Indexer[ itemIndex ] == this.PendingNewItem )
@@ -2627,13 +2626,13 @@ namespace Radical.Model
             this.Dispose( false );
         }
 
-        private Boolean isDisposed;
+        private bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><collection>true</collection> to release both managed and unmanaged resources; <collection>false</collection> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose( bool disposing )
         {
             if( !this.isDisposed )
             {
@@ -2821,7 +2820,7 @@ namespace Radical.Model
         /// Raises the PropertyChanged event.
         /// </summary>
         /// <param name="propertyName">The name of the property.</param>
-        protected virtual void OnPropertyChanged( String propertyName )
+        protected virtual void OnPropertyChanged( string propertyName )
         {
             Ensure.That( propertyName )
                 .IsNotNull()
@@ -2856,7 +2855,7 @@ namespace Radical.Model
             this.IsInitializing = true;
         }
 
-        protected Boolean IsInitializing { get; private set; }
+        protected bool IsInitializing { get; private set; }
 
         void ISupportInitialize.EndInit()
         {

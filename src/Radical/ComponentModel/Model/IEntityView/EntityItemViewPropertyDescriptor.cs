@@ -2,8 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
-using Radical.Validation;
-using System.Linq.Expressions;
 
 namespace Radical.ComponentModel
 {
@@ -21,7 +19,7 @@ namespace Radical.ComponentModel
         /// is not mapped to a real property on the underlying object.
         /// </summary>
         protected EntityItemViewPropertyDescriptor()
-            : base( String.Format( CultureInfo.InvariantCulture, "___RuntimeEvaluatedPropertyDescriptor_{0:N}", Guid.NewGuid() ), null )
+            : base( string.Format( CultureInfo.InvariantCulture, "___RuntimeEvaluatedPropertyDescriptor_{0:N}", Guid.NewGuid() ), null )
         {
             this._property = null;
         }
@@ -42,7 +40,7 @@ namespace Radical.ComponentModel
         /// The EntityItemViewPropertyDescriptor will be mapped on the property given its name.
         /// </summary>
         /// <param name="propertyName">The property name to map to, the property must exists on the underlying type</param>
-        public EntityItemViewPropertyDescriptor( String propertyName )
+        public EntityItemViewPropertyDescriptor( string propertyName )
             : this( typeof( T ).GetProperty( propertyName ) )
         {
 
@@ -51,11 +49,11 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityItemViewPropertyDescriptor&lt;T&gt;"/> class.
         /// The EntityItemViewPropertyDescriptor will be mapped on the given property name and uses the given
-        /// String as display name.
+        /// string as display name.
         /// </summary>
         /// <param name="propertyName">The property name to map to, the property must exists on the underlying type</param>
         /// <param name="customDisplayName">A string used as the DisplayName for this descriptor.</param>
-        public EntityItemViewPropertyDescriptor( String propertyName, String customDisplayName )
+        public EntityItemViewPropertyDescriptor( string propertyName, string customDisplayName )
             : this( typeof( T ).GetProperty( propertyName ) )
         {
             this._customDisplayName = customDisplayName;
@@ -88,18 +86,18 @@ namespace Radical.ComponentModel
             get { return this._property; }
         }
 
-        String _customDisplayName = null;
+        string _customDisplayName = null;
 
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.
         /// </summary>
         /// <value></value>
         /// <returns>The name to display for the member.</returns>
-        public override String DisplayName
+        public override string DisplayName
         {
             get
             {
-                if( !String.IsNullOrEmpty( this._customDisplayName ) )
+                if( !string.IsNullOrEmpty( this._customDisplayName ) )
                 {
                     return this._customDisplayName;
                 }
@@ -135,7 +133,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <value></value>
         /// <returns>true if the property is read-only; otherwise, false.</returns>
-        public override Boolean IsReadOnly
+        public override bool IsReadOnly
         {
             get { return !this.Property.CanWrite; }
         }
@@ -147,7 +145,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the property should be persisted; otherwise, false.
         /// </returns>
-        public override Boolean ShouldSerializeValue( object component )
+        public override bool ShouldSerializeValue( object component )
         {
             return false;
         }
@@ -159,7 +157,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if resetting the component changes its value; otherwise, false.
         /// </returns>
-        public override Boolean CanResetValue( object component )
+        public override bool CanResetValue( object component )
         {
             return false;
 

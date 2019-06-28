@@ -72,9 +72,9 @@ namespace Radical.Tests.ChangeTracking
             IEqualityComparer<GenericParameterHelper> instance = new ReferenceEqualityComparer<GenericParameterHelper>();
 
             var obj = new GenericParameterHelper();
-            Int32 expected = obj.GetHashCode();
+            int expected = obj.GetHashCode();
 
-            Int32 actual = instance.GetHashCode( obj );
+            int actual = instance.GetHashCode( obj );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -85,7 +85,7 @@ namespace Radical.Tests.ChangeTracking
         public void generic_iEqualityComparer_getHashCode_null_reference()
         {
             IEqualityComparer<GenericParameterHelper> instance = new ReferenceEqualityComparer<GenericParameterHelper>();
-            Int32 actual = instance.GetHashCode( null );
+            int actual = instance.GetHashCode( null );
         }
 
         [TestMethod]
@@ -143,8 +143,8 @@ namespace Radical.Tests.ChangeTracking
             IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
             var obj = new GenericParameterHelper();
 
-            Int32 expected = obj.GetHashCode();
-            Int32 actual = instance.GetHashCode( obj );
+            int expected = obj.GetHashCode();
+            int actual = instance.GetHashCode( obj );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -155,7 +155,7 @@ namespace Radical.Tests.ChangeTracking
         public void iEqualityComparer_getHashCode_null_reference()
         {
             IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
-            Int32 actual = instance.GetHashCode( null );
+            int actual = instance.GetHashCode( null );
         }
     }
 }

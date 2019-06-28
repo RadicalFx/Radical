@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Radical.DataBinding;
+﻿using Radical.DataBinding;
 using Radical.Linq;
-using System.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Radical.Helpers
 {
@@ -17,9 +16,9 @@ namespace Radical.Helpers
         /// extracts descriptions.
         /// </summary>
         /// <returns>A readonly list of strings that represents descriptions data.</returns>
-        public static IEnumerable<String> ExtractDescriptions<T>()
+        public static IEnumerable<string> ExtractDescriptions<T>()
         {
-            List<String> lst = new List<String>();
+            List<string> lst = new List<string>();
 
             EnumHelper.ExtractBindingData<T>()
                 .ForEach( eb => lst.Add( eb.Caption ) );

@@ -1,8 +1,8 @@
 namespace Radical.Model
 {
-    using System;
     using Radical.ComponentModel;
     using Radical.Validation;
+    using System;
 
     /// <summary>
     /// This filter is a include all filter, the <collection>ShouldInclude( T )</collection> method always returns true.
@@ -27,7 +27,7 @@ namespace Radical.Model
         /// <returns>
         ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
-        public override Boolean ShouldInclude( T item )
+        public override bool ShouldInclude( T item )
         {
             Ensure.That( item )
                 .Named( () => item )
@@ -51,12 +51,12 @@ namespace Radical.Model
         #endregion
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// A <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
-        public override String ToString()
+        public override string ToString()
         {
             return Resources.Labels.ViewAllFilterName;
         }

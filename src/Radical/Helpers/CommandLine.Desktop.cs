@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Radical.Reflection;
+using Radical.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Radical.Validation;
-using Radical.Reflection;
 using System.Text;
 
 namespace Radical.Helpers
@@ -26,13 +26,13 @@ namespace Radical.Helpers
 
         const Char SEPARATOR = '=';
 
-        readonly IEnumerable<String> args;
+        readonly IEnumerable<string> args;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLine"/> class.
         /// </summary>
         /// <param name="args">The current command line args.</param>
-        public CommandLine( IEnumerable<String> args )
+        public CommandLine( IEnumerable<string> args )
         {
             Ensure.That( args ).Named( "args" ).IsNotNull();
 
@@ -45,7 +45,7 @@ namespace Radical.Helpers
         /// </summary>
         /// <param name="fullArgument">The full argument.</param>
         /// <returns>Just the argument key.</returns>
-        static String Normalize( String fullArgument )
+        static string Normalize( string fullArgument )
         {
             if ( fullArgument.StartsWith( "/" ) || fullArgument.StartsWith( "-" ) )
             {
@@ -68,13 +68,13 @@ namespace Radical.Helpers
         /// <returns>
         ///     <c>true</c> if the current command contains the specified argument; otherwise, <c>false</c>.
         /// </returns>
-        public Boolean Contains( String arg )
+        public bool Contains( string arg )
         {
             var query = this.args.Where( s => Normalize( s ).Equals( arg, StringComparison.CurrentCultureIgnoreCase ) );
             return query.Any();
         }
 
-        String GetValue( String argumentValuePair )
+        string GetValue( string argumentValuePair )
         {
             var fullValue = this.args.Where( s =>
             {
@@ -101,12 +101,12 @@ namespace Radical.Helpers
         /// <param name="arg">The argument name.</param>
         /// <param name="value">The current argument value.</param>
         /// <returns><c>True</c> if the operation succeded, otherwise <c>false</c>.</returns>
-        public Boolean TryGetValue<T>( String arg, out T value )
+        public bool TryGetValue<T>( string arg, out T value )
         {
             if ( this.Contains( arg ) )
             {
                 var v = this.GetValue( arg );
-                if ( !String.IsNullOrEmpty( v ) )
+                if ( !string.IsNullOrEmpty( v ) )
                 {
                     try
                     {
@@ -165,7 +165,7 @@ namespace Radical.Helpers
             {
                 if ( !this.Contains( property.Argument ) && !property.Aliases.Any( alias => this.Contains( alias ) ) && property.IsRequired )
                 {
-                    var msg = String.Format( "The command line argument '{0}' is required.", property.Argument );
+                    var msg = string.Format( "The command line argument '{0}' is required.", property.Argument );
                     throw new ArgumentException( msg, property.Argument );
                 }
                 else if ( this.Contains( property.Argument ) || property.Aliases.Any( alias => this.Contains( alias ) ) )
@@ -177,7 +177,7 @@ namespace Radical.Helpers
                     }
 
                     var value = this.GetValue( lookFor );
-                    if ( !String.IsNullOrEmpty( value ) )
+                    if ( !string.IsNullOrEmpty( value ) )
                     {
                         var t = property.Property.PropertyType;
                         var isNullable = Nullable.GetUnderlyingType( t ) != null;
@@ -194,9 +194,9 @@ namespace Radical.Helpers
                         else
                         {
                             var converted = Convert.ChangeType( value, t );
-                            if ( t == typeof( String ) )
+                            if ( t == typeof( string ) )
                             {
-                                var temp = ( String )converted;
+                                var temp = ( string )converted;
                                 if ( temp.IndexOf( ' ' ) != -1 && temp.StartsWith( "\"" ) && temp.EndsWith( "\"" ) )
                                 {
                                     converted = temp.Trim( '"' );
@@ -206,7 +206,7 @@ namespace Radical.Helpers
                             property.Property.SetValue( instance, converted, null );
                         }
                     }
-                    else if ( property.Property.PropertyType.Is<Boolean>() )
+                    else if ( property.Property.PropertyType.Is<bool>() )
                     {
                         property.Property.SetValue( instance, this.Contains( property.Argument ), null );
                     }
@@ -216,7 +216,7 @@ namespace Radical.Helpers
             return instance;
         }
 
-        public static String AsArguments<T>( T source )
+        public static string AsArguments<T>( T source )
         {
             var properties = typeof( T )
                 .GetProperties()
@@ -229,7 +229,7 @@ namespace Radical.Helpers
                 var value = p.Property.GetValue( source, null ).ToString();
                 if ( value.IndexOf( ' ' ) != -1 )
                 {
-                    value = String.Format( "\"{0}\"", value );
+                    value = string.Format( "\"{0}\"", value );
                 }
                 builder.AppendFormat( "-{0}{1}{2}", p.Argument, SEPARATOR, value );
                 builder.Append( ' ' );

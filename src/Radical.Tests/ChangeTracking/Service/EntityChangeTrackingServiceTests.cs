@@ -87,12 +87,12 @@
             ChangeTrackingService svc = new ChangeTrackingService();
 
             Person p = new Person(svc, false);
-            String expected = p.Name;
+            string expected = p.Name;
             p.Name = "Mauro";
 
             svc.Undo();
 
-            Assert.AreEqual<String>(expected, p.Name);
+            Assert.AreEqual<string>(expected, p.Name);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@
 
             IChangeSet cSet = svc.GetChangeSet();
 
-            Assert.AreEqual<Int32>(2, cSet.Count);
+            Assert.AreEqual<int>(2, cSet.Count);
         }
 
         [TestMethod]
@@ -303,7 +303,7 @@
         public void afterUndo_service_Redo_restore_previous_value()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
-            String expected = "Mauro";
+            string expected = "Mauro";
 
             Person p = new Person(svc, false);
             p.Name = expected;
@@ -311,7 +311,7 @@
             svc.Undo();
             svc.Redo();
 
-            Assert.AreEqual<String>(expected, p.Name);
+            Assert.AreEqual<string>(expected, p.Name);
         }
 
         [TestMethod]
@@ -494,7 +494,7 @@
         public void if_entity_is_iComponent_on_Disposed_entity_changes_are_removed_changes_stack()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
-            Boolean expected = false;
+            bool expected = false;
 
             Person p = null;
             using (p = new Person(svc, false))
@@ -503,9 +503,9 @@
                 p.Name = "Mauro";
             }
 
-            Boolean actual = svc.IsChanged;
+            bool actual = svc.IsChanged;
 
-            Assert.AreEqual<Boolean>(expected, actual);
+            Assert.AreEqual<bool>(expected, actual);
         }
 
         [TestMethod]
@@ -625,10 +625,10 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_no_more_changes_can_be_added()
         {
-            RejectCallback<String> cb = cv => { };
+            RejectCallback<string> cb = cv => { };
             Object fakeOwner = new Object();
-            String change = String.Empty;
-            PropertyValueChange<String> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
+            string change = string.Empty;
+            PropertyValueChange<string> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.Suspend();
@@ -794,7 +794,7 @@
             ChangeTrackingService svc = new ChangeTrackingService();
             IEnumerable entities = svc.GetEntities(EntityTrackingStates.IsTransient, false);
 
-            Assert.AreEqual<Int32>(0, entities.OfType<Object>().Count());
+            Assert.AreEqual<int>(0, entities.OfType<Object>().Count());
         }
 
         [TestMethod]
@@ -818,10 +818,10 @@
         [TestCategory("ChangeTracking")]
         public void service_after_add_isChanged_is_true()
         {
-            RejectCallback<String> cb = cv => { };
+            RejectCallback<string> cb = cv => { };
             Object fakeOwner = new Object();
-            String change = String.Empty;
-            PropertyValueChange<String> stub = new PropertyValueChange<String>(fakeOwner, "property-name", change, cb);
+            string change = string.Empty;
+            PropertyValueChange<string> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.Add(stub, AddChangeBehavior.RedoRequest);
@@ -833,10 +833,10 @@
         [TestCategory("ChangeTracking")]
         public void service_after_add_getChangeSet_return_valid_cSet()
         {
-            RejectCallback<String> cb = cv => { };
+            RejectCallback<string> cb = cv => { };
             Object fakeOwner = new Object();
-            String change = String.Empty;
-            IChange expected = new PropertyValueChange<String>(fakeOwner, "property-name", change, cb);
+            string change = string.Empty;
+            IChange expected = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.Add(expected, AddChangeBehavior.RedoRequest);
@@ -872,10 +872,10 @@
         [TestCategory("ChangeTracking")]
         public void service_create_non_null_bookmark()
         {
-            RejectCallback<String> cb = cv => { };
+            RejectCallback<string> cb = cv => { };
             Object fakeOwner = new Object();
-            String change = String.Empty;
-            IChange expected = new PropertyValueChange<String>(fakeOwner, "property-name", change, cb);
+            string change = string.Empty;
+            IChange expected = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.Add(expected, AddChangeBehavior.RedoRequest);
@@ -908,10 +908,10 @@
         [TestCategory("ChangeTracking")]
         public void service_validate_a_valid_bookmark_is_true()
         {
-            RejectCallback<String> cb = cv => { };
+            RejectCallback<string> cb = cv => { };
             Object fakeOwner = new Object();
-            String change = String.Empty;
-            IChange expected = new PropertyValueChange<String>(fakeOwner, "property-name", change, cb);
+            string change = string.Empty;
+            IChange expected = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.Add(expected, AddChangeBehavior.RedoRequest);
@@ -973,7 +973,7 @@
         [TestCategory("ChangeTracking")]
         public void service_successfully_revert_to_a_valid_bookmark()
         {
-            String expected = "Mauro";
+            string expected = "Mauro";
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -986,14 +986,14 @@
 
             svc.Revert(bmk);
 
-            Assert.AreEqual<String>(expected, p.Name);
+            Assert.AreEqual<string>(expected, p.Name);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_successfully_revert_to_a_valid_bookmark_created_at_initial_state()
         {
-            String expected = String.Empty;
+            string expected = string.Empty;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             IBookmark bmk = svc.CreateBookmark();
@@ -1004,7 +1004,7 @@
 
             svc.Revert(bmk);
 
-            Assert.AreEqual<String>(expected, p.Name);
+            Assert.AreEqual<string>(expected, p.Name);
         }
 
         [TestMethod]
@@ -1054,7 +1054,7 @@
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
             Assert.IsNotNull(advisory);
-            Assert.AreEqual<Int32>(1, advisory.Count());
+            Assert.AreEqual<int>(1, advisory.Count());
             Assert.AreEqual<ProposedActions>(ProposedActions.Create, advisory.First().Action);
         }
 
@@ -1080,7 +1080,7 @@
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
             Assert.IsNotNull(advisory);
-            Assert.AreEqual<Int32>(0, advisory.Count());
+            Assert.AreEqual<int>(0, advisory.Count());
         }
 
         [TestMethod]
@@ -1120,7 +1120,7 @@
             IChangeSet cSet = svc.GetChangeSet();
 
             Assert.IsNotNull(cSet);
-            Assert.AreEqual<Int32>(0, cSet.Count);
+            Assert.AreEqual<int>(0, cSet.Count);
         }
 
         [TestMethod]
@@ -1145,8 +1145,8 @@
         [TestCategory("ChangeTracking")]
         public void service_getChangeSet_with_valid_iChangeSetFilter()
         {
-            Int32 expected = 2;
-            Int32 actual = 0;
+            int expected = 2;
+            int actual = 0;
 
             var mock = A.Fake<IChangeSetFilter>();
             A.CallTo(()=>mock.ShouldInclude(null))
@@ -1163,15 +1163,15 @@
             IChangeSet cSet = svc.GetChangeSet(mock);
             actual = cSet.Count;
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_getChangeSet_returns_valid_cSet()
         {
-            Int32 expected = 2;
-            Int32 actual = 0;
+            int expected = 2;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1183,7 +1183,7 @@
             IChangeSet cSet = svc.GetChangeSet();
             actual = cSet.Count;
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
@@ -1199,7 +1199,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.None, false);
 
-            Assert.AreEqual<Int32>(1, entities.Count());
+            Assert.AreEqual<int>(1, entities.Count());
         }
 
         [TestMethod]
@@ -1217,7 +1217,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities();
 
-            Assert.AreEqual<Int32>(2, entities.Count());
+            Assert.AreEqual<int>(2, entities.Count());
         }
 
         [TestMethod]
@@ -1233,7 +1233,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, true);
 
-            Assert.AreEqual<Int32>(1, entities.Count());
+            Assert.AreEqual<int>(1, entities.Count());
         }
 
         [TestMethod]
@@ -1249,7 +1249,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, false);
 
-            Assert.AreEqual<Int32>(1, entities.Count());
+            Assert.AreEqual<int>(1, entities.Count());
         }
 
         [TestMethod]
@@ -1265,7 +1265,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, true);
 
-            Assert.AreEqual<Int32>(0, entities.Count());
+            Assert.AreEqual<int>(0, entities.Count());
         }
 
         [TestMethod]
@@ -1281,7 +1281,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, false);
 
-            Assert.AreEqual<Int32>(1, entities.Count());
+            Assert.AreEqual<int>(1, entities.Count());
         }
 
         [TestMethod]
@@ -1297,7 +1297,7 @@
 
             IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.IsTransient, false);
 
-            Assert.AreEqual<Int32>(1, entities.Count());
+            Assert.AreEqual<int>(1, entities.Count());
         }
 
         [TestMethod]
@@ -1425,8 +1425,8 @@
         [TestCategory("ChangeTracking")]
         public void service_on_add_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 3;
-            Int32 actual = 0;
+            int expected = 3;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
@@ -1436,30 +1436,30 @@
             p.Name = "Mau";                    //no changes, no raise
             p.Name = "Mauro";                //raise
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_registerTransient_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
 
             Person p = new Person(svc);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_registerTransient_with_explicit_autoRemove_false_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
@@ -1467,15 +1467,15 @@
             Person p = new Person(svc, false);
             svc.RegisterTransient(p, false);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_registerTransient_with_explicit_autoRemove_true_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
@@ -1483,15 +1483,15 @@
             Person p = new Person(svc, false);
             svc.RegisterTransient(p, true);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_unregisterTransient_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1499,15 +1499,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.UnregisterTransient(p);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_with_only_transient_entities_on_acceptChanges_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1515,15 +1515,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.AcceptChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_with_only_changes_on_acceptChanges_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc, false);
@@ -1532,15 +1532,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.AcceptChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_with_changes_and_transientEntities_on_acceptChanges_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1549,15 +1549,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.AcceptChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_acceptChanges_with_nothing_to_do_not_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 0;
-            Int32 actual = 0;
+            int expected = 0;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc, false);
@@ -1565,15 +1565,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.AcceptChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_with_only_transient_entities_on_rejectChanges_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1581,15 +1581,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.RejectChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_with_only_changes_on_rejectChanges_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc, false);
@@ -1598,15 +1598,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.RejectChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_with_changes_and_transientEntities_on_rejectChanges_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1615,15 +1615,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.RejectChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_rejectChanges_raise_trackingServiceStateChanged_event_once_even_if_there_are_more_changes()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1636,15 +1636,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.RejectChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_rejectChanges_with_nothing_to_do_not_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 0;
-            Int32 actual = 0;
+            int expected = 0;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc, false);
@@ -1652,15 +1652,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.RejectChanges();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_undo_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 2; //1: UndoRequest change, 2: Undo
-            Int32 actual = 0;
+            int expected = 2; //1: UndoRequest change, 2: Undo
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1669,7 +1669,7 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.Undo();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
@@ -1721,8 +1721,8 @@
         [TestCategory("ChangeTracking")]
         public void service_on_undo_with_nothing_to_do_not_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 0;
-            Int32 actual = 0;
+            int expected = 0;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1730,15 +1730,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.Undo();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_redo_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 2; //1: Store actual value, 2: Redo
-            Int32 actual = 0;
+            int expected = 2; //1: Store actual value, 2: Redo
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1748,15 +1748,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.Redo();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_redo_with_nothing_to_do_not_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 0;
-            Int32 actual = 0;
+            int expected = 0;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
             Person p = new Person(svc);
@@ -1764,15 +1764,15 @@
             svc.TrackingServiceStateChanged += (sender, args) => { actual++; };
             svc.Redo();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_revert_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1783,15 +1783,15 @@
             svc.TrackingServiceStateChanged += (s, e) => { actual++; };
             svc.Revert(bmk);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_on_revert_with_nothing_to_do_not_raise_trackingServiceStateChanged_event()
         {
-            Int32 expected = 0;
-            Int32 actual = 0;
+            int expected = 0;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1801,7 +1801,7 @@
             svc.TrackingServiceStateChanged += (s, e) => { actual++; };
             svc.Revert(bmk);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
@@ -1822,7 +1822,7 @@
         [TestCategory("ChangeTracking")]
         public void service_correcly_handle_multiple_undos_redos()
         {
-            String expected = "Mauro";
+            string expected = "Mauro";
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1834,14 +1834,14 @@
             svc.Undo();
             svc.Redo();
 
-            Assert.AreEqual<String>(expected, p.Name);
+            Assert.AreEqual<string>(expected, p.Name);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void service_after_redo_CanRedo_is_false()
         {
-            String expected = "Mauro";
+            string expected = "Mauro";
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1890,8 +1890,8 @@
         [TestCategory("ChangeTracking")]
         public void service_on_stopTracking_raise_trackingServiceStateChanged()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
             ChangeTrackingService svc = new ChangeTrackingService();
 
             Person p = new Person(svc);
@@ -1900,7 +1900,7 @@
             svc.TrackingServiceStateChanged += (s, e) => { actual++; };
             svc.Detach(p);
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
@@ -1927,8 +1927,8 @@
         [TestCategory("ChangeTracking")]
         public void service_after_trackingServiceStateChanged_unregister_event_is_not_raised()
         {
-            Int32 expected = 0;
-            Int32 actual = 0;
+            int expected = 0;
+            int actual = 0;
 
             EventHandler h = (s, e) => { actual++; };
             using (ChangeTrackingService svc = new ChangeTrackingService())
@@ -1962,12 +1962,12 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_remove_change_from_changesStack()
         {
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
             Object fakeOwner = new Object();
-            String change = "Foo";
+            string change = "Foo";
 
-            var iChange = new PropertyValueChange<String>(fakeOwner, "property-name", change, rc, cc, "");
+            var iChange = new PropertyValueChange<string>(fakeOwner, "property-name", change, rc, cc, "");
 
             ChangeTrackingService svc = new ChangeTrackingService();
             svc.Add(iChange, AddChangeBehavior.Default);
@@ -1982,10 +1982,10 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_EnumValueOutOfRangeException_on_invalid_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
             Object fakeOwner = new Object();
-            String change = "Foo";
+            string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
             iChange.HackedCommitReason = (CommitReason)1000;
@@ -2001,10 +2001,10 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_ArgumentOutOfRangeException_on_none_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
             Object fakeOwner = new Object();
-            String change = "Foo";
+            string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
             iChange.HackedCommitReason = CommitReason.None;
@@ -2020,10 +2020,10 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_reject_EnumValueOutOfRangeException_on_invalid_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
             Object fakeOwner = new Object();
-            String change = "Foo";
+            string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
             iChange.HackedRejectReason = (RejectReason)1000;
@@ -2039,10 +2039,10 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_reject_ArgumentOutOfRangeException_on_none_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
             Object fakeOwner = new Object();
-            String change = "Foo";
+            string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
             iChange.HackedRejectReason = RejectReason.None;
@@ -2057,12 +2057,12 @@
         [TestCategory("ChangeTracking")]
         public void service_on_dispose_with_changes()
         {
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
             Object fakeOwner = new Object();
-            String change = "Foo";
+            string change = "Foo";
 
-            var iChange = new PropertyValueChange<String>(fakeOwner, "property-name", change, rc, cc, "");
+            var iChange = new PropertyValueChange<string>(fakeOwner, "property-name", change, rc, cc, "");
 
             using (ChangeTrackingService svc = new ChangeTrackingService())
             {
@@ -2074,8 +2074,8 @@
         [TestCategory("ChangeTracking")]
         public void service_on_dispose_raise_disposed_event()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             EventHandler h = null;
             h = (s, e) =>

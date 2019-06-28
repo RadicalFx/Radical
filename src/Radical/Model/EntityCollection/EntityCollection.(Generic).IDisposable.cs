@@ -1,16 +1,4 @@
 using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using Radical.ComponentModel;
-using Radical.Linq;
-using Radical.Validation;
-using System.Linq.Expressions;
 
 namespace Radical.Model
 {
@@ -25,13 +13,13 @@ namespace Radical.Model
             this.Dispose( false );
         }
 
-        private Boolean isDisposed;
+        private bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><collection>true</collection> to release both managed and unmanaged resources; <collection>false</collection> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose( bool disposing )
         {
             if( disposing )
             {

@@ -353,7 +353,7 @@ namespace Radical.Tests.Windows.Messaging
             var signaled = wh.WaitOne( TimeSpan.FromSeconds( timeout ) );
             if( !signaled )
             {
-                Trace.WriteLine( String.Format( "Run without any issue for {0} seconds.", timeout ) );
+                Trace.WriteLine( string.Format( "Run without any issue for {0} seconds.", timeout ) );
             }
 
             run = false;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Radical.ComponentModel
 {
@@ -49,7 +48,7 @@ namespace Radical.ComponentModel
         /// <returns>
         ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
-        Boolean IsRegistered<TService>();
+        bool IsRegistered<TService>();
 
         /// <summary>
         /// Determines whether the given service type is registered.
@@ -58,7 +57,7 @@ namespace Radical.ComponentModel
         /// <returns>
         ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
-        Boolean IsRegistered( Type serviceType );
+        bool IsRegistered( Type serviceType );
 
         /// <summary>
         /// Resolves the specified service type.
@@ -73,7 +72,7 @@ namespace Radical.ComponentModel
         /// <param name="key">The key.</param>
         /// <param name="serviceType">Type of the service.</param>
         /// <returns></returns>
-        Object Resolve( String key, Type serviceType );
+        Object Resolve( string key, Type serviceType );
 
         /// <summary>
         /// Resolves all entries of the given type.

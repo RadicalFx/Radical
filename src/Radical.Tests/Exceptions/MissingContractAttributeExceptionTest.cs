@@ -15,12 +15,12 @@ namespace Radical.Tests.Exceptions
             return new MissingContractAttributeException();
         }
 
-        protected override Exception CreateMock( String message )
+        protected override Exception CreateMock( string message )
         {
             return new MissingContractAttributeException( message );
         }
 
-        protected override Exception CreateMock( String message, Exception innerException )
+        protected override Exception CreateMock( string message, Exception innerException )
         {
             return new MissingContractAttributeException( message, innerException );
         }
@@ -46,12 +46,12 @@ namespace Radical.Tests.Exceptions
         [TestMethod()]
         public void ctor_systemType()
         {
-            Type expected = typeof( String );
-            String expectedmessage = String.Format( CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", expected.FullName );
+            Type expected = typeof( string );
+            string expectedmessage = string.Format( CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", expected.FullName );
 
             MissingContractAttributeException target = this.CreateMock( expected );
 
-            Assert.AreEqual<String>( expectedmessage, target.Message );
+            Assert.AreEqual<string>( expectedmessage, target.Message );
             Assert.AreEqual<Type>( expected, target.TargetType );
         }
     }

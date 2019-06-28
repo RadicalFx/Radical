@@ -1,7 +1,6 @@
-using System;
 using Radical.ComponentModel;
-using Radical.Validation;
 using Radical.Reflection;
+using Radical.Validation;
 
 namespace Radical.Model
 {
@@ -28,7 +27,7 @@ namespace Radical.Model
         /// <returns>
         ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
-        public abstract Boolean ShouldInclude( T item );
+        public abstract bool ShouldInclude( T item );
 
         #region IEntityItemViewFilter Members
 

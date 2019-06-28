@@ -19,7 +19,7 @@
         [TestMethod]
         public void arrayExtensions_isSameAs_using_empty_arrays_should_return_arrays_equality()
         {
-            var actual = ArrayExtensions.IsSameAs(new Int32[0], new Int32[0]);
+            var actual = ArrayExtensions.IsSameAs(new int[0], new int[0]);
 
             actual.Should().Be.True();
         }

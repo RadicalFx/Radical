@@ -30,19 +30,19 @@ namespace Radical.Tests.Model.Entity
 
             }
 
-            public TestableMementoEntity(Boolean registerAsTransient)
+            public TestableMementoEntity(bool registerAsTransient)
                 : base(null, registerAsTransient)
             {
 
             }
 
-            public TestableMementoEntity(IChangeTrackingService memento, Boolean registerAsTransient)
+            public TestableMementoEntity(IChangeTrackingService memento, bool registerAsTransient)
                 : base(memento, registerAsTransient)
             {
 
             }
 
-            internal Boolean GetIsTracking()
+            internal bool GetIsTracking()
             {
                 return base.IsTracking;
             }
@@ -273,7 +273,7 @@ namespace Radical.Tests.Model.Entity
 
             change.IsCommitSupported.Should().Be.False();
             change.Owner.Should().Be.EqualTo(target);
-            change.Description.Should().Be.EqualTo(String.Empty);
+            change.Description.Should().Be.EqualTo(string.Empty);
         }
 
         [TestMethod]
@@ -331,7 +331,7 @@ namespace Radical.Tests.Model.Entity
 
             change.IsCommitSupported.Should().Be.True();
             change.Owner.Should().Be.EqualTo(target);
-            change.Description.Should().Be.EqualTo(String.Empty);
+            change.Description.Should().Be.EqualTo(string.Empty);
         }
 
         [TestMethod]
@@ -389,7 +389,7 @@ namespace Radical.Tests.Model.Entity
 
             change.IsCommitSupported.Should().Be.True();
             change.Owner.Should().Be.EqualTo(target);
-            change.Description.Should().Be.EqualTo(String.Empty);
+            change.Description.Should().Be.EqualTo(string.Empty);
         }
 
         [TestMethod]
@@ -436,7 +436,7 @@ namespace Radical.Tests.Model.Entity
             var target = new TestableMementoEntity(memento);
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, RejectReason.Undo);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.Undo);
 
             var actual = target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
 
@@ -453,7 +453,7 @@ namespace Radical.Tests.Model.Entity
             var target = new TestableMementoEntity(memento);
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, RejectReason.Redo);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.Redo);
 
             var actual = target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
 
@@ -470,7 +470,7 @@ namespace Radical.Tests.Model.Entity
             var target = new TestableMementoEntity(memento);
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, RejectReason.Revert);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.Revert);
 
             var actual = target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
 
@@ -487,7 +487,7 @@ namespace Radical.Tests.Model.Entity
             var target = new TestableMementoEntity(memento);
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, RejectReason.RejectChanges);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.RejectChanges);
 
             var actual = target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
 
@@ -506,7 +506,7 @@ namespace Radical.Tests.Model.Entity
             target.Dispose();
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, RejectReason.Revert);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.Revert);
 
             target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
         }
@@ -522,7 +522,7 @@ namespace Radical.Tests.Model.Entity
             var target = new TestableMementoEntity(memento);
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, RejectReason.None);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.None);
 
             target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
         }
@@ -538,7 +538,7 @@ namespace Radical.Tests.Model.Entity
             var target = new TestableMementoEntity(memento);
 
             var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<String>(target, value, iChange, (RejectReason)1000);
+            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, (RejectReason)1000);
 
             target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
         }

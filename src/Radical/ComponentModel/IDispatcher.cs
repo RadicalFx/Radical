@@ -55,6 +55,6 @@ namespace Radical.ComponentModel
         /// Gets a value indicating whether the caller can safely call a target method without using this dispatcher.
         /// </summary>
         /// <value><c>true</c> if the call is safe; otherwise, <c>false</c>.</value>
-        Boolean IsSafe { get; }
+        bool IsSafe { get; }
     }
 }

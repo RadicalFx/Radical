@@ -1,6 +1,6 @@
-﻿using System;
-using Radical.ComponentModel.Messaging;
+﻿using Radical.ComponentModel.Messaging;
 using Radical.Validation;
+using System;
 
 namespace Radical.Observers
 {
@@ -70,7 +70,7 @@ namespace Radical.Observers
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>( Func<TMessage, Boolean> filter ) where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>( Func<TMessage, bool> filter ) where TMessage : class
         {
             this.broker.Subscribe<TMessage>( this, ( sender, msg ) =>
             {
@@ -91,7 +91,7 @@ namespace Radical.Observers
         /// <param name="filter">The filter condition.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>(Func<TMessage, Boolean> filter, InvocationModel invocationModel ) where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>(Func<TMessage, bool> filter, InvocationModel invocationModel ) where TMessage : class
         {
             this.broker.Subscribe<TMessage>(this, invocationModel, (sender, msg) =>
             {

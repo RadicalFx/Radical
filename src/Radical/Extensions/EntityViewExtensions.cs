@@ -1,12 +1,10 @@
 namespace Radical
 {
-    using System;
-    using System.Text.RegularExpressions;
-    using Radical.Validation;
     using Radical.ComponentModel;
-    using System.Linq;
+    using Radical.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
 
     public static class EntityViewExtensions
     {
@@ -16,13 +14,13 @@ namespace Radical
             return view.Select( item => item.EntityItem ); ;
         }
 
-        public static IEntityView<T> ApplySimpleSort<T>( this IEntityView<T> view, String property )
+        public static IEntityView<T> ApplySimpleSort<T>( this IEntityView<T> view, string property )
             where T : class
         {
             Ensure.That( view ).Named( "view" ).IsNotNull();
 
             var actualDirection = view.SortDirection;
-            var actualProperty = view.SortProperty == null ? ( String )null : view.SortProperty.Name;
+            var actualProperty = view.SortProperty == null ? ( string )null : view.SortProperty.Name;
 
             if( property != null && property == actualProperty )
             {

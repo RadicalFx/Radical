@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Radical.ComponentModel.QueryModel;
+using System;
 using System.Collections.Generic;
-using Radical.ComponentModel.QueryModel;
 
 namespace Radical.ComponentModel
 {
@@ -46,7 +46,7 @@ namespace Radical.ComponentModel
         /// <returns>
         ///     <c>true</c> if the specified entity is attached; otherwise, <c>false</c>.
         /// </returns>
-        Boolean IsAttached( Object entity );
+        bool IsAttached( Object entity );
 
         /// <summary>
         /// Detaches the specified entity.
@@ -66,7 +66,7 @@ namespace Radical.ComponentModel
         /// <value>
         ///     <c>true</c> if this instance has pending changes; otherwise, <c>false</c>.
         /// </value>
-        Boolean HasPendingChanges { get; }
+        bool HasPendingChanges { get; }
 
         /// <summary>
         /// Begins a new transaction.
@@ -137,6 +137,6 @@ namespace Radical.ComponentModel
         /// <returns>
         /// The number of affected entities.
         /// </returns>
-        Int32 Execute<TCommand>( TCommand command ) where TCommand : IBatchCommand;
+        int Execute<TCommand>( TCommand command ) where TCommand : IBatchCommand;
     }
 }

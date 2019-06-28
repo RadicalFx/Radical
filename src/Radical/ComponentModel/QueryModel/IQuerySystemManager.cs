@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace Radical.ComponentModel.QueryModel
+﻿namespace Radical.ComponentModel.QueryModel
 {
     /// <summary>
     /// A query system is the main entry point to retrieve 

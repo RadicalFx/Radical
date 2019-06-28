@@ -1,11 +1,11 @@
 namespace Radical.Reflection
 {
-    using System;
-    using System.Linq;
-    using System.Globalization;
     using Radical.Validation;
-    using System.Text;
+    using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
 
     /// <summary>
     /// Defines static methods to manipulates System.Type types.
@@ -14,15 +14,15 @@ namespace Radical.Reflection
     public static class TypeExtensions
     {
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="System.string"/> that represents this instance.
         /// Use 's' for ShortString, 'sn' for ShortNameString.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="format">The format.</param>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="System.string"/> that represents this instance.
         /// </returns>
-        public static String ToString( this Type type, String format )
+        public static string ToString( this Type type, string format )
         {
             switch( format.ToLower() )
             {
@@ -44,21 +44,21 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="type">The type to build the string for.</param>
         /// <returns>A string representing the given type.</returns>
-        public static String ToShortString( this Type type )
+        public static string ToShortString( this Type type )
         {
             Ensure.That( type ).Named( "type" ).IsNotNull();
 
-            String tName = type.FullName;
-            String aName = type.Assembly.GetName().Name;
+            string tName = type.FullName;
+            string aName = type.Assembly.GetName().Name;
 
 
-            if( String.Equals( aName, "mscorlib", StringComparison.OrdinalIgnoreCase ) )
+            if( string.Equals( aName, "mscorlib", StringComparison.OrdinalIgnoreCase ) )
             {
-                return String.Format( CultureInfo.InvariantCulture, "{0}", tName );
+                return string.Format( CultureInfo.InvariantCulture, "{0}", tName );
             }
             else
             {
-                return String.Format( CultureInfo.InvariantCulture, "{0}, {1}", tName, aName );
+                return string.Format( CultureInfo.InvariantCulture, "{0}, {1}", tName, aName );
             }
         }
 
@@ -68,7 +68,7 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="type">The type to build the string for.</param>
         /// <returns>A string representing the name of the given type.</returns>
-        public static String ToShortNameString( this Type type )
+        public static string ToShortNameString( this Type type )
         {
             if( type.IsGenericType )
             {
@@ -83,7 +83,7 @@ namespace Radical.Reflection
                 .ToString()
                 .TrimEnd( ',', ' ' );
 
-                return String.Format( "{0}<{1}>", name, argumentsName );
+                return string.Format( "{0}<{1}>", name, argumentsName );
             }
 
             return type.Name;
@@ -99,7 +99,7 @@ namespace Radical.Reflection
         /// <returns>
         ///     <c>true</c> if the specified type inherits from the T type; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean Is<T>( this Type type )
+        public static bool Is<T>( this Type type )
         {
             return type.Is( typeof( T ) );
         }
@@ -114,7 +114,7 @@ namespace Radical.Reflection
         /// <returns>
         ///     <c>true</c> if the specified type inherits from the other type; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean Is( this Type type, Type otherType )
+        public static bool Is( this Type type, Type otherType )
         {
             return type != null &&
                 otherType != null &&
@@ -137,7 +137,7 @@ namespace Radical.Reflection
         /// <param name="type">The type to search the inheritance chain.</param>
         /// <param name="breakIf">A delegate that determinse whento stop the base type lookup.</param>
         /// <returns>The inheritance chain of the given type.</returns>
-        public static IEnumerable<Type> GetInheritanceChain( this Type type, Func<Type, Boolean> breakIf )
+        public static IEnumerable<Type> GetInheritanceChain( this Type type, Func<Type, bool> breakIf )
         {
             for( var current = type; current != null; current = current.BaseType )
             {

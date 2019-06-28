@@ -29,7 +29,7 @@
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void iconUriHelper_buildPackUri_using_empty_relative_uri_should_raise_ArgumentOutOfRangeException()
         {
-            Radical.StringExtensions.AsPackUri(String.Empty);
+            Radical.StringExtensions.AsPackUri(string.Empty);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@
         [TestMethod]
         public void stringExtensions_likeCompare_using_null_reference_value_should_not_fail()
         {
-            var actual = Radical.StringExtensions.IsLike(null, (String)null);
+            var actual = Radical.StringExtensions.IsLike(null, (string)null);
 
             actual.Should().Be.True();
         }
@@ -107,7 +107,7 @@
         [TestMethod]
         public void stringExtensions_likeCompare_using_null_reference_pattern_should_not_fail()
         {
-            var actual = "Foo".IsLike((String)null);
+            var actual = "Foo".IsLike((string)null);
 
             actual.Should().Be.False();
         }
@@ -115,7 +115,7 @@
         [TestMethod]
         public void stringExtensions_likeCompare_using_multiple_patterns_should_behave_as_expected()
         {
-            Boolean actual = Radical.StringExtensions.IsLike("Foo", "*v*", "F*");
+            bool actual = Radical.StringExtensions.IsLike("Foo", "*v*", "F*");
 
             actual.Should().Be.True();
         }
@@ -123,7 +123,7 @@
         [TestMethod]
         public void stringExtensions_likeCompare_using_single_pattern_with_leading_stars_should_behave_as_expected()
         {
-            Boolean actual = Radical.StringExtensions.IsLike("Foo", "*F*");
+            bool actual = Radical.StringExtensions.IsLike("Foo", "*F*");
 
             actual.Should().Be.True();
         }
@@ -161,9 +161,9 @@
         [TestMethod]
         public void stringExtension_AsKeywords_using_null_source_string_should_return_empty_keywords()
         {
-            var expected = new String[0];
+            var expected = new string[0];
 
-            var actual = ((String)null).AsKeywords(false, ',');
+            var actual = ((string)null).AsKeywords(false, ',');
 
             actual.Should().Have.SameSequenceAs(expected);
         }
@@ -171,7 +171,7 @@
         [TestMethod]
         public void stringExtension_AsKeywords_using_empty_source_string_should_return_empty_keywords()
         {
-            var expected = new String[0];
+            var expected = new string[0];
 
             var actual = ("").AsKeywords(false, ',');
 
@@ -243,7 +243,7 @@
         {
             var expected = "default";
 
-            var actual = ((String)null).IfNullOrEmptyReturn(expected);
+            var actual = ((string)null).IfNullOrEmptyReturn(expected);
 
             actual.Should().Be.EqualTo(expected);
         }

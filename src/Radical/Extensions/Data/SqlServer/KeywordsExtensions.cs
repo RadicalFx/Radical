@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using System;
 using System.Linq;
 
 namespace Radical.Data.SqlServer
 {
     public static class KeywordsExtensions
     {
-        public static IEnumerable<String> AsSqlServerKeywords( this IEnumerable<String> keywords )
+        public static IEnumerable<string> AsSqlServerKeywords( this IEnumerable<string> keywords )
         {
-            return keywords.Aggregate( new List<String>(), ( acc, kw ) =>
+            return keywords.Aggregate( new List<string>(), ( acc, kw ) =>
             {
                 var tmp = kw.AsSqlServerKeyword();
                 acc.Add( tmp );
@@ -18,7 +17,7 @@ namespace Radical.Data.SqlServer
             .AsReadOnly();
         }
 
-        public static String AsSqlServerKeyword( this String keyword )
+        public static string AsSqlServerKeyword( this string keyword )
         {
             var tmp = keyword.Replace( '*', '%' ).Replace( '?', '_' );
 

@@ -1,9 +1,8 @@
+using Radical.Linq;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Radical.Validation;
 using System.Linq.Expressions;
-using Radical.Linq;
+using System.Text;
 
 namespace Radical.Validation
 {
@@ -22,7 +21,7 @@ namespace Radical.Validation
         /// <returns>
         /// The newly created <see cref="ValidationError" />.
         /// </returns>
-        public static ValidationError Create<T>( Expression<Func<T>> key, String keyDisplayName, params String[] detectedProblems )
+        public static ValidationError Create<T>( Expression<Func<T>> key, string keyDisplayName, params string[] detectedProblems )
         {
             return new ValidationError( key.GetMemberName(), keyDisplayName, detectedProblems );
         }
@@ -33,8 +32,8 @@ namespace Radical.Validation
         ///// <param name="key">The key.</param>
         ///// <param name="keyDisplayName">Display name of the key.</param>
         ///// <param name="detectedProblems">The detected problems.</param>
-        //public ValidationError( String key, String keyDisplayName, params String[] detectedProblems )
-        //    : this( key, keyDisplayName, ( IEnumerable<String> )detectedProblems )
+        //public ValidationError( string key, string keyDisplayName, params string[] detectedProblems )
+        //    : this( key, keyDisplayName, ( IEnumerable<string> )detectedProblems )
         //{
 
         //}
@@ -45,7 +44,7 @@ namespace Radical.Validation
         /// <param name="key">The key, tipically the invalid property name.</param>
         /// <param name="keyDisplayName">Display name of the key.</param>
         /// <param name="detectedProblems">The detected problems.</param>
-        public ValidationError( String key, String keyDisplayName, IEnumerable<String> detectedProblems )
+        public ValidationError( string key, string keyDisplayName, IEnumerable<string> detectedProblems )
         {
             Ensure.That( key ).Named( "key" ).IsNotNullNorEmpty();
             Ensure.That( detectedProblems ).Named( "detectedProblems" ).IsNotNull();
@@ -59,7 +58,7 @@ namespace Radical.Validation
         /// Gets the error key.
         /// </summary>
         /// <value>The error key.</value>
-        public String Key { get; private set; }
+        public string Key { get; private set; }
 
         /// <summary>
         /// Gets the display name of the key.
@@ -67,23 +66,23 @@ namespace Radical.Validation
         /// <value>
         /// The display name of the key.
         /// </value>
-        public String KeyDisplayName { get; private set; }
+        public string KeyDisplayName { get; private set; }
 
         /// <summary>
         /// Gets the detected problems.
         /// </summary>
         /// <value>The detected problems.</value>
-        public IEnumerable<String> DetectedProblems { get; private set; }
+        public IEnumerable<string> DetectedProblems { get; private set; }
 
         /// <summary>
         /// Adds the given list of problems to the currently detected problems.
         /// </summary>
         /// <param name="problems">The problems to add.</param>
-        public void AddProblems( IEnumerable<String> problems )
+        public void AddProblems( IEnumerable<string> problems )
         {
             Ensure.That( problems ).Named( "problems" ).IsNotNull();
 
-            var tmp = new List<String>( this.DetectedProblems );
+            var tmp = new List<string>( this.DetectedProblems );
             tmp.AddRange( problems );
 
             this.DetectedProblems = tmp.AsReadOnly();
@@ -91,13 +90,13 @@ namespace Radical.Validation
             this.stringValue = null;
         }
 
-        private String stringValue;
+        private string stringValue;
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="System.string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="System.string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

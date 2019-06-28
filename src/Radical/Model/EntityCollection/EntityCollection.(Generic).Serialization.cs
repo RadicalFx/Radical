@@ -1,16 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
+﻿using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using Radical.ComponentModel;
-using Radical.Linq;
-using Radical.Validation;
-using System.Linq.Expressions;
 
 namespace Radical.Model
 {
@@ -62,7 +52,7 @@ namespace Radical.Model
         /// <summary>
         /// The serialization key to use during the serialization process.
         /// </summary>
-        protected readonly static String SerializationKey = String.Format( CultureInfo.InvariantCulture, "{0}_Data_Array", typeof( T ).Name );
+        protected readonly static string SerializationKey = string.Format( CultureInfo.InvariantCulture, "{0}_Data_Array", typeof( T ).Name );
 
         /// <summary>
         /// Runs when the entire object graph has been deserialized.

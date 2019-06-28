@@ -1,13 +1,12 @@
 ﻿namespace Radical.ChangeTracking
 {
+    using Radical.ComponentModel.ChangeTracking;
+    using Radical.Linq;
+    using Radical.Validation;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Linq;
-    using Radical.Validation;
-    using Radical.Linq;
     using System.Linq.Expressions;
 
     /// <summary>
@@ -41,7 +40,7 @@
 
         List<IChange> backwardChangesStack = new List<IChange>();
         List<IChange> forwardChangesStack = new List<IChange>();
-        Dictionary<Object, Boolean> transientEntities = new Dictionary<Object, Boolean>();
+        Dictionary<Object, bool> transientEntities = new Dictionary<Object, bool>();
         List<IComponent> iComponentEntities = new List<IComponent>();
 
         #region IDisposable Members
@@ -59,7 +58,7 @@
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose(Boolean disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!this.IsDisposed)
             {
@@ -355,7 +354,7 @@
             }
         }
 
-        Boolean CanRevertTo(IBookmark bookmark)
+        bool CanRevertTo(IBookmark bookmark)
         {
             /*
              * Siamo in grado di fare la revert:
@@ -401,7 +400,7 @@
         /// </summary>
         /// <param name="bookmark">The bookmark.</param>
         /// <returns><c>True</c> if the given bookmark is valid; otherwise <c>false</c>.</returns>
-        public virtual Boolean Validate(IBookmark bookmark)
+        public virtual bool Validate(IBookmark bookmark)
         {
             Ensure.That(bookmark).Named("bookmark").IsNotNull();
             return bookmark.Owner == this && (bookmark.Position == null || this.backwardChangesStack.Contains(bookmark.Position));
@@ -435,7 +434,7 @@
         /// If the change tracking service has already registered the object or if has pending 
         /// changes for the object an ArgumentException is raised.
         /// </exception>
-        public void RegisterTransient(Object entity, Boolean autoRemove)
+        public void RegisterTransient(Object entity, bool autoRemove)
         {
             this.EnsureNotSuspended();
             this.OnRegisterTransient(entity, autoRemove);
@@ -459,10 +458,10 @@
         /// If the change tracking service has already registered the object or if has pending 
         /// changes for the object an ArgumentException is raised.
         /// </exception>
-        protected virtual void OnRegisterTransient(Object entity, Boolean autoRemove)
+        protected virtual void OnRegisterTransient(Object entity, bool autoRemove)
         {
             EntityTrackingStates state = this.GetEntityState(entity);
-            Boolean isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
+            bool isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
 
             Ensure.That(entity)
                 .Named(() => entity)
@@ -527,7 +526,7 @@
         /// <param name="stateFilter">The state filter.</param>
         /// <param name="exactMatch">if set to <c>true</c> [exact match].</param>
         /// <returns></returns>
-        public virtual IEnumerable<Object> GetEntities(EntityTrackingStates stateFilter, Boolean exactMatch)
+        public virtual IEnumerable<Object> GetEntities(EntityTrackingStates stateFilter, bool exactMatch)
         {
             HashSet<Object> all = new HashSet<Object>(ObjectReferenceEqualityComparer.Instance);
             transientEntities.Keys.ForEach(te => all.Add(te));
@@ -707,7 +706,7 @@
         /// Gets a value indicating whether this instance can undo the last change.
         /// </summary>
         /// <value><c>true</c> if this instance can undo; otherwise, <c>false</c>.</value>
-        public Boolean CanUndo
+        public bool CanUndo
         {
             get { return this.backwardChangesStack.Count > 0; }
         }
@@ -733,7 +732,7 @@
         /// <value>
         ///     <c>true</c> if this instance has transient entities; otherwise, <c>false</c>.
         /// </value>
-        public Boolean HasTransientEntities
+        public bool HasTransientEntities
         {
             get { return this.transientEntities.Count > 0; }
         }
@@ -742,7 +741,7 @@
         /// Gets a value indicating whether this instance can redo.
         /// </summary>
         /// <value><c>true</c> if this instance can redo; otherwise, <c>false</c>.</value>
-        public Boolean CanRedo
+        public bool CanRedo
         {
             get { return this.forwardChangesStack.Count > 0; }
         }
@@ -996,9 +995,9 @@
         {
             EntityTrackingStates state = this.GetEntityState(entity);
 
-            Boolean isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
-            Boolean hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
-            Boolean hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
+            bool isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
+            bool hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
+            bool hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
 
             /*
              * questo handler potrebbe venire invocato in maniera un po' strana 
@@ -1089,7 +1088,7 @@
         /// <value>
         ///     <c>true</c> if this instance is suspended; otherwise, <c>false</c>.
         /// </value>
-        public Boolean IsSuspended
+        public bool IsSuspended
         {
             get;
             private set;
@@ -1147,7 +1146,7 @@
 
         #region IRevertibleChangeTracking Members
 
-        void RejectChangesCore(Boolean shouldNotify)
+        void RejectChangesCore(bool shouldNotify)
         {
             if (shouldNotify)
             {
@@ -1295,7 +1294,7 @@
 
         #endregion
 
-        Boolean IsInAtomicOperation
+        bool IsInAtomicOperation
         {
             get { return this.AtomicOperation != null; }
         }

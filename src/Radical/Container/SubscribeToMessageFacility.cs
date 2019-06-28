@@ -10,10 +10,10 @@ namespace Radical
 {
     public sealed class SubscribeToMessageFacility : IPuzzleContainerFacility
     {
-        List<Tuple<String, IContainerEntry>> buffer = new List<Tuple<String, IContainerEntry>>();
-        Boolean isMessageBrokerRegistered = false;
+        List<Tuple<string, IContainerEntry>> buffer = new List<Tuple<string, IContainerEntry>>();
+        bool isMessageBrokerRegistered = false;
 
-        void Attach(IPuzzleContainer container, String key, IContainerEntry entry)
+        void Attach(IPuzzleContainer container, string key, IContainerEntry entry)
         {
             var invocationModel = entry.Component.Is<INeedSafeSubscription>() ?
                 InvocationModel.Safe :
@@ -24,7 +24,7 @@ namespace Radical
                 .ForEach(t => this.Subscribe(container, key, entry, t, invocationModel));
         }
 
-        void Subscribe(IPuzzleContainer container, String key, IContainerEntry entry, Type genericHandler, InvocationModel invocationModel)
+        void Subscribe(IPuzzleContainer container, string key, IContainerEntry entry, Type genericHandler, InvocationModel invocationModel)
         {
             /*
              * Qui abbiamo un problema di questo tipo: quando in Castle viene
@@ -56,7 +56,7 @@ namespace Radical
             }
         }
 
-        Boolean IsInterestingHandler(IContainerEntry entry, Type t)
+        bool IsInterestingHandler(IContainerEntry entry, Type t)
         {
             return entry.Services.Any(s => s.Is(t)) || entry.Component.Is(t);
         }
@@ -83,7 +83,7 @@ namespace Radical
                 {
                     if (!this.isMessageBrokerRegistered)
                     {
-                        this.buffer.Add(new Tuple<String, IContainerEntry>(e.Entry.Key, e.Entry));
+                        this.buffer.Add(new Tuple<string, IContainerEntry>(e.Entry.Key, e.Entry));
                     }
                     else
                     {

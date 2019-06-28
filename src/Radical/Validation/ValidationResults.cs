@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using Radical.Linq;
+using System;
 using System.Collections.Generic;
-using Radical.Validation;
-using Radical.Linq;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -42,7 +41,7 @@ namespace Radical.Validation
         /// Gets a value indicating whether validation succedeed or not.
         /// </summary>
         /// <value><c>true</c> if the validation succedeed; otherwise, <c>false</c>.</value>
-        public Boolean IsValid
+        public bool IsValid
         {
             get
             {
@@ -64,7 +63,7 @@ namespace Radical.Validation
         /// <param name="key">The key.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="detectedProblems">The detected problems.</param>
-        public void AddError<T>( Expression<Func<T>> key, String displayName, String[] detectedProblems )
+        public void AddError<T>( Expression<Func<T>> key, string displayName, string[] detectedProblems )
         {
             var error = ValidationError.Create<T>( key, displayName, detectedProblems );
             this.AddError( error );
@@ -93,10 +92,10 @@ namespace Radical.Validation
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="System.string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="System.string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {

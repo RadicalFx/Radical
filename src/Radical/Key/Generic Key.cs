@@ -1,7 +1,7 @@
 namespace Radical
 {
-    using System;
     using Radical.ComponentModel;
+    using System;
 
     /// <summary>
     /// A concrete implemantation of the <see cref="IKey"/> interface.
@@ -42,10 +42,10 @@ namespace Radical
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// A <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
         public override string ToString()
         {
@@ -61,7 +61,7 @@ namespace Radical
             get { return this.value; }
         }
 
-        public override Boolean IsEmpty
+        public override bool IsEmpty
         {
             get { return Object.Equals( this.Value, default( T ) ); }
         }
@@ -101,7 +101,7 @@ namespace Radical
         /// <param name="pk2">The PK2.</param>
         /// <returns>The result of the operator.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "pk" )]
-        public static Boolean operator ==( Key<T> pk1, Key<T> pk2 )
+        public static bool operator ==( Key<T> pk1, Key<T> pk2 )
         {
             return Key<T>.Equals( pk1, pk2 );
         }
@@ -113,7 +113,7 @@ namespace Radical
         /// <param name="pk2">The PK2.</param>
         /// <returns>The result of the operator.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "pk" )]
-        public static Boolean operator !=( Key<T> pk1, Key<T> pk2 )
+        public static bool operator !=( Key<T> pk1, Key<T> pk2 )
         {
             return !Key<T>.Equals( pk1, pk2 );
         }
@@ -165,10 +165,10 @@ namespace Radical
         /// <param name="rightValue">The left side key value.</param>
         /// <returns><c>True</c> if the two instances are the same, otherwise <c>false</c>.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters" ), System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes" )]
-        public static Boolean Equals( IKey<T> leftValue, IKey<T> rightValue )
+        public static bool Equals( IKey<T> leftValue, IKey<T> rightValue )
         {
-            Boolean pk1IsNull = Object.ReferenceEquals( null, leftValue );
-            Boolean pk2IsNull = Object.ReferenceEquals( null, rightValue );
+            bool pk1IsNull = Object.ReferenceEquals( null, leftValue );
+            bool pk2IsNull = Object.ReferenceEquals( null, rightValue );
 
             if( pk1IsNull && pk2IsNull )
             {
@@ -239,8 +239,8 @@ namespace Radical
                 return 1;
             }
 
-            Boolean thisValueIsNull = this.Value == null;
-            Boolean otherValueIsNull = other.Value == null;
+            bool thisValueIsNull = this.Value == null;
+            bool otherValueIsNull = other.Value == null;
 
             if( thisValueIsNull && otherValueIsNull )
             {

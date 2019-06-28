@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Radical.Validation;
+using System;
 using System.Collections.Generic;
-using Radical.Validation;
 
 namespace Radical
 {
@@ -11,13 +11,13 @@ namespace Radical
     /// <typeparam name="T">The type of the item to compare.</typeparam>
     public sealed class DelegateComparer<T> : IComparer<T>
     {
-        readonly Func<T, T, Int32> comparer;
+        readonly Func<T, T, int> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DelegateComparer&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="comparer">The comparer.</param>
-        public DelegateComparer( Func<T, T, Int32> comparer )
+        public DelegateComparer( Func<T, T, int> comparer )
         {
             Ensure.That( comparer ).Named( "comparer" ).IsNotNull();
 

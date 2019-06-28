@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.Validation;
+﻿using Radical.Validation;
+using System;
 
 namespace Radical
 {
@@ -20,7 +17,7 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the two arrays are structurally equals; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsSameAs<T>( this T[] source, T[] other )
+        public static bool IsSameAs<T>( this T[] source, T[] other )
             where T : IComparable
         {
             return IsSameAs( source, other, ( s, o ) =>
@@ -41,7 +38,7 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the two arrays are structurally equals; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsSameAs<T>( this T[] source, T[] other, Func<T, T, Boolean> itemComparer )
+        public static bool IsSameAs<T>( this T[] source, T[] other, Func<T, T, bool> itemComparer )
         {
             Ensure.That( source ).Named( "source" ).IsNotNull();
             Ensure.That( itemComparer ).Named( "itemComparer" ).IsNotNull();
@@ -61,7 +58,7 @@ namespace Radical
                 return false;
             }
 
-            for( Int32 i = 0; i < source.Length; i++ )
+            for( int i = 0; i < source.Length; i++ )
             {
                 if( !itemComparer( source[ i ], other[ i ] ) )
                 {

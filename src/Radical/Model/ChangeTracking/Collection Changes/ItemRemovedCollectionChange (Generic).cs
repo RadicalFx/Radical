@@ -1,10 +1,10 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
-    using System.Collections.Generic;
     using Radical.Collections;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Validation;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Identifies that an item in a collection has been removed.
@@ -19,7 +19,7 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public ItemRemovedCollectionChange( Object owner, ItemChangedDescriptor<T> descriptor, RejectCallback<ItemChangedDescriptor<T>> rejectCallback, CommitCallback<ItemChangedDescriptor<T>> commitCallback, String description )
+        public ItemRemovedCollectionChange( Object owner, ItemChangedDescriptor<T> descriptor, RejectCallback<ItemChangedDescriptor<T>> rejectCallback, CommitCallback<ItemChangedDescriptor<T>> commitCallback, string description )
             : base( owner, descriptor, rejectCallback, commitCallback, description )
         {
 

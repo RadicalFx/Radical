@@ -70,7 +70,7 @@
         public void IsAttributeDefined_parameterInfo()
         {
             ParameterInfo pi = GetParameter();
-            Boolean actual = ParameterInfoExtension.IsAttributeDefined<MyTestAttribute>( pi );
+            bool actual = ParameterInfoExtension.IsAttributeDefined<MyTestAttribute>( pi );
 
             Assert.IsTrue( actual );
         }
@@ -79,7 +79,7 @@
         public void IsAttributeDefined_parameterInfo_using_inherited_attribute_but_searching_for_base_attribute_type()
         {
             ParameterInfo pi = GetParameterWithInherited();
-            Boolean actual = ParameterInfoExtension.IsAttributeDefined<MyTestAttribute>( pi );
+            bool actual = ParameterInfoExtension.IsAttributeDefined<MyTestAttribute>( pi );
 
             Assert.IsTrue( actual );
         }
@@ -131,7 +131,7 @@
             MyTestAttribute[] actual = ParameterInfoExtension.GetAttributes<MyTestAttribute>( pi );
 
             Assert.IsNotNull( actual );
-            Assert.AreEqual<Int32>( 1, actual.Length );
+            Assert.AreEqual<int>( 1, actual.Length );
             Assert.IsNotNull( actual[ 0 ] );
         }
     }

@@ -1,7 +1,5 @@
 ﻿namespace Radical.Model
 {
-    using System;
-
     public class SetValueAtEventArgs<T> : InsertEventArgs<T>
     {
         /// <summary>
@@ -10,7 +8,7 @@
         /// <param name="index">The index.</param>
         /// <param name="newValue">The new value.</param>
         /// <param name="oldValue">The old value.</param>
-        public SetValueAtEventArgs( Int32 index, T newValue, T oldValue )
+        public SetValueAtEventArgs( int index, T newValue, T oldValue )
             : base( index, newValue )
         {
             this.OldValue = oldValue;

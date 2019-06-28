@@ -1,10 +1,8 @@
 ﻿namespace Radical.ChangeTracking
 {
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Linq;
+    using System.Collections.Generic;
 
     public class ChangeSetDistinctVisitor : IChangeSetDistinctVisitor
     {

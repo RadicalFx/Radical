@@ -16,7 +16,7 @@ namespace Radical.Tests.Model.Entity
             this.OnInitialize();
         }
 
-        public MockEntity(String initialFirstNameValue)
+        public MockEntity(string initialFirstNameValue)
         {
             this.SetInitialPropertyValue(() => this.FirstName, initialFirstNameValue);
 
@@ -25,7 +25,7 @@ namespace Radical.Tests.Model.Entity
 
         void OnInitialize()
         {
-            var metadata = new PropertyMetadata<String>(this, () => this.MainProperty);
+            var metadata = new PropertyMetadata<string>(this, () => this.MainProperty);
             metadata.AddCascadeChangeNotifications(() => this.SubProperty);
 
             this.SetPropertyMetadata(metadata);
@@ -36,31 +36,31 @@ namespace Radical.Tests.Model.Entity
             this.SetInitialPropertyValue(property, value);
         }
 
-        public String FirstName
+        public string FirstName
         {
             get { return this.GetPropertyValue(() => this.FirstName); }
             set { this.SetPropertyValue(() => this.FirstName, value); }
         }
 
-        public String LastName
+        public string LastName
         {
             get { return this.GetPropertyValue(() => this.LastName); }
             set { this.SetPropertyValue(() => this.LastName, value); }
         }
 
-        public Int32 Number
+        public int Number
         {
             get { return this.GetPropertyValue(() => this.Number); }
             set { this.SetPropertyValue(() => this.Number, value); }
         }
 
-        public String MainProperty
+        public string MainProperty
         {
             get { return this.GetPropertyValue(() => this.MainProperty); }
             set { this.SetPropertyValue(() => this.MainProperty, value); }
         }
 
-        public String SubProperty
+        public string SubProperty
         {
             get { return this.GetPropertyValue(() => this.SubProperty); }
         }
@@ -308,7 +308,7 @@ namespace Radical.Tests.Model.Entity
             var actual = 0;
 
             var expectedNotifications = new[] { "MainProperty", "SubProperty" };
-            var actualNotifications = new List<String>();
+            var actualNotifications = new List<string>();
 
             var target = new MockEntity();
             target.PropertyChanged += (s, e) =>
@@ -330,7 +330,7 @@ namespace Radical.Tests.Model.Entity
             var actual = 0;
 
             var expectedNotifications = new[] { "BornDate", "Age" };
-            var actualNotifications = new List<String>();
+            var actualNotifications = new List<string>();
 
             var target = new Person(new DateTime(1973, 1, 10));
             target.PropertyChanged += (s, e) =>

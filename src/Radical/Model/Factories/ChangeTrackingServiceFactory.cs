@@ -1,7 +1,7 @@
-﻿using System;
-using Radical.Validation;
+﻿using Radical.ComponentModel.ChangeTracking;
 using Radical.ComponentModel.Factories;
-using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
 
 namespace Radical.Model.Factories
 {

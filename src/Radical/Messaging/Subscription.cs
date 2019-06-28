@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Radical.ComponentModel;
 using Radical.ComponentModel.Messaging;
 using Radical.Validation;
-using Radical.ComponentModel;
+using System;
 
 namespace Radical.Messaging
 {

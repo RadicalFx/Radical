@@ -31,7 +31,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory( "ChangeTracking" )]
         public void after_Undo_collection_is_rolledback()
         {
-            Int32 expected = 0;
+            int expected = 0;
 
             IChangeTrackingService svc = new ChangeTrackingService();
 
@@ -195,7 +195,7 @@ namespace Radical.Tests.ChangeTracking
         public void afterUndo_service_Redo_restore_previous_value()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
-            Int32 expected = 1;
+            int expected = 1;
 
             PersonCollection p = new PersonCollection( svc );
             p.Add( new Person( null, false ) );
@@ -203,7 +203,7 @@ namespace Radical.Tests.ChangeTracking
             svc.Undo();
             svc.Redo();
 
-            Assert.AreEqual<Int32>( expected, p.Count );
+            Assert.AreEqual<int>( expected, p.Count );
         }
 
         [TestMethod]
@@ -336,7 +336,7 @@ namespace Radical.Tests.ChangeTracking
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
             Assert.IsNotNull( advisory );
-            Assert.AreEqual<Int32>( 1, advisory.Count() );
+            Assert.AreEqual<int>( 1, advisory.Count() );
             Assert.AreEqual<ProposedActions>( ProposedActions.Update, advisory.First().Action );
         }
 
@@ -352,7 +352,7 @@ namespace Radical.Tests.ChangeTracking
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
             Assert.IsNotNull( advisory );
-            Assert.AreEqual<Int32>( 1, advisory.Count() );
+            Assert.AreEqual<int>( 1, advisory.Count() );
             Assert.AreEqual<ProposedActions>( ProposedActions.Create, advisory.First().Action );
         }
 
@@ -376,7 +376,7 @@ namespace Radical.Tests.ChangeTracking
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
             Assert.IsNotNull( advisory );
-            Assert.AreEqual<Int32>( 5, advisory.Count() );
+            Assert.AreEqual<int>( 5, advisory.Count() );
             foreach( var aa in advisory )
             {
                 Assert.AreEqual<ProposedActions>( ProposedActions.Delete, aa.Action );
@@ -387,8 +387,8 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory( "ChangeTracking" )]
         public void service_getChangeSet_returns_valid_cSet()
         {
-            Int32 expected = 3;
-            Int32 actual = 0;
+            int expected = 3;
+            int actual = 0;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -400,7 +400,7 @@ namespace Radical.Tests.ChangeTracking
             IChangeSet cSet = svc.GetChangeSet();
             actual = cSet.Count;
 
-            Assert.AreEqual<Int32>( expected, actual );
+            Assert.AreEqual<int>( expected, actual );
         }
 
         [TestMethod]
@@ -426,13 +426,13 @@ namespace Radical.Tests.ChangeTracking
             list.Clear();
             svc.Undo();
 
-            Assert.AreEqual<Int32>( source.Length, list.Count() );
+            Assert.AreEqual<int>( source.Length, list.Count() );
             source.ForEach( p =>
             {
-                Int32 expected = Array.IndexOf( source, p );
-                Int32 actual = list.IndexOf( p );
+                int expected = Array.IndexOf( source, p );
+                int actual = list.IndexOf( p );
 
-                Assert.AreEqual<Int32>( expected, actual );
+                Assert.AreEqual<int>( expected, actual );
             } );
         }
 
@@ -454,22 +454,22 @@ namespace Radical.Tests.ChangeTracking
             list.Remove( p1 );
 
             svc.Undo();
-            Assert.AreEqual<Int32>( 3, list.Count );
+            Assert.AreEqual<int>( 3, list.Count );
             Assert.IsTrue( list.Contains( p1 ) );
 
             svc.Undo();
-            Assert.AreEqual<Int32>( 1, list.IndexOf( p2 ) );
+            Assert.AreEqual<int>( 1, list.IndexOf( p2 ) );
 
             svc.Undo();
-            Assert.AreEqual<Int32>( 2, list.Count );
+            Assert.AreEqual<int>( 2, list.Count );
             Assert.IsFalse( list.Contains( p3 ) );
 
             svc.Undo();
-            Assert.AreEqual<Int32>( 1, list.Count );
+            Assert.AreEqual<int>( 1, list.Count );
             Assert.IsFalse( list.Contains( p2 ) );
 
             svc.Undo();
-            Assert.AreEqual<Int32>( 0, list.Count );
+            Assert.AreEqual<int>( 0, list.Count );
             Assert.IsFalse( list.Contains( p1 ) );
         }
 
@@ -496,22 +496,22 @@ namespace Radical.Tests.ChangeTracking
             }
 
             svc.Redo();
-            Assert.AreEqual<Int32>( 1, list.Count );
+            Assert.AreEqual<int>( 1, list.Count );
             Assert.IsTrue( list.Contains( p1 ) );
 
             svc.Redo();
-            Assert.AreEqual<Int32>( 2, list.Count );
+            Assert.AreEqual<int>( 2, list.Count );
             Assert.IsTrue( list.Contains( p2 ) );
 
             svc.Redo();
-            Assert.AreEqual<Int32>( 3, list.Count );
+            Assert.AreEqual<int>( 3, list.Count );
             Assert.IsTrue( list.Contains( p3 ) );
 
             svc.Redo();
-            Assert.AreEqual<Int32>( 0, list.IndexOf( p2 ) );
+            Assert.AreEqual<int>( 0, list.IndexOf( p2 ) );
 
             svc.Redo();
-            Assert.AreEqual<Int32>( 2, list.Count );
+            Assert.AreEqual<int>( 2, list.Count );
             Assert.IsFalse( list.Contains( p1 ) );
         }
 

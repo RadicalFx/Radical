@@ -14,7 +14,7 @@
             var expected = true;
 
             var target = new CommandLine( new[] { "-d" } );
-            Boolean actual = target.Contains( "d" );
+            bool actual = target.Contains( "d" );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -25,7 +25,7 @@
             var expected = true;
 
             var target = new CommandLine( new[] { "/d" } );
-            Boolean actual = target.Contains( "d" );
+            bool actual = target.Contains( "d" );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -36,7 +36,7 @@
             var expected = true;
 
             var target = new CommandLine( new[] { "d" } );
-            Boolean actual = target.Contains( "d" );
+            bool actual = target.Contains( "d" );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -47,7 +47,7 @@
             var expected = true;
 
             var target = new CommandLine( new[] { "D" } );
-            Boolean actual = target.Contains( "d" );
+            bool actual = target.Contains( "d" );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -58,7 +58,7 @@
             var expected = false;
 
             var target = new CommandLine( new[] { "-data" } );
-            Boolean actual = target.Contains( "d" );
+            bool actual = target.Contains( "d" );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -70,8 +70,8 @@
 
             var target = new CommandLine( new[] { "-d=1000" } );
 
-            Int32 value;
-            Boolean actual = target.TryGetValue<Int32>( "d", out value );
+            int value;
+            bool actual = target.TryGetValue<int>( "d", out value );
 
             actual.Should().Be.True();
             value.Should().Be.EqualTo( expectedValue );
@@ -82,10 +82,10 @@
         {
             var expected = false;
 
-            var target = new CommandLine( new String[ 0 ] );
+            var target = new CommandLine( new string[ 0 ] );
 
-            Int32 v;
-            Boolean actual = target.TryGetValue<Int32>( "xyz", out v );
+            int v;
+            bool actual = target.TryGetValue<int>( "xyz", out v );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -93,10 +93,10 @@
         [TestMethod]
         public void commandLine_tryGetValue_using_nullable_as_expected_value_and_missing_parameter_should_return_null()
         {
-            var target = new CommandLine( new String[ 0 ] );
+            var target = new CommandLine( new string[ 0 ] );
 
-            Int32? v;
-            Boolean actual = target.TryGetValue<Int32?>( "xyz", out v );
+            int? v;
+            bool actual = target.TryGetValue<int?>( "xyz", out v );
 
             actual.Should().Be.False();
             v.HasValue.Should().Be.False();
@@ -105,11 +105,11 @@
         [TestMethod]
         public void commandLine_tryGetValue_using_nullable_as_expected_value_and_valid_parameter_should_return_expected_value()
         {
-            var expected = new Nullable<Int32>( 10 );
+            var expected = new Nullable<int>( 10 );
             var target = new CommandLine( new[] { "xyz=10" } );
 
-            Int32? v;
-            Boolean actual = target.TryGetValue<Int32?>( "xyz", out v );
+            int? v;
+            bool actual = target.TryGetValue<int?>( "xyz", out v );
 
             actual.Should().Be.True();
             v.Should().Be.EqualTo( expected );
@@ -120,8 +120,8 @@
         {
             var target = new CommandLine( new[] { "xyz=1_0" } );
 
-            Int32 v;
-            Boolean actual = target.TryGetValue<Int32>( "xyz", out v );
+            int v;
+            bool actual = target.TryGetValue<int>( "xyz", out v );
 
             actual.Should().Be.False();
         }
@@ -132,7 +132,7 @@
             public int FirstProperty { get; set; }
 
             [CommandLineArgument( "s" )]
-            public String SecondProperty { get; set; }
+            public string SecondProperty { get; set; }
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@
         [ExpectedException( typeof( ArgumentException ) )]
         public void CommandLine_as_using_valid_command_line_and_class_should_not_convert_command_line_to_class_instance_using_missing_required_arguments()
         {
-            var target = new CommandLine( new String[ 0 ] );
+            var target = new CommandLine( new string[ 0 ] );
             var instance = target.As<Sample>();
         }
 
@@ -221,7 +221,7 @@
         class SampleWithAliases
         {
             [CommandLineArgument( "Sample", Aliases = new[] { "s" }, IsRequired = true )]
-            public String Sample { get; set; }
+            public string Sample { get; set; }
         }
 
         [TestMethod]
@@ -240,7 +240,7 @@
         {
             var target = new CommandLine( new[] { "-s=foo=bar" } );
             
-            String actual;
+            string actual;
             target.TryGetValue( "s", out actual );
 
             actual.Should().Be.EqualTo( "foo=bar" );
@@ -249,13 +249,13 @@
         class UserDefinition
         {
             [CommandLineArgument( "username", IsRequired = true, Aliases = new[] { "u" } )]
-            public String Username { get; set; }
+            public string Username { get; set; }
 
             [CommandLineArgument( "password", IsRequired = true, Aliases = new[] { "p" } )]
-            public String Password { get; set; }
+            public string Password { get; set; }
 
             [CommandLineArgument( "administrator", IsRequired = false, Aliases = new[] { "a", "admin" } )]
-            public Boolean AsAdmin { get; set; }
+            public bool AsAdmin { get; set; }
         }
 
         [TestMethod]

@@ -7,6 +7,6 @@ namespace Radical.Tests.Extensions
 {
     class Address
     {
-        public String Street { get; set; }
+        public string Street { get; set; }
     }
 }

@@ -1,10 +1,7 @@
 namespace Radical
 {
-    using System;
-    using System.Text.RegularExpressions;
-    using Radical.Validation;
     using Radical.ComponentModel;
-    using System.Linq;
+    using System;
     using System.Collections.Generic;
 
     public static class EntityCollectionExtensions
@@ -15,7 +12,7 @@ namespace Radical
             return BulkLoad( list, data, true );
         }
 
-        public static IEntityCollection<T> BulkLoad<T>( this IEntityCollection<T> list, IEnumerable<T> data, Boolean clear )
+        public static IEntityCollection<T> BulkLoad<T>( this IEntityCollection<T> list, IEnumerable<T> data, bool clear )
             where T : class
         {
             list.BeginInit();

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Radical.ComponentModel;
+using System;
 using System.Linq;
-using System.Net;
-using System.Reflection;
-using Radical.ComponentModel;
 //using Radical.Reflection;
 
 namespace Radical
@@ -24,7 +22,7 @@ namespace Radical
             container.ComponentRegistered += new EventHandler<ComponentRegisteredEventArgs>( OnComponentRegistered );
         }
 
-        Boolean IsBootable( Type type )
+        bool IsBootable( Type type )
         {
             return type.IsAssignableFrom( typeof( IBootable ).GetType() );
         }

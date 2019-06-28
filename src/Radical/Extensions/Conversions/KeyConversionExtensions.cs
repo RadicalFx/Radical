@@ -1,8 +1,8 @@
 ﻿namespace Radical.Conversions
 {
-    using System;
     using Radical.ComponentModel;
     using Radical.Validation;
+    using System;
 
     public static class KeyConversionExtensions
     {

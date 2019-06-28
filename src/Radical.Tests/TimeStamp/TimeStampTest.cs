@@ -31,8 +31,8 @@ namespace Radical.Tests
             Timestamp v1 = this.CreateMock();
             Timestamp v2 = this.CreateMock();
 
-            Boolean expected = false;
-            Boolean actual = (v1 != v2);
+            bool expected = false;
+            bool actual = (v1 != v2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -43,8 +43,8 @@ namespace Radical.Tests
             Timestamp v1 = this.CreateMock();
             Timestamp v2 = this.CreateMock();
 
-            Boolean expected = true;
-            Boolean actual = (v1 == v2);
+            bool expected = true;
+            bool actual = (v1 == v2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -55,8 +55,8 @@ namespace Radical.Tests
             Timestamp v1 = this.CreateMock();
             Timestamp v2 = null;
 
-            Boolean expected = false;
-            Boolean actual = (v1 == v2);
+            bool expected = false;
+            bool actual = (v1 == v2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -67,8 +67,8 @@ namespace Radical.Tests
             Timestamp v1 = null;
             Timestamp v2 = this.CreateMock();
 
-            Boolean expected = false;
-            Boolean actual = (v1 == v2);
+            bool expected = false;
+            bool actual = (v1 == v2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -79,8 +79,8 @@ namespace Radical.Tests
             Timestamp v1 = this.CreateMock();
             Timestamp v2 = this.CreateMock();
 
-            Boolean expected = true;
-            Boolean actual = v1.Equals(v2);
+            bool expected = true;
+            bool actual = v1.Equals(v2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -91,8 +91,8 @@ namespace Radical.Tests
             Timestamp v1 = this.CreateMock();
             Object v2 = new Object();
 
-            Boolean expected = false;
-            Boolean actual = v1.Equals(v2);
+            bool expected = false;
+            bool actual = v1.Equals(v2);
 
             Assert.AreEqual(expected, actual);
         }
@@ -103,18 +103,18 @@ namespace Radical.Tests
             Timestamp v1 = this.CreateMock();
             Timestamp v2 = this.CreateMock();
 
-            Boolean expected = true;
-            Boolean actual = v1.Equals((Object)v2);
+            bool expected = true;
+            bool actual = v1.Equals((Object)v2);
 
             Assert.AreEqual(expected, actual);
         }
 
         protected virtual void AssertGetHashCode(Timestamp ts)
         {
-            Int32 expected = 0;
-            Int32 actual = ts.GetHashCode();
+            int expected = 0;
+            int actual = ts.GetHashCode();
 
-            Assert.AreEqual<Int32>(expected, actual);
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod()]

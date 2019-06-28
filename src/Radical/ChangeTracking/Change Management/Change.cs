@@ -1,11 +1,11 @@
 ﻿namespace Radical.ChangeTracking
 {
-    using System;
-    using System.Collections.Generic;
     using Radical;
     using Radical.Collections;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Validation;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Represents a change occurred to an object.
@@ -42,7 +42,7 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        protected Change( Object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, String description )
+        protected Change( Object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description )
         {
             Ensure.That( owner ).Named( "owner" ).IsNotNull();
             Ensure.That( rejectCallback ).Named( "rejectCallback" ).IsNotNull();
@@ -160,7 +160,7 @@
         /// <value>
         ///     <c>true</c> if this instance supports commit; otherwise, <c>false</c>.
         /// </value>
-        public virtual Boolean IsCommitSupported
+        public virtual bool IsCommitSupported
         {
             get { return this.CommitCallback != null; }
         }

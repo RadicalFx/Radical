@@ -1,12 +1,12 @@
 namespace Radical.Model
 {
+    using Radical.ComponentModel;
+    using Radical.Linq;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using Radical.ComponentModel;
-    using Radical.Linq;
 
     /// <summary>
     /// The Indexer class is primarly an Index manager for the View,
@@ -42,9 +42,9 @@ namespace Radical.Model
          * "Pending Add", ma questa è una limitazione della View e non dell'indice che 
          * sarebbe già ora in grado di gestirne 'n'.
          */
-        Dictionary<IEntityItemView<T>, Int32> defaultIndex = new Dictionary<IEntityItemView<T>, Int32>();
+        Dictionary<IEntityItemView<T>, int> defaultIndex = new Dictionary<IEntityItemView<T>, int>();
 
-        Dictionary<String, Dictionary<Object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<String, Dictionary<Object, IEntityItemView<T>>>();
+        Dictionary<string, Dictionary<Object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<string, Dictionary<Object, IEntityItemView<T>>>();
 
         #region .ctor
 
@@ -111,7 +111,7 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
         public bool Remove( IEntityItemView<T> item )
         {
-            Int32 index = this.storage.IndexOf( item );
+            int index = this.storage.IndexOf( item );
             if( index > -1 )
             {
                 this.RemoveAt( index );
@@ -161,7 +161,7 @@ namespace Radical.Model
         /// Removes the corrurrence of the EntityItemView at the specified index
         /// </summary>
         /// <param name="index">The index.</param>
-        public void RemoveAt( Int32 index )
+        public void RemoveAt( int index )
         {
             IEntityItemView<T> item = this.storage[ index ];
             if( this.defaultIndex.ContainsKey( item ) )
@@ -177,7 +177,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="array">The one-dimensional Array that is the destination of the elements copied from ICollection. The Array must have zero-based indexing.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins</param>
-        public void CopyTo( IEntityItemView<T>[] array, Int32 arrayIndex )
+        public void CopyTo( IEntityItemView<T>[] array, int arrayIndex )
         {
             this.storage.CopyTo( array, arrayIndex );
         }
@@ -187,7 +187,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
-        public Int32 Count
+        public int Count
         {
             get { return this.storage.Count; }
         }
@@ -199,7 +199,7 @@ namespace Radical.Model
         /// <returns>
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
-        public Boolean Contains( IEntityItemView<T> item )
+        public bool Contains( IEntityItemView<T> item )
         {
             return this.storage.Contains( item );
         }
@@ -211,7 +211,7 @@ namespace Radical.Model
         /// <returns>
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
-        public Boolean Contains( T item )
+        public bool Contains( T item )
         {
             return this.IndexOf( item ) != -1;
         }
@@ -220,7 +220,7 @@ namespace Radical.Model
         /// Gets the <see cref="Radical.Model.EntityItemView&lt;T&gt;"/> at the specified index.
         /// </summary>
         /// <item></item>
-        public IEntityItemView<T> this[ Int32 index ]
+        public IEntityItemView<T> this[ int index ]
         {
             get { return this.storage[ index ]; }
         }
@@ -254,15 +254,15 @@ namespace Radical.Model
         /// </summary>
         /// <param name="item">The item to find the index for.</param>
         /// <returns></returns>
-        public Int32 IndexOf( T item )
+        public int IndexOf( T item )
         {
             /*
              * Le performance di questo potrebbero essere
              * drasticamente migliorate se gestissimo anche
              * un'indicizzazione tra T e la posizione dello
              * EntityItemView che lo incapsula utilizzando
-             * un altro Dictionary<T, Int32> dove T è il DataItem
-             * mentre l'Int32 è l'indice dell'EntityItemView che
+             * un altro Dictionary<T, int> dove T è il DataItem
+             * mentre l'int è l'indice dell'EntityItemView che
              * lo incapsula
              */
             var x = ( from el in this.storage
@@ -282,7 +282,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns></returns>
-        public Int32 IndexOf( IEntityItemView<T> item )
+        public int IndexOf( IEntityItemView<T> item )
         {
             return this.storage.IndexOf( item );
         }
@@ -294,7 +294,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="objectItemViewIndexInView">The EntityItemView index.</param>
         /// <returns>The index of the T element, otherwise -1</returns>
-        public Int32 FindObjectIndexInDataSource( Int32 objectItemViewIndexInView )
+        public int FindObjectIndexInDataSource( int objectItemViewIndexInView )
         {
             if( objectItemViewIndexInView > -1 && objectItemViewIndexInView < this.storage.Count )
             {
@@ -315,7 +315,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="entityIndexInDataSource">The index of the T element in DataSource.</param>
         /// <returns>The Index of the EntityItemView, otherwise -1</returns>
-        public Int32 FindEntityItemViewIndexInView( Int32 entityIndexInDataSource )
+        public int FindEntityItemViewIndexInView( int entityIndexInDataSource )
         {
             if( entityIndexInDataSource > -1 && entityIndexInDataSource < this.view.DataSource.Count )
             {
@@ -372,9 +372,9 @@ namespace Radical.Model
         /// <param name="property">The property to look at.</param>
         /// <param name="key">The key to search.</param>
         /// <returns>The inedex of the first item the match the given key.</returns>
-        public Int32 Find( PropertyDescriptor property, object key )
+        public int Find( PropertyDescriptor property, object key )
         {
-            Int32 index = -1;
+            int index = -1;
 
             if( this.propertiesIndexes.ContainsKey( property.Name ) )
             {
@@ -439,7 +439,7 @@ namespace Radical.Model
         /// </summary>
         public void Rebuild()
         {
-            IEnumerable<KeyValuePair<IEntityItemView<T>, Int32>> pendingAddElements = null;
+            IEnumerable<KeyValuePair<IEntityItemView<T>, int>> pendingAddElements = null;
 
             if( this.Count > 0 )
             {

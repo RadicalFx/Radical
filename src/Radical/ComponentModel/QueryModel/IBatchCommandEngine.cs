@@ -1,5 +1,4 @@
-﻿using System;
-namespace Radical.ComponentModel.QueryModel
+﻿namespace Radical.ComponentModel.QueryModel
 {
     /// <summary>
     /// Represents the base interface for all the batch commands engines.

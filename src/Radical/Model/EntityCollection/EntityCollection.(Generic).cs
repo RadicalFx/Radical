@@ -1,16 +1,12 @@
-using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 using Radical.ComponentModel;
 using Radical.Linq;
 using Radical.Validation;
-using System.Linq.Expressions;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Radical.Model
 {
@@ -86,7 +82,7 @@ namespace Radical.Model
         /// <value>
         ///     <c>true</c> if this instance is loading data; otherwise, <c>false</c>.
         /// </value>
-        public Boolean IsInitializing
+        public bool IsInitializing
         {
             get;
             private set;
@@ -107,7 +103,7 @@ namespace Radical.Model
         /// notifying to the outside world the changes occurred.
         /// </summary>
         /// <param name="notify">if set to <c>true</c> raises the <see cref="CollectionChanged"/> event.</param>
-        public virtual void EndInit( Boolean notify )
+        public virtual void EndInit( bool notify )
         {
             this.EnsureNotDisposed();
 
@@ -162,7 +158,7 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="capacity">The initial capacity.</param>
-        public EntityCollection( Int32 capacity )
+        public EntityCollection( int capacity )
             : this()
         {
             this._storage = new List<T>( capacity );
@@ -195,7 +191,7 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnInitialize()
         {
-            //this._serializationKey = String.Format( CultureInfo.InvariantCulture, "{0}_Data_Array", typeof( T ).Name );
+            //this._serializationKey = string.Format( CultureInfo.InvariantCulture, "{0}_Data_Array", typeof( T ).Name );
         }
 
         /// <summary>
@@ -219,7 +215,7 @@ namespace Radical.Model
             if ( this.Settings.NotifyListItemPropertyChanged )
             {
                 T item = ( T )sender;
-                Int32 index = this.IndexOf( item );
+                int index = this.IndexOf( item );
 
                 this.OnCollectionChanged( new CollectionChangedEventArgs<T>( CollectionChangeType.ItemChanged, index, -1, item ) );
             }
@@ -254,7 +250,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected void SetValueAt( Int32 index, T value )
+        protected void SetValueAt( int index, T value )
         {
             this.EnsureNotDisposed();
             //Recuperiamo un riferimento al valore che verrà sovrascritto
@@ -287,7 +283,7 @@ namespace Radical.Model
         /// <param name="index">The index.</param>
         /// <param name="newValue">The new item.</param>
         /// <param name="overwrittenValue">The overwritten item.</param>
-        protected virtual void OnSetValueAtCompleted( Int32 index, T newValue, T overwrittenValue )
+        protected virtual void OnSetValueAtCompleted( int index, T newValue, T overwrittenValue )
         {
 
         }
@@ -297,7 +293,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns></returns>
-        protected virtual T GetValueAt( Int32 index )
+        protected virtual T GetValueAt( int index )
         {
             this.EnsureNotDisposed();
             return ( T )this.Storage[ index ];
@@ -307,7 +303,7 @@ namespace Radical.Model
         /// Gets or sets the <see cref="T:T"/> at the specified index.
         /// </summary>
         /// <item></item>
-        public T this[ Int32 index ]
+        public T this[ int index ]
         {
             get
             {
@@ -326,7 +322,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected virtual void OnAddCompleted( Int32 index, T value )
+        protected virtual void OnAddCompleted( int index, T value )
         {
             
         }
@@ -340,7 +336,7 @@ namespace Radical.Model
             this.EnsureNotDisposed();
             //Aggiungiamo allo storage
             this.Storage.Add( item );
-            Int32 index = this.Count - 1;
+            int index = this.Count - 1;
 
             this.WireListItem( item );
 
@@ -358,7 +354,7 @@ namespace Radical.Model
         /// <exception cref="ArgumentOutOfRangeException">The supplied index (<paramref name="newIndex"/>)
         /// is outside the bounds of the collection.</exception>
         /// <exception cref="ArgumentNullException">The supplied <paramref name="item"/> is a null reference.</exception>
-        public void Move( T item, Int32 newIndex )
+        public void Move( T item, int newIndex )
         {
             this.EnsureNotDisposed();
             if( item == null )
@@ -366,7 +362,7 @@ namespace Radical.Model
                 throw new ArgumentNullException( "item" );
             }
 
-            Int32 index = this.IndexOf( item );
+            int index = this.IndexOf( item );
             if( index == -1 )
             {
                 throw new ArgumentOutOfRangeException( "item" );
@@ -384,7 +380,7 @@ namespace Radical.Model
         /// <param name="newIndex">The new index.</param>
         /// <exception cref="ArgumentOutOfRangeException">The supplied index (<paramref name="oldIndex"/> or <paramref name="newIndex"/>)
         /// is outside the bounds of the collection.</exception>
-        public void Move( Int32 oldIndex, Int32 newIndex )
+        public void Move( int oldIndex, int newIndex )
         {
             this.EnsureNotDisposed();
             if( oldIndex < 0 || oldIndex >= this.Count )
@@ -412,7 +408,7 @@ namespace Radical.Model
         /// <param name="oldIndex">The old index.</param>
         /// <param name="newIndex">The new index.</param>
         /// <param name="value">The value.</param>
-        protected virtual void OnMoveCompleted( Int32 oldIndex, Int32 newIndex, T value )
+        protected virtual void OnMoveCompleted( int oldIndex, int newIndex, T value )
         {
 
         }
@@ -448,7 +444,7 @@ namespace Radical.Model
         /// <returns>
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
-        public Boolean Contains( T item )
+        public bool Contains( T item )
         {
             this.EnsureNotDisposed();
             return this.Storage.Contains( item );
@@ -459,7 +455,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns></returns>
-        public Int32 IndexOf( T item )
+        public int IndexOf( T item )
         {
             this.EnsureNotDisposed();
             return this.Storage.IndexOf( item );
@@ -471,7 +467,7 @@ namespace Radical.Model
         ///// <param name="value">The item.</param>
         ///// <param name="startIndex">The start index.</param>
         ///// <returns></returns>
-        //public Int32 IndexOf( T value, Int32 startIndex )
+        //public int IndexOf( T value, int startIndex )
         //{
         //    this.EnsureNotDisposed();
         //    return this.Storage.IndexOf( value, startIndex );
@@ -491,7 +487,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="item">The item.</param>
-        public void Insert( Int32 index, T item )
+        public void Insert( int index, T item )
         {
             this.EnsureNotDisposed();
             InsertEventArgs<T> args = new InsertEventArgs<T>( index, item );
@@ -512,7 +508,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected virtual void OnInsertCompleted( Int32 index, T value )
+        protected virtual void OnInsertCompleted( int index, T value )
         {
             
         }
@@ -522,7 +518,7 @@ namespace Radical.Model
         /// </summary>
         /// <value></value>
         /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
-        protected virtual Boolean IsReadOnly
+        protected virtual bool IsReadOnly
         {
             get
             {
@@ -536,7 +532,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="value">The item.</param>
         /// <param name="index">The index.</param>
-        protected virtual void OnRemoveCompleted( T value, Int32 index )
+        protected virtual void OnRemoveCompleted( T value, int index )
         {
             
         }
@@ -545,7 +541,7 @@ namespace Radical.Model
         /// Removes the specified item.
         /// </summary>
         /// <param name="item">The item to remove.</param>
-        public Boolean Remove( T item )
+        public bool Remove( T item )
         {
             this.EnsureNotDisposed();
             return this.Remove( item, true );
@@ -557,11 +553,11 @@ namespace Radical.Model
         /// <param name="item">The item to remove.</param>
         /// <param name="notify">if set to <collection>true</collection> raises the CollectionChanged event.</param>
         /// <returns>true if the operation has been completed successfully; otherwise false.</returns>
-        protected Boolean Remove( T item, Boolean notify )
+        protected bool Remove( T item, bool notify )
         {
             this.EnsureNotDisposed();
             //Recuperiamo l'indice da rimuovere
-            Int32 index = this.Storage.IndexOf( item );
+            int index = this.Storage.IndexOf( item );
 
             //Rimuoviamo
             if( index > -1 )
@@ -569,7 +565,7 @@ namespace Radical.Model
                 this.UnwireListItem( item );
 
                 //Rimuoviamo
-                Boolean retVal = this.Storage.Remove( item );
+                bool retVal = this.Storage.Remove( item );
 
                 this.OnRemoveCompleted( item, index );
 
@@ -590,7 +586,7 @@ namespace Radical.Model
         /// <param name="index">The zero-based index of the item to remove.</param>
         /// <exception cref="T:System.ArgumentOutOfRangeException">index is not a valid index in the <see cref="T:System.Collections.IList"></see>. </exception>
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"></see> is read-only.-or- The <see cref="T:System.Collections.IList"></see> has a fixed size. </exception>
-        public void RemoveAt( Int32 index )
+        public void RemoveAt( int index )
         {
             this.EnsureNotDisposed();
             this.RemoveAt( index, true );
@@ -601,7 +597,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="notify">if set to <collection>true</collection> raises the CollectionChanged event.</param>
-        protected void RemoveAt( Int32 index, Boolean notify )
+        protected void RemoveAt( int index, bool notify )
         {
             this.EnsureNotDisposed();
             T value = this.GetValueAt( index );
@@ -620,7 +616,7 @@ namespace Radical.Model
         /// </summary>
         /// <value></value>
         /// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
-        public Int32 Count
+        public int Count
         {
             get
             {
@@ -660,7 +656,7 @@ namespace Radical.Model
         ///     <paramref name="arrayIndex"/> is less than 0.</exception>
         /// <exception cref="T:System.ArgumentException">
         ///     <paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type <paramref name="T"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
-        public void CopyTo( T[] array, Int32 arrayIndex )
+        public void CopyTo( T[] array, int arrayIndex )
         {
             this.EnsureNotDisposed();
             this.Storage.CopyTo( array, arrayIndex );
@@ -760,9 +756,9 @@ namespace Radical.Model
             return default( T );
         }
 
-        Boolean hasDefaultCtor;
-        Boolean defaultCtorSearched;
-        Boolean HasDefaultCtor()
+        bool hasDefaultCtor;
+        bool defaultCtorSearched;
+        bool HasDefaultCtor()
         {
             if( !defaultCtorSearched )
             {
@@ -782,7 +778,7 @@ namespace Radical.Model
         /// <item>
         ///     <collection>true</collection> if this.instace allo the creation of new items; otherwise, <collection>false</collection>.
         /// </item>
-        public virtual Boolean AllowNew
+        public virtual bool AllowNew
         {
             get
             {
@@ -879,7 +875,7 @@ namespace Radical.Model
                 this.NotifyListItemPropertyChanged = true;
             }
 
-            public Boolean NotifyListItemPropertyChanged { get; set; }
+            public bool NotifyListItemPropertyChanged { get; set; }
         }
     }
 }

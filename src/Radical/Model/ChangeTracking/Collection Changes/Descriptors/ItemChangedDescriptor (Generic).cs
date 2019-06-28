@@ -1,7 +1,5 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
-
     public class ItemChangedDescriptor<T> : CollectionChangeDescriptor<T>
     {
         /// <summary>
@@ -9,7 +7,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="index">The index.</param>
-        public ItemChangedDescriptor( T item, Int32 index )
+        public ItemChangedDescriptor( T item, int index )
         {
             this.Item = item;
             this.Index = index;
@@ -29,7 +27,7 @@
         /// Gets the index of the item.
         /// </summary>
         /// <value>The index.</value>
-        public Int32 Index
+        public int Index
         {
             get;
             private set;

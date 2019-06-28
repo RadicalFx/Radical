@@ -55,7 +55,7 @@ namespace Radical.Tests.ChangeTracking
 
         }
 
-        public Person( IChangeTrackingService memento, Boolean registerAsTransient )
+        public Person( IChangeTrackingService memento, bool registerAsTransient )
             : base( memento, registerAsTransient )
         {
             this.nameRejectCallback = ( pcr ) =>
@@ -84,10 +84,10 @@ namespace Radical.Tests.ChangeTracking
             base.OnRegisterTransient( this.transientRegistration );
         }
 
-        private readonly RejectCallback<String> nameRejectCallback = null;
-        private String _name = String.Empty;
+        private readonly RejectCallback<string> nameRejectCallback = null;
+        private string _name = string.Empty;
 
-        public String Name
+        public string Name
         {
             get { return this._name; }
             set
@@ -100,7 +100,7 @@ namespace Radical.Tests.ChangeTracking
             }
         }
 
-        public String FirstName
+        public string FirstName
         {
             get { return this.GetPropertyValue(() => this.FirstName); }
             set { this.SetPropertyValue(() => this.FirstName, value); }

@@ -12,12 +12,12 @@ namespace Radical.Tests.Exceptions
             return new InvalidKeyFormatException();
         }
 
-        protected override Exception CreateMock( String message )
+        protected override Exception CreateMock( string message )
         {
             return new InvalidKeyFormatException( message );
         }
 
-        protected override Exception CreateMock( String message, Exception innerException )
+        protected override Exception CreateMock( string message, Exception innerException )
         {
             return new InvalidKeyFormatException( message, innerException );
         }

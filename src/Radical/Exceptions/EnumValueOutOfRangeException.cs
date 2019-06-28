@@ -34,7 +34,7 @@
         /// Initializes a new instance of the <see cref="EnumValueOutOfRangeException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public EnumValueOutOfRangeException( String message )
+        public EnumValueOutOfRangeException( string message )
             : base( message )
         {
 
@@ -45,7 +45,7 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public EnumValueOutOfRangeException( String message, Exception innerException )
+        public EnumValueOutOfRangeException( string message, Exception innerException )
             : base( message, innerException )
         {
 

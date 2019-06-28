@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Radical.Helpers
 {
     public class OSHelper
     {
-        public Int32 GetOSArchitecture()
+        public int GetOSArchitecture()
         {
             string pa = Environment.GetEnvironmentVariable( "PROCESSOR_ARCHITECTURE" );
-            return ( ( String.IsNullOrEmpty( pa ) || String.Compare( pa, 0, "x86", 0, 3, true ) == 0 ) ? 32 : 64 );
+            return ( ( string.IsNullOrEmpty( pa ) || string.Compare( pa, 0, "x86", 0, 3, true ) == 0 ) ? 32 : 64 );
         }
 
         public string GetOSInfo()

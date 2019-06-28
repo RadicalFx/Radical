@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Radical.ComponentModel.QueryModel;
-using Radical.Validation;
+﻿using Radical.ComponentModel.QueryModel;
 
 namespace Radical.Model.QueryModel
 {

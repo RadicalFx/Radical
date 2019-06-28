@@ -32,7 +32,7 @@
         /// Initializes a new instance of the <see cref="RadicalException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public RadicalException( String message )
+        public RadicalException( string message )
             : base( message )
         {
 
@@ -43,7 +43,7 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public RadicalException( String message, Exception innerException )
+        public RadicalException( string message, Exception innerException )
             : base( message, innerException )
         {
 

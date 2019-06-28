@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Radical.Win32
+﻿namespace Radical.Win32
 {
 #pragma warning disable 1591
 

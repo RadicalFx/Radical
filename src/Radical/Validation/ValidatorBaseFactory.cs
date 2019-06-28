@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.ComponentModel.Validation;
+﻿using Radical.ComponentModel.Validation;
 
 namespace Radical.Validation
 {

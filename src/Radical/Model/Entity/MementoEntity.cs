@@ -1,13 +1,10 @@
-﻿using System;
-using System.ComponentModel;
-using Radical.ChangeTracking.Specialized;
-using Radical.ComponentModel;
+﻿using Radical.ChangeTracking.Specialized;
 using Radical.ComponentModel.ChangeTracking;
-using Radical.Validation;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using Radical.Linq;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
 namespace Radical.Model
 {
@@ -20,7 +17,7 @@ namespace Radical.Model
         Entity,
         IMemento
     {
-        Boolean isDisposed = false;
+        bool isDisposed = false;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -95,7 +92,7 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="MementoEntity"/> class.
         /// </summary>
         /// <param name="registerAsTransient">if set to <c>true</c> [register as transient].</param>
-        protected MementoEntity( Boolean registerAsTransient )
+        protected MementoEntity( bool registerAsTransient )
             : this( null, registerAsTransient ? ChangeTrackingRegistration.AsTransient : ChangeTrackingRegistration.AsPersistent )
         {
 
@@ -128,7 +125,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="memento">The memento.</param>
         /// <param name="registerAsTransient">if set to <c>true</c> [register as transient].</param>
-        protected MementoEntity( IChangeTrackingService memento, Boolean registerAsTransient )
+        protected MementoEntity( IChangeTrackingService memento, bool registerAsTransient )
             : this( memento, registerAsTransient ? ChangeTrackingRegistration.AsTransient : ChangeTrackingRegistration.AsPersistent )
         {
 
@@ -160,7 +157,7 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
-        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, T value, Boolean trackChanges )
+        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, T value, bool trackChanges )
         {
             return this.SetInitialPropertyValue<T>( property.GetMemberName(), value, trackChanges );
         }
@@ -178,7 +175,7 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
-        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, Func<T> lazyValue, Boolean trackChanges )
+        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges )
         {
             var metadata = ( MementoPropertyMetadata<T> )base.SetInitialPropertyValue( property, lazyValue );
 
@@ -200,7 +197,7 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
-        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( String property, T value, Boolean trackChanges )
+        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( string property, T value, bool trackChanges )
         {
             var metadata = ( MementoPropertyMetadata<T> )base.SetInitialPropertyValue( property, value );
 
@@ -227,9 +224,9 @@ namespace Radical.Model
             } );
         }
 
-        readonly IDictionary<String, Delegate> rejectCallbacks = new Dictionary<String, Delegate>();
+        readonly IDictionary<string, Delegate> rejectCallbacks = new Dictionary<string, Delegate>();
 
-        RejectCallback<T> GetRejectCallback<T>( String propertyName )
+        RejectCallback<T> GetRejectCallback<T>( string propertyName )
         {
             Delegate d;
             if ( !this.rejectCallbacks.TryGetValue( propertyName, out d ) )
@@ -328,7 +325,7 @@ namespace Radical.Model
         ///     <c>true</c> if there is an active change tracking service; otherwise, <c>false</c>.
         /// </value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1822:MarkMembersAsStatic" )]
-        protected virtual Boolean IsTracking
+        protected virtual bool IsTracking
         {
             get
             {
@@ -345,7 +342,7 @@ namespace Radical.Model
         /// <param name="restore">A delegate to call when the change tracking 
         /// service needs to restore the cached change.</param>
         /// <returns>A reference to the cached change as an instance of <see cref="IChange"/> interface.</returns>
-        protected IChange CacheChange<T>( String propertyName, T value, RejectCallback<T> restore )
+        protected IChange CacheChange<T>( string propertyName, T value, RejectCallback<T> restore )
         {
             this.EnsureNotDisposed();
             return this.CacheChange<T>( propertyName, value, restore, null, AddChangeBehavior.Default );
@@ -365,7 +362,7 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the cached change as an instance of <see cref="IChange"/> interface.
         /// </returns>
-        protected IChange CacheChange<T>( String propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit )
+        protected IChange CacheChange<T>( string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit )
         {
             this.EnsureNotDisposed();
             return this.CacheChange<T>( propertyName, value, restore, commit, AddChangeBehavior.Default );
@@ -387,12 +384,12 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the cached change as an instance of <see cref="IChange"/> interface.
         /// </returns>
-        protected IChange CacheChange<T>( String propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit, AddChangeBehavior direction )
+        protected IChange CacheChange<T>( string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit, AddChangeBehavior direction )
         {
             this.EnsureNotDisposed();
             if ( this.IsTracking )
             {
-                IChange iChange = new PropertyValueChange<T>( this, propertyName, value, restore, commit, String.Empty );
+                IChange iChange = new PropertyValueChange<T>( this, propertyName, value, restore, commit, string.Empty );
 
                 ( ( IMemento )this ).Memento.Add( iChange, direction );
 
@@ -402,7 +399,7 @@ namespace Radical.Model
             return null;
         }
 
-        protected virtual IChange CacheChangeOnRejectCallback<T>( String propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args )
+        protected virtual IChange CacheChangeOnRejectCallback<T>( string propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args )
         {
             this.EnsureNotDisposed();
             switch ( args.Reason )

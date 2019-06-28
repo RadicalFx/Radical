@@ -35,7 +35,7 @@
         /// Initializes a new instance of the <see cref="SuspendedChangeTrackingServiceException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public SuspendedChangeTrackingServiceException( String message )
+        public SuspendedChangeTrackingServiceException( string message )
             : base( message )
         {
 
@@ -46,7 +46,7 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public SuspendedChangeTrackingServiceException( String message, Exception innerException )
+        public SuspendedChangeTrackingServiceException( string message, Exception innerException )
             : base( message, innerException )
         {
 

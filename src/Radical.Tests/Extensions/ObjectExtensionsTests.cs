@@ -15,7 +15,7 @@ namespace Radical.Tests.Extensions
         {
             var expected = "a string";
 
-            var actual = Radical.ObjectExtensions.Return( expected, v => v, "failed", s => String.IsNullOrEmpty( s ) );
+            var actual = Radical.ObjectExtensions.Return( expected, v => v, "failed", s => string.IsNullOrEmpty( s ) );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -26,7 +26,7 @@ namespace Radical.Tests.Extensions
         {
             var expected = "failed";
 
-            var actual = Radical.ObjectExtensions.Return( "", v => v, expected, s => String.IsNullOrEmpty( s ) );
+            var actual = Radical.ObjectExtensions.Return( "", v => v, expected, s => string.IsNullOrEmpty( s ) );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -37,7 +37,7 @@ namespace Radical.Tests.Extensions
         {
             var expected = "failed";
 
-            var actual = Radical.ObjectExtensions.Return( ( String )null, v => v, expected, s => String.IsNullOrEmpty( s ) );
+            var actual = Radical.ObjectExtensions.Return( ( string )null, v => v, expected, s => string.IsNullOrEmpty( s ) );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -48,7 +48,7 @@ namespace Radical.Tests.Extensions
         {
             var actual = false;
 
-            Radical.ObjectExtensions.Return( "a value", v => v, () => { actual = true; return "failed"; }, s => String.IsNullOrEmpty( s ) );
+            Radical.ObjectExtensions.Return( "a value", v => v, () => { actual = true; return "failed"; }, s => string.IsNullOrEmpty( s ) );
 
             actual.Should().Be.False();
         }
@@ -78,7 +78,7 @@ namespace Radical.Tests.Extensions
         [TestCategory( "ObjectExtensions" )]
         public void ObjectExtensions_With_using_null_parameter_should_return_failure_value()
         {
-            var expected = ( String )null;
+            var expected = ( string )null;
             var actual = expected.With( s => s );
 
             actual.Should().Be.Null();
@@ -89,7 +89,7 @@ namespace Radical.Tests.Extensions
         public void ObjectExtensions_With_using_null_parameter_should_return_alternative_value()
         {
             var expected = "foo";
-            var actual = ( ( String )null ).With( s => s, () => expected );
+            var actual = ( ( string )null ).With( s => s, () => expected );
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -99,7 +99,7 @@ namespace Radical.Tests.Extensions
         public void ObjectExtensions_With_using_empty_parameter_and_failure_evaluator_should_return_alternative_value()
         {
             var expected = "foo";
-            var actual = ( "" ).With( s => s, s => String.IsNullOrEmpty( s ), () => expected );
+            var actual = ( "" ).With( s => s, s => string.IsNullOrEmpty( s ), () => expected );
 
             actual.Should().Be.EqualTo( expected );
         }

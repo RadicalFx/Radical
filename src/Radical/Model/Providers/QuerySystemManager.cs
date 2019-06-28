@@ -1,10 +1,9 @@
 ﻿namespace Radical.Model.Providers
 {
-    using System;
-    using Radical.Validation;
-    using System.Reflection;
     using Radical.ComponentModel.QueryModel;
     using Radical.Reflection;
+    using Radical.Validation;
+    using System;
 
     /// <summary>
     /// Default <see cref="IQuerySystemManager"/> implementation.
@@ -53,7 +52,7 @@
             var queryEngine = this.container.GetService( queryEngineType );
             if( queryEngine == null )
             {
-                var message = String.Format( "Unsupported specification: {1}, cannot find any QueryEngine for the given query.{0}{0}Query full type name: {2}", Environment.NewLine, specType.ToString( "sn" ), specType.FullName );
+                var message = string.Format( "Unsupported specification: {1}, cannot find any QueryEngine for the given query.{0}{0}Query full type name: {2}", Environment.NewLine, specType.ToString( "sn" ), specType.FullName );
                 throw new SpecificationNotSupportedException( message );
             }
 
@@ -89,7 +88,7 @@
             var scalarEvaluator = this.container.GetService( scalarEvaluatorType );
             if( scalarEvaluator == null )
             {
-                var message = String.Format( "Unsupported specification: {1}, cannot find any ScalarEvaluator for the given query.{0}{0}Query full type name: {2}", Environment.NewLine, specType.ToString( "sn" ), specType.FullName );
+                var message = string.Format( "Unsupported specification: {1}, cannot find any ScalarEvaluator for the given query.{0}{0}Query full type name: {2}", Environment.NewLine, specType.ToString( "sn" ), specType.FullName );
                 throw new SpecificationNotSupportedException( message );
             }
 
@@ -119,7 +118,7 @@
             var engine = this.container.GetService( engineType );
             if( engine == null )
             {
-                var message = String.Format( "Unsupported batch command: {1}, cannot find any Engine for the given command.{0}{0}Command full type name: {2}", Environment.NewLine, cmdType.ToString( "sn" ), cmdType.FullName );
+                var message = string.Format( "Unsupported batch command: {1}, cannot find any Engine for the given command.{0}{0}Command full type name: {2}", Environment.NewLine, cmdType.ToString( "sn" ), cmdType.FullName );
                 throw new SpecificationNotSupportedException( message );
             }
 

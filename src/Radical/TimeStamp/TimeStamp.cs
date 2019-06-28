@@ -21,9 +21,9 @@ namespace Radical.ComponentModel
         /// <param name="leftValue">The left side timestamp.</param>
         /// <param name="rightValue">The right side timestamp.</param>
         /// <returns>The result of the operator.</returns>
-        public static Boolean operator ==( Timestamp leftValue, Timestamp rightValue )
+        public static bool operator ==( Timestamp leftValue, Timestamp rightValue )
         {
-            Boolean returnValue = true;
+            bool returnValue = true;
 
             if( Object.Equals( leftValue, null ) && Object.Equals( rightValue, null ) )
             {
@@ -59,7 +59,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the specified <see cref="T:Timestamp"/> is equal to the current <see cref="T:Timestamp"/>; otherwise, false.
         /// </returns>
-        public abstract Boolean Equals( Timestamp obj );
+        public abstract bool Equals( Timestamp obj );
 
         /// <summary>
         /// Implements the operator !=.
@@ -67,7 +67,7 @@ namespace Radical.ComponentModel
         /// <param name="leftValue">The left side timestamp.</param>
         /// <param name="rightValue">The right side timestamp.</param>
         /// <returns>The result of the operator.</returns>
-        public static Boolean operator !=( Timestamp leftValue, Timestamp rightValue )
+        public static bool operator !=( Timestamp leftValue, Timestamp rightValue )
         {
             return !( leftValue == rightValue );
         }
@@ -79,7 +79,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
         /// </returns>
-        public override sealed Boolean Equals( Object obj )
+        public override sealed bool Equals( Object obj )
         {
             Timestamp target = obj as Timestamp;
             if( target != null )

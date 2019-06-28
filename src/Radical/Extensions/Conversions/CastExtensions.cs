@@ -1,5 +1,5 @@
-﻿using System;
-using Radical.Validation;
+﻿using Radical.Validation;
+using System;
 
 namespace Radical.Conversions
 {

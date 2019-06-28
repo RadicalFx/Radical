@@ -1,7 +1,5 @@
 ﻿namespace Radical
 {
-    using System;
-
     /// <summary>
     /// Adds behaviors for numeric types.
     /// </summary>
@@ -14,7 +12,7 @@
         /// <returns>
         ///     <c>true</c> if the specified value is even; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsEven( this Int32 value )
+        public static bool IsEven( this int value )
         {
             return value % 2 == 0;
         }

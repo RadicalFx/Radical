@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Radical.Win32
 {
 #pragma warning disable 1591
 
     public static class Constants
     {
-        public const Int32 AUTOSUGGEST = 0x10000000,
+        public const int AUTOSUGGEST = 0x10000000,
             AUTOSUGGEST_OFF = 0x20000000,
             AUTOAPPEND = 0x40000000,
-            AUTOAPPEND_OFF = ( unchecked( ( Int32 )0x80000000 ) );
+            AUTOAPPEND_OFF = ( unchecked( ( int )0x80000000 ) );
 
-        public const Int32 ARW_BOTTOMLEFT = 0x0000,
+        public const int ARW_BOTTOMLEFT = 0x0000,
             ARW_BOTTOMRIGHT = 0x0001,
             ARW_TOPLEFT = 0x0002,
             ARW_TOPRIGHT = 0x0003,
@@ -28,7 +24,7 @@ namespace Radical.Win32
             ADVF_ONLYONCE = 2,
             ADVF_PRIMEFIRST = 4;
 
-        public const Int32 BCM_GETIDEALSIZE = 0x1601,
+        public const int BCM_GETIDEALSIZE = 0x1601,
             BI_RGB = 0,
             BS_PATTERN = 3,
             BITSPIXEL = 12,
@@ -69,7 +65,7 @@ namespace Radical.Win32
             BM_SETSTATE = 0x00F3,
             BM_CLICK = 0x00F5;
 
-        public const Int32 CDERR_DIALOGFAILURE = 0xFFFF,
+        public const int CDERR_DIALOGFAILURE = 0xFFFF,
             CDERR_STRUCTSIZE = 0x0001,
             CDERR_INITIALIZATION = 0x0002,
             CDERR_NOTEMPLATE = 0x0003,
@@ -110,7 +106,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 cmb4 = 0x0473,
+        public const int cmb4 = 0x0473,
             CS_DBLCLKS = 0x0008,
             CS_DROPSHADOW = 0x00020000,
             CF_TEXT = 1,
@@ -131,7 +127,7 @@ namespace Radical.Win32
             CF_LOCALE = 16,
             CLSCTX_INPROC_SERVER = 0x1,
             CLSCTX_LOCAL_SERVER = 0x4,
-            CW_USEDEFAULT = ( unchecked( ( Int32 )0x80000000 ) ),
+            CW_USEDEFAULT = ( unchecked( ( int )0x80000000 ) ),
             CWP_SKIPINVISIBLE = 0x0001,
             COLOR_WINDOW = 5,
             CB_ERR = ( -1 ),
@@ -189,8 +185,8 @@ namespace Radical.Win32
             CDIS_MARKED = 0x0080,
             CDIS_INDETERMINATE = 0x0100,
             CDIS_SHOWKEYBOARDCUES = 0x0200,
-            CLR_NONE = unchecked( ( Int32 )0xFFFFFFFF ),
-            CLR_DEFAULT = unchecked( ( Int32 )0xFF000000 ),
+            CLR_NONE = unchecked( ( int )0xFFFFFFFF ),
+            CLR_DEFAULT = unchecked( ( int )0xFF000000 ),
             CCS_NORESIZE = 0x00000004,
             CCS_NOPARENTALIGN = 0x00000008,
             CCS_NODIVIDER = 0x00000040,
@@ -202,8 +198,8 @@ namespace Radical.Win32
             CBEM_GETITEMW = ( 0x0400 + 13 ),
             CBEN_ENDEDITA = ( ( 0 - 800 ) - 5 ),
             CBEN_ENDEDITW = ( ( 0 - 800 ) - 6 ),
-            CONNECT_E_NOCONNECTION = unchecked( ( Int32 )0x80040200 ),
-            CONNECT_E_CANNOTCONNECT = unchecked( ( Int32 )0x80040202 ),
+            CONNECT_E_NOCONNECTION = unchecked( ( int )0x80040200 ),
+            CONNECT_E_CANNOTCONNECT = unchecked( ( int )0x80040202 ),
             CTRLINFO_EATS_RETURN = 1,
             CTRLINFO_EATS_ESCAPE = 2,
             CSIDL_DESKTOP = 0x0000,        // <desktop>
@@ -229,20 +225,20 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 DUPLICATE = 0x06,
+        public const int DUPLICATE = 0x06,
             DISPID_UNKNOWN = ( -1 ),
             DISPID_PROPERTYPUT = ( -3 ),
             DISPATCH_METHOD = 0x1,
             DISPATCH_PROPERTYGET = 0x2,
             DISPATCH_PROPERTYPUT = 0x4,
-            DV_E_DVASPECT = unchecked( ( Int32 )0x8004006B ),
-            DISP_E_MEMBERNOTFOUND = unchecked( ( Int32 )0x80020003 ),
-            DISP_E_PARAMNOTFOUND = unchecked( ( Int32 )0x80020004 ),
-            DISP_E_EXCEPTION = unchecked( ( Int32 )0x80020009 ),
+            DV_E_DVASPECT = unchecked( ( int )0x8004006B ),
+            DISP_E_MEMBERNOTFOUND = unchecked( ( int )0x80020003 ),
+            DISP_E_PARAMNOTFOUND = unchecked( ( int )0x80020004 ),
+            DISP_E_EXCEPTION = unchecked( ( int )0x80020009 ),
             DEFAULT_GUI_FONT = 17,
             DIB_RGB_COLORS = 0,
-            DRAGDROP_E_NOTREGISTERED = unchecked( ( Int32 )0x80040100 ),
-            DRAGDROP_E_ALREADYREGISTERED = unchecked( ( Int32 )0x80040101 ),
+            DRAGDROP_E_NOTREGISTERED = unchecked( ( int )0x80040100 ),
+            DRAGDROP_E_ALREADYREGISTERED = unchecked( ( int )0x80040101 ),
             DUPLICATE_SAME_ACCESS = 0x00000002,
             DFC_CAPTION = 1,
             DFC_MENU = 2,
@@ -317,14 +313,14 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 E_NOTIMPL = unchecked( ( Int32 )0x80004001 ),
-            E_OUTOFMEMORY = unchecked( ( Int32 )0x8007000E ),
-            E_INVALIDARG = unchecked( ( Int32 )0x80070057 ),
-            E_NOINTERFACE = unchecked( ( Int32 )0x80004002 ),
-            E_FAIL = unchecked( ( Int32 )0x80004005 ),
-            E_ABORT = unchecked( ( Int32 )0x80004004 ),
-            E_UNEXPECTED = unchecked( ( Int32 )0x8000FFFF ),
-            INET_E_DEFAULT_ACTION = unchecked( ( Int32 )0x800C0011 ),
+        public const int E_NOTIMPL = unchecked( ( int )0x80004001 ),
+            E_OUTOFMEMORY = unchecked( ( int )0x8007000E ),
+            E_INVALIDARG = unchecked( ( int )0x80070057 ),
+            E_NOINTERFACE = unchecked( ( int )0x80004002 ),
+            E_FAIL = unchecked( ( int )0x80004005 ),
+            E_ABORT = unchecked( ( int )0x80004004 ),
+            E_UNEXPECTED = unchecked( ( int )0x8000FFFF ),
+            INET_E_DEFAULT_ACTION = unchecked( ( int )0x800C0011 ),
             ETO_OPAQUE = 0x0002,
             ETO_CLIPPED = 0x0004,
             EMR_POLYTEXTOUTA = 96,
@@ -378,14 +374,14 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 FNERR_SUBCLASSFAILURE = 0x3001,
+        public const int FNERR_SUBCLASSFAILURE = 0x3001,
             FNERR_INVALIDFILENAME = 0x3002,
             FNERR_BUFFERTOOSMALL = 0x3003,
             FRERR_BUFFERLENGTHZERO = 0x4001,
             FADF_BSTR = ( 0x100 ),
             FADF_UNKNOWN = ( 0x200 ),
             FADF_DISPATCH = ( 0x400 ),
-            FADF_VARIANT = ( unchecked( ( Int32 )0x800 ) ),
+            FADF_VARIANT = ( unchecked( ( int )0x800 ) ),
             FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000,
             FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200,
             FVIRTKEY = 0x01,
@@ -394,7 +390,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 GMEM_MOVEABLE = 0x0002,
+        public const int GMEM_MOVEABLE = 0x0002,
             GMEM_ZEROINIT = 0x0040,
             GMEM_DDESHARE = 0x2000,
             GWL_WNDPROC = ( -4 ),
@@ -409,7 +405,7 @@ namespace Radical.Win32
             GW_CHILD = 5,
             GMR_VISIBLE = 0,
             GMR_DAYSTATE = 1,
-            GDI_ERROR = ( unchecked( ( Int32 )0xFFFFFFFF ) ),
+            GDI_ERROR = ( unchecked( ( int )0xFFFFFFFF ) ),
             GDTR_MIN = 0x0001,
             GDTR_MAX = 0x0002,
             GDT_VALID = 0,
@@ -417,7 +413,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 HOLLOW_BRUSH = 5,
+        public const int HOLLOW_BRUSH = 5,
             HC_ACTION = 0,
             HC_GETNEXT = 1,
             HC_SKIP = 2,
@@ -460,10 +456,10 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 IME_CMODE_NATIVE = 0x0001,
+        public const int IME_CMODE_NATIVE = 0x0001,
             IME_CMODE_KATAKANA = 0x0002,
             IME_CMODE_FULLSHAPE = 0x0008,
-            INPLACE_E_NOTOOLSPACE = unchecked( ( Int32 )0x800401A1 ),
+            INPLACE_E_NOTOOLSPACE = unchecked( ( int )0x800401A1 ),
             ICON_SMALL = 0,
             ICON_BIG = 1,
             IDC_ARROW = 32512,
@@ -509,7 +505,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 IDM_PRINT = 27,
+        public const int IDM_PRINT = 27,
             IDM_PAGESETUP = 2004,
             IDM_PRINTPREVIEW = 2003,
             IDM_PROPERTIES = 28,
@@ -517,30 +513,30 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 CSC_NAVIGATEFORWARD = 0x00000001,
+        public const int CSC_NAVIGATEFORWARD = 0x00000001,
             CSC_NAVIGATEBACK = 0x00000002;
 
-        public const Int32 STG_E_INVALIDFUNCTION = unchecked( ( Int32 )0x80030001 );
-        public const Int32 STG_E_FILENOTFOUND = unchecked( ( Int32 )0x80030002 );
-        public const Int32 STG_E_PATHNOTFOUND = unchecked( ( Int32 )0x80030003 );
-        public const Int32 STG_E_TOOMANYOPENFILES = unchecked( ( Int32 )0x80030004 );
-        public const Int32 STG_E_ACCESSDENIED = unchecked( ( Int32 )0x80030005 );
-        public const Int32 STG_E_INVALIDHANDLE = unchecked( ( Int32 )0x80030006 );
-        public const Int32 STG_E_INSUFFICIENTMEMORY = unchecked( ( Int32 )0x80030008 );
-        public const Int32 STG_E_INVALIDPOINTER = unchecked( ( Int32 )0x80030009 );
-        public const Int32 STG_E_NOMOREFILES = unchecked( ( Int32 )0x80030012 );
-        public const Int32 STG_E_DISKISWRITEPROTECTED = unchecked( ( Int32 )0x80030013 );
-        public const Int32 STG_E_SEEKERROR = unchecked( ( Int32 )0x80030019 );
-        public const Int32 STG_E_WRITEFAULT = unchecked( ( Int32 )0x8003001D );
-        public const Int32 STG_E_READFAULT = unchecked( ( Int32 )0x8003001E );
-        public const Int32 STG_E_SHAREVIOLATION = unchecked( ( Int32 )0x80030020 );
-        public const Int32 STG_E_LOCKVIOLATION = unchecked( ( Int32 )0x80030021 );
+        public const int STG_E_INVALIDFUNCTION = unchecked( ( int )0x80030001 );
+        public const int STG_E_FILENOTFOUND = unchecked( ( int )0x80030002 );
+        public const int STG_E_PATHNOTFOUND = unchecked( ( int )0x80030003 );
+        public const int STG_E_TOOMANYOPENFILES = unchecked( ( int )0x80030004 );
+        public const int STG_E_ACCESSDENIED = unchecked( ( int )0x80030005 );
+        public const int STG_E_INVALIDHANDLE = unchecked( ( int )0x80030006 );
+        public const int STG_E_INSUFFICIENTMEMORY = unchecked( ( int )0x80030008 );
+        public const int STG_E_INVALIDPOINTER = unchecked( ( int )0x80030009 );
+        public const int STG_E_NOMOREFILES = unchecked( ( int )0x80030012 );
+        public const int STG_E_DISKISWRITEPROTECTED = unchecked( ( int )0x80030013 );
+        public const int STG_E_SEEKERROR = unchecked( ( int )0x80030019 );
+        public const int STG_E_WRITEFAULT = unchecked( ( int )0x8003001D );
+        public const int STG_E_READFAULT = unchecked( ( int )0x8003001E );
+        public const int STG_E_SHAREVIOLATION = unchecked( ( int )0x80030020 );
+        public const int STG_E_LOCKVIOLATION = unchecked( ( int )0x80030021 );
 
-        public const Int32 KEYEVENTF_KEYUP = 0x0002;
+        public const int KEYEVENTF_KEYUP = 0x0002;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 LOGPIXELSX = 88,
+        public const int LOGPIXELSX = 88,
             LOGPIXELSY = 90,
             LB_ERR = ( -1 ),
             LB_ERRSPACE = ( -2 ),
@@ -574,7 +570,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 LBS_NOTIFY = 0x0001,
+        public const int LBS_NOTIFY = 0x0001,
             LBS_MULTIPLESEL = 0x0008,
             LBS_OWNERDRAWFIXED = 0x0010,
             LBS_OWNERDRAWVARIABLE = 0x0020,
@@ -610,7 +606,7 @@ namespace Radical.Win32
             LVS_ALIGNTOP = 0x0000,
             LVS_ALIGNLEFT = 0x0800,
             LVS_NOCOLUMNHEADER = 0x4000,
-            LVS_NOSORTHEADER = unchecked( ( Int32 )0x8000 ),
+            LVS_NOSORTHEADER = unchecked( ( int )0x8000 ),
             LVS_OWNERDATA = 0x1000,
             LVSCW_AUTOSIZE = -1,
             LVSCW_AUTOSIZE_USEHEADER = -2,
@@ -792,12 +788,12 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 LANG_NEUTRAL = 0x00,
+        public const int LANG_NEUTRAL = 0x00,
             LOCALE_IFIRSTDAYOFWEEK = 0x0000100C;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 MEMBERID_NIL = ( -1 ),
+        public const int MEMBERID_NIL = ( -1 ),
             MAX_PATH = 260,
             MM_TEXT = 1,
             MM_ANISOTROPIC = 8,
@@ -865,11 +861,11 @@ namespace Radical.Win32
             MCS_WEEKNUMBERS = 0x0004,
             MCS_NOTODAYCIRCLE = 0x0008,
             MCS_NOTODAY = 0x0010,
-            MSAA_MENU_SIG = ( unchecked( ( Int32 )0xAA0DF00D ) );
+            MSAA_MENU_SIG = ( unchecked( ( int )0xAA0DF00D ) );
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 NIM_ADD = 0x00000000,
+        public const int NIM_ADD = 0x00000000,
             NIM_MODIFY = 0x00000001,
             NIM_DELETE = 0x00000002,
             NIF_MESSAGE = 0x00000001,
@@ -887,14 +883,14 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 NIN_BALLOONSHOW = 0x402,
+        public const int NIN_BALLOONSHOW = 0x402,
             NIN_BALLOONHIDE = 0x403,
             NIN_BALLOONTIMEOUT = 0x404,
             NIN_BALLOONUSERCLICK = 0x405;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 OFN_READONLY = 0x00000001,
+        public const int OFN_READONLY = 0x00000001,
             OFN_OVERWRITEPROMPT = 0x00000002,
             OFN_HIDEREADONLY = 0x00000004,
             OFN_NOCHANGEDIR = 0x00000008,
@@ -916,8 +912,8 @@ namespace Radical.Win32
             OLEIVERB_INPLACEACTIVATE = -5,
             OLEIVERB_DISCARDUNDOSTATE = -6,
             OLEIVERB_PROPERTIES = -7,
-            OLE_E_NOCONNECTION = unchecked( ( Int32 )0x80040004 ),
-            OLE_E_PROMPTSAVECANCELLED = unchecked( ( Int32 )0x8004000C ),
+            OLE_E_NOCONNECTION = unchecked( ( int )0x80040004 ),
+            OLE_E_PROMPTSAVECANCELLED = unchecked( ( int )0x8004000C ),
             OLEMISC_RECOMPOSEONRESIZE = 0x00000001,
             OLEMISC_INSIDEOUT = 0x00000080,
             OLEMISC_ACTIVATEWHENVISIBLE = 0x0000100,
@@ -951,7 +947,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 PDERR_SETUPFAILURE = 0x1001,
+        public const int PDERR_SETUPFAILURE = 0x1001,
             PDERR_PARSEFAILURE = 0x1002,
             PDERR_RETDEFFAILURE = 0x1003,
             PDERR_LOADDRVFAILURE = 0x1004,
@@ -1008,11 +1004,11 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 PBS_SMOOTH = 0x01;
+        public const int PBS_SMOOTH = 0x01;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 QS_KEY = 0x0001,
+        public const int QS_KEY = 0x0001,
             QS_MOUSEMOVE = 0x0002,
             QS_MOUSEBUTTON = 0x0004,
             QS_POSTMESSAGE = 0x0008,
@@ -1028,9 +1024,9 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 RPC_E_CHANGED_MODE = unchecked( ( Int32 )0x80010106 ),
+        public const int RPC_E_CHANGED_MODE = unchecked( ( int )0x80010106 ),
             RGN_AND = 1,
-            RPC_E_CANTCALLOUT_ININPUTSYNCCALL = unchecked( ( Int32 )0x8001010D ),
+            RPC_E_CANTCALLOUT_ININPUTSYNCCALL = unchecked( ( int )0x8001010D ),
             RGN_DIFF = 4,
             RDW_INVALIDATE = 0x0001,
             RDW_ERASE = 0x0004,
@@ -1041,7 +1037,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 stc4 = 0x0443,
+        public const int stc4 = 0x0443,
             SHGFP_TYPE_CURRENT = 0,
             STGM_READ = 0x00000000,
             STGM_WRITE = 0x00000001,
@@ -1167,7 +1163,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 SND_SYNC = 0000,
+        public const int SND_SYNC = 0000,
             SND_ASYNC = 0x0001,
             SND_NODEFAULT = 0x0002,
             SND_MEMORY = 0x0004,
@@ -1178,7 +1174,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 MB_ICONHAND = 0x000010,
+        public const int MB_ICONHAND = 0x000010,
             MB_ICONQUESTION = 0x000020,
             MB_ICONEXCLAMATION = 0x000030,
             MB_ICONASTERISK = 0x000040;
@@ -1186,7 +1182,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 FLASHW_STOP = 0,
+        public const int FLASHW_STOP = 0,
             FLASHW_CAPTION = 0x00000001,
             FLASHW_TRAY = 0x00000002,
             FLASHW_ALL = FLASHW_CAPTION | FLASHW_TRAY,
@@ -1195,7 +1191,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 HLP_FILE = 1,
+        public const int HLP_FILE = 1,
             HLP_KEYWORD = 2,
             HLP_NAVIGATOR = 3,
             HLP_OBJECT = 4;
@@ -1217,7 +1213,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 SHGFI_ICON = 0x000000100,
+        public const int SHGFI_ICON = 0x000000100,
             SHGFI_DISPLAYNAME = 0x000000200,
             SHGFI_TYPENAME = 0x000000400,
             SHGFI_ATTRIBUTES = 0x000000800,
@@ -1238,7 +1234,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 SW_SCROLLCHILDREN = 0x0001,
+        public const int SW_SCROLLCHILDREN = 0x0001,
             SW_INVALIDATE = 0x0002,
             SW_ERASE = 0x0004,
             SW_SMOOTHSCROLL = 0x0010,
@@ -1340,12 +1336,12 @@ namespace Radical.Win32
             STREAM_SEEK_CUR = 0x1,
             STREAM_SEEK_END = 0x2;
 
-        public const Int32 S_OK = 0x00000000;
-        public const Int32 S_FALSE = 0x00000001;
+        public const int S_OK = 0x00000000;
+        public const int S_FALSE = 0x00000001;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 TRANSPARENT = 1,
+        public const int TRANSPARENT = 1,
             TME_HOVER = 0x00000001,
             TME_LEAVE = 0x00000002,
             TPM_LEFTBUTTON = 0x0000,
@@ -1513,8 +1509,8 @@ namespace Radical.Win32
             TVIS_EXPANDED = 0x0020,
             TVIS_EXPANDEDONCE = 0x0040,
             TVIS_STATEIMAGEMASK = 0xF000,
-            TVI_ROOT = ( unchecked( ( Int32 )0xFFFF0000 ) ),
-            TVI_FIRST = ( unchecked( ( Int32 )0xFFFF0001 ) ),
+            TVI_ROOT = ( unchecked( ( int )0xFFFF0000 ) ),
+            TVI_FIRST = ( unchecked( ( int )0xFFFF0001 ) ),
             TVM_INSERTITEMA = ( 0x1100 + 0 ),
             TVM_INSERTITEMW = ( 0x1100 + 50 ),
             TVM_DELETEITEM = ( 0x1100 + 1 ),
@@ -1620,7 +1616,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 TVHT_NOWHERE = 0x0001,
+        public const int TVHT_NOWHERE = 0x0001,
             TVHT_ONITEMICON = 0x0002,
             TVHT_ONITEMLABEL = 0x0004,
             TVHT_ONITEM = ( TVHT_ONITEMICON | TVHT_ONITEMLABEL | TVHT_ONITEMSTATEICON ),
@@ -1635,7 +1631,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 UIS_SET = 1,
+        public const int UIS_SET = 1,
             UIS_CLEAR = 2,
             UIS_INITIALIZE = 3,
             UISF_HIDEFOCUS = 0x1,
@@ -1647,7 +1643,7 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 VIEW_E_DRAW = unchecked( ( Int32 )0x80040140 ),
+        public const int VIEW_E_DRAW = unchecked( ( int )0x80040140 ),
             VK_LEFT = 0x25,
             VK_UP = 0x26,
             VK_RIGHT = 0x27,
@@ -1663,24 +1659,24 @@ namespace Radical.Win32
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 LLKHF_EXTENDED = 1,
+        public const int LLKHF_EXTENDED = 1,
             LLKHF_INJECTED = 0x10,
             LLKHF_ALTDOWN = 0x20,
             LLKHF_UP = 0x80;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 WAVE_FORMAT_PCM = 0x0001,
+        public const int WAVE_FORMAT_PCM = 0x0001,
             WAVE_FORMAT_ADPCM = 0x0002,
             WAVE_FORMAT_IEEE_FLOAT = 0x0003;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const Int32 MMIO_READ = 0x00000000,
+        public const int MMIO_READ = 0x00000000,
             MMIO_ALLOCBUF = 0x00010000,
             MMIO_FINDRIFF = 0x00000020;
 
-        public const Int32 WH_JOURNALPLAYBACK = 1,
+        public const int WH_JOURNALPLAYBACK = 1,
             WH_GETMESSAGE = 3,
             WH_KEYBOARD_LL = 13,
             WH_MOUSE = 7,
@@ -1833,7 +1829,7 @@ namespace Radical.Win32
             WM_MOUSELAST = 0x020A,
             WM_TRAYMOUSEMESSAGE = 0x800;
 
-        public const Int32 WHEEL_DELTA = 120,
+        public const int WHEEL_DELTA = 120,
             WM_PARENTNOTIFY = 0x0210,
             WM_ENTERMENULOOP = 0x0211,
             WM_EXITMENULOOP = 0x0212,
@@ -1895,11 +1891,11 @@ namespace Radical.Win32
             WM_AFXLAST = 0x037F,
             WM_PENWINFIRST = 0x0380,
             WM_PENWINLAST = 0x038F,
-            WM_APP = unchecked( ( Int32 )0x8000 ),
+            WM_APP = unchecked( ( int )0x8000 ),
             WM_USER = 0x0400,
             WM_REFLECT = WM_USER + 0x1C00,
             WS_OVERLAPPED = 0x00000000,
-            WS_POPUP = unchecked( ( Int32 )0x80000000 ),
+            WS_POPUP = unchecked( ( int )0x80000000 ),
             WS_CHILD = 0x40000000,
             WS_MINIMIZE = 0x20000000,
             WS_VISIBLE = 0x10000000,

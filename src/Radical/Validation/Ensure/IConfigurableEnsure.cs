@@ -24,6 +24,6 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="parameterName">Name of the parameter.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        IEnsure<T> Named( String parameterName );
+        IEnsure<T> Named( string parameterName );
     }
 }

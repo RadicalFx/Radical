@@ -17,10 +17,10 @@ namespace Radical.Tests
             {
                 ByteArrayTimestamp target = ( ByteArrayTimestamp )ts;
 
-                Int32 expected = ( target.Value.GetHashCode() * 35 ) ^ 73;
-                Int32 actual = target.GetHashCode();
+                int expected = ( target.Value.GetHashCode() * 35 ) ^ 73;
+                int actual = target.GetHashCode();
 
-                Assert.AreEqual<Int32>( expected, actual );
+                Assert.AreEqual<int>( expected, actual );
             }
         }
 
@@ -28,9 +28,9 @@ namespace Radical.Tests
         {
             Byte[] actual = baActual.Value;
 
-            Assert.AreEqual<Int32>( expected.Length, actual.Length );
+            Assert.AreEqual<int>( expected.Length, actual.Length );
 
-            for( Int32 i = 0; i < expected.Length; i++ )
+            for( int i = 0; i < expected.Length; i++ )
             {
                 Assert.AreEqual<Byte>( expected[ i ], actual[ i ] );
             }
@@ -74,23 +74,23 @@ namespace Radical.Tests
         [TestMethod()]
         public void byteArrayTimeStamp_empty_toString()
         {
-            String expected = "";
+            string expected = "";
 
             ByteArrayTimestamp target = new ByteArrayTimestamp( new Byte[ 0 ] );
-            String actual = target.ToString();
+            string actual = target.ToString();
 
-            Assert.AreEqual<String>( expected, actual );
+            Assert.AreEqual<string>( expected, actual );
         }
 
         [TestMethod()]
         public void byteArrayTimeStamp_toString()
         {
-            String expected = "00:0C:37:FF";
+            string expected = "00:0C:37:FF";
 
             ByteArrayTimestamp target = new ByteArrayTimestamp( new Byte[]{ 0, 12, 55, 255 } );
-            String actual = target.ToString();
+            string actual = target.ToString();
 
-            Assert.AreEqual<String>( expected, actual );
+            Assert.AreEqual<string>( expected, actual );
         }
 
         [TestMethod()]
@@ -99,8 +99,8 @@ namespace Radical.Tests
             ByteArrayTimestamp v1 = new ByteArrayTimestamp( new Byte[] { 0, 12, 55, 255 } );
             ByteArrayTimestamp v2 = new ByteArrayTimestamp( new Byte[] { 0, 1, 55, 255 } );
 
-            Boolean expected = false;
-            Boolean actual = v1.Equals( v2 );
+            bool expected = false;
+            bool actual = v1.Equals( v2 );
 
             Assert.AreEqual( expected, actual );
         }
@@ -111,8 +111,8 @@ namespace Radical.Tests
             ByteArrayTimestamp v1 = new ByteArrayTimestamp( new Byte[] { 0, 12, 55, 255 } );
             ByteArrayTimestamp v2 = new ByteArrayTimestamp( new Byte[] { 0, 1, 55 } );
 
-            Boolean expected = false;
-            Boolean actual = v1.Equals( v2 );
+            bool expected = false;
+            bool actual = v1.Equals( v2 );
 
             Assert.AreEqual( expected, actual );
         }
@@ -123,8 +123,8 @@ namespace Radical.Tests
             ByteArrayTimestamp v1 = new ByteArrayTimestamp( new Byte[] { 0, 12, 55, 255 } );
             ByteArrayTimestamp v2 = null;
 
-            Boolean expected = false;
-            Boolean actual = v1.Equals( v2 );
+            bool expected = false;
+            bool actual = v1.Equals( v2 );
 
             Assert.AreEqual( expected, actual );
         }

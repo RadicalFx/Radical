@@ -1,9 +1,7 @@
+using Radical.ComponentModel;
 using System;
 using System.Collections;
 using System.ComponentModel;
-using Radical.ComponentModel;
-using System.Collections.Generic;
-using Radical.Validation;
 
 namespace Radical.Model
 {
@@ -15,7 +13,7 @@ namespace Radical.Model
         INotifyEditableObject
         //where T : class
     {
-        //readonly IDictionary<String, Object> customValues = new Dictionary<String, Object>();
+        //readonly IDictionary<string, Object> customValues = new Dictionary<string, Object>();
 
         #region .ctor
 
@@ -54,7 +52,7 @@ namespace Radical.Model
         /// </summary>
         public void Delete()
         {
-            Int32 myIndex = this.View.IndexOf( this );
+            int myIndex = this.View.IndexOf( this );
             ( ( IList )this.View ).RemoveAt( myIndex );
         }
 
@@ -114,7 +112,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>An error message indicating what is wrong with this object. The default is an empty string ("").</returns>
-        public virtual String Error
+        public virtual string Error
         {
             get
             {
@@ -123,7 +121,7 @@ namespace Radical.Model
                     return ( ( IDataErrorInfo )this.EntityItem ).Error;
                 }
 
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -131,7 +129,7 @@ namespace Radical.Model
         /// Gets the error message for the property with the given name.
         /// </summary>
         /// <value>The error message for the property. The default is an empty string ("").</value>
-        public virtual String this[ String columnName ]
+        public virtual string this[ string columnName ]
         {
             get
             {
@@ -146,7 +144,7 @@ namespace Radical.Model
                     return ( ( IDataErrorInfo )this.EntityItem )[ columnName ];
                 }
 
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -190,7 +188,7 @@ namespace Radical.Model
             }
         }
 
-        private Boolean isEditing;
+        private bool isEditing;
 
         /// <summary>
         /// Begins an edit on an object.
@@ -276,7 +274,7 @@ namespace Radical.Model
             }
         }
 
-        public void NotifyPropertyChanged( String propertyName )
+        public void NotifyPropertyChanged( string propertyName )
         {
             this.OnPropertyChanged( new PropertyChangedEventArgs( propertyName ) );
         }
@@ -323,12 +321,12 @@ namespace Radical.Model
             return null;
         }
 
-        String ICustomTypeDescriptor.GetClassName()
+        string ICustomTypeDescriptor.GetClassName()
         {
             return null;
         }
 
-        String ICustomTypeDescriptor.GetComponentName()
+        string ICustomTypeDescriptor.GetComponentName()
         {
             return null;
         }

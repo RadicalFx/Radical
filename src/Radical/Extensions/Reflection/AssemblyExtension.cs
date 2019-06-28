@@ -1,12 +1,9 @@
 ﻿namespace Radical.Reflection
 {
     using System;
-    using System.Linq;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using Radical.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
     /// <summary>
     /// Entry point for accessing assembly types.
@@ -37,7 +34,7 @@
         /// <returns>
         ///     <c>true</c> if the attribute is defined on the specified assembly; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsAttributeDefined<T>( this Assembly assembly )
+        public static bool IsAttributeDefined<T>( this Assembly assembly )
             where T : Attribute
         {
             return assembly.IsDefined( typeof( T ), true );
@@ -78,7 +75,7 @@
         /// <param name="assembly">The assembly to search in.</param>
         /// <param name="attribute">The attribute used to assign the output refence.</param>
         /// <returns><c>True</c> if an attribute of the given type can be found; otherwise false.</returns>
-        public static Boolean TryGetAttribute<T>( this Assembly assembly, out T attribute )
+        public static bool TryGetAttribute<T>( this Assembly assembly, out T attribute )
             where T : Attribute
         {
             if( assembly.IsAttributeDefined<T>() )

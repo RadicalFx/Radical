@@ -17,7 +17,7 @@ namespace Radical.Tests.Model.Entity
             this.OnInitialize();
         }
 
-        public MementoMockEntity(String firstName)
+        public MementoMockEntity(string firstName)
         {
             this.SetInitialPropertyValue(() => this.FirstName, firstName);
 
@@ -26,12 +26,12 @@ namespace Radical.Tests.Model.Entity
 
         void OnInitialize()
         {
-            var firstNameMetadata = this.GetPropertyMetadata<String>("FirstName");
-            ((MementoPropertyMetadata<String>)firstNameMetadata).EnableChangesTracking();
+            var firstNameMetadata = this.GetPropertyMetadata<string>("FirstName");
+            ((MementoPropertyMetadata<string>)firstNameMetadata).EnableChangesTracking();
 
-            //this.SetPropertyMetadata( new MementoPropertyMetadata<String>( () => this.FirstName ) { TrackChanges = true } );
+            //this.SetPropertyMetadata( new MementoPropertyMetadata<string>( () => this.FirstName ) { TrackChanges = true } );
 
-            var metadata = new PropertyMetadata<String>(this, () => this.MainProperty);
+            var metadata = new PropertyMetadata<string>(this, () => this.MainProperty);
             metadata.AddCascadeChangeNotifications(() => this.SubProperty);
 
             this.SetPropertyMetadata(metadata);
@@ -42,19 +42,19 @@ namespace Radical.Tests.Model.Entity
             this.SetInitialPropertyValue(property, value);
         }
 
-        public String FirstName
+        public string FirstName
         {
             get { return this.GetPropertyValue(() => this.FirstName); }
             set { this.SetPropertyValue(() => this.FirstName, value); }
         }
 
-        public String LastName
+        public string LastName
         {
             get { return this.GetPropertyValue(() => this.LastName); }
             set { this.SetPropertyValue(() => this.LastName, value); }
         }
 
-        public Int32 Number
+        public int Number
         {
             get { return this.GetPropertyValue(() => this.Number); }
             set { this.SetPropertyValue(() => this.Number, value); }

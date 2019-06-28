@@ -12,12 +12,12 @@ namespace Radical.Tests.Exceptions
             return new EnumValueOutOfRangeException();
         }
 
-        protected override Exception CreateMock( String message )
+        protected override Exception CreateMock( string message )
         {
             return new EnumValueOutOfRangeException( message );
         }
 
-        protected override Exception CreateMock( String message, Exception innerException )
+        protected override Exception CreateMock( string message, Exception innerException )
         {
             return new EnumValueOutOfRangeException( message, innerException );
         }

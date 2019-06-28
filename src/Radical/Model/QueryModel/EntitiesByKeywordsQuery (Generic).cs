@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using Radical.Validation;
 using System.Collections.Generic;
-using Radical.ComponentModel.QueryModel;
-using Radical.Validation;
+using System.Linq;
 using System.Text;
 
 namespace Radical.Model.QueryModel
@@ -18,7 +16,7 @@ namespace Radical.Model.QueryModel
         /// Initializes a new instance of the <see cref="EntitiesByKeywordsQuery&lt;TSource, TResult&gt;"/> class.
         /// </summary>
         /// <param name="keywords">The keywords.</param>
-        public EntitiesByKeywordsQuery( IEnumerable<String> keywords )
+        public EntitiesByKeywordsQuery( IEnumerable<string> keywords )
         {
             Ensure.That( keywords ).Named( "keywords" ).IsNotNull();
 
@@ -28,18 +26,18 @@ namespace Radical.Model.QueryModel
         /// <summary>
         /// Gets the keywords.
         /// </summary>
-        public IEnumerable<String> Keywords
+        public IEnumerable<string> Keywords
         {
             get;
             private set;
         }
 
-        private String value = null;
+        private string value = null;
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="System.string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="System.string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

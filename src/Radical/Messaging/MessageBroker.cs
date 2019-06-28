@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Radical.ComponentModel;
+﻿using Radical.ComponentModel;
 using Radical.ComponentModel.Messaging;
-using System.Reflection;
-using Radical.Validation;
-using Radical.Linq;
-using Radical.Reflection;
-using System.Diagnostics;
 using Radical.Conversions;
 using Radical.Diagnostics;
+using Radical.Linq;
+using Radical.Reflection;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Radical.Messaging
@@ -46,7 +45,7 @@ namespace Radical.Messaging
         readonly List<SubscriptionsContainer> msgSubsIndex = null;
         readonly ReaderWriterLockSlim msgSubsIndexLock = new ReaderWriterLockSlim();
 
-        //Dictionary<String, IScopedMessageBroker> topics = new Dictionary<string, IScopedMessageBroker>();
+        //Dictionary<string, IScopedMessageBroker> topics = new Dictionary<string, IScopedMessageBroker>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBroker"/> class.

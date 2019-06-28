@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
 
 namespace Radical.Helpers
 {
@@ -33,10 +29,10 @@ namespace Radical.Helpers
         }
 
         /// <summary>
-        /// Gets the combined hash as an <c>Int32</c> value.
+        /// Gets the combined hash as an <c>int</c> value.
         /// </summary>
         /// <value>The combined hash code.</value>
-        public Int32 CombinedHash32
+        public int CombinedHash32
         {
             get { return this.combinedHashCode.GetHashCode(); }
         }

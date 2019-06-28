@@ -1,9 +1,9 @@
-using System;
-using System.Linq;
 using Radical.ComponentModel.ChangeTracking;
-using System.Collections.Generic;
 using Radical.Conversions;
 using Radical.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Radical.ChangeTracking
 {

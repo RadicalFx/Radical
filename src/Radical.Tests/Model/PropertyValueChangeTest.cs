@@ -40,14 +40,14 @@ namespace Radical.Tests.Model
             var actual = target.Owner;
 
             actual.Should().Be.EqualTo( expected );
-            target.Description.Should().Be.EqualTo( String.Empty );
+            target.Description.Should().Be.EqualTo( string.Empty );
         }
 
         [TestMethod]
         public void propertyValueChange_ctor_owner_value_rejectCallback_on_reject_should_return_expected_values()
         {
             var expected = "Foo";
-            ChangeRejectedEventArgs<String> actual = null;
+            ChangeRejectedEventArgs<string> actual = null;
             var owner = new Object();
 
             var target = this.MockPropertyValue( owner, expected, cv => { actual = cv; } );

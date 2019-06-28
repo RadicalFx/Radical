@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Radical.ComponentModel
 {
@@ -15,7 +14,7 @@ namespace Radical.ComponentModel
         /// <value>
         /// The key.
         /// </value>
-        String Key { get; }
+        string Key { get; }
 
         /// <summary>
         /// Gets the component type.
@@ -46,7 +45,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Gets the parameters.
         /// </summary>
-        IDictionary<String, Object> Parameters { get; }
+        IDictionary<string, Object> Parameters { get; }
 
         /// <summary>
         /// Gets an indication is this component is overridable.
@@ -54,6 +53,6 @@ namespace Radical.ComponentModel
         /// <value>
         /// An indication is this component is overridable.
         /// </value>
-        Boolean IsOverridable { get; }
+        bool IsOverridable { get; }
     }
 }

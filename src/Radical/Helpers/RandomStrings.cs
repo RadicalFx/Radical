@@ -1,7 +1,7 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Radical.Helpers
 {
@@ -16,14 +16,14 @@ namespace Radical.Helpers
         /// Generates a random string using default settings.
         /// </summary>
         /// <returns></returns>
-        public static String GenerateRandom()
+        public static string GenerateRandom()
         {
             return instance.Next();
         }
 
-        const Int32 DEFAULT_MINIMUM = 6;
-        const Int32 DEFAULT_MAXIMUM = 10;
-        const Int32 U_BOUND_DIGIT = 61;
+        const int DEFAULT_MINIMUM = 6;
+        const int DEFAULT_MAXIMUM = 10;
+        const int U_BOUND_DIGIT = 61;
 
         private RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         private char[] pwdCharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}\\|;:'\",<.>/?".ToCharArray();
@@ -34,10 +34,10 @@ namespace Radical.Helpers
         /// <param name="lBound">The lower bound</param>
         /// <param name="uBound">The upper bound</param>
         /// <returns>The random result</returns>
-        protected Int32 GetCryptographicRandomNumber( Int32 lBound, Int32 uBound )
+        protected int GetCryptographicRandomNumber( int lBound, int uBound )
         {
             // Assumes lBound >= 0 && lBound < uBound
-            // returns an Int32 >= lBound and < uBound
+            // returns an int >= lBound and < uBound
             UInt32 urndnum;
             Byte[] rndnum = new Byte[ 4 ];
 
@@ -55,7 +55,7 @@ namespace Radical.Helpers
                 urndnum = BitConverter.ToUInt32( rndnum, 0 );
             } while( urndnum >= xcludeRndBase );
 
-            return ( Int32 )( urndnum % ( uBound - lBound ) ) + lBound;
+            return ( int )( urndnum % ( uBound - lBound ) ) + lBound;
         }
 
         /// <summary>
@@ -64,14 +64,14 @@ namespace Radical.Helpers
         /// <returns>The choosen char</returns>
         protected char GetRandomCharacter()
         {
-            Int32 upperBound = pwdCharArray.GetUpperBound( 0 );
+            int upperBound = pwdCharArray.GetUpperBound( 0 );
 
             if( !this.AllowSymbols )
             {
                 upperBound = U_BOUND_DIGIT;
             }
 
-            Int32 randomCharPosition = GetCryptographicRandomNumber( pwdCharArray.GetLowerBound( 0 ), upperBound );
+            int randomCharPosition = GetCryptographicRandomNumber( pwdCharArray.GetLowerBound( 0 ), upperBound );
             return pwdCharArray[ randomCharPosition ];
         }
 
@@ -79,7 +79,7 @@ namespace Radical.Helpers
         /// Generates one string based on the defined rules.
         /// </summary>
         /// <returns>The generated string.</returns>
-        public String Next()
+        public string Next()
         {
             // Pick random length between minimum and maximum   
             var pwdLength = GetCryptographicRandomNumber( this.MinLenght, this.MaxLenght );
@@ -144,13 +144,13 @@ namespace Radical.Helpers
             get { return this._exclusions; }
         }
 
-        private Int32 _minLenght = DEFAULT_MINIMUM;
+        private int _minLenght = DEFAULT_MINIMUM;
 
         /// <summary>
         /// Minimum char number of the generated password
         /// </summary>
         /// <value>The min lenght.</value>
-        public Int32 MinLenght
+        public int MinLenght
         {
             get { return this._minLenght; }
             set
@@ -163,13 +163,13 @@ namespace Radical.Helpers
             }
         }
 
-        private Int32 _maxLenght = DEFAULT_MAXIMUM;
+        private int _maxLenght = DEFAULT_MAXIMUM;
 
         /// <summary>
         /// Maximum char number of the generated password
         /// </summary>
         /// <value>The max lenght.</value>
-        public Int32 MaxLenght
+        public int MaxLenght
         {
             get { return this._maxLenght; }
             set
@@ -183,19 +183,19 @@ namespace Radical.Helpers
         }
 
 
-        private Boolean _allowSymbols = true;
+        private bool _allowSymbols = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether symbols are allowed.
         /// </summary>
         /// <value><c>true</c> if symbols are allowed; otherwise, <c>false</c>.</value>
-        public Boolean AllowSymbols
+        public bool AllowSymbols
         {
             get { return this._allowSymbols; }
             set { this._allowSymbols = value; }
         }
 
-        private Boolean _allowRepeatCharacters = true;
+        private bool _allowRepeatCharacters = true;
 
         /// <summary>
         /// If true the resulting string can contains
@@ -204,7 +204,7 @@ namespace Radical.Helpers
         /// <value>
         ///     <c>true</c> if [allow repeat characters]; otherwise, <c>false</c>.
         /// </value>
-        public Boolean AllowRepeatCharacters
+        public bool AllowRepeatCharacters
         {
             get { return this._allowRepeatCharacters; }
             set { this._allowRepeatCharacters = value; }
@@ -218,7 +218,7 @@ namespace Radical.Helpers
         /// <value>
         ///     <c>true</c> if [allow consecutive characters]; otherwise, <c>false</c>.
         /// </value>
-        public Boolean AllowConsecutiveCharacters
+        public bool AllowConsecutiveCharacters
         {
             get;
             set;

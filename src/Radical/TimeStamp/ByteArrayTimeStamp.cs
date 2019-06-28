@@ -32,9 +32,9 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the specified <see cref="T:Timestamp"/> is equal to the current <see cref="T:Timestamp"/>; otherwise, false.
         /// </returns>
-        public override Boolean Equals( Timestamp obj )
+        public override bool Equals( Timestamp obj )
         {
-            Boolean returnValue = true;
+            bool returnValue = true;
 
             ByteArrayTimestamp timestamp = obj as ByteArrayTimestamp;
             if( obj != null )
@@ -45,7 +45,7 @@ namespace Radical.ComponentModel
                 }
                 else
                 {
-                    for( Int32 i = 0; i < timestamp.Value.Length; i++ )
+                    for( int i = 0; i < timestamp.Value.Length; i++ )
                     {
                         if( this.Value[ i ] != timestamp.Value[ i ] )
                         {
@@ -74,10 +74,10 @@ namespace Radical.ComponentModel
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// A <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
         public override string ToString()
         {

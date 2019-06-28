@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Radical.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
-using Radical.ComponentModel;
 
 namespace Radical
 {
@@ -15,10 +13,10 @@ namespace Radical
         internal PuzzleContainerEntry()
         {
             this.Key = Guid.NewGuid().ToString();
-            this.Parameters = new Dictionary<String, Object>();
+            this.Parameters = new Dictionary<string, Object>();
         }
 
-        public String Key
+        public string Key
         {
             get;
             private set;
@@ -44,7 +42,7 @@ namespace Radical
             private set;
         }
 
-        Dictionary<Int32, Type> services = new Dictionary<Int32, Type>();
+        Dictionary<int, Type> services = new Dictionary<int, Type>();
 
         internal PuzzleContainerEntry<T> AddService( Type type )
         {
@@ -76,7 +74,7 @@ namespace Radical
             internal set;
         }
 
-        public IDictionary<String, Object> Parameters
+        public IDictionary<string, Object> Parameters
         {
             get;
             private set;
@@ -89,7 +87,7 @@ namespace Radical
             this.Component = type;
         }
 
-        void WithParameters( IDictionary<String, Object> parameters )
+        void WithParameters( IDictionary<string, Object> parameters )
         {
             //Ensure.That( parameters ).Named( "parameters" ).IsNotNull();
 
@@ -137,7 +135,7 @@ namespace Radical
             return this;
         }
 
-        //IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.WithParameters( IDictionary<String, Object> parameters )
+        //IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.WithParameters( IDictionary<string, Object> parameters )
         //{
         //    this.WithParameters( parameters );
         //    return this;
@@ -186,7 +184,7 @@ namespace Radical
             return this;
         }
 
-        //IPuzzleContainerEntry IPuzzleContainerEntry.WithParameters( IDictionary<String, Object> parameters )
+        //IPuzzleContainerEntry IPuzzleContainerEntry.WithParameters( IDictionary<string, Object> parameters )
         //{
         //    this.WithParameters( parameters );
         //    return this;

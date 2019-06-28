@@ -17,7 +17,7 @@ namespace Radical.Tests.Extensions
             var expected = 12;
             var actual = 0;
 
-            var list = new List<Int32>();
+            var list = new List<int>();
             actual = list.SingleOr( () => expected );
 
             actual.Should().Be.EqualTo( expected );
@@ -30,7 +30,7 @@ namespace Radical.Tests.Extensions
             var expected = 12;
             var actual = 0;
 
-            var list = new List<Int32>();
+            var list = new List<int>();
             actual = list.FirstOr( () => expected );
 
             actual.Should().Be.EqualTo( expected );

@@ -46,7 +46,7 @@
         public void IsAttributeDefined_memberInfo()
         {
             Type t = typeof( MyBaseTestClass );
-            Boolean actual = MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>( t );
+            bool actual = MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>( t );
 
             Assert.IsTrue( actual );
         }
@@ -55,7 +55,7 @@
         public void IsAttributeDefined_memberInfo_using_base_attribute()
         {
             Type t = typeof( MyBaseTestClass );
-            Boolean actual = MemberInfoExtensions.IsAttributeDefined<Attribute>( t );
+            bool actual = MemberInfoExtensions.IsAttributeDefined<Attribute>( t );
 
             Assert.IsTrue( actual );
         }
@@ -64,7 +64,7 @@
         public void IsAttributeDefined_memberInfo_inherit_false()
         {
             Type t = typeof( MyDerivedTestClass );
-            Boolean actual = MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>( t, false );
+            bool actual = MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>( t, false );
 
             Assert.IsFalse( actual );
         }
@@ -179,7 +179,7 @@
             MyTestAttribute[] actual = MemberInfoExtensions.GetAttributes<MyTestAttribute>( t );
 
             Assert.IsNotNull( actual );
-            Assert.AreEqual<Int32>( 1, actual.Length );
+            Assert.AreEqual<int>( 1, actual.Length );
             Assert.IsNotNull( actual[ 0 ] );
         }
 
@@ -190,7 +190,7 @@
             MyTestAttribute[] actual = MemberInfoExtensions.GetAttributes<MyTestAttribute>( t );
 
             Assert.IsNotNull( actual );
-            Assert.AreEqual<Int32>( 1, actual.Length );
+            Assert.AreEqual<int>( 1, actual.Length );
             Assert.IsNotNull( actual[ 0 ] );
         }
 
@@ -201,7 +201,7 @@
             MyTestAttribute[] actual = MemberInfoExtensions.GetAttributes<MyTestAttribute>( t, false );
 
             Assert.IsNotNull( actual );
-            Assert.AreEqual<Int32>( 0, actual.Length );
+            Assert.AreEqual<int>( 0, actual.Length );
         }
 
         [TestMethod()]
@@ -211,7 +211,7 @@
             MyTestAttribute[] actual = MemberInfoExtensions.GetAttributes<MyTestAttribute>( t, true );
 
             Assert.IsNotNull( actual );
-            Assert.AreEqual<Int32>( 1, actual.Length );
+            Assert.AreEqual<int>( 1, actual.Length );
             Assert.IsNotNull( actual[ 0 ] );
         }
     }

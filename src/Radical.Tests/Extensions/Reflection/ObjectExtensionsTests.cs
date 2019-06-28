@@ -18,7 +18,7 @@ namespace Radical.Tests.Extensions.Reflection
             var expected = "Mauro";
             var person = new Person() { Name = expected };
 
-            var getter = person.CreateFastPropertyGetter<String>( "Name" );
+            var getter = person.CreateFastPropertyGetter<string>( "Name" );
             var actual = getter();
 
             actual.Should().Be.EqualTo( expected );
@@ -33,7 +33,7 @@ namespace Radical.Tests.Extensions.Reflection
             var person = new Person() { Name = expected };
 
             var getter = person.CreateFastPropertyGetter( typeof( Person ).GetProperty( "Name" ) );
-            var actual = ( String )getter.DynamicInvoke();
+            var actual = ( string )getter.DynamicInvoke();
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -47,7 +47,7 @@ namespace Radical.Tests.Extensions.Reflection
             var person = new Person( expected );
 
             var getter = person.CreateFastPropertyGetter( typeof( Person ).GetProperty( "privateValue", BindingFlags.NonPublic | BindingFlags.Instance ) );
-            var actual = ( String )getter();
+            var actual = ( string )getter();
 
             actual.Should().Be.EqualTo( expected );
         }
@@ -60,7 +60,7 @@ namespace Radical.Tests.Extensions.Reflection
             var expected = "Mauro";
             var person = new Person( expected );
 
-            var getter = person.CreateFastPropertyGetter<String>( typeof( Person ).GetProperty( "privateValue", BindingFlags.NonPublic | BindingFlags.Instance ) );
+            var getter = person.CreateFastPropertyGetter<string>( typeof( Person ).GetProperty( "privateValue", BindingFlags.NonPublic | BindingFlags.Instance ) );
             var actual = getter();
 
             actual.Should().Be.EqualTo( expected );

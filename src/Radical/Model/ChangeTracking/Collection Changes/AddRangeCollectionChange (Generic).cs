@@ -1,11 +1,11 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Linq;
     using Radical.Validation;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Identifies an AddRange operation on a collection.
@@ -20,7 +20,7 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public AddRangeCollectionChange( Object owner, CollectionRangeDescriptor<T> descriptor, RejectCallback<CollectionRangeDescriptor<T>> rejectCallback, CommitCallback<CollectionRangeDescriptor<T>> commitCallback, String description )
+        public AddRangeCollectionChange( Object owner, CollectionRangeDescriptor<T> descriptor, RejectCallback<CollectionRangeDescriptor<T>> rejectCallback, CommitCallback<CollectionRangeDescriptor<T>> commitCallback, string description )
             : base( owner, descriptor, rejectCallback, commitCallback, description )
         {
 

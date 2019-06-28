@@ -15,7 +15,7 @@ namespace Radical
         /// Initializes a new instance of the <see cref="LocalizableEnumItemDescriptionAttribute"/> class.
         /// </summary>
         /// <param name="captionKey">The description key.</param>
-        public LocalizableEnumItemDescriptionAttribute( String captionKey )
+        public LocalizableEnumItemDescriptionAttribute( string captionKey )
             : base( captionKey )
         {
 
@@ -26,7 +26,7 @@ namespace Radical
         /// </summary>
         /// <param name="captionKey">The caption key.</param>
         /// <param name="index">The index.</param>
-        public LocalizableEnumItemDescriptionAttribute( String captionKey, Int32 index )
+        public LocalizableEnumItemDescriptionAttribute( string captionKey, int index )
             : base( captionKey, index )
         {
 
@@ -38,7 +38,7 @@ namespace Radical
         /// <param name="captionKey">The caption key.</param>
         /// <param name="descriptionKey">The description key.</param>
         /// <param name="index">The index.</param>
-        public LocalizableEnumItemDescriptionAttribute( String captionKey, String descriptionKey, Int32 index )
+        public LocalizableEnumItemDescriptionAttribute( string captionKey, string descriptionKey, int index )
             : base( captionKey, descriptionKey, index )
         {
 
@@ -89,13 +89,13 @@ namespace Radical
         /// Gets or sets the name of the resource.
         /// </summary>
         /// <value>The name of the resource.</value>
-        public String ResourceName { get; set; }
+        public string ResourceName { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the assembly.
         /// </summary>
         /// <value>The name of the assembly.</value>
-        public String AssemblyName { get; set; }
+        public string AssemblyName { get; set; }
 
         /// <summary>
         /// Gets or sets the caption fallback value.
@@ -103,7 +103,7 @@ namespace Radical
         /// <value>
         /// The caption fallback value.
         /// </value>
-        public String CaptionFallbackValue { get; set; }
+        public string CaptionFallbackValue { get; set; }
 
         /// <summary>
         /// Gets or sets the description fallback value.
@@ -111,7 +111,7 @@ namespace Radical
         /// <value>
         /// The description fallback value.
         /// </value>
-        public String DescriptionFallbackValue { get; set; }
+        public string DescriptionFallbackValue { get; set; }
 
         /// <summary>
         /// Gets or sets the assembly location behavior.
@@ -129,7 +129,7 @@ namespace Radical
         /// <returns>
         /// The Caption value.
         /// </returns>
-        protected override String OnGetCaption( String caption )
+        protected override string OnGetCaption( string caption )
         {
             var value = this.ResourceManager.GetString( caption );
 
@@ -144,7 +144,7 @@ namespace Radical
         /// <returns>
         /// The Description value.
         /// </returns>
-        protected override string OnGetDescription( String description )
+        protected override string OnGetDescription( string description )
         {
             var value = this.ResourceManager.GetString( description );
 

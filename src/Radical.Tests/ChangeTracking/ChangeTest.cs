@@ -15,7 +15,7 @@ namespace Radical.Tests.ChangeTracking
     [TestClass()]
     public class ChangeTest
     {
-        protected virtual IChange<T> Mock<T>(Object owner, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, String description)
+        protected virtual IChange<T> Mock<T>(Object owner, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
         {
             try
             {
@@ -40,11 +40,11 @@ namespace Radical.Tests.ChangeTracking
         {
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
+            var description = string.Empty;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
 
             target.Should().Not.Be.Null();
             target.Owner.Should().Be.EqualTo(owner);
@@ -57,7 +57,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_null_commitCallback()
         {
-            var target = Mock<String>(new Object(), "Foo", e => { }, null, String.Empty);
+            var target = Mock<string>(new Object(), "Foo", e => { }, null, string.Empty);
 
             target.IsCommitSupported.Should().Be.False();
         }
@@ -67,7 +67,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_owner_argumentNullException()
         {
-            var target = Mock<String>(null, "Foo", null, null, String.Empty);
+            var target = Mock<string>(null, "Foo", null, null, string.Empty);
         }
 
         [TestMethod]
@@ -78,11 +78,11 @@ namespace Radical.Tests.ChangeTracking
 
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { invoked = true; };
-            CommitCallback<String> cc = null;
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { invoked = true; };
+            CommitCallback<string> cc = null;
+            var description = string.Empty;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Reject(RejectReason.Undo);
 
             invoked.Should().Be.True();
@@ -92,16 +92,16 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_rejectCallback_is_invoked_with_expected_values()
         {
-            ChangeRejectedEventArgs<String> expected = null;
+            ChangeRejectedEventArgs<string> expected = null;
 
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { expected = e; };
-            CommitCallback<String> cc = null;
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { expected = e; };
+            CommitCallback<string> cc = null;
+            var description = string.Empty;
             var reason = RejectReason.Undo;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Reject(reason);
 
             expected.Should().Not.Be.Null();
@@ -118,12 +118,12 @@ namespace Radical.Tests.ChangeTracking
         {
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = null;
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = null;
+            var description = string.Empty;
             var reason = RejectReason.None;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Reject(reason);
         }
 
@@ -134,12 +134,12 @@ namespace Radical.Tests.ChangeTracking
         {
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = null;
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = null;
+            var description = string.Empty;
             var reason = (RejectReason)1000;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Reject(reason);
         }
 
@@ -148,24 +148,24 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_rejectCallback_argumentNullException()
         {
-            var target = Mock<String>(new Object(), "Foo", null, null, String.Empty);
+            var target = Mock<string>(new Object(), "Foo", null, null, string.Empty);
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_rejected_fired()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = null;
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = null;
+            var description = string.Empty;
             var reason = RejectReason.Undo;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Rejected += (s, e) => { actual++; };
             target.Reject(reason);
 
@@ -176,17 +176,17 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_committed_fired()
         {
-            Int32 expected = 1;
-            Int32 actual = 0;
+            int expected = 1;
+            int actual = 0;
 
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = null;
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = null;
+            var description = string.Empty;
             var reason = CommitReason.AcceptChanges;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Committed += (s, e) => { actual++; };
             target.Commit(reason);
 
@@ -200,12 +200,12 @@ namespace Radical.Tests.ChangeTracking
         {
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
+            var description = string.Empty;
             var reason = CommitReason.None;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Commit(reason);
         }
 
@@ -216,12 +216,12 @@ namespace Radical.Tests.ChangeTracking
         {
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
+            var description = string.Empty;
             var reason = (CommitReason)1000;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Commit(reason);
         }
 
@@ -229,16 +229,16 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commitCallback_is_invoked_with_expected_values()
         {
-            ChangeCommittedEventArgs<String> expected = null;
+            ChangeCommittedEventArgs<string> expected = null;
 
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { expected = e; };
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { expected = e; };
+            var description = string.Empty;
             var reason = CommitReason.AcceptChanges;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             target.Commit(reason);
 
             expected.Should().Not.Be.Null();
@@ -254,11 +254,11 @@ namespace Radical.Tests.ChangeTracking
         {
             var owner = new Object();
             var value = "Foo";
-            RejectCallback<String> rc = e => { };
-            CommitCallback<String> cc = e => { };
-            var description = String.Empty;
+            RejectCallback<string> rc = e => { };
+            CommitCallback<string> cc = e => { };
+            var description = string.Empty;
 
-            var target = Mock<String>(owner, value, rc, cc, description);
+            var target = Mock<string>(owner, value, rc, cc, description);
             IEnumerable<Object> ce = target.GetChangedEntities();
 
             ce.Should().Not.Be.Null();

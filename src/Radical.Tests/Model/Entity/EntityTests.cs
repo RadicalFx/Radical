@@ -14,13 +14,13 @@ namespace Radical.Tests.Model.Entity
     {
         class TestMetadata<T> : PropertyMetadata<T>
         {
-            public TestMetadata(Object propertyOwner, String propertyName)
+            public TestMetadata(Object propertyOwner, string propertyName)
                 : base(propertyOwner, propertyName)
             {
 
             }
 
-            public Boolean IsDisposed { get; private set; }
+            public bool IsDisposed { get; private set; }
 
             protected override void Dispose(bool disposing)
             {
@@ -42,7 +42,7 @@ namespace Radical.Tests.Model.Entity
                 return new TestMetadata<T>(this, propertyName);
             }
 
-            public String MyProperty
+            public string MyProperty
             {
                 get { return this.GetPropertyValue(() => this.MyProperty); }
                 set { this.SetPropertyValue(() => this.MyProperty, value); }
@@ -87,7 +87,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_dispose_using_metadata_should_not_fail()
         {
-            TestMetadata<String> metadata;
+            TestMetadata<string> metadata;
 
             using (var target = new SutEntity())
             {

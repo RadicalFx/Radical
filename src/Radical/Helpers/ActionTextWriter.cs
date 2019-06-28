@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using Radical.Validation;
-using System.Text;
+﻿using Radical.Validation;
+using System;
 using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace Radical
 {
@@ -12,13 +12,13 @@ namespace Radical
     /// </summary>
     public sealed class ActionTextWriter : TextWriter
     {
-        readonly Action<String> logger;
+        readonly Action<string> logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActionTextWriter"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public ActionTextWriter( Action<String> logger )
+        public ActionTextWriter( Action<string> logger )
             : base( CultureInfo.InvariantCulture )
         {
             Ensure.That( logger ).Named( "logger" ).IsNotNull();
@@ -31,7 +31,7 @@ namespace Radical
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="formatProvider">The format provider.</param>
-        public ActionTextWriter( Action<String> logger, IFormatProvider formatProvider )
+        public ActionTextWriter( Action<string> logger, IFormatProvider formatProvider )
             : base( formatProvider )
         {
             Ensure.That( logger ).Named( "logger" ).IsNotNull();
@@ -83,7 +83,7 @@ namespace Radical
                 base.Write( buffer, index, count );
             }
 
-            this.logger( new String( buffer, index, count ) );
+            this.logger( new string( buffer, index, count ) );
         }
 
         Encoding _encoding;

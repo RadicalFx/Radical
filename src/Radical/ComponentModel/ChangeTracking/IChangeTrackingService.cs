@@ -60,7 +60,7 @@
         /// </summary>
         /// <param name="bookmark">The bookmark.</param>
         /// <returns><c>True</c> if the given bookmark is valid; otherwise <c>false</c>.</returns>
-        Boolean Validate( IBookmark bookmark );
+        bool Validate( IBookmark bookmark );
 
         /// <summary>
         /// Registers the supplied object as a new object.
@@ -79,7 +79,7 @@
         /// or an Undo that removes the last IChange of the object, is called the object then is automatically 
         /// removed from the list of the new objects.</remarks>
         /// <exception cref="ArgumentException">If the change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
-        void RegisterTransient( Object entity, Boolean autoRemove );
+        void RegisterTransient( Object entity, bool autoRemove );
 
         /// <summary>
         /// Unregisters the supplied entity from the transient objects 
@@ -95,7 +95,7 @@
         /// <value>
         ///     <c>true</c> if this instance has transient entities; otherwise, <c>false</c>.
         /// </value>
-        Boolean HasTransientEntities { get; }
+        bool HasTransientEntities { get; }
 
         /// <summary>
         /// Gets the state of the entity.
@@ -116,13 +116,13 @@
         /// <param name="sateFilter">The sate filter to use to search entities.</param>
         /// <param name="exactMatch">if set to <c>true</c> the search is performed using an exact match behavior.</param>
         /// <returns>An enumerable list of entities that matches the filter.</returns>
-        IEnumerable<Object> GetEntities( EntityTrackingStates sateFilter, Boolean exactMatch );
+        IEnumerable<Object> GetEntities( EntityTrackingStates sateFilter, bool exactMatch );
 
         /// <summary>
         /// Gets a value indicating whether this instance can undo the last change.
         /// </summary>
         /// <value><c>true</c> if this instance can undo; otherwise, <c>false</c>.</value>
-        Boolean CanUndo { get; }
+        bool CanUndo { get; }
 
         /// <summary>
         /// Undoes the last IChange holded by 
@@ -135,7 +135,7 @@
         /// Gets a value indicating whether this instance can redo.
         /// </summary>
         /// <value><c>true</c> if this instance can redo; otherwise, <c>false</c>.</value>
-        Boolean CanRedo { get; }
+        bool CanRedo { get; }
 
         /// <summary>
         /// Redoes the last undoed change.
@@ -195,7 +195,7 @@
         /// <value>
         ///     <c>true</c> if this instance is suspended; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsSuspended { get; }
+        bool IsSuspended { get; }
 
         /// <summary>
         /// Resumes all the tracking operation of this service.

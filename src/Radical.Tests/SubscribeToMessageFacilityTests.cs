@@ -16,7 +16,7 @@ namespace Radical.Tests
 
         class AMessageHandler : AbstractMessageHandler<AMessage>
         {
-            public Boolean Invoked { get; private set; }
+            public bool Invoked { get; private set; }
 
             public override void Handle(Object sender, AMessage message)
             {

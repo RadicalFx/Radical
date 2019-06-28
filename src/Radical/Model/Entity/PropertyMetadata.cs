@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Collections.Generic;
-using Radical.Linq;
+﻿using Radical.Linq;
 using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Radical.Model
@@ -25,7 +24,7 @@ namespace Radical.Model
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose( bool disposing )
         {
             if ( disposing )
             {
@@ -68,12 +67,12 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>( Object propertyOwner, String propertyName )
+        public static PropertyMetadata<T> Create<T>( Object propertyOwner, string propertyName )
         {
             return new PropertyMetadata<T>( propertyOwner, propertyName );
         }
 
-        readonly HashSet<String> cascadeChangeNotifications = new HashSet<String>();
+        readonly HashSet<string> cascadeChangeNotifications = new HashSet<string>();
 
         readonly Object propertyOwner;
         PropertyInfo _property;
@@ -98,7 +97,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="propertyName">Name of the property.</param>
-        protected PropertyMetadata( Object propertyOwner, String propertyName )
+        protected PropertyMetadata( Object propertyOwner, string propertyName )
         {
             Ensure.That( propertyOwner ).Named( "propertyOwner" ).IsNotNull();
             Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
@@ -114,7 +113,7 @@ namespace Radical.Model
         /// <value>
         /// The name of the property.
         /// </value>
-        public String PropertyName { get; private set; }
+        public string PropertyName { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the property represented by this metadata should notify changes.
@@ -122,7 +121,7 @@ namespace Radical.Model
         /// <value>
         ///   <c>true</c> if the property should notify changes; otherwise, <c>false</c>.
         /// </value>
-        public Boolean NotifyChanges { get; set; }
+        public bool NotifyChanges { get; set; }
 
         /// <summary>
         /// Disables changes notifications for this property.
@@ -149,7 +148,7 @@ namespace Radical.Model
             return this.AddCascadeChangeNotifications( property.GetMemberName() );
         }
 
-        public PropertyMetadata AddCascadeChangeNotifications( String property )
+        public PropertyMetadata AddCascadeChangeNotifications( string property )
         {
             this.cascadeChangeNotifications.Add( property );
 
@@ -161,7 +160,7 @@ namespace Radical.Model
             return this.RemoveCascadeChangeNotifications( property.GetMemberName() );
         }
 
-        public PropertyMetadata RemoveCascadeChangeNotifications( String property )
+        public PropertyMetadata RemoveCascadeChangeNotifications( string property )
         {
             if ( this.cascadeChangeNotifications.Contains( property ) )
             {
@@ -171,7 +170,7 @@ namespace Radical.Model
             return this;
         }
 
-        public IEnumerable<String> GetCascadeChangeNotifications()
+        public IEnumerable<string> GetCascadeChangeNotifications()
         {
             return this.cascadeChangeNotifications;
         }
@@ -180,12 +179,12 @@ namespace Radical.Model
 
         public abstract PropertyValue GetDefaultValue();
 
-        //public void AddCustomMetadata<T>( String key, T value ) 
+        //public void AddCustomMetadata<T>( string key, T value ) 
         //{
 
         //}
 
-        //public T GetCustomMetadata<T>( String key )
+        //public T GetCustomMetadata<T>( string key )
         //{
 
         //}

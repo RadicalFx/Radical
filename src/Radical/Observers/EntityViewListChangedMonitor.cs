@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.ComponentModel;
+﻿using Radical.ComponentModel;
 using System.ComponentModel;
 
 namespace Radical.Observers
@@ -57,7 +53,7 @@ namespace Radical.Observers
             this.StartMonitoring( source );
         }
 
-        protected override void OnStopMonitoring( Boolean targetDisposed )
+        protected override void OnStopMonitoring( bool targetDisposed )
         {
             if( !targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive )
             {

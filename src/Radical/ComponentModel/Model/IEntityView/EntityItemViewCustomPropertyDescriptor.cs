@@ -1,7 +1,4 @@
 using System;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
 
 namespace Radical.ComponentModel
 {
@@ -61,38 +58,38 @@ namespace Radical.ComponentModel
             set;
         }
 
-        public EntityItemViewCustomPropertyDescriptor( String customPropertyName, EntityItemViewValueGetter<T, TValue> getter )
+        public EntityItemViewCustomPropertyDescriptor( string customPropertyName, EntityItemViewValueGetter<T, TValue> getter )
             : this( customPropertyName, getter, null )
         {
 
         }
 
-        public EntityItemViewCustomPropertyDescriptor( String customPropertyName, EntityItemViewValueGetter<T, TValue> getter, EntityItemViewValueSetter<T, TValue> setter )
+        public EntityItemViewCustomPropertyDescriptor( string customPropertyName, EntityItemViewValueGetter<T, TValue> getter, EntityItemViewValueSetter<T, TValue> setter )
             : this( customPropertyName )
         {
             this.ValueGetter = getter;
             this.ValueSetter = setter;
         }
 
-        public EntityItemViewCustomPropertyDescriptor( String customDisplayName )
+        public EntityItemViewCustomPropertyDescriptor( string customDisplayName )
             : base()
         {
             this._customDisplayName = customDisplayName;
         }
 
-        String _customDisplayName = null;
+        string _customDisplayName = null;
 
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.
         /// </summary>
         /// <value></value>
         /// <returns>The name to display for the member.</returns>
-        public override String DisplayName
+        public override string DisplayName
         {
             get { return this.Name; }
         }
 
-        public override String Name
+        public override string Name
         {
             get { return this._customDisplayName; }
         }
@@ -112,7 +109,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <value></value>
         /// <returns>true if the property is read-only; otherwise, false.</returns>
-        public override Boolean IsReadOnly
+        public override bool IsReadOnly
         {
             get { return this.ValueSetter == null; }
         }

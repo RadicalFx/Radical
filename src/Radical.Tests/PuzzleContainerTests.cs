@@ -13,8 +13,8 @@ namespace Radical.Tests
     {
         class MyFacility : IPuzzleContainerFacility
         {
-            public Boolean InitializeCalled { get; set; }
-            public Boolean TeardownCalled { get; set; }
+            public bool InitializeCalled { get; set; }
+            public bool TeardownCalled { get; set; }
 
             public void Initialize( IPuzzleContainer container )
             {
@@ -99,7 +99,7 @@ namespace Radical.Tests
         public void puzzleContainer_register_entry_using_valid_entry_should_not_fail()
         {
             var container = new PuzzleContainer();
-            container.Register( EntryBuilder.For<String>() );
+            container.Register( EntryBuilder.For<string>() );
         }
 
         [TestMethod]
@@ -222,7 +222,7 @@ namespace Radical.Tests
         {
             var container = new PuzzleContainer();
 
-            var actual = container.IsRegistered<Int32>();
+            var actual = container.IsRegistered<int>();
 
             Assert.IsFalse( actual );
         }
@@ -382,7 +382,7 @@ namespace Radical.Tests
                 this.IsResolved = dependency != null;
             }
 
-            public Boolean IsResolved { get; private set; }
+            public bool IsResolved { get; private set; }
         }
 
         class TypeWithStaticCtor
@@ -569,7 +569,7 @@ namespace Radical.Tests
 
         class DisposableFoo : IFoo, IDisposable
         {
-            public Boolean Disposed { get; private set; }
+            public bool Disposed { get; private set; }
 
             public void Dispose()
             {

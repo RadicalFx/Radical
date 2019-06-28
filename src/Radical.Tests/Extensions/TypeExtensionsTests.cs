@@ -21,7 +21,7 @@
         [TestCategory("TypeExtensions")]
         public void TypeExtensions_is_non_generic_using_valid_types_should_return_true()
         {
-            var actual = typeof(Int32).Is(typeof(Object));
+            var actual = typeof(int).Is(typeof(Object));
             actual.Should().Be.True();
         }
 
@@ -29,7 +29,7 @@
         [TestCategory("TypeExtensions")]
         public void TypeExtensions_is_non_generic_using_non_inherited_types_should_return_false()
         {
-            var actual = typeof(Int32).Is(typeof(String));
+            var actual = typeof(int).Is(typeof(string));
             actual.Should().Be.False();
         }
 
@@ -37,16 +37,16 @@
         [TestCategory("TypeExtensions")]
         public void TypeExtensions_getInheritanceChain_using_valid_type_should_return_expected_inheritance_data()
         {
-            IEnumerable<Type> chain = Radical.Reflection.TypeExtensions.GetInheritanceChain(typeof(String));
-            chain.Should().Have.SameSequenceAs(new Type[] { typeof(String), typeof(Object) });
+            IEnumerable<Type> chain = Radical.Reflection.TypeExtensions.GetInheritanceChain(typeof(string));
+            chain.Should().Have.SameSequenceAs(new Type[] { typeof(string), typeof(Object) });
         }
 
         [TestMethod]
         [TestCategory("TypeExtensions")]
         public void TypeExtensions_getInheritanceChain_using_valid_type_and_valid_stopper_should_return_expected_inheritance_data()
         {
-            IEnumerable<Type> chain = Radical.Reflection.TypeExtensions.GetInheritanceChain(typeof(String), t => t != typeof(String));
-            chain.Should().Have.SameSequenceAs(new Type[] { typeof(String) });
+            IEnumerable<Type> chain = Radical.Reflection.TypeExtensions.GetInheritanceChain(typeof(string), t => t != typeof(string));
+            chain.Should().Have.SameSequenceAs(new Type[] { typeof(string) });
         }
 
         class Root { }

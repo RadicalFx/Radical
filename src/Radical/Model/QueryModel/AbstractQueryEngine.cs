@@ -1,7 +1,5 @@
-﻿using System;
-using Radical.ComponentModel.QueryModel;
+﻿using Radical.ComponentModel.QueryModel;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Radical.Model.QueryModel
 {

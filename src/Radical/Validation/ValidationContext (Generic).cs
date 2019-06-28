@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Radical.Linq;
-using Radical.Validation;
-using Radical.ComponentModel.Validation;
+﻿using Radical.ComponentModel.Validation;
 
 namespace Radical.Validation
 {
@@ -50,13 +45,13 @@ namespace Radical.Validation
         /// Gets or sets the validation rule set if specified.
         /// </summary>
         /// <value>The rule set.</value>
-        public String RuleSet { get; set; }
+        public string RuleSet { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the validated property if specified.
         /// </summary>
         /// <value>The name of the property.</value>
-        public String PropertyName { get; set; }
+        public string PropertyName { get; set; }
 
         /// <summary>
         /// Gets the current validator.

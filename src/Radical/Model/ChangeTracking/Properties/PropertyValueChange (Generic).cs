@@ -1,9 +1,9 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Validation;
+    using System;
 
     /// <summary>
     /// Identifies a change specific for a property change.
@@ -17,8 +17,8 @@
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="value">The value.</param>
         /// <param name="restoreCallback">The restore callback.</param>
-        public PropertyValueChange( Object owner, String propertyName, T value, RejectCallback<T> restoreCallback )
-            : this( owner, propertyName, value, restoreCallback, null, String.Empty )
+        public PropertyValueChange( Object owner, string propertyName, T value, RejectCallback<T> restoreCallback )
+            : this( owner, propertyName, value, restoreCallback, null, string.Empty )
         {
 
         }
@@ -31,7 +31,7 @@
         /// <param name="value">The value.</param>
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange( Object owner, String propertyName, T value, RejectCallback<T> restoreCallback, String description )
+        public PropertyValueChange( Object owner, string propertyName, T value, RejectCallback<T> restoreCallback, string description )
             : this( owner, propertyName, value, restoreCallback, null, description )
         {
 
@@ -46,7 +46,7 @@
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange( Object owner, String propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, String description )
+        public PropertyValueChange( Object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, string description )
             : base( owner, value, restoreCallback, commitCallback, description )
         {
             this.PropertyName = propertyName;
@@ -58,7 +58,7 @@
         /// <value>
         /// The name of the property.
         /// </value>
-        public String PropertyName { get; private set; }
+        public string PropertyName { get; private set; }
 
         /// <summary>
         /// Gets the advised action for this IChange.

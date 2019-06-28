@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Radical.Validation;
+using System;
 using System.Linq.Expressions;
-using Radical.Linq;
-using Radical.Validation;
 
 namespace Radical.ComponentModel.Validation
 {
@@ -17,7 +15,7 @@ namespace Radical.ComponentModel.Validation
         /// <summary>
         /// Gets the rule set.
         /// </summary>
-        String RuleSet { get; }
+        string RuleSet { get; }
 
         /// <summary>
         /// Determines whether the specified entity is valid.
@@ -26,7 +24,7 @@ namespace Radical.ComponentModel.Validation
         /// <returns>
         ///     <c>true</c> if the specified entity is valid; otherwise, <c>false</c>.
         /// </returns>
-        Boolean IsValid( T entity );
+        bool IsValid( T entity );
 
         /// <summary>
         /// Validates the specified entity.
@@ -43,7 +41,7 @@ namespace Radical.ComponentModel.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
         /// </returns>
-        ValidationResults Validate( T entity, String propertyName );
+        ValidationResults Validate( T entity, string propertyName );
 
         /// <summary>
         /// Validates the specified property of the given entity.
@@ -70,7 +68,7 @@ namespace Radical.ComponentModel.Validation
         /// <param name="rule">The rule to add.</param>
         /// <param name="error">The error if the given rule is not valid.</param>
         /// <returns>The current validator instance.</returns>
-        IValidator<T> AddRule( Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, String error );
+        IValidator<T> AddRule( Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, string error );
 
         /// <summary>
         /// Adds the given rule to the list of the validation rules.

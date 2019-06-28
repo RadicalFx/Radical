@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Radical.ComponentModel.QueryModel
+﻿namespace Radical.ComponentModel.QueryModel
 {
     /// <summary>
     /// Defines a scalar specification with support for projections.

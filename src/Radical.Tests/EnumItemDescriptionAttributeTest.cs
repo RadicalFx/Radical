@@ -23,12 +23,12 @@ namespace Radical.Tests
             }
         }
 
-        protected virtual EnumItemDescriptionAttribute CreateMock( String caption )
+        protected virtual EnumItemDescriptionAttribute CreateMock( string caption )
         {
             return new EnumItemDescriptionAttribute( caption );
         }
 
-        protected virtual EnumItemDescriptionAttribute CreateMock( String caption, Int32 index )
+        protected virtual EnumItemDescriptionAttribute CreateMock( string caption, int index )
         {
             return new EnumItemDescriptionAttribute( caption, index );
         }
@@ -36,7 +36,7 @@ namespace Radical.Tests
         [TestMethod()]
         public void EnumItemDescriptionAttribute_ctor_caption()
         {
-            String caption = "fake caption";
+            string caption = "fake caption";
             EnumItemDescriptionAttribute target = this.CreateMock( caption );
 
             Assert.IsNotNull( target );
@@ -45,8 +45,8 @@ namespace Radical.Tests
         [TestMethod()]
         public void EnumItemDescriptionAttribute_ctor_caption_index()
         {
-            String caption = "fake caption";
-            Int32 index = 0;
+            string caption = "fake caption";
+            int index = 0;
             EnumItemDescriptionAttribute target = this.CreateMock( caption, index );
 
             Assert.IsNotNull( target );
@@ -55,39 +55,39 @@ namespace Radical.Tests
         [TestMethod()]
         public void EnumItemDescriptionAttribute_caption()
         {
-            String caption = "fake caption";
+            string caption = "fake caption";
             EnumItemDescriptionAttribute target = this.CreateMock( caption );
 
-            Assert.AreEqual<String>( caption, target.Caption );
+            Assert.AreEqual<string>( caption, target.Caption );
         }
 
         [TestMethod()]
         public void EnumItemDescriptionAttribute_valid_caption()
         {
-            String expectedCaption = "fake caption";
-            Int32 expectedIndex = 0;
+            string expectedCaption = "fake caption";
+            int expectedIndex = 0;
             EnumItemDescriptionAttribute target = this.CreateMock( expectedCaption, expectedIndex );
 
-            Assert.AreEqual<String>( expectedCaption, target.Caption );
+            Assert.AreEqual<string>( expectedCaption, target.Caption );
         }
 
         [TestMethod()]
         public void EnumItemDescriptionAttribute_valid_index()
         {
-            String expectedcaption = "fake caption";
-            Int32 expectedIndex = 0;
+            string expectedcaption = "fake caption";
+            int expectedIndex = 0;
             EnumItemDescriptionAttribute target = this.CreateMock( expectedcaption, expectedIndex );
 
-            Assert.AreEqual<Int32>( expectedIndex, target.Index );
+            Assert.AreEqual<int>( expectedIndex, target.Index );
         }
 
         [TestMethod()]
         public void EnumItemDescriptionAttribute_Index()
         {
             EnumItemDescriptionAttribute target = this.CreateMock( "fake caption" );
-            Int32 actual = target.Index;
+            int actual = target.Index;
 
-            Assert.AreEqual<Int32>( -1, actual );
+            Assert.AreEqual<int>( -1, actual );
         }
 
         [TestMethod()]

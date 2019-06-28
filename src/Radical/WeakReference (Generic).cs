@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Security;
 
     /// <summary>
     /// Represents a weak reference, which references an object while still allowing

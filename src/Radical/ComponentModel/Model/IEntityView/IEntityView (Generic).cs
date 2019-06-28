@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Radical.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Radical.Model;
 
 namespace Radical.ComponentModel
 {
@@ -26,7 +26,7 @@ namespace Radical.ComponentModel
         /// <param name="setter">A delegate to call in order to set the value of the dinamically generated property.</param>
         /// <returns>A reference to the dinamically generated property.</returns>
         EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
-            String calculatedPropertyDisplayName,
+            string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter,
             EntityItemViewValueSetter<T, TProperty> setter );
 
@@ -38,10 +38,10 @@ namespace Radical.ComponentModel
         /// <param name="getter">A delegate to call in order to get the value of the dinamically generated property.</param>
         /// <returns>A reference to the dinamically generated property.</returns>
         /// <remarks>Using this overload implicitly creates a read-only property because no setter has been supplied.</remarks>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>( String calculatedPropertyDisplayName,
+        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>( string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter );
 
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>( String calculatedPropertyDisplayName,
+        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>( string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter,
             Func<TProperty> defaultValueInterceptor );
 
@@ -51,7 +51,7 @@ namespace Radical.ComponentModel
         /// <param name="propertyName">Name of the property to map to.</param>
         /// <param name="displayName">The display name.</param>
         /// <returns>A reference to the dinamically generated property.</returns>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping( String propertyName, String displayName );
+        EntityItemViewPropertyDescriptor<T> AddPropertyMapping( string propertyName, string displayName );
 
         /// <summary>
         /// Adds a property mapping using the supplied property descriptor instance.
@@ -65,23 +65,23 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="propertyName">Name of the property to map to.</param>
         /// <returns>A reference to the dinamically generated property.</returns>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping( String propertyName );
+        EntityItemViewPropertyDescriptor<T> AddPropertyMapping( string propertyName );
 
-        Boolean IsPropertyMappingDefined( String propertyName );
+        bool IsPropertyMappingDefined( string propertyName );
 
         /// <summary>
         /// Removes the property mapping.
         /// </summary>
         /// <param name="customProperty">The custom property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        Boolean RemovePropertyMapping( EntityItemViewPropertyDescriptor<T> customProperty );
+        bool RemovePropertyMapping( EntityItemViewPropertyDescriptor<T> customProperty );
 
         /// <summary>
         /// Removes the property mapping.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        Boolean RemovePropertyMapping( String propertyName );
+        bool RemovePropertyMapping( string propertyName );
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance must auto generate property mappings.
@@ -89,7 +89,7 @@ namespace Radical.ComponentModel
         /// <value>
         ///     <c>true</c> if this instance must auto generate property mappings; otherwise, <c>false</c>.
         /// </value>
-        Boolean AutoGenerateProperties { get; set; }
+        bool AutoGenerateProperties { get; set; }
 
         /// <summary>
         /// Gets the all the dinamically added custom property mappings.
@@ -98,9 +98,9 @@ namespace Radical.ComponentModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures" ), System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate" )]
         IEnumerable<EntityItemViewPropertyDescriptor<T>> GetCustomProperties();
 
-        EntityItemViewPropertyDescriptor<T> GetCustomProperty( String name );
+        EntityItemViewPropertyDescriptor<T> GetCustomProperty( string name );
 
-        PropertyDescriptor GetProperty( String name );
+        PropertyDescriptor GetProperty( string name );
 
         /// <summary>
         /// Gets or sets the filter to be used to exclude items from the collection of items returned by the data source
@@ -113,7 +113,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="item">The item to move.</param>
         /// <param name="newIndex">The destination index.</param>
-        void Move( IEntityItemView<T> item, Int32 newIndex );
+        void Move( IEntityItemView<T> item, int newIndex );
 
         void ApplySort( IComparer<IEntityItemView<T>> comparer );
 

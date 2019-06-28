@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Radical.Helpers
 {
@@ -30,7 +28,7 @@ namespace Radical.Helpers
         /// <param name="clearTextPassword">The clear text password.</param>
         /// <param name="passwordSalt">The password salt.</param>
         /// <returns>The hash of the given password.</returns>
-        public static Byte[] CreateHash( String clearTextPassword, Byte[] passwordSalt )
+        public static Byte[] CreateHash( string clearTextPassword, Byte[] passwordSalt )
         {
             return Password.CreateHash( clearTextPassword, passwordSalt, "SHA1" );
         }
@@ -44,7 +42,7 @@ namespace Radical.Helpers
         /// <returns>
         /// The hash of the given password.
         /// </returns>
-        public static Byte[] CreateHash( String clearTextPassword, Byte[] passwordSalt, String hashAlgorithmName )
+        public static Byte[] CreateHash( string clearTextPassword, Byte[] passwordSalt, string hashAlgorithmName )
         {
             var bytes = Encoding.Unicode.GetBytes( clearTextPassword );
             var buffer = new byte[ passwordSalt.Length + bytes.Length ];

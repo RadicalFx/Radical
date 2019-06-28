@@ -20,7 +20,7 @@ namespace Radical.Tests.Model.Entity
                 this.OnPropertyChanged( e );
             }
 
-            internal void RaisePropertyChanged( String propertyName )
+            internal void RaisePropertyChanged( string propertyName )
             {
                 this.OnPropertyChanged( propertyName );
             }
@@ -30,7 +30,7 @@ namespace Radical.Tests.Model.Entity
         public void entity_propertyChanged_event_using_propertyChangedEventArgs_raised_with_expected_values()
         {
             var expected = "Foo";
-            var actual = String.Empty;
+            var actual = string.Empty;
 
             var target = new TestableEntity();
             target.PropertyChanged += ( s, e ) => { actual = e.PropertyName; };
@@ -43,7 +43,7 @@ namespace Radical.Tests.Model.Entity
         public void entity_propertyChanged_event_using_propertyName_raised_with_expected_values()
         {
             var expected = "Foo";
-            var actual = String.Empty;
+            var actual = string.Empty;
 
             var target = new TestableEntity();
             target.PropertyChanged += ( s, e ) => { actual = e.PropertyName; };

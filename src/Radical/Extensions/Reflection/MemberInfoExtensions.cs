@@ -1,9 +1,9 @@
 namespace Radical.Reflection
 {
+    using Radical.Validation;
     using System;
     using System.Linq;
     using System.Reflection;
-    using Radical.Validation;
 
     /// <summary>
     /// Defines static methods to manipulates MemberInfo types.
@@ -20,7 +20,7 @@ namespace Radical.Reflection
         ///     <c>true</c> if the attribute is defined; otherwise, <c>false</c>.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static Boolean IsAttributeDefined<T>( this MemberInfo memberInfo ) where T : Attribute
+        public static bool IsAttributeDefined<T>( this MemberInfo memberInfo ) where T : Attribute
         {
             return memberInfo.IsAttributeDefined<T>( true );
         }
@@ -35,7 +35,7 @@ namespace Radical.Reflection
         ///     <c>true</c> if the attribute is defined; otherwise, <c>false</c>.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static Boolean IsAttributeDefined<T>( this MemberInfo memberInfo, Boolean inherit ) where T : Attribute
+        public static bool IsAttributeDefined<T>( this MemberInfo memberInfo, bool inherit ) where T : Attribute
         {
             Ensure.That( memberInfo ).Named( "memberInfo" ).IsNotNull();
 
@@ -64,7 +64,7 @@ namespace Radical.Reflection
         /// <param name="inherit"><c>true</c> to search the inheritance chain.</param>
         /// <returns>An array of the found attributes.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static T[] GetAttributes<T>( this MemberInfo memberInfo, Boolean inherit ) where T : Attribute
+        public static T[] GetAttributes<T>( this MemberInfo memberInfo, bool inherit ) where T : Attribute
         {
             Ensure.That( memberInfo ).Named( "memberInfo" ).IsNotNull();
 
@@ -109,7 +109,7 @@ namespace Radical.Reflection
         /// An instance of the found attribute, if one, otherwise null.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static T GetAttribute<T>( this MemberInfo memberInfo, Boolean inherit ) where T : Attribute
+        public static T GetAttribute<T>( this MemberInfo memberInfo, bool inherit ) where T : Attribute
         {
             Ensure.That( memberInfo ).Named( "memberInfo" ).IsNotNull();
 
@@ -132,7 +132,7 @@ namespace Radical.Reflection
         /// <returns>
         /// <c>True</c> if an attribute of the given type can be found; otherwise <c>false</c>.
         /// </returns>
-        public static Boolean TryGetAttribute<T>( this MemberInfo memberInfo, out T attribute ) where T : Attribute
+        public static bool TryGetAttribute<T>( this MemberInfo memberInfo, out T attribute ) where T : Attribute
         {
             Ensure.That( memberInfo ).Named( "memberInfo" ).IsNotNull();
 

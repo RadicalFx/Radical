@@ -1,12 +1,10 @@
-﻿using System;
+﻿//using Radical.Validation;
+using Radical.ComponentModel;
+using Radical.Linq;
+using Radical.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
-//using Radical.Validation;
-using Radical.ComponentModel;
-using Radical.Validation;
-using Radical.Linq;
 
 namespace Radical
 {
@@ -30,7 +28,7 @@ namespace Radical
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose( bool disposing )
         {
             if ( disposing )
             {
@@ -172,7 +170,7 @@ namespace Radical
             return this.ResolveEntry( entry );
         }
 
-        public object Resolve( String key, Type serviceType )
+        public object Resolve( string key, Type serviceType )
         {
             Ensure.That( key ).Named( () => key )
                 .IsNotNullNorEmpty();
@@ -225,7 +223,7 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
-        public Boolean IsRegistered<TService>()
+        public bool IsRegistered<TService>()
         {
             return this.IsRegistered( typeof( TService ) );
         }
@@ -237,7 +235,7 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the specified type is registered; otherwise, <c>false</c>.
         /// </returns>
-        public Boolean IsRegistered( Type type )
+        public bool IsRegistered( Type type )
         {
             return type != null && this.allEntries
                 .Any( x =>
@@ -268,7 +266,7 @@ namespace Radical
             } );
         }
 
-        IContainerEntry GetEntryFor( String key, Type type )
+        IContainerEntry GetEntryFor( string key, Type type )
         {
             return this.allEntries.FirstOrDefault( x =>
             {

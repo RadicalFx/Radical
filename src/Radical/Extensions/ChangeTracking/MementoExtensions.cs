@@ -1,8 +1,8 @@
 namespace Radical.ChangeTracking
 {
+    using Radical.ComponentModel.ChangeTracking;
     using System;
     using System.Linq.Expressions;
-    using Radical.ComponentModel.ChangeTracking;
 
     /// <summary>
     /// Extends <c>IMemento</c> interface providing shortcuts
@@ -18,7 +18,7 @@ namespace Radical.ChangeTracking
         ///     <c>true</c> if the specified entity is transient; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the supplied entity is not tracked by a change tracking service.</exception>
-        public static Boolean IsTransient( this IMemento entity )
+        public static bool IsTransient( this IMemento entity )
         {
             var memento = entity.Memento;
             if( memento == null )
@@ -39,7 +39,7 @@ namespace Radical.ChangeTracking
         ///     <c>true</c> if the specified entity is changed; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the supplied entity is not tracked by a change tracking service.</exception>
-        public static Boolean IsChanged( this IMemento entity )
+        public static bool IsChanged( this IMemento entity )
         {
             var memento = entity.Memento;
             if( memento == null )

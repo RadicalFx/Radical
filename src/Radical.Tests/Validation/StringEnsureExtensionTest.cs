@@ -41,7 +41,7 @@ namespace Radical.Tests.Validation
         [ExpectedException( typeof( ArgumentNullException ) )]
         public void stringEnsureExtension_isNotNullNorEmpty_null_string_should_raise_ArgumentNullException()
         {
-            String value = null;
+            string value = null;
             Ensure.That( value ).IsNotNullNorEmpty();
         }
 
@@ -49,7 +49,7 @@ namespace Radical.Tests.Validation
         [ExpectedException( typeof( ArgumentOutOfRangeException ) )]
         public void stringEnsureExtension_isNotNullNorEmpty_empty_string_should_raise_ArgumentOutOfRangeException()
         {
-            String value = String.Empty;
+            string value = string.Empty;
             Ensure.That( value ).IsNotNullNorEmpty();
         }
 
@@ -77,7 +77,7 @@ namespace Radical.Tests.Validation
 
             try
             {
-                var target = Ensure.That( String.Empty )
+                var target = Ensure.That( string.Empty )
                     .WithPreview( ( v, e ) => actual = true );
                 target.IsNotNullNorEmpty();
             }

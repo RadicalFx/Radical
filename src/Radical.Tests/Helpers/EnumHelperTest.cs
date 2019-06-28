@@ -30,8 +30,8 @@ namespace Radical.Tests.Helpers
         [TestMethod()]
         public void ExtractDescriptionsTest()
         {
-            String[] expected = new[] { "Value 1", "Value 3", "Value 2" };
-            IEnumerable<String> actual = EnumHelper.ExtractDescriptions<TestEnum>();
+            string[] expected = new[] { "Value 1", "Value 3", "Value 2" };
+            IEnumerable<string> actual = EnumHelper.ExtractDescriptions<TestEnum>();
 
             actual.Should().Have.SameSequenceAs( expected );
         }
@@ -39,17 +39,17 @@ namespace Radical.Tests.Helpers
         [TestMethod()]
         public void ExtractDescriptionsTest_ensure_order()
         {
-            String[] expected = new[] { "Value 1", "Value 3", "Value 2" };
-            IEnumerable<String> actual = EnumHelper.ExtractDescriptions<TestEnum>();
+            string[] expected = new[] { "Value 1", "Value 3", "Value 2" };
+            IEnumerable<string> actual = EnumHelper.ExtractDescriptions<TestEnum>();
 
             /*
              * ExtractDescriptions dovrebbe rispettare l'ordine imposto
              * dalla proprietà Index dell'attributo
              */
-            Assert.AreEqual<Int32>( expected.Length, actual.Count() );
-            for( Int32 i = 0; i < expected.Length; i++ )
+            Assert.AreEqual<int>( expected.Length, actual.Count() );
+            for( int i = 0; i < expected.Length; i++ )
             {
-                Assert.AreEqual<String>( expected[ i ], actual.ElementAt( i ) );
+                Assert.AreEqual<string>( expected[ i ], actual.ElementAt( i ) );
             }
         }
 
@@ -58,8 +58,8 @@ namespace Radical.Tests.Helpers
         {
             var actual = EnumHelper.ExtractBindingData<TestEnum>();
 
-            Int32 expectedCount = 3;
-            Assert.AreEqual<Int32>( expectedCount, actual.Count() );
+            int expectedCount = 3;
+            Assert.AreEqual<int>( expectedCount, actual.Count() );
 
             Assert.AreEqual<TestEnum>( TestEnum.Value1, actual.ElementAt( 0 ).Value );
             Assert.AreEqual<TestEnum>( TestEnum.Value3, actual.ElementAt( 1 ).Value );

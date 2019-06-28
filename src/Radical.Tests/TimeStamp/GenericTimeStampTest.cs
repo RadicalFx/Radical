@@ -10,7 +10,7 @@ namespace Radical.Tests
     [TestClass()]
     public class GenericTimeStampTest : TimeStampTest
     {
-        const Int32 VALUE = 1000;
+        const int VALUE = 1000;
 
         public Timestamp<T> CreateMock<T>( T initialValue )
         {
@@ -23,24 +23,24 @@ namespace Radical.Tests
         {
             unchecked
             {
-                Timestamp<Int32> target = ( Timestamp<Int32> )ts;
+                Timestamp<int> target = ( Timestamp<int> )ts;
 
-                Int32 expected = ( target.Value * 35 ) ^ 73;
-                Int32 actual = target.GetHashCode();
+                int expected = ( target.Value * 35 ) ^ 73;
+                int actual = target.GetHashCode();
 
-                Assert.AreEqual<Int32>( expected, actual );
+                Assert.AreEqual<int>( expected, actual );
             }
         }
 
         [TestMethod()]
         public void valueTest()
         {
-            var target = new Timestamp<Int32>(VALUE);
+            var target = new Timestamp<int>(VALUE);
 
-            Int32 expected = VALUE;
-            Int32 actual = target.Value;
+            int expected = VALUE;
+            int actual = target.Value;
 
-            Assert.AreEqual<Int32>( expected, actual );
+            Assert.AreEqual<int>( expected, actual );
         }
 
         [TestMethod()]
@@ -53,35 +53,35 @@ namespace Radical.Tests
         [TestMethod()]
         public void implicit_op_from_T_to_timeStamp()
         {
-            Timestamp<Int32> target = VALUE;
+            Timestamp<int> target = VALUE;
 
             Assert.IsNotNull( target );
-            Assert.AreEqual<Int32>( VALUE, target.Value );
+            Assert.AreEqual<int>( VALUE, target.Value );
         }
 
         [TestMethod()]
         public void implicit_op_from_timeStamp_to_T()
         {
-            Timestamp<Int32> target = new Timestamp<int>( VALUE );
-            Int32 actual = target;
+            Timestamp<int> target = new Timestamp<int>( VALUE );
+            int actual = target;
 
-            Assert.AreEqual<Int32>( VALUE, actual );
+            Assert.AreEqual<int>( VALUE, actual );
         }
 
         [TestMethod()]
         public void implicit_op_from_null_timeStamp_to_T()
         {
-            Timestamp<Int32> target = null;
-            Int32 actual = target;
+            Timestamp<int> target = null;
+            int actual = target;
 
-            Assert.AreEqual<Int32>( 0, actual );
+            Assert.AreEqual<int>( 0, actual );
         }
 
         [TestMethod]
         public void genericTimeStamp_equals_to_null_timestamp_should_return_false()
         {
-            Timestamp<Int32> target = new Timestamp<int>( VALUE );
-            Boolean actual = target.Equals( ( Timestamp )null );
+            Timestamp<int> target = new Timestamp<int>( VALUE );
+            bool actual = target.Equals( ( Timestamp )null );
 
             actual.Should().Be.False();
         }
@@ -93,7 +93,7 @@ namespace Radical.Tests
 
             Timestamp<Object> v1 = new Timestamp<Object>( val );
             Timestamp<Object> v2 = new Timestamp<Object>( val );
-            Boolean actual = v1.Equals( v2 );
+            bool actual = v1.Equals( v2 );
 
             actual.Should().Be.True();
         }
@@ -106,7 +106,7 @@ namespace Radical.Tests
 
             Timestamp<Object> v1 = new Timestamp<Object>( val1 );
             Timestamp<Object> v2 = new Timestamp<Object>( val2 );
-            Boolean actual = v1.Equals( v2 );
+            bool actual = v1.Equals( v2 );
 
             actual.Should().Be.False();
         }

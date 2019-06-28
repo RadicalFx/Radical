@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using Radical.Linq;
+using System;
 using System.Linq.Expressions;
-using System.Collections.Generic;
-using Radical.Linq;
-using Radical.Validation;
-using System.Reflection;
 
 namespace Radical.Model
 {
@@ -22,7 +18,7 @@ namespace Radical.Model
             this.propertyChangedHandler = null;
         }
 
-        public PropertyMetadata( Object propertyOwner, String propertyName )
+        public PropertyMetadata( Object propertyOwner, string propertyName )
             : base( propertyOwner, propertyName )
         {
             
@@ -46,7 +42,7 @@ namespace Radical.Model
             return this;
         }
 
-        private Boolean defaultValueSet;
+        private bool defaultValueSet;
         private T _defaultValue = default( T );
         public virtual T DefaultValue
         {

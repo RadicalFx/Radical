@@ -1,7 +1,5 @@
 ﻿namespace Radical.Conversions
 {
-    using System;
-
     /// <summary>
     /// Add behaviors to convert from one type to another.
     /// </summary>

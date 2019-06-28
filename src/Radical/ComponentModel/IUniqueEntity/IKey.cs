@@ -11,7 +11,7 @@
         ///// Serializes this instance.
         ///// </summary>
         ///// <returns>A string that represents this instance data.</returns>
-        //String Serialize();
+        //string Serialize();
 
         /// <summary>
         /// Gets a value indicating whether this instance is empty.
@@ -19,7 +19,7 @@
         /// <value>
         ///   <c>true</c> if this instance is empty; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsEmpty { get; }
+        bool IsEmpty { get; }
     }
 
     /// <summary>

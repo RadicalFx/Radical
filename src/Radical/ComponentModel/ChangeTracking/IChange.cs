@@ -49,13 +49,13 @@
         /// <value>
         ///     <c>true</c> if this instance supports commit; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsCommitSupported { get; }
+        bool IsCommitSupported { get; }
 
         /// <summary>
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        String Description { get; }
+        string Description { get; }
 
         /// <summary>
         /// Gets the advised action for this IChange.

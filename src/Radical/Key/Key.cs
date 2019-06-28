@@ -1,7 +1,7 @@
 namespace Radical
 {
-    using System;
     using Radical.ComponentModel;
+    using System;
 
     /// <summary>
     /// The <c>Key</c> class is an abstraction of a primary key.
@@ -22,13 +22,13 @@ namespace Radical
         //public abstract TypeCode GetTypeCode();
 
         ///// <summary>
-        ///// Converts the value of this instance to an equivalent Boolean value using the specified culture-specific formatting information.
+        ///// Converts the value of this instance to an equivalent bool value using the specified culture-specific formatting information.
         ///// </summary>
         ///// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information.</param>
         ///// <returns>
-        ///// A Boolean value equivalent to the value of this instance.
+        ///// A bool value equivalent to the value of this instance.
         ///// </returns>
-        //public abstract Boolean ToBoolean( IFormatProvider provider );
+        //public abstract bool ToBoolean( IFormatProvider provider );
 
         ///// <summary>
         ///// Converts the value of this instance to an equivalent 8-bit unsigned integer using the specified culture-specific formatting information.
@@ -121,11 +121,11 @@ namespace Radical
         //public abstract float ToSingle( IFormatProvider provider );
 
         ///// <summary>
-        ///// Converts the value of this instance to an equivalent <see cref="T:System.String"/> using the specified culture-specific formatting information.
+        ///// Converts the value of this instance to an equivalent <see cref="T:System.string"/> using the specified culture-specific formatting information.
         ///// </summary>
         ///// <param name="provider">An <see cref="T:System.IFormatProvider"/> interface implementation that supplies culture-specific formatting information.</param>
         ///// <returns>
-        ///// A <see cref="T:System.String"/> instance equivalent to the value of this instance.
+        ///// A <see cref="T:System.string"/> instance equivalent to the value of this instance.
         ///// </returns>
         //public abstract string ToString( IFormatProvider provider );
 
@@ -204,6 +204,6 @@ namespace Radical
 
         #endregion
 
-        public abstract Boolean IsEmpty { get; }
+        public abstract bool IsEmpty { get; }
     }
 }

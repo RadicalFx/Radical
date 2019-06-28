@@ -1,6 +1,5 @@
-﻿using System;
-using System.Reflection;
-using Radical.ComponentModel;
+﻿using Radical.ComponentModel;
+using System;
 
 namespace Radical
 {

@@ -1,15 +1,15 @@
-using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Radical.Validation;
-using System.Collections.Generic;
 using Radical.Collections;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Radical
 {
     /// <summary>
-    /// Adds behaviors to the <c>String</c> class.
+    /// Adds behaviors to the <c>string</c> class.
     /// </summary>
     public static class StringExtensions
     {
@@ -20,7 +20,7 @@ namespace Radical
         /// <param name="pattern">The pattern to use as search pattern.</param>
         /// <returns><c>True</c> in case of successful match, otherwise <c>false</c>.</returns>
         /// <remarks>The default IsLike is performed using a case insensitive search.</remarks>
-        public static Boolean IsLike( this String value, String pattern )
+        public static bool IsLike( this string value, string pattern )
         {
             return IsLike( value, pattern, true );
         }
@@ -34,7 +34,7 @@ namespace Radical
         ///     <c>True</c> in case of successful match, otherwise <c>false</c>.
         /// </returns>
         /// <remarks>The default IsLike is performed using a case insensitive search.</remarks>
-        public static Boolean IsLike( this String value, params String[] patterns )
+        public static bool IsLike( this string value, params string[] patterns )
         {
             Ensure.That( patterns ).Named( "patterns" )
                 .IsNotNull();
@@ -59,7 +59,7 @@ namespace Radical
         /// <returns>
         ///     <c>True</c> in cas of successful match, otherwise <c>false</c>.
         /// </returns>
-        public static Boolean IsLike( this String value, String pattern, Boolean ignoreCase )
+        public static bool IsLike( this string value, string pattern, bool ignoreCase )
         {
             if( value == null && pattern == null )
             {
@@ -100,7 +100,7 @@ namespace Radical
              * l'inizio e la fine della stringa altrimenti
              * ad es. Beatrice matcha con B*r 
              */
-            pattern = String.Concat( "\\A", pattern, "\\z" );
+            pattern = string.Concat( "\\A", pattern, "\\z" );
 
             var options = RegexOptions.None;
             if( ignoreCase )
@@ -117,9 +117,9 @@ namespace Radical
         /// <param name="value">The current string value.</param>
         /// <param name="text">The text to append.</param>
         /// <returns>A new string composed by the source value with the given text appended at the end.</returns>
-        public static String Append( this String value, String text )
+        public static string Append( this string value, string text )
         {
-            return String.Concat( value, text );
+            return string.Concat( value, text );
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Radical
         /// <param name="value">The value to test.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns>The input string, if not null, otherwise the supplied default value.</returns>
-        public static String ValueOr( this String value, String defaultValue )
+        public static string ValueOr( this string value, string defaultValue )
         {
             return ValueOr( value, defaultValue, null );
         }
@@ -144,7 +144,7 @@ namespace Radical
         /// <returns>
         /// The input string, if not null, otherwise the supplied default value.
         /// </returns>
-        public static String ValueOr( this String value, String defaultValue, Func<String, String> ifValue )
+        public static string ValueOr( this string value, string defaultValue, Func<string, string> ifValue )
         {
             if( value != null )
             {
@@ -159,9 +159,9 @@ namespace Radical
         /// </summary>
         /// <param name="value">The value to test.</param>
         /// <returns>The input string, if not null, otherwise an empty string.</returns>
-        public static String ValueOrEmpty( this String value )
+        public static string ValueOrEmpty( this string value )
         {
-            return ValueOr( value, String.Empty, null );
+            return ValueOr( value, string.Empty, null );
         }
 
         /// <summary>
@@ -170,10 +170,10 @@ namespace Radical
         /// <param name="value">The value to test against.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns>The supplied value or default if the supplied one is null or empty.</returns>
-        public static String IfNullOrEmptyReturn( this String value, String defaultValue )
+        public static string IfNullOrEmptyReturn( this string value, string defaultValue )
         {
             var tmp = value.ValueOrEmpty().Trim();
-            return String.IsNullOrEmpty( tmp ) ? defaultValue : value;
+            return string.IsNullOrEmpty( tmp ) ? defaultValue : value;
         }
 
         /// <summary>
@@ -186,21 +186,21 @@ namespace Radical
         /// <returns>
         /// The input string, if not null, otherwise an empty string.
         /// </returns>
-        public static String ValueOrEmpty( this String value, Func<String, String> ifValue )
+        public static string ValueOrEmpty( this string value, Func<string, string> ifValue )
         {
-            return ValueOr( value, String.Empty, ifValue );
+            return ValueOr( value, string.Empty, ifValue );
         }
 
         /// <summary>
-        /// Indicates whether the specified System.String object is null or an System.String.Empty string.
+        /// Indicates whether the specified System.string object is null or an System.string.Empty string.
         /// </summary>
         /// <param name="value">The value to test.</param>
         /// <returns>
         ///     <c>true</c> if is null or empty; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsNullOrEmpty( this String value )
+        public static bool IsNullOrEmpty( this string value )
         {
-            return String.IsNullOrEmpty( value );
+            return string.IsNullOrEmpty( value );
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Radical
         /// <param name="source">The source string to split.</param>
         /// <param name="separators">The char separators.</param>
         /// <returns>A distinct list of string spliited by the given chars.</returns>
-        public static IEnumerable<String> AsKeywords( this String source, params Char[] separators )
+        public static IEnumerable<string> AsKeywords( this string source, params Char[] separators )
         {
             return AsKeywords( source, true, separators );
         }
@@ -225,15 +225,15 @@ namespace Radical
         /// <returns>
         /// A distinct list of string spliited by the given chars.
         /// </returns>
-        public static IEnumerable<String> AsKeywords( this String source, Boolean applyWildChardsIfNecessary, params Char[] separators )
+        public static IEnumerable<string> AsKeywords( this string source, bool applyWildChardsIfNecessary, params Char[] separators )
         {
-            if( String.IsNullOrEmpty( source ) )
+            if( string.IsNullOrEmpty( source ) )
             {
-                return new ReadOnlyCollection<String>( new String[ 0 ] );
+                return new ReadOnlyCollection<string>( new string[ 0 ] );
             }
 
             return source.Split( separators, StringSplitOptions.RemoveEmptyEntries )
-                .Aggregate( new List<String>(), ( accumulator, word ) =>
+                .Aggregate( new List<string>(), ( accumulator, word ) =>
                 {
                     var tmp = word.Trim();
                     if( tmp.Length > 0 )
@@ -251,11 +251,11 @@ namespace Radical
                 .Distinct();
         }
 
-        static String ParseWildChars( String word )
+        static string ParseWildChars( string word )
         {
             if( word.IndexOfAny( new[] { '*', '?' } ) == -1 )
             {
-                word = String.Concat( "*", word, "*" );
+                word = string.Concat( "*", word, "*" );
             }
 
             return word;
@@ -266,14 +266,14 @@ namespace Radical
         /// </summary>
         /// <param name="resourceRelativeUri">The resource relative URI.</param>
         /// <returns>The pack uri.</returns>
-        public static String AsPackUri( this String resourceRelativeUri )
+        public static string AsPackUri( this string resourceRelativeUri )
         {
             Ensure.That( resourceRelativeUri )
                 .Named( "resourceRelativeUri" )
                 .IsNotNullNorEmpty();
 
             var assembly = Assembly.GetCallingAssembly();
-            String aName = assembly.GetName().Name;
+            string aName = assembly.GetName().Name;
 
             return resourceRelativeUri.AsPackUri( aName );
         }
@@ -284,12 +284,12 @@ namespace Radical
         /// <param name="resourceRelativeUri">The resource relative URI.</param>
         /// <param name="assemblyName">Name of the assembly containing the resource.</param>
         /// <returns>The pack uri.</returns>
-        public static String AsPackUri( this String resourceRelativeUri, String assemblyName )
+        public static string AsPackUri( this string resourceRelativeUri, string assemblyName )
         {
             Ensure.That( resourceRelativeUri ).Named( "resourceRelativeUri" ).IsNotNullNorEmpty();
             Ensure.That( assemblyName ).Named( "assemblyName" ).IsNotNullNorEmpty();
 
-            var uri = String.Format( "pack://application:,,,/{0};component{1}", assemblyName, resourceRelativeUri );
+            var uri = string.Format( "pack://application:,,,/{0};component{1}", assemblyName, resourceRelativeUri );
             return uri;
         }
     }

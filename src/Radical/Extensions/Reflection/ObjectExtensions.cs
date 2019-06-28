@@ -22,7 +22,7 @@ namespace Radical.Reflection
         /// <param name="target">The target instance that expose the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>A delgate to get the property value.</returns>
-        public static Func<T> CreateFastPropertyGetter<T>( this Object target, String propertyName )
+        public static Func<T> CreateFastPropertyGetter<T>( this Object target, string propertyName )
         {
             return target.CreateFastPropertyGetter<T>( target.GetType().GetProperty( propertyName ) );
         }

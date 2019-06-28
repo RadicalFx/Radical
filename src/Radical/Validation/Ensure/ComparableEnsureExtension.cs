@@ -113,7 +113,7 @@ namespace Radical.Validation
             } )
             .ThenThrow( v =>
             {
-                var msg = String.Format( "The inspected value should be greater then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "" );
+                var msg = string.Format( "The inspected value should be greater then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "" );
                 return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( msg ) );
             } );
 
@@ -171,7 +171,7 @@ namespace Radical.Validation
             } )
             .ThenThrow( v =>
             {
-                var msg = String.Format( "The inspected value should be smaller then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "" );
+                var msg = string.Format( "The inspected value should be smaller then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "" );
                 return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( msg ) );
             } );
 

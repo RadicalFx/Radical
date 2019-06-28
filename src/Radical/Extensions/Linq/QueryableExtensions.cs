@@ -1,9 +1,7 @@
 namespace Radical.Linq
 {
-    using System;
-    using System.Text.RegularExpressions;
-    using Radical.Validation;
     using Radical.ComponentModel;
+    using System;
     using System.Linq;
 
     public static class QueryableExtensions

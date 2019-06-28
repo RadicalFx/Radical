@@ -23,7 +23,7 @@
         /// </summary>
         /// <param name="changeType">Type of the change.</param>
         /// <param name="index">The index.</param>
-        public CollectionChangedEventArgs( CollectionChangeType changeType, Int32 index )
+        public CollectionChangedEventArgs( CollectionChangeType changeType, int index )
             : this( changeType, index, -1, default( T ) )
         {
 
@@ -36,11 +36,11 @@
         /// <param name="index">The index.</param>
         /// <param name="oldIndex">The old index.</param>
         /// <param name="item">The item.</param>
-        public CollectionChangedEventArgs( CollectionChangeType changeType, Int32 index, Int32 oldIndex, T item )
+        public CollectionChangedEventArgs( CollectionChangeType changeType, int index, int oldIndex, T item )
         {
             //if( trace.IsDebugLevel )
             //{
-            //    trace.Debug( "CollectionChangedEventArgs.ctor( CollectionChangeType, Int32, {0} )", typeof( T ).Name );
+            //    trace.Debug( "CollectionChangedEventArgs.ctor( CollectionChangeType, int, {0} )", typeof( T ).Name );
             //    trace.Debug( "changeType: {0}", changeType );
             //    trace.Debug( "index: {0}", index );
             //    trace.Debug( "oldIndex: {0}", oldIndex );
@@ -67,7 +67,7 @@
         /// The Index of the changed Item
         /// </summary>
         /// <value>The index.</value>
-        public Int32 Index
+        public int Index
         {
             get;
             private set;
@@ -77,7 +77,7 @@
         /// The Old Index of the changed item, eg in case of a Move operation
         /// </summary>
         /// <value>The old index.</value>
-        public Int32 OldIndex
+        public int OldIndex
         {
             get;
             private set;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Radical.ComponentModel.ChangeTracking
+﻿namespace Radical.ComponentModel.ChangeTracking
 {
     /// <summary>
     /// Identifies a change occurred to a property.
@@ -16,6 +11,6 @@ namespace Radical.ComponentModel.ChangeTracking
         /// <value>
         /// The name of the property.
         /// </value>
-        String PropertyName { get; }
+        string PropertyName { get; }
     }
 }

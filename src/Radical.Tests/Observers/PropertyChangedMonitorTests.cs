@@ -15,7 +15,7 @@ namespace Radical.Tests.Observers
         class TestStub : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
-            void OnPropertyChanged( String name )
+            void OnPropertyChanged( string name )
             {
                 if( this.PropertyChanged != null )
                 {
@@ -23,8 +23,8 @@ namespace Radical.Tests.Observers
                 }
             }
 
-            private String _value = null;
-            public String Value
+            private string _value = null;
+            public string Value
             {
                 get { return this._value; }
                 set
@@ -37,8 +37,8 @@ namespace Radical.Tests.Observers
                 }
             }
 
-            private readonly Observable<String> _text = new Observable<String>();
-            public Observable<String> Text
+            private readonly Observable<string> _text = new Observable<string>();
+            public Observable<string> Text
             {
                 get { return this._text; }
             }

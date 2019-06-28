@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Linq;
+using Radical.Validation;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Radical.ComponentModel.ChangeTracking;
-using Radical.Validation;
-using Radical.Linq;
+using System.Linq;
 
 namespace Radical.ChangeTracking
 {
@@ -41,7 +41,7 @@ namespace Radical.ChangeTracking
             {
                 ProposedActions proposedAction = kvp.Value.GetAdvisedAction( kvp.Key );
                 EntityTrackingStates state = svc.GetEntityState( kvp.Key );
-                Boolean isTransient = ( state & EntityTrackingStates.IsTransient ) == EntityTrackingStates.IsTransient;
+                bool isTransient = ( state & EntityTrackingStates.IsTransient ) == EntityTrackingStates.IsTransient;
 
                 switch( proposedAction )
                 {

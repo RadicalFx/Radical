@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
-using System.Diagnostics;
+using System.Text;
 
 namespace Radical.Diagnostics
 {
@@ -18,9 +16,9 @@ namespace Radical.Diagnostics
         /// </summary>
         /// <param name="target">The target.</param>
         /// <returns>A string representing the object dump.</returns>
-        public static String Dump( Object target )
+        public static string Dump( Object target )
         {
-            return ObjectDumper.Dump( target, Int32.MaxValue );
+            return ObjectDumper.Dump( target, int.MaxValue );
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Radical.Diagnostics
         /// <param name="target">The target.</param>
         /// <param name="depth">The depth of the dump.</param>
         /// <returns>A string representing the object dump.</returns>
-        public static String Dump( object target, int depth )
+        public static string Dump( object target, int depth )
         {
             try
             {
@@ -44,7 +42,7 @@ namespace Radical.Diagnostics
             }
             catch( Exception ex )
             {
-                return String.Format( "Dump failure: {0}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace );
+                return string.Format( "Dump failure: {0}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace );
             }
         }
 
@@ -64,10 +62,10 @@ namespace Radical.Diagnostics
         int maxDepth;
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="System.string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="System.string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
@@ -169,7 +167,7 @@ namespace Radical.Diagnostics
                     var type = target.GetType();
                     //this.WriteIndent();
                     this.Write( prefix );
-                    this.Write( String.Format( "Type: {0} ({1})", type.Name, type ) );
+                    this.Write( string.Format( "Type: {0} ({1})", type.Name, type ) );
                     this.WriteLine();
 
                     if( target is Assembly )
@@ -256,7 +254,7 @@ namespace Radical.Diagnostics
                                     }
                                     catch( TargetInvocationException )
                                     {
-                                        this.Write( String.Format( "{0}: <Cannot get value>.", m.Name ) );
+                                        this.Write( string.Format( "{0}: <Cannot get value>.", m.Name ) );
                                         this.WriteLine();
                                     }
 

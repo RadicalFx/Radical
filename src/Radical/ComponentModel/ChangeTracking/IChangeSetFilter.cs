@@ -1,7 +1,5 @@
 ﻿namespace Radical.ComponentModel.ChangeTracking
 {
-    using System;
-
     /// <summary>
     /// An instance of an <c>IChangeSetFilter</c> is a class 
     /// used to filter <see cref="IChange"/>(s) that has to be
@@ -15,6 +13,6 @@
         /// </summary>
         /// <param name="change">The change to evaluate.</param>
         /// <returns></returns>
-        Boolean ShouldInclude( IChange change );
+        bool ShouldInclude( IChange change );
     }
 }

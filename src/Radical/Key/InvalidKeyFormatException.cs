@@ -33,7 +33,7 @@
         /// Initializes a new instance of the <see cref="InvalidKeyFormatException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public InvalidKeyFormatException( String message )
+        public InvalidKeyFormatException( string message )
             : base( message )
         {
 
@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public InvalidKeyFormatException( String message, Exception innerException )
+        public InvalidKeyFormatException( string message, Exception innerException )
             : base( message, innerException )
         {
 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Radical.Reflection;
+using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using Radical.Reflection;
 
 namespace Radical.Validation
 {
@@ -15,7 +12,7 @@ namespace Radical.Validation
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
-        public String GetPropertyDisplayName( String propertyName, Object entity )
+        public string GetPropertyDisplayName( string propertyName, Object entity )
         {
             var displayName = propertyName;
 

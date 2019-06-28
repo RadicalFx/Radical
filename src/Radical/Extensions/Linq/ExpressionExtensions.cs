@@ -14,7 +14,7 @@ namespace Radical.Linq
         /// <typeparam name="T">The member type.</typeparam>
         /// <param name="source">The source expression that represents the member.</param>
         /// <returns>The name of the member.</returns>
-        public static String GetMemberName<T>( this Expression<Func<T>> source )
+        public static string GetMemberName<T>( this Expression<Func<T>> source )
         {
             var expression = source.Body as MemberExpression;
             if( expression != null )
@@ -40,7 +40,7 @@ namespace Radical.Linq
         /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <param name="source">The source.</param>
         /// <returns>The name of the member.</returns>
-        public static String GetMemberName<T, TProperty>( this Expression<Func<T, TProperty>> source )
+        public static string GetMemberName<T, TProperty>( this Expression<Func<T, TProperty>> source )
         {
             var expression = FindMemberExpression( source.Body );
             var member = expression.Member;

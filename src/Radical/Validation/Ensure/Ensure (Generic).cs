@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace Radical.Validation
@@ -66,7 +65,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="parameterName">Name of the parameter.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> Named( String parameterName )
+        public IEnsure<T> Named( string parameterName )
         {
             this._name = parameterName;
             return this;
@@ -92,16 +91,16 @@ namespace Radical.Validation
         }
 
         Expression<Func<T>> nameExpression;
-        String _name;
+        string _name;
         /// <summary>
         /// Gets or sets the name of the parameter to validate.
         /// </summary>
         /// <value>The name of the parameter.</value>
-        public String Name
+        public string Name
         {
             get
             {
-                if( String.IsNullOrEmpty( this._name ) && this.nameExpression != null )
+                if( string.IsNullOrEmpty( this._name ) && this.nameExpression != null )
                 {
                     var expression = ( MemberExpression )this.nameExpression.Body;
                     this._name = expression.Member.Name;
@@ -116,7 +115,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="errorMessage">The error message.</param>
         /// <returns>This ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> WithMessage( String errorMessage )
+        public IEnsure<T> WithMessage( string errorMessage )
         {
             this.UserErrorMessage = errorMessage;
             return this;
@@ -130,9 +129,9 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> WithMessage( String errorMessage, params Object[] formatArgs )
+        public IEnsure<T> WithMessage( string errorMessage, params Object[] formatArgs )
         {
-            this.UserErrorMessage = String.Format( errorMessage, formatArgs );
+            this.UserErrorMessage = string.Format( errorMessage, formatArgs );
             return this;
         }
 
@@ -140,7 +139,7 @@ namespace Radical.Validation
         /// Gets the user custom error message.
         /// </summary>
         /// <value>The error message.</value>
-        public String UserErrorMessage
+        public string UserErrorMessage
         {
             get;
             private set;
@@ -155,7 +154,7 @@ namespace Radical.Validation
          * {5} --> <validatorSpecificMessage>
          * {6} --> parameter name (if any)
          */
-        const String fullErrorMessageFormat = "Ensure validation failure.{0}{0}" +
+        const string fullErrorMessageFormat = "Ensure validation failure.{0}{0}" +
                                               "   {5}{0}" +
                                               "   Location: class {1} at {3} {2}.{0}" +
                                               "   Name: '{6}'{0}" +
@@ -166,9 +165,9 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="validatorSpecificMessage">The validator specific message.</param>
         /// <returns>The error message.</returns>
-        public String GetFullErrorMessage( String validatorSpecificMessage )
+        public string GetFullErrorMessage( string validatorSpecificMessage )
         {
-            var fullErrorMessage = String.Format
+            var fullErrorMessage = string.Format
             (
                 fullErrorMessageFormat,
                 Environment.NewLine,
@@ -187,9 +186,9 @@ namespace Radical.Validation
         /// Gets the full error message.
         /// </summary>
         /// <returns>The error message.</returns>
-        public String GetFullErrorMessage()
+        public string GetFullErrorMessage()
         {
-            return this.GetFullErrorMessage( String.Empty );
+            return this.GetFullErrorMessage( string.Empty );
         }
 
         /// <summary>
@@ -201,7 +200,7 @@ namespace Radical.Validation
             get { return this.inspectedObject; }
         }
 
-        Boolean state = false;
+        bool state = false;
 
         /// <summary>
         /// Execute the given predicate and saves the result for later usage.
@@ -253,7 +252,7 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> Then( Action<T, String> action )
+        public IEnsure<T> Then( Action<T, string> action )
         {
             if( state )
             {
@@ -270,7 +269,7 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> Else( Action<T, String> action )
+        public IEnsure<T> Else( Action<T, string> action )
         {
             if( !state )
             {

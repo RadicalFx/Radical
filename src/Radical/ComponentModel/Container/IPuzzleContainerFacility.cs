@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Radical.ComponentModel
+﻿namespace Radical.ComponentModel
 {
     /// <summary>
     /// Defines a facility for the puzzle container.

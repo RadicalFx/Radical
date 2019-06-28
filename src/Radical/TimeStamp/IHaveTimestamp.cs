@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Radical.ComponentModel
+﻿namespace Radical.ComponentModel
 {
     public interface IHaveTimestamp<T>
     {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Radical.Linq;
-using Radical.Validation;
+﻿using Radical.Validation;
+using System;
 
 namespace Radical.ComponentModel.Validation
 {
@@ -15,7 +12,7 @@ namespace Radical.ComponentModel.Validation
         /// <summary>
         /// Gets the rule set.
         /// </summary>
-        String RuleSet { get; }
+        string RuleSet { get; }
 
         /// <summary>
         /// Determines whether the specified entity is valid.
@@ -24,7 +21,7 @@ namespace Radical.ComponentModel.Validation
         /// <returns>
         ///     <c>true</c> if the specified entity is valid; otherwise, <c>false</c>.
         /// </returns>
-        Boolean IsValid( Object entity );
+        bool IsValid( Object entity );
 
         /// <summary>
         /// Validates the specified entity.
@@ -41,6 +38,6 @@ namespace Radical.ComponentModel.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
         /// </returns>
-        ValidationResults Validate( Object entity, String propertyName );
+        ValidationResults Validate( Object entity, string propertyName );
     }
 }

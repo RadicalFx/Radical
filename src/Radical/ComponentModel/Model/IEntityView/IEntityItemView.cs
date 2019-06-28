@@ -1,7 +1,6 @@
 namespace Radical.ComponentModel
 {
     using System.ComponentModel;
-    using System;
 
     /// <summary>
     /// Identifies an item in an <see cref="IEntityView"/> object.
@@ -28,10 +27,10 @@ namespace Radical.ComponentModel
         /// <value>The owner view.</value>
         IEntityView View { get; }
 
-        void SetCustomValue<TValue>( String customPropertyName, TValue value );
-        TValue GetCustomValue<TValue>( String customPropertyName );
+        void SetCustomValue<TValue>( string customPropertyName, TValue value );
+        TValue GetCustomValue<TValue>( string customPropertyName );
 
-        void NotifyPropertyChanged( String propertyName );
+        void NotifyPropertyChanged( string propertyName );
     }
 
 }

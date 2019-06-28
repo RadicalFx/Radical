@@ -1,8 +1,6 @@
 namespace Radical
 {
     using System;
-    using System.Text.RegularExpressions;
-    using Radical.Validation;
 
     /// <summary>
     /// Adds behaviors to the Generic <c>Nullable</c> class.

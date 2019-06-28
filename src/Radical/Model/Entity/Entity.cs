@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Radical.Linq;
+using Radical.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using Radical.Linq;
-using Radical.Validation;
 
 namespace Radical.Model
 {
@@ -23,13 +23,13 @@ namespace Radical.Model
             this.Dispose( false );
         }
 
-        private Boolean isDisposed;
+        private bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose( bool disposing )
         {
             if ( disposing )
             {
@@ -130,7 +130,7 @@ namespace Radical.Model
             }
         }
 
-        protected void OnPropertyChanged( String propertyName )
+        protected void OnPropertyChanged( string propertyName )
         {
             this.OnPropertyChanged( new PropertyChangedEventArgs( propertyName ) );
         }
@@ -208,7 +208,7 @@ namespace Radical.Model
         /// <typeparam name="T">The property type</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The default value.</param>
-        protected PropertyMetadata<T> SetInitialPropertyValue<T>( String property, T value )
+        protected PropertyMetadata<T> SetInitialPropertyValue<T>( string property, T value )
         {
             var metadata = this.GetPropertyMetadata<T>( property )
                 .WithDefaultValue( value );
@@ -216,7 +216,7 @@ namespace Radical.Model
             return metadata;
         }
 
-        readonly IDictionary<String, PropertyMetadata> propertiesMetadata = new Dictionary<String, PropertyMetadata>();
+        readonly IDictionary<string, PropertyMetadata> propertiesMetadata = new Dictionary<string, PropertyMetadata>();
 
         /// <summary>
         /// Gets the property metadata.
@@ -239,7 +239,7 @@ namespace Radical.Model
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>An instance of the requested property metadata.</returns>
-        protected PropertyMetadata<T> GetPropertyMetadata<T>( String propertyName )
+        protected PropertyMetadata<T> GetPropertyMetadata<T>( string propertyName )
         {
             Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
 
@@ -261,7 +261,7 @@ namespace Radical.Model
         ///// <param name="propertyName">Name of the property.</param>
         ///// <param name="propertyType">Type of the property.</param>
         ///// <returns>An instance of the requested property metadata.</returns>
-        //protected PropertyMetadata GetPropertyMetadata( String propertyName, Type propertyType )
+        //protected PropertyMetadata GetPropertyMetadata( string propertyName, Type propertyType )
         //{
         //    PropertyMetadata md;
         //    if( !this.propertiesMetadata.TryGetValue( propertyName, out md ) )
@@ -279,7 +279,7 @@ namespace Radical.Model
         /// <typeparam name="T">Type of the property.</typeparam>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>An instance of the requested default property metadata.</returns>
-        protected virtual PropertyMetadata<T> GetDefaultMetadata<T>( String propertyName )
+        protected virtual PropertyMetadata<T> GetDefaultMetadata<T>( string propertyName )
         {
             return PropertyMetadata.Create<T>( this, propertyName );
 
@@ -294,7 +294,7 @@ namespace Radical.Model
         ///// <returns>
         ///// An instance of the requested default property metadata.
         ///// </returns>
-        //protected virtual PropertyMetadata GetDefaultMetadata( String propertyName, Type propertyType )
+        //protected virtual PropertyMetadata GetDefaultMetadata( string propertyName, Type propertyType )
         //{
         //    var type = typeof( PropertyMetadata<> ).MakeGenericType( propertyType );
 
@@ -354,9 +354,9 @@ namespace Radical.Model
             md.EnableChangesNotifications();
         }
 
-        //protected IDisposable SuspendNotificationsOf( String property ) { }
+        //protected IDisposable SuspendNotificationsOf( string property ) { }
 
-        //protected void ResumeNotificationsFor<T>( String property ) { }
+        //protected void ResumeNotificationsFor<T>( string property ) { }
 
         //protected virtual void AddMetadata<T>( Expression<Func<T>> property, Action<PropertyMetadata<T>> interceptor )
         //{
@@ -374,14 +374,14 @@ namespace Radical.Model
         /// <returns>
         ///     <c>true</c> if metadata for the specified property has been set; otherwise, <c>false</c>.
         /// </returns>
-        protected virtual Boolean HasMetadata<T>( Expression<Func<T>> property )
+        protected virtual bool HasMetadata<T>( Expression<Func<T>> property )
         {
             return this.propertiesMetadata.ContainsKey( property.GetMemberName() );
         }
 
-        readonly IDictionary<String, PropertyValue> valuesBag = new Dictionary<String, PropertyValue>();
+        readonly IDictionary<string, PropertyValue> valuesBag = new Dictionary<string, PropertyValue>();
 
-        protected void SetPropertyValueCore<T>( String propertyName, T data, PropertyValueChanged<T> pvc )
+        protected void SetPropertyValueCore<T>( string propertyName, T data, PropertyValueChanged<T> pvc )
         {
             var oldValue = this.GetPropertyValue<T>( propertyName );
 
@@ -432,12 +432,12 @@ namespace Radical.Model
             this.SetPropertyValue( propertyName, data, pvc );
         }
 
-        protected void SetPropertyValue<T>( String propertyName, T data )
+        protected void SetPropertyValue<T>( string propertyName, T data )
         {
             this.SetPropertyValue( propertyName, data, null );
         }
 
-        protected virtual void SetPropertyValue<T>( String propertyName, T data, PropertyValueChanged<T> pvc )
+        protected virtual void SetPropertyValue<T>( string propertyName, T data, PropertyValueChanged<T> pvc )
         {
             this.SetPropertyValueCore( propertyName, data, pvc );
         }
@@ -478,7 +478,7 @@ namespace Radical.Model
         /// <typeparam name="T">The property value type.</typeparam>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>The requested property value.</returns>
-        protected internal virtual T GetPropertyValue<T>( String propertyName )
+        protected internal virtual T GetPropertyValue<T>( string propertyName )
         {
             PropertyValue actual;
             if ( this.valuesBag.TryGetValue( propertyName, out actual ) )

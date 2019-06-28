@@ -1,6 +1,6 @@
 ﻿using Radical.ComponentModel.Messaging;
-using Radical.Validation;
 using Radical.Reflection;
+using Radical.Validation;
 
 namespace Radical.Messaging
 {

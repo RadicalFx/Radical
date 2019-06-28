@@ -19,7 +19,7 @@ namespace Radical.Reflection
         ///     <c>true</c> if the attribute is defined; otherwise, <c>false</c>.
         /// </returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static Boolean IsAttributeDefined<T>( this ParameterInfo memberInfo ) where T : Attribute
+        public static bool IsAttributeDefined<T>( this ParameterInfo memberInfo ) where T : Attribute
         {
             if( memberInfo == null )
             {

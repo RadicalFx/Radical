@@ -1,9 +1,9 @@
 namespace Radical.Model
 {
+    using Radical.ComponentModel;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using Radical.ComponentModel;
 
     public class EntityItemViewSortComparer<T> : IComparer<IEntityItemView<T>>
         //where T : class
@@ -27,9 +27,9 @@ namespace Radical.Model
             this.SortDescriptions = sortDescriptions;
         }
 
-        static Int32 Compare( Object a, Object b, ListSortDirection direction )
+        static int Compare( Object a, Object b, ListSortDirection direction )
         {
-            Int32 retVal = 0;
+            int retVal = 0;
 
             if( !Object.Equals( a, b ) )
             {
@@ -45,10 +45,10 @@ namespace Radical.Model
                      * a confrontare la loro rappresentazione
                      * sottoforma di stringa
                      */
-                    var av = a == null ? ( String )null : a.ToString();
-                    var bv = b == null ? ( String )null : b.ToString();
+                    var av = a == null ? ( string )null : a.ToString();
+                    var bv = b == null ? ( string )null : b.ToString();
 
-                    retVal = String.Compare( av, bv, StringComparison.CurrentCulture );
+                    retVal = string.Compare( av, bv, StringComparison.CurrentCulture );
                 }
             }
 
@@ -68,7 +68,7 @@ namespace Radical.Model
         /// <returns>
         /// Value Condition Less than zero<paramref name="x" /> is less than <paramref name="y" />.Zero<paramref name="x" /> equals <paramref name="y" />.Greater than zero<paramref name="x" /> is greater than <paramref name="y" />.
         /// </returns>
-        protected virtual Int32 OnCompare( IEntityItemView<T> x, IEntityItemView<T> y )
+        protected virtual int OnCompare( IEntityItemView<T> x, IEntityItemView<T> y )
         {
             /*
              * Il confronto viene fatto scorrendo tutti
@@ -81,7 +81,7 @@ namespace Radical.Model
              * Il classico esempio è Cognome ASC, Nome DESC confronto i 
              * nomi solo se i Cognomi sono uguali
              */
-            Int32 retVal = 0;
+            int retVal = 0;
 
             if( this.SortDescriptions.Count == 1 )
             {
@@ -116,7 +116,7 @@ namespace Radical.Model
         /// <returns>
         /// Value Condition Less than zero<paramref name="x"/> is less than <paramref name="y"/>.Zero<paramref name="x"/> equals <paramref name="y"/>.Greater than zero<paramref name="x"/> is greater than <paramref name="y"/>.
         /// </returns>
-        public Int32 Compare( IEntityItemView<T> x, IEntityItemView<T> y )
+        public int Compare( IEntityItemView<T> x, IEntityItemView<T> y )
         {
             return this.OnCompare( x, y );
         }
