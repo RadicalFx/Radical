@@ -253,7 +253,7 @@ namespace Radical
         public RadicalException(string message) { }
         public RadicalException(string message, System.Exception innerException) { }
     }
-    public enum ResourceAssemblyLocationBehavior
+    public enum ResourceAssemblyLocationBehavior : int
     {
         ByAssemblyName = 0,
         UseExecutingAssembly = 1,
@@ -432,7 +432,7 @@ namespace Radical.ChangeTracking
         public void Undo() { }
         public void UnregisterTransient(object entity) { }
         public virtual bool Validate(Radical.ComponentModel.ChangeTracking.IBookmark bookmark) { }
-        protected enum StopTrackingReason
+        protected enum StopTrackingReason : int
         {
             UserRequest = 0,
             DisposedEvent = 1,
@@ -581,7 +581,7 @@ namespace Radical.ComponentModel
         public T Item { get; }
         public int OldIndex { get; }
     }
-    public enum CollectionChangeType
+    public enum CollectionChangeType : int
     {
         None = 0,
         SortChanged = 1,
@@ -886,7 +886,7 @@ namespace Radical.ComponentModel
     {
         Radical.ComponentModel.IKey<T> Key { get; }
     }
-    public enum Lifestyle
+    public enum Lifestyle : int
     {
         Singleton = 0,
         Transient = 1,
@@ -912,7 +912,7 @@ namespace Radical.ComponentModel
 }
 namespace Radical.ComponentModel.ChangeTracking
 {
-    public enum AddChangeBehavior
+    public enum AddChangeBehavior : int
     {
         None = 0,
         Default = 1,
@@ -936,13 +936,13 @@ namespace Radical.ComponentModel.ChangeTracking
         public ChangeRejectedEventArgs(object entity, T cachedValue, Radical.ComponentModel.ChangeTracking.IChange source, Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
         public Radical.ComponentModel.ChangeTracking.RejectReason Reason { get; }
     }
-    public enum ChangeTrackingRegistration
+    public enum ChangeTrackingRegistration : int
     {
         AsTransient = 0,
         AsPersistent = 1,
     }
     public delegate void CommitCallback<T>(Radical.ComponentModel.ChangeTracking.ChangeCommittedEventArgs<T> value);
-    public enum CommitReason
+    public enum CommitReason : int
     {
         None = 0,
         AcceptChanges = 1,
@@ -953,14 +953,14 @@ namespace Radical.ComponentModel.ChangeTracking
         public Radical.ComponentModel.ChangeTracking.CommitReason Reason { get; }
     }
     [System.FlagsAttribute()]
-    public enum EntityPropertyStates
+    public enum EntityPropertyStates : int
     {
         None = 0,
         Changed = 1,
         ValueChanged = 2,
     }
     [System.FlagsAttribute()]
-    public enum EntityTrackingStates
+    public enum EntityTrackingStates : int
     {
         None = 0,
         IsTransient = 1,
@@ -1063,7 +1063,7 @@ namespace Radical.ComponentModel.ChangeTracking
         string PropertyName { get; }
     }
     [System.FlagsAttribute()]
-    public enum ProposedActions
+    public enum ProposedActions : int
     {
         None = 0,
         Create = 1,
@@ -1077,7 +1077,7 @@ namespace Radical.ComponentModel.ChangeTracking
         public RejectedEventArgs(Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
         public Radical.ComponentModel.ChangeTracking.RejectReason Reason { get; }
     }
-    public enum RejectReason
+    public enum RejectReason : int
     {
         None = 0,
         Undo = 1,
@@ -1085,7 +1085,7 @@ namespace Radical.ComponentModel.ChangeTracking
         RejectChanges = 3,
         Revert = 4,
     }
-    public enum TransientRegistration
+    public enum TransientRegistration : int
     {
         AsTransparent = 0,
         AsPersistable = 1,
@@ -1150,7 +1150,7 @@ namespace Radical.ComponentModel.Messaging
         void Unsubscribe<T>(object subscriber, System.Delegate callback);
     }
     public interface INeedSafeSubscription { }
-    public enum InvocationModel
+    public enum InvocationModel : int
     {
         Default = 0,
         Safe = 1,
@@ -1237,7 +1237,7 @@ namespace Radical.ComponentModel.Validation
         Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>();
         Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>(string ruleSet);
     }
-    public enum RuleEvaluation
+    public enum RuleEvaluation : int
     {
         Succeeded = 0,
         Failed = 1,
@@ -1515,7 +1515,7 @@ namespace Radical.Messaging
         public void Unsubscribe<T>(object subscriber, object sender) { }
         public void Unsubscribe<T>(object subscriber, System.Delegate callback) { }
     }
-    public enum SubscriptionPriority
+    public enum SubscriptionPriority : int
     {
         Highest = 3,
         High = 2,
@@ -2261,19 +2261,6 @@ namespace Radical.Threading
         public void Invoke(System.Delegate d, params object[] args) { }
     }
 }
-namespace Radical.Transactions
-{
-    public sealed class TransactionEnlistmentHelper : System.IDisposable
-    {
-        public TransactionEnlistmentHelper() { }
-        public bool EnlistedInTransaction { get; }
-        public event System.EventHandler TransactionCompleted;
-        public event System.EventHandler TransactionEnlisted;
-        public void Dispose() { }
-        public void EnlistInTransaction(bool ensureTransaction, System.Transactions.IEnlistmentNotification enlistmentNotification, System.Transactions.EnlistmentOptions options) { }
-        protected override void Finalize() { }
-    }
-}
 namespace Radical.Validation
 {
     public class static ArrayEnsureExtension
@@ -2281,7 +2268,7 @@ namespace Radical.Validation
         public static Radical.Validation.IEnsure<T[]> ContainsIndex<T>(this Radical.Validation.IEnsure<T[]> validator, int index) { }
     }
     [System.FlagsAttribute()]
-    public enum Boundary
+    public enum Boundary : int
     {
         IncludeLower = 1,
         ExcludeLower = 2,
@@ -2381,12 +2368,12 @@ namespace Radical.Validation
         Radical.Validation.IEnsure<T> WithMessage(string errorMessage, params object[] formatArgs);
         Radical.Validation.IEnsure<T> WithPreview(System.Action<Radical.Validation.IEnsure<T>, System.Exception> validationFailurePreview);
     }
-    public enum Or
+    public enum Or : int
     {
         Equal = 0,
         NotEqual = 1,
     }
-    public enum SourceInfoLoadStrategy
+    public enum SourceInfoLoadStrategy : int
     {
         Load = 0,
         Skip = 1,
@@ -4283,7 +4270,7 @@ namespace Radical.Win32
         public static System.IntPtr GetWindowLong(System.IntPtr hWnd, Radical.Win32.WindowLong index) { }
         public static System.IntPtr SetWindowLong(System.IntPtr hWnd, Radical.Win32.WindowLong index, System.IntPtr value) { }
     }
-    public enum WindowLong
+    public enum WindowLong : int
     {
         WindowProc = -4,
         HInstance = -6,
