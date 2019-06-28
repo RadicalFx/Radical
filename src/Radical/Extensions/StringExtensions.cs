@@ -79,7 +79,7 @@ namespace Radical
             /*
              * Se nella stringa ci sono dei '.' dobbiamo 
              * metterci un bell'escape, questa operazione
-             * è da fare dopo la precedente per evitare
+             * Ã¨ da fare dopo la precedente per evitare
              * di raddoppiare anche queste \
              */
             pattern = pattern.Replace( ".", "\\." );

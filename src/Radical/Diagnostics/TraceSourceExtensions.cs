@@ -30,8 +30,7 @@ namespace Radical.Diagnostics
             source.TraceEvent( TraceEventType.Verbose, eventId, message );
         }
 
-        public static void Debug( this TraceSource source, int eventId, string format, params Object[] args )
-        {
+        public static void Debug( this TraceSource source, int eventId, string format, params Object[] args )        {
             source.TraceEvent( TraceEventType.Verbose, eventId, format, args );
         }
 

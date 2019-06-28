@@ -133,7 +133,7 @@ namespace Radical.Model
         {
             get
             {
-                //si potrebbe trovare un sistema per rimbalzare su chi espone la propriet‡
+                //si potrebbe trovare un sistema per rimbalzare su chi espone la propriet√†
                 //if( this.View.IsPropertyMappingDefined( columnName ) ) 
                 //{
 

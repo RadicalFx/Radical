@@ -5,6 +5,7 @@ using Radical.Validation;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using Radical.Diagnostics;
 
 namespace Radical.Observers
 {
