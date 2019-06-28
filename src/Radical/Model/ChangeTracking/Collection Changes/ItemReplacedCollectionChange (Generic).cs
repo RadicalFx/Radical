@@ -19,8 +19,8 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public ItemReplacedCollectionChange( Object owner, ItemReplacedDescriptor<T> descriptor, RejectCallback<ItemReplacedDescriptor<T>> rejectCallback, CommitCallback<ItemReplacedDescriptor<T>> commitCallback, string description )
-            : base( owner, descriptor, rejectCallback, commitCallback, description )
+        public ItemReplacedCollectionChange(Object owner, ItemReplacedDescriptor<T> descriptor, RejectCallback<ItemReplacedDescriptor<T>> rejectCallback, CommitCallback<ItemReplacedDescriptor<T>> commitCallback, string description)
+            : base(owner, descriptor, rejectCallback, commitCallback, description)
         {
 
         }
@@ -31,7 +31,7 @@
         /// <returns></returns>
         public override IEnumerable<Object> GetChangedEntities()
         {
-            return new ReadOnlyCollection<Object>( new Object[] { this.Descriptor.NewItem, this.Descriptor.ReplacedItem } );
+            return new ReadOnlyCollection<Object>(new Object[] { this.Descriptor.NewItem, this.Descriptor.ReplacedItem });
         }
 
         /// <summary>
@@ -40,21 +40,21 @@
         /// <param name="changedItem"></param>
         /// <returns></returns>
         /// <value>The advised action.</value>
-        public override ProposedActions GetAdvisedAction( object changedItem )
+        public override ProposedActions GetAdvisedAction(object changedItem)
         {
-            Ensure.That( changedItem )
-                .If( o =>
-                {
-                    return !Object.Equals( o, this.Descriptor.NewItem ) &&
-                        !Object.Equals( o, this.Descriptor.ReplacedItem );
-                } )
-                .Then( o => { throw new ArgumentOutOfRangeException(); } );
+            Ensure.That(changedItem)
+                .If(o =>
+               {
+                   return !Object.Equals(o, this.Descriptor.NewItem) &&
+                       !Object.Equals(o, this.Descriptor.ReplacedItem);
+               })
+                .Then(o => { throw new ArgumentOutOfRangeException(); });
 
-            if( Object.Equals( changedItem, this.Descriptor.NewItem ) )
+            if (Object.Equals(changedItem, this.Descriptor.NewItem))
             {
                 return ProposedActions.Update | ProposedActions.Create;
             }
-            else if( Object.Equals( changedItem, this.Descriptor.ReplacedItem ) )
+            else if (Object.Equals(changedItem, this.Descriptor.ReplacedItem))
             {
                 return ProposedActions.Delete | ProposedActions.Dispose;
             }
@@ -75,7 +75,7 @@
                 this.Descriptor,
                 this.RejectCallback,
                 this.CommitCallback,
-                this.Description );
+                this.Description);
         }
     }
 }

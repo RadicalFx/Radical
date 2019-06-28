@@ -14,7 +14,7 @@ namespace Radical
 
         public object GetService(Type serviceType)
         {
-            if(this.container.IsRegistered(serviceType))
+            if (this.container.IsRegistered(serviceType))
             {
                 return this.container.Resolve(serviceType);
             }

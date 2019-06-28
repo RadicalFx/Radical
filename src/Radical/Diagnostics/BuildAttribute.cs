@@ -2,10 +2,10 @@
 
 namespace Radical.Diagnostics
 {
-    [AttributeUsage( AttributeTargets.Assembly, AllowMultiple = false )]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
     public sealed class BuildAttribute : Attribute
     {
-        public BuildAttribute( bool isOptimized )
+        public BuildAttribute(bool isOptimized)
         {
             this.IsOptimized = isOptimized;
             this.Version = "0.0.0.0";

@@ -8,7 +8,7 @@ namespace Radical.Tests.ChangeTracking
 
     class PersonCollection : MementoEntityCollection<Person>
     {
-        public PersonCollection( IChangeTrackingService memento )
+        public PersonCollection(IChangeTrackingService memento)
             : base()
         {
             this.Memento = memento;

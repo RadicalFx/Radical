@@ -1149,7 +1149,7 @@
             int actual = 0;
 
             var mock = A.Fake<IChangeSetFilter>();
-            A.CallTo(()=>mock.ShouldInclude(null))
+            A.CallTo(() => mock.ShouldInclude(null))
                 .WithAnyArguments()
                 .Returns(true);
 
@@ -1947,7 +1947,7 @@
         public void service_on_acceptChanges_successfully_commit_a_commitSupported_change()
         {
             var iChange = A.Fake<IChange>();
-            A.CallTo(()=>iChange.IsCommitSupported).Returns(true);
+            A.CallTo(() => iChange.IsCommitSupported).Returns(true);
 
             var svc = new ChangeTrackingService();
             svc.Add(iChange, AddChangeBehavior.Default);

@@ -15,13 +15,13 @@ namespace Radical.Diagnostics
         /// <param name="validator">The validator.</param>
         /// <param name="logger">The logger.</param>
         /// <returns>The current validator for fluent interface usage.</returns>
-        public static IEnsure<T> LogErrorsTo<T>( this IEnsure<T> validator, TraceSource logger ) 
+        public static IEnsure<T> LogErrorsTo<T>(this IEnsure<T> validator, TraceSource logger)
         {
-            validator.WithPreview( ( v, e ) => 
-            {
-                var msg = v.GetFullErrorMessage();
-                logger.Error( msg, e, logger.Switch.Level == SourceLevels.Verbose );
-            } );
+            validator.WithPreview((v, e) =>
+           {
+               var msg = v.GetFullErrorMessage();
+               logger.Error(msg, e, logger.Switch.Level == SourceLevels.Verbose);
+           });
 
             return validator;
         }

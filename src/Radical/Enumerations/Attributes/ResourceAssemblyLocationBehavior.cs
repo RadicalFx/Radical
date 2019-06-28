@@ -19,7 +19,7 @@
         /// Use the calling assembly.
         /// </summary>
         UseCallingAssembly,
-        
+
         /// <summary>
         /// Use the entry assembly.
         /// </summary>

@@ -8,14 +8,14 @@ namespace Radical.Model
 {
     public static class MementoPropertyMetadata
     {
-        public static MementoPropertyMetadata<T> Create<T>( Object propertyOwner, Expression<Func<T>> property )
+        public static MementoPropertyMetadata<T> Create<T>(Object propertyOwner, Expression<Func<T>> property)
         {
-            return new MementoPropertyMetadata<T>( propertyOwner, property );
+            return new MementoPropertyMetadata<T>(propertyOwner, property);
         }
 
-        public static MementoPropertyMetadata<T> Create<T>( Object propertyOwner, string propertyName )
+        public static MementoPropertyMetadata<T> Create<T>(Object propertyOwner, string propertyName)
         {
-            return new MementoPropertyMetadata<T>( propertyOwner, propertyName );
+            return new MementoPropertyMetadata<T>(propertyOwner, propertyName);
         }
     }
 
@@ -26,10 +26,10 @@ namespace Radical.Model
     public class MementoPropertyMetadata<T> : PropertyMetadata<T>,
         IMementoPropertyMetadata
     {
-        public MementoPropertyMetadata( Object propertyOwner, string propertyName )
-            : base( propertyOwner, propertyName )
+        public MementoPropertyMetadata(Object propertyOwner, string propertyName)
+            : base(propertyOwner, propertyName)
         {
-            if ( this.Property.IsAttributeDefined<MementoPropertyMetadataAttribute>() )
+            if (this.Property.IsAttributeDefined<MementoPropertyMetadataAttribute>())
             {
                 var attribute = this.Property.GetAttribute<MementoPropertyMetadataAttribute>();
                 this.TrackChanges = attribute.TrackChanges;
@@ -40,8 +40,8 @@ namespace Radical.Model
             }
         }
 
-        public MementoPropertyMetadata( Object propertyOwner, Expression<Func<T>> property )
-            : this( propertyOwner, property.GetMemberName() )
+        public MementoPropertyMetadata(Object propertyOwner, Expression<Func<T>> property)
+            : this(propertyOwner, property.GetMemberName())
         {
 
         }
@@ -61,7 +61,7 @@ namespace Radical.Model
         }
     }
 
-    [AttributeUsage( AttributeTargets.Property )]
+    [AttributeUsage(AttributeTargets.Property)]
     public class MementoPropertyMetadataAttribute : PropertyMetadataAttribute
     {
         public MementoPropertyMetadataAttribute()

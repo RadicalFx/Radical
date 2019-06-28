@@ -13,10 +13,10 @@ namespace Radical.Tests.Model
             var item = new GenericParameterHelper();
             var index = 10;
 
-            var target = new ItemChangedDescriptor<GenericParameterHelper>( item, index );
+            var target = new ItemChangedDescriptor<GenericParameterHelper>(item, index);
 
-            target.Index.Should().Be.EqualTo( index );
-            target.Item.Should().Be.EqualTo( item );
+            target.Index.Should().Be.EqualTo(index);
+            target.Item.Should().Be.EqualTo(item);
         }
     }
 }

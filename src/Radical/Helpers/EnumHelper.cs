@@ -21,7 +21,7 @@ namespace Radical.Helpers
             List<string> lst = new List<string>();
 
             EnumHelper.ExtractBindingData<T>()
-                .ForEach( eb => lst.Add( eb.Caption ) );
+                .ForEach(eb => lst.Add(eb.Caption));
 
             return lst.AsReadOnly();
         }
@@ -32,7 +32,7 @@ namespace Radical.Helpers
         /// <returns>An readonly list of <see cref="EnumBinder&lt;T&gt;"/> objects.</returns>
         public static IEnumerable<EnumBinder<T>> ExtractBindingData<T>()
         {
-            return ExtractBindingData<T>( null );
+            return ExtractBindingData<T>(null);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Radical.Helpers
         /// <returns>The list of enum values.</returns>
         public static IEnumerable<T> GetValues<T>()
         {
-            var values = EnumHelper.GetValues( typeof( T ) );
+            var values = EnumHelper.GetValues(typeof(T));
             return values.Cast<T>();
         }
 
@@ -51,16 +51,16 @@ namespace Radical.Helpers
         /// </summary>
         /// <param name="enumType">Type of the enum.</param>
         /// <returns>The list of enum values.</returns>
-        public static IEnumerable<object> GetValues( Type enumType )
+        public static IEnumerable<object> GetValues(Type enumType)
         {
-            if( !enumType.IsEnum )
+            if (!enumType.IsEnum)
             {
-                throw new ArgumentException( "Type '" + enumType.Name + "' is not an enum" );
+                throw new ArgumentException("Type '" + enumType.Name + "' is not an enum");
             }
 
             var values = from field in enumType.GetFields()
                          where field.IsLiteral
-                         select field.GetValue( enumType );
+                         select field.GetValue(enumType);
 
             return values;
         }
@@ -73,28 +73,28 @@ namespace Radical.Helpers
         /// <returns>
         /// An readonly list of <see cref="EnumBinder"/> objects.
         /// </returns>
-        public static IEnumerable<EnumBinder<T>> ExtractBindingData<T>( Predicate<T> filter )
+        public static IEnumerable<EnumBinder<T>> ExtractBindingData<T>(Predicate<T> filter)
         {
             var lst = new List<EnumBinder<T>>();
 
-            foreach( var obj in Enum.GetValues( typeof( T ) ) )
+            foreach (var obj in Enum.GetValues(typeof(T)))
             {
-                if( filter == null || filter( ( T )obj ) )
+                if (filter == null || filter((T)obj))
                 {
-                    var e = ( Enum )obj;
+                    var e = (Enum)obj;
                     EnumItemDescriptionAttribute attribute;
-                    if( e.TryGetDescriptionAttribute( out attribute ) )
+                    if (e.TryGetDescriptionAttribute(out attribute))
                     {
-                        var eb = new EnumBinder<T>( attribute, ( T )obj );
-                        lst.Add( eb );
+                        var eb = new EnumBinder<T>(attribute, (T)obj);
+                        lst.Add(eb);
                     }
                 }
 
             }
 
-            lst.Sort( ( v1, v2 ) => v1.Index.CompareTo( v2.Index ) );
+            lst.Sort((v1, v2) => v1.Index.CompareTo(v2.Index));
 
             return lst.AsReadOnly();
-        } 
+        }
     }
 }

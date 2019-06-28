@@ -11,7 +11,7 @@ namespace Radical.ComponentModel
         /// Initializes a new instance of the <see cref="ComponentRegisteredEventArgs"/> class.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        public ComponentRegisteredEventArgs( IContainerEntry entry )
+        public ComponentRegisteredEventArgs(IContainerEntry entry)
         {
             //Ensure.That( entry ).Named( "entry" ).IsNotNull();
             this.Entry = entry;

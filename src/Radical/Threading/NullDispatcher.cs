@@ -17,21 +17,21 @@ namespace Radical.Threading
         /// </summary>
         /// <param name="d">The delegate to invoke.</param>
         /// <param name="args">The delegate arguments, or null if no arguments shuold passed to the delegate.</param>
-        public void Invoke( Delegate d, params object[] args )
+        public void Invoke(Delegate d, params object[] args)
         {
-            Ensure.That( d ).Named( () => d ).IsNotNull();
-            Ensure.That( d.Target ).Named( () => d.Target ).IsNotNull();
+            Ensure.That(d).Named(() => d).IsNotNull();
+            Ensure.That(d.Target).Named(() => d.Target).IsNotNull();
 
-            d.Method.Invoke( d.Target, args );
+            d.Method.Invoke(d.Target, args);
         }
 
         /// <summary>
         /// Safely dispatches the specified action.
         /// </summary>
         /// <param name="action">The action.</param>
-        public void Dispatch( Action action )
+        public void Dispatch(Action action)
         {
-            Ensure.That( action ).Named( () => action ).IsNotNull();
+            Ensure.That(action).Named(() => action).IsNotNull();
 
             action();
         }
@@ -42,11 +42,11 @@ namespace Radical.Threading
         /// <typeparam name="T">Argument type.</typeparam>
         /// <param name="arg">The argument.</param>
         /// <param name="action">The action to dispatch.</param>
-        public void Dispatch<T>( T arg, Action<T> action )
+        public void Dispatch<T>(T arg, Action<T> action)
         {
-            Ensure.That( action ).Named( () => action ).IsNotNull();
+            Ensure.That(action).Named(() => action).IsNotNull();
 
-            action( arg );
+            action(arg);
         }
 
         /// <summary>
@@ -57,11 +57,11 @@ namespace Radical.Threading
         /// <param name="arg1">The first argument.</param>
         /// <param name="arg2">The second argument.</param>
         /// <param name="action">The action to dispatch.</param>
-        public void Dispatch<T1, T2>( T1 arg1, T2 arg2, Action<T1, T2> action )
+        public void Dispatch<T1, T2>(T1 arg1, T2 arg2, Action<T1, T2> action)
         {
-            Ensure.That( action ).Named( () => action ).IsNotNull();
+            Ensure.That(action).Named(() => action).IsNotNull();
 
-            action( arg1, arg2 );
+            action(arg1, arg2);
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace Radical.Threading
         /// <typeparam name="TResult">The type of the Func result.</typeparam>
         /// <param name="func">The Func to dispatch.</param>
         /// <returns>The result of Func invocation.</returns>
-        public TResult Dispatch<TResult>( Func<TResult> func )
+        public TResult Dispatch<TResult>(Func<TResult> func)
         {
-            Ensure.That( func ).Named( () => func ).IsNotNull();
+            Ensure.That(func).Named(() => func).IsNotNull();
 
             return func();
         }

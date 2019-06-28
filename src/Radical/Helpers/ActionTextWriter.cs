@@ -18,10 +18,10 @@ namespace Radical
         /// Initializes a new instance of the <see cref="ActionTextWriter"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        public ActionTextWriter( Action<string> logger )
-            : base( CultureInfo.InvariantCulture )
+        public ActionTextWriter(Action<string> logger)
+            : base(CultureInfo.InvariantCulture)
         {
-            Ensure.That( logger ).Named( "logger" ).IsNotNull();
+            Ensure.That(logger).Named("logger").IsNotNull();
 
             this.logger = logger;
         }
@@ -31,10 +31,10 @@ namespace Radical
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="formatProvider">The format provider.</param>
-        public ActionTextWriter( Action<string> logger, IFormatProvider formatProvider )
-            : base( formatProvider )
+        public ActionTextWriter(Action<string> logger, IFormatProvider formatProvider)
+            : base(formatProvider)
         {
-            Ensure.That( logger ).Named( "logger" ).IsNotNull();
+            Ensure.That(logger).Named("logger").IsNotNull();
 
             this.logger = logger;
         }
@@ -49,9 +49,9 @@ namespace Radical
         /// <exception cref="T:System.IO.IOException">
         /// An I/O error occurs.
         /// </exception>
-        public override void Write( string value )
+        public override void Write(string value)
         {
-            this.logger( value );
+            this.logger(value);
         }
 
         /// <summary>
@@ -75,15 +75,15 @@ namespace Radical
         /// <exception cref="T:System.IO.IOException">
         /// An I/O error occurs.
         /// </exception>
-        public override void Write( char[] buffer, int index, int count )
+        public override void Write(char[] buffer, int index, int count)
         {
-            if( buffer == null || index < 0 || count < 0 || buffer.Length - index < count )
+            if (buffer == null || index < 0 || count < 0 || buffer.Length - index < count)
             {
                 //let base class to throw exception
-                base.Write( buffer, index, count );
+                base.Write(buffer, index, count);
             }
 
-            this.logger( new string( buffer, index, count ) );
+            this.logger(new string(buffer, index, count));
         }
 
         Encoding _encoding;
@@ -99,9 +99,9 @@ namespace Radical
         {
             get
             {
-                if( this._encoding == null )
+                if (this._encoding == null)
                 {
-                    this._encoding = new UnicodeEncoding( false, false );
+                    this._encoding = new UnicodeEncoding(false, false);
                 }
 
                 return this._encoding;

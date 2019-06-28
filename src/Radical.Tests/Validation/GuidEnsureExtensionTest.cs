@@ -11,15 +11,15 @@ namespace Radical.Tests.Validation
         [TestMethod]
         public void guidEnsureExtension_isNotEmpty_using_non_empty_guid_should_behave_as_expected()
         {
-            var v = Ensure.That( Guid.NewGuid() );
+            var v = Ensure.That(Guid.NewGuid());
             v.IsNotEmpty();
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentOutOfRangeException ) )]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void guidEnsureExtension_isNotEmpty_using_empty_guid_should_raise_ArgumentOutOfRangeException()
         {
-            var v = Ensure.That( Guid.Empty );
+            var v = Ensure.That(Guid.Empty);
             v.IsNotEmpty();
         }
 
@@ -30,11 +30,11 @@ namespace Radical.Tests.Validation
 
             try
             {
-                var target = Ensure.That( Guid.Empty )
-                    .WithPreview( ( v, e ) => actual = true );
+                var target = Ensure.That(Guid.Empty)
+                    .WithPreview((v, e) => actual = true);
                 target.IsNotEmpty();
             }
-            catch( ArgumentOutOfRangeException )
+            catch (ArgumentOutOfRangeException)
             {
 
             }

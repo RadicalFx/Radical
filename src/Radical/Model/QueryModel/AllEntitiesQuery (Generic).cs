@@ -14,7 +14,7 @@ namespace Radical.Model.QueryModel
         /// </summary>
         public AllEntitiesQuery()
         {
-            
+
         }
     }
 }

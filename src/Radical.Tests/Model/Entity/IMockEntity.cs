@@ -12,6 +12,6 @@ namespace Radical.Tests.Model.Entity
         string MainProperty { get; set; }
         string SubProperty { get; }
 
-        void SetInitialValue<T>( System.Linq.Expressions.Expression<Func<T>> property, T value );
+        void SetInitialValue<T>(System.Linq.Expressions.Expression<Func<T>> property, T value);
     }
 }

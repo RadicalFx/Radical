@@ -9,7 +9,7 @@
     /// In order to prevent the exception the caller should check the <c>IsSuspended</c>
     /// property of the service.
     /// </summary>
-    [Serializable] 
+    [Serializable]
     public class SuspendedChangeTrackingServiceException : RadicalException
     {
         /// <summary>
@@ -17,11 +17,11 @@
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected SuspendedChangeTrackingServiceException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
+        protected SuspendedChangeTrackingServiceException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
 
-        } 
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SuspendedChangeTrackingServiceException"/> class.
@@ -35,8 +35,8 @@
         /// Initializes a new instance of the <see cref="SuspendedChangeTrackingServiceException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public SuspendedChangeTrackingServiceException( string message )
-            : base( message )
+        public SuspendedChangeTrackingServiceException(string message)
+            : base(message)
         {
 
         }
@@ -46,8 +46,8 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public SuspendedChangeTrackingServiceException( string message, Exception innerException )
-            : base( message, innerException )
+        public SuspendedChangeTrackingServiceException(string message, Exception innerException)
+            : base(message, innerException)
         {
 
         }

@@ -16,9 +16,9 @@ namespace Radical
         /// <returns>
         /// The input value, if not null, otherwise the supplied default value.
         /// </returns>
-        public static T ValueOr<T>( this Nullable<T> value, T defaultValue ) where T : struct
+        public static T ValueOr<T>(this Nullable<T> value, T defaultValue) where T : struct
         {
-            return ValueOr( value, defaultValue, null );
+            return ValueOr(value, defaultValue, null);
         }
 
         /// <summary>
@@ -34,13 +34,13 @@ namespace Radical
         /// <returns>
         /// The input value, if not null, otherwise the supplied default value.
         /// </returns>
-        public static T ValueOr<T>( this Nullable<T> value, T defaultValue, Func<T, T> ifValue ) where T : struct
+        public static T ValueOr<T>(this Nullable<T> value, T defaultValue, Func<T, T> ifValue) where T : struct
         {
-            if( value.HasValue )
+            if (value.HasValue)
             {
-                if( ifValue != null )
+                if (ifValue != null)
                 {
-                    return ifValue( value.Value );
+                    return ifValue(value.Value);
                 }
 
                 return value.Value;

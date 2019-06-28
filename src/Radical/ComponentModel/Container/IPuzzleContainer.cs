@@ -18,7 +18,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="facility">The facility.</param>
         /// <returns>This container instance.</returns>
-        IPuzzleContainer AddFacility( IPuzzleContainerFacility facility );
+        IPuzzleContainer AddFacility(IPuzzleContainerFacility facility);
 
         /// <summary>
         /// Adds a new facility.
@@ -32,14 +32,14 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="entries">The entries to register.</param>
         /// <returns>This container instance.</returns>
-        IPuzzleContainer Register( IEnumerable<IContainerEntry> entries );
+        IPuzzleContainer Register(IEnumerable<IContainerEntry> entries);
 
         /// <summary>
         /// Registers the specified entry in this container.
         /// </summary>
         /// <param name="entry">The entry to register.</param>
         /// <returns>This container instance.</returns>
-        IPuzzleContainer Register( IContainerEntry entry );
+        IPuzzleContainer Register(IContainerEntry entry);
 
         /// <summary>
         /// Determines whether the given service type is registered.
@@ -57,14 +57,14 @@ namespace Radical.ComponentModel
         /// <returns>
         ///     <c>true</c> if the given service type is registered; otherwise, <c>false</c>.
         /// </returns>
-        bool IsRegistered( Type serviceType );
+        bool IsRegistered(Type serviceType);
 
         /// <summary>
         /// Resolves the specified service type.
         /// </summary>
         /// <param name="serviceType">The Type of the service.</param>
         /// <returns>The resolved service instance.</returns>
-        Object Resolve( Type serviceType );
+        Object Resolve(Type serviceType);
 
         /// <summary>
         /// Resolves the entry identified by the specified key and with the given type.
@@ -72,7 +72,7 @@ namespace Radical.ComponentModel
         /// <param name="key">The key.</param>
         /// <param name="serviceType">Type of the service.</param>
         /// <returns></returns>
-        Object Resolve( string key, Type serviceType );
+        Object Resolve(string key, Type serviceType);
 
         /// <summary>
         /// Resolves all entries of the given type.
@@ -86,7 +86,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="t">The type of entry to resolve.</param>
         /// <returns></returns>
-        IEnumerable<Object> ResolveAll( Type t );
+        IEnumerable<Object> ResolveAll(Type t);
 
         /// <summary>
         /// Resolves the specified service type.
@@ -100,6 +100,6 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="knownTypesProvider">The known types provider.</param>
         /// <param name="descriptors">The descriptors.</param>
-        void SetupWith( Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors );
+        void SetupWith(Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors);
     }
 }

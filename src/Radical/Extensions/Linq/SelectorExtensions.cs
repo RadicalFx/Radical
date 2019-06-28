@@ -22,17 +22,17 @@ namespace Radical.Linq
         /// <exception cref="T:System.ArgumentNullException">
         ///   <paramref name="source"/> or <paramref name="defaultValue"/> is null.</exception>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source"/> is null.</exception>
-        public static T FirstOr<T>( this IEnumerable<T> source, Func<T> defaultValue )
+        public static T FirstOr<T>(this IEnumerable<T> source, Func<T> defaultValue)
         {
-            Ensure.That( source ).Named( () => source ).IsNotNull();
-            Ensure.That( defaultValue ).Named( () => defaultValue ).IsNotNull();
+            Ensure.That(source).Named(() => source).IsNotNull();
+            Ensure.That(defaultValue).Named(() => defaultValue).IsNotNull();
 
             var list = source as IList<T>;
-            if( list == null )
+            if (list == null)
             {
-                using( var enumerator = source.GetEnumerator() )
+                using (var enumerator = source.GetEnumerator())
                 {
-                    if( enumerator.MoveNext() )
+                    if (enumerator.MoveNext())
                     {
                         return enumerator.Current;
                     }
@@ -40,9 +40,9 @@ namespace Radical.Linq
             }
             else
             {
-                if( list.Count > 0 )
+                if (list.Count > 0)
                 {
-                    return list[ 0 ];
+                    return list[0];
                 }
             }
 
@@ -62,23 +62,23 @@ namespace Radical.Linq
         /// <exception cref="T:System.ArgumentNullException">
         ///   <paramref name="source"/> or <paramref name="defaultValue"/> is null.</exception>
         /// <exception cref="T:System.InvalidOperationException">More than one element satisfies the condition in <paramref name="predicate"/>.</exception>
-        public static T SingleOr<T>( this IEnumerable<T> source, Func<T> defaultValue )
+        public static T SingleOr<T>(this IEnumerable<T> source, Func<T> defaultValue)
         {
-            Ensure.That( source ).Named( () => source ).IsNotNull();
-            Ensure.That( defaultValue ).Named( () => defaultValue ).IsNotNull();
+            Ensure.That(source).Named(() => source).IsNotNull();
+            Ensure.That(defaultValue).Named(() => defaultValue).IsNotNull();
 
             var list = source as IList<T>;
-            if( list == null )
+            if (list == null)
             {
-                using( var enumerator = source.GetEnumerator() )
+                using (var enumerator = source.GetEnumerator())
                 {
-                    if( !enumerator.MoveNext() )
+                    if (!enumerator.MoveNext())
                     {
                         return defaultValue();
                     }
 
                     var current = enumerator.Current;
-                    if( !enumerator.MoveNext() )
+                    if (!enumerator.MoveNext())
                     {
                         return current;
                     }
@@ -86,16 +86,16 @@ namespace Radical.Linq
             }
             else
             {
-                switch( list.Count )
+                switch (list.Count)
                 {
                     case 0:
                         return defaultValue();
                     case 1:
-                        return list[ 0 ];
+                        return list[0];
                 }
             }
 
-            throw new InvalidOperationException( "The source list contains more than one element." );
+            throw new InvalidOperationException("The source list contains more than one element.");
         }
     }
 }

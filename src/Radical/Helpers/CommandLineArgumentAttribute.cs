@@ -6,21 +6,21 @@ namespace Radical.Helpers
     /// <summary>
     /// Defines the command line argument name associated to a property.
     /// </summary>
-    [AttributeUsage( AttributeTargets.Property, AllowMultiple = false, Inherited = false )]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public sealed class CommandLineArgumentAttribute : Attribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLineArgumentAttribute"/> class.
         /// </summary>
         /// <param name="argumentName">Name of the argument.</param>
-        public CommandLineArgumentAttribute( string argumentName )
+        public CommandLineArgumentAttribute(string argumentName)
         {
-            Ensure.That( argumentName )
-                .Named( () => argumentName )
+            Ensure.That(argumentName)
+                .Named(() => argumentName)
                 .IsNotNullNorEmpty();
 
             this.ArgumentName = argumentName;
-            this.Aliases = new string[ 0 ];
+            this.Aliases = new string[0];
         }
 
         /// <summary>

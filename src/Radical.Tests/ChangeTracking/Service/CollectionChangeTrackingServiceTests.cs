@@ -16,358 +16,358 @@ namespace Radical.Tests.ChangeTracking
     public class CollectionChangeTrackingServiceTests
     {
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_Add_canUndo_is_true()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( svc, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(svc, false));
 
             svc.CanUndo.Should().Be.True();
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_Undo_collection_is_rolledback()
         {
             int expected = 0;
 
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( svc, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(svc, false));
 
             svc.Undo();
 
-            p.Count.Should().Be.EqualTo( expected );
+            p.Count.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_Add_getChangeSet_contains_change()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( svc, false ) );
-            p.Add( new Person( svc, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(svc, false));
+            p.Add(new Person(svc, false));
 
             IChangeSet cSet = svc.GetChangeSet();
 
-            cSet.Count.Should().Be.EqualTo( 2 );
+            cSet.Count.Should().Be.EqualTo(2);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_add_GetEntityState_is_Changed()
         {
             EntityTrackingStates expected = EntityTrackingStates.HasBackwardChanges;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( svc, false ) );
-            p.Add( new Person( svc, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(svc, false));
+            p.Add(new Person(svc, false));
 
-            EntityTrackingStates actual = svc.GetEntityState( p );
+            EntityTrackingStates actual = svc.GetEntityState(p);
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_mutual_exclusive_actions_service_CanUndo()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( svc, false ) );
-            p.RemoveAt( 0 );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(svc, false));
+            p.RemoveAt(0);
 
-            Assert.IsTrue( svc.CanUndo );
+            Assert.IsTrue(svc.CanUndo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_mutual_exclusive_actions_entity_state_is_HasBackwardChanges()
         {
             EntityTrackingStates expected = EntityTrackingStates.HasBackwardChanges;
 
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( svc, false ) );
-            p.RemoveAt( 0 );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(svc, false));
+            p.RemoveAt(0);
 
-            EntityTrackingStates actual = svc.GetEntityState( p );
-            Assert.AreEqual<EntityTrackingStates>( expected, actual );
+            EntityTrackingStates actual = svc.GetEntityState(p);
+            Assert.AreEqual<EntityTrackingStates>(expected, actual);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void unchangedEntity_service_canRedo_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
+            PersonCollection p = new PersonCollection(svc);
 
-            Assert.IsFalse( svc.CanRedo );
+            Assert.IsFalse(svc.CanRedo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void unchangedEntity_service_canUndo_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
+            PersonCollection p = new PersonCollection(svc);
 
-            Assert.IsFalse( svc.CanUndo );
+            Assert.IsFalse(svc.CanUndo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void unchangedEntity_service_isChanged_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
+            PersonCollection p = new PersonCollection(svc);
 
-            Assert.IsFalse( svc.IsChanged );
+            Assert.IsFalse(svc.IsChanged);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void unchangedEntity_service_getEntityState_is_None()
         {
             EntityTrackingStates expected = EntityTrackingStates.None;
 
             ChangeTrackingService svc = new ChangeTrackingService();
-            PersonCollection p = new PersonCollection( svc );
+            PersonCollection p = new PersonCollection(svc);
 
-            EntityTrackingStates actual = svc.GetEntityState( p );
+            EntityTrackingStates actual = svc.GetEntityState(p);
 
-            Assert.AreEqual<EntityTrackingStates>( expected, actual );
+            Assert.AreEqual<EntityTrackingStates>(expected, actual);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void afterUndo_service_canRedo()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
             svc.Undo();
 
-            Assert.IsTrue( svc.CanRedo );
+            Assert.IsTrue(svc.CanRedo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_change_canRedo_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
-            Assert.IsFalse( svc.CanRedo );
+            Assert.IsFalse(svc.CanRedo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_multiple_change_canRedo_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
             svc.Undo();
-            p.Add( new Person( null, false ) );
+            p.Add(new Person(null, false));
 
-            Assert.IsFalse( svc.CanRedo );
+            Assert.IsFalse(svc.CanRedo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void afterUndo_service_Redo_restore_previous_value()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
             int expected = 1;
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.Undo();
             svc.Redo();
 
-            Assert.AreEqual<int>( expected, p.Count );
+            Assert.AreEqual<int>(expected, p.Count);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_acceptChanges_entity_is_no_more_changed()
         {
             EntityTrackingStates expected = EntityTrackingStates.None;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.AcceptChanges();
 
-            EntityTrackingStates actual = svc.GetEntityState( p );
-            Assert.AreEqual<EntityTrackingStates>( expected, actual );
+            EntityTrackingStates actual = svc.GetEntityState(p);
+            Assert.AreEqual<EntityTrackingStates>(expected, actual);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_acceptChanges_service_isChanged_is_false()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.AcceptChanges();
 
-            Assert.IsFalse( svc.IsChanged );
+            Assert.IsFalse(svc.IsChanged);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_acceptChanges_service_canUndo_is_false()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.AcceptChanges();
 
-            Assert.IsFalse( svc.CanUndo );
+            Assert.IsFalse(svc.CanUndo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_acceptChanges_service_canRedo_is_false()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.AcceptChanges();
 
-            Assert.IsFalse( svc.CanRedo );
+            Assert.IsFalse(svc.CanRedo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_rejectChanges_entity_is_no_more_changed()
         {
             EntityTrackingStates expected = EntityTrackingStates.None;
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.RejectChanges();
 
-            EntityTrackingStates actual = svc.GetEntityState( p );
-            Assert.AreEqual<EntityTrackingStates>( expected, actual );
+            EntityTrackingStates actual = svc.GetEntityState(p);
+            Assert.AreEqual<EntityTrackingStates>(expected, actual);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_rejectChanges_service_isChanged_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.RejectChanges();
 
-            Assert.IsFalse( svc.IsChanged );
+            Assert.IsFalse(svc.IsChanged);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_rejectChanges_service_canUndo_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.RejectChanges();
 
-            Assert.IsFalse( svc.CanUndo );
+            Assert.IsFalse(svc.CanUndo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void after_rejectChanges_service_canRedo_is_false()
         {
             IChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             svc.RejectChanges();
 
-            Assert.IsFalse( svc.CanRedo );
+            Assert.IsFalse(svc.CanRedo);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_on_single_add_generate_valid_advisory()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
 
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
-            Assert.IsNotNull( advisory );
-            Assert.AreEqual<int>( 1, advisory.Count() );
-            Assert.AreEqual<ProposedActions>( ProposedActions.Update, advisory.First().Action );
+            Assert.IsNotNull(advisory);
+            Assert.AreEqual<int>(1, advisory.Count());
+            Assert.AreEqual<ProposedActions>(ProposedActions.Update, advisory.First().Action);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_on_single_add_generate_valid_advisory_even_with_transient_persistable_entity()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, ChangeTrackingRegistration.AsTransient, TransientRegistration.AsPersistable ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, ChangeTrackingRegistration.AsTransient, TransientRegistration.AsPersistable));
 
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
-            Assert.IsNotNull( advisory );
-            Assert.AreEqual<int>( 1, advisory.Count() );
-            Assert.AreEqual<ProposedActions>( ProposedActions.Create, advisory.First().Action );
+            Assert.IsNotNull(advisory);
+            Assert.AreEqual<int>(1, advisory.Count());
+            Assert.AreEqual<ProposedActions>(ProposedActions.Create, advisory.First().Action);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_on_clear_generate_valid_advisory()
         {
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
-            p.Add( new Person( null, false ) );
-            p.Add( new Person( null, false ) );
-            p.Add( new Person( null, false ) );
-            p.Add( new Person( null, false ) );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
+            p.Add(new Person(null, false));
+            p.Add(new Person(null, false));
+            p.Add(new Person(null, false));
+            p.Add(new Person(null, false));
 
             svc.AcceptChanges();
 
@@ -375,16 +375,16 @@ namespace Radical.Tests.ChangeTracking
 
             IEnumerable<IAdvisedAction> advisory = svc.GetAdvisory();
 
-            Assert.IsNotNull( advisory );
-            Assert.AreEqual<int>( 5, advisory.Count() );
-            foreach( var aa in advisory )
+            Assert.IsNotNull(advisory);
+            Assert.AreEqual<int>(5, advisory.Count());
+            foreach (var aa in advisory)
             {
-                Assert.AreEqual<ProposedActions>( ProposedActions.Delete, aa.Action );
+                Assert.AreEqual<ProposedActions>(ProposedActions.Delete, aa.Action);
             }
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_getChangeSet_returns_valid_cSet()
         {
             int expected = 3;
@@ -392,22 +392,22 @@ namespace Radical.Tests.ChangeTracking
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection p = new PersonCollection( svc );
-            p.Add( new Person( null, false ) );
-            p.Add( new Person( null, false ) );
-            p.Move( 0, 1 );
+            PersonCollection p = new PersonCollection(svc);
+            p.Add(new Person(null, false));
+            p.Add(new Person(null, false));
+            p.Move(0, 1);
 
             IChangeSet cSet = svc.GetChangeSet();
             actual = cSet.Count;
 
-            Assert.AreEqual<int>( expected, actual );
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_on_clear_undo_entities_are_restored()
         {
-            var source = new Person[] 
+            var source = new Person[]
             {
                 new Person( null, false ),
                 new Person( null, false ),
@@ -418,119 +418,119 @@ namespace Radical.Tests.ChangeTracking
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection list = new PersonCollection( svc );
+            PersonCollection list = new PersonCollection(svc);
             list.BeginInit();
-            list.AddRange( source );
+            list.AddRange(source);
             list.EndInit();
 
             list.Clear();
             svc.Undo();
 
-            Assert.AreEqual<int>( source.Length, list.Count() );
-            source.ForEach( p =>
-            {
-                int expected = Array.IndexOf( source, p );
-                int actual = list.IndexOf( p );
+            Assert.AreEqual<int>(source.Length, list.Count());
+            source.ForEach(p =>
+           {
+               int expected = Array.IndexOf(source, p);
+               int actual = list.IndexOf(p);
 
-                Assert.AreEqual<int>( expected, actual );
-            } );
+               Assert.AreEqual<int>(expected, actual);
+           });
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_undoes_are_in_the_correct_order()
         {
-            var p1 = new Person( null, false );
-            var p2 = new Person( null, false );
-            var p3 = new Person( null, false );
+            var p1 = new Person(null, false);
+            var p2 = new Person(null, false);
+            var p3 = new Person(null, false);
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection list = new PersonCollection( svc );
-            list.Add( p1 );
-            list.Add( p2 );
-            list.Add( p3 );
-            list.Move( p2, 0 );
-            list.Remove( p1 );
+            PersonCollection list = new PersonCollection(svc);
+            list.Add(p1);
+            list.Add(p2);
+            list.Add(p3);
+            list.Move(p2, 0);
+            list.Remove(p1);
 
             svc.Undo();
-            Assert.AreEqual<int>( 3, list.Count );
-            Assert.IsTrue( list.Contains( p1 ) );
+            Assert.AreEqual<int>(3, list.Count);
+            Assert.IsTrue(list.Contains(p1));
 
             svc.Undo();
-            Assert.AreEqual<int>( 1, list.IndexOf( p2 ) );
+            Assert.AreEqual<int>(1, list.IndexOf(p2));
 
             svc.Undo();
-            Assert.AreEqual<int>( 2, list.Count );
-            Assert.IsFalse( list.Contains( p3 ) );
+            Assert.AreEqual<int>(2, list.Count);
+            Assert.IsFalse(list.Contains(p3));
 
             svc.Undo();
-            Assert.AreEqual<int>( 1, list.Count );
-            Assert.IsFalse( list.Contains( p2 ) );
+            Assert.AreEqual<int>(1, list.Count);
+            Assert.IsFalse(list.Contains(p2));
 
             svc.Undo();
-            Assert.AreEqual<int>( 0, list.Count );
-            Assert.IsFalse( list.Contains( p1 ) );
+            Assert.AreEqual<int>(0, list.Count);
+            Assert.IsFalse(list.Contains(p1));
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_redoes_are_in_the_correct_order()
         {
-            var p1 = new Person( null, false );
-            var p2 = new Person( null, false );
-            var p3 = new Person( null, false );
+            var p1 = new Person(null, false);
+            var p2 = new Person(null, false);
+            var p3 = new Person(null, false);
 
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection list = new PersonCollection( svc );
-            list.Add( p1 );
-            list.Add( p2 );
-            list.Add( p3 );
-            list.Move( p2, 0 );
-            list.Remove( p1 );
+            PersonCollection list = new PersonCollection(svc);
+            list.Add(p1);
+            list.Add(p2);
+            list.Add(p3);
+            list.Move(p2, 0);
+            list.Remove(p1);
 
-            while( svc.CanUndo )
+            while (svc.CanUndo)
             {
                 svc.Undo();
             }
 
             svc.Redo();
-            Assert.AreEqual<int>( 1, list.Count );
-            Assert.IsTrue( list.Contains( p1 ) );
+            Assert.AreEqual<int>(1, list.Count);
+            Assert.IsTrue(list.Contains(p1));
 
             svc.Redo();
-            Assert.AreEqual<int>( 2, list.Count );
-            Assert.IsTrue( list.Contains( p2 ) );
+            Assert.AreEqual<int>(2, list.Count);
+            Assert.IsTrue(list.Contains(p2));
 
             svc.Redo();
-            Assert.AreEqual<int>( 3, list.Count );
-            Assert.IsTrue( list.Contains( p3 ) );
+            Assert.AreEqual<int>(3, list.Count);
+            Assert.IsTrue(list.Contains(p3));
 
             svc.Redo();
-            Assert.AreEqual<int>( 0, list.IndexOf( p2 ) );
+            Assert.AreEqual<int>(0, list.IndexOf(p2));
 
             svc.Redo();
-            Assert.AreEqual<int>( 2, list.Count );
-            Assert.IsFalse( list.Contains( p1 ) );
+            Assert.AreEqual<int>(2, list.Count);
+            Assert.IsFalse(list.Contains(p1));
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void service_getAdvisory_generate_valid_advisory_with_more_changes_applied_to_the_same_entity()
         {
             ProposedActions expected = ProposedActions.Delete;
             ChangeTrackingService svc = new ChangeTrackingService();
 
-            PersonCollection list = new PersonCollection( svc );
-            list.Add( new Person( null, false ) );    //First IChange
-            list.RemoveAt( 0 );                        //Second IChange
+            PersonCollection list = new PersonCollection(svc);
+            list.Add(new Person(null, false));    //First IChange
+            list.RemoveAt(0);                        //Second IChange
 
             IAdvisory advisory = svc.GetAdvisory();
             IAdvisedAction action = advisory.First();
             ProposedActions actual = action.Action;
 
-            Assert.AreEqual<ProposedActions>( expected, actual );
+            Assert.AreEqual<ProposedActions>(expected, actual);
         }
     }
 }

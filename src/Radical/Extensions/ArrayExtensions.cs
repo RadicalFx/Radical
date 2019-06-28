@@ -17,13 +17,13 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the two arrays are structurally equals; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsSameAs<T>( this T[] source, T[] other )
+        public static bool IsSameAs<T>(this T[] source, T[] other)
             where T : IComparable
         {
-            return IsSameAs( source, other, ( s, o ) =>
-            {
-                return s.CompareTo( o ) == 0;
-            } );
+            return IsSameAs(source, other, (s, o) =>
+           {
+               return s.CompareTo(o) == 0;
+           });
         }
 
         /// <summary>
@@ -38,29 +38,29 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the two arrays are structurally equals; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsSameAs<T>( this T[] source, T[] other, Func<T, T, bool> itemComparer )
+        public static bool IsSameAs<T>(this T[] source, T[] other, Func<T, T, bool> itemComparer)
         {
-            Ensure.That( source ).Named( "source" ).IsNotNull();
-            Ensure.That( itemComparer ).Named( "itemComparer" ).IsNotNull();
+            Ensure.That(source).Named("source").IsNotNull();
+            Ensure.That(itemComparer).Named("itemComparer").IsNotNull();
 
-            if( other == null )
+            if (other == null)
             {
                 return false;
             }
 
-            if( Object.ReferenceEquals( source, other ) ) 
+            if (Object.ReferenceEquals(source, other))
             {
                 return true;
             }
 
-            if( source.Length != other.Length )
+            if (source.Length != other.Length)
             {
                 return false;
             }
 
-            for( int i = 0; i < source.Length; i++ )
+            for (int i = 0; i < source.Length; i++)
             {
-                if( !itemComparer( source[ i ], other[ i ] ) )
+                if (!itemComparer(source[i], other[i]))
                 {
                     return false;
                 }

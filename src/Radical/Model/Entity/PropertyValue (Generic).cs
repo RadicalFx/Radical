@@ -10,7 +10,7 @@
         /// Initializes a new instance of the <see cref="PropertyValue&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public PropertyValue( T value )
+        public PropertyValue(T value)
         {
             this.Value = value;
         }

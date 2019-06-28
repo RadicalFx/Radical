@@ -14,9 +14,9 @@ namespace Radical.Model.QueryModel
         /// Initializes a new instance of the <see cref="EntityByKeyQuery&lt;TSource, TResult&gt;"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
-        public EntityByKeyQuery( IKey key )
+        public EntityByKeyQuery(IKey key)
         {
-            Ensure.That( key ).Named( "key" ).IsNotNull();
+            Ensure.That(key).Named("key").IsNotNull();
 
             this.Key = key;
         }

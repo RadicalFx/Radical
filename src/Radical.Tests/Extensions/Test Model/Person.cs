@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Radical.Tests.Extensions
 {
-    class  Person
+    class Person
     {
         public Address Address { get; set; }
-        public Person ()
+        public Person()
         {
 
         }
@@ -22,6 +22,6 @@ namespace Radical.Tests.Extensions
 
         public int Age { get; set; }
         public string Name { get; set; }
-        
+
     }
 }

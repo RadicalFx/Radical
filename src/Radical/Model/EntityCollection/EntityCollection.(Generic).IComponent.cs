@@ -16,9 +16,9 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnDisposed()
         {
-            if( this.Disposed != null )
+            if (this.Disposed != null)
             {
-                this.Disposed( this, EventArgs.Empty );
+                this.Disposed(this, EventArgs.Empty);
             }
         }
 
@@ -29,8 +29,8 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
-        [Browsable( false )]
-        [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         ISite IComponent.Site
         {
             get

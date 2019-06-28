@@ -17,7 +17,7 @@
         /// <returns>An instance of the assembly containing the given type T.</returns>
         public static Assembly ThatContains<T>()
         {
-            return typeof( T ).Assembly;
+            return typeof(T).Assembly;
         }
     }
 
@@ -34,10 +34,10 @@
         /// <returns>
         ///     <c>true</c> if the attribute is defined on the specified assembly; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsAttributeDefined<T>( this Assembly assembly )
+        public static bool IsAttributeDefined<T>(this Assembly assembly)
             where T : Attribute
         {
-            return assembly.IsDefined( typeof( T ), true );
+            return assembly.IsDefined(typeof(T), true);
         }
 
         /// <summary>
@@ -48,10 +48,10 @@
         /// <typeparam name="T">The attribute type to look for.</typeparam>
         /// <param name="assembly">The assembly to search in.</param>
         /// <returns>A list of attribute if any; otherwise an empty list.</returns>
-        public static IEnumerable<T> GetAttributes<T>( this Assembly assembly )
+        public static IEnumerable<T> GetAttributes<T>(this Assembly assembly)
             where T : Attribute
         {
-            return assembly.GetCustomAttributes( typeof( T ), true ).OfType<T>();
+            return assembly.GetCustomAttributes(typeof(T), true).OfType<T>();
         }
 
         /// <summary>
@@ -61,8 +61,8 @@
         /// <typeparam name="T">The attribute type to look for.</typeparam>
         /// <param name="assembly">The assembly to search in.</param>
         /// <returns>The attribute instance.</returns>
-        public static T GetAttribute<T>( this Assembly assembly )
-            where T : Attribute 
+        public static T GetAttribute<T>(this Assembly assembly)
+            where T : Attribute
         {
             return assembly.GetAttributes<T>().First();
         }
@@ -75,10 +75,10 @@
         /// <param name="assembly">The assembly to search in.</param>
         /// <param name="attribute">The attribute used to assign the output refence.</param>
         /// <returns><c>True</c> if an attribute of the given type can be found; otherwise false.</returns>
-        public static bool TryGetAttribute<T>( this Assembly assembly, out T attribute )
+        public static bool TryGetAttribute<T>(this Assembly assembly, out T attribute)
             where T : Attribute
         {
-            if( assembly.IsAttributeDefined<T>() )
+            if (assembly.IsAttributeDefined<T>())
             {
                 attribute = assembly.GetAttribute<T>();
             }

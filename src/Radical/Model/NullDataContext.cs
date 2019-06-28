@@ -19,7 +19,7 @@ namespace Radical.Model
         /// Inserts the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Insert( object entity )
+        public void Insert(object entity)
         {
 
         }
@@ -28,7 +28,7 @@ namespace Radical.Model
         /// Updates the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Update( object entity )
+        public void Update(object entity)
         {
 
         }
@@ -37,7 +37,7 @@ namespace Radical.Model
         /// Saves the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Save( object entity )
+        public void Save(object entity)
         {
 
         }
@@ -46,7 +46,7 @@ namespace Radical.Model
         /// Deletes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Delete( object entity )
+        public void Delete(object entity)
         {
 
         }
@@ -66,7 +66,7 @@ namespace Radical.Model
         /// <returns>
         ///     <c>true</c> if the specified entity is attached; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAttached( object entity )
+        public bool IsAttached(object entity)
         {
             return false;
         }
@@ -75,7 +75,7 @@ namespace Radical.Model
         /// Detaches the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public void Detach( object entity )
+        public void Detach(object entity)
         {
 
         }
@@ -105,7 +105,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="isolationLevel">The isolation level.</param>
         /// <returns>The begun transaction.</returns>
-        public ITransaction BeginTransaction( System.Data.IsolationLevel isolationLevel )
+        public ITransaction BeginTransaction(System.Data.IsolationLevel isolationLevel)
         {
             return null;
         }
@@ -136,7 +136,7 @@ namespace Radical.Model
         /// <returns>
         /// The list of entities that satifies the given query.
         /// </returns>
-        public IList<TResult> GetByQuery<TSource, TResult>( ComponentModel.QueryModel.IQuerySpecification<TSource, TResult> querySpec )
+        public IList<TResult> GetByQuery<TSource, TResult>(ComponentModel.QueryModel.IQuerySpecification<TSource, TResult> querySpec)
         {
             return new List<TResult>();
         }
@@ -150,9 +150,9 @@ namespace Radical.Model
         /// <returns>
         /// The scalar value that satisfies the given query.
         /// </returns>
-        public TResult GetScalar<TSource, TResult>( ComponentModel.QueryModel.IScalarSpecification<TSource, TResult> scalarSpec )
+        public TResult GetScalar<TSource, TResult>(ComponentModel.QueryModel.IScalarSpecification<TSource, TResult> scalarSpec)
         {
-            return default( TResult );
+            return default(TResult);
         }
 
         /// <summary>
@@ -164,9 +164,9 @@ namespace Radical.Model
         /// <returns>
         /// The list of entities that satifies the given generic specification.
         /// </returns>
-        public IEnumerable<TResult> GetBySpecification<TSource, TResult>( ComponentModel.QueryModel.ISpecification<TSource, TResult> specification )
+        public IEnumerable<TResult> GetBySpecification<TSource, TResult>(ComponentModel.QueryModel.ISpecification<TSource, TResult> specification)
         {
-            yield return default( TResult );
+            yield return default(TResult);
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace Radical.Model
         /// <typeparam name="T">The type of the entity.</typeparam>
         /// <param name="key">The entity key.</param>
         /// <returns>The requested entity.</returns>
-        public T GetByKey<T>( object key )
+        public T GetByKey<T>(object key)
         {
-            return default( T );
+            return default(T);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Radical.Model
         /// </summary>
         public void Dispose()
         {
-            
+
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Radical.Model
         /// <returns>
         /// The number of affected rows.
         /// </returns>
-        public int Execute<TCommand>( TCommand command ) where TCommand : ComponentModel.QueryModel.IBatchCommand
+        public int Execute<TCommand>(TCommand command) where TCommand : ComponentModel.QueryModel.IBatchCommand
         {
             return 0;
         }

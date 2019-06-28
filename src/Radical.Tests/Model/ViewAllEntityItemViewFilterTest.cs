@@ -14,7 +14,7 @@ namespace Radical.Tests.Model
             var expected = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
             var actual = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -23,24 +23,24 @@ namespace Radical.Tests.Model
             var expected = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
             var actual = ViewAllEntityItemViewFilter<Object>.Instance;
 
-            actual.Should().Not.Be.EqualTo( expected );
+            actual.Should().Not.Be.EqualTo(expected);
         }
 
         [TestMethod]
         public void viewAllEntityItemViewFilter_shouldInclude_should_always_return_true()
         {
             var target = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
-            var actual = target.ShouldInclude( new GenericParameterHelper() );
+            var actual = target.ShouldInclude(new GenericParameterHelper());
 
             actual.Should().Be.True();
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void viewAllEntityItemViewFilter_shouldInclude_using_null_reference_should_raise_ArgumentNullException()
         {
             var target = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
-            ( ( ViewAllEntityItemViewFilter<GenericParameterHelper> )target ).ShouldInclude( null );
+            ((ViewAllEntityItemViewFilter<GenericParameterHelper>)target).ShouldInclude(null);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Radical.Tests.Model
 
             var actual = target.ToString();
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }

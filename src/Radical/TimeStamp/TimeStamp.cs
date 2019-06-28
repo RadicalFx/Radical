@@ -21,11 +21,11 @@ namespace Radical.ComponentModel
         /// <param name="leftValue">The left side timestamp.</param>
         /// <param name="rightValue">The right side timestamp.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator ==( Timestamp leftValue, Timestamp rightValue )
+        public static bool operator ==(Timestamp leftValue, Timestamp rightValue)
         {
             bool returnValue = true;
 
-            if( Object.Equals( leftValue, null ) && Object.Equals( rightValue, null ) )
+            if (Object.Equals(leftValue, null) && Object.Equals(rightValue, null))
             {
                 /*
                  * Sono entrambi null --> sono uguali
@@ -33,7 +33,7 @@ namespace Radical.ComponentModel
                 returnValue = true;
             }
             //else if( ( Object.Equals( leftvalue, null ) && !Object.Equals( v2, null ) ) || ( !Object.Equals( leftvalue, null ) && Object.Equals( v2, null ) ) )
-            else if( ( Object.Equals( leftValue, null ) || Object.Equals( rightValue, null ) ) )
+            else if ((Object.Equals(leftValue, null) || Object.Equals(rightValue, null)))
             {
                 /*
                  * leftvalue == null
@@ -46,7 +46,7 @@ namespace Radical.ComponentModel
             }
             else
             {
-                returnValue = leftValue.Equals( rightValue );
+                returnValue = leftValue.Equals(rightValue);
             }
 
             return returnValue;
@@ -59,7 +59,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the specified <see cref="T:Timestamp"/> is equal to the current <see cref="T:Timestamp"/>; otherwise, false.
         /// </returns>
-        public abstract bool Equals( Timestamp obj );
+        public abstract bool Equals(Timestamp obj);
 
         /// <summary>
         /// Implements the operator !=.
@@ -67,9 +67,9 @@ namespace Radical.ComponentModel
         /// <param name="leftValue">The left side timestamp.</param>
         /// <param name="rightValue">The right side timestamp.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator !=( Timestamp leftValue, Timestamp rightValue )
+        public static bool operator !=(Timestamp leftValue, Timestamp rightValue)
         {
-            return !( leftValue == rightValue );
+            return !(leftValue == rightValue);
         }
 
         /// <summary>
@@ -79,12 +79,12 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
         /// </returns>
-        public override sealed bool Equals( Object obj )
+        public override sealed bool Equals(Object obj)
         {
             Timestamp target = obj as Timestamp;
-            if( target != null )
+            if (target != null)
             {
-                return this.Equals( target );
+                return this.Equals(target);
             }
 
             return false;

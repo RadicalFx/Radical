@@ -19,10 +19,10 @@ namespace Radical
         /// </summary>
         /// <param name="comparer">The comparer.</param>
         /// <param name="hashCodeFunc">The hash code func.</param>
-        public DelegateEqualityComparer( Func<T, T, bool> comparer, Func<T, int> hashCodeFunc )
+        public DelegateEqualityComparer(Func<T, T, bool> comparer, Func<T, int> hashCodeFunc)
         {
-            Ensure.That( comparer ).Named( "comparer" ).IsNotNull();
-            Ensure.That( hashCodeFunc ).Named( "hashCodeFunc" ).IsNotNull();
+            Ensure.That(comparer).Named("comparer").IsNotNull();
+            Ensure.That(hashCodeFunc).Named("hashCodeFunc").IsNotNull();
 
             this.comparer = comparer;
             this.hashCodeFunc = hashCodeFunc;
@@ -36,9 +36,9 @@ namespace Radical
         /// <returns>
         /// true if the specified objects are equal; otherwise, false.
         /// </returns>
-        public override bool Equals( T x, T y )
+        public override bool Equals(T x, T y)
         {
-            return this.comparer( x, y );
+            return this.comparer(x, y);
         }
 
         /// <summary>
@@ -51,9 +51,9 @@ namespace Radical
         /// <exception cref="T:System.ArgumentNullException">
         /// The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.
         /// </exception>
-        public override int GetHashCode( T obj )
+        public override int GetHashCode(T obj)
         {
-            return this.hashCodeFunc( obj );
+            return this.hashCodeFunc(obj);
         }
     }
 }

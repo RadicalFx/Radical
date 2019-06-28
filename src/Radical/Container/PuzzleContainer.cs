@@ -21,16 +21,16 @@ namespace Radical
         /// </summary>
         ~PuzzleContainer()
         {
-            this.Dispose( false );
+            this.Dispose(false);
         }
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose( bool disposing )
+        protected virtual void Dispose(bool disposing)
         {
-            if ( disposing )
+            if (disposing)
             {
                 /*
                  * Se disposing è 'true' significa che dispose
@@ -48,9 +48,9 @@ namespace Radical
 
                 this.trackedSingletons.Clear();
 
-                foreach ( var facility in this.facilities )
+                foreach (var facility in this.facilities)
                 {
-                    facility.Teardown( this );
+                    facility.Teardown(this);
                 }
                 //this.facilities.ForEach( f => f.Teardown( this ) );
                 this.facilities.Clear();
@@ -62,8 +62,8 @@ namespace Radical
         /// </summary>
         public void Dispose()
         {
-            this.Dispose( true );
-            GC.SuppressFinalize( this );
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
@@ -77,12 +77,12 @@ namespace Radical
         /// Raises the <see cref="E:ComponentRegistered"/> event.
         /// </summary>
         /// <param name="e">The <see cref="Radical.ComponentModel.ComponentRegisteredEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnComponentRegistered( ComponentRegisteredEventArgs e )
+        protected virtual void OnComponentRegistered(ComponentRegisteredEventArgs e)
         {
             var h = this.ComponentRegistered;
-            if ( h != null )
+            if (h != null)
             {
-                h( this, e );
+                h(this, e);
             }
         }
 
@@ -106,13 +106,13 @@ namespace Radical
         /// </summary>
         /// <param name="entry">The entry to register.</param>
         /// <returns>This container instance.</returns>
-        public IPuzzleContainer Register( IContainerEntry entry )
+        public IPuzzleContainer Register(IContainerEntry entry)
         {
-            Ensure.That( entry ).Named( "entry" ).IsNotNull();
+            Ensure.That(entry).Named("entry").IsNotNull();
 
-            allEntries.Add( entry );
+            allEntries.Add(entry);
 
-            this.OnComponentRegistered( new ComponentRegisteredEventArgs( entry ) );
+            this.OnComponentRegistered(new ComponentRegisteredEventArgs(entry));
 
             return this;
         }
@@ -122,15 +122,15 @@ namespace Radical
         /// </summary>
         /// <param name="entries">The entries to register.</param>
         /// <returns>This container instance.</returns>
-        public IPuzzleContainer Register( IEnumerable<IContainerEntry> entries )
+        public IPuzzleContainer Register(IEnumerable<IContainerEntry> entries)
         {
-            Ensure.That( entries )
-                .Named( "entries" )
+            Ensure.That(entries)
+                .Named("entries")
                 .IsNotNull();
 
-            foreach ( var entry in entries )
+            foreach (var entry in entries)
             {
-                this.Register( entry );
+                this.Register(entry);
             }
 
             return this;
@@ -143,7 +143,7 @@ namespace Radical
         /// <returns>The resolved service instance.</returns>
         public TService Resolve<TService>()
         {
-            return ( TService )this.Resolve( typeof( TService ) );
+            return (TService)this.Resolve(typeof(TService));
         }
 
         /// <summary>
@@ -151,66 +151,66 @@ namespace Radical
         /// </summary>
         /// <param name="serviceType">The Type of the service.</param>
         /// <returns>The resolved service instance.</returns>
-        public object Resolve( Type serviceType )
+        public object Resolve(Type serviceType)
         {
-            Ensure.That( serviceType )
-                .Named( "serviceType" )
+            Ensure.That(serviceType)
+                .Named("serviceType")
                 .IsNotNull()
-                .IsTrue( t => this.IsRegistered( t ) );
+                .IsTrue(t => this.IsRegistered(t));
 
-            var entry = this.GetAllEntriesFor( serviceType )
-                .Where( e => !e.IsOverridable )
+            var entry = this.GetAllEntriesFor(serviceType)
+                .Where(e => !e.IsOverridable)
                 .FirstOrDefault()
-                .Return( e => e, () =>
-                {
-                    return this.GetAllEntriesFor( serviceType )
-                        .FirstOrDefault();
-                } );
+                .Return(e => e, () =>
+               {
+                   return this.GetAllEntriesFor(serviceType)
+                       .FirstOrDefault();
+               });
 
-            return this.ResolveEntry( entry );
+            return this.ResolveEntry(entry);
         }
 
-        public object Resolve( string key, Type serviceType )
+        public object Resolve(string key, Type serviceType)
         {
-            Ensure.That( key ).Named( () => key )
+            Ensure.That(key).Named(() => key)
                 .IsNotNullNorEmpty();
 
-            Ensure.That( serviceType )
-                .Named( "serviceType" )
+            Ensure.That(serviceType)
+                .Named("serviceType")
                 .IsNotNull()
-                .IsTrue( t => this.IsRegistered( t ) );
+                .IsTrue(t => this.IsRegistered(t));
 
-            var entry = this.GetEntryFor( key, serviceType );
+            var entry = this.GetEntryFor(key, serviceType);
 
-            return this.ResolveEntry( entry );
+            return this.ResolveEntry(entry);
         }
 
         public IEnumerable<T> ResolveAll<T>()
         {
-            var ti = typeof( T );
+            var ti = typeof(T);
 
-            return this.ResolveAllCore( ti ).Cast<T>();
+            return this.ResolveAllCore(ti).Cast<T>();
         }
 
-        public IEnumerable<Object> ResolveAll( Type t )
+        public IEnumerable<Object> ResolveAll(Type t)
         {
-            return this.ResolveAllCore( t ).Cast<Object>();
+            return this.ResolveAllCore(t).Cast<Object>();
         }
 
-        private Array ResolveAllCore( Type serviceType )
+        private Array ResolveAllCore(Type serviceType)
         {
             //Ensure.That( serviceType )
             //    .Named( () => serviceType )
             //    .IsNotNull()
             //    .IsTrue( t => this.IsRegistered( t ) );
 
-            var all = this.GetAllEntriesFor( serviceType ).ToArray();
-            var tmp = Array.CreateInstance( serviceType, all.Length );
-            for ( var i = 0; i < all.Length; i++ )
+            var all = this.GetAllEntriesFor(serviceType).ToArray();
+            var tmp = Array.CreateInstance(serviceType, all.Length);
+            for (var i = 0; i < all.Length; i++)
             {
-                var entry = all[ i ];
-                var obj = this.ResolveEntry( entry );
-                tmp.SetValue( obj, i );
+                var entry = all[i];
+                var obj = this.ResolveEntry(entry);
+                tmp.SetValue(obj, i);
             }
 
             return tmp;
@@ -225,7 +225,7 @@ namespace Radical
         /// </returns>
         public bool IsRegistered<TService>()
         {
-            return this.IsRegistered( typeof( TService ) );
+            return this.IsRegistered(typeof(TService));
         }
 
         /// <summary>
@@ -235,55 +235,55 @@ namespace Radical
         /// <returns>
         ///     <c>true</c> if the specified type is registered; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsRegistered( Type type )
+        public bool IsRegistered(Type type)
         {
             return type != null && this.allEntries
-                .Any( x =>
-                {
-                    return x.Component == type ||
-                    (
-                        x.Services.Any( s => s == type ) &&
-                        (
-                            x.Component != null ||
-                            x.Factory != null
-                        )
-                    );
-                } );
+                .Any(x =>
+               {
+                   return x.Component == type ||
+                   (
+                       x.Services.Any(s => s == type) &&
+                       (
+                           x.Component != null ||
+                           x.Factory != null
+                       )
+                   );
+               });
         }
 
-        IEnumerable<IContainerEntry> GetAllEntriesFor( Type type )
+        IEnumerable<IContainerEntry> GetAllEntriesFor(Type type)
         {
-            return this.allEntries.Where( x =>
-            {
-                return x.Component == type ||
-                (
-                    x.Services.Any( s => s == type ) &&
-                    (
-                        x.Component != null ||
-                        x.Factory != null
-                    )
-                );
-            } );
+            return this.allEntries.Where(x =>
+           {
+               return x.Component == type ||
+               (
+                   x.Services.Any(s => s == type) &&
+                   (
+                       x.Component != null ||
+                       x.Factory != null
+                   )
+               );
+           });
         }
 
-        IContainerEntry GetEntryFor( string key, Type type )
+        IContainerEntry GetEntryFor(string key, Type type)
         {
-            return this.allEntries.FirstOrDefault( x =>
-            {
-                return x.Key == key && x.Services.Any( s => s == type );
-            } );
+            return this.allEntries.FirstOrDefault(x =>
+           {
+               return x.Key == key && x.Services.Any(s => s == type);
+           });
         }
 
-        Object ResolveEntry( IContainerEntry entry )
+        Object ResolveEntry(IContainerEntry entry)
         {
-            if ( entry.Lifestyle == Lifestyle.Singleton && this.trackedSingletons.ContainsKey( entry ) )
+            if (entry.Lifestyle == Lifestyle.Singleton && this.trackedSingletons.ContainsKey(entry))
             {
-                return this.trackedSingletons[ entry ];
+                return this.trackedSingletons[entry];
             }
 
             Object instance = null;
 
-            if ( entry.Factory != null )
+            if (entry.Factory != null)
             {
                 instance = entry.Factory.DynamicInvoke();
             }
@@ -291,80 +291,80 @@ namespace Radical
             {
                 var ctor = entry.Component
                     .GetConstructors()
-                    .FirstOrDefault( x =>
-                    {
-                        return !x.IsStatic && x.GetParameters()
-                            .All( y =>
-                            {
-                                var pti = y.ParameterType;
+                    .FirstOrDefault(x =>
+                   {
+                       return !x.IsStatic && x.GetParameters()
+                           .All(y =>
+                           {
+                               var pti = y.ParameterType;
 
-                                if ( entry.Parameters.ContainsKey( y.Name ) && pti.IsAssignableFrom( entry.Parameters[ y.Name ].GetType() ) )
-                                {
-                                    return true;
-                                }
+                               if (entry.Parameters.ContainsKey(y.Name) && pti.IsAssignableFrom(entry.Parameters[y.Name].GetType()))
+                               {
+                                   return true;
+                               }
 
-                                if ( this.IsRegistered( pti ) )
-                                {
-                                    return true;
-                                }
+                               if (this.IsRegistered(pti))
+                               {
+                                   return true;
+                               }
 
-                                if ( pti.IsArray && pti.HasElementType )
-                                {
-                                    var eti = pti.GetElementType();
+                               if (pti.IsArray && pti.HasElementType)
+                               {
+                                   var eti = pti.GetElementType();
 
-                                    return this.IsRegistered( eti );
-                                }
+                                   return this.IsRegistered(eti);
+                               }
 
-                                if ( pti.IsGenericType )
-                                {
+                               if (pti.IsGenericType)
+                               {
                                     //is "IEnumerable"
                                 }
 
-                                return false;
-                            } );
-                    } );
+                               return false;
+                           });
+                   });
 
-                Ensure.That( ctor )
-                    .Named( "ctor" )
-                    .WithMessage( "Cannot find any valid constructor fot type {0}.", entry.Component.FullName )
+                Ensure.That(ctor)
+                    .Named("ctor")
+                    .WithMessage("Cannot find any valid constructor fot type {0}.", entry.Component.FullName)
                     .IsNotNull();
 
                 var ctorParams = ctor.GetParameters();
-                var pars = new Object[ ctorParams.Length ];
-                for ( int i = 0; i < pars.Length; i++ )
+                var pars = new Object[ctorParams.Length];
+                for (int i = 0; i < pars.Length; i++)
                 {
-                    var p = ctorParams[ i ];
-                    if ( entry.Parameters.ContainsKey( p.Name ) )
+                    var p = ctorParams[i];
+                    if (entry.Parameters.ContainsKey(p.Name))
                     {
-                        pars[ i ] = entry.Parameters[ p.Name ];
+                        pars[i] = entry.Parameters[p.Name];
                     }
                     else
                     {
                         var pti = p.ParameterType;
-                        if ( pti.IsArray && pti.HasElementType )
+                        if (pti.IsArray && pti.HasElementType)
                         {
                             var eti = pti.GetElementType();
-                            var all = this.ResolveAll( eti );
-                            pars[ i ] = all;
+                            var all = this.ResolveAll(eti);
+                            pars[i] = all;
                         }
                         else
                         {
-                            pars[ i ] = this.Resolve( pti );
+                            pars[i] = this.Resolve(pti);
                         }
                     }
                 }
 
-                instance = ctor.Invoke( pars );
+                instance = ctor.Invoke(pars);
             }
 
-            if ( instance != null )
+            if (instance != null)
             {
-                foreach ( var x in entry.Parameters )
+                foreach (var x in entry.Parameters)
                 {
-                    var prop = entry.Component.GetProperties().SingleOrDefault( p => p.Name == x.Key );
-                    if ( prop != null && prop.CanWrite && prop.PropertyType.IsAssignableFrom( x.Value.GetType() ) )
+                    var prop = entry.Component.GetProperties().SingleOrDefault(p => p.Name == x.Key);
+                    if (prop != null && prop.CanWrite && prop.PropertyType.IsAssignableFrom(x.Value.GetType()))
                     {
-                        prop.SetValue( instance, x.Value, null );
+                        prop.SetValue(instance, x.Value, null);
                     }
                 }
 
@@ -372,9 +372,9 @@ namespace Radical
                 //che cerca di risolvere le proprietà pubbliche esposte dal tipo
                 //appena risolto.
 
-                if ( entry.Lifestyle == Lifestyle.Singleton )
+                if (entry.Lifestyle == Lifestyle.Singleton)
                 {
-                    this.trackedSingletons.Add( entry, instance );
+                    this.trackedSingletons.Add(entry, instance);
                 }
             }
 
@@ -388,11 +388,11 @@ namespace Radical
         /// <returns>
         /// A service object of type <paramref name="serviceType"/>.-or- null if there is no service object of type <paramref name="serviceType"/>.
         /// </returns>
-        public object GetService( Type serviceType )
+        public object GetService(Type serviceType)
         {
-            if ( this.IsRegistered( serviceType ) )
+            if (this.IsRegistered(serviceType))
             {
-                var service = this.Resolve( serviceType );
+                var service = this.Resolve(serviceType);
 
                 return service;
             }
@@ -404,12 +404,12 @@ namespace Radical
         /// </summary>
         /// <param name="facility">The facility.</param>
         /// <returns>This container instance.</returns>
-        public IPuzzleContainer AddFacility( IPuzzleContainerFacility facility )
+        public IPuzzleContainer AddFacility(IPuzzleContainerFacility facility)
         {
-            Ensure.That( facility ).Named( () => facility ).IsNotNull();
+            Ensure.That(facility).Named(() => facility).IsNotNull();
 
-            facility.Initialize( this );
-            this.facilities.Add( facility );
+            facility.Initialize(this);
+            this.facilities.Add(facility);
 
             return this;
         }
@@ -426,15 +426,15 @@ namespace Radical
              * in modo da permettere alla facility a sua volta di avere dipendenze
              * l'inghippo è che tipicamente una facility viene aggiunta all'inizio
              */
-            Ensure.That( typeof( TFacility ) )
-                .WithMessage( "Cannot register an interface." )
-                .IsFalse( t => t.IsInterface )
-                .WithMessage( "Cannot register an abstract class." )
-                .IsFalse( t => t.IsAbstract );
+            Ensure.That(typeof(TFacility))
+                .WithMessage("Cannot register an interface.")
+                .IsFalse(t => t.IsInterface)
+                .WithMessage("Cannot register an abstract class.")
+                .IsFalse(t => t.IsAbstract);
 
-            var facility = ( IPuzzleContainerFacility )Activator.CreateInstance<TFacility>();
+            var facility = (IPuzzleContainerFacility)Activator.CreateInstance<TFacility>();
 
-            return this.AddFacility( facility );
+            return this.AddFacility(facility);
         }
 
         /// <summary>
@@ -454,9 +454,9 @@ namespace Radical
         /// <param name="descriptors">The descriptors.</param>
         public void SetupWith(Func<IEnumerable<Type>> knownTypesProvider, params IPuzzleSetupDescriptor[] descriptors)
         {
-            if(descriptors != null)
+            if (descriptors != null)
             {
-                foreach(var d in descriptors)
+                foreach (var d in descriptors)
                 {
                     d.Setup(this, knownTypesProvider);
                 }

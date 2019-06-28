@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <param name="index">The index.</param>
-        public ItemChangedDescriptor( T item, int index )
+        public ItemChangedDescriptor(T item, int index)
         {
             this.Item = item;
             this.Index = index;

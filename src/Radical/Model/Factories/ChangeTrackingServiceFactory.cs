@@ -13,9 +13,9 @@ namespace Radical.Model.Factories
         /// Initializes a new instance of the <see cref="ChangeTrackingServiceFactory"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public ChangeTrackingServiceFactory( IServiceProvider container )
+        public ChangeTrackingServiceFactory(IServiceProvider container)
         {
-            Ensure.That( container ).Named( "container" ).IsNotNull();
+            Ensure.That(container).Named("container").IsNotNull();
 
             this.container = container;
         }
@@ -28,7 +28,7 @@ namespace Radical.Model.Factories
         /// </returns>
         public IChangeTrackingService Create()
         {
-            return ( IChangeTrackingService )this.container.GetService( typeof( IChangeTrackingService ) );
+            return (IChangeTrackingService)this.container.GetService(typeof(IChangeTrackingService));
         }
     }
 }

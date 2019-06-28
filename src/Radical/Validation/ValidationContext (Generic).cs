@@ -13,10 +13,10 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <param name="validator">The validator.</param>
-        public ValidationContext( T entity, IValidator<T> validator )
-            : this( entity, validator, new ValidationResults() )
+        public ValidationContext(T entity, IValidator<T> validator)
+            : this(entity, validator, new ValidationResults())
         {
- 
+
         }
 
         /// <summary>
@@ -25,10 +25,10 @@ namespace Radical.Validation
         /// <param name="entity">The entity.</param>
         /// <param name="validator">The validator.</param>
         /// <param name="results">The results.</param>
-        public ValidationContext( T entity, IValidator<T> validator, ValidationResults results )
+        public ValidationContext(T entity, IValidator<T> validator, ValidationResults results)
         {
-            Ensure.That( validator ).Named( "validator" ).IsNotNull();
-            Ensure.That( results ).Named( "results" ).IsNotNull();
+            Ensure.That(validator).Named("validator").IsNotNull();
+            Ensure.That(results).Named("results").IsNotNull();
 
             this.Entity = entity;
             this.Validator = validator;

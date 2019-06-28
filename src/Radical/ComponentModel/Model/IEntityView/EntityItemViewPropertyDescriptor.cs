@@ -19,7 +19,7 @@ namespace Radical.ComponentModel
         /// is not mapped to a real property on the underlying object.
         /// </summary>
         protected EntityItemViewPropertyDescriptor()
-            : base( string.Format( CultureInfo.InvariantCulture, "___RuntimeEvaluatedPropertyDescriptor_{0:N}", Guid.NewGuid() ), null )
+            : base(string.Format(CultureInfo.InvariantCulture, "___RuntimeEvaluatedPropertyDescriptor_{0:N}", Guid.NewGuid()), null)
         {
             this._property = null;
         }
@@ -29,8 +29,8 @@ namespace Radical.ComponentModel
         /// The EntityItemViewPropertyDescriptor will be mapped on the given property.
         /// </summary>
         /// <param name="property">The property to map to</param>
-        public EntityItemViewPropertyDescriptor( PropertyInfo property )
-            : base( property.Name, null )
+        public EntityItemViewPropertyDescriptor(PropertyInfo property)
+            : base(property.Name, null)
         {
             this._property = property;
         }
@@ -40,8 +40,8 @@ namespace Radical.ComponentModel
         /// The EntityItemViewPropertyDescriptor will be mapped on the property given its name.
         /// </summary>
         /// <param name="propertyName">The property name to map to, the property must exists on the underlying type</param>
-        public EntityItemViewPropertyDescriptor( string propertyName )
-            : this( typeof( T ).GetProperty( propertyName ) )
+        public EntityItemViewPropertyDescriptor(string propertyName)
+            : this(typeof(T).GetProperty(propertyName))
         {
 
         }
@@ -53,8 +53,8 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="propertyName">The property name to map to, the property must exists on the underlying type</param>
         /// <param name="customDisplayName">A string used as the DisplayName for this descriptor.</param>
-        public EntityItemViewPropertyDescriptor( string propertyName, string customDisplayName )
-            : this( typeof( T ).GetProperty( propertyName ) )
+        public EntityItemViewPropertyDescriptor(string propertyName, string customDisplayName)
+            : this(typeof(T).GetProperty(propertyName))
         {
             this._customDisplayName = customDisplayName;
         }
@@ -65,9 +65,9 @@ namespace Radical.ComponentModel
         /// <returns>The default value for this property.</returns>
         public virtual Object GetDefaultValue()
         {
-            if( this.PropertyType.IsValueType ) 
+            if (this.PropertyType.IsValueType)
             {
-                return Activator.CreateInstance( this.PropertyType );
+                return Activator.CreateInstance(this.PropertyType);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace Radical.ComponentModel
         {
             get
             {
-                if( !string.IsNullOrEmpty( this._customDisplayName ) )
+                if (!string.IsNullOrEmpty(this._customDisplayName))
                 {
                     return this._customDisplayName;
                 }
@@ -113,7 +113,7 @@ namespace Radical.ComponentModel
         /// <returns>A <see cref="T:System.Type"/> that represents the type of component this property is bound to. When the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)"/> or <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)"/> methods are invoked, the object specified might be an instance of this type.</returns>
         public override Type ComponentType
         {
-            get { return typeof( IEntityItemView<T> ); }
+            get { return typeof(IEntityItemView<T>); }
         }
 
         private Type _customPropertyType = null;
@@ -145,7 +145,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the property should be persisted; otherwise, false.
         /// </returns>
-        public override bool ShouldSerializeValue( object component )
+        public override bool ShouldSerializeValue(object component)
         {
             return false;
         }
@@ -157,7 +157,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if resetting the component changes its value; otherwise, false.
         /// </returns>
-        public override bool CanResetValue( object component )
+        public override bool CanResetValue(object component)
         {
             return false;
 
@@ -192,7 +192,7 @@ namespace Radical.ComponentModel
         /// When overridden in a derived class, resets the value for this property of the component to the default value.
         /// </summary>
         /// <param name="component">The component with the property value that is to be reset to the default value.</param>
-        public override void ResetValue( object component )
+        public override void ResetValue(object component)
         {
             //NOP
         }
@@ -204,25 +204,25 @@ namespace Radical.ComponentModel
         /// <returns>
         /// The value of a property for a given component.
         /// </returns>
-        public override sealed object GetValue( object component )
+        public override sealed object GetValue(object component)
         {
-            if( component == null )
+            if (component == null)
             {
-                throw new ArgumentNullException( "component" );
+                throw new ArgumentNullException("component");
             }
 
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
-            if( oiv == null )
+            if (oiv == null)
             {
-                throw new ArgumentException( "InvalidComponentType", "component" );
+                throw new ArgumentException("InvalidComponentType", "component");
             }
 
-            return this.GetValueCore( oiv );
+            return this.GetValueCore(oiv);
         }
 
         //Radical.Reflection.Function<Object> fastGetter = null;
 
-        protected virtual object GetValueCore( IEntityItemView<T> component )
+        protected virtual object GetValueCore(IEntityItemView<T> component)
         {
             //if( fastGetter == null ) 
             //{
@@ -231,7 +231,7 @@ namespace Radical.ComponentModel
 
             //return fastGetter();
 
-            return this.Property.GetValue( component.EntityItem, null );
+            return this.Property.GetValue(component.EntityItem, null);
         }
 
         /// <summary>
@@ -239,30 +239,30 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="component">The component with the property value that is to be set.</param>
         /// <param name="value">The new value.</param>
-        public override sealed void SetValue( object component, object value )
+        public override sealed void SetValue(object component, object value)
         {
-            if( this.IsReadOnly )
+            if (this.IsReadOnly)
             {
-                throw new InvalidOperationException( "Current property is readonly." );
+                throw new InvalidOperationException("Current property is readonly.");
             }
 
-            if( component == null )
+            if (component == null)
             {
-                throw new ArgumentNullException( "component" );
+                throw new ArgumentNullException("component");
             }
 
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
-            if( oiv == null )
+            if (oiv == null)
             {
-                throw new ArgumentException( "InvalidComponentType", "component" );
+                throw new ArgumentException("InvalidComponentType", "component");
             }
 
-            this.SetValueCore( oiv, value );
+            this.SetValueCore(oiv, value);
         }
 
-        protected virtual void SetValueCore( IEntityItemView<T> component, object value )
+        protected virtual void SetValueCore(IEntityItemView<T> component, object value)
         {
-            this.Property.SetValue( component.EntityItem, value, null );
+            this.Property.SetValue(component.EntityItem, value, null);
         }
     }
 }

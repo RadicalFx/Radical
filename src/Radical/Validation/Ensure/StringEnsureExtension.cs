@@ -19,7 +19,7 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is an empty string.</exception>
-        public static IEnsure<string> IsNotEmpty( this IEnsure<string> validator )
+        public static IEnsure<string> IsNotEmpty(this IEnsure<string> validator)
         {
             //var value = validator.GetValue<string>();
 
@@ -28,11 +28,11 @@ namespace Radical.Validation
             //    throw new ArgumentOutOfRangeException( validator.Name, validator.GetFullErrorMessage( "The inspected string value should be not empty." ) );
             //}
 
-            validator.If( s => s != null && s.Length == 0 )
-                .ThenThrow( e =>
-                {
-                    return new ArgumentOutOfRangeException( e.Name, e.GetFullErrorMessage( "The inspected string value should be not empty." ) );
-                } );
+            validator.If(s => s != null && s.Length == 0)
+                .ThenThrow(e =>
+               {
+                   return new ArgumentOutOfRangeException(e.Name, e.GetFullErrorMessage("The inspected string value should be not empty."));
+               });
 
             return validator;
         }
@@ -49,7 +49,7 @@ namespace Radical.Validation
         /// is raised if the current inspected object is an empty string.</exception>
         /// <exception cref="ArgumentNullException">An <c>ArgumentNullException</c>
         /// is raised if the current inspected object is a null string.</exception>
-        public static IEnsure<string> IsNotNullNorEmpty( this IEnsure<string> validator )
+        public static IEnsure<string> IsNotNullNorEmpty(this IEnsure<string> validator)
         {
             return validator.IsNotNull().IsNotEmpty();
         }
@@ -66,18 +66,18 @@ namespace Radical.Validation
         /// <exception cref="FormatException">A <c>FormatException</c>
         /// is raised if the current inspected object does not match the given regular expression.
         /// </exception>
-        public static IEnsure<string> Matches( this IEnsure<string> validator, string regExPattern )
+        public static IEnsure<string> Matches(this IEnsure<string> validator, string regExPattern)
         {
-            validator.If( s =>
-            {
-                bool match = Regex.IsMatch( validator.Value, regExPattern );
+            validator.If(s =>
+           {
+               bool match = Regex.IsMatch(validator.Value, regExPattern);
 
-                return !match;
-            } )
-            .ThenThrow( v =>
-            {
-                return new FormatException( v.GetFullErrorMessage( "The inspected string value does not match the given format." ) );
-            } );
+               return !match;
+           })
+            .ThenThrow(v =>
+           {
+               return new FormatException(v.GetFullErrorMessage("The inspected string value does not match the given format."));
+           });
 
             return validator;
         }

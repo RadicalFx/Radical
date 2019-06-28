@@ -16,16 +16,16 @@
         /// <param name="entity">The entity.</param>
         /// <param name="cachedValue">The cached value.</param>
         /// <param name="source">The source.</param>
-        public ChangeEventArgs( Object entity, T cachedValue, IChange source )
+        public ChangeEventArgs(Object entity, T cachedValue, IChange source)
         {
-            if( entity == null )
+            if (entity == null)
             {
-                throw new ArgumentNullException( "entity" );
+                throw new ArgumentNullException("entity");
             }
 
-            if( source == null )
+            if (source == null)
             {
-                throw new ArgumentNullException( "source" );
+                throw new ArgumentNullException("source");
             }
 
             this.Entity = entity;

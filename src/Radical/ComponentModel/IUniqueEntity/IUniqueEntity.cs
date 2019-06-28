@@ -4,7 +4,7 @@ namespace Radical.ComponentModel
     /// <summary>
     /// A domain entity that can be identified by a primary key.
     /// </summary>
-    public interface IUniqueEntity 
+    public interface IUniqueEntity
     {
         /// <summary>
         /// Gets the key.

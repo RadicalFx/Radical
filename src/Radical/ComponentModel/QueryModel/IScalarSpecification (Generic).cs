@@ -6,7 +6,7 @@
     /// <remarks>A scalar specification is expected to return a single result.</remarks>
     /// <typeparam name="TSource">The type of the source.</typeparam>
     /// <typeparam name="TResult">The type of the expected result.</typeparam>
-    public interface IScalarSpecification<TSource, TResult> : 
+    public interface IScalarSpecification<TSource, TResult> :
         ISpecification<TSource, TResult>
     {
 

@@ -12,7 +12,7 @@
         /// <returns>
         ///     <c>true</c> if the specified value is even; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsEven( this int value )
+        public static bool IsEven(this int value)
         {
             return value % 2 == 0;
         }

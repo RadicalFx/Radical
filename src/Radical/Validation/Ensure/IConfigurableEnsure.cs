@@ -17,13 +17,13 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="parameterName">Name of the parameter.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        IEnsure<T> Named( Expression<Func<T>> parameterName );
+        IEnsure<T> Named(Expression<Func<T>> parameterName);
 
         /// <summary>
         /// Identifies the name of the parameter that will be validated.
         /// </summary>
         /// <param name="parameterName">Name of the parameter.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        IEnsure<T> Named( string parameterName );
+        IEnsure<T> Named(string parameterName);
     }
 }

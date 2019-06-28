@@ -15,8 +15,8 @@
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected InvalidKeyFormatException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
+        protected InvalidKeyFormatException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
 
         }
@@ -33,8 +33,8 @@
         /// Initializes a new instance of the <see cref="InvalidKeyFormatException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public InvalidKeyFormatException( string message )
-            : base( message )
+        public InvalidKeyFormatException(string message)
+            : base(message)
         {
 
         }
@@ -44,8 +44,8 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public InvalidKeyFormatException( string message, Exception innerException )
-            : base( message, innerException )
+        public InvalidKeyFormatException(string message, Exception innerException)
+            : base(message, innerException)
         {
 
         }

@@ -8,7 +8,7 @@ namespace Radical.Model
     {
         bool ICollection<T>.IsReadOnly
         {
-            get {return this.IsReadOnly; }
+            get { return this.IsReadOnly; }
         }
 
         /// <summary>
@@ -53,10 +53,10 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentException">
         ///     <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
-        void ICollection.CopyTo( Array array, int index )
+        void ICollection.CopyTo(Array array, int index)
         {
             this.EnsureNotDisposed();
-            this.Storage.CopyTo( ( T[] )array, index );
+            this.Storage.CopyTo((T[])array, index);
         }
     }
 }

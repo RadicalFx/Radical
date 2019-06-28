@@ -5,6 +5,6 @@ namespace Radical.ComponentModel
 {
     public interface IPuzzleSetupDescriptor
     {
-        void Setup( IPuzzleContainer container, Func<IEnumerable<Type>> knownTypesProvider );
+        void Setup(IPuzzleContainer container, Func<IEnumerable<Type>> knownTypesProvider);
     }
 }

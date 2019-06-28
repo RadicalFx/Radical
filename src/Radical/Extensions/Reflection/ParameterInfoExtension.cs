@@ -18,15 +18,15 @@ namespace Radical.Reflection
         /// <returns>
         ///     <c>true</c> if the attribute is defined; otherwise, <c>false</c>.
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static bool IsAttributeDefined<T>( this ParameterInfo memberInfo ) where T : Attribute
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static bool IsAttributeDefined<T>(this ParameterInfo memberInfo) where T : Attribute
         {
-            if( memberInfo == null )
+            if (memberInfo == null)
             {
-                throw new ArgumentNullException( "memberInfo" );
+                throw new ArgumentNullException("memberInfo");
             }
 
-            return memberInfo.IsDefined( typeof( T ), false );
+            return memberInfo.IsDefined(typeof(T), false);
         }
 
         /// <summary>
@@ -35,15 +35,15 @@ namespace Radical.Reflection
         /// <typeparam name="T">The attribute to search for</typeparam>
         /// <param name="memberInfo">The ParameterInfo to search on.</param>
         /// <returns>An array of the found attributes.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static T[] GetAttributes<T>( this ParameterInfo memberInfo ) where T : Attribute
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static T[] GetAttributes<T>(this ParameterInfo memberInfo) where T : Attribute
         {
-            if( memberInfo == null )
+            if (memberInfo == null)
             {
-                throw new ArgumentNullException( "memberInfo" );
+                throw new ArgumentNullException("memberInfo");
             }
 
-            return memberInfo.GetCustomAttributes( typeof( T ), true )
+            return memberInfo.GetCustomAttributes(typeof(T), true)
                 .OfType<T>()
                 .ToArray();
 
@@ -70,14 +70,14 @@ namespace Radical.Reflection
         /// <returns>
         /// An instance of the found attribute, if one, otherwise null.
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter" )]
-        public static T GetAttribute<T>( this ParameterInfo memberInfo ) where T : Attribute
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public static T GetAttribute<T>(this ParameterInfo memberInfo) where T : Attribute
         {
             T returnValue = null;
 
-            if( ParameterInfoExtension.IsAttributeDefined<T>( memberInfo ) )
+            if (ParameterInfoExtension.IsAttributeDefined<T>(memberInfo))
             {
-                returnValue = ( T )memberInfo.GetCustomAttributes( typeof( T ), false )[ 0 ];
+                returnValue = (T)memberInfo.GetCustomAttributes(typeof(T), false)[0];
             }
 
             return returnValue;

@@ -12,8 +12,8 @@
         /// Initializes a new instance of the <see cref="CollectionChangedEventArgs&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="changeType">Type of the change.</param>
-        public CollectionChangedEventArgs( CollectionChangeType changeType )
-            : this( changeType, -1, -1, default( T ) )
+        public CollectionChangedEventArgs(CollectionChangeType changeType)
+            : this(changeType, -1, -1, default(T))
         {
 
         }
@@ -23,8 +23,8 @@
         /// </summary>
         /// <param name="changeType">Type of the change.</param>
         /// <param name="index">The index.</param>
-        public CollectionChangedEventArgs( CollectionChangeType changeType, int index )
-            : this( changeType, index, -1, default( T ) )
+        public CollectionChangedEventArgs(CollectionChangeType changeType, int index)
+            : this(changeType, index, -1, default(T))
         {
 
         }
@@ -36,7 +36,7 @@
         /// <param name="index">The index.</param>
         /// <param name="oldIndex">The old index.</param>
         /// <param name="item">The item.</param>
-        public CollectionChangedEventArgs( CollectionChangeType changeType, int index, int oldIndex, T item )
+        public CollectionChangedEventArgs(CollectionChangeType changeType, int index, int oldIndex, T item)
         {
             //if( trace.IsDebugLevel )
             //{

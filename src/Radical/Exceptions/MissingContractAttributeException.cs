@@ -9,7 +9,7 @@
     /// Exception raised to notify that the <see cref="Radical.ComponentModel.ContractAttribute"/>
     /// cannot be found on the searched entity.
     /// </summary>
-    [Serializable] 
+    [Serializable]
     public class MissingContractAttributeException : RadicalException
     {
         /// <summary>
@@ -17,12 +17,12 @@
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        protected MissingContractAttributeException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
+        protected MissingContractAttributeException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
-            Type targetType = ( Type )info.GetValue( "targetType", typeof( Type ) );
+            Type targetType = (Type)info.GetValue("targetType", typeof(Type));
             this.TargetType = targetType;
-        } 
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
@@ -36,8 +36,8 @@
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
         /// </summary>
         /// <param name="targetType">The target type.</param>
-        public MissingContractAttributeException( Type targetType )
-            : this( string.Format( CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName ) )
+        public MissingContractAttributeException(Type targetType)
+            : this(string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
         {
             this.TargetType = targetType;
         }
@@ -46,8 +46,8 @@
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public MissingContractAttributeException( string message )
-            : base( message )
+        public MissingContractAttributeException(string message)
+            : base(message)
         {
 
         }
@@ -57,8 +57,8 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public MissingContractAttributeException( string message, Exception innerException )
-            : base( message, innerException )
+        public MissingContractAttributeException(string message, Exception innerException)
+            : base(message, innerException)
         {
 
         }
@@ -85,12 +85,12 @@
         ///     <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/>
         ///     <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="SerializationFormatter"/>
         /// </PermissionSet>
-        [SecurityPermission( SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter )]
-        public override void GetObjectData( SerializationInfo info, StreamingContext context )
+        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            base.GetObjectData( info, context );
+            base.GetObjectData(info, context);
 
-            info.AddValue( "targetType", this.TargetType, typeof( Type ) );
-        } 
+            info.AddValue("targetType", this.TargetType, typeof(Type));
+        }
     }
 }

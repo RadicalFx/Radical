@@ -17,9 +17,9 @@ namespace Radical
         /// Initializes a new instance of the <see cref="DelegateComparer&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="comparer">The comparer.</param>
-        public DelegateComparer( Func<T, T, int> comparer )
+        public DelegateComparer(Func<T, T, int> comparer)
         {
-            Ensure.That( comparer ).Named( "comparer" ).IsNotNull();
+            Ensure.That(comparer).Named("comparer").IsNotNull();
 
             this.comparer = comparer;
         }
@@ -39,9 +39,9 @@ namespace Radical
         /// Greater than zero
         /// <paramref name="x"/> is greater than <paramref name="y"/>.
         /// </returns>
-        public int Compare( T x, T y )
+        public int Compare(T x, T y)
         {
-            return this.comparer( x, y );
+            return this.comparer(x, y);
         }
     }
 }

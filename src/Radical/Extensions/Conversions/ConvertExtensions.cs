@@ -11,9 +11,9 @@
         /// <typeparam name="T">The type of the source value.</typeparam>
         /// <param name="value">The source value.</param>
         /// <returns>The observable instance that wraps the source value.</returns>
-        public static Observable<T> AsObservable<T>( this T value )
+        public static Observable<T> AsObservable<T>(this T value)
         {
-            return new Observable<T>( value );
+            return new Observable<T>(value);
         }
 
     }

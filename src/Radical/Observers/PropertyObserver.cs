@@ -21,10 +21,10 @@ namespace Radical.Observers
         /// <typeparam name="T">The type of the source to monitor.</typeparam>
         /// <param name="source">The source.</param>
         /// <returns>An instance of the monitor.</returns>
-        public static PropertyChangedMonitor<T> For<T>( T source )
+        public static PropertyChangedMonitor<T> For<T>(T source)
             where T : INotifyPropertyChanged
         {
-            return new PropertyChangedMonitor<T>( source );
+            return new PropertyChangedMonitor<T>(source);
         }
 
         /// <summary>
@@ -34,10 +34,10 @@ namespace Radical.Observers
         /// <param name="source">The source.</param>
         /// <param name="dispatcher">The dispatcher.</param>
         /// <returns>An instance of the monitor.</returns>
-        public static PropertyChangedMonitor<T> For<T>( T source, IDispatcher dispatcher )
+        public static PropertyChangedMonitor<T> For<T>(T source, IDispatcher dispatcher)
             where T : INotifyPropertyChanged
         {
-            return new PropertyChangedMonitor<T>( source, dispatcher );
+            return new PropertyChangedMonitor<T>(source, dispatcher);
         }
 
         /// <summary>
@@ -48,17 +48,17 @@ namespace Radical.Observers
         /// <returns>
         /// An instance of the monitor.
         /// </returns>
-        public static PropertyChangedMonitor ForAllPropertiesOf<T>( T source )
+        public static PropertyChangedMonitor ForAllPropertiesOf<T>(T source)
             where T : INotifyPropertyChanged
         {
-            return new PropertyChangedMonitor( source );
+            return new PropertyChangedMonitor(source);
         }
     }
 
     /// <summary>
     /// A specialized observer to monitor INotifyPropertyChanged instances.
     /// </summary>
-    public class PropertyChangedMonitor : AbstractMonitor 
+    public class PropertyChangedMonitor : AbstractMonitor
     {
         PropertyChangedEventHandler handler;
 
@@ -66,23 +66,23 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="PropertyChangedMonitor"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        public PropertyChangedMonitor( INotifyPropertyChanged source )
-            : base( source )
+        public PropertyChangedMonitor(INotifyPropertyChanged source)
+            : base(source)
         {
-            
+
         }
 
         /// <summary>
         /// Starts monitoring the given source object.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected override void StartMonitoring( object source )
+        protected override void StartMonitoring(object source)
         {
-            base.StartMonitoring( source );
+            base.StartMonitoring(source);
 
-            this.handler = ( s, e ) => this.OnChanged();
+            this.handler = (s, e) => this.OnChanged();
 
-            var inpc = ( INotifyPropertyChanged )source;
+            var inpc = (INotifyPropertyChanged)source;
             inpc.PropertyChanged += this.handler;
         }
 
@@ -90,11 +90,11 @@ namespace Radical.Observers
         /// Called in order to allow inheritors to stop the monitoring operations.
         /// </summary>
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
-        protected override void OnStopMonitoring( bool targetDisposed )
+        protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if( !targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive )
+            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
             {
-                var inpc = ( INotifyPropertyChanged )this.WeakSource.Target;
+                var inpc = (INotifyPropertyChanged)this.WeakSource.Target;
                 inpc.PropertyChanged -= this.handler;
             }
 
@@ -120,20 +120,20 @@ namespace Radical.Observers
         /// Raises the PropertyChanged event.
         /// </summary>
         /// <param name="args">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnPropertyChanged( PropertyChangedEventArgs args )
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            if( this.Dispatcher != null && !this.Dispatcher.IsSafe )
+            if (this.Dispatcher != null && !this.Dispatcher.IsSafe)
             {
-                this.Dispatcher.Dispatch( args, e => 
-                {
-                    this.OnPropertyChanged( e );
-                } );
+                this.Dispatcher.Dispatch(args, e =>
+               {
+                   this.OnPropertyChanged(e);
+               });
             }
             else
             {
-                if( this.PropertyChanged != null )
+                if (this.PropertyChanged != null)
                 {
-                    this.PropertyChanged( this, args );
+                    this.PropertyChanged(this, args);
                 }
             }
         }
@@ -147,8 +147,8 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="PropertyChangedMonitor&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        public PropertyChangedMonitor( T source )
-            : this( source, null )
+        public PropertyChangedMonitor(T source)
+            : this(source, null)
         {
 
         }
@@ -158,23 +158,23 @@ namespace Radical.Observers
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="dispatcher">The dispatcher.</param>
-        public PropertyChangedMonitor( T source, IDispatcher dispatcher )
-            : base( source, dispatcher )
+        public PropertyChangedMonitor(T source, IDispatcher dispatcher)
+            : base(source, dispatcher)
         {
-            handler = ( s, e ) =>
+            handler = (s, e) =>
             {
                 Action<T, string> callback;
-                if( propertiesToWatch.TryGetValue( e.PropertyName, out callback ) )
+                if (propertiesToWatch.TryGetValue(e.PropertyName, out callback))
                 {
-                    if( callback != null )
+                    if (callback != null)
                     {
-                        callback( source, e.PropertyName );
+                        callback(source, e.PropertyName);
                     }
                 }
 
-                if( propertiesToWatch.ContainsKey( e.PropertyName ) )
+                if (propertiesToWatch.ContainsKey(e.PropertyName))
                 {
-                    this.OnPropertyChanged( e );
+                    this.OnPropertyChanged(e);
                     this.OnChanged();
                 }
             };
@@ -189,11 +189,11 @@ namespace Radical.Observers
         /// <returns>
         /// Itself, used for fluent programming.
         /// </returns>
-        public PropertyChangedMonitor<T> Observe( string property )
+        public PropertyChangedMonitor<T> Observe(string property)
         {
-            Ensure.That( property ).Named( "property" ).IsNotNullNorEmpty();
+            Ensure.That(property).Named("property").IsNotNullNorEmpty();
 
-            this.Observe( property, null );
+            this.Observe(property, null);
 
             return this;
         }
@@ -204,11 +204,11 @@ namespace Radical.Observers
         /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <param name="property">The property.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> Observe<TProperty>( Expression<Func<T, TProperty>> property )
+        public PropertyChangedMonitor<T> Observe<TProperty>(Expression<Func<T, TProperty>> property)
         {
-            Ensure.That( property ).Named( "property" ).IsNotNull();
+            Ensure.That(property).Named("property").IsNotNull();
 
-            this.Observe( property, null );
+            this.Observe(property, null);
 
             return this;
         }
@@ -220,11 +220,11 @@ namespace Radical.Observers
         /// <param name="property">The property.</param>
         /// <param name="callback">The callback.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> Observe<TProperty>( Expression<Func<T, TProperty>> property, Action<T, string> callback )
+        public PropertyChangedMonitor<T> Observe<TProperty>(Expression<Func<T, TProperty>> property, Action<T, string> callback)
         {
-            Ensure.That( property ).Named( "property" ).IsNotNull();
+            Ensure.That(property).Named("property").IsNotNull();
 
-            return this.Observe( property.GetMemberName(), callback );
+            return this.Observe(property.GetMemberName(), callback);
         }
 
         /// <summary>
@@ -233,17 +233,17 @@ namespace Radical.Observers
         /// <param name="propertyName">The property.</param>
         /// <param name="callback">The callback.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> Observe( string propertyName, Action<T, string> callback )
+        public PropertyChangedMonitor<T> Observe(string propertyName, Action<T, string> callback)
         {
-            Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
+            Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
-            if( propertiesToWatch.ContainsKey( propertyName ) )
+            if (propertiesToWatch.ContainsKey(propertyName))
             {
-                propertiesToWatch[ propertyName ] = callback;
+                propertiesToWatch[propertyName] = callback;
             }
             else
             {
-                propertiesToWatch.Add( propertyName, callback );
+                propertiesToWatch.Add(propertyName, callback);
             }
 
             return this;
@@ -255,15 +255,15 @@ namespace Radical.Observers
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="property">The property.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> Observe<TValue>( Observable<TValue> property )
+        public PropertyChangedMonitor<T> Observe<TValue>(Observable<TValue> property)
         {
-            Ensure.That( property ).Named( "property" ).IsNotNull();
+            Ensure.That(property).Named("property").IsNotNull();
 
-            var om = new PropertyChangedMonitor<Observable<TValue>>( property );
-            om.Observe( p => p.Value );
-            om.Changed += ( s, e ) => this.OnChanged();
+            var om = new PropertyChangedMonitor<Observable<TValue>>(property);
+            om.Observe(p => p.Value);
+            om.Changed += (s, e) => this.OnChanged();
 
-            this.observablePropertiesToWatch.Add( om );
+            this.observablePropertiesToWatch.Add(om);
 
             return this;
         }
@@ -274,12 +274,12 @@ namespace Radical.Observers
         /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <param name="property">The property.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> StopObserving<TProperty>( Expression<Func<T, TProperty>> property )
+        public PropertyChangedMonitor<T> StopObserving<TProperty>(Expression<Func<T, TProperty>> property)
         {
             var propertyName = property.GetMemberName();
-            if( propertiesToWatch.ContainsKey( propertyName ) )
+            if (propertiesToWatch.ContainsKey(propertyName))
             {
-                propertiesToWatch.Remove( propertyName );
+                propertiesToWatch.Remove(propertyName);
             }
 
             return this;
@@ -291,18 +291,18 @@ namespace Radical.Observers
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="property">The property.</param>
         /// <returns>Itself, used for fluent programming.</returns>
-        public PropertyChangedMonitor<T> StopObserving<TValue>( Observable<TValue> property )
+        public PropertyChangedMonitor<T> StopObserving<TValue>(Observable<TValue> property)
         {
-            Ensure.That( property ).Named( "property" ).IsNotNull();
+            Ensure.That(property).Named("property").IsNotNull();
 
             var om = this.observablePropertiesToWatch
-                .Where( am => am.As<PropertyChangedMonitor<Observable<TValue>>>().Source == property )
+                .Where(am => am.As<PropertyChangedMonitor<Observable<TValue>>>().Source == property)
                 .SingleOrDefault();
 
-            if( om != null )
+            if (om != null)
             {
                 om.StopMonitoring();
-                this.observablePropertiesToWatch.Remove( om );
+                this.observablePropertiesToWatch.Remove(om);
             }
 
             return this;
@@ -312,9 +312,9 @@ namespace Radical.Observers
         /// Called in order to allow inheritors to stop the monitoring operations.
         /// </summary>
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
-        protected override void OnStopMonitoring( bool targetDisposed )
+        protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if( !targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive )
+            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
             {
                 this.Source.PropertyChanged -= handler;
             }

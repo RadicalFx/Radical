@@ -15,7 +15,7 @@
         /// <param name="context">The current data context.</param>
         /// <param name="provider">The provider to use a data context.</param>
         /// <returns>The searched entity.</returns>
-        TResult Evaluate( QueryModel.IScalarSpecification<TSource, TResult> scalarSpec, IDataContext context, TProvider provider );
+        TResult Evaluate(QueryModel.IScalarSpecification<TSource, TResult> scalarSpec, IDataContext context, TProvider provider);
     }
 
     /// <summary>
@@ -36,6 +36,6 @@
         /// <param name="context">The current data context.</param>
         /// <param name="provider">The provider to use a data context.</param>
         /// <returns>The searched entity.</returns>
-        TResult Evaluate( TScalar scalarSpec, IDataContext context, TProvider provider );
+        TResult Evaluate(TScalar scalarSpec, IDataContext context, TProvider provider);
     }
 }

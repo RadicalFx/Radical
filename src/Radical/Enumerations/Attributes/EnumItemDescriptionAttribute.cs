@@ -5,7 +5,7 @@ namespace Radical
     /// <summary>
     /// Attribue specialized in adding description info to an enuration type.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1813:AvoidUnsealedAttributes" ), AttributeUsage( AttributeTargets.Field, AllowMultiple = false, Inherited = false )]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes"), AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public class EnumItemDescriptionAttribute : Attribute
     {
         readonly string _caption;
@@ -16,8 +16,8 @@ namespace Radical
         /// Initializes a new instance of the <see cref="EnumItemDescriptionAttribute"/> class.
         /// </summary>
         /// <param name="caption">The description.</param>
-        public EnumItemDescriptionAttribute( string caption )
-            : this( caption, string.Empty, -1 )
+        public EnumItemDescriptionAttribute(string caption)
+            : this(caption, string.Empty, -1)
         {
 
         }
@@ -27,8 +27,8 @@ namespace Radical
         /// </summary>
         /// <param name="caption">The description.</param>
         /// <param name="index">The index.</param>
-        public EnumItemDescriptionAttribute( string caption, int index )
-            : this( caption, string.Empty, index )
+        public EnumItemDescriptionAttribute(string caption, int index)
+            : this(caption, string.Empty, index)
         {
 
         }
@@ -39,16 +39,16 @@ namespace Radical
         /// <param name="caption">The caption.</param>
         /// <param name="description">The description.</param>
         /// <param name="index">The index.</param>
-        public EnumItemDescriptionAttribute( string caption, string description, int index )
+        public EnumItemDescriptionAttribute(string caption, string description, int index)
         {
-            if ( caption == null )
+            if (caption == null)
             {
-                throw new ArgumentNullException( "caption" );
+                throw new ArgumentNullException("caption");
             }
 
-            if ( description == null )
+            if (description == null)
             {
-                throw new ArgumentNullException( "description" );
+                throw new ArgumentNullException("description");
             }
 
             this._caption = caption;
@@ -62,7 +62,7 @@ namespace Radical
         /// <value>The caption.</value>
         public string Caption
         {
-            get { return this.OnGetCaption( this._caption ); }
+            get { return this.OnGetCaption(this._caption); }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Radical
         /// <value>The description.</value>
         public string Description
         {
-            get { return this.OnGetDescription( this._description ); }
+            get { return this.OnGetDescription(this._description); }
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Radical
         /// <returns>
         /// The Caption value.
         /// </returns>
-        protected virtual string OnGetCaption( string caption )
+        protected virtual string OnGetCaption(string caption)
         {
             return caption;
         }
@@ -101,7 +101,7 @@ namespace Radical
         /// method to customize Description return value
         /// </summary>
         /// <returns>The Description value.</returns>
-        protected virtual string OnGetDescription( string description )
+        protected virtual string OnGetDescription(string description)
         {
             return description;
         }

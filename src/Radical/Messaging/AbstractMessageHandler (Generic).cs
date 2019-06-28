@@ -15,21 +15,21 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public abstract void Handle( object sender, T message );
+        public abstract void Handle(object sender, T message);
 
         /// <summary>
         /// Handles the specified message.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public virtual void Handle(object sender, object message )
+        public virtual void Handle(object sender, object message)
         {
-            Ensure.That( message )
-                .Named( "message" )
+            Ensure.That(message)
+                .Named("message")
                 .IsNotNull()
-                .IsTrue( msg => msg.GetType().Is<T>() );
+                .IsTrue(msg => msg.GetType().Is<T>());
 
-            this.Handle( sender, ( T )message );
+            this.Handle(sender, (T)message);
         }
 
         /// <summary>
@@ -40,14 +40,14 @@ namespace Radical.Messaging
         /// <returns>
         ///   <c>True</c> if this message handler is interested in handling the given message; otherwise <c>false</c>.
         /// </returns>
-        public bool ShouldHandle( object sender, object message )
+        public bool ShouldHandle(object sender, object message)
         {
-            Ensure.That( message )
-                .Named( "message" )
+            Ensure.That(message)
+                .Named("message")
                 .IsNotNull()
-                .IsTrue( msg => msg.GetType().Is<T>() );
+                .IsTrue(msg => msg.GetType().Is<T>());
 
-            return this.OnShouldHandle( sender, ( T )message );
+            return this.OnShouldHandle(sender, (T)message);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Radical.Messaging
         /// <returns>
         ///   <c>True</c> if this message handler is interested in handling the given message; otherwise <c>false</c>.
         /// </returns>
-        protected virtual bool OnShouldHandle( object sender, T message )
+        protected virtual bool OnShouldHandle(object sender, T message)
         {
             return true;
         }

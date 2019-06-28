@@ -6,28 +6,28 @@
 
     public class ChangeSetDistinctVisitor : IChangeSetDistinctVisitor
     {
-        public IDictionary<object, IChange> Visit( IChangeSet changeSet )
+        public IDictionary<object, IChange> Visit(IChangeSet changeSet)
         {
             var distinct = new Dictionary<object, IChange>();
 
-            changeSet.ForEach( change =>
-            {
+            changeSet.ForEach(change =>
+           {
                 /*
                  * recuperiamo un riferimento alle entities 
                  * che sono oggetto della modifica
                  */
-                change.GetChangedEntities().ForEach( entity =>
-                {
-                    if( !distinct.ContainsKey( entity ) )
-                    {
+               change.GetChangedEntities().ForEach(entity =>
+               {
+                   if (!distinct.ContainsKey(entity))
+                   {
                         /*
                          * se l'entity non è tra quelle che abbiamo
                          * già incontrato la aggiungiamo.
                          */
-                        distinct.Add( entity, change );
-                    }
-                    else
-                    {
+                       distinct.Add(entity, change);
+                   }
+                   else
+                   {
                         /*
                          * Se l'entity è già tra quelle visitate
                          * sostituiamo la IChange associata perchè
@@ -35,10 +35,10 @@
                          * quella che determina la ProposedActions che
                          * verrà proposta.
                          */
-                        distinct[ entity ] = change;
-                    }
-                } );
-            } );
+                       distinct[entity] = change;
+                   }
+               });
+           });
 
             return distinct;
         }

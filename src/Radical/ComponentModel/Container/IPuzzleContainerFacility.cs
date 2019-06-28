@@ -9,12 +9,12 @@
         /// Initializes this facility.
         /// </summary>
         /// <param name="container">The container hosting the facility.</param>
-        void Initialize( IPuzzleContainer container );
+        void Initialize(IPuzzleContainer container);
 
         /// <summary>
         /// Teardowns this facility.
         /// </summary>
         /// <param name="container">The container hosting the facility.</param>
-        void Teardown( IPuzzleContainer container );
+        void Teardown(IPuzzleContainer container);
     }
 }

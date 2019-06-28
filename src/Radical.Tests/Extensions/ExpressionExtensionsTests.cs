@@ -24,7 +24,7 @@
 
             var actual = target.GetMemberName();
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }

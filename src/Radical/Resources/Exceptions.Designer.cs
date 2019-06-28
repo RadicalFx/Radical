@@ -22,121 +22,147 @@ namespace Radical.Resources
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Exceptions {
-        
+    internal class Exceptions
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Exceptions() {
+        internal Exceptions()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Radical.Resources.Exceptions", typeof(Exceptions).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Not allowed to add new items..
         /// </summary>
-        internal static string AllowNewException {
-            get {
+        internal static string AllowNewException
+        {
+            get
+            {
                 return ResourceManager.GetString("AllowNewException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot directly access current EntityView (Unsupported Action :{0})..
         /// </summary>
-        internal static string CannotAccessEntityViewException {
-            get {
+        internal static string CannotAccessEntityViewException
+        {
+            get
+            {
                 return ResourceManager.GetString("CannotAccessEntityViewException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to AllowNew is set to false, cannot call CreateNew()..
         /// </summary>
-        internal static string CreateNewNotSupportedException {
-            get {
+        internal static string CreateNewNotSupportedException
+        {
+            get
+            {
                 return ResourceManager.GetString("CreateNewNotSupportedException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Supplied enum value is not defined in the supplied enum type..
         /// </summary>
-        internal static string EnumValidatorNotDefinedException {
-            get {
+        internal static string EnumValidatorNotDefinedException
+        {
+            get
+            {
                 return ResourceManager.GetString("EnumValidatorNotDefinedException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Missing description attribute on Enum type..
         /// </summary>
-        internal static string ExtractDescriptionMissingAttributeException {
-            get {
+        internal static string ExtractDescriptionMissingAttributeException
+        {
+            get
+            {
                 return ResourceManager.GetString("ExtractDescriptionMissingAttributeException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Current object is read only..
         /// </summary>
-        internal static string IsReadOnlyException {
-            get {
+        internal static string IsReadOnlyException
+        {
+            get
+            {
                 return ResourceManager.GetString("IsReadOnlyException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to OnCreateNew cannot return a null reference.
         /// </summary>
-        internal static string OnCreateNewReturnNullException {
-            get {
+        internal static string OnCreateNewReturnNullException
+        {
+            get
+            {
                 return ResourceManager.GetString("OnCreateNewReturnNullException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Property not Found: {0}..
         /// </summary>
-        internal static string PropertyNotFoundException {
-            get {
+        internal static string PropertyNotFoundException
+        {
+            get
+            {
                 return ResourceManager.GetString("PropertyNotFoundException", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The suplied message type represents a type that does not inherit from IMessage.
         /// </summary>
-        internal static string SubscribeToMessageAttributeInvalidMessageType {
-            get {
+        internal static string SubscribeToMessageAttributeInvalidMessageType
+        {
+            get
+            {
                 return ResourceManager.GetString("SubscribeToMessageAttributeInvalidMessageType", resourceCulture);
             }
         }

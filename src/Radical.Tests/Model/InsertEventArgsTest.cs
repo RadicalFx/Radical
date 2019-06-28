@@ -25,11 +25,11 @@
             string expectedValue = "Foo";
             int expectedIndex = 10;
 
-            InsertEventArgs<string> obj = new InsertEventArgs<string>( expectedIndex, expectedValue );
+            InsertEventArgs<string> obj = new InsertEventArgs<string>(expectedIndex, expectedValue);
 
-            Assert.IsFalse( obj.Cancel );
-            Assert.AreEqual<int>( expectedIndex, obj.Index );
-            Assert.AreEqual<string>( expectedValue, obj.NewValue );
+            Assert.IsFalse(obj.Cancel);
+            Assert.AreEqual<int>(expectedIndex, obj.Index);
+            Assert.AreEqual<string>(expectedValue, obj.NewValue);
         }
     }
 }

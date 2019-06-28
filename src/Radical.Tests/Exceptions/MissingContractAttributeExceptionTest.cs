@@ -15,44 +15,44 @@ namespace Radical.Tests.Exceptions
             return new MissingContractAttributeException();
         }
 
-        protected override Exception CreateMock( string message )
+        protected override Exception CreateMock(string message)
         {
-            return new MissingContractAttributeException( message );
+            return new MissingContractAttributeException(message);
         }
 
-        protected override Exception CreateMock( string message, Exception innerException )
+        protected override Exception CreateMock(string message, Exception innerException)
         {
-            return new MissingContractAttributeException( message, innerException );
+            return new MissingContractAttributeException(message, innerException);
         }
 
-        protected virtual MissingContractAttributeException CreateMock( Type targetType )
+        protected virtual MissingContractAttributeException CreateMock(Type targetType)
         {
-            return new MissingContractAttributeException( targetType );
+            return new MissingContractAttributeException(targetType);
         }
 
-        protected override void AssertAreEqual( Exception ex1, Exception ex2 )
+        protected override void AssertAreEqual(Exception ex1, Exception ex2)
         {
-            base.AssertAreEqual( ex1, ex2 );
+            base.AssertAreEqual(ex1, ex2);
 
             MissingContractAttributeException mex1 = ex1 as MissingContractAttributeException;
             MissingContractAttributeException mex2 = ex2 as MissingContractAttributeException;
 
-            Assert.IsNotNull( mex1 );
-            Assert.IsNotNull( mex2 );
+            Assert.IsNotNull(mex1);
+            Assert.IsNotNull(mex2);
 
-            Assert.AreEqual<Type>( mex1.TargetType, mex2.TargetType );
+            Assert.AreEqual<Type>(mex1.TargetType, mex2.TargetType);
         }
 
         [TestMethod()]
         public void ctor_systemType()
         {
-            Type expected = typeof( string );
-            string expectedmessage = string.Format( CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", expected.FullName );
+            Type expected = typeof(string);
+            string expectedmessage = string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", expected.FullName);
 
-            MissingContractAttributeException target = this.CreateMock( expected );
+            MissingContractAttributeException target = this.CreateMock(expected);
 
-            Assert.AreEqual<string>( expectedmessage, target.Message );
-            Assert.AreEqual<Type>( expected, target.TargetType );
+            Assert.AreEqual<string>(expectedmessage, target.Message);
+            Assert.AreEqual<Type>(expected, target.TargetType);
         }
     }
 }

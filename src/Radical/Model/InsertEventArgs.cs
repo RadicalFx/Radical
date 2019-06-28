@@ -9,8 +9,8 @@
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="newValue">The new value.</param>
-        public InsertEventArgs( int index, T newValue )
-            : base( false )
+        public InsertEventArgs(int index, T newValue)
+            : base(false)
         {
             this.NewValue = newValue;
             this.Index = index;
@@ -20,8 +20,8 @@
         /// Gets the new value.
         /// </summary>
         /// <value>The new value.</value>
-        public T NewValue{ get; private set; }
-        
+        public T NewValue { get; private set; }
+
         /// <summary>
         /// Gets the index.
         /// </summary>

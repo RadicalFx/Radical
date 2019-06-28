@@ -16,12 +16,12 @@ namespace Radical.Tests
             public bool InitializeCalled { get; set; }
             public bool TeardownCalled { get; set; }
 
-            public void Initialize( IPuzzleContainer container )
+            public void Initialize(IPuzzleContainer container)
             {
                 this.InitializeCalled = true;
             }
 
-            public void Teardown( IPuzzleContainer container )
+            public void Teardown(IPuzzleContainer container)
             {
                 this.TeardownCalled = true;
             }
@@ -36,7 +36,7 @@ namespace Radical.Tests
                 .OfType<MyFacility>()
                 .SingleOrDefault();
 
-            Assert.IsNotNull( facility );
+            Assert.IsNotNull(facility);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace Radical.Tests
                 .OfType<MyFacility>()
                 .Single();
 
-            Assert.IsTrue( facility.InitializeCalled );
+            Assert.IsTrue(facility.InitializeCalled);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace Radical.Tests
         {
             MyFacility facility;
 
-            using ( var container = new PuzzleContainer() )
+            using (var container = new PuzzleContainer())
             {
                 container.AddFacility<MyFacility>();
                 facility = container.GetFacilities()
@@ -64,15 +64,15 @@ namespace Radical.Tests
                     .Single();
             }
 
-            Assert.IsTrue( facility.TeardownCalled );
+            Assert.IsTrue(facility.TeardownCalled);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void puzzleContainer_addFacility_using_null_reference_should_raise_ArgumentNullException()
         {
             var container = new PuzzleContainer();
-            container.AddFacility( null );
+            container.AddFacility(null);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Radical.Tests
             var container = new PuzzleContainer();
 
             var facility = new MyFacility();
-            container.AddFacility( facility );
+            container.AddFacility(facility);
         }
 
         [TestMethod]
@@ -90,32 +90,32 @@ namespace Radical.Tests
             var container = new PuzzleContainer();
 
             var facility = new MyFacility();
-            container.AddFacility( facility );
+            container.AddFacility(facility);
 
-            Assert.IsTrue( facility.InitializeCalled );
+            Assert.IsTrue(facility.InitializeCalled);
         }
 
         [TestMethod]
         public void puzzleContainer_register_entry_using_valid_entry_should_not_fail()
         {
             var container = new PuzzleContainer();
-            container.Register( EntryBuilder.For<string>() );
+            container.Register(EntryBuilder.For<string>());
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void puzzleContainer_register_entry_using_null_reference_should_raise_ArgumentNullException()
         {
             var container = new PuzzleContainer();
-            container.Register( ( IContainerEntry )null );
+            container.Register((IContainerEntry)null);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void puzzleContainer_register_entries_using_null_reference_should_raise_ArgumentNullException()
         {
             var container = new PuzzleContainer();
-            container.Register( ( IEnumerable<IContainerEntry> )null );
+            container.Register((IEnumerable<IContainerEntry>)null);
         }
 
         [TestMethod]
@@ -126,12 +126,12 @@ namespace Radical.Tests
             IContainerEntry e1 = EntryBuilder.For<ArgumentException>();
             IContainerEntry e2 = EntryBuilder.For<ArgumentNullException>();
 
-            container.Register( new[] { e1, e2 } );
+            container.Register(new[] { e1, e2 });
             var obj1 = container.Resolve<ArgumentException>();
             var obj2 = container.Resolve<ArgumentNullException>();
 
-            Assert.IsNotNull( obj1 );
-            Assert.IsNotNull( obj2 );
+            Assert.IsNotNull(obj1);
+            Assert.IsNotNull(obj2);
         }
 
         [TestMethod]
@@ -141,10 +141,10 @@ namespace Radical.Tests
 
             var container = new PuzzleContainer();
 
-            container.Register( EntryBuilder.For<Object>().UsingInstance( expected ) );
+            container.Register(EntryBuilder.For<Object>().UsingInstance(expected));
             var actual = container.Resolve<Object>();
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -152,10 +152,10 @@ namespace Radical.Tests
         {
             var container = new PuzzleContainer();
 
-            container.Register( EntryBuilder.For<Object>() );
+            container.Register(EntryBuilder.For<Object>());
             var actual = container.IsRegistered<Object>();
 
-            Assert.IsTrue( actual );
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
@@ -163,11 +163,11 @@ namespace Radical.Tests
         {
             var container = new PuzzleContainer();
 
-            container.Register( EntryBuilder.For<Object>().WithLifestyle( Lifestyle.Transient ) );
+            container.Register(EntryBuilder.For<Object>().WithLifestyle(Lifestyle.Transient));
             var i1 = container.Resolve<Object>();
             var i2 = container.Resolve<Object>();
 
-            Assert.AreNotEqual( i1, i2 );
+            Assert.AreNotEqual(i1, i2);
         }
 
         [TestMethod]
@@ -180,18 +180,18 @@ namespace Radical.Tests
             container.Register
             (
                 EntryBuilder.For<Object>()
-                    .UsingFactory( () =>
-                    {
-                        actual++;
-                        return new Object();
-                    } )
-                    .WithLifestyle( Lifestyle.Transient )
+                    .UsingFactory(() =>
+                   {
+                       actual++;
+                       return new Object();
+                   })
+                    .WithLifestyle(Lifestyle.Transient)
             );
 
             container.Resolve<Object>();
             container.Resolve<Object>();
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -204,17 +204,17 @@ namespace Radical.Tests
             container.Register
             (
                 EntryBuilder.For<Object>()
-                    .UsingFactory( () =>
-                    {
-                        actual++;
-                        return new Object();
-                    } )
+                    .UsingFactory(() =>
+                   {
+                       actual++;
+                       return new Object();
+                   })
             );
 
             container.Resolve<Object>();
             container.Resolve<Object>();
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -224,7 +224,7 @@ namespace Radical.Tests
 
             var actual = container.IsRegistered<int>();
 
-            Assert.IsFalse( actual );
+            Assert.IsFalse(actual);
         }
 
         [TestMethod]
@@ -232,11 +232,11 @@ namespace Radical.Tests
         {
             var container = new PuzzleContainer();
 
-            container.Register( EntryBuilder.For<Object>().UsingInstance( new Object() ) );
+            container.Register(EntryBuilder.For<Object>().UsingInstance(new Object()));
             var expected = container.Resolve<Object>();
             var actual = container.Resolve<Object>();
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -246,10 +246,10 @@ namespace Radical.Tests
 
             var container = new PuzzleContainer();
 
-            container.Register( EntryBuilder.For<Object>().UsingInstance( expected ) );
-            var actual = container.GetService( typeof( Object ) );
+            container.Register(EntryBuilder.For<Object>().UsingInstance(expected));
+            var actual = container.GetService(typeof(Object));
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -257,15 +257,15 @@ namespace Radical.Tests
         {
             var container = new PuzzleContainer();
 
-            container.Register( EntryBuilder.For<Object>().UsingInstance( new Object() ) );
-            var expected = container.GetService( typeof( Object ) );
-            var actual = container.GetService( typeof( Object ) );
+            container.Register(EntryBuilder.For<Object>().UsingInstance(new Object()));
+            var expected = container.GetService(typeof(Object));
+            var actual = container.GetService(typeof(Object));
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentException ) )]
+        [ExpectedException(typeof(ArgumentException))]
         public void puzzleContainer_resolve_using_non_registered_type_should_raise_ArgumentException()
         {
             var container = new PuzzleContainer();
@@ -276,9 +276,9 @@ namespace Radical.Tests
         public void puzzleContainer_getService_using_non_registered_type_should_return_null()
         {
             var container = new PuzzleContainer();
-            var actual = container.GetService( typeof( Object ) );
+            var actual = container.GetService(typeof(Object));
 
-            Assert.IsNull( actual );
+            Assert.IsNull(actual);
         }
 
         [TestMethod]
@@ -288,11 +288,11 @@ namespace Radical.Tests
             var actual = 0;
 
             var container = new PuzzleContainer();
-            container.ComponentRegistered += ( s, e ) => actual++;
+            container.ComponentRegistered += (s, e) => actual++;
 
-            container.Register( EntryBuilder.For<Object>() );
+            container.Register(EntryBuilder.For<Object>());
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -302,11 +302,11 @@ namespace Radical.Tests
             IContainerEntry actual = null;
 
             var container = new PuzzleContainer();
-            container.ComponentRegistered += ( s, e ) => actual = e.Entry;
+            container.ComponentRegistered += (s, e) => actual = e.Entry;
 
-            container.Register( expected );
+            container.Register(expected);
 
-            Assert.AreEqual( expected, actual );
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -317,17 +317,17 @@ namespace Radical.Tests
 
             var container = new PuzzleContainer();
             container.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj1 )
+                EntryBuilder.For<Object>().UsingInstance(obj1)
             );
 
             container.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj2 )
+                EntryBuilder.For<Object>().UsingInstance(obj2)
             );
 
             IEnumerable<Object> actual = container.ResolveAll<Object>();
 
-            Assert.IsTrue( actual.Contains( obj1 ) );
-            Assert.IsTrue( actual.Contains( obj2 ) );
+            Assert.IsTrue(actual.Contains(obj1));
+            Assert.IsTrue(actual.Contains(obj2));
         }
 
         [TestMethod]
@@ -338,17 +338,17 @@ namespace Radical.Tests
 
             var container = new PuzzleContainer();
             container.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj1 )
+                EntryBuilder.For<Object>().UsingInstance(obj1)
             );
 
             container.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj2 )
+                EntryBuilder.For<Object>().UsingInstance(obj2)
             );
 
-            IEnumerable<Object> actual = container.ResolveAll( typeof( Object ) );
+            IEnumerable<Object> actual = container.ResolveAll(typeof(Object));
 
-            Assert.IsTrue( actual.Contains( obj1 ) );
-            Assert.IsTrue( actual.Contains( obj2 ) );
+            Assert.IsTrue(actual.Contains(obj1));
+            Assert.IsTrue(actual.Contains(obj2));
         }
 
         [TestMethod]
@@ -358,11 +358,11 @@ namespace Radical.Tests
 
             var actual = container.ResolveAll<Object>();
 
-            Assert.AreEqual( 0, actual.Count() );
+            Assert.AreEqual(0, actual.Count());
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_resolve_using_type_with_static_type_initializer_should_not_fail()
         {
             var container = new PuzzleContainer();
@@ -372,12 +372,12 @@ namespace Radical.Tests
 
             var actual = container.Resolve<TypeWithStaticCtor>();
 
-            Assert.IsNotNull( actual );
+            Assert.IsNotNull(actual);
         }
 
         class TypeWithArrayDependency
         {
-            public TypeWithArrayDependency( Object[] dependency )
+            public TypeWithArrayDependency(Object[] dependency)
             {
                 this.IsResolved = dependency != null;
             }
@@ -402,11 +402,11 @@ namespace Radical.Tests
             var sut = new PuzzleContainer();
 
             sut.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj1 )
+                EntryBuilder.For<Object>().UsingInstance(obj1)
             );
 
             sut.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj2 )
+                EntryBuilder.For<Object>().UsingInstance(obj2)
             );
 
             sut.Register(
@@ -415,11 +415,11 @@ namespace Radical.Tests
 
             var actual = sut.Resolve<TypeWithArrayDependency>();
 
-            Assert.IsTrue( actual.IsResolved );
+            Assert.IsTrue(actual.IsResolved);
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_Resolve_using_overridable_types_should_resolve_overrider_and_not_overridden()
         {
             var obj1 = new Object();
@@ -429,21 +429,21 @@ namespace Radical.Tests
 
             sut.Register(
                 EntryBuilder.For<Object>()
-                    .UsingInstance( obj1 )
+                    .UsingInstance(obj1)
                     .Overridable()
             );
 
             sut.Register(
-                EntryBuilder.For<Object>().UsingInstance( obj2 )
+                EntryBuilder.For<Object>().UsingInstance(obj2)
             );
 
             var actual = sut.Resolve<Object>();
 
-            Assert.AreEqual( obj2, actual );
+            Assert.AreEqual(obj2, actual);
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_Resolve_using_overridable_types_should_resolve_even_all_are_marked_as_overridable()
         {
             var obj1 = new Object();
@@ -453,19 +453,19 @@ namespace Radical.Tests
 
             sut.Register(
                 EntryBuilder.For<Object>()
-                    .UsingInstance( obj1 )
+                    .UsingInstance(obj1)
                     .Overridable()
             );
 
             sut.Register(
                 EntryBuilder.For<Object>()
-                    .UsingInstance( obj2 )
+                    .UsingInstance(obj2)
                     .Overridable()
             );
 
             var actual = sut.Resolve<Object>();
 
-            Assert.AreEqual( obj1, actual );
+            Assert.AreEqual(obj1, actual);
         }
 
         interface IFoo { }
@@ -476,7 +476,7 @@ namespace Radical.Tests
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding()
         {
             var entry = EntryBuilder.For<IFoo>()
@@ -484,39 +484,39 @@ namespace Radical.Tests
                 .ImplementedBy<TypeWithMultipleContracts>();
 
             var sut = new PuzzleContainer();
-            sut.Register( entry );
+            sut.Register(entry);
 
             var actual = sut.IsRegistered<IBar>();
 
-            Assert.IsTrue( actual );
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_transient_types()
         {
             var entry = EntryBuilder.For<IFoo>()
                 .Forward<IBar>()
                 .ImplementedBy<TypeWithMultipleContracts>()
-                .WithLifestyle( Lifestyle.Transient );
+                .WithLifestyle(Lifestyle.Transient);
 
             var sut = new PuzzleContainer();
-            sut.Register( entry );
+            sut.Register(entry);
 
             var iBar = sut.Resolve<IBar>();
             var iFoo = sut.Resolve<IFoo>();
 
-            Assert.IsNotNull( iBar );
-            Assert.IsNotNull( iFoo );
+            Assert.IsNotNull(iBar);
+            Assert.IsNotNull(iFoo);
 
             Assert.AreNotEqual(iBar, iFoo);
 
-            Assert.IsTrue( iBar.GetType().Is<TypeWithMultipleContracts>() );
-            Assert.IsTrue( iFoo.GetType().Is<TypeWithMultipleContracts>() );
+            Assert.IsTrue(iBar.GetType().Is<TypeWithMultipleContracts>());
+            Assert.IsTrue(iFoo.GetType().Is<TypeWithMultipleContracts>());
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_in_singleton_types()
         {
             var entry = EntryBuilder.For<IFoo>()
@@ -524,47 +524,47 @@ namespace Radical.Tests
                 .ImplementedBy<TypeWithMultipleContracts>();
 
             var sut = new PuzzleContainer();
-            sut.Register( entry );
+            sut.Register(entry);
 
             var iBar = sut.Resolve<IBar>();
             var iFoo = sut.Resolve<IFoo>();
 
-            Assert.AreEqual( iBar, iFoo );
+            Assert.AreEqual(iBar, iFoo);
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_instances()
         {
             var entry = EntryBuilder.For<IFoo>()
                 .Forward<IBar>()
-                .UsingInstance( new TypeWithMultipleContracts() );
+                .UsingInstance(new TypeWithMultipleContracts());
 
             var sut = new PuzzleContainer();
-            sut.Register( entry );
+            sut.Register(entry);
 
             var iBar = sut.Resolve<IBar>();
             var iFoo = sut.Resolve<IFoo>();
 
-            Assert.AreEqual( iBar, iFoo );
+            Assert.AreEqual(iBar, iFoo);
         }
 
         [TestMethod]
-        [TestCategory( "PuzzleContainer" )]
+        [TestCategory("PuzzleContainer")]
         public void PuzzleContainer_entryBuilder_should_support_contract_forwarding_with_factory_method()
         {
             var entry = EntryBuilder.For<IFoo>()
                 .Forward<IBar>()
-                .UsingFactory( () => new TypeWithMultipleContracts() )
-                .WithLifestyle( Lifestyle.Singleton );
+                .UsingFactory(() => new TypeWithMultipleContracts())
+                .WithLifestyle(Lifestyle.Singleton);
 
             var sut = new PuzzleContainer();
-            sut.Register( entry );
+            sut.Register(entry);
 
             var iBar = sut.Resolve<IBar>();
             var iFoo = sut.Resolve<IFoo>();
 
-            Assert.AreEqual( iBar, iFoo );
+            Assert.AreEqual(iBar, iFoo);
         }
 
         class DisposableFoo : IFoo, IDisposable

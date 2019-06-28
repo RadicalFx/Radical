@@ -14,8 +14,8 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="RebuildIndexesEventArgs"/> class.
         /// </summary>
         /// <param name="index">The index.</param>
-        public RebuildIndexesEventArgs( int index )
-            : base( false )
+        public RebuildIndexesEventArgs(int index)
+            : base(false)
         {
             this.Index = index;
         }

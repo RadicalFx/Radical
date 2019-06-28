@@ -8,11 +8,11 @@
     /// Extendes the System.ComponentModel.IBindingListView interface by providing
     /// advanced features.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
-    public interface IEntityView : 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public interface IEntityView :
         ISupportInitialize,
-        IBindingListView, 
-        ITypedList, 
+        IBindingListView,
+        ITypedList,
         INotifyPropertyChanged //, INotifyCollectionChanged
     {
         /// <summary>
@@ -25,7 +25,7 @@
         /// at the specified index.
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        void CancelNew( int itemIndex );
+        void CancelNew(int itemIndex);
 
         /// <summary>
         /// Ends a pending AddNew operation.
@@ -36,7 +36,7 @@
         /// Ends a pending AddNew operation.
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        void EndNew( int itemIndex );
+        void EndNew(int itemIndex);
 
         /// <summary>
         /// Gets a value indicating whether this instance is adding a new item.
@@ -101,8 +101,8 @@
         /// </summary>
         /// <param name="sourceIndex">Index of the source element to move.</param>
         /// <param name="newIndex">The destination index.</param>
-        void Move( int sourceIndex, int newIndex );
+        void Move(int sourceIndex, int newIndex);
 
-        void ApplySort( string sortDescriptions );
+        void ApplySort(string sortDescriptions);
     }
 }

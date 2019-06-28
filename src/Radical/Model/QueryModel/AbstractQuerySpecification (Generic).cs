@@ -14,7 +14,7 @@ namespace Radical.Model.QueryModel
         /// </summary>
         protected AbstractQuerySpecification()
         {
-            
+
         }
     }
 }

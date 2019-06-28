@@ -11,9 +11,9 @@ namespace Radical.Tests
         public void committedEventArgs_ctor_normal_should_set_values()
         {
             var expected = CommitReason.AcceptChanges;
-            CommittedEventArgs target = new CommittedEventArgs( expected );
+            CommittedEventArgs target = new CommittedEventArgs(expected);
 
-            target.Reason.Should().Be.EqualTo( expected );
+            target.Reason.Should().Be.EqualTo(expected);
         }
     }
 }

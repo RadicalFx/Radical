@@ -23,18 +23,18 @@ namespace Radical.Model
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected override void Dispose( bool disposing )
+        protected override void Dispose(bool disposing)
         {
-            if ( disposing )
+            if (disposing)
             {
-                if ( !isDisposed )
+                if (!isDisposed)
                 {
                     /*
                      * Questa chiamata la dobbiamo fare una volta sola 
                      * pena una bella ObjectDisposedException, altrimenti
                      * chiamate succesive alla Dispose fallirebbero
                      */
-                    ( ( IMemento )this ).Memento = null;
+                    ((IMemento)this).Memento = null;
                 }
             }
 
@@ -47,7 +47,7 @@ namespace Radical.Model
              */
             isDisposed = true;
 
-            base.Dispose( disposing );
+            base.Dispose(disposing);
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace Radical.Model
              * perchè la Dispose potrebbe fallire e noi restare 
              * in uno stato indeterminato
              */
-            if ( this.isDisposed )
+            if (this.isDisposed)
             {
-                throw new ObjectDisposedException( this.GetType().FullName );
+                throw new ObjectDisposedException(this.GetType().FullName);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="MementoEntity"/> class.
         /// </summary>
         protected MementoEntity()
-            : this( null, ChangeTrackingRegistration.AsTransient )
+            : this(null, ChangeTrackingRegistration.AsTransient)
         {
 
         }
@@ -82,8 +82,8 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="MementoEntity"/> class.
         /// </summary>
         /// <param name="memento">The memento.</param>
-        protected MementoEntity( IChangeTrackingService memento )
-            : this( memento, ChangeTrackingRegistration.AsTransient )
+        protected MementoEntity(IChangeTrackingService memento)
+            : this(memento, ChangeTrackingRegistration.AsTransient)
         {
 
         }
@@ -92,8 +92,8 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="MementoEntity"/> class.
         /// </summary>
         /// <param name="registerAsTransient">if set to <c>true</c> [register as transient].</param>
-        protected MementoEntity( bool registerAsTransient )
-            : this( null, registerAsTransient ? ChangeTrackingRegistration.AsTransient : ChangeTrackingRegistration.AsPersistent )
+        protected MementoEntity(bool registerAsTransient)
+            : this(null, registerAsTransient ? ChangeTrackingRegistration.AsTransient : ChangeTrackingRegistration.AsPersistent)
         {
 
         }
@@ -102,8 +102,8 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="MementoEntity" /> class.
         /// </summary>
         /// <param name="registration">The registration.</param>
-        protected MementoEntity( ChangeTrackingRegistration registration )
-            : this( null, registration )
+        protected MementoEntity(ChangeTrackingRegistration registration)
+            : this(null, registration)
         {
 
         }
@@ -113,11 +113,11 @@ namespace Radical.Model
         /// </summary>
         /// <param name="memento">The memento.</param>
         /// <param name="registration">The registration.</param>
-        protected MementoEntity( IChangeTrackingService memento, ChangeTrackingRegistration registration )
+        protected MementoEntity(IChangeTrackingService memento, ChangeTrackingRegistration registration)
             : base()
         {
             this.registration = registration;
-            ( ( IMemento )this ).Memento = memento;
+            ((IMemento)this).Memento = memento;
         }
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace Radical.Model
         /// </summary>
         /// <param name="memento">The memento.</param>
         /// <param name="registerAsTransient">if set to <c>true</c> [register as transient].</param>
-        protected MementoEntity( IChangeTrackingService memento, bool registerAsTransient )
-            : this( memento, registerAsTransient ? ChangeTrackingRegistration.AsTransient : ChangeTrackingRegistration.AsPersistent )
+        protected MementoEntity(IChangeTrackingService memento, bool registerAsTransient)
+            : this(memento, registerAsTransient ? ChangeTrackingRegistration.AsTransient : ChangeTrackingRegistration.AsPersistent)
         {
 
         }
@@ -139,9 +139,9 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the requested default property metadata.
         /// </returns>
-        protected override PropertyMetadata<T> GetDefaultMetadata<T>( string propertyName )
+        protected override PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
         {
-            return MementoPropertyMetadata.Create<T>( this, propertyName );
+            return MementoPropertyMetadata.Create<T>(this, propertyName);
         }
 
         /// <summary>
@@ -157,9 +157,9 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
-        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, T value, bool trackChanges )
+        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, T value, bool trackChanges)
         {
-            return this.SetInitialPropertyValue<T>( property.GetMemberName(), value, trackChanges );
+            return this.SetInitialPropertyValue<T>(property.GetMemberName(), value, trackChanges);
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
-        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges )
+        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges)
         {
-            var metadata = ( MementoPropertyMetadata<T> )base.SetInitialPropertyValue( property, lazyValue );
+            var metadata = (MementoPropertyMetadata<T>)base.SetInitialPropertyValue(property, lazyValue);
 
             metadata.TrackChanges = trackChanges;
 
@@ -197,56 +197,56 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
-        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>( string property, T value, bool trackChanges )
+        protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges)
         {
-            var metadata = ( MementoPropertyMetadata<T> )base.SetInitialPropertyValue( property, value );
+            var metadata = (MementoPropertyMetadata<T>)base.SetInitialPropertyValue(property, value);
 
             metadata.TrackChanges = trackChanges;
 
             return metadata;
         }
 
-        protected override void SetPropertyValue<T>( string propertyName, T data, PropertyValueChanged<T> pvc )
+        protected override void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
-            base.SetPropertyValue<T>( propertyName, data, e =>
-            {
-                var md = this.GetPropertyMetadata<T>( propertyName ) as MementoPropertyMetadata<T>;
-                if ( md != null && md.TrackChanges )
-                {
-                    var callback = this.GetRejectCallback<T>( propertyName );
-                    this.CacheChange( propertyName, e.OldValue, callback );
-                }
+            base.SetPropertyValue<T>(propertyName, data, e =>
+           {
+               var md = this.GetPropertyMetadata<T>(propertyName) as MementoPropertyMetadata<T>;
+               if (md != null && md.TrackChanges)
+               {
+                   var callback = this.GetRejectCallback<T>(propertyName);
+                   this.CacheChange(propertyName, e.OldValue, callback);
+               }
 
-                if ( pvc != null )
-                {
-                    pvc( e );
-                }
-            } );
+               if (pvc != null)
+               {
+                   pvc(e);
+               }
+           });
         }
 
         readonly IDictionary<string, Delegate> rejectCallbacks = new Dictionary<string, Delegate>();
 
-        RejectCallback<T> GetRejectCallback<T>( string propertyName )
+        RejectCallback<T> GetRejectCallback<T>(string propertyName)
         {
             Delegate d;
-            if ( !this.rejectCallbacks.TryGetValue( propertyName, out d ) )
+            if (!this.rejectCallbacks.TryGetValue(propertyName, out d))
             {
-                RejectCallback<T> callback = ( pcr ) =>
+                RejectCallback<T> callback = (pcr) =>
                 {
-                    var owner = ( MementoEntity )pcr.Source.Owner;
-                    var actualValue = owner.GetPropertyValue<T>( propertyName );
-                    var cb = this.GetRejectCallback<T>( propertyName );
+                    var owner = (MementoEntity)pcr.Source.Owner;
+                    var actualValue = owner.GetPropertyValue<T>(propertyName);
+                    var cb = this.GetRejectCallback<T>(propertyName);
 
-                    owner.CacheChangeOnRejectCallback( propertyName, actualValue, cb, null, pcr );
-                    owner.SetPropertyValueCore( propertyName, pcr.CachedValue, null );
+                    owner.CacheChangeOnRejectCallback(propertyName, actualValue, cb, null, pcr);
+                    owner.SetPropertyValueCore(propertyName, pcr.CachedValue, null);
                 };
 
-                this.rejectCallbacks.Add( propertyName, callback );
+                this.rejectCallbacks.Add(propertyName, callback);
 
                 d = callback;
             }
 
-            return ( RejectCallback<T> )d;
+            return (RejectCallback<T>)d;
         }
 
         ChangeTrackingRegistration registration = ChangeTrackingRegistration.AsPersistent;
@@ -257,7 +257,7 @@ namespace Radical.Model
         /// features provider.
         /// </summary>
         /// <value>The change tracking service.</value>
-        [Bindable( BindableSupport.No )]
+        [Bindable(BindableSupport.No)]
         IChangeTrackingService IMemento.Memento
         {
             get
@@ -268,16 +268,16 @@ namespace Radical.Model
             set
             {
                 this.EnsureNotDisposed();
-                if ( value != this._memento )
+                if (value != this._memento)
                 {
-                    var old = ( ( IMemento )this ).Memento;
+                    var old = ((IMemento)this).Memento;
                     this._memento = value;
-                    if ( this.registration == ChangeTrackingRegistration.AsTransient && this.IsTracking )
+                    if (this.registration == ChangeTrackingRegistration.AsTransient && this.IsTracking)
                     {
-                        this.OnRegisterTransient( TransientRegistration.AsTransparent );
+                        this.OnRegisterTransient(TransientRegistration.AsTransparent);
                     }
 
-                    this.OnMementoChanged( value, old );
+                    this.OnMementoChanged(value, old);
                 }
             }
         }
@@ -288,7 +288,7 @@ namespace Radical.Model
         /// <returns>The current change tracking service, if any; otherwise null.</returns>
         protected IChangeTrackingService GetTrackingService()
         {
-            return ( ( IMemento )this ).Memento;
+            return ((IMemento)this).Memento;
         }
 
         /// <summary>
@@ -302,10 +302,10 @@ namespace Radical.Model
         /// <summary>
         /// Called in order to register this instance as transient.
         /// </summary>
-        protected virtual void OnRegisterTransient( TransientRegistration transientRegistration )
+        protected virtual void OnRegisterTransient(TransientRegistration transientRegistration)
         {
             var autoRemove = transientRegistration == TransientRegistration.AsTransparent;
-            ( ( IMemento )this ).Memento.RegisterTransient( this, autoRemove );
+            ((IMemento)this).Memento.RegisterTransient(this, autoRemove);
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="newMemento">The new memento service.</param>
         /// <param name="oldMemento">The old memmento service.</param>
-        protected virtual void OnMementoChanged( IChangeTrackingService newMemento, IChangeTrackingService oldMemento )
+        protected virtual void OnMementoChanged(IChangeTrackingService newMemento, IChangeTrackingService oldMemento)
         {
 
         }
@@ -324,13 +324,13 @@ namespace Radical.Model
         /// <value>
         ///     <c>true</c> if there is an active change tracking service; otherwise, <c>false</c>.
         /// </value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1822:MarkMembersAsStatic" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         protected virtual bool IsTracking
         {
             get
             {
                 this.EnsureNotDisposed();
-                return ( ( IMemento )this ).Memento != null && !( ( IMemento )this ).Memento.IsSuspended;
+                return ((IMemento)this).Memento != null && !((IMemento)this).Memento.IsSuspended;
             }
         }
 
@@ -342,10 +342,10 @@ namespace Radical.Model
         /// <param name="restore">A delegate to call when the change tracking 
         /// service needs to restore the cached change.</param>
         /// <returns>A reference to the cached change as an instance of <see cref="IChange"/> interface.</returns>
-        protected IChange CacheChange<T>( string propertyName, T value, RejectCallback<T> restore )
+        protected IChange CacheChange<T>(string propertyName, T value, RejectCallback<T> restore)
         {
             this.EnsureNotDisposed();
-            return this.CacheChange<T>( propertyName, value, restore, null, AddChangeBehavior.Default );
+            return this.CacheChange<T>(propertyName, value, restore, null, AddChangeBehavior.Default);
         }
 
         /// <summary>
@@ -362,10 +362,10 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the cached change as an instance of <see cref="IChange"/> interface.
         /// </returns>
-        protected IChange CacheChange<T>( string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit )
+        protected IChange CacheChange<T>(string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit)
         {
             this.EnsureNotDisposed();
-            return this.CacheChange<T>( propertyName, value, restore, commit, AddChangeBehavior.Default );
+            return this.CacheChange<T>(propertyName, value, restore, commit, AddChangeBehavior.Default);
         }
 
         /// <summary>
@@ -384,14 +384,14 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the cached change as an instance of <see cref="IChange"/> interface.
         /// </returns>
-        protected IChange CacheChange<T>( string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit, AddChangeBehavior direction )
+        protected IChange CacheChange<T>(string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit, AddChangeBehavior direction)
         {
             this.EnsureNotDisposed();
-            if ( this.IsTracking )
+            if (this.IsTracking)
             {
-                IChange iChange = new PropertyValueChange<T>( this, propertyName, value, restore, commit, string.Empty );
+                IChange iChange = new PropertyValueChange<T>(this, propertyName, value, restore, commit, string.Empty);
 
-                ( ( IMemento )this ).Memento.Add( iChange, direction );
+                ((IMemento)this).Memento.Add(iChange, direction);
 
                 return iChange;
             }
@@ -399,16 +399,16 @@ namespace Radical.Model
             return null;
         }
 
-        protected virtual IChange CacheChangeOnRejectCallback<T>( string propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args )
+        protected virtual IChange CacheChangeOnRejectCallback<T>(string propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args)
         {
             this.EnsureNotDisposed();
-            switch ( args.Reason )
+            switch (args.Reason)
             {
                 case RejectReason.Undo:
-                    return this.CacheChange( propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.UndoRequest );
+                    return this.CacheChange(propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.UndoRequest);
 
                 case RejectReason.Redo:
-                    return this.CacheChange( propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.RedoRequest );
+                    return this.CacheChange(propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.RedoRequest);
 
                 case RejectReason.RejectChanges:
                 case RejectReason.Revert:

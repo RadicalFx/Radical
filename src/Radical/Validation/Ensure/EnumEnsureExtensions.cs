@@ -20,17 +20,17 @@ namespace Radical.Validation
         /// <exception cref="NotSupportedException">A <c>NotSupportedException</c> is raised if the supplied type T is not an enum type.</exception>
         /// <exception cref="EnumValueOutOfRangeException">An <c>EnumValueOutOfRangeException</c>
         /// is raised if the supplied enum value is not defined.</exception>
-        public static IEnsure<T> IsDefined<T>( this IEnsure<T> validator )
+        public static IEnsure<T> IsDefined<T>(this IEnsure<T> validator)
         {
-            if( !typeof( T ).Is<Enum>() )
+            if (!typeof(T).Is<Enum>())
             {
-                throw new NotSupportedException( "Only enum types are supported by this ensure extension" );
+                throw new NotSupportedException("Only enum types are supported by this ensure extension");
             }
 
             var enumType = validator.Value.GetType();
-            if( !Enum.IsDefined( enumType, validator.Value ) )
+            if (!Enum.IsDefined(enumType, validator.Value))
             {
-                validator.Throw( new EnumValueOutOfRangeException( Resources.Exceptions.EnumValidatorNotDefinedException ) );
+                validator.Throw(new EnumValueOutOfRangeException(Resources.Exceptions.EnumValidatorNotDefinedException));
             }
 
             return validator;

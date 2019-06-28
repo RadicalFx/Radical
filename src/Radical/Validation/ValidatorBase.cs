@@ -21,9 +21,9 @@ namespace Radical.Validation
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
-        protected virtual string GetPropertyDisplayName(string propertyName, Object entity) 
+        protected virtual string GetPropertyDisplayName(string propertyName, Object entity)
         {
-            return this.tools.GetPropertyDisplayName( propertyName, entity );
+            return this.tools.GetPropertyDisplayName(propertyName, entity);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Radical.Validation
         /// Initializes a new instance of the <see cref="ValidatorBase&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="ruleSet">The rule set.</param>
-        public ValidatorBase( string ruleSet )
+        public ValidatorBase(string ruleSet)
         {
             this.RuleSet = ruleSet;
         }
@@ -47,9 +47,9 @@ namespace Radical.Validation
         /// <returns>
         ///     <c>true</c> if the specified entity is valid; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsValid( T entity )
+        public bool IsValid(T entity)
         {
-            var results = this.Validate( entity );
+            var results = this.Validate(entity);
 
             return results.IsValid;
         }
@@ -58,14 +58,14 @@ namespace Radical.Validation
         /// Executes the validation process.
         /// </summary>
         /// <param name="context">The validation context.</param>
-        protected virtual void OnValidate( ValidationContext<T> context )
+        protected virtual void OnValidate(ValidationContext<T> context)
         {
-            this.rules.ForEach( rule => rule( context ) );
+            this.rules.ForEach(rule => rule(context));
 
             var ivc = context.Entity as IRequireValidationCallback<T>;
-            if ( ivc != null )
+            if (ivc != null)
             {
-                ivc.OnValidate( context );
+                ivc.OnValidate(context);
             }
         }
 
@@ -74,14 +74,14 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>An instance of the <see cref="ValidationResults"/> with the results of the validation process.</returns>
-        public ValidationResults Validate( T entity )
+        public ValidationResults Validate(T entity)
         {
-            var context = new ValidationContext<T>( entity, this )
+            var context = new ValidationContext<T>(entity, this)
             {
                 RuleSet = RuleSet
             };
 
-            this.OnValidate( context );
+            this.OnValidate(context);
 
             return context.Results;
         }
@@ -94,15 +94,15 @@ namespace Radical.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
         /// </returns>
-        public ValidationResults Validate( T entity, string propertyName )
+        public ValidationResults Validate(T entity, string propertyName)
         {
-            var context = new ValidationContext<T>( entity, this )
+            var context = new ValidationContext<T>(entity, this)
             {
                 RuleSet = RuleSet,
                 PropertyName = propertyName
             };
 
-            this.OnValidate( context );
+            this.OnValidate(context);
 
             return context.Results;
         }
@@ -116,9 +116,9 @@ namespace Radical.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
         /// </returns>
-        public ValidationResults Validate<TProperty>( T entity, Expression<Func<T, TProperty>> property )
+        public ValidationResults Validate<TProperty>(T entity, Expression<Func<T, TProperty>> property)
         {
-            return this.Validate( entity, property.GetMemberName() );
+            return this.Validate(entity, property.GetMemberName());
         }
 
         /// <summary>
@@ -126,9 +126,9 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="rule">The rule to add.</param>
         /// <returns>The current validator instance.</returns>
-        public IValidator<T> AddRule( Action<ValidationContext<T>> rule )
+        public IValidator<T> AddRule(Action<ValidationContext<T>> rule)
         {
-            rules.Add( rule );
+            rules.Add(rule);
             return this;
         }
 
@@ -140,9 +140,9 @@ namespace Radical.Validation
         /// <param name="rule">The rule.</param>
         /// <param name="error">The error.</param>
         /// <returns></returns>
-        public IValidator<T> AddRule( Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, string error )
+        public IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, string error)
         {
-            return this.AddRule( propertyIdentifier, rule, ctx => error );
+            return this.AddRule(propertyIdentifier, rule, ctx => error);
         }
 
         /// <summary>
@@ -153,19 +153,19 @@ namespace Radical.Validation
         /// <param name="error">The error.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public IValidator<T> AddRule( Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, Func<ValidationContext<T>, string> error )
+        public IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, Func<ValidationContext<T>, string> error)
         {
-            return this.AddRule( ctx =>
-            {
-                var result = rule( ctx );
-                if ( result == RuleEvaluation.Failed )
-                {
-                    var propertyName = propertyIdentifier.GetMemberName();
-                    var displayName = this.GetPropertyDisplayName( propertyName, ctx.Entity );
+            return this.AddRule(ctx =>
+           {
+               var result = rule(ctx);
+               if (result == RuleEvaluation.Failed)
+               {
+                   var propertyName = propertyIdentifier.GetMemberName();
+                   var displayName = this.GetPropertyDisplayName(propertyName, ctx.Entity);
 
-                    ctx.Results.AddError( new ValidationError( propertyName, displayName, new[] { error( ctx ) } ) );
-                }
-            } );
+                   ctx.Results.AddError(new ValidationError(propertyName, displayName, new[] { error(ctx) }));
+               }
+           });
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace Radical.Validation
         /// <returns>
         ///   <c>true</c> if the specified entity is valid; otherwise, <c>false</c>.
         /// </returns>
-        bool IValidator.IsValid( object entity )
+        bool IValidator.IsValid(object entity)
         {
-            return this.IsValid( ( T )entity );
+            return this.IsValid((T)entity);
         }
 
         /// <summary>
@@ -187,9 +187,9 @@ namespace Radical.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults" /> with the results of the validation process.
         /// </returns>
-        ValidationResults IValidator.Validate( object entity )
+        ValidationResults IValidator.Validate(object entity)
         {
-            return this.Validate( ( T )entity );
+            return this.Validate((T)entity);
         }
 
         /// <summary>
@@ -200,9 +200,9 @@ namespace Radical.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults" /> with the results of the validation process.
         /// </returns>
-        ValidationResults IValidator.Validate( object entity, string propertyName )
+        ValidationResults IValidator.Validate(object entity, string propertyName)
         {
-            return this.Validate( ( T )entity, propertyName );
+            return this.Validate((T)entity, propertyName);
         }
     }
 }

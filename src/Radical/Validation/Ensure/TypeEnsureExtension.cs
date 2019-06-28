@@ -16,9 +16,9 @@ namespace Radical.Validation
         /// <typeparam name="T">The <see cref="Type"/> to compare.</typeparam>
         /// <param name="validator">The current validator.</param>
         /// <returns>The current validator for fluent interface usage.</returns>
-        public static IEnsure<Type> Is<T>( this IEnsure<Type> validator )
+        public static IEnsure<Type> Is<T>(this IEnsure<Type> validator)
         {
-            return validator.IsTrue( data => data.Is<T>() );
+            return validator.IsTrue(data => data.Is<T>());
         }
     }
 }

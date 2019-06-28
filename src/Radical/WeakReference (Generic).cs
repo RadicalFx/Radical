@@ -16,8 +16,8 @@
         /// the specified object.
         /// </summary>
         /// <param name="target">The object to reference.</param>
-        public WeakReference( T target )
-            : base( target )
+        public WeakReference(T target)
+            : base(target)
         {
 
         }
@@ -31,8 +31,8 @@
         /// If true, the object is tracked
         /// after finalization; if false, the object is only tracked 
         /// until finalization.</param>
-        public WeakReference( T target, bool trackResurrection )
-            : base( target, trackResurrection )
+        public WeakReference(T target, bool trackResurrection)
+            : base(target, trackResurrection)
         {
 
         }
@@ -45,20 +45,20 @@
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="info"/> is null.
         /// </exception>
-        protected WeakReference( SerializationInfo info, StreamingContext context )
-            : base( info, context )
+        protected WeakReference(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
- 
+
         }
-        
+
         /// <summary>
         /// Gets or sets the object (the target) referenced by the 
         /// current WeakReference{T} object.
         /// </summary>
         public new T Target
         {
-            get { return ( T )base.Target; }
+            get { return (T)base.Target; }
             set { base.Target = value; }
         }
-    } 
+    }
 }

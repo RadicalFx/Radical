@@ -38,12 +38,12 @@ namespace Radical.ComponentModel
         /// </returns>
         public TValue GetDefaultValue()
         {
-            if( this.DafaultValueInterceptor != null )
+            if (this.DafaultValueInterceptor != null)
             {
                 return this.DafaultValueInterceptor();
             }
 
-            return default( TValue );
+            return default(TValue);
         }
 
         /// <summary>
@@ -58,20 +58,20 @@ namespace Radical.ComponentModel
             set;
         }
 
-        public EntityItemViewCustomPropertyDescriptor( string customPropertyName, EntityItemViewValueGetter<T, TValue> getter )
-            : this( customPropertyName, getter, null )
+        public EntityItemViewCustomPropertyDescriptor(string customPropertyName, EntityItemViewValueGetter<T, TValue> getter)
+            : this(customPropertyName, getter, null)
         {
 
         }
 
-        public EntityItemViewCustomPropertyDescriptor( string customPropertyName, EntityItemViewValueGetter<T, TValue> getter, EntityItemViewValueSetter<T, TValue> setter )
-            : this( customPropertyName )
+        public EntityItemViewCustomPropertyDescriptor(string customPropertyName, EntityItemViewValueGetter<T, TValue> getter, EntityItemViewValueSetter<T, TValue> setter)
+            : this(customPropertyName)
         {
             this.ValueGetter = getter;
             this.ValueSetter = setter;
         }
 
-        public EntityItemViewCustomPropertyDescriptor( string customDisplayName )
+        public EntityItemViewCustomPropertyDescriptor(string customDisplayName)
             : base()
         {
             this._customDisplayName = customDisplayName;
@@ -101,7 +101,7 @@ namespace Radical.ComponentModel
         /// <returns>A <see cref="T:System.Type"/> that represents the type of the property.</returns>
         public override Type PropertyType
         {
-            get { return typeof( TValue ); }
+            get { return typeof(TValue); }
         }
 
         /// <summary>
@@ -114,18 +114,18 @@ namespace Radical.ComponentModel
             get { return this.ValueSetter == null; }
         }
 
-        protected override object GetValueCore( IEntityItemView<T> component )
+        protected override object GetValueCore(IEntityItemView<T> component)
         {
-            var args = new EntityItemViewValueGetterArgs<T, TValue>( component, this.Name );
-            var returnValue = this.ValueGetter( args );
+            var args = new EntityItemViewValueGetterArgs<T, TValue>(component, this.Name);
+            var returnValue = this.ValueGetter(args);
 
             return returnValue;
         }
 
-        protected override void SetValueCore( IEntityItemView<T> component, object value )
+        protected override void SetValueCore(IEntityItemView<T> component, object value)
         {
-            var args = new EntityItemViewValueSetterArgs<T, TValue>( component, this.Name, ( TValue )value );
-            this.ValueSetter( args );
+            var args = new EntityItemViewValueSetterArgs<T, TValue>(component, this.Name, (TValue)value);
+            this.ValueSetter(args);
         }
     }
 }

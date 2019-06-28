@@ -7,7 +7,7 @@ namespace Radical.Model.Services
     {
         public IKey GenerateEmpty()
         {
-            return ( 0 ).AsKey();
+            return (0).AsKey();
         }
     }
 }

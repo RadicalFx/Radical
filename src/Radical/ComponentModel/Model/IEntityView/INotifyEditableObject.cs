@@ -17,7 +17,7 @@ namespace Radical.ComponentModel
         /// Notifies that an edit operation has benn canceled.
         /// </summary>
         event EventHandler EditCanceled;
-        
+
         /// <summary>
         /// Notifies that an edit operation has ended.
         /// </summary>

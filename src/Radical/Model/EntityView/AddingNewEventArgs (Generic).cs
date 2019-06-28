@@ -9,7 +9,7 @@ namespace Radical.Model
         /// </summary>
         public AddingNewEventArgs()
         {
-            
+
         }
 
         /// <summary>

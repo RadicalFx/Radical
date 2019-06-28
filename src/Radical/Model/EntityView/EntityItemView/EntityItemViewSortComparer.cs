@@ -6,7 +6,7 @@ namespace Radical.Model
     using System.ComponentModel;
 
     public class EntityItemViewSortComparer<T> : IComparer<IEntityItemView<T>>
-        //where T : class
+    //where T : class
     {
         /// <summary>
         /// Gets the sort descriptions.
@@ -22,21 +22,21 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="EntityItemViewSortComparer&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="sortDescriptions">The sort descriptions.</param>
-        public EntityItemViewSortComparer( ListSortDescriptionCollection sortDescriptions )
+        public EntityItemViewSortComparer(ListSortDescriptionCollection sortDescriptions)
         {
             this.SortDescriptions = sortDescriptions;
         }
 
-        static int Compare( Object a, Object b, ListSortDirection direction )
+        static int Compare(Object a, Object b, ListSortDirection direction)
         {
             int retVal = 0;
 
-            if( !Object.Equals( a, b ) )
+            if (!Object.Equals(a, b))
             {
                 IComparable ic = a as IComparable;
-                if( ic != null )
+                if (ic != null)
                 {
-                    retVal = ic.CompareTo( b );
+                    retVal = ic.CompareTo(b);
                 }
                 else
                 {
@@ -45,14 +45,14 @@ namespace Radical.Model
                      * a confrontare la loro rappresentazione
                      * sottoforma di stringa
                      */
-                    var av = a == null ? ( string )null : a.ToString();
-                    var bv = b == null ? ( string )null : b.ToString();
+                    var av = a == null ? (string)null : a.ToString();
+                    var bv = b == null ? (string)null : b.ToString();
 
-                    retVal = string.Compare( av, bv, StringComparison.CurrentCulture );
+                    retVal = string.Compare(av, bv, StringComparison.CurrentCulture);
                 }
             }
 
-            if( direction == ListSortDirection.Descending )
+            if (direction == ListSortDirection.Descending)
             {
                 retVal *= -1;
             }
@@ -68,7 +68,7 @@ namespace Radical.Model
         /// <returns>
         /// Value Condition Less than zero<paramref name="x" /> is less than <paramref name="y" />.Zero<paramref name="x" /> equals <paramref name="y" />.Greater than zero<paramref name="x" /> is greater than <paramref name="y" />.
         /// </returns>
-        protected virtual int OnCompare( IEntityItemView<T> x, IEntityItemView<T> y )
+        protected virtual int OnCompare(IEntityItemView<T> x, IEntityItemView<T> y)
         {
             /*
              * Il confronto viene fatto scorrendo tutti
@@ -83,25 +83,25 @@ namespace Radical.Model
              */
             int retVal = 0;
 
-            if( this.SortDescriptions.Count == 1 )
+            if (this.SortDescriptions.Count == 1)
             {
-                ListSortDescription sd = this.SortDescriptions[ 0 ];
+                ListSortDescription sd = this.SortDescriptions[0];
 
-                object valueX = sd.PropertyDescriptor.GetValue( x );
-                object valueY = sd.PropertyDescriptor.GetValue( y );
+                object valueX = sd.PropertyDescriptor.GetValue(x);
+                object valueY = sd.PropertyDescriptor.GetValue(y);
 
-                retVal = EntityItemViewSortComparer<T>.Compare( valueX, valueY, sd.SortDirection );
+                retVal = EntityItemViewSortComparer<T>.Compare(valueX, valueY, sd.SortDirection);
             }
             else
             {
-                foreach( ListSortDescription sd in this.SortDescriptions )
+                foreach (ListSortDescription sd in this.SortDescriptions)
                 {
-                    if( retVal == 0 )
+                    if (retVal == 0)
                     {
-                        object valueX = sd.PropertyDescriptor.GetValue( x );
-                        object valueY = sd.PropertyDescriptor.GetValue( y );
+                        object valueX = sd.PropertyDescriptor.GetValue(x);
+                        object valueY = sd.PropertyDescriptor.GetValue(y);
 
-                        retVal = EntityItemViewSortComparer<T>.Compare( valueX, valueY, sd.SortDirection );
+                        retVal = EntityItemViewSortComparer<T>.Compare(valueX, valueY, sd.SortDirection);
                     }
                 }
             }
@@ -116,9 +116,9 @@ namespace Radical.Model
         /// <returns>
         /// Value Condition Less than zero<paramref name="x"/> is less than <paramref name="y"/>.Zero<paramref name="x"/> equals <paramref name="y"/>.Greater than zero<paramref name="x"/> is greater than <paramref name="y"/>.
         /// </returns>
-        public int Compare( IEntityItemView<T> x, IEntityItemView<T> y )
+        public int Compare(IEntityItemView<T> x, IEntityItemView<T> y)
         {
-            return this.OnCompare( x, y );
+            return this.OnCompare(x, y);
         }
     }
 }

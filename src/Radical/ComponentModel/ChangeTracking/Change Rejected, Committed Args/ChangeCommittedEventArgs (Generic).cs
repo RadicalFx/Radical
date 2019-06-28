@@ -16,8 +16,8 @@
         /// <param name="cachedValue">The cached value.</param>
         /// <param name="source">The source.</param>
         /// <param name="reason">The reason.</param>
-        public ChangeCommittedEventArgs( Object entity, T cachedValue, IChange source, CommitReason reason )
-            : base( entity, cachedValue, source )
+        public ChangeCommittedEventArgs(Object entity, T cachedValue, IChange source, CommitReason reason)
+            : base(entity, cachedValue, source)
         {
             this.Reason = reason;
         }

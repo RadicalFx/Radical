@@ -22,8 +22,8 @@
         /// Initializes a new instance of the <see cref="SpecificationNotSupportedException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public SpecificationNotSupportedException( string message )
-            : base( message )
+        public SpecificationNotSupportedException(string message)
+            : base(message)
         {
 
         }
@@ -33,8 +33,8 @@
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public SpecificationNotSupportedException( string message, Exception inner )
-            : base( message, inner )
+        public SpecificationNotSupportedException(string message, Exception inner)
+            : base(message, inner)
         {
 
         }
@@ -51,8 +51,8 @@
         /// <exception cref="T:System.Runtime.Serialization.SerializationException">
         /// The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0).
         /// </exception>
-        protected SpecificationNotSupportedException( SerializationInfo info, StreamingContext context )
-            : base( info, context )
+        protected SpecificationNotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
 
         }

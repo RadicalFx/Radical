@@ -17,7 +17,7 @@ namespace Radical.Tests.Model
 
             var filter = A.Fake<EntityItemViewFilterBase<GenericParameterHelper>>();
             A.CallTo(() => filter.ShouldInclude(expected)).Returns(true).Once();
-            
+
             var target = (IEntityItemViewFilter)filter;
             target.ShouldInclude(expected);
 

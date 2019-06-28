@@ -27,12 +27,12 @@ namespace Radical.Model
         /// <returns>
         ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
-        public override bool ShouldInclude( T item )
+        public override bool ShouldInclude(T item)
         {
-            Ensure.That( item )
-                .Named( () => item )
-                .If( i => Object.ReferenceEquals( i, null ) )
-                .ThenThrow( e => new ArgumentNullException( e.GetFullErrorMessage() ) );
+            Ensure.That(item)
+                .Named(() => item)
+                .If(i => Object.ReferenceEquals(i, null))
+                .ThenThrow(e => new ArgumentNullException(e.GetFullErrorMessage()));
 
             return true;
         }
@@ -42,7 +42,7 @@ namespace Radical.Model
         #region Singleton Pattern
 
         private readonly static ViewAllEntityItemViewFilter<T> _instance = new ViewAllEntityItemViewFilter<T>();
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static IEntityItemViewFilter Instance
         {
             get { return _instance; }

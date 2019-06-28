@@ -21,6 +21,6 @@
         /// <param name="ruleSet">The rule set to pass to the 
         /// newly created validator.</param>
         /// <returns>An instance of the requested validator.</returns>
-        IValidator<T> CreateValidator<T>( string ruleSet );
+        IValidator<T> CreateValidator<T>(string ruleSet);
     }
 }

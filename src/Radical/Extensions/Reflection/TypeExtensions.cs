@@ -22,9 +22,9 @@ namespace Radical.Reflection
         /// <returns>
         /// A <see cref="System.string"/> that represents this instance.
         /// </returns>
-        public static string ToString( this Type type, string format )
+        public static string ToString(this Type type, string format)
         {
-            switch( format.ToLower() )
+            switch (format.ToLower())
             {
                 case "sn":
                     return type.ToShortNameString();
@@ -44,21 +44,21 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="type">The type to build the string for.</param>
         /// <returns>A string representing the given type.</returns>
-        public static string ToShortString( this Type type )
+        public static string ToShortString(this Type type)
         {
-            Ensure.That( type ).Named( "type" ).IsNotNull();
+            Ensure.That(type).Named("type").IsNotNull();
 
             string tName = type.FullName;
             string aName = type.Assembly.GetName().Name;
 
 
-            if( string.Equals( aName, "mscorlib", StringComparison.OrdinalIgnoreCase ) )
+            if (string.Equals(aName, "mscorlib", StringComparison.OrdinalIgnoreCase))
             {
-                return string.Format( CultureInfo.InvariantCulture, "{0}", tName );
+                return string.Format(CultureInfo.InvariantCulture, "{0}", tName);
             }
             else
             {
-                return string.Format( CultureInfo.InvariantCulture, "{0}, {1}", tName, aName );
+                return string.Format(CultureInfo.InvariantCulture, "{0}, {1}", tName, aName);
             }
         }
 
@@ -68,22 +68,22 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="type">The type to build the string for.</param>
         /// <returns>A string representing the name of the given type.</returns>
-        public static string ToShortNameString( this Type type )
+        public static string ToShortNameString(this Type type)
         {
-            if( type.IsGenericType )
+            if (type.IsGenericType)
             {
-                var name = type.Name.Substring( 0, type.Name.Length - 2 );
+                var name = type.Name.Substring(0, type.Name.Length - 2);
                 var arguments = type.GetGenericArguments();
-                var argumentsName = arguments.Aggregate( new StringBuilder(), ( r, s ) =>
-                {
-                    r.AppendFormat( "{0}, ", s.ToShortNameString() );
+                var argumentsName = arguments.Aggregate(new StringBuilder(), (r, s) =>
+               {
+                   r.AppendFormat("{0}, ", s.ToShortNameString());
 
-                    return r;
-                } )
+                   return r;
+               })
                 .ToString()
-                .TrimEnd( ',', ' ' );
+                .TrimEnd(',', ' ');
 
-                return string.Format( "{0}<{1}>", name, argumentsName );
+                return string.Format("{0}<{1}>", name, argumentsName);
             }
 
             return type.Name;
@@ -99,9 +99,9 @@ namespace Radical.Reflection
         /// <returns>
         ///     <c>true</c> if the specified type inherits from the T type; otherwise, <c>false</c>.
         /// </returns>
-        public static bool Is<T>( this Type type )
+        public static bool Is<T>(this Type type)
         {
-            return type.Is( typeof( T ) );
+            return type.Is(typeof(T));
         }
 
         /// <summary>
@@ -114,11 +114,11 @@ namespace Radical.Reflection
         /// <returns>
         ///     <c>true</c> if the specified type inherits from the other type; otherwise, <c>false</c>.
         /// </returns>
-        public static bool Is( this Type type, Type otherType )
+        public static bool Is(this Type type, Type otherType)
         {
             return type != null &&
                 otherType != null &&
-                otherType.IsAssignableFrom( type );
+                otherType.IsAssignableFrom(type);
         }
 
         /// <summary>
@@ -126,9 +126,9 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="type">The type to search the inheritance chain.</param>
         /// <returns>The inheritance chain of the given type.</returns>
-        public static IEnumerable<Type> GetInheritanceChain( this Type type )
+        public static IEnumerable<Type> GetInheritanceChain(this Type type)
         {
-            return type.GetInheritanceChain( t => false );
+            return type.GetInheritanceChain(t => false);
         }
 
         /// <summary>
@@ -137,11 +137,11 @@ namespace Radical.Reflection
         /// <param name="type">The type to search the inheritance chain.</param>
         /// <param name="breakIf">A delegate that determinse whento stop the base type lookup.</param>
         /// <returns>The inheritance chain of the given type.</returns>
-        public static IEnumerable<Type> GetInheritanceChain( this Type type, Func<Type, bool> breakIf )
+        public static IEnumerable<Type> GetInheritanceChain(this Type type, Func<Type, bool> breakIf)
         {
-            for( var current = type; current != null; current = current.BaseType )
+            for (var current = type; current != null; current = current.BaseType)
             {
-                if( breakIf( current ) )
+                if (breakIf(current))
                 {
                     yield break;
                 }
@@ -155,10 +155,10 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>A list of descendant types.</returns>
-        public static IEnumerable<Type> GetDescendants( Type type )
+        public static IEnumerable<Type> GetDescendants(Type type)
         {
-            var all = type.Assembly.GetTypes().Where( t => t.Is( type ) );
-            foreach( var t in all )
+            var all = type.Assembly.GetTypes().Where(t => t.Is(type));
+            foreach (var t in all)
             {
                 yield return t;
             }

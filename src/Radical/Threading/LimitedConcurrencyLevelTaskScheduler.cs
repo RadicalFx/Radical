@@ -27,22 +27,22 @@ namespace Radical.Threading
         /// specified degree of parallelism.
         /// </summary>
         /// <param name="maxDegreeOfParallelism">The maximum degree of parallelism provided by this scheduler.</param>
-        public LimitedConcurrencyLevelTaskScheduler( int maxDegreeOfParallelism )
+        public LimitedConcurrencyLevelTaskScheduler(int maxDegreeOfParallelism)
         {
-            if( maxDegreeOfParallelism < 1 ) throw new ArgumentOutOfRangeException( "maxDegreeOfParallelism" );
+            if (maxDegreeOfParallelism < 1) throw new ArgumentOutOfRangeException("maxDegreeOfParallelism");
             _maxDegreeOfParallelism = maxDegreeOfParallelism;
         }
 
         /// <summary>Queues a task to the scheduler.</summary>
         /// <param name="task">The task to be queued.</param>
-        protected sealed override void QueueTask( Task task )
+        protected sealed override void QueueTask(Task task)
         {
             // Add the task to the list of tasks to be processed.  If there aren't enough
             // delegates currently queued or running to process tasks, schedule another.
-            lock( _tasks )
+            lock (_tasks)
             {
-                _tasks.AddLast( task );
-                if( _delegatesQueuedOrRunning < _maxDegreeOfParallelism )
+                _tasks.AddLast(task);
+                if (_delegatesQueuedOrRunning < _maxDegreeOfParallelism)
                 {
                     ++_delegatesQueuedOrRunning;
                     NotifyThreadPoolOfPendingWork();
@@ -55,63 +55,63 @@ namespace Radical.Threading
         /// </summary>
         private void NotifyThreadPoolOfPendingWork()
         {
-            ThreadPool.UnsafeQueueUserWorkItem( _ =>
-            {
+            ThreadPool.UnsafeQueueUserWorkItem(_ =>
+           {
                 // Note that the current thread is now processing work items.
                 // This is necessary to enable inlining of tasks into this thread.
                 _currentThreadIsProcessingItems = true;
-                try
-                {
+               try
+               {
                     // Process all available items in the queue.
-                    while( true )
-                    {
-                        Task item;
-                        lock( _tasks )
-                        {
+                    while (true)
+                   {
+                       Task item;
+                       lock (_tasks)
+                       {
                             // When there are no more items to be processed,
                             // note that we're done processing, and get out.
-                            if( _tasks.Count == 0 )
-                            {
-                                --_delegatesQueuedOrRunning;
-                                break;
-                            }
+                            if (_tasks.Count == 0)
+                           {
+                               --_delegatesQueuedOrRunning;
+                               break;
+                           }
 
                             // Get the next item from the queue
                             item = _tasks.First.Value;
-                            _tasks.RemoveFirst();
-                        }
+                           _tasks.RemoveFirst();
+                       }
 
                         // Execute the task we pulled out of the queue
-                        base.TryExecuteTask( item );
-                    }
-                }
+                        base.TryExecuteTask(item);
+                   }
+               }
                 // We're done processing items on the current thread
                 finally { _currentThreadIsProcessingItems = false; }
-            }, null );
+           }, null);
         }
 
         /// <summary>Attempts to execute the specified task on the current thread.</summary>
         /// <param name="task">The task to be executed.</param>
         /// <param name="taskWasPreviouslyQueued"></param>
         /// <returns>Whether the task could be executed on the current thread.</returns>
-        protected sealed override bool TryExecuteTaskInline( Task task, bool taskWasPreviouslyQueued )
+        protected sealed override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
             // If this thread isn't already processing a task, we don't support inlining
-            if( !_currentThreadIsProcessingItems ) return false;
+            if (!_currentThreadIsProcessingItems) return false;
 
             // If the task was previously queued, remove it from the queue
-            if( taskWasPreviouslyQueued ) TryDequeue( task );
+            if (taskWasPreviouslyQueued) TryDequeue(task);
 
             // Try to run the task.
-            return base.TryExecuteTask( task );
+            return base.TryExecuteTask(task);
         }
 
         /// <summary>Attempts to remove a previously scheduled task from the scheduler.</summary>
         /// <param name="task">The task to be removed.</param>
         /// <returns>Whether the task could be found and removed.</returns>
-        protected sealed override bool TryDequeue( Task task )
+        protected sealed override bool TryDequeue(Task task)
         {
-            lock( _tasks ) return _tasks.Remove( task );
+            lock (_tasks) return _tasks.Remove(task);
         }
 
         /// <summary>Gets the maximum concurrency level supported by this scheduler.</summary>
@@ -124,13 +124,13 @@ namespace Radical.Threading
             bool lockTaken = false;
             try
             {
-                Monitor.TryEnter( _tasks, ref lockTaken );
-                if( lockTaken ) return _tasks.ToArray();
+                Monitor.TryEnter(_tasks, ref lockTaken);
+                if (lockTaken) return _tasks.ToArray();
                 else throw new NotSupportedException();
             }
             finally
             {
-                if( lockTaken ) Monitor.Exit( _tasks );
+                if (lockTaken) Monitor.Exit(_tasks);
             }
         }
     }

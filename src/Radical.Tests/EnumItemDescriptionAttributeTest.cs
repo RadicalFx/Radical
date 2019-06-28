@@ -23,23 +23,23 @@ namespace Radical.Tests
             }
         }
 
-        protected virtual EnumItemDescriptionAttribute CreateMock( string caption )
+        protected virtual EnumItemDescriptionAttribute CreateMock(string caption)
         {
-            return new EnumItemDescriptionAttribute( caption );
+            return new EnumItemDescriptionAttribute(caption);
         }
 
-        protected virtual EnumItemDescriptionAttribute CreateMock( string caption, int index )
+        protected virtual EnumItemDescriptionAttribute CreateMock(string caption, int index)
         {
-            return new EnumItemDescriptionAttribute( caption, index );
+            return new EnumItemDescriptionAttribute(caption, index);
         }
 
         [TestMethod()]
         public void EnumItemDescriptionAttribute_ctor_caption()
         {
             string caption = "fake caption";
-            EnumItemDescriptionAttribute target = this.CreateMock( caption );
+            EnumItemDescriptionAttribute target = this.CreateMock(caption);
 
-            Assert.IsNotNull( target );
+            Assert.IsNotNull(target);
         }
 
         [TestMethod()]
@@ -47,18 +47,18 @@ namespace Radical.Tests
         {
             string caption = "fake caption";
             int index = 0;
-            EnumItemDescriptionAttribute target = this.CreateMock( caption, index );
+            EnumItemDescriptionAttribute target = this.CreateMock(caption, index);
 
-            Assert.IsNotNull( target );
+            Assert.IsNotNull(target);
         }
 
         [TestMethod()]
         public void EnumItemDescriptionAttribute_caption()
         {
             string caption = "fake caption";
-            EnumItemDescriptionAttribute target = this.CreateMock( caption );
+            EnumItemDescriptionAttribute target = this.CreateMock(caption);
 
-            Assert.AreEqual<string>( caption, target.Caption );
+            Assert.AreEqual<string>(caption, target.Caption);
         }
 
         [TestMethod()]
@@ -66,9 +66,9 @@ namespace Radical.Tests
         {
             string expectedCaption = "fake caption";
             int expectedIndex = 0;
-            EnumItemDescriptionAttribute target = this.CreateMock( expectedCaption, expectedIndex );
+            EnumItemDescriptionAttribute target = this.CreateMock(expectedCaption, expectedIndex);
 
-            Assert.AreEqual<string>( expectedCaption, target.Caption );
+            Assert.AreEqual<string>(expectedCaption, target.Caption);
         }
 
         [TestMethod()]
@@ -76,25 +76,25 @@ namespace Radical.Tests
         {
             string expectedcaption = "fake caption";
             int expectedIndex = 0;
-            EnumItemDescriptionAttribute target = this.CreateMock( expectedcaption, expectedIndex );
+            EnumItemDescriptionAttribute target = this.CreateMock(expectedcaption, expectedIndex);
 
-            Assert.AreEqual<int>( expectedIndex, target.Index );
+            Assert.AreEqual<int>(expectedIndex, target.Index);
         }
 
         [TestMethod()]
         public void EnumItemDescriptionAttribute_Index()
         {
-            EnumItemDescriptionAttribute target = this.CreateMock( "fake caption" );
+            EnumItemDescriptionAttribute target = this.CreateMock("fake caption");
             int actual = target.Index;
 
-            Assert.AreEqual<int>( -1, actual );
+            Assert.AreEqual<int>(-1, actual);
         }
 
         [TestMethod()]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void EnumItemDescriptionAttribute_ctor_null_caption()
         {
-            EnumItemDescriptionAttribute target = this.CreateMock( null );
+            EnumItemDescriptionAttribute target = this.CreateMock(null);
         }
     }
 }

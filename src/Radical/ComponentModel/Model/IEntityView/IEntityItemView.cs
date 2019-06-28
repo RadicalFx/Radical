@@ -5,9 +5,9 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Identifies an item in an <see cref="IEntityView"/> object.
     /// </summary>
-    public interface IEntityItemView : 
-        ICustomTypeDescriptor, 
-        INotifyEditableObject, 
+    public interface IEntityItemView :
+        ICustomTypeDescriptor,
+        INotifyEditableObject,
         INotifyPropertyChanged
     {
         /// <summary>
@@ -27,10 +27,10 @@ namespace Radical.ComponentModel
         /// <value>The owner view.</value>
         IEntityView View { get; }
 
-        void SetCustomValue<TValue>( string customPropertyName, TValue value );
-        TValue GetCustomValue<TValue>( string customPropertyName );
+        void SetCustomValue<TValue>(string customPropertyName, TValue value);
+        TValue GetCustomValue<TValue>(string customPropertyName);
 
-        void NotifyPropertyChanged( string propertyName );
+        void NotifyPropertyChanged(string propertyName);
     }
 
 }

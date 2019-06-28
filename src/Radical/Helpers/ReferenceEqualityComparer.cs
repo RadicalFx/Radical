@@ -13,26 +13,26 @@
 
         }
 
-        public bool Equals( T x, T y )
+        public bool Equals(T x, T y)
         {
-            return Object.Equals( x, y );
+            return Object.Equals(x, y);
         }
 
-        bool IEqualityComparer.Equals( Object x, Object y )
+        bool IEqualityComparer.Equals(Object x, Object y)
         {
-            return Object.Equals( x, y );
+            return Object.Equals(x, y);
         }
 
-        int IEqualityComparer.GetHashCode( object obj )
+        int IEqualityComparer.GetHashCode(object obj)
         {
-            Ensure.That( obj ).Named( "obj" ).IsNotNull();
+            Ensure.That(obj).Named("obj").IsNotNull();
 
             return obj.GetHashCode();
         }
 
-        int IEqualityComparer<T>.GetHashCode( T obj )
+        int IEqualityComparer<T>.GetHashCode(T obj)
         {
-            Ensure.That( obj ).Named( "obj" ).IsNotNull();
+            Ensure.That(obj).Named("obj").IsNotNull();
 
             return obj.GetHashCode();
         }

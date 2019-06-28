@@ -21,14 +21,14 @@ namespace Radical.ComponentModel.Validation
         /// <returns>
         ///     <c>true</c> if the specified entity is valid; otherwise, <c>false</c>.
         /// </returns>
-        bool IsValid( Object entity );
+        bool IsValid(Object entity);
 
         /// <summary>
         /// Validates the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>An instance of the <see cref="ValidationResults"/> with the results of the validation process.</returns>
-        ValidationResults Validate( Object entity );
+        ValidationResults Validate(Object entity);
 
         /// <summary>
         /// Validates the specified property of the given entity.
@@ -38,6 +38,6 @@ namespace Radical.ComponentModel.Validation
         /// <returns>
         /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
         /// </returns>
-        ValidationResults Validate( Object entity, string propertyName );
+        ValidationResults Validate(Object entity, string propertyName);
     }
 }

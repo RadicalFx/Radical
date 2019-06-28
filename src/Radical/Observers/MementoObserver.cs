@@ -6,14 +6,14 @@ namespace Radical.Observers
 {
     public static class MementoObserver
     {
-        public static MementoMonitor Monitor( IChangeTrackingService source )
+        public static MementoMonitor Monitor(IChangeTrackingService source)
         {
-            return new MementoMonitor( source );
+            return new MementoMonitor(source);
         }
 
-        public static MementoMonitor Monitor( IChangeTrackingService source, IDispatcher dispatcher )
+        public static MementoMonitor Monitor(IChangeTrackingService source, IDispatcher dispatcher)
         {
-            return new MementoMonitor( source, dispatcher );
+            return new MementoMonitor(source, dispatcher);
         }
     }
 
@@ -21,23 +21,23 @@ namespace Radical.Observers
     {
         EventHandler handler = null;
 
-        public MementoMonitor( IChangeTrackingService source )
-            : this( source, null )
+        public MementoMonitor(IChangeTrackingService source)
+            : this(source, null)
         {
 
         }
 
-        public MementoMonitor( IChangeTrackingService source, IDispatcher dispatcher )
-            : base( source, dispatcher )
+        public MementoMonitor(IChangeTrackingService source, IDispatcher dispatcher)
+            : base(source, dispatcher)
         {
-            handler = ( s, e ) => this.OnChanged();
+            handler = (s, e) => this.OnChanged();
 
             this.Source.TrackingServiceStateChanged += handler;
         }
 
-        protected override void OnStopMonitoring( bool targetDisposed )
+        protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if( !targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive )
+            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
             {
                 this.Source.TrackingServiceStateChanged -= handler;
             }

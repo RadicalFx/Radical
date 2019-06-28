@@ -18,17 +18,17 @@ namespace Radical.ChangeTracking
         ///     <c>true</c> if the specified entity is transient; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the supplied entity is not tracked by a change tracking service.</exception>
-        public static bool IsTransient( this IMemento entity )
+        public static bool IsTransient(this IMemento entity)
         {
             var memento = entity.Memento;
-            if( memento == null )
+            if (memento == null)
             {
                 throw new ArgumentException();
             }
 
-            var state = memento.GetEntityState( entity );
+            var state = memento.GetEntityState(entity);
 
-            return ( state & EntityTrackingStates.IsTransient ) == EntityTrackingStates.IsTransient;
+            return (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
         }
 
         /// <summary>
@@ -39,17 +39,17 @@ namespace Radical.ChangeTracking
         ///     <c>true</c> if the specified entity is changed; otherwise, <c>false</c>.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the supplied entity is not tracked by a change tracking service.</exception>
-        public static bool IsChanged( this IMemento entity )
+        public static bool IsChanged(this IMemento entity)
         {
             var memento = entity.Memento;
-            if( memento == null )
+            if (memento == null)
             {
                 throw new ArgumentException();
             }
 
-            var state = memento.GetEntityState( entity );
+            var state = memento.GetEntityState(entity);
 
-            return ( state & EntityTrackingStates.HasBackwardChanges ) == EntityTrackingStates.HasBackwardChanges;
+            return (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
         }
 
         /// <summary>

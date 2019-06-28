@@ -7,7 +7,7 @@ namespace Radical.Win32
         public const int AUTOSUGGEST = 0x10000000,
             AUTOSUGGEST_OFF = 0x20000000,
             AUTOAPPEND = 0x40000000,
-            AUTOAPPEND_OFF = ( unchecked( ( int )0x80000000 ) );
+            AUTOAPPEND_OFF = (unchecked((int)0x80000000));
 
         public const int ARW_BOTTOMLEFT = 0x0000,
             ARW_BOTTOMRIGHT = 0x0001,
@@ -18,8 +18,8 @@ namespace Radical.Win32
             ARW_UP = 0x0004,
             ARW_DOWN = 0x0004,
             ARW_HIDE = 0x0008,
-            ACM_OPENA = ( 0x0400 + 100 ),
-            ACM_OPENW = ( 0x0400 + 103 ),
+            ACM_OPENA = (0x0400 + 100),
+            ACM_OPENW = (0x0400 + 103),
             ADVF_NODATA = 1,
             ADVF_ONLYONCE = 2,
             ADVF_PRIMEFIRST = 4;
@@ -104,8 +104,8 @@ namespace Radical.Win32
             CF_NOVERTFONTS = 0x01000000,
             CP_WINANSI = 1004;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int cmb4 = 0x0473,
             CS_DBLCLKS = 0x0008,
             CS_DROPSHADOW = 0x00020000,
@@ -127,10 +127,10 @@ namespace Radical.Win32
             CF_LOCALE = 16,
             CLSCTX_INPROC_SERVER = 0x1,
             CLSCTX_LOCAL_SERVER = 0x4,
-            CW_USEDEFAULT = ( unchecked( ( int )0x80000000 ) ),
+            CW_USEDEFAULT = (unchecked((int)0x80000000)),
             CWP_SKIPINVISIBLE = 0x0001,
             COLOR_WINDOW = 5,
-            CB_ERR = ( -1 ),
+            CB_ERR = (-1),
             CBN_SELCHANGE = 1,
             CBN_DBLCLK = 2,
             CBN_EDITCHANGE = 5,
@@ -173,8 +173,8 @@ namespace Radical.Win32
             CDDS_POSTPAINT = 0x00000002,
             CDDS_ITEM = 0x00010000,
             CDDS_SUBITEM = 0x00020000,
-            CDDS_ITEMPREPAINT = ( 0x00010000 | 0x00000001 ),
-            CDDS_ITEMPOSTPAINT = ( 0x00010000 | 0x00000002 ),
+            CDDS_ITEMPREPAINT = (0x00010000 | 0x00000001),
+            CDDS_ITEMPOSTPAINT = (0x00010000 | 0x00000002),
             CDIS_SELECTED = 0x0001,
             CDIS_GRAYED = 0x0002,
             CDIS_DISABLED = 0x0004,
@@ -185,21 +185,21 @@ namespace Radical.Win32
             CDIS_MARKED = 0x0080,
             CDIS_INDETERMINATE = 0x0100,
             CDIS_SHOWKEYBOARDCUES = 0x0200,
-            CLR_NONE = unchecked( ( int )0xFFFFFFFF ),
-            CLR_DEFAULT = unchecked( ( int )0xFF000000 ),
+            CLR_NONE = unchecked((int)0xFFFFFFFF),
+            CLR_DEFAULT = unchecked((int)0xFF000000),
             CCS_NORESIZE = 0x00000004,
             CCS_NOPARENTALIGN = 0x00000008,
             CCS_NODIVIDER = 0x00000040,
-            CBEM_INSERTITEMA = ( 0x0400 + 1 ),
-            CBEM_GETITEMA = ( 0x0400 + 4 ),
-            CBEM_SETITEMA = ( 0x0400 + 5 ),
-            CBEM_INSERTITEMW = ( 0x0400 + 11 ),
-            CBEM_SETITEMW = ( 0x0400 + 12 ),
-            CBEM_GETITEMW = ( 0x0400 + 13 ),
-            CBEN_ENDEDITA = ( ( 0 - 800 ) - 5 ),
-            CBEN_ENDEDITW = ( ( 0 - 800 ) - 6 ),
-            CONNECT_E_NOCONNECTION = unchecked( ( int )0x80040200 ),
-            CONNECT_E_CANNOTCONNECT = unchecked( ( int )0x80040202 ),
+            CBEM_INSERTITEMA = (0x0400 + 1),
+            CBEM_GETITEMA = (0x0400 + 4),
+            CBEM_SETITEMA = (0x0400 + 5),
+            CBEM_INSERTITEMW = (0x0400 + 11),
+            CBEM_SETITEMW = (0x0400 + 12),
+            CBEM_GETITEMW = (0x0400 + 13),
+            CBEN_ENDEDITA = ((0 - 800) - 5),
+            CBEN_ENDEDITW = ((0 - 800) - 6),
+            CONNECT_E_NOCONNECTION = unchecked((int)0x80040200),
+            CONNECT_E_CANNOTCONNECT = unchecked((int)0x80040202),
             CTRLINFO_EATS_RETURN = 1,
             CTRLINFO_EATS_ESCAPE = 2,
             CSIDL_DESKTOP = 0x0000,        // <desktop>
@@ -223,22 +223,22 @@ namespace Radical.Win32
             CSIDL_PROGRAM_FILES = 0x0026,        // C:\Program Files
             CSIDL_PROGRAM_FILES_COMMON = 0x002b;        // C:\Program Files\Common
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int DUPLICATE = 0x06,
-            DISPID_UNKNOWN = ( -1 ),
-            DISPID_PROPERTYPUT = ( -3 ),
+            DISPID_UNKNOWN = (-1),
+            DISPID_PROPERTYPUT = (-3),
             DISPATCH_METHOD = 0x1,
             DISPATCH_PROPERTYGET = 0x2,
             DISPATCH_PROPERTYPUT = 0x4,
-            DV_E_DVASPECT = unchecked( ( int )0x8004006B ),
-            DISP_E_MEMBERNOTFOUND = unchecked( ( int )0x80020003 ),
-            DISP_E_PARAMNOTFOUND = unchecked( ( int )0x80020004 ),
-            DISP_E_EXCEPTION = unchecked( ( int )0x80020009 ),
+            DV_E_DVASPECT = unchecked((int)0x8004006B),
+            DISP_E_MEMBERNOTFOUND = unchecked((int)0x80020003),
+            DISP_E_PARAMNOTFOUND = unchecked((int)0x80020004),
+            DISP_E_EXCEPTION = unchecked((int)0x80020009),
             DEFAULT_GUI_FONT = 17,
             DIB_RGB_COLORS = 0,
-            DRAGDROP_E_NOTREGISTERED = unchecked( ( int )0x80040100 ),
-            DRAGDROP_E_ALREADYREGISTERED = unchecked( ( int )0x80040101 ),
+            DRAGDROP_E_NOTREGISTERED = unchecked((int)0x80040100),
+            DRAGDROP_E_ALREADYREGISTERED = unchecked((int)0x80040101),
             DUPLICATE_SAME_ACCESS = 0x00000002,
             DFC_CAPTION = 1,
             DFC_MENU = 2,
@@ -285,54 +285,54 @@ namespace Radical.Win32
             DLGC_WANTTAB = 0x0002,
             DLGC_WANTALLKEYS = 0x0004,
             DLGC_WANTCHARS = 0x0080,
-            DTM_SETSYSTEMTIME = ( 0x1000 + 2 ),
-            DTM_SETRANGE = ( 0x1000 + 4 ),
-            DTM_SETFORMATA = ( 0x1000 + 5 ),
-            DTM_SETFORMATW = ( 0x1000 + 50 ),
-            DTM_SETMCCOLOR = ( 0x1000 + 6 ),
-            DTM_SETMCFONT = ( 0x1000 + 9 ),
+            DTM_SETSYSTEMTIME = (0x1000 + 2),
+            DTM_SETRANGE = (0x1000 + 4),
+            DTM_SETFORMATA = (0x1000 + 5),
+            DTM_SETFORMATW = (0x1000 + 50),
+            DTM_SETMCCOLOR = (0x1000 + 6),
+            DTM_SETMCFONT = (0x1000 + 9),
             DTS_UPDOWN = 0x0001,
             DTS_SHOWNONE = 0x0002,
             DTS_LONGDATEFORMAT = 0x0004,
             DTS_TIMEFORMAT = 0x0009,
             DTS_RIGHTALIGN = 0x0020,
-            DTN_DATETIMECHANGE = ( ( 0 - 760 ) + 1 ),
-            DTN_USERSTRINGA = ( ( 0 - 760 ) + 2 ),
-            DTN_USERSTRINGW = ( ( 0 - 760 ) + 15 ),
-            DTN_WMKEYDOWNA = ( ( 0 - 760 ) + 3 ),
-            DTN_WMKEYDOWNW = ( ( 0 - 760 ) + 16 ),
-            DTN_FORMATA = ( ( 0 - 760 ) + 4 ),
-            DTN_FORMATW = ( ( 0 - 760 ) + 17 ),
-            DTN_FORMATQUERYA = ( ( 0 - 760 ) + 5 ),
-            DTN_FORMATQUERYW = ( ( 0 - 760 ) + 18 ),
-            DTN_DROPDOWN = ( ( 0 - 760 ) + 6 ),
-            DTN_CLOSEUP = ( ( 0 - 760 ) + 7 ),
+            DTN_DATETIMECHANGE = ((0 - 760) + 1),
+            DTN_USERSTRINGA = ((0 - 760) + 2),
+            DTN_USERSTRINGW = ((0 - 760) + 15),
+            DTN_WMKEYDOWNA = ((0 - 760) + 3),
+            DTN_WMKEYDOWNW = ((0 - 760) + 16),
+            DTN_FORMATA = ((0 - 760) + 4),
+            DTN_FORMATW = ((0 - 760) + 17),
+            DTN_FORMATQUERYA = ((0 - 760) + 5),
+            DTN_FORMATQUERYW = ((0 - 760) + 18),
+            DTN_DROPDOWN = ((0 - 760) + 6),
+            DTN_CLOSEUP = ((0 - 760) + 7),
             DVASPECT_CONTENT = 1,
             DVASPECT_TRANSPARENT = 32,
             DVASPECT_OPAQUE = 16;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const int E_NOTIMPL = unchecked( ( int )0x80004001 ),
-            E_OUTOFMEMORY = unchecked( ( int )0x8007000E ),
-            E_INVALIDARG = unchecked( ( int )0x80070057 ),
-            E_NOINTERFACE = unchecked( ( int )0x80004002 ),
-            E_FAIL = unchecked( ( int )0x80004005 ),
-            E_ABORT = unchecked( ( int )0x80004004 ),
-            E_UNEXPECTED = unchecked( ( int )0x8000FFFF ),
-            INET_E_DEFAULT_ACTION = unchecked( ( int )0x800C0011 ),
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
+        public const int E_NOTIMPL = unchecked((int)0x80004001),
+            E_OUTOFMEMORY = unchecked((int)0x8007000E),
+            E_INVALIDARG = unchecked((int)0x80070057),
+            E_NOINTERFACE = unchecked((int)0x80004002),
+            E_FAIL = unchecked((int)0x80004005),
+            E_ABORT = unchecked((int)0x80004004),
+            E_UNEXPECTED = unchecked((int)0x8000FFFF),
+            INET_E_DEFAULT_ACTION = unchecked((int)0x800C0011),
             ETO_OPAQUE = 0x0002,
             ETO_CLIPPED = 0x0004,
             EMR_POLYTEXTOUTA = 96,
             EMR_POLYTEXTOUTW = 97,
-            EDGE_RAISED = ( 0x0001 | 0x0004 ),
-            EDGE_SUNKEN = ( 0x0002 | 0x0008 ),
-            EDGE_ETCHED = ( 0x0002 | 0x0004 ),
-            EDGE_BUMP = ( 0x0001 | 0x0008 ),
+            EDGE_RAISED = (0x0001 | 0x0004),
+            EDGE_SUNKEN = (0x0002 | 0x0008),
+            EDGE_ETCHED = (0x0002 | 0x0004),
+            EDGE_BUMP = (0x0001 | 0x0008),
             ES_LEFT = 0x0000,
             ES_CENTER = 0x0001,
             ES_RIGHT = 0x0002,
-            ES_NUMBER = 0x2000, 
+            ES_NUMBER = 0x2000,
             ES_MULTILINE = 0x0004,
             ES_UPPERCASE = 0x0008,
             ES_LOWERCASE = 0x0010,
@@ -372,32 +372,32 @@ namespace Radical.Win32
             ECM_FIRST = 0x1500,
             EM_SETCUEBANNER = ECM_FIRST + 1;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int FNERR_SUBCLASSFAILURE = 0x3001,
             FNERR_INVALIDFILENAME = 0x3002,
             FNERR_BUFFERTOOSMALL = 0x3003,
             FRERR_BUFFERLENGTHZERO = 0x4001,
-            FADF_BSTR = ( 0x100 ),
-            FADF_UNKNOWN = ( 0x200 ),
-            FADF_DISPATCH = ( 0x400 ),
-            FADF_VARIANT = ( unchecked( ( int )0x800 ) ),
+            FADF_BSTR = (0x100),
+            FADF_UNKNOWN = (0x200),
+            FADF_DISPATCH = (0x400),
+            FADF_VARIANT = (unchecked((int)0x800)),
             FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000,
             FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200,
             FVIRTKEY = 0x01,
             FSHIFT = 0x04,
             FALT = 0x10;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int GMEM_MOVEABLE = 0x0002,
             GMEM_ZEROINIT = 0x0040,
             GMEM_DDESHARE = 0x2000,
-            GWL_WNDPROC = ( -4 ),
-            GWL_HWNDPARENT = ( -8 ),
-            GWL_STYLE = ( -16 ),
-            GWL_EXSTYLE = ( -20 ),
-            GWL_ID = ( -12 ),
+            GWL_WNDPROC = (-4),
+            GWL_HWNDPARENT = (-8),
+            GWL_STYLE = (-16),
+            GWL_EXSTYLE = (-20),
+            GWL_ID = (-12),
             GW_HWNDFIRST = 0,
             GW_HWNDLAST = 1,
             GW_HWNDNEXT = 2,
@@ -405,14 +405,14 @@ namespace Radical.Win32
             GW_CHILD = 5,
             GMR_VISIBLE = 0,
             GMR_DAYSTATE = 1,
-            GDI_ERROR = ( unchecked( ( int )0xFFFFFFFF ) ),
+            GDI_ERROR = (unchecked((int)0xFFFFFFFF)),
             GDTR_MIN = 0x0001,
             GDTR_MAX = 0x0002,
             GDT_VALID = 0,
             GDT_NONE = 1;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int HOLLOW_BRUSH = 5,
             HC_ACTION = 0,
             HC_GETNEXT = 1,
@@ -426,40 +426,40 @@ namespace Radical.Win32
             HELPINFO_WINDOW = 0x0001,
             HCF_HIGHCONTRASTON = 0x00000001,
             HDI_ORDER = 0x0080,
-            HDM_GETITEMCOUNT = ( 0x1200 + 0 ),
-            HDM_INSERTITEMA = ( 0x1200 + 1 ),
-            HDM_INSERTITEMW = ( 0x1200 + 10 ),
-            HDM_GETITEMA = ( 0x1200 + 3 ),
-            HDM_GETITEMW = ( 0x1200 + 11 ),
-            HDM_SETITEMA = ( 0x1200 + 4 ),
-            HDM_SETITEMW = ( 0x1200 + 12 ),
-            HDN_ITEMCHANGINGA = ( ( 0 - 300 ) - 0 ),
-            HDN_ITEMCHANGINGW = ( ( 0 - 300 ) - 20 ),
-            HDN_ITEMCHANGEDA = ( ( 0 - 300 ) - 1 ),
-            HDN_ITEMCHANGEDW = ( ( 0 - 300 ) - 21 ),
-            HDN_ITEMCLICKA = ( ( 0 - 300 ) - 2 ),
-            HDN_ITEMCLICKW = ( ( 0 - 300 ) - 22 ),
-            HDN_ITEMDBLCLICKA = ( ( 0 - 300 ) - 3 ),
-            HDN_ITEMDBLCLICKW = ( ( 0 - 300 ) - 23 ),
-            HDN_DIVIDERDBLCLICKA = ( ( 0 - 300 ) - 5 ),
-            HDN_DIVIDERDBLCLICKW = ( ( 0 - 300 ) - 25 ),
-            HDN_BEGINTDRAG = ( ( 0 - 300 ) - 10 ),
-            HDN_BEGINTRACKA = ( ( 0 - 300 ) - 6 ),
-            HDN_BEGINTRACKW = ( ( 0 - 300 ) - 26 ),
-            HDN_ENDDRAG = ( ( 0 - 300 ) - 11 ),
-            HDN_ENDTRACKA = ( ( 0 - 300 ) - 7 ),
-            HDN_ENDTRACKW = ( ( 0 - 300 ) - 27 ),
-            HDN_TRACKA = ( ( 0 - 300 ) - 8 ),
-            HDN_TRACKW = ( ( 0 - 300 ) - 28 ),
-            HDN_GETDISPINFOA = ( ( 0 - 300 ) - 9 ),
-            HDN_GETDISPINFOW = ( ( 0 - 300 ) - 29 );
+            HDM_GETITEMCOUNT = (0x1200 + 0),
+            HDM_INSERTITEMA = (0x1200 + 1),
+            HDM_INSERTITEMW = (0x1200 + 10),
+            HDM_GETITEMA = (0x1200 + 3),
+            HDM_GETITEMW = (0x1200 + 11),
+            HDM_SETITEMA = (0x1200 + 4),
+            HDM_SETITEMW = (0x1200 + 12),
+            HDN_ITEMCHANGINGA = ((0 - 300) - 0),
+            HDN_ITEMCHANGINGW = ((0 - 300) - 20),
+            HDN_ITEMCHANGEDA = ((0 - 300) - 1),
+            HDN_ITEMCHANGEDW = ((0 - 300) - 21),
+            HDN_ITEMCLICKA = ((0 - 300) - 2),
+            HDN_ITEMCLICKW = ((0 - 300) - 22),
+            HDN_ITEMDBLCLICKA = ((0 - 300) - 3),
+            HDN_ITEMDBLCLICKW = ((0 - 300) - 23),
+            HDN_DIVIDERDBLCLICKA = ((0 - 300) - 5),
+            HDN_DIVIDERDBLCLICKW = ((0 - 300) - 25),
+            HDN_BEGINTDRAG = ((0 - 300) - 10),
+            HDN_BEGINTRACKA = ((0 - 300) - 6),
+            HDN_BEGINTRACKW = ((0 - 300) - 26),
+            HDN_ENDDRAG = ((0 - 300) - 11),
+            HDN_ENDTRACKA = ((0 - 300) - 7),
+            HDN_ENDTRACKW = ((0 - 300) - 27),
+            HDN_TRACKA = ((0 - 300) - 8),
+            HDN_TRACKW = ((0 - 300) - 28),
+            HDN_GETDISPINFOA = ((0 - 300) - 9),
+            HDN_GETDISPINFOW = ((0 - 300) - 29);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int IME_CMODE_NATIVE = 0x0001,
             IME_CMODE_KATAKANA = 0x0002,
             IME_CMODE_FULLSHAPE = 0x0008,
-            INPLACE_E_NOTOOLSPACE = unchecked( ( int )0x800401A1 ),
+            INPLACE_E_NOTOOLSPACE = unchecked((int)0x800401A1),
             ICON_SMALL = 0,
             ICON_BIG = 1,
             IDC_ARROW = 32512,
@@ -503,43 +503,43 @@ namespace Radical.Win32
             ILS_SATURATE = 0x4,
             ILS_ALPHA = 0x8;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int IDM_PRINT = 27,
             IDM_PAGESETUP = 2004,
             IDM_PRINTPREVIEW = 2003,
             IDM_PROPERTIES = 28,
             IDM_SAVEAS = 71;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int CSC_NAVIGATEFORWARD = 0x00000001,
             CSC_NAVIGATEBACK = 0x00000002;
 
-        public const int STG_E_INVALIDFUNCTION = unchecked( ( int )0x80030001 );
-        public const int STG_E_FILENOTFOUND = unchecked( ( int )0x80030002 );
-        public const int STG_E_PATHNOTFOUND = unchecked( ( int )0x80030003 );
-        public const int STG_E_TOOMANYOPENFILES = unchecked( ( int )0x80030004 );
-        public const int STG_E_ACCESSDENIED = unchecked( ( int )0x80030005 );
-        public const int STG_E_INVALIDHANDLE = unchecked( ( int )0x80030006 );
-        public const int STG_E_INSUFFICIENTMEMORY = unchecked( ( int )0x80030008 );
-        public const int STG_E_INVALIDPOINTER = unchecked( ( int )0x80030009 );
-        public const int STG_E_NOMOREFILES = unchecked( ( int )0x80030012 );
-        public const int STG_E_DISKISWRITEPROTECTED = unchecked( ( int )0x80030013 );
-        public const int STG_E_SEEKERROR = unchecked( ( int )0x80030019 );
-        public const int STG_E_WRITEFAULT = unchecked( ( int )0x8003001D );
-        public const int STG_E_READFAULT = unchecked( ( int )0x8003001E );
-        public const int STG_E_SHAREVIOLATION = unchecked( ( int )0x80030020 );
-        public const int STG_E_LOCKVIOLATION = unchecked( ( int )0x80030021 );
+        public const int STG_E_INVALIDFUNCTION = unchecked((int)0x80030001);
+        public const int STG_E_FILENOTFOUND = unchecked((int)0x80030002);
+        public const int STG_E_PATHNOTFOUND = unchecked((int)0x80030003);
+        public const int STG_E_TOOMANYOPENFILES = unchecked((int)0x80030004);
+        public const int STG_E_ACCESSDENIED = unchecked((int)0x80030005);
+        public const int STG_E_INVALIDHANDLE = unchecked((int)0x80030006);
+        public const int STG_E_INSUFFICIENTMEMORY = unchecked((int)0x80030008);
+        public const int STG_E_INVALIDPOINTER = unchecked((int)0x80030009);
+        public const int STG_E_NOMOREFILES = unchecked((int)0x80030012);
+        public const int STG_E_DISKISWRITEPROTECTED = unchecked((int)0x80030013);
+        public const int STG_E_SEEKERROR = unchecked((int)0x80030019);
+        public const int STG_E_WRITEFAULT = unchecked((int)0x8003001D);
+        public const int STG_E_READFAULT = unchecked((int)0x8003001E);
+        public const int STG_E_SHAREVIOLATION = unchecked((int)0x80030020);
+        public const int STG_E_LOCKVIOLATION = unchecked((int)0x80030021);
 
         public const int KEYEVENTF_KEYUP = 0x0002;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int LOGPIXELSX = 88,
             LOGPIXELSY = 90,
-            LB_ERR = ( -1 ),
-            LB_ERRSPACE = ( -2 ),
+            LB_ERR = (-1),
+            LB_ERRSPACE = (-2),
             LBN_SELCHANGE = 1,
             LBN_DBLCLK = 2,
             LB_ADDSTRING = 0x0180,
@@ -568,8 +568,8 @@ namespace Radical.Win32
             LB_ITEMFROMPOINT = 0x01A9,
             LB_SETLOCALE = 0x01A5;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int LBS_NOTIFY = 0x0001,
             LBS_MULTIPLESEL = 0x0008,
             LBS_OWNERDRAWFIXED = 0x0010,
@@ -606,20 +606,20 @@ namespace Radical.Win32
             LVS_ALIGNTOP = 0x0000,
             LVS_ALIGNLEFT = 0x0800,
             LVS_NOCOLUMNHEADER = 0x4000,
-            LVS_NOSORTHEADER = unchecked( ( int )0x8000 ),
+            LVS_NOSORTHEADER = unchecked((int)0x8000),
             LVS_OWNERDATA = 0x1000,
             LVSCW_AUTOSIZE = -1,
             LVSCW_AUTOSIZE_USEHEADER = -2,
-            LVM_SCROLL = ( 0x1000 + 20 ),
-            LVM_SETBKCOLOR = ( 0x1000 + 1 ),
-            LVM_SETBKIMAGEA = ( 0x1000 + 68 ),
-            LVM_SETBKIMAGEW = ( 0x1000 + 138 ),
-            LVM_SETINFOTIP = ( 0x1000 + 173 ),
+            LVM_SCROLL = (0x1000 + 20),
+            LVM_SETBKCOLOR = (0x1000 + 1),
+            LVM_SETBKIMAGEA = (0x1000 + 68),
+            LVM_SETBKIMAGEW = (0x1000 + 138),
+            LVM_SETINFOTIP = (0x1000 + 173),
             LVSIL_NORMAL = 0,
             LVSIL_SMALL = 1,
             LVSIL_STATE = 2,
-            LVM_SETIMAGELIST = ( 0x1000 + 3 ),
-            LVM_SETTOOLTIPS = ( 0x1000 + 74 ),
+            LVM_SETIMAGELIST = (0x1000 + 3),
+            LVM_SETTOOLTIPS = (0x1000 + 74),
             LVIF_TEXT = 0x0001,
             LVIF_IMAGE = 0x0002,
             LVIF_INDENT = 0x0010,
@@ -633,34 +633,34 @@ namespace Radical.Win32
             LVIS_DROPHILITED = 0x0008,
             LVIS_OVERLAYMASK = 0x0F00,
             LVIS_STATEIMAGEMASK = 0xF000,
-            LVM_GETITEMA = ( 0x1000 + 5 ),
-            LVM_GETITEMW = ( 0x1000 + 75 ),
-            LVM_SETITEMA = ( 0x1000 + 6 ),
-            LVM_SETITEMW = ( 0x1000 + 76 ),
-            LVM_SETITEMPOSITION32 = ( 0x01000 + 49 ),
-            LVM_INSERTITEMA = ( 0x1000 + 7 ),
-            LVM_INSERTITEMW = ( 0x1000 + 77 ),
-            LVM_DELETEITEM = ( 0x1000 + 8 ),
-            LVM_DELETECOLUMN = ( 0x1000 + 28 ),
-            LVM_DELETEALLITEMS = ( 0x1000 + 9 ),
-            LVM_UPDATE = ( 0x1000 + 42 ),
+            LVM_GETITEMA = (0x1000 + 5),
+            LVM_GETITEMW = (0x1000 + 75),
+            LVM_SETITEMA = (0x1000 + 6),
+            LVM_SETITEMW = (0x1000 + 76),
+            LVM_SETITEMPOSITION32 = (0x01000 + 49),
+            LVM_INSERTITEMA = (0x1000 + 7),
+            LVM_INSERTITEMW = (0x1000 + 77),
+            LVM_DELETEITEM = (0x1000 + 8),
+            LVM_DELETECOLUMN = (0x1000 + 28),
+            LVM_DELETEALLITEMS = (0x1000 + 9),
+            LVM_UPDATE = (0x1000 + 42),
             LVNI_FOCUSED = 0x0001,
             LVNI_SELECTED = 0x0002,
-            LVM_GETNEXTITEM = ( 0x1000 + 12 ),
+            LVM_GETNEXTITEM = (0x1000 + 12),
             LVFI_PARAM = 0x0001,
             LVFI_NEARESTXY = 0x0040,
             LVFI_PARTIAL = 0x0008,
             LVFI_STRING = 0x0002,
-            LVM_FINDITEMA = ( 0x1000 + 13 ),
-            LVM_FINDITEMW = ( 0x1000 + 83 ),
+            LVM_FINDITEMA = (0x1000 + 13),
+            LVM_FINDITEMW = (0x1000 + 83),
             LVIR_BOUNDS = 0,
             LVIR_ICON = 1,
             LVIR_LABEL = 2,
             LVIR_SELECTBOUNDS = 3,
-            LVM_GETITEMRECT = ( 0x1000 + 14 ),
-            LVM_GETSUBITEMRECT = ( 0x1000 + 56 ),
-            LVM_GETSTRINGWIDTHA = ( 0x1000 + 17 ),
-            LVM_GETSTRINGWIDTHW = ( 0x1000 + 87 ),
+            LVM_GETITEMRECT = (0x1000 + 14),
+            LVM_GETSUBITEMRECT = (0x1000 + 56),
+            LVM_GETSTRINGWIDTHA = (0x1000 + 17),
+            LVM_GETSTRINGWIDTHW = (0x1000 + 87),
             LVHT_NOWHERE = 0x0001,
             LVHT_ONITEMICON = 0x0002,
             LVHT_ONITEMLABEL = 0x0004,
@@ -668,18 +668,18 @@ namespace Radical.Win32
             LVHT_BELOW = 0x0010,
             LVHT_RIGHT = 0x0020,
             LVHT_LEFT = 0x0040,
-            LVHT_ONITEM = ( 0x0002 | 0x0004 | 0x0008 ),
+            LVHT_ONITEM = (0x0002 | 0x0004 | 0x0008),
             LVHT_ONITEMSTATEICON = 0x0008,
-            LVM_SUBITEMHITTEST = ( 0x1000 + 57 ),
-            LVM_HITTEST = ( 0x1000 + 18 ),
-            LVM_ENSUREVISIBLE = ( 0x1000 + 19 ),
+            LVM_SUBITEMHITTEST = (0x1000 + 57),
+            LVM_HITTEST = (0x1000 + 18),
+            LVM_ENSUREVISIBLE = (0x1000 + 19),
             LVA_DEFAULT = 0x0000,
             LVA_ALIGNLEFT = 0x0001,
             LVA_ALIGNTOP = 0x0002,
             LVA_SNAPTOGRID = 0x0005,
-            LVM_ARRANGE = ( 0x1000 + 22 ),
-            LVM_EDITLABELA = ( 0x1000 + 23 ),
-            LVM_EDITLABELW = ( 0x1000 + 118 ),
+            LVM_ARRANGE = (0x1000 + 22),
+            LVM_EDITLABELA = (0x1000 + 23),
+            LVM_EDITLABELW = (0x1000 + 118),
             LVCDI_ITEM = 0x0000,
             LVCF_FMT = 0x0001,
             LVCF_WIDTH = 0x0002,
@@ -707,51 +707,51 @@ namespace Radical.Win32
             LVTVIM_TILESIZE = 0x00000001,
             LVTVIM_COLUMNS = 0x00000002,
             LVM_FIRST = 0x1000,
-            LVM_ENABLEGROUPVIEW = ( LVM_FIRST + 157 ),
-            LVM_MOVEITEMTOGROUP = ( LVM_FIRST + 154 ),
-            LVM_GETCOLUMNA = ( LVM_FIRST + 25 ),
-            LVM_GETCOLUMNW = ( LVM_FIRST + 95 ),
-            LVM_SETCOLUMNA = ( LVM_FIRST + 26 ),
-            LVM_SETCOLUMNW = ( LVM_FIRST + 96 ),
-            LVM_INSERTCOLUMNA = ( LVM_FIRST + 27 ),
-            LVM_INSERTCOLUMNW = ( LVM_FIRST + 97 ),
-            LVM_INSERTGROUP = ( LVM_FIRST + 145 ),
-            LVM_REMOVEGROUP = ( LVM_FIRST + 150 ),
-            LVM_INSERTMARKHITTEST = ( LVM_FIRST + 168 ),
-            LVM_REMOVEALLGROUPS = ( LVM_FIRST + 160 ),
-            LVM_GETCOLUMNWIDTH = ( LVM_FIRST + 29 ),
-            LVM_SETCOLUMNWIDTH = ( LVM_FIRST + 30 ),
-            LVM_SETINSERTMARK = ( LVM_FIRST + 166 ),
-            LVM_GETHEADER = ( LVM_FIRST + 31 ),
-            LVM_SETTEXTCOLOR = ( LVM_FIRST + 36 ),
-            LVM_SETTEXTBKCOLOR = ( LVM_FIRST + 38 ),
-            LVM_GETTOPINDEX = ( LVM_FIRST + 39 ),
-            LVM_SETITEMPOSITION = ( LVM_FIRST + 15 ),
-            LVM_SETITEMSTATE = ( LVM_FIRST + 43 ),
-            LVM_GETITEMSTATE = ( LVM_FIRST + 44 ),
-            LVM_GETITEMTEXTA = ( LVM_FIRST + 45 ),
-            LVM_GETITEMTEXTW = ( LVM_FIRST + 115 ),
-            LVM_GETHOTITEM = ( LVM_FIRST + 61 ),
-            LVM_SETITEMTEXTA = ( LVM_FIRST + 46 ),
-            LVM_SETITEMTEXTW = ( LVM_FIRST + 116 ),
-            LVM_SETITEMCOUNT = ( LVM_FIRST + 47 ),
-            LVM_SORTITEMS = ( LVM_FIRST + 48 ),
-            LVM_GETSELECTEDCOUNT = ( LVM_FIRST + 50 ),
-            LVM_GETISEARCHSTRINGA = ( LVM_FIRST + 52 ),
-            LVM_GETISEARCHSTRINGW = ( LVM_FIRST + 117 ),
-            LVM_SETEXTENDEDLISTVIEWSTYLE = ( LVM_FIRST + 54 ),
-            LVM_SETVIEW = ( LVM_FIRST + 142 ),
-            LVM_GETGROUPINFO = ( LVM_FIRST + 149 ),
-            LVM_SETGROUPINFO = ( LVM_FIRST + 147 ),
-            LVM_HASGROUP = ( LVM_FIRST + 161 ),
-            LVM_SETTILEVIEWINFO = ( LVM_FIRST + 162 ),
-            LVM_GETTILEVIEWINFO = ( LVM_FIRST + 163 ),
-            LVM_GETINSERTMARK = ( LVM_FIRST + 167 ),
-            LVM_GETINSERTMARKRECT = ( LVM_FIRST + 169 ),
-            LVM_SETINSERTMARKCOLOR = ( LVM_FIRST + 170 ),
-            LVM_GETINSERTMARKCOLOR = ( 0x1000 + 171 ),
-            LVM_ISGROUPVIEWENABLED = ( LVM_FIRST + 175 ),
-            LVM_REDRAWITEMS = ( LVM_FIRST + 21 ),
+            LVM_ENABLEGROUPVIEW = (LVM_FIRST + 157),
+            LVM_MOVEITEMTOGROUP = (LVM_FIRST + 154),
+            LVM_GETCOLUMNA = (LVM_FIRST + 25),
+            LVM_GETCOLUMNW = (LVM_FIRST + 95),
+            LVM_SETCOLUMNA = (LVM_FIRST + 26),
+            LVM_SETCOLUMNW = (LVM_FIRST + 96),
+            LVM_INSERTCOLUMNA = (LVM_FIRST + 27),
+            LVM_INSERTCOLUMNW = (LVM_FIRST + 97),
+            LVM_INSERTGROUP = (LVM_FIRST + 145),
+            LVM_REMOVEGROUP = (LVM_FIRST + 150),
+            LVM_INSERTMARKHITTEST = (LVM_FIRST + 168),
+            LVM_REMOVEALLGROUPS = (LVM_FIRST + 160),
+            LVM_GETCOLUMNWIDTH = (LVM_FIRST + 29),
+            LVM_SETCOLUMNWIDTH = (LVM_FIRST + 30),
+            LVM_SETINSERTMARK = (LVM_FIRST + 166),
+            LVM_GETHEADER = (LVM_FIRST + 31),
+            LVM_SETTEXTCOLOR = (LVM_FIRST + 36),
+            LVM_SETTEXTBKCOLOR = (LVM_FIRST + 38),
+            LVM_GETTOPINDEX = (LVM_FIRST + 39),
+            LVM_SETITEMPOSITION = (LVM_FIRST + 15),
+            LVM_SETITEMSTATE = (LVM_FIRST + 43),
+            LVM_GETITEMSTATE = (LVM_FIRST + 44),
+            LVM_GETITEMTEXTA = (LVM_FIRST + 45),
+            LVM_GETITEMTEXTW = (LVM_FIRST + 115),
+            LVM_GETHOTITEM = (LVM_FIRST + 61),
+            LVM_SETITEMTEXTA = (LVM_FIRST + 46),
+            LVM_SETITEMTEXTW = (LVM_FIRST + 116),
+            LVM_SETITEMCOUNT = (LVM_FIRST + 47),
+            LVM_SORTITEMS = (LVM_FIRST + 48),
+            LVM_GETSELECTEDCOUNT = (LVM_FIRST + 50),
+            LVM_GETISEARCHSTRINGA = (LVM_FIRST + 52),
+            LVM_GETISEARCHSTRINGW = (LVM_FIRST + 117),
+            LVM_SETEXTENDEDLISTVIEWSTYLE = (LVM_FIRST + 54),
+            LVM_SETVIEW = (LVM_FIRST + 142),
+            LVM_GETGROUPINFO = (LVM_FIRST + 149),
+            LVM_SETGROUPINFO = (LVM_FIRST + 147),
+            LVM_HASGROUP = (LVM_FIRST + 161),
+            LVM_SETTILEVIEWINFO = (LVM_FIRST + 162),
+            LVM_GETTILEVIEWINFO = (LVM_FIRST + 163),
+            LVM_GETINSERTMARK = (LVM_FIRST + 167),
+            LVM_GETINSERTMARKRECT = (LVM_FIRST + 169),
+            LVM_SETINSERTMARKCOLOR = (LVM_FIRST + 170),
+            LVM_GETINSERTMARKCOLOR = (0x1000 + 171),
+            LVM_ISGROUPVIEWENABLED = (LVM_FIRST + 175),
+            LVM_REDRAWITEMS = (LVM_FIRST + 21),
             LVS_EX_UNDERLINEHOT = 0x0800,
             LVS_EX_GRIDLINES = 0x00000001,
             LVS_EX_CHECKBOXES = 0x00000004,
@@ -761,39 +761,39 @@ namespace Radical.Win32
             LVS_EX_ONECLICKACTIVATE = 0x00000040,
             LVS_EX_TWOCLICKACTIVATE = 0x00000080,
             LVS_EX_INFOTIP = 0x00000400,
-            LVN_ITEMCHANGING = ( ( 0 - 100 ) - 0 ),
-            LVN_ITEMCHANGED = ( ( 0 - 100 ) - 1 ),
-            LVN_BEGINLABELEDITA = ( ( 0 - 100 ) - 5 ),
-            LVN_BEGINLABELEDITW = ( ( 0 - 100 ) - 75 ),
-            LVN_ENDLABELEDITA = ( ( 0 - 100 ) - 6 ),
-            LVN_ENDLABELEDITW = ( ( 0 - 100 ) - 76 ),
-            LVN_COLUMNCLICK = ( ( 0 - 100 ) - 8 ),
-            LVN_BEGINDRAG = ( ( 0 - 100 ) - 9 ),
-            LVN_BEGINRDRAG = ( ( 0 - 100 ) - 11 ),
-            LVN_ODFINDITEMA = ( ( 0 - 100 ) - 52 ),
-            LVN_ODFINDITEMW = ( ( 0 - 100 ) - 79 ),
-            LVN_ITEMACTIVATE = ( ( 0 - 100 ) - 14 ),
-            LVN_GETDISPINFOA = ( ( 0 - 100 ) - 50 ),
-            LVN_GETDISPINFOW = ( ( 0 - 100 ) - 77 ),
-            LVN_ODCACHEHINT = ( ( 0 - 100 ) - 13 ),
-            LVN_ODSTATECHANGED = ( ( 0 - 100 ) - 15 ),
-            LVN_SETDISPINFOA = ( ( 0 - 100 ) - 51 ),
-            LVN_SETDISPINFOW = ( ( 0 - 100 ) - 78 ),
-            LVN_GETINFOTIPA = ( ( 0 - 100 ) - 57 ),
-            LVN_GETINFOTIPW = ( ( 0 - 100 ) - 58 ),
-            LVN_KEYDOWN = ( ( 0 - 100 ) - 55 ),
+            LVN_ITEMCHANGING = ((0 - 100) - 0),
+            LVN_ITEMCHANGED = ((0 - 100) - 1),
+            LVN_BEGINLABELEDITA = ((0 - 100) - 5),
+            LVN_BEGINLABELEDITW = ((0 - 100) - 75),
+            LVN_ENDLABELEDITA = ((0 - 100) - 6),
+            LVN_ENDLABELEDITW = ((0 - 100) - 76),
+            LVN_COLUMNCLICK = ((0 - 100) - 8),
+            LVN_BEGINDRAG = ((0 - 100) - 9),
+            LVN_BEGINRDRAG = ((0 - 100) - 11),
+            LVN_ODFINDITEMA = ((0 - 100) - 52),
+            LVN_ODFINDITEMW = ((0 - 100) - 79),
+            LVN_ITEMACTIVATE = ((0 - 100) - 14),
+            LVN_GETDISPINFOA = ((0 - 100) - 50),
+            LVN_GETDISPINFOW = ((0 - 100) - 77),
+            LVN_ODCACHEHINT = ((0 - 100) - 13),
+            LVN_ODSTATECHANGED = ((0 - 100) - 15),
+            LVN_SETDISPINFOA = ((0 - 100) - 51),
+            LVN_SETDISPINFOW = ((0 - 100) - 78),
+            LVN_GETINFOTIPA = ((0 - 100) - 57),
+            LVN_GETINFOTIPW = ((0 - 100) - 58),
+            LVN_KEYDOWN = ((0 - 100) - 55),
 
             LWA_COLORKEY = 0x00000001,
             LWA_ALPHA = 0x00000002;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int LANG_NEUTRAL = 0x00,
             LOCALE_IFIRSTDAYOFWEEK = 0x0000100C;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const int MEMBERID_NIL = ( -1 ),
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
+        public const int MEMBERID_NIL = (-1),
             MAX_PATH = 260,
             MM_TEXT = 1,
             MM_ANISOTROPIC = 8,
@@ -822,49 +822,49 @@ namespace Radical.Win32
             MFT_RIGHTJUSTIFY = 0x00004000,
             MDITILE_VERTICAL = 0x0000,
             MDITILE_HORIZONTAL = 0x0001,
-            MCM_SETMAXSELCOUNT = ( 0x1000 + 4 ),
-            MCM_SETSELRANGE = ( 0x1000 + 6 ),
-            MCM_GETMONTHRANGE = ( 0x1000 + 7 ),
-            MCM_GETMINREQRECT = ( 0x1000 + 9 ),
-            MCM_SETCOLOR = ( 0x1000 + 10 ),
-            MCM_SETTODAY = ( 0x1000 + 12 ),
-            MCM_GETTODAY = ( 0x1000 + 13 ),
-            MCM_HITTEST = ( 0x1000 + 14 ),
-            MCM_SETFIRSTDAYOFWEEK = ( 0x1000 + 15 ),
-            MCM_SETRANGE = ( 0x1000 + 18 ),
-            MCM_SETMONTHDELTA = ( 0x1000 + 20 ),
-            MCM_GETMAXTODAYWIDTH = ( 0x1000 + 21 ),
+            MCM_SETMAXSELCOUNT = (0x1000 + 4),
+            MCM_SETSELRANGE = (0x1000 + 6),
+            MCM_GETMONTHRANGE = (0x1000 + 7),
+            MCM_GETMINREQRECT = (0x1000 + 9),
+            MCM_SETCOLOR = (0x1000 + 10),
+            MCM_SETTODAY = (0x1000 + 12),
+            MCM_GETTODAY = (0x1000 + 13),
+            MCM_HITTEST = (0x1000 + 14),
+            MCM_SETFIRSTDAYOFWEEK = (0x1000 + 15),
+            MCM_SETRANGE = (0x1000 + 18),
+            MCM_SETMONTHDELTA = (0x1000 + 20),
+            MCM_GETMAXTODAYWIDTH = (0x1000 + 21),
             MCHT_TITLE = 0x00010000,
             MCHT_CALENDAR = 0x00020000,
             MCHT_TODAYLINK = 0x00030000,
-            MCHT_TITLEBK = ( 0x00010000 ),
-            MCHT_TITLEMONTH = ( 0x00010000 | 0x0001 ),
-            MCHT_TITLEYEAR = ( 0x00010000 | 0x0002 ),
-            MCHT_TITLEBTNNEXT = ( 0x00010000 | 0x01000000 | 0x0003 ),
-            MCHT_TITLEBTNPREV = ( 0x00010000 | 0x02000000 | 0x0003 ),
-            MCHT_CALENDARBK = ( 0x00020000 ),
-            MCHT_CALENDARDATE = ( 0x00020000 | 0x0001 ),
-            MCHT_CALENDARDATENEXT = ( ( 0x00020000 | 0x0001 ) | 0x01000000 ),
-            MCHT_CALENDARDATEPREV = ( ( 0x00020000 | 0x0001 ) | 0x02000000 ),
-            MCHT_CALENDARDAY = ( 0x00020000 | 0x0002 ),
-            MCHT_CALENDARWEEKNUM = ( 0x00020000 | 0x0003 ),
+            MCHT_TITLEBK = (0x00010000),
+            MCHT_TITLEMONTH = (0x00010000 | 0x0001),
+            MCHT_TITLEYEAR = (0x00010000 | 0x0002),
+            MCHT_TITLEBTNNEXT = (0x00010000 | 0x01000000 | 0x0003),
+            MCHT_TITLEBTNPREV = (0x00010000 | 0x02000000 | 0x0003),
+            MCHT_CALENDARBK = (0x00020000),
+            MCHT_CALENDARDATE = (0x00020000 | 0x0001),
+            MCHT_CALENDARDATENEXT = ((0x00020000 | 0x0001) | 0x01000000),
+            MCHT_CALENDARDATEPREV = ((0x00020000 | 0x0001) | 0x02000000),
+            MCHT_CALENDARDAY = (0x00020000 | 0x0002),
+            MCHT_CALENDARWEEKNUM = (0x00020000 | 0x0003),
             MCSC_TEXT = 1,
             MCSC_TITLEBK = 2,
             MCSC_TITLETEXT = 3,
             MCSC_MONTHBK = 4,
             MCSC_TRAILINGTEXT = 5,
-            MCN_SELCHANGE = ( ( 0 - 750 ) + 1 ),
-            MCN_GETDAYSTATE = ( ( 0 - 750 ) + 3 ),
-            MCN_SELECT = ( ( 0 - 750 ) + 4 ),
+            MCN_SELCHANGE = ((0 - 750) + 1),
+            MCN_GETDAYSTATE = ((0 - 750) + 3),
+            MCN_SELECT = ((0 - 750) + 4),
             MCS_DAYSTATE = 0x0001,
             MCS_MULTISELECT = 0x0002,
             MCS_WEEKNUMBERS = 0x0004,
             MCS_NOTODAYCIRCLE = 0x0008,
             MCS_NOTODAY = 0x0010,
-            MSAA_MENU_SIG = ( unchecked( ( int )0xAA0DF00D ) );
+            MSAA_MENU_SIG = (unchecked((int)0xAA0DF00D));
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int NIM_ADD = 0x00000000,
             NIM_MODIFY = 0x00000001,
             NIM_DELETE = 0x00000002,
@@ -874,22 +874,22 @@ namespace Radical.Win32
             NIF_INFO = 0x00000010,
             NFR_ANSI = 1,
             NFR_UNICODE = 2,
-            NM_CLICK = ( ( 0 - 0 ) - 2 ),
-            NM_DBLCLK = ( ( 0 - 0 ) - 3 ),
-            NM_RCLICK = ( ( 0 - 0 ) - 5 ),
-            NM_RDBLCLK = ( ( 0 - 0 ) - 6 ),
-            NM_CUSTOMDRAW = ( ( 0 - 0 ) - 12 ),
-            NM_RELEASEDCAPTURE = ( ( 0 - 0 ) - 16 );
+            NM_CLICK = ((0 - 0) - 2),
+            NM_DBLCLK = ((0 - 0) - 3),
+            NM_RCLICK = ((0 - 0) - 5),
+            NM_RDBLCLK = ((0 - 0) - 6),
+            NM_CUSTOMDRAW = ((0 - 0) - 12),
+            NM_RELEASEDCAPTURE = ((0 - 0) - 16);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int NIN_BALLOONSHOW = 0x402,
             NIN_BALLOONHIDE = 0x403,
             NIN_BALLOONTIMEOUT = 0x404,
             NIN_BALLOONUSERCLICK = 0x405;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int OFN_READONLY = 0x00000001,
             OFN_OVERWRITEPROMPT = 0x00000002,
             OFN_HIDEREADONLY = 0x00000004,
@@ -912,8 +912,8 @@ namespace Radical.Win32
             OLEIVERB_INPLACEACTIVATE = -5,
             OLEIVERB_DISCARDUNDOSTATE = -6,
             OLEIVERB_PROPERTIES = -7,
-            OLE_E_NOCONNECTION = unchecked( ( int )0x80040004 ),
-            OLE_E_PROMPTSAVECANCELLED = unchecked( ( int )0x8004000C ),
+            OLE_E_NOCONNECTION = unchecked((int)0x80040004),
+            OLE_E_PROMPTSAVECANCELLED = unchecked((int)0x8004000C),
             OLEMISC_RECOMPOSEONRESIZE = 0x00000001,
             OLEMISC_INSIDEOUT = 0x00000080,
             OLEMISC_ACTIVATEWHENVISIBLE = 0x0000100,
@@ -945,8 +945,8 @@ namespace Radical.Win32
             OLECLOSE_SAVEIFDIRTY = 0,
             OLECLOSE_PROMPTSAVE = 2;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int PDERR_SETUPFAILURE = 0x1001,
             PDERR_PARSEFAILURE = 0x1002,
             PDERR_RETDEFFAILURE = 0x1003,
@@ -989,25 +989,25 @@ namespace Radical.Win32
             PM_NOREMOVE = 0x0000,
             PM_REMOVE = 0x0001,
             PM_NOYIELD = 0x0002,
-            PBM_SETRANGE = ( 0x0400 + 1 ),
-            PBM_SETPOS = ( 0x0400 + 2 ),
-            PBM_SETSTEP = ( 0x0400 + 4 ),
-            PBM_SETRANGE32 = ( 0x0400 + 6 ),
-            PBM_SETBARCOLOR = ( 0x0400 + 9 ),
-            PBM_SETBKCOLOR = ( 0x2000 + 1 ),
-            PSM_SETTITLEA = ( 0x0400 + 111 ),
-            PSM_SETTITLEW = ( 0x0400 + 120 ),
-            PSM_SETFINISHTEXTA = ( 0x0400 + 115 ),
-            PSM_SETFINISHTEXTW = ( 0x0400 + 121 ),
+            PBM_SETRANGE = (0x0400 + 1),
+            PBM_SETPOS = (0x0400 + 2),
+            PBM_SETSTEP = (0x0400 + 4),
+            PBM_SETRANGE32 = (0x0400 + 6),
+            PBM_SETBARCOLOR = (0x0400 + 9),
+            PBM_SETBKCOLOR = (0x2000 + 1),
+            PSM_SETTITLEA = (0x0400 + 111),
+            PSM_SETTITLEW = (0x0400 + 120),
+            PSM_SETFINISHTEXTA = (0x0400 + 115),
+            PSM_SETFINISHTEXTW = (0x0400 + 121),
             PATCOPY = 0x00F00021,
             PATINVERT = 0x005A0049;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int PBS_SMOOTH = 0x01;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int QS_KEY = 0x0001,
             QS_MOUSEMOVE = 0x0002,
             QS_MOUSEBUTTON = 0x0004,
@@ -1022,21 +1022,21 @@ namespace Radical.Win32
             QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY,
             QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const int RPC_E_CHANGED_MODE = unchecked( ( int )0x80010106 ),
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
+        public const int RPC_E_CHANGED_MODE = unchecked((int)0x80010106),
             RGN_AND = 1,
-            RPC_E_CANTCALLOUT_ININPUTSYNCCALL = unchecked( ( int )0x8001010D ),
+            RPC_E_CANTCALLOUT_ININPUTSYNCCALL = unchecked((int)0x8001010D),
             RGN_DIFF = 4,
             RDW_INVALIDATE = 0x0001,
             RDW_ERASE = 0x0004,
             RDW_ALLCHILDREN = 0x0080,
             RDW_FRAME = 0x0400,
-            RB_INSERTBANDA = ( 0x0400 + 1 ),
-            RB_INSERTBANDW = ( 0x0400 + 10 );
+            RB_INSERTBANDA = (0x0400 + 1),
+            RB_INSERTBANDW = (0x0400 + 10);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int stc4 = 0x0443,
             SHGFP_TYPE_CURRENT = 0,
             STGM_READ = 0x00000000,
@@ -1161,8 +1161,8 @@ namespace Radical.Win32
             SM_SAMEDISPLAYFORMAT = 81,
             SM_REMOTESESSION = 0x1000;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int SND_SYNC = 0000,
             SND_ASYNC = 0x0001,
             SND_NODEFAULT = 0x0002,
@@ -1172,16 +1172,16 @@ namespace Radical.Win32
             SND_FILENAME = 0x00020000,
             SND_NOSTOP = 0x0010;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int MB_ICONHAND = 0x000010,
             MB_ICONQUESTION = 0x000020,
             MB_ICONEXCLAMATION = 0x000030,
             MB_ICONASTERISK = 0x000040;
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int FLASHW_STOP = 0,
             FLASHW_CAPTION = 0x00000001,
             FLASHW_TRAY = 0x00000002,
@@ -1189,21 +1189,21 @@ namespace Radical.Win32
             FLASHW_TIMER = 0x00000004,
             FLASHW_TIMERNOFG = 0x0000000C;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int HLP_FILE = 1,
             HLP_KEYWORD = 2,
             HLP_NAVIGATOR = 3,
             HLP_OBJECT = 4;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const uint SHACF_DEFAULT = 0x0,
             SHACF_FILESYSTEM = 0x1,
             SHACF_URLHISTORY = 0x2,
             SHACF_URLMRU = 0x4,
             SHACF_USETAB = 0x8,
-            SHACF_URLALL = ( SHACF_URLHISTORY | SHACF_URLMRU ),
+            SHACF_URLALL = (SHACF_URLHISTORY | SHACF_URLMRU),
             SHACF_FILESYS_ONLY = 0x10,
             SHACF_FILESYS_DIRS = 0x20,
             SHACF_AUTOSUGGEST_FORCE_ON = 0x10000000,
@@ -1211,8 +1211,8 @@ namespace Radical.Win32
             SHACF_AUTOAPPEND_FORCE_ON = 0x40000000,
             SHACF_AUTOAPPEND_FORCE_OFF = 0x80000000;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int SHGFI_ICON = 0x000000100,
             SHGFI_DISPLAYNAME = 0x000000200,
             SHGFI_TYPENAME = 0x000000400,
@@ -1232,8 +1232,8 @@ namespace Radical.Win32
             SHGFI_ADDOVERLAYS = 0x000000020,
             SHGFI_OVERLAYINDEX = 0x000000040;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int SW_SCROLLCHILDREN = 0x0001,
             SW_INVALIDATE = 0x0002,
             SW_ERASE = 0x0004,
@@ -1260,7 +1260,7 @@ namespace Radical.Win32
             SIF_PAGE = 0x0002,
             SIF_POS = 0x0004,
             SIF_TRACKPOS = 0x0010,
-            SIF_ALL = ( 0x0001 | 0x0002 | 0x0004 | 0x0010 ),
+            SIF_ALL = (0x0001 | 0x0002 | 0x0004 | 0x0010),
             SPI_GETFONTSMOOTHING = 0x004A,
             SPI_GETDROPSHADOW = 0x1024,
             SPI_GETFLATMENU = 0x1022,
@@ -1306,20 +1306,20 @@ namespace Radical.Win32
             SPI_GETSNAPTODEFBUTTON = 95,
             SPI_GETWHEELSCROLLLINES = 104,
             SBARS_SIZEGRIP = 0x0100,
-            SB_SETTEXTA = ( 0x0400 + 1 ),
-            SB_SETTEXTW = ( 0x0400 + 11 ),
-            SB_GETTEXTA = ( 0x0400 + 2 ),
-            SB_GETTEXTW = ( 0x0400 + 13 ),
-            SB_GETTEXTLENGTHA = ( 0x0400 + 3 ),
-            SB_GETTEXTLENGTHW = ( 0x0400 + 12 ),
-            SB_SETPARTS = ( 0x0400 + 4 ),
-            SB_SIMPLE = ( 0x0400 + 9 ),
-            SB_GETRECT = ( 0x0400 + 10 ),
-            SB_SETICON = ( 0x0400 + 15 ),
-            SB_SETTIPTEXTA = ( 0x0400 + 16 ),
-            SB_SETTIPTEXTW = ( 0x0400 + 17 ),
-            SB_GETTIPTEXTA = ( 0x0400 + 18 ),
-            SB_GETTIPTEXTW = ( 0x0400 + 19 ),
+            SB_SETTEXTA = (0x0400 + 1),
+            SB_SETTEXTW = (0x0400 + 11),
+            SB_GETTEXTA = (0x0400 + 2),
+            SB_GETTEXTW = (0x0400 + 13),
+            SB_GETTEXTLENGTHA = (0x0400 + 3),
+            SB_GETTEXTLENGTHW = (0x0400 + 12),
+            SB_SETPARTS = (0x0400 + 4),
+            SB_SIMPLE = (0x0400 + 9),
+            SB_GETRECT = (0x0400 + 10),
+            SB_SETICON = (0x0400 + 15),
+            SB_SETTIPTEXTA = (0x0400 + 16),
+            SB_SETTIPTEXTW = (0x0400 + 17),
+            SB_GETTIPTEXTA = (0x0400 + 18),
+            SB_GETTIPTEXTW = (0x0400 + 19),
             SBT_OWNERDRAW = 0x1000,
             SBT_NOBORDERS = 0x0100,
             SBT_POPOUT = 0x0200,
@@ -1339,8 +1339,8 @@ namespace Radical.Win32
         public const int S_OK = 0x00000000;
         public const int S_FALSE = 0x00000001;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int TRANSPARENT = 1,
             TME_HOVER = 0x00000001,
             TME_LEAVE = 0x00000002,
@@ -1360,50 +1360,50 @@ namespace Radical.Win32
             TBSTYLE_FLAT = 0x0800,
             TBSTYLE_LIST = 0x1000,
             TBSTYLE_EX_DRAWDDARROWS = 0x00000001,
-            TB_ENABLEBUTTON = ( 0x0400 + 1 ),
-            TB_ISBUTTONCHECKED = ( 0x0400 + 10 ),
-            TB_ISBUTTONINDETERMINATE = ( 0x0400 + 13 ),
-            TB_ADDBUTTONSA = ( 0x0400 + 20 ),
-            TB_ADDBUTTONSW = ( 0x0400 + 68 ),
-            TB_INSERTBUTTONA = ( 0x0400 + 21 ),
-            TB_INSERTBUTTONW = ( 0x0400 + 67 ),
-            TB_DELETEBUTTON = ( 0x0400 + 22 ),
-            TB_GETBUTTON = ( 0x0400 + 23 ),
-            TB_SAVERESTOREA = ( 0x0400 + 26 ),
-            TB_SAVERESTOREW = ( 0x0400 + 76 ),
-            TB_ADDSTRINGA = ( 0x0400 + 28 ),
-            TB_ADDSTRINGW = ( 0x0400 + 77 ),
-            TB_BUTTONSTRUCTSIZE = ( 0x0400 + 30 ),
-            TB_SETBUTTONSIZE = ( 0x0400 + 31 ),
-            TB_AUTOSIZE = ( 0x0400 + 33 ),
-            TB_GETROWS = ( 0x0400 + 40 ),
-            TB_GETBUTTONTEXTA = ( 0x0400 + 45 ),
-            TB_GETBUTTONTEXTW = ( 0x0400 + 75 ),
-            TB_SETIMAGELIST = ( 0x0400 + 48 ),
-            TB_GETRECT = ( 0x0400 + 51 ),
-            TB_GETBUTTONSIZE = ( 0x0400 + 58 ),
-            TB_GETBUTTONINFOW = ( 0x0400 + 63 ),
-            TB_SETBUTTONINFOW = ( 0x0400 + 64 ),
-            TB_GETBUTTONINFOA = ( 0x0400 + 65 ),
-            TB_SETBUTTONINFOA = ( 0x0400 + 66 ),
-            TB_MAPACCELERATORA = ( 0x0400 + 78 ),
-            TB_SETEXTENDEDSTYLE = ( 0x0400 + 84 ),
-            TB_MAPACCELERATORW = ( 0x0400 + 90 ),
-            TB_SETTOOLTIPS = ( 0x0400 + 36 ),
+            TB_ENABLEBUTTON = (0x0400 + 1),
+            TB_ISBUTTONCHECKED = (0x0400 + 10),
+            TB_ISBUTTONINDETERMINATE = (0x0400 + 13),
+            TB_ADDBUTTONSA = (0x0400 + 20),
+            TB_ADDBUTTONSW = (0x0400 + 68),
+            TB_INSERTBUTTONA = (0x0400 + 21),
+            TB_INSERTBUTTONW = (0x0400 + 67),
+            TB_DELETEBUTTON = (0x0400 + 22),
+            TB_GETBUTTON = (0x0400 + 23),
+            TB_SAVERESTOREA = (0x0400 + 26),
+            TB_SAVERESTOREW = (0x0400 + 76),
+            TB_ADDSTRINGA = (0x0400 + 28),
+            TB_ADDSTRINGW = (0x0400 + 77),
+            TB_BUTTONSTRUCTSIZE = (0x0400 + 30),
+            TB_SETBUTTONSIZE = (0x0400 + 31),
+            TB_AUTOSIZE = (0x0400 + 33),
+            TB_GETROWS = (0x0400 + 40),
+            TB_GETBUTTONTEXTA = (0x0400 + 45),
+            TB_GETBUTTONTEXTW = (0x0400 + 75),
+            TB_SETIMAGELIST = (0x0400 + 48),
+            TB_GETRECT = (0x0400 + 51),
+            TB_GETBUTTONSIZE = (0x0400 + 58),
+            TB_GETBUTTONINFOW = (0x0400 + 63),
+            TB_SETBUTTONINFOW = (0x0400 + 64),
+            TB_GETBUTTONINFOA = (0x0400 + 65),
+            TB_SETBUTTONINFOA = (0x0400 + 66),
+            TB_MAPACCELERATORA = (0x0400 + 78),
+            TB_SETEXTENDEDSTYLE = (0x0400 + 84),
+            TB_MAPACCELERATORW = (0x0400 + 90),
+            TB_SETTOOLTIPS = (0x0400 + 36),
             TBIF_IMAGE = 0x00000001,
             TBIF_TEXT = 0x00000002,
             TBIF_STATE = 0x00000004,
             TBIF_STYLE = 0x00000008,
             TBIF_COMMAND = 0x00000020,
             TBIF_SIZE = 0x00000040,
-            TBN_GETBUTTONINFOA = ( ( 0 - 700 ) - 0 ),
-            TBN_GETBUTTONINFOW = ( ( 0 - 700 ) - 20 ),
-            TBN_QUERYINSERT = ( ( 0 - 700 ) - 6 ),
-            TBN_DROPDOWN = ( ( 0 - 700 ) - 10 ),
-            TBN_GETDISPINFOA = ( ( 0 - 700 ) - 16 ),
-            TBN_GETDISPINFOW = ( ( 0 - 700 ) - 17 ),
-            TBN_GETINFOTIPA = ( ( 0 - 700 ) - 18 ),
-            TBN_GETINFOTIPW = ( ( 0 - 700 ) - 19 ),
+            TBN_GETBUTTONINFOA = ((0 - 700) - 0),
+            TBN_GETBUTTONINFOW = ((0 - 700) - 20),
+            TBN_QUERYINSERT = ((0 - 700) - 6),
+            TBN_DROPDOWN = ((0 - 700) - 10),
+            TBN_GETDISPINFOA = ((0 - 700) - 16),
+            TBN_GETDISPINFOW = ((0 - 700) - 17),
+            TBN_GETINFOTIPA = ((0 - 700) - 18),
+            TBN_GETINFOTIPW = ((0 - 700) - 19),
             TTS_ALWAYSTIP = 0x01,
             TTS_NOPREFIX = 0x02,
             TTS_NOANIMATE = 0x10,
@@ -1421,64 +1421,64 @@ namespace Radical.Win32
             TTDT_RESHOW = 1,
             TTDT_AUTOPOP = 2,
             TTDT_INITIAL = 3,
-            TTM_TRACKACTIVATE = ( 0x0400 + 17 ),
-            TTM_TRACKPOSITION = ( 0x0400 + 18 ),
-            TTM_ACTIVATE = ( 0x0400 + 1 ),
-            TTM_POP = ( 0x0400 + 28 ),
-            TTM_ADJUSTRECT = ( 0x400 + 31 ),
-            TTM_SETDELAYTIME = ( 0x0400 + 3 ),
-            TTM_SETTITLEA = ( WM_USER + 32 ),
-            TTM_SETTITLEW = ( WM_USER + 33 ),
-            TTM_ADDTOOLA = ( 0x0400 + 4 ),
-            TTM_ADDTOOLW = ( 0x0400 + 50 ),
-            TTM_DELTOOLA = ( 0x0400 + 5 ),
-            TTM_DELTOOLW = ( 0x0400 + 51 ),
-            TTM_NEWTOOLRECTA = ( 0x0400 + 6 ),
-            TTM_NEWTOOLRECTW = ( 0x0400 + 52 ),
-            TTM_RELAYEVENT = ( 0x0400 + 7 ),
-            TTM_GETTIPBKCOLOR = ( 0x0400 + 22 ),
-            TTM_SETTIPBKCOLOR = ( 0x0400 + 19 ),
-            TTM_SETTIPTEXTCOLOR = ( 0x0400 + 20 ),
-            TTM_GETTIPTEXTCOLOR = ( 0x0400 + 23 ),
-            TTM_GETTOOLINFOA = ( 0x0400 + 8 ),
-            TTM_GETTOOLINFOW = ( 0x0400 + 53 ),
-            TTM_SETTOOLINFOA = ( 0x0400 + 9 ),
-            TTM_SETTOOLINFOW = ( 0x0400 + 54 ),
-            TTM_HITTESTA = ( 0x0400 + 10 ),
-            TTM_HITTESTW = ( 0x0400 + 55 ),
-            TTM_GETTEXTA = ( 0x0400 + 11 ),
-            TTM_GETTEXTW = ( 0x0400 + 56 ),
-            TTM_UPDATE = ( 0x0400 + 29 ),
-            TTM_UPDATETIPTEXTA = ( 0x0400 + 12 ),
-            TTM_UPDATETIPTEXTW = ( 0x0400 + 57 ),
-            TTM_ENUMTOOLSA = ( 0x0400 + 14 ),
-            TTM_ENUMTOOLSW = ( 0x0400 + 58 ),
-            TTM_GETCURRENTTOOLA = ( 0x0400 + 15 ),
-            TTM_GETCURRENTTOOLW = ( 0x0400 + 59 ),
-            TTM_WINDOWFROMPOINT = ( 0x0400 + 16 ),
-            TTM_GETDELAYTIME = ( 0x0400 + 21 ),
-            TTM_SETMAXTIPWIDTH = ( 0x0400 + 24 ),
-            TTN_GETDISPINFOA = ( ( 0 - 520 ) - 0 ),
-            TTN_GETDISPINFOW = ( ( 0 - 520 ) - 10 ),
-            TTN_SHOW = ( ( 0 - 520 ) - 1 ),
-            TTN_POP = ( ( 0 - 520 ) - 2 ),
-            TTN_NEEDTEXTA = ( ( 0 - 520 ) - 0 ),
-            TTN_NEEDTEXTW = ( ( 0 - 520 ) - 10 ),
+            TTM_TRACKACTIVATE = (0x0400 + 17),
+            TTM_TRACKPOSITION = (0x0400 + 18),
+            TTM_ACTIVATE = (0x0400 + 1),
+            TTM_POP = (0x0400 + 28),
+            TTM_ADJUSTRECT = (0x400 + 31),
+            TTM_SETDELAYTIME = (0x0400 + 3),
+            TTM_SETTITLEA = (WM_USER + 32),
+            TTM_SETTITLEW = (WM_USER + 33),
+            TTM_ADDTOOLA = (0x0400 + 4),
+            TTM_ADDTOOLW = (0x0400 + 50),
+            TTM_DELTOOLA = (0x0400 + 5),
+            TTM_DELTOOLW = (0x0400 + 51),
+            TTM_NEWTOOLRECTA = (0x0400 + 6),
+            TTM_NEWTOOLRECTW = (0x0400 + 52),
+            TTM_RELAYEVENT = (0x0400 + 7),
+            TTM_GETTIPBKCOLOR = (0x0400 + 22),
+            TTM_SETTIPBKCOLOR = (0x0400 + 19),
+            TTM_SETTIPTEXTCOLOR = (0x0400 + 20),
+            TTM_GETTIPTEXTCOLOR = (0x0400 + 23),
+            TTM_GETTOOLINFOA = (0x0400 + 8),
+            TTM_GETTOOLINFOW = (0x0400 + 53),
+            TTM_SETTOOLINFOA = (0x0400 + 9),
+            TTM_SETTOOLINFOW = (0x0400 + 54),
+            TTM_HITTESTA = (0x0400 + 10),
+            TTM_HITTESTW = (0x0400 + 55),
+            TTM_GETTEXTA = (0x0400 + 11),
+            TTM_GETTEXTW = (0x0400 + 56),
+            TTM_UPDATE = (0x0400 + 29),
+            TTM_UPDATETIPTEXTA = (0x0400 + 12),
+            TTM_UPDATETIPTEXTW = (0x0400 + 57),
+            TTM_ENUMTOOLSA = (0x0400 + 14),
+            TTM_ENUMTOOLSW = (0x0400 + 58),
+            TTM_GETCURRENTTOOLA = (0x0400 + 15),
+            TTM_GETCURRENTTOOLW = (0x0400 + 59),
+            TTM_WINDOWFROMPOINT = (0x0400 + 16),
+            TTM_GETDELAYTIME = (0x0400 + 21),
+            TTM_SETMAXTIPWIDTH = (0x0400 + 24),
+            TTN_GETDISPINFOA = ((0 - 520) - 0),
+            TTN_GETDISPINFOW = ((0 - 520) - 10),
+            TTN_SHOW = ((0 - 520) - 1),
+            TTN_POP = ((0 - 520) - 2),
+            TTN_NEEDTEXTA = ((0 - 520) - 0),
+            TTN_NEEDTEXTW = ((0 - 520) - 10),
             TBS_AUTOTICKS = 0x0001,
             TBS_VERT = 0x0002,
             TBS_TOP = 0x0004,
             TBS_BOTTOM = 0x0000,
             TBS_BOTH = 0x0008,
             TBS_NOTICKS = 0x0010,
-            TBM_GETPOS = ( 0x0400 ),
-            TBM_SETTIC = ( 0x0400 + 4 ),
-            TBM_SETPOS = ( 0x0400 + 5 ),
-            TBM_SETRANGE = ( 0x0400 + 6 ),
-            TBM_SETRANGEMIN = ( 0x0400 + 7 ),
-            TBM_SETRANGEMAX = ( 0x0400 + 8 ),
-            TBM_SETTICFREQ = ( 0x0400 + 20 ),
-            TBM_SETPAGESIZE = ( 0x0400 + 21 ),
-            TBM_SETLINESIZE = ( 0x0400 + 23 ),
+            TBM_GETPOS = (0x0400),
+            TBM_SETTIC = (0x0400 + 4),
+            TBM_SETPOS = (0x0400 + 5),
+            TBM_SETRANGE = (0x0400 + 6),
+            TBM_SETRANGEMIN = (0x0400 + 7),
+            TBM_SETRANGEMAX = (0x0400 + 8),
+            TBM_SETTICFREQ = (0x0400 + 20),
+            TBM_SETPAGESIZE = (0x0400 + 21),
+            TBM_SETLINESIZE = (0x0400 + 23),
             TB_LINEUP = 0,
             TB_LINEDOWN = 1,
             TB_PAGEUP = 2,
@@ -1509,66 +1509,66 @@ namespace Radical.Win32
             TVIS_EXPANDED = 0x0020,
             TVIS_EXPANDEDONCE = 0x0040,
             TVIS_STATEIMAGEMASK = 0xF000,
-            TVI_ROOT = ( unchecked( ( int )0xFFFF0000 ) ),
-            TVI_FIRST = ( unchecked( ( int )0xFFFF0001 ) ),
-            TVM_INSERTITEMA = ( 0x1100 + 0 ),
-            TVM_INSERTITEMW = ( 0x1100 + 50 ),
-            TVM_DELETEITEM = ( 0x1100 + 1 ),
-            TVM_EXPAND = ( 0x1100 + 2 ),
+            TVI_ROOT = (unchecked((int)0xFFFF0000)),
+            TVI_FIRST = (unchecked((int)0xFFFF0001)),
+            TVM_INSERTITEMA = (0x1100 + 0),
+            TVM_INSERTITEMW = (0x1100 + 50),
+            TVM_DELETEITEM = (0x1100 + 1),
+            TVM_EXPAND = (0x1100 + 2),
             TVE_COLLAPSE = 0x0001,
             TVE_EXPAND = 0x0002,
-            TVM_GETITEMRECT = ( 0x1100 + 4 ),
-            TVM_GETINDENT = ( 0x1100 + 6 ),
-            TVM_SETINDENT = ( 0x1100 + 7 ),
-            TVM_SETIMAGELIST = ( 0x1100 + 9 ),
-            TVM_GETNEXTITEM = ( 0x1100 + 10 ),
+            TVM_GETITEMRECT = (0x1100 + 4),
+            TVM_GETINDENT = (0x1100 + 6),
+            TVM_SETINDENT = (0x1100 + 7),
+            TVM_SETIMAGELIST = (0x1100 + 9),
+            TVM_GETNEXTITEM = (0x1100 + 10),
             TVGN_NEXT = 0x0001,
             TVGN_PREVIOUS = 0x0002,
             TVGN_FIRSTVISIBLE = 0x0005,
             TVGN_NEXTVISIBLE = 0x0006,
             TVGN_PREVIOUSVISIBLE = 0x0007,
             TVGN_CARET = 0x0009,
-            TVM_SELECTITEM = ( 0x1100 + 11 ),
-            TVM_GETITEMA = ( 0x1100 + 12 ),
-            TVM_GETITEMW = ( 0x1100 + 62 ),
-            TVM_SETITEMA = ( 0x1100 + 13 ),
-            TVM_SETITEMW = ( 0x1100 + 63 ),
-            TVM_EDITLABELA = ( 0x1100 + 14 ),
-            TVM_EDITLABELW = ( 0x1100 + 65 ),
-            TVM_GETEDITCONTROL = ( 0x1100 + 15 ),
-            TVM_GETVISIBLECOUNT = ( 0x1100 + 16 ),
-            TVM_HITTEST = ( 0x1100 + 17 ),
-            TVM_ENSUREVISIBLE = ( 0x1100 + 20 ),
-            TVM_ENDEDITLABELNOW = ( 0x1100 + 22 ),
-            TVM_GETISEARCHSTRINGA = ( 0x1100 + 23 ),
-            TVM_GETISEARCHSTRINGW = ( 0x1100 + 64 ),
-            TVM_SETITEMHEIGHT = ( 0x1100 + 27 ),
-            TVM_GETITEMHEIGHT = ( 0x1100 + 28 ),
-            TVN_SELCHANGINGA = ( ( 0 - 400 ) - 1 ),
-            TVN_SELCHANGINGW = ( ( 0 - 400 ) - 50 ),
-            TVN_GETINFOTIPA = ( ( 0 - 400 ) - 13 ),
-            TVN_GETINFOTIPW = ( ( 0 - 400 ) - 14 ),
-            TVN_SELCHANGEDA = ( ( 0 - 400 ) - 2 ),
-            TVN_SELCHANGEDW = ( ( 0 - 400 ) - 51 ),
+            TVM_SELECTITEM = (0x1100 + 11),
+            TVM_GETITEMA = (0x1100 + 12),
+            TVM_GETITEMW = (0x1100 + 62),
+            TVM_SETITEMA = (0x1100 + 13),
+            TVM_SETITEMW = (0x1100 + 63),
+            TVM_EDITLABELA = (0x1100 + 14),
+            TVM_EDITLABELW = (0x1100 + 65),
+            TVM_GETEDITCONTROL = (0x1100 + 15),
+            TVM_GETVISIBLECOUNT = (0x1100 + 16),
+            TVM_HITTEST = (0x1100 + 17),
+            TVM_ENSUREVISIBLE = (0x1100 + 20),
+            TVM_ENDEDITLABELNOW = (0x1100 + 22),
+            TVM_GETISEARCHSTRINGA = (0x1100 + 23),
+            TVM_GETISEARCHSTRINGW = (0x1100 + 64),
+            TVM_SETITEMHEIGHT = (0x1100 + 27),
+            TVM_GETITEMHEIGHT = (0x1100 + 28),
+            TVN_SELCHANGINGA = ((0 - 400) - 1),
+            TVN_SELCHANGINGW = ((0 - 400) - 50),
+            TVN_GETINFOTIPA = ((0 - 400) - 13),
+            TVN_GETINFOTIPW = ((0 - 400) - 14),
+            TVN_SELCHANGEDA = ((0 - 400) - 2),
+            TVN_SELCHANGEDW = ((0 - 400) - 51),
             TVC_UNKNOWN = 0x0000,
             TVC_BYMOUSE = 0x0001,
             TVC_BYKEYBOARD = 0x0002,
-            TVN_GETDISPINFOA = ( ( 0 - 400 ) - 3 ),
-            TVN_GETDISPINFOW = ( ( 0 - 400 ) - 52 ),
-            TVN_SETDISPINFOA = ( ( 0 - 400 ) - 4 ),
-            TVN_SETDISPINFOW = ( ( 0 - 400 ) - 53 ),
-            TVN_ITEMEXPANDINGA = ( ( 0 - 400 ) - 5 ),
-            TVN_ITEMEXPANDINGW = ( ( 0 - 400 ) - 54 ),
-            TVN_ITEMEXPANDEDA = ( ( 0 - 400 ) - 6 ),
-            TVN_ITEMEXPANDEDW = ( ( 0 - 400 ) - 55 ),
-            TVN_BEGINDRAGA = ( ( 0 - 400 ) - 7 ),
-            TVN_BEGINDRAGW = ( ( 0 - 400 ) - 56 ),
-            TVN_BEGINRDRAGA = ( ( 0 - 400 ) - 8 ),
-            TVN_BEGINRDRAGW = ( ( 0 - 400 ) - 57 ),
-            TVN_BEGINLABELEDITA = ( ( 0 - 400 ) - 10 ),
-            TVN_BEGINLABELEDITW = ( ( 0 - 400 ) - 59 ),
-            TVN_ENDLABELEDITA = ( ( 0 - 400 ) - 11 ),
-            TVN_ENDLABELEDITW = ( ( 0 - 400 ) - 60 ),
+            TVN_GETDISPINFOA = ((0 - 400) - 3),
+            TVN_GETDISPINFOW = ((0 - 400) - 52),
+            TVN_SETDISPINFOA = ((0 - 400) - 4),
+            TVN_SETDISPINFOW = ((0 - 400) - 53),
+            TVN_ITEMEXPANDINGA = ((0 - 400) - 5),
+            TVN_ITEMEXPANDINGW = ((0 - 400) - 54),
+            TVN_ITEMEXPANDEDA = ((0 - 400) - 6),
+            TVN_ITEMEXPANDEDW = ((0 - 400) - 55),
+            TVN_BEGINDRAGA = ((0 - 400) - 7),
+            TVN_BEGINDRAGW = ((0 - 400) - 56),
+            TVN_BEGINRDRAGA = ((0 - 400) - 8),
+            TVN_BEGINRDRAGW = ((0 - 400) - 57),
+            TVN_BEGINLABELEDITA = ((0 - 400) - 10),
+            TVN_BEGINLABELEDITW = ((0 - 400) - 59),
+            TVN_ENDLABELEDITA = ((0 - 400) - 11),
+            TVN_ENDLABELEDITW = ((0 - 400) - 60),
             TCS_BOTTOM = 0x0002,
             TCS_RIGHT = 0x0002,
             TCS_FLATBUTTONS = 0x0008,
@@ -1582,44 +1582,44 @@ namespace Radical.Win32
             TCS_RAGGEDRIGHT = 0x0800,
             TCS_OWNERDRAWFIXED = 0x2000,
             TCS_TOOLTIPS = 0x4000,
-            TCM_SETIMAGELIST = ( 0x1300 + 3 ),
+            TCM_SETIMAGELIST = (0x1300 + 3),
             TCIF_TEXT = 0x0001,
             TCIF_IMAGE = 0x0002,
-            TCM_GETITEMA = ( 0x1300 + 5 ),
-            TCM_GETITEMW = ( 0x1300 + 60 ),
-            TCM_SETITEMA = ( 0x1300 + 6 ),
-            TCM_SETITEMW = ( 0x1300 + 61 ),
-            TCM_INSERTITEMA = ( 0x1300 + 7 ),
-            TCM_INSERTITEMW = ( 0x1300 + 62 ),
-            TCM_DELETEITEM = ( 0x1300 + 8 ),
-            TCM_DELETEALLITEMS = ( 0x1300 + 9 ),
-            TCM_GETITEMRECT = ( 0x1300 + 10 ),
-            TCM_GETCURSEL = ( 0x1300 + 11 ),
-            TCM_SETCURSEL = ( 0x1300 + 12 ),
-            TCM_ADJUSTRECT = ( 0x1300 + 40 ),
-            TCM_SETITEMSIZE = ( 0x1300 + 41 ),
-            TCM_SETPADDING = ( 0x1300 + 43 ),
-            TCM_GETROWCOUNT = ( 0x1300 + 44 ),
-            TCM_GETTOOLTIPS = ( 0x1300 + 45 ),
-            TCM_SETTOOLTIPS = ( 0x1300 + 46 ),
-            TCN_SELCHANGE = ( ( 0 - 550 ) - 1 ),
-            TCN_SELCHANGING = ( ( 0 - 550 ) - 2 ),
+            TCM_GETITEMA = (0x1300 + 5),
+            TCM_GETITEMW = (0x1300 + 60),
+            TCM_SETITEMA = (0x1300 + 6),
+            TCM_SETITEMW = (0x1300 + 61),
+            TCM_INSERTITEMA = (0x1300 + 7),
+            TCM_INSERTITEMW = (0x1300 + 62),
+            TCM_DELETEITEM = (0x1300 + 8),
+            TCM_DELETEALLITEMS = (0x1300 + 9),
+            TCM_GETITEMRECT = (0x1300 + 10),
+            TCM_GETCURSEL = (0x1300 + 11),
+            TCM_SETCURSEL = (0x1300 + 12),
+            TCM_ADJUSTRECT = (0x1300 + 40),
+            TCM_SETITEMSIZE = (0x1300 + 41),
+            TCM_SETPADDING = (0x1300 + 43),
+            TCM_GETROWCOUNT = (0x1300 + 44),
+            TCM_GETTOOLTIPS = (0x1300 + 45),
+            TCM_SETTOOLTIPS = (0x1300 + 46),
+            TCN_SELCHANGE = ((0 - 550) - 1),
+            TCN_SELCHANGING = ((0 - 550) - 2),
             TBSTYLE_WRAPPABLE = 0x0200,
-            TVM_SETBKCOLOR = ( TV_FIRST + 29 ),
-            TVM_SETTEXTCOLOR = ( TV_FIRST + 30 ),
+            TVM_SETBKCOLOR = (TV_FIRST + 29),
+            TVM_SETTEXTCOLOR = (TV_FIRST + 30),
             TYMED_NULL = 0,
-            TVM_GETLINECOLOR = ( TV_FIRST + 41 ),
-            TVM_SETLINECOLOR = ( TV_FIRST + 40 ),
-            TVM_SETTOOLTIPS = ( TV_FIRST + 24 ),
+            TVM_GETLINECOLOR = (TV_FIRST + 41),
+            TVM_SETLINECOLOR = (TV_FIRST + 40),
+            TVM_SETTOOLTIPS = (TV_FIRST + 24),
             TVSIL_STATE = 2,
-            TVM_SORTCHILDRENCB = ( TV_FIRST + 21 );
+            TVM_SORTCHILDRENCB = (TV_FIRST + 21);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int TVHT_NOWHERE = 0x0001,
             TVHT_ONITEMICON = 0x0002,
             TVHT_ONITEMLABEL = 0x0004,
-            TVHT_ONITEM = ( TVHT_ONITEMICON | TVHT_ONITEMLABEL | TVHT_ONITEMSTATEICON ),
+            TVHT_ONITEM = (TVHT_ONITEMICON | TVHT_ONITEMLABEL | TVHT_ONITEMSTATEICON),
             TVHT_ONITEMINDENT = 0x0008,
             TVHT_ONITEMBUTTON = 0x0010,
             TVHT_ONITEMRIGHT = 0x0020,
@@ -1629,8 +1629,8 @@ namespace Radical.Win32
             TVHT_TORIGHT = 0x0400,
             TVHT_TOLEFT = 0x0800;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int UIS_SET = 1,
             UIS_CLEAR = 2,
             UIS_INITIALIZE = 3,
@@ -1641,9 +1641,9 @@ namespace Radical.Win32
             USERCLASSTYPE_APPNAME = 3,
             UOI_FLAGS = 1;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
-        public const int VIEW_E_DRAW = unchecked( ( int )0x80040140 ),
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
+        public const int VIEW_E_DRAW = unchecked((int)0x80040140),
             VK_LEFT = 0x25,
             VK_UP = 0x26,
             VK_RIGHT = 0x27,
@@ -1657,21 +1657,21 @@ namespace Radical.Win32
             VK_NUMLOCK = 0x90,
             VK_CAPSLOCK = 0x14;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int LLKHF_EXTENDED = 1,
             LLKHF_INJECTED = 0x10,
             LLKHF_ALTDOWN = 0x20,
             LLKHF_UP = 0x80;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int WAVE_FORMAT_PCM = 0x0001,
             WAVE_FORMAT_ADPCM = 0x0002,
             WAVE_FORMAT_IEEE_FLOAT = 0x0003;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores" )]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "FORCEFONTEXIST")]
         public const int MMIO_READ = 0x00000000,
             MMIO_ALLOCBUF = 0x00010000,
             MMIO_FINDRIFF = 0x00000020;
@@ -1891,11 +1891,11 @@ namespace Radical.Win32
             WM_AFXLAST = 0x037F,
             WM_PENWINFIRST = 0x0380,
             WM_PENWINLAST = 0x038F,
-            WM_APP = unchecked( ( int )0x8000 ),
+            WM_APP = unchecked((int)0x8000),
             WM_USER = 0x0400,
             WM_REFLECT = WM_USER + 0x1C00,
             WS_OVERLAPPED = 0x00000000,
-            WS_POPUP = unchecked( ( int )0x80000000 ),
+            WS_POPUP = unchecked((int)0x80000000),
             WS_CHILD = 0x40000000,
             WS_MINIMIZE = 0x20000000,
             WS_VISIBLE = 0x10000000,
@@ -1930,7 +1930,7 @@ namespace Radical.Win32
             WS_EX_LAYOUTRTL = 0x00400000,
             WS_EX_NOINHERITLAYOUT = 0x00100000,
             WPF_SETMINPOSITION = 0x0001,
-            WM_CHOOSEFONT_GETLOGFONT = ( 0x0400 + 1 ),
+            WM_CHOOSEFONT_GETLOGFONT = (0x0400 + 1),
             WM_TASKBAR_CREATED = 0xC086;
 
     }

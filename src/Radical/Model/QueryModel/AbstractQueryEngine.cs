@@ -21,7 +21,7 @@ namespace Radical.Model.QueryModel
         /// <param name="context">The current data context.</param>
         /// <param name="provider">The provider to use a data context.</param>
         /// <returns>A list of entities.</returns>
-        public abstract IList<TResult> ExecuteQuery( TQuery querySpec, ComponentModel.IDataContext context, TProvider provider );
+        public abstract IList<TResult> ExecuteQuery(TQuery querySpec, ComponentModel.IDataContext context, TProvider provider);
 
         /// <summary>
         /// Executes the given query against the given provider.
@@ -30,9 +30,9 @@ namespace Radical.Model.QueryModel
         /// <param name="context">The current data context.</param>
         /// <param name="provider">The provider to use a data context.</param>
         /// <returns>A list of entities.</returns>
-        public IList<TResult> ExecuteQuery( IQuerySpecification<TSource, TResult> querySpec, ComponentModel.IDataContext context, TProvider provider )
+        public IList<TResult> ExecuteQuery(IQuerySpecification<TSource, TResult> querySpec, ComponentModel.IDataContext context, TProvider provider)
         {
-            return this.ExecuteQuery( ( TQuery )querySpec, context, provider );
+            return this.ExecuteQuery((TQuery)querySpec, context, provider);
         }
     }
 }

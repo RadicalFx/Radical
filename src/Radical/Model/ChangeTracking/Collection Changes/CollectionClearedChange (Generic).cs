@@ -20,8 +20,8 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public CollectionClearedChange( Object owner, CollectionRangeDescriptor<T> descriptor, RejectCallback<CollectionRangeDescriptor<T>> rejectCallback, CommitCallback<CollectionRangeDescriptor<T>> commitCallback, string description )
-            : base( owner, descriptor, rejectCallback, commitCallback, description )
+        public CollectionClearedChange(Object owner, CollectionRangeDescriptor<T> descriptor, RejectCallback<CollectionRangeDescriptor<T>> rejectCallback, CommitCallback<CollectionRangeDescriptor<T>> commitCallback, string description)
+            : base(owner, descriptor, rejectCallback, commitCallback, description)
         {
 
         }
@@ -41,18 +41,18 @@
         /// <param name="changedItem"></param>
         /// <returns></returns>
         /// <value>The advised action.</value>
-        public override ProposedActions GetAdvisedAction( object changedItem )
+        public override ProposedActions GetAdvisedAction(object changedItem)
         {
-            Ensure.That( changedItem )
-                .Named( "changedItem" )
-                .If( o =>
-                {
-                    return !this.Descriptor.Items.Where( t => Object.Equals( t, o ) ).Any();
-                } )
-                .Then( ( o, n ) =>
-                {
-                    throw new ArgumentOutOfRangeException( n );
-                } );
+            Ensure.That(changedItem)
+                .Named("changedItem")
+                .If(o =>
+               {
+                   return !this.Descriptor.Items.Where(t => Object.Equals(t, o)).Any();
+               })
+                .Then((o, n) =>
+               {
+                   throw new ArgumentOutOfRangeException(n);
+               });
 
             return ProposedActions.Delete | ProposedActions.Dispose;
         }
@@ -68,7 +68,7 @@
                 this.Descriptor,
                 this.RejectCallback,
                 this.CommitCallback,
-                this.Description );
+                this.Description);
         }
     }
 }

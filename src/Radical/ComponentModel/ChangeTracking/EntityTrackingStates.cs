@@ -13,7 +13,7 @@
         /// the entity is not transient or the entity
         /// is not tracked.
         /// </summary>
-        None =0,
+        None = 0,
 
         /// <summary>
         /// The entity is transient.

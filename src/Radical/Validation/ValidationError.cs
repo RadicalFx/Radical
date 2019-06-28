@@ -21,9 +21,9 @@ namespace Radical.Validation
         /// <returns>
         /// The newly created <see cref="ValidationError" />.
         /// </returns>
-        public static ValidationError Create<T>( Expression<Func<T>> key, string keyDisplayName, params string[] detectedProblems )
+        public static ValidationError Create<T>(Expression<Func<T>> key, string keyDisplayName, params string[] detectedProblems)
         {
-            return new ValidationError( key.GetMemberName(), keyDisplayName, detectedProblems );
+            return new ValidationError(key.GetMemberName(), keyDisplayName, detectedProblems);
         }
 
         ///// <summary>
@@ -44,10 +44,10 @@ namespace Radical.Validation
         /// <param name="key">The key, tipically the invalid property name.</param>
         /// <param name="keyDisplayName">Display name of the key.</param>
         /// <param name="detectedProblems">The detected problems.</param>
-        public ValidationError( string key, string keyDisplayName, IEnumerable<string> detectedProblems )
+        public ValidationError(string key, string keyDisplayName, IEnumerable<string> detectedProblems)
         {
-            Ensure.That( key ).Named( "key" ).IsNotNullNorEmpty();
-            Ensure.That( detectedProblems ).Named( "detectedProblems" ).IsNotNull();
+            Ensure.That(key).Named("key").IsNotNullNorEmpty();
+            Ensure.That(detectedProblems).Named("detectedProblems").IsNotNull();
 
             this.Key = key;
             this.KeyDisplayName = keyDisplayName;
@@ -78,12 +78,12 @@ namespace Radical.Validation
         /// Adds the given list of problems to the currently detected problems.
         /// </summary>
         /// <param name="problems">The problems to add.</param>
-        public void AddProblems( IEnumerable<string> problems )
+        public void AddProblems(IEnumerable<string> problems)
         {
-            Ensure.That( problems ).Named( "problems" ).IsNotNull();
+            Ensure.That(problems).Named("problems").IsNotNull();
 
-            var tmp = new List<string>( this.DetectedProblems );
-            tmp.AddRange( problems );
+            var tmp = new List<string>(this.DetectedProblems);
+            tmp.AddRange(problems);
 
             this.DetectedProblems = tmp.AsReadOnly();
 
@@ -100,16 +100,16 @@ namespace Radical.Validation
         /// </returns>
         public override string ToString()
         {
-            if( stringValue == null )
+            if (stringValue == null)
             {
                 var sb = new StringBuilder();
 
-                foreach( var problem in this.DetectedProblems )
+                foreach (var problem in this.DetectedProblems)
                 {
-                    sb.AppendLine( problem );
+                    sb.AppendLine(problem);
                 }
 
-                stringValue = sb.ToString().TrimEnd( Environment.NewLine.ToCharArray() );
+                stringValue = sb.ToString().TrimEnd(Environment.NewLine.ToCharArray());
             }
 
             return stringValue;

@@ -20,7 +20,7 @@ namespace Radical.Model.QueryModel
         /// <param name="context">The current data context.</param>
         /// <param name="provider">The provider to use a data context.</param>
         /// <returns>The searched entity.</returns>
-        public abstract TResult Evaluate( TScalar scalarSpec, ComponentModel.IDataContext context, TProvider provider );
+        public abstract TResult Evaluate(TScalar scalarSpec, ComponentModel.IDataContext context, TProvider provider);
 
         /// <summary>
         /// Evaluates the specified scalar specification against the given provider.
@@ -29,9 +29,9 @@ namespace Radical.Model.QueryModel
         /// <param name="context">The current data context.</param>
         /// <param name="provider">The provider to use a data context.</param>
         /// <returns>The searched entity.</returns>
-        public TResult Evaluate( IScalarSpecification<TSource, TResult> scalarSpec, ComponentModel.IDataContext context, TProvider provider )
+        public TResult Evaluate(IScalarSpecification<TSource, TResult> scalarSpec, ComponentModel.IDataContext context, TProvider provider)
         {
-            return this.Evaluate( ( TScalar )scalarSpec, context, provider );
+            return this.Evaluate((TScalar)scalarSpec, context, provider);
         }
     }
 }

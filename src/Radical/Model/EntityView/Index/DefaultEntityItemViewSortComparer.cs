@@ -6,18 +6,18 @@
 
     sealed class DefaultEntityItemViewSortComparer<T> :
         IComparer<IEntityItemView<T>>
-        //where T : class
+    //where T : class
     {
         IList dataSource;
 
-        public DefaultEntityItemViewSortComparer( IList dataSource )
+        public DefaultEntityItemViewSortComparer(IList dataSource)
         {
             this.dataSource = dataSource;
         }
 
         #region IComparer<IEntityItemView<T>> Members
 
-        public int Compare( IEntityItemView<T> x, IEntityItemView<T> y )
+        public int Compare(IEntityItemView<T> x, IEntityItemView<T> y)
         {
             /*
              * Questo comparer ha lo scopo di ordinare gli item come sono 
@@ -29,10 +29,10 @@
              * ce lo metterebbe in testa perchè l'indice -1 è minore... ergo
              * dobbiamo gestire questo "special case"
              */
-            int xIndex = this.dataSource.IndexOf( x.EntityItem );
-            int yIndex = this.dataSource.IndexOf( y.EntityItem );
+            int xIndex = this.dataSource.IndexOf(x.EntityItem);
+            int yIndex = this.dataSource.IndexOf(y.EntityItem);
 
-            if( xIndex == -1 && yIndex != -1 )
+            if (xIndex == -1 && yIndex != -1)
             {
                 /*
                  * x non c'è, lo dobbiamo mettere comunque in fondo
@@ -40,7 +40,7 @@
                  */
                 return -1;
             }
-            else if( xIndex != -1 && yIndex == -1 )
+            else if (xIndex != -1 && yIndex == -1)
             {
                 /*
                  * y non c'è, lo dobbiamo mettere comunque in fondo
@@ -50,7 +50,7 @@
             }
             else
             {
-                return xIndex.CompareTo( yIndex );
+                return xIndex.CompareTo(yIndex);
             }
         }
 

@@ -16,9 +16,9 @@ namespace Radical.Diagnostics
         /// </summary>
         /// <param name="target">The target.</param>
         /// <returns>A string representing the object dump.</returns>
-        public static string Dump( Object target )
+        public static string Dump(Object target)
         {
-            return ObjectDumper.Dump( target, int.MaxValue );
+            return ObjectDumper.Dump(target, int.MaxValue);
         }
 
         /// <summary>
@@ -27,22 +27,22 @@ namespace Radical.Diagnostics
         /// <param name="target">The target.</param>
         /// <param name="depth">The depth of the dump.</param>
         /// <returns>A string representing the object dump.</returns>
-        public static string Dump( object target, int depth )
+        public static string Dump(object target, int depth)
         {
             try
             {
-                using( var dumper = new ObjectDumper( depth ) )
+                using (var dumper = new ObjectDumper(depth))
                 {
-                    dumper.WriteObject( null, target );
+                    dumper.WriteObject(null, target);
 
                     return dumper
                         .ToString()
-                        .TrimEnd( Environment.NewLine.ToCharArray() );
+                        .TrimEnd(Environment.NewLine.ToCharArray());
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                return string.Format( "Dump failure: {0}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace );
+                return string.Format("Dump failure: {0}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace);
             }
         }
 
@@ -76,34 +76,34 @@ namespace Radical.Diagnostics
         /// Initializes a new instance of the <see cref="ObjectDumper"/> class.
         /// </summary>
         /// <param name="depth">The depth.</param>
-        private ObjectDumper( int depth )
+        private ObjectDumper(int depth)
         {
             this.maxDepth = depth;
         }
 
-        void Write( string s )
+        void Write(string s)
         {
-            if( s != null )
+            if (s != null)
             {
                 //Debug.Write( s );
-                this.builder.Append( s );
+                this.builder.Append(s);
                 //this.pos += s.Length;
             }
         }
 
-        void WriteLine( string s )
+        void WriteLine(string s)
         {
-            if( s != null )
+            if (s != null)
             {
                 //Debug.WriteLine( s );
-                this.builder.AppendLine( s );
+                this.builder.AppendLine(s);
                 //this.pos += s.Length;
             }
         }
 
         void WriteIndent()
         {
-            this.builder.Append( ' ', level * 3 );
+            this.builder.Append(' ', level * 3);
         }
 
         void WriteLine()
@@ -115,50 +115,50 @@ namespace Radical.Diagnostics
 
         void WriteTab()
         {
-            this.Write( "\t" );
+            this.Write("\t");
         }
 
-        private void WriteObject( string prefix, object target )
+        private void WriteObject(string prefix, object target)
         {
             try
             {
-                if( target != null && !target.GetType().IsValueType && !( target is string ) )
+                if (target != null && !target.GetType().IsValueType && !(target is string))
                 {
-                    if( this.visitedReferences.Contains( target ) )
+                    if (this.visitedReferences.Contains(target))
                     {
                         return;
                     }
 
-                    this.visitedReferences.Add( target );
+                    this.visitedReferences.Add(target);
                 }
 
-                if( target == null || target.GetType().IsPrimitive || target is string )
+                if (target == null || target.GetType().IsPrimitive || target is string)
                 {
                     this.WriteIndent();
-                    this.Write( prefix );
-                    this.WriteValue( target );
+                    this.Write(prefix);
+                    this.WriteValue(target);
                     this.WriteLine();
                 }
-                else if( target is IEnumerable )
+                else if (target is IEnumerable)
                 {
-                    foreach( object element in ( IEnumerable )target )
+                    foreach (object element in (IEnumerable)target)
                     {
-                        if( element is IEnumerable && !( element is string ) )
+                        if (element is IEnumerable && !(element is string))
                         {
                             this.WriteIndent();
-                            this.Write( prefix );
-                            this.Write( "[...]" );
+                            this.Write(prefix);
+                            this.Write("[...]");
                             this.WriteLine();
-                            if( this.level < this.maxDepth )
+                            if (this.level < this.maxDepth)
                             {
                                 this.level++;
-                                this.WriteObject( prefix, element );
+                                this.WriteObject(prefix, element);
                                 this.level--;
                             }
                         }
                         else
                         {
-                            this.WriteObject( prefix, element );
+                            this.WriteObject(prefix, element);
                         }
                     }
                 }
@@ -166,24 +166,24 @@ namespace Radical.Diagnostics
                 {
                     var type = target.GetType();
                     //this.WriteIndent();
-                    this.Write( prefix );
-                    this.Write( string.Format( "Type: {0} ({1})", type.Name, type ) );
+                    this.Write(prefix);
+                    this.Write(string.Format("Type: {0} ({1})", type.Name, type));
                     this.WriteLine();
 
-                    if( target is Assembly )
+                    if (target is Assembly)
                     {
-                        var a = ( Assembly )target;
+                        var a = (Assembly)target;
                         this.WriteIndent();
-                        this.Write( "FullName: " + a.FullName );
+                        this.Write("FullName: " + a.FullName);
                     }
-                    else if( target is RuntimeTypeHandle || target is RuntimeMethodHandle || target is RuntimeArgumentHandle || target is RuntimeFieldHandle )
+                    else if (target is RuntimeTypeHandle || target is RuntimeMethodHandle || target is RuntimeArgumentHandle || target is RuntimeFieldHandle)
                     {
                         //this.WriteIndent();
                         //this.Write( "<RuntimeTypeHandle>" );
                     }
                     else
                     {
-                        var members = type.GetMembers( BindingFlags.Public | BindingFlags.Instance );
+                        var members = type.GetMembers(BindingFlags.Public | BindingFlags.Instance);
                         //this.WriteIndent();
                         //this.Write( prefix );
 
@@ -238,23 +238,23 @@ namespace Radical.Diagnostics
                         //    this.WriteLine();
                         //}
 
-                        if( this.level < this.maxDepth )
+                        if (this.level < this.maxDepth)
                         {
-                            foreach( MemberInfo m in members )
+                            foreach (MemberInfo m in members)
                             {
                                 var f = m as FieldInfo;
                                 var p = m as PropertyInfo;
-                                if( f != null || p != null )
+                                if (f != null || p != null)
                                 {
                                     this.level++;
                                     try
                                     {
-                                        object value = f != null ? f.GetValue( target ) : p.GetValue( target, null );
-                                        this.WriteObject( m.Name + ": ", value );
+                                        object value = f != null ? f.GetValue(target) : p.GetValue(target, null);
+                                        this.WriteObject(m.Name + ": ", value);
                                     }
-                                    catch( TargetInvocationException )
+                                    catch (TargetInvocationException)
                                     {
-                                        this.Write( string.Format( "{0}: <Cannot get value>.", m.Name ) );
+                                        this.Write(string.Format("{0}: <Cannot get value>.", m.Name));
                                         this.WriteLine();
                                     }
 
@@ -277,25 +277,25 @@ namespace Radical.Diagnostics
                     }
                 }
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
                 throw;
             }
         }
 
-        private void WriteValue( object value )
+        private void WriteValue(object value)
         {
-            if( value == null )
+            if (value == null)
             {
-                this.Write( "<null>" );
+                this.Write("<null>");
             }
-            else if( value is DateTime )
+            else if (value is DateTime)
             {
-                this.Write( ( ( DateTime )value ).ToShortDateString() );
+                this.Write(((DateTime)value).ToShortDateString());
             }
-            else if( value is ValueType || value is string )
+            else if (value is ValueType || value is string)
             {
-                this.Write( value.ToString() );
+                this.Write(value.ToString());
             }
             //else if( value is IEnumerable )
             //{
@@ -303,7 +303,7 @@ namespace Radical.Diagnostics
             //}
             else
             {
-                this.Write( "{ }" );
+                this.Write("{ }");
             }
         }
     }

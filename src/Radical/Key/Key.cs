@@ -6,9 +6,9 @@ namespace Radical
     /// <summary>
     /// The <c>Key</c> class is an abstraction of a primary key.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes" )]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes")]
     [Serializable]
-    [CLSCompliant( false )]
+    [CLSCompliant(false)]
     public abstract class Key : IKey
     {
         #region IConvertible Members
@@ -179,7 +179,7 @@ namespace Radical
         /// </returns>
         /// <exception cref="T:System.ArgumentException">
         ///     <paramref name="obj"/> is not the same type as this instance. </exception>
-        public abstract int CompareTo( object obj );
+        public abstract int CompareTo(object obj);
 
         #endregion
 
@@ -200,7 +200,7 @@ namespace Radical
         /// <returns>
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
-        public abstract bool Equals( IKey other );
+        public abstract bool Equals(IKey other);
 
         #endregion
 

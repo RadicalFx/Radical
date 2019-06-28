@@ -12,8 +12,8 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="PredicateEntityItemViewFilter&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="filterDelegate">The filter delegate.</param>
-        public PredicateEntityItemViewFilter( Predicate<T> filterDelegate )
-            : this( filterDelegate, null )
+        public PredicateEntityItemViewFilter(Predicate<T> filterDelegate)
+            : this(filterDelegate, null)
         {
 
         }
@@ -23,9 +23,9 @@ namespace Radical.Model
         /// </summary>
         /// <param name="filterDelegate">The filter delegate.</param>
         /// <param name="filterName">The name of the filter.</param>
-        public PredicateEntityItemViewFilter( Predicate<T> filterDelegate, string filterName )
+        public PredicateEntityItemViewFilter(Predicate<T> filterDelegate, string filterName)
         {
-            Ensure.That( filterDelegate ).Named( "filterDelegate" ).IsNotNull();
+            Ensure.That(filterDelegate).Named("filterDelegate").IsNotNull();
 
             this.filterName = filterName ?? Resources.Labels.DefaulPredicateFilterName;
             this.FilterDelegate = filterDelegate;
@@ -51,9 +51,9 @@ namespace Radical.Model
         /// <returns>
         ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
-        public override bool ShouldInclude( T item )
+        public override bool ShouldInclude(T item)
         {
-            return this.FilterDelegate( item );
+            return this.FilterDelegate(item);
         }
 
         #endregion

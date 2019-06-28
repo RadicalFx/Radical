@@ -26,17 +26,17 @@
                 new Person(){ FirstName = "Mauro", LastName = "Servienti" }
             };
 
-            var view1 = new EntityView<Person>( dataSource );
-            var view2 = new EntityView<Person>( dataSource );
+            var view1 = new EntityView<Person>(dataSource);
+            var view2 = new EntityView<Person>(dataSource);
 
-            view1.ApplySort( "FirstName" );
+            view1.ApplySort("FirstName");
 
-            var item1 = view1.ElementAt( 0 );
-            var item2 = view2.ElementAt( 0 );
+            var item1 = view1.ElementAt(0);
+            var item2 = view2.ElementAt(0);
 
-            var actual = item1.Equals( item2 );
+            var actual = item1.Equals(item2);
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }

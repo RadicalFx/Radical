@@ -14,5 +14,5 @@
         /// Transient lifestyle.
         /// </summary>
         Transient
-    }    
+    }
 }

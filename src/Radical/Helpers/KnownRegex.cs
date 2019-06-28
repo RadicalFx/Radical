@@ -39,7 +39,7 @@
         /// Validates an email address
         /// </summary>
         public static readonly string MailAddress = @"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$";
-        
+
         /// <summary>
         /// validates an url, http, https or ftp.
         /// </summary>

@@ -11,7 +11,7 @@
         /// Initializes a new instance of the <see cref="CommittedEventArgs"/> class.
         /// </summary>
         /// <param name="reason">The reason.</param>
-        public CommittedEventArgs( CommitReason reason )
+        public CommittedEventArgs(CommitReason reason)
         {
             this.Reason = reason;
         }

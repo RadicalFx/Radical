@@ -21,7 +21,7 @@
         /// A <c>SpecificationNotSupportedException</c> is raised if the infrastructure cannot 
         /// find a suitable engine for the given specification.
         /// </exception>
-        IQueryEngine<TSource, TResult, TProvider> GetQueryEngine<TSource, TResult, TProvider>( IQuerySpecification<TSource, TResult> querySpec );
+        IQueryEngine<TSource, TResult, TProvider> GetQueryEngine<TSource, TResult, TProvider>(IQuerySpecification<TSource, TResult> querySpec);
 
         /// <summary>
         /// Gets the scalar evaluator for the given scalar specification.
@@ -35,7 +35,7 @@
         /// A <c>SpecificationNotSupportedException</c> is raised if the infrastructure cannot 
         /// find a suitable engine for the given specification.
         /// </exception>
-        IScalarEvaluator<TSource, TResult, TProvider> GetScalarEvaluator<TSource, TResult, TProvider>( IScalarSpecification<TSource, TResult> scalarSpec );
+        IScalarEvaluator<TSource, TResult, TProvider> GetScalarEvaluator<TSource, TResult, TProvider>(IScalarSpecification<TSource, TResult> scalarSpec);
 
         /// <summary>
         /// Gets the batch command engine.
@@ -46,6 +46,6 @@
         /// <returns>
         /// The bengine responsible for the execution of the given command.
         /// </returns>
-        IBatchCommandEngine<TCommand, TProvider> GetBatchCommandEngine<TCommand, TProvider>( TCommand command ) where TCommand : IBatchCommand;
+        IBatchCommandEngine<TCommand, TProvider> GetBatchCommandEngine<TCommand, TProvider>(TCommand command) where TCommand : IBatchCommand;
     }
 }

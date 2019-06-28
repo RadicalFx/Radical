@@ -17,21 +17,21 @@
 
             EntityItemViewValueGetter<Object, string> getter = e =>
             {
-                return e.Item.GetCustomValue<string>( e.PropertyName );
+                return e.Item.GetCustomValue<string>(e.PropertyName);
             };
 
             EntityItemViewValueSetter<Object, string> setter = e =>
             {
-                e.Item.SetCustomValue( e.PropertyName, e.Value );
+                e.Item.SetCustomValue(e.PropertyName, e.Value);
             };
 
-            var target = new EntityView<Object>( new[] { new Object() } );
-            target.AddPropertyMapping<string>( "Foo", getter, setter );
+            var target = new EntityView<Object>(new[] { new Object() });
+            target.AddPropertyMapping<string>("Foo", getter, setter);
 
-            target.First().SetCustomValue( "Foo", expected );
-            var actual = target.First().GetCustomValue<string>( "Foo" );
+            target.First().SetCustomValue("Foo", expected);
+            var actual = target.First().GetCustomValue<string>("Foo");
 
-            actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
+            actual.Should("Not yet implemented").Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -45,18 +45,18 @@
                 return "initial value";
             };
 
-            var target = new EntityView<Object>( new[] { new Object() } );
-            target.AddPropertyMapping<string>( "Foo", e =>
-            {
-                return e.Item.GetCustomValue<string>( e.PropertyName );
-            }, interceptor );
+            var target = new EntityView<Object>(new[] { new Object() });
+            target.AddPropertyMapping<string>("Foo", e =>
+           {
+               return e.Item.GetCustomValue<string>(e.PropertyName);
+           }, interceptor);
 
             var item = target.FirstOrDefault();
-            item.GetCustomValue<string>( "Foo" );
-            item.GetCustomValue<string>( "Foo" );
-            item.GetCustomValue<string>( "Foo" );
+            item.GetCustomValue<string>("Foo");
+            item.GetCustomValue<string>("Foo");
+            item.GetCustomValue<string>("Foo");
 
-            actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
+            actual.Should("Not yet implemented").Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -70,16 +70,16 @@
                 return expected;
             };
 
-            var target = new EntityView<Object>( new[] { new Object() } );
-            target.AddPropertyMapping<string>( "Foo", e =>
-            {
-                return e.Item.GetCustomValue<string>( e.PropertyName );
-            }, interceptor );
+            var target = new EntityView<Object>(new[] { new Object() });
+            target.AddPropertyMapping<string>("Foo", e =>
+           {
+               return e.Item.GetCustomValue<string>(e.PropertyName);
+           }, interceptor);
 
             var item = target.FirstOrDefault();
-            actual = item.GetCustomValue<string>( "Foo" );
+            actual = item.GetCustomValue<string>("Foo");
 
-            actual.Should( "Not yet implemented" ).Be.EqualTo( expected );
+            actual.Should("Not yet implemented").Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -89,27 +89,27 @@
 
             EntityItemViewValueGetter<Object, string> getter = e =>
             {
-                return e.Item.GetCustomValue<string>( e.PropertyName );
+                return e.Item.GetCustomValue<string>(e.PropertyName);
             };
 
             EntityItemViewValueSetter<Object, string> setter = e =>
             {
-                e.Item.SetCustomValue( e.PropertyName, e.Value );
+                e.Item.SetCustomValue(e.PropertyName, e.Value);
             };
 
-            var target = new EntityView<Object>( new[] { new Object() } );
-            target.AddPropertyMapping<string>( "Foo", getter, setter );
+            var target = new EntityView<Object>(new[] { new Object() });
+            target.AddPropertyMapping<string>("Foo", getter, setter);
 
             var item = target.First();
-            item.SetCustomValue<string>( "Foo", value );
+            item.SetCustomValue<string>("Foo", value);
 
-            target.RemovePropertyMapping( "Foo" );
-            target.AddPropertyMapping<string>( "Foo", getter, setter );
+            target.RemovePropertyMapping("Foo");
+            target.AddPropertyMapping<string>("Foo", getter, setter);
 
-            var actual = target.First().GetCustomValue<string>( "Foo" );
+            var actual = target.First().GetCustomValue<string>("Foo");
 
-            actual.Should( "Not yet implemented" ).Not.Be.EqualTo( value );
-            actual.Should( "Not yet implemented" ).Be.Null();
+            actual.Should("Not yet implemented").Not.Be.EqualTo(value);
+            actual.Should("Not yet implemented").Be.Null();
         }
 
         [TestMethod]
@@ -121,28 +121,28 @@
 
             EntityItemViewValueGetter<Object, string> getter = e =>
             {
-                return e.Item.GetCustomValue<string>( e.PropertyName );
+                return e.Item.GetCustomValue<string>(e.PropertyName);
             };
 
             EntityItemViewValueSetter<Object, string> setter = e =>
             {
-                e.Item.SetCustomValue( e.PropertyName, e.Value );
+                e.Item.SetCustomValue(e.PropertyName, e.Value);
             };
 
-            var target = new EntityView<Object>( new[] { new Object(), new Object() } );
-            target.AddPropertyMapping<string>( propertyName, getter, setter );
+            var target = new EntityView<Object>(new[] { new Object(), new Object() });
+            target.AddPropertyMapping<string>(propertyName, getter, setter);
 
             var firstItem = target.First();
-            firstItem.SetCustomValue<string>( propertyName, expectedFirst );
+            firstItem.SetCustomValue<string>(propertyName, expectedFirst);
 
             var lastItem = target.Last();
-            lastItem.SetCustomValue<string>( propertyName, expectedLast );
+            lastItem.SetCustomValue<string>(propertyName, expectedLast);
 
-            target.RemovePropertyMapping( propertyName );
-            target.AddPropertyMapping<string>( propertyName, getter, setter );
+            target.RemovePropertyMapping(propertyName);
+            target.AddPropertyMapping<string>(propertyName, getter, setter);
 
-            var actualFirst = target.First().GetCustomValue<string>( "Foo" );
-            var actualLast = target.Last().GetCustomValue<string>( "Foo" );
+            var actualFirst = target.First().GetCustomValue<string>("Foo");
+            var actualLast = target.Last().GetCustomValue<string>("Foo");
 
             actualFirst.Should().Be.Null();
             actualLast.Should().Be.Null();

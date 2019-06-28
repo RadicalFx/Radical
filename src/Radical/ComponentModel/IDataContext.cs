@@ -14,25 +14,25 @@ namespace Radical.ComponentModel
         /// Inserts the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        void Insert( Object entity );
+        void Insert(Object entity);
 
         /// <summary>
         /// Updates the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        void Update( Object entity );
+        void Update(Object entity);
 
         /// <summary>
         /// Saves the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        void Save( Object entity );
+        void Save(Object entity);
 
         /// <summary>
         /// Deletes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        void Delete( Object entity );
+        void Delete(Object entity);
 
         /// <summary>
         /// Clears this instance removing all the cached entities, cancelling all pending saves, updates and deletes.
@@ -46,13 +46,13 @@ namespace Radical.ComponentModel
         /// <returns>
         ///     <c>true</c> if the specified entity is attached; otherwise, <c>false</c>.
         /// </returns>
-        bool IsAttached( Object entity );
+        bool IsAttached(Object entity);
 
         /// <summary>
         /// Detaches the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        void Detach( Object entity );
+        void Detach(Object entity);
 
         ///// <summary>
         ///// Attaches the specified entity.
@@ -80,7 +80,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="isolationLevel">The isolation level.</param>
         /// <returns>The begun transaction.</returns>
-        ITransaction BeginTransaction( System.Data.IsolationLevel isolationLevel );
+        ITransaction BeginTransaction(System.Data.IsolationLevel isolationLevel);
 
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Radical.ComponentModel
         /// <typeparam name="TResult">The type of the expected result.</typeparam>
         /// <param name="querySpec">The query specification.</param>
         /// <returns>The list of entities that satifies the given query.</returns>
-        IList<TResult> GetByQuery<TSource, TResult>( IQuerySpecification<TSource, TResult> querySpec );
+        IList<TResult> GetByQuery<TSource, TResult>(IQuerySpecification<TSource, TResult> querySpec);
 
         /// <summary>
         /// Gets a single value (a scalar value) that satisfies the given query.
@@ -110,7 +110,7 @@ namespace Radical.ComponentModel
         /// <typeparam name="TResult">The type of the expected result.</typeparam>
         /// <param name="scalarSpec">The scalar specification.</param>
         /// <returns>The scalar value that satisfies the given query.</returns>
-        TResult GetScalar<TSource, TResult>( IScalarSpecification<TSource, TResult> scalarSpec );
+        TResult GetScalar<TSource, TResult>(IScalarSpecification<TSource, TResult> scalarSpec);
 
         /// <summary>
         /// Gets a list of entity that satifies the given generic specification.
@@ -119,7 +119,7 @@ namespace Radical.ComponentModel
         /// <typeparam name="TResult">The type of the expected result.</typeparam>
         /// <param name="specification">The generic specification.</param>
         /// <returns>The list of entities that satifies the given generic specification.</returns>
-        IEnumerable<TResult> GetBySpecification<TSource, TResult>( ISpecification<TSource, TResult> specification );
+        IEnumerable<TResult> GetBySpecification<TSource, TResult>(ISpecification<TSource, TResult> specification);
 
         /// <summary>
         /// Gets single entity given its key.
@@ -127,7 +127,7 @@ namespace Radical.ComponentModel
         /// <typeparam name="T">The type of the entity.</typeparam>
         /// <param name="key">The entity key.</param>
         /// <returns>The requested entity.</returns>
-        T GetByKey<T>( Object key );
+        T GetByKey<T>(Object key);
 
         /// <summary>
         /// Executes the specified command against the current data source using the underlying provider.
@@ -137,6 +137,6 @@ namespace Radical.ComponentModel
         /// <returns>
         /// The number of affected entities.
         /// </returns>
-        int Execute<TCommand>( TCommand command ) where TCommand : IBatchCommand;
+        int Execute<TCommand>(TCommand command) where TCommand : IBatchCommand;
     }
 }

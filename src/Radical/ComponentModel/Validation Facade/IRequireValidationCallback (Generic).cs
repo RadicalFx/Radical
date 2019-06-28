@@ -15,6 +15,6 @@ namespace Radical.ComponentModel.Validation
         /// into the validation process.
         /// </summary>
         /// <param name="context">The validation context.</param>
-        void OnValidate( ValidationContext<T> context );
+        void OnValidate(ValidationContext<T> context);
     }
 }

@@ -16,9 +16,9 @@ namespace Radical.Model.QueryModel
         /// Initializes a new instance of the <see cref="EntitiesByKeywordsQuery&lt;TSource, TResult&gt;"/> class.
         /// </summary>
         /// <param name="keywords">The keywords.</param>
-        public EntitiesByKeywordsQuery( IEnumerable<string> keywords )
+        public EntitiesByKeywordsQuery(IEnumerable<string> keywords)
         {
-            Ensure.That( keywords ).Named( "keywords" ).IsNotNull();
+            Ensure.That(keywords).Named("keywords").IsNotNull();
 
             this.Keywords = keywords;
         }
@@ -41,16 +41,16 @@ namespace Radical.Model.QueryModel
         /// </returns>
         public override string ToString()
         {
-            if( value == null )
+            if (value == null)
             {
-                value = this.Keywords.Aggregate( new StringBuilder(), ( a, w ) =>
-                {
-                    a.AppendFormat( "{0}, ", w );
+                value = this.Keywords.Aggregate(new StringBuilder(), (a, w) =>
+               {
+                   a.AppendFormat("{0}, ", w);
 
-                    return a;
-                } )
+                   return a;
+               })
                 .ToString()
-                .TrimEnd( new[] { ',', ' ' } );
+                .TrimEnd(new[] { ',', ' ' });
             }
 
             return value;

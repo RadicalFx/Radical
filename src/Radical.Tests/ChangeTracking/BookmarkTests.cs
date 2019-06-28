@@ -44,11 +44,11 @@
         //}
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
-        [TestCategory( "ChangeTracking" )]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestCategory("ChangeTracking")]
         public void bookmark_null_owner__null_change_null_transientEntities_iChangeTrackingService_ctor_raise_argumentNullException_on_owner()
         {
-            Bookmark bmk = new Bookmark( ( IChangeTrackingService )null, ( IChange )null, ( IEnumerable<Object> )null );
+            Bookmark bmk = new Bookmark((IChangeTrackingService)null, (IChange)null, (IEnumerable<Object>)null);
         }
 
         //[TestMethod]
@@ -71,28 +71,28 @@
         //}
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void bookmark_valid_owner_null_change_null_transientEntities_iChangeTrackingService_ctor_valid_transientEntities()
         {
             IChangeTrackingService mock = A.Fake<IChangeTrackingService>();
-            Bookmark bmk = new Bookmark( mock, ( IChange )null, ( IEnumerable<Object> )null );
+            Bookmark bmk = new Bookmark(mock, (IChange)null, (IEnumerable<Object>)null);
 
             bmk.TransientEntities.Should().Not.Be.Null();
-            bmk.TransientEntities.Count().Should().Be.EqualTo( 0 );
+            bmk.TransientEntities.Count().Should().Be.EqualTo(0);
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void bookmark_valid_owner_null_iChange_valid_transientEntities_iChangeTrackingService_ctor()
         {
             IChangeTrackingService mock = A.Fake<IChangeTrackingService>();
-            Bookmark bmk = new Bookmark( mock, ( IChange )null, new Object[ 0 ] );
+            Bookmark bmk = new Bookmark(mock, (IChange)null, new Object[0]);
 
             bmk.Position.Should().Be.Null();
         }
 
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void bookmark_valid_owner_valid_iChange_valid_transientEntities_iChangeTrackingService_ctor()
         {
             IChangeTrackingService owner = A.Fake<IChangeTrackingService>();
@@ -100,11 +100,11 @@
 
             Object[] entities = new Object[] { new Object(), new Object() };
 
-            Bookmark bmk = new Bookmark( owner, expected, entities );
+            Bookmark bmk = new Bookmark(owner, expected, entities);
 
-            bmk.Position.Should().Be.EqualTo( expected );
+            bmk.Position.Should().Be.EqualTo(expected);
             bmk.TransientEntities.Should().Not.Be.Null();
-            bmk.TransientEntities.Should().Have.SameSequenceAs( entities );
+            bmk.TransientEntities.Should().Have.SameSequenceAs(entities);
         }
     }
 }

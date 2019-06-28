@@ -13,6 +13,6 @@
         /// <returns>
         /// THe number of affected elements.
         /// </returns>
-        int Execute( TCommand command, TProvider provider );
+        int Execute(TCommand command, TProvider provider);
     }
 }

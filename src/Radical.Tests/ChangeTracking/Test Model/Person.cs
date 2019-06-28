@@ -10,11 +10,11 @@ namespace Radical.Tests.ChangeTracking
 
     class Person : MementoEntity, IComponent
     {
-        protected override void Dispose( bool disposing )
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose( disposing );
+            base.Dispose(disposing);
 
-            if( disposing )
+            if (disposing)
             {
                 //if( this.Site != null && this.Site.Container != null )
                 //{
@@ -35,9 +35,9 @@ namespace Radical.Tests.ChangeTracking
 
         protected virtual void OnDisposed()
         {
-            if( this.Disposed != null )
+            if (this.Disposed != null)
             {
-                this.Disposed( this, EventArgs.Empty );
+                this.Disposed(this, EventArgs.Empty);
             }
         }
 
@@ -49,39 +49,39 @@ namespace Radical.Tests.ChangeTracking
 
         #endregion
 
-        public Person( IChangeTrackingService memento )
-            : this( memento, true )
+        public Person(IChangeTrackingService memento)
+            : this(memento, true)
         {
 
         }
 
-        public Person( IChangeTrackingService memento, bool registerAsTransient )
-            : base( memento, registerAsTransient )
+        public Person(IChangeTrackingService memento, bool registerAsTransient)
+            : base(memento, registerAsTransient)
         {
-            this.nameRejectCallback = ( pcr ) =>
+            this.nameRejectCallback = (pcr) =>
             {
-                this.CacheChangeOnRejectCallback( "property-name", this.Name, nameRejectCallback, null, pcr );
+                this.CacheChangeOnRejectCallback("property-name", this.Name, nameRejectCallback, null, pcr);
                 this._name = pcr.CachedValue;
             };
         }
 
         TransientRegistration transientRegistration = TransientRegistration.AsTransparent;
 
-        public Person( IChangeTrackingService memento, ChangeTrackingRegistration registration, TransientRegistration transientRegistration )
-            : base( memento, registration )
+        public Person(IChangeTrackingService memento, ChangeTrackingRegistration registration, TransientRegistration transientRegistration)
+            : base(memento, registration)
         {
             this.transientRegistration = transientRegistration;
 
-            this.nameRejectCallback = ( pcr ) =>
+            this.nameRejectCallback = (pcr) =>
             {
-                this.CacheChangeOnRejectCallback( "property-name", this.Name, nameRejectCallback, null, pcr );
+                this.CacheChangeOnRejectCallback("property-name", this.Name, nameRejectCallback, null, pcr);
                 this._name = pcr.CachedValue;
             };
         }
 
-        protected override void OnRegisterTransient( TransientRegistration transientRegistration )
+        protected override void OnRegisterTransient(TransientRegistration transientRegistration)
         {
-            base.OnRegisterTransient( this.transientRegistration );
+            base.OnRegisterTransient(this.transientRegistration);
         }
 
         private readonly RejectCallback<string> nameRejectCallback = null;
@@ -92,9 +92,9 @@ namespace Radical.Tests.ChangeTracking
             get { return this._name; }
             set
             {
-                if( value != this.Name )
+                if (value != this.Name)
                 {
-                    this.CacheChange( "property-name", this.Name, nameRejectCallback );
+                    this.CacheChange("property-name", this.Name, nameRejectCallback);
                     this._name = value;
                 }
             }

@@ -21,13 +21,13 @@ namespace Radical.Linq
         /// <returns>
         /// A flat readonly list of all the items in the source tree.
         /// </returns>
-        public static IEnumerable<T> ToFlat<T>( this T root, Func<T, IEnumerable<T>> childrenGetter ) 
+        public static IEnumerable<T> ToFlat<T>(this T root, Func<T, IEnumerable<T>> childrenGetter)
             where T : class
         {
-            Ensure.That( root ).Named( "root" ).IsNotNull();
-            Ensure.That( childrenGetter ).Named( "childrenGetter" ).IsNotNull();
+            Ensure.That(root).Named("root").IsNotNull();
+            Ensure.That(childrenGetter).Named("childrenGetter").IsNotNull();
 
-            return ( new[] { root } ).ToFlat( childrenGetter );
+            return (new[] { root }).ToFlat(childrenGetter);
         }
 
         /// <summary>
@@ -37,19 +37,19 @@ namespace Radical.Linq
         /// <param name="source">The source tree.</param>
         /// <param name="childrenGetter">The delegate to retrieve the children of a given node.</param>
         /// <returns>A flat readonly list of all the items in the source tree.</returns>
-        public static IEnumerable<T> ToFlat<T>( this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter )
+        public static IEnumerable<T> ToFlat<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter)
         {
-            Ensure.That( source ).Named( "source" ).IsNotNull();
-            Ensure.That( childrenGetter ).Named( "childrenGetter" ).IsNotNull();
+            Ensure.That(source).Named("source").IsNotNull();
+            Ensure.That(childrenGetter).Named("childrenGetter").IsNotNull();
 
-            foreach( T item in source )
+            foreach (T item in source)
             {
                 yield return item;
 
-                var children = childrenGetter( item );
-                if( children != null )
+                var children = childrenGetter(item);
+                if (children != null)
                 {
-                    foreach( T child in children.ToFlat( childrenGetter ) )
+                    foreach (T child in children.ToFlat(childrenGetter))
                     {
                         yield return child;
                     }
@@ -65,16 +65,16 @@ namespace Radical.Linq
         /// <param name="childrenGetter">The delegate to retrieve the children of a given node.</param>
         /// <param name="condition">The condition to usa as filter.</param>
         /// <returns>A flat readonly list of all the items in the source tree that mets the given condition.</returns>
-        public static IEnumerable<T> FindNodes<T>( this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter, Func<T, bool> condition )
+        public static IEnumerable<T> FindNodes<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter, Func<T, bool> condition)
         {
-            Ensure.That( source ).Named( "source" ).IsNotNull();
-            Ensure.That( childrenGetter ).Named( "childrenGetter" ).IsNotNull();
-            Ensure.That( condition ).Named( "condition" ).IsNotNull();
+            Ensure.That(source).Named("source").IsNotNull();
+            Ensure.That(childrenGetter).Named("childrenGetter").IsNotNull();
+            Ensure.That(condition).Named("condition").IsNotNull();
 
-            var flat = source.ToFlat( childrenGetter );
-            foreach( var item in flat )
+            var flat = source.ToFlat(childrenGetter);
+            foreach (var item in flat)
             {
-                if( condition( item ) )
+                if (condition(item))
                 {
                     yield return item;
                 }
@@ -91,13 +91,13 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter )
+        public static bool IsChildOfAny<T>(this T item, IEnumerable<T> parents, Func<T, T> parentGetter)
             where T : class
         {
-            Ensure.That( parents ).Named( "parents" ).IsNotNull();
-            Ensure.That( parentGetter ).Named( "parentGetter" ).IsNotNull();
+            Ensure.That(parents).Named("parents").IsNotNull();
+            Ensure.That(parentGetter).Named("parentGetter").IsNotNull();
 
-            return item.IsChildOfAny( parents, parentGetter, new ReferenceEqualityComparer<T>() );
+            return item.IsChildOfAny(parents, parentGetter, new ReferenceEqualityComparer<T>());
         }
 
         /// <summary>
@@ -111,13 +111,13 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter, Func<T, T, bool> comparer )
+        public static bool IsChildOfAny<T>(this T item, IEnumerable<T> parents, Func<T, T> parentGetter, Func<T, T, bool> comparer)
         {
-            Ensure.That( parents ).Named( "parents" ).IsNotNull();
-            Ensure.That( parentGetter ).Named( "parentGetter" ).IsNotNull();
-            Ensure.That( comparer ).Named( "comparer" ).IsNotNull();
+            Ensure.That(parents).Named("parents").IsNotNull();
+            Ensure.That(parentGetter).Named("parentGetter").IsNotNull();
+            Ensure.That(comparer).Named("comparer").IsNotNull();
 
-            return item.IsChildOfAny( parents, parentGetter, new DelegateEqualityComparer<T>( comparer, t => t.GetHashCode() ) );
+            return item.IsChildOfAny(parents, parentGetter, new DelegateEqualityComparer<T>(comparer, t => t.GetHashCode()));
         }
 
         /// <summary>
@@ -131,24 +131,24 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsChildOfAny<T>( this T item, IEnumerable<T> parents, Func<T, T> parentGetter, IEqualityComparer<T> comparer )
+        public static bool IsChildOfAny<T>(this T item, IEnumerable<T> parents, Func<T, T> parentGetter, IEqualityComparer<T> comparer)
         {
-            Ensure.That( parents ).Named( "parents" ).IsNotNull();
-            Ensure.That( parentGetter ).Named( "parentGetter" ).IsNotNull();
-            Ensure.That( comparer ).Named( "comparer" ).IsNotNull();
+            Ensure.That(parents).Named("parents").IsNotNull();
+            Ensure.That(parentGetter).Named("parentGetter").IsNotNull();
+            Ensure.That(comparer).Named("comparer").IsNotNull();
 
-            if( item == null )
+            if (item == null)
             {
                 return false;
             }
 
-            if( parents.Contains( item, comparer ) )
+            if (parents.Contains(item, comparer))
             {
                 return true;
             }
 
-            var parent = parentGetter( item );
-            return parent.IsChildOfAny( parents, parentGetter, comparer );
+            var parent = parentGetter(item);
+            return parent.IsChildOfAny(parents, parentGetter, comparer);
         }
 
         /// <summary>
@@ -158,14 +158,14 @@ namespace Radical.Linq
         /// <param name="list">The enumeration to enumerate on.</param>
         /// <param name="action">The action to apply/execute.</param>
         /// <returns>The source enumeration.</returns>
-        public static IEnumerable<T> ForEach<T>( this IEnumerable<T> list, Action<T> action )
+        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> list, Action<T> action)
         {
-            Ensure.That( list ).Named( "list" ).IsNotNull();
-            Ensure.That( action ).Named( "action" ).IsNotNull();
+            Ensure.That(list).Named("list").IsNotNull();
+            Ensure.That(action).Named("action").IsNotNull();
 
-            foreach( T element in list )
+            foreach (T element in list)
             {
-                action( element );
+                action(element);
             }
 
             return list;
@@ -181,15 +181,15 @@ namespace Radical.Linq
         /// <param name="initialState">The initial state.</param>
         /// <param name="func">The Func to invoke for each element.</param>
         /// <returns>The source enumeration.</returns>
-        public static IEnumerable<T> ForEach<TState, T>( this IEnumerable<T> list, TState initialState, Func<TState, T, TState> func )
+        public static IEnumerable<T> ForEach<TState, T>(this IEnumerable<T> list, TState initialState, Func<TState, T, TState> func)
         {
-            Ensure.That( list ).Named( "list" ).IsNotNull();
-            Ensure.That( func ).Named( "func" ).IsNotNull();
+            Ensure.That(list).Named("list").IsNotNull();
+            Ensure.That(func).Named("func").IsNotNull();
 
             TState actualState = initialState;
-            foreach( var element in list )
+            foreach (var element in list)
             {
-                actualState = func( actualState, element );
+                actualState = func(actualState, element);
             }
 
             return list;
@@ -201,9 +201,9 @@ namespace Radical.Linq
         /// <param name="list">The enumeration to enumerate.</param>
         /// <param name="action">The action to apply/execute.</param>
         /// <returns>The source list for fluent interface usage.</returns>
-        public static IEnumerable Enumerate( this IEnumerable list, Action<Object> action )
+        public static IEnumerable Enumerate(this IEnumerable list, Action<Object> action)
         {
-            return list.OfType<Object>().ForEach( action );
+            return list.OfType<Object>().ForEach(action);
         }
 
         /// <summary>
@@ -212,12 +212,12 @@ namespace Radical.Linq
         /// <typeparam name="T">The type of item of the list.</typeparam>
         /// <param name="list">The source list.</param>
         /// <returns>A new read only <c>IEnumerable</c> containing the same items of the source list.</returns>
-        public static IEnumerable<T> AsReadOnly<T>( this IEnumerable<T> list )
+        public static IEnumerable<T> AsReadOnly<T>(this IEnumerable<T> list)
         {
-            Ensure.That( list ).Named( "list" ).IsNotNull();
+            Ensure.That(list).Named("list").IsNotNull();
 
             var tmp = list as List<T>;
-            if( tmp != null )
+            if (tmp != null)
             {
                 return tmp.AsReadOnly();
             }
@@ -230,9 +230,9 @@ namespace Radical.Linq
         /// </summary>
         /// <param name="source">The source sequence.</param>
         /// <returns><c>True</c> if the sequence contains elements; otherwise <c>false</c>.</returns>
-        public static bool Any( this IEnumerable source )
+        public static bool Any(this IEnumerable source)
         {
-            Ensure.That( source ).Named( "source" ).IsNotNull();
+            Ensure.That(source).Named("source").IsNotNull();
 
             var e = source.GetEnumerator();
             return e.MoveNext();
@@ -246,7 +246,7 @@ namespace Radical.Linq
         /// <returns>
         ///     <c>True</c> if the sequence contains no elements; otherwise <c>false</c>.
         /// </returns>
-        public static bool None<T>( this IEnumerable<T> source )
+        public static bool None<T>(this IEnumerable<T> source)
         {
             return !source.Any();
         }
@@ -256,7 +256,7 @@ namespace Radical.Linq
         /// </summary>
         /// <param name="source">The source sequence.</param>
         /// <returns><c>True</c> if the sequence contains no elements; otherwise <c>false</c>.</returns>
-        public static bool None( this IEnumerable source )
+        public static bool None(this IEnumerable source)
         {
             return !source.Any();
         }
@@ -268,14 +268,14 @@ namespace Radical.Linq
         /// <param name="items">The source items list.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>The new list with inserted the separator.</returns>
-        public static IEnumerable<T> AlternateWith<T>( this IEnumerable<T> items, T separator )
+        public static IEnumerable<T> AlternateWith<T>(this IEnumerable<T> items, T separator)
         {
-            Ensure.That( items ).Named( "items" ).IsNotNull();
+            Ensure.That(items).Named("items").IsNotNull();
 
             var isFirst = true;
-            foreach( var item in items )
+            foreach (var item in items)
             {
-                if( isFirst )
+                if (isFirst)
                 {
                     isFirst = false;
                 }
@@ -294,9 +294,9 @@ namespace Radical.Linq
         /// <typeparam name="T">The type of the item in the source list.</typeparam>
         /// <param name="items">The items.</param>
         /// <returns>A new list ordered in a random manner.</returns>
-        public static IEnumerable<T> Shouffle<T>( this IEnumerable<T> items ) 
+        public static IEnumerable<T> Shouffle<T>(this IEnumerable<T> items)
         {
-            return items.OrderBy( i => Guid.NewGuid() );
+            return items.OrderBy(i => Guid.NewGuid());
         }
     }
 }

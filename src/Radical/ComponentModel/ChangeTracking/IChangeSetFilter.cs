@@ -13,6 +13,6 @@
         /// </summary>
         /// <param name="change">The change to evaluate.</param>
         /// <returns></returns>
-        bool ShouldInclude( IChange change );
+        bool ShouldInclude(IChange change);
     }
 }

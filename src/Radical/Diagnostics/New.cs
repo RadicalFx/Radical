@@ -12,9 +12,9 @@ namespace Radical.Diagnostics
         /// Prevents a default instance of the <see cref="New"/> class from being created.
         /// </summary>
         /// <param name="operationId">The operation id.</param>
-        private New( Object operationId )
+        private New(Object operationId)
         {
-            Trace.CorrelationManager.StartLogicalOperation( operationId );
+            Trace.CorrelationManager.StartLogicalOperation(operationId);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Radical.Diagnostics
         /// </summary>
         /// <param name="operationId">The operation id.</param>
         /// <returns>A self stopping logical operation instance.</returns>
-        public static IDisposable LogicalOperation( Object operationId ) 
+        public static IDisposable LogicalOperation(Object operationId)
         {
             return new New(operationId);
         }

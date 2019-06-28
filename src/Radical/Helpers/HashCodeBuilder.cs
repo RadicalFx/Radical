@@ -13,7 +13,7 @@ namespace Radical.Helpers
         /// Initializes a new instance of the <see cref="HashCodeBuilder"/> class.
         /// </summary>
         /// <param name="initialHashCode">The initial hash code.</param>
-        public HashCodeBuilder( Int64 initialHashCode )
+        public HashCodeBuilder(Int64 initialHashCode)
         {
             this.combinedHashCode = initialHashCode;
         }
@@ -22,10 +22,10 @@ namespace Radical.Helpers
         /// Adds the given value to the generated has code.
         /// </summary>
         /// <param name="value">The value.</param>
-        public void AddObject( object value )
+        public void AddObject(object value)
         {
             var h = value.GetHashCode();
-            this.combinedHashCode = ( ( this.combinedHashCode << 5 ) + this.combinedHashCode ) ^ h;
+            this.combinedHashCode = ((this.combinedHashCode << 5) + this.combinedHashCode) ^ h;
         }
 
         /// <summary>

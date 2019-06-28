@@ -15,8 +15,8 @@ namespace Radical.Observers
     {
         ListChangedEventHandler handler = null;
 
-        public EntityViewListChangedMonitor( IEntityView source )
-            : base( source )
+        public EntityViewListChangedMonitor(IEntityView source)
+            : base(source)
         {
 
         }
@@ -27,35 +27,35 @@ namespace Radical.Observers
 
         }
 
-        public EntityViewListChangedMonitor( IEntityView source, IDispatcher dispatcher )
-            : base( source, dispatcher )
+        public EntityViewListChangedMonitor(IEntityView source, IDispatcher dispatcher)
+            : base(source, dispatcher)
         {
 
         }
 
-        public EntityViewListChangedMonitor( IDispatcher dispatcher )
-            : base( dispatcher )
+        public EntityViewListChangedMonitor(IDispatcher dispatcher)
+            : base(dispatcher)
         {
 
         }
 
-        protected override void StartMonitoring( object source )
+        protected override void StartMonitoring(object source)
         {
-            base.StartMonitoring( source );
+            base.StartMonitoring(source);
 
-            handler = ( s, e ) => this.OnChanged();
+            handler = (s, e) => this.OnChanged();
             this.Source.ListChanged += handler;
         }
 
-        public void Observe( IEntityView source )
+        public void Observe(IEntityView source)
         {
             this.StopMonitoring();
-            this.StartMonitoring( source );
+            this.StartMonitoring(source);
         }
 
-        protected override void OnStopMonitoring( bool targetDisposed )
+        protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if( !targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive )
+            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
             {
                 this.Source.ListChanged -= handler;
             }

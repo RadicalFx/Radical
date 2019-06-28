@@ -43,7 +43,7 @@
         /// should raise an <see cref="ArgumentOutOfRangeException"/>.
         /// </summary>
         None = 0,
-        
+
         /// <summary>
         /// The commit is due to an accept change request.
         /// </summary>

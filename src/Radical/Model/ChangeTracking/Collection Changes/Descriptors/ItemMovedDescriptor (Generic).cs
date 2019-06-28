@@ -8,8 +8,8 @@
         /// <param name="item">The item.</param>
         /// <param name="newIndex">The new index.</param>
         /// <param name="oldIndex">The old index.</param>
-        public ItemMovedDescriptor( T item, int newIndex, int oldIndex )
-            : base( item, newIndex)
+        public ItemMovedDescriptor(T item, int newIndex, int oldIndex)
+            : base(item, newIndex)
         {
             this.OldIndex = oldIndex;
         }

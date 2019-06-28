@@ -8,9 +8,9 @@ namespace Radical.ComponentModel
     /// <typeparam name="T">The type of the value holded by this Timestamp.</typeparam>
     public class Timestamp<T> : Timestamp
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         private readonly T value;
-        
+
         /// <summary>
         /// Gets the underlying value holded by this instance.
         /// </summary>
@@ -24,11 +24,11 @@ namespace Radical.ComponentModel
         /// Initializes a new instance of the <see cref="Timestamp&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Timestamp( T value )
+        public Timestamp(T value)
         {
-            if( value == null )
+            if (value == null)
             {
-                throw new ArgumentNullException( "value", "Timestamp value cannot be null" );
+                throw new ArgumentNullException("value", "Timestamp value cannot be null");
             }
 
             this.value = value;
@@ -39,9 +39,9 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator Timestamp<T>( T value )
+        public static implicit operator Timestamp<T>(T value)
         {
-            return new Timestamp<T>( value );
+            return new Timestamp<T>(value);
         }
 
         /// <summary>
@@ -50,11 +50,11 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="timestamp">The timestamp.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator T( Timestamp<T> timestamp )
+        public static implicit operator T(Timestamp<T> timestamp)
         {
-            if( timestamp == null )
+            if (timestamp == null)
             {
-                return default( T );
+                return default(T);
             }
 
             return timestamp.value;
@@ -67,18 +67,18 @@ namespace Radical.ComponentModel
         /// <returns>
         /// true if the specified <see cref="T:Timestamp"/> is equal to the current <see cref="T:Timestamp"/>; otherwise, false.
         /// </returns>
-        public override bool Equals( Timestamp obj )
+        public override bool Equals(Timestamp obj)
         {
             Timestamp<T> timestamp = obj as Timestamp<T>;
-            if( obj != null )
+            if (obj != null)
             {
-                if( this.value is IComparable )
+                if (this.value is IComparable)
                 {
-                    return ( ( IComparable )this.value ).CompareTo( timestamp.value ) == 0;
+                    return ((IComparable)this.value).CompareTo(timestamp.value) == 0;
                 }
                 else
                 {
-                    return Object.Equals( this.value, timestamp.value );
+                    return Object.Equals(this.value, timestamp.value);
                 }
             }
             else
@@ -95,7 +95,7 @@ namespace Radical.ComponentModel
         {
             unchecked
             {
-                return ( ( this.value.GetHashCode() * 35 ) ^ 73 );
+                return ((this.value.GetHashCode() * 35) ^ 73);
             }
         }
     }
