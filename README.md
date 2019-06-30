@@ -1,8 +1,8 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/vbesg43on820lmhy?svg=true)](https://ci.appveyor.com/project/radical-bot/radical)
+# Radical
 
 --
 
-![Radical logo](Radical.png)
+![Radical logo](assets/icon.png)
 
 *Radical* is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern.
 
