@@ -30,7 +30,7 @@
         [TestMethod]
         public void typeExtension_toShortString_using_mscorelib_type_should_not_add_assemblyName_to_type_string()
         {
-            var expected = "System.string";
+            var expected = "System.String";
             var target = typeof(string);
 
             var actual = Radical.Reflection.TypeExtensions.ToShortString(target);
@@ -40,7 +40,7 @@
         [TestMethod]
         public void typeExtension_toString_S_using_mscorelib_type_should_not_add_assemblyName_to_type_string()
         {
-            var expected = "System.string";
+            var expected = "System.String";
             var target = typeof(string);
 
             var actual = Radical.Reflection.TypeExtensions.ToString(target, "S");
@@ -50,7 +50,7 @@
         [TestMethod]
         public void typeextensions_toShortNameString_using_non_generic_type_should_return_type_name()
         {
-            var expected = "string";
+            var expected = "String";
             var actual = typeof(string).ToShortNameString();
 
             actual.Should().Be.EqualTo(expected);
@@ -59,7 +59,7 @@
         [TestMethod]
         public void typeextensions_toShortNameString_using_generic_type_should_return_type_name()
         {
-            var expected = "List<string>";
+            var expected = "List<String>";
             var actual = typeof(List<string>).ToShortNameString();
 
             actual.Should().Be.EqualTo(expected);
@@ -68,7 +68,7 @@
         [TestMethod]
         public void typeextensions_toShortNameString_using_complex_generic_type_should_return_type_name()
         {
-            var expected = "IDictionary<List<Object>, List<string>>";
+            var expected = "IDictionary<List<Object>, List<String>>";
             var actual = typeof(IDictionary<List<Object>, List<string>>).ToShortNameString();
 
             actual.Should().Be.EqualTo(expected);
@@ -77,7 +77,7 @@
         [TestMethod]
         public void typeextensions_toString_SN_using_complex_generic_type_should_return_type_name()
         {
-            var expected = "IDictionary<List<Object>, List<string>>";
+            var expected = "IDictionary<List<Object>, List<String>>";
             var actual = typeof(IDictionary<List<Object>, List<string>>).ToString("SN");
 
             actual.Should().Be.EqualTo(expected);
