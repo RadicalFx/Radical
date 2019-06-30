@@ -1,49 +1,28 @@
+version: '{build}'
 image: Visual Studio 2017
+
 skip_branch_with_pr: true
-skip_tags: true
 pull_requests:
   do_not_increment_build_number: true
 
+environment:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_XMLDOC_MODE: skip
+
+branches:
+  only:
+  - master
+  - vnext
+  - develop
+  - /release-.*/
+  - /^\d+\.\d+\.\d+(-\S*)?$/
+
 build_script:
-  - cmd: Build.cmd
-  
+- cmd: ./build.cmd
+
+test: off
+
 artifacts:
-  - path: build
-  - path: nugets\*.nupkg
+- path: ./**/*.nupkg
 
-test:
-  categories:
-    except:
-      - ObjectDumper
-      - AsyncWorker
-
-for:
-
--
-  branches:
-    only:
-      - develop
-
-  deploy:
-    - provider: Environment
-      name: MyGet feed
-      artifact: /.*\.nupkg/
--
-  branches:
-    only:
-      - master
-
-  build_script:
-    - cmd: Build.cmd release
-
-  deploy:
-    - provider: Environment
-      name: NuGet public feed
-      artifact: /.*\.nupkg/
-
-    - provider: GitHub    
-      release: $(GitVersion_NuGetVersion)
-      description: 'Release v$(GitVersion_NuGetVersion)'
-      auth_token:
-        secure: 2ijF4OfPYfIUTunubL/Z04ogADL9sx/gKW1jMRNJnAa1OpHZpSvCKmP0gvNs8C7h
-      artifact: /.*\.nupkg/, build\Release.zip
+deploy: off

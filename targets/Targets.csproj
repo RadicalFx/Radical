@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bullseye" Version="2.2.0" />
+    <PackageReference Include="Colorful.Console" Version="1.2.9" />
     <PackageReference Include="SimpleExec" Version="4.1.0" />
   </ItemGroup>
 
