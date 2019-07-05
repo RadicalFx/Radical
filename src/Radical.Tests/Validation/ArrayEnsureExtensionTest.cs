@@ -9,42 +9,42 @@ namespace Radical.Tests.Validation
     public class ArrayEnsureExtensionTest
     {
         [TestMethod()]
-        [ExpectedException( typeof( System.ArgumentOutOfRangeException ) )]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_lower()
         {
-            Int32[] data = new Int32[ 1 ] { 0 };
-            Ensure.That( data ).ContainsIndex( -1 );
+            int[] data = new int[1] { 0 };
+            Ensure.That(data).ContainsIndex(-1);
         }
 
         [TestMethod()]
-        [ExpectedException( typeof( System.ArgumentOutOfRangeException ) )]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_lower_using_named_ensure()
         {
-            Int32[] data = new Int32[ 1 ] { 0 };
-            Ensure.That( data ).Named( "foo" ).ContainsIndex( -1 );
+            int[] data = new int[1] { 0 };
+            Ensure.That(data).Named("foo").ContainsIndex(-1);
         }
 
         [TestMethod()]
-        [ExpectedException( typeof( System.ArgumentOutOfRangeException ) )]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_upper()
         {
-            Int32[] data = new Int32[ 1 ] { 0 };
-            Ensure.That( data ).ContainsIndex( 2 );
+            int[] data = new int[1] { 0 };
+            Ensure.That(data).ContainsIndex(2);
         }
 
         [TestMethod()]
-        [ExpectedException( typeof( System.ArgumentOutOfRangeException ) )]
+        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_upper_using_named_ensure()
         {
-            Int32[] data = new Int32[ 1 ] { 0 };
-            Ensure.That( data ).Named( "foo" ).ContainsIndex( 2 );
+            int[] data = new int[1] { 0 };
+            Ensure.That(data).Named("foo").ContainsIndex(2);
         }
 
         [TestMethod()]
         public void arrayEnsureExtension_containsIndex_using_a_valid_index()
         {
-            Int32[] data = new Int32[ 3 ];
-            Ensure.That( data ).ContainsIndex( 2 );
+            int[] data = new int[3];
+            Ensure.That(data).ContainsIndex(2);
         }
 
         [TestMethod]
@@ -54,11 +54,11 @@ namespace Radical.Tests.Validation
 
             try
             {
-                var target = Ensure.That( new Int32[ 1 ] { 0 } )
-                    .WithPreview( ( v, e ) => actual = true );
-                target.ContainsIndex( 2 );
+                var target = Ensure.That(new int[1] { 0 })
+                    .WithPreview((v, e) => actual = true);
+                target.ContainsIndex(2);
             }
-            catch( ArgumentOutOfRangeException )
+            catch (ArgumentOutOfRangeException)
             {
 
             }

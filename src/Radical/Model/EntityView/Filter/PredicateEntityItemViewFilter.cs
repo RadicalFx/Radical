@@ -1,19 +1,19 @@
-using System;
 using Radical.Validation;
+using System;
 
 namespace Radical.Model
 {
     public sealed class PredicateEntityItemViewFilter<T> : EntityItemViewFilterBase<T> // where T : class
     {
         public Predicate<T> FilterDelegate { get; private set; }
-        private String filterName;
+        private string filterName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PredicateEntityItemViewFilter&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="filterDelegate">The filter delegate.</param>
-        public PredicateEntityItemViewFilter( Predicate<T> filterDelegate )
-            : this( filterDelegate, null )
+        public PredicateEntityItemViewFilter(Predicate<T> filterDelegate)
+            : this(filterDelegate, null)
         {
 
         }
@@ -23,21 +23,21 @@ namespace Radical.Model
         /// </summary>
         /// <param name="filterDelegate">The filter delegate.</param>
         /// <param name="filterName">The name of the filter.</param>
-        public PredicateEntityItemViewFilter( Predicate<T> filterDelegate, String filterName )
+        public PredicateEntityItemViewFilter(Predicate<T> filterDelegate, string filterName)
         {
-            Ensure.That( filterDelegate ).Named( "filterDelegate" ).IsNotNull();
+            Ensure.That(filterDelegate).Named("filterDelegate").IsNotNull();
 
             this.filterName = filterName ?? Resources.Labels.DefaulPredicateFilterName;
             this.FilterDelegate = filterDelegate;
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// A <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
-        public override String ToString()
+        public override string ToString()
         {
             return this.filterName;
         }
@@ -51,9 +51,9 @@ namespace Radical.Model
         /// <returns>
         ///     <collection>True</collection> if the item should be included, otherwise <collection>false</collection>.
         /// </returns>
-        public override Boolean ShouldInclude( T item )
+        public override bool ShouldInclude(T item)
         {
-            return this.FilterDelegate( item );
+            return this.FilterDelegate(item);
         }
 
         #endregion

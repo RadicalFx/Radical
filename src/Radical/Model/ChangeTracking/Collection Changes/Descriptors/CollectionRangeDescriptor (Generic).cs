@@ -8,7 +8,7 @@
         /// Initializes a new instance of the <see cref="CollectionRangeDescriptor&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="items">The items.</param>
-        public CollectionRangeDescriptor( IEnumerable<T> items )
+        public CollectionRangeDescriptor(IEnumerable<T> items)
         {
             this.Items = items;
         }

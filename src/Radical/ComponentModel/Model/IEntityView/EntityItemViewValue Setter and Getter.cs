@@ -5,17 +5,17 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Delegate used to get property value
     /// </summary>
-    public delegate Object EntityItemViewValueGetter<T, TValue>( EntityItemViewValueGetterArgs<T, TValue> args ); //where T : class;
+    public delegate Object EntityItemViewValueGetter<T, TValue>(EntityItemViewValueGetterArgs<T, TValue> args); //where T : class;
 
     /// <summary>
     /// Delegate used to set property value
     /// </summary>
-    public delegate void EntityItemViewValueSetter<T, TValue>( EntityItemViewValueSetterArgs<T, TValue> args ); //where T : class;
+    public delegate void EntityItemViewValueSetter<T, TValue>(EntityItemViewValueSetterArgs<T, TValue> args); //where T : class;
 
     public abstract class EntityItemViewValueArgs<T, TValue>
-        //where T : class
+    //where T : class
     {
-        protected EntityItemViewValueArgs( IEntityItemView<T> item, String propertyName )
+        protected EntityItemViewValueArgs(IEntityItemView<T> item, string propertyName)
         {
             this.Item = item;
             this.PropertyName = propertyName;
@@ -27,27 +27,27 @@ namespace Radical.ComponentModel
             private set;
         }
 
-        public String PropertyName
+        public string PropertyName
         {
             get;
             private set;
         }
     }
     public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T, TValue>
-        //where T : class
+    //where T : class
     {
-        public EntityItemViewValueGetterArgs( IEntityItemView<T> item, String propertyName )
-            : base( item, propertyName )
+        public EntityItemViewValueGetterArgs(IEntityItemView<T> item, string propertyName)
+            : base(item, propertyName)
         {
 
         }
     }
 
     public class EntityItemViewValueSetterArgs<T, TValue> : EntityItemViewValueArgs<T, TValue>
-        //where T : class
+    //where T : class
     {
-        public EntityItemViewValueSetterArgs( IEntityItemView<T> item, String propertyName, TValue value )
-            : base( item, propertyName )
+        public EntityItemViewValueSetterArgs(IEntityItemView<T> item, string propertyName, TValue value)
+            : base(item, propertyName)
         {
             this.Value = value;
         }

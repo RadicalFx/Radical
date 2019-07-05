@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Radical.ComponentModel
+﻿namespace Radical.ComponentModel
 {
     /// <summary>
     /// Defines the lifestyle of a component.
@@ -16,5 +14,5 @@ namespace Radical.ComponentModel
         /// Transient lifestyle.
         /// </summary>
         Transient
-    }    
+    }
 }

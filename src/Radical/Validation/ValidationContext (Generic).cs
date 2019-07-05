@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Radical.Linq;
-using Radical.Validation;
-using Radical.ComponentModel.Validation;
+﻿using Radical.ComponentModel.Validation;
 
 namespace Radical.Validation
 {
@@ -18,10 +13,10 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <param name="validator">The validator.</param>
-        public ValidationContext( T entity, IValidator<T> validator )
-            : this( entity, validator, new ValidationResults() )
+        public ValidationContext(T entity, IValidator<T> validator)
+            : this(entity, validator, new ValidationResults())
         {
- 
+
         }
 
         /// <summary>
@@ -30,10 +25,10 @@ namespace Radical.Validation
         /// <param name="entity">The entity.</param>
         /// <param name="validator">The validator.</param>
         /// <param name="results">The results.</param>
-        public ValidationContext( T entity, IValidator<T> validator, ValidationResults results )
+        public ValidationContext(T entity, IValidator<T> validator, ValidationResults results)
         {
-            Ensure.That( validator ).Named( "validator" ).IsNotNull();
-            Ensure.That( results ).Named( "results" ).IsNotNull();
+            Ensure.That(validator).Named("validator").IsNotNull();
+            Ensure.That(results).Named("results").IsNotNull();
 
             this.Entity = entity;
             this.Validator = validator;
@@ -50,13 +45,13 @@ namespace Radical.Validation
         /// Gets or sets the validation rule set if specified.
         /// </summary>
         /// <value>The rule set.</value>
-        public String RuleSet { get; set; }
+        public string RuleSet { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the validated property if specified.
         /// </summary>
         /// <value>The name of the property.</value>
-        public String PropertyName { get; set; }
+        public string PropertyName { get; set; }
 
         /// <summary>
         /// Gets the current validator.

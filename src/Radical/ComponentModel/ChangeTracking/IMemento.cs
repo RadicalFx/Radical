@@ -17,7 +17,7 @@
     /// <summary>
     /// Determines how to register the entity with the <see cref="IChangeTrackingService"/>
     /// </summary>
-    public enum ChangeTrackingRegistration 
+    public enum ChangeTrackingRegistration
     {
         /// <summary>
         /// The entity will be registered as transient.
@@ -33,7 +33,7 @@
     /// <summary>
     /// Determines the type oo the transient registration.
     /// </summary>
-    public enum TransientRegistration 
+    public enum TransientRegistration
     {
         /// <summary>
         /// The transient entity will be registered in the change tracking service

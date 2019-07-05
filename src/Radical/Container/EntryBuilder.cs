@@ -1,6 +1,5 @@
-﻿using System;
-using System.Reflection;
-using Radical.ComponentModel;
+﻿using Radical.ComponentModel;
+using System;
 
 namespace Radical
 {
@@ -14,11 +13,11 @@ namespace Radical
         /// </summary>
         /// <param name="type">The type to create entry for.</param>
         /// <returns>The container entry.</returns>
-        public static IPuzzleContainerEntry For( Type type )
+        public static IPuzzleContainerEntry For(Type type)
         {
-            if( type.IsInterface )
+            if (type.IsInterface)
             {
-                return new PuzzleContainerEntry<Object>().AddService( type );
+                return new PuzzleContainerEntry<Object>().AddService(type);
             }
             else
             {
@@ -35,10 +34,10 @@ namespace Radical
         /// </returns>
         public static IPuzzleContainerEntry<T> For<T>()
         {
-            var type = typeof( T );
-            if( type.IsInterface )
+            var type = typeof(T);
+            if (type.IsInterface)
             {
-                return new PuzzleContainerEntry<T>().AddService( type );
+                return new PuzzleContainerEntry<T>().AddService(type);
             }
             else
             {

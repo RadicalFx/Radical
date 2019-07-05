@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
-    <OutputPath>..\..\build</OutputPath>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <DefineConstants>NET_CORE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -11,7 +14,6 @@
     <PackageLicenseUrl>https://github.com/RadicalFx/radical/blob/master/license.md</PackageLicenseUrl>
     <PackageTags>Radical</PackageTags>
     <PackageIconUrl>http://www.radicalframework.com/img/radical-ico.png</PackageIconUrl>
-    <PackageOutputPath>..\..\nugets</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -23,7 +25,7 @@
     <MinVerMinimumMajorMinor>2</MinVerMinimumMajorMinor>
   </PropertyGroup>
 
-  <Target Name="ApVeyorPullRequestsTarget" AfterTargets="MinVer" Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''" >
+  <Target Name="ApVeyorPullRequestsTarget" AfterTargets="MinVer" Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''">
     <PropertyGroup>
       <PackageVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)-PR.$(APPVEYOR_PULL_REQUEST_NUMBER).$(MinVerPreRelease)</PackageVersion>
       <PackageVersion Condition="'$(MinVerBuildMetadata)' != ''">$(PackageVersion)+$(MinVerBuildMetadata)</PackageVersion>
@@ -32,14 +34,10 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="1.0.0-beta.4">
+    <PackageReference Include="MinVer" Version="1.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Transactions" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,7 @@
 
         private IncludeAllChangeSetFilter()
         {
- 
+
         }
 
         #region IChangeSetBuilder Members
@@ -33,9 +33,9 @@
         /// </summary>
         /// <param name="change">The change to evaluate.</param>
         /// <returns></returns>
-        public bool ShouldInclude( IChange change )
+        public bool ShouldInclude(IChange change)
         {
-            Ensure.That( change ).Named( "change" ).IsNotNull();
+            Ensure.That(change).Named("change").IsNotNull();
 
             return true;
         }

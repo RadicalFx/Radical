@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Radical.ComponentModel
 {
@@ -14,7 +12,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry<T> UsingInstance<TComponent>( TComponent instance ) 
+        IPuzzleContainerEntry<T> UsingInstance<TComponent>(TComponent instance)
             where TComponent : T;
 
         /// <summary>
@@ -22,7 +20,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="componentType">The type of the component.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry<T> ImplementedBy( Type componentType );
+        IPuzzleContainerEntry<T> ImplementedBy(Type componentType);
 
         /// <summary>
         /// Defines the type that implements the service.
@@ -36,14 +34,14 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="lifestyle">The lifestyle.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry<T> WithLifestyle( Lifestyle lifestyle );
+        IPuzzleContainerEntry<T> WithLifestyle(Lifestyle lifestyle);
 
         /// <summary>
         /// Defines the factory to use.
         /// </summary>
         /// <param name="factory">The factory.</param>
         /// <returns>This entry instance</returns>
-        IPuzzleContainerEntry<T> UsingFactory( Func<T> factory );
+        IPuzzleContainerEntry<T> UsingFactory(Func<T> factory);
 
         /// <summary>
         /// Defines the specified component registration as overridable.

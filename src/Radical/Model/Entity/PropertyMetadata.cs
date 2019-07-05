@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Collections.Generic;
-using Radical.Linq;
+﻿using Radical.Linq;
 using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Radical.Model
@@ -18,18 +17,18 @@ namespace Radical.Model
         /// </summary>
         ~PropertyMetadata()
         {
-            this.Dispose( false );
+            this.Dispose(false);
         }
-        
+
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose(bool disposing)
         {
-            if ( disposing )
+            if (disposing)
             {
-                this.cascadeChangeNotifications.Clear();   
+                this.cascadeChangeNotifications.Clear();
             }
         }
 
@@ -38,8 +37,8 @@ namespace Radical.Model
         /// </summary>
         public void Dispose()
         {
-            this.Dispose( true );
-            GC.SuppressFinalize( this );
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
@@ -53,10 +52,10 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>( Object propertyOwner, Expression<Func<T>> property )
+        public static PropertyMetadata<T> Create<T>(Object propertyOwner, Expression<Func<T>> property)
         {
             var name = property.GetMemberName();
-            return PropertyMetadata.Create<T>( propertyOwner, name );
+            return PropertyMetadata.Create<T>(propertyOwner, name);
         }
 
         /// <summary>
@@ -68,29 +67,29 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>( Object propertyOwner, String propertyName )
+        public static PropertyMetadata<T> Create<T>(Object propertyOwner, string propertyName)
         {
-            return new PropertyMetadata<T>( propertyOwner, propertyName );
+            return new PropertyMetadata<T>(propertyOwner, propertyName);
         }
 
-        readonly HashSet<String> cascadeChangeNotifications = new HashSet<String>();
+        readonly HashSet<string> cascadeChangeNotifications = new HashSet<string>();
 
         readonly Object propertyOwner;
         PropertyInfo _property;
 
-        protected PropertyInfo Property 
+        protected PropertyInfo Property
         {
-            get 
+            get
             {
-                if ( this._property == null ) 
+                if (this._property == null)
                 {
                     this._property = this.propertyOwner
                         .GetType()
-                        .GetProperty( this.PropertyName );
+                        .GetProperty(this.PropertyName);
                 }
 
                 return this._property;
-            } 
+            }
         }
 
         /// <summary>
@@ -98,10 +97,10 @@ namespace Radical.Model
         /// </summary>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="propertyName">Name of the property.</param>
-        protected PropertyMetadata( Object propertyOwner, String propertyName )
+        protected PropertyMetadata(Object propertyOwner, string propertyName)
         {
-            Ensure.That( propertyOwner ).Named( "propertyOwner" ).IsNotNull();
-            Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
+            Ensure.That(propertyOwner).Named("propertyOwner").IsNotNull();
+            Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
             this.propertyOwner = propertyOwner;
             this.PropertyName = propertyName;
@@ -114,7 +113,7 @@ namespace Radical.Model
         /// <value>
         /// The name of the property.
         /// </value>
-        public String PropertyName { get; private set; }
+        public string PropertyName { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the property represented by this metadata should notify changes.
@@ -122,7 +121,7 @@ namespace Radical.Model
         /// <value>
         ///   <c>true</c> if the property should notify changes; otherwise, <c>false</c>.
         /// </value>
-        public Boolean NotifyChanges { get; set; }
+        public bool NotifyChanges { get; set; }
 
         /// <summary>
         /// Disables changes notifications for this property.
@@ -144,48 +143,48 @@ namespace Radical.Model
             return this;
         }
 
-        public PropertyMetadata AddCascadeChangeNotifications<T>( Expression<Func<T>> property )
+        public PropertyMetadata AddCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
-            return this.AddCascadeChangeNotifications( property.GetMemberName() );
+            return this.AddCascadeChangeNotifications(property.GetMemberName());
         }
 
-        public PropertyMetadata AddCascadeChangeNotifications( String property )
+        public PropertyMetadata AddCascadeChangeNotifications(string property)
         {
-            this.cascadeChangeNotifications.Add( property );
+            this.cascadeChangeNotifications.Add(property);
 
             return this;
         }
 
-        public PropertyMetadata RemoveCascadeChangeNotifications<T>( Expression<Func<T>> property )
+        public PropertyMetadata RemoveCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
-            return this.RemoveCascadeChangeNotifications( property.GetMemberName() );
+            return this.RemoveCascadeChangeNotifications(property.GetMemberName());
         }
 
-        public PropertyMetadata RemoveCascadeChangeNotifications( String property )
+        public PropertyMetadata RemoveCascadeChangeNotifications(string property)
         {
-            if ( this.cascadeChangeNotifications.Contains( property ) )
+            if (this.cascadeChangeNotifications.Contains(property))
             {
-                this.cascadeChangeNotifications.Remove( property );
+                this.cascadeChangeNotifications.Remove(property);
             }
 
             return this;
         }
 
-        public IEnumerable<String> GetCascadeChangeNotifications()
+        public IEnumerable<string> GetCascadeChangeNotifications()
         {
             return this.cascadeChangeNotifications;
         }
 
-        public abstract void SetDefaultValue( PropertyValue value );
+        public abstract void SetDefaultValue(PropertyValue value);
 
         public abstract PropertyValue GetDefaultValue();
 
-        //public void AddCustomMetadata<T>( String key, T value ) 
+        //public void AddCustomMetadata<T>( string key, T value ) 
         //{
 
         //}
 
-        //public T GetCustomMetadata<T>( String key )
+        //public T GetCustomMetadata<T>( string key )
         //{
 
         //}

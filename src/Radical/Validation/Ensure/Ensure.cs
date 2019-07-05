@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System;
 using System.Reflection;
 namespace Radical.Validation
 {
@@ -37,17 +36,17 @@ namespace Radical.Validation
             private string _className;
             private string _methodName;
 
-            public static SourceInfo FromStack( StackTrace st, bool lazy )
+            public static SourceInfo FromStack(StackTrace st, bool lazy)
             {
                 SourceInfo si = SourceInfo.Empty;
-                if ( st.FrameCount > 0 )
+                if (st.FrameCount > 0)
                 {
 #if DEBUG
-                    var frame = st.GetFrame( 1 );
+                    var frame = st.GetFrame(1);
 #else
                     var frame = st.GetFrame( 0 );
 #endif
-                    si = new SourceInfo( frame, lazy );
+                    si = new SourceInfo(frame, lazy);
                 }
 
                 return si;
@@ -72,11 +71,11 @@ namespace Radical.Validation
                 this.loaded = true;
             }
 
-            private SourceInfo( StackFrame frame, bool lazy )
+            private SourceInfo(StackFrame frame, bool lazy)
             {
                 this.frame = frame;
                 this.lazy = lazy;
-                if ( !this.lazy )
+                if (!this.lazy)
                 {
                     this.EnsureDataAreLoaded();
                 }
@@ -84,16 +83,16 @@ namespace Radical.Validation
 
             void EnsureDataAreLoaded()
             {
-                if ( !this.loaded )
+                if (!this.loaded)
                 {
                     var mi = this.frame.GetMethod();
-                    if ( mi != null )
+                    if (mi != null)
                     {
                         this._methodName = mi.Name;
                         this._className = mi.DeclaringType.Name;
                         this._sourceType = mi.MemberType;
                     }
-                    else 
+                    else
                     {
                         this._methodName = SourceInfo.Empty.MethodName;
                         this._className = SourceInfo.Empty.ClassName;
@@ -108,19 +107,20 @@ namespace Radical.Validation
             /// Gets the name of the method.
             /// </summary>
             /// <value>The name of the method.</value>
-            public String MethodName 
+            public string MethodName
             {
-                get 
+                get
                 {
                     this.EnsureDataAreLoaded();
-                    return this._methodName; 
-                } }
+                    return this._methodName;
+                }
+            }
 
             /// <summary>
             /// Gets the name of the class.
             /// </summary>
             /// <value>The name of the class.</value>
-            public String ClassName
+            public string ClassName
             {
                 get
                 {
@@ -150,9 +150,9 @@ namespace Radical.Validation
         /// <typeparam name="T">The type of the inepcted object value.</typeparam>
         /// <param name="obj">The object value to inspect.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public static IConfigurableEnsure<T> That<T>( T obj )
+        public static IConfigurableEnsure<T> That<T>(T obj)
         {
-            return That<T>( obj, Ensure.SourceInfoLoadStrategy );
+            return That<T>(obj, Ensure.SourceInfoLoadStrategy);
         }
 
         /// <summary>
@@ -163,23 +163,23 @@ namespace Radical.Validation
         /// <param name="obj">The object value to inspect.</param>
         /// <param name="strategy">Determines if the Ensure instance should load the current Stack.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public static IConfigurableEnsure<T> That<T>( T obj, SourceInfoLoadStrategy strategy )
+        public static IConfigurableEnsure<T> That<T>(T obj, SourceInfoLoadStrategy strategy)
         {
             var si = SourceInfo.Empty;
 
-            if ( strategy != Validation.SourceInfoLoadStrategy.Skip ) 
+            if (strategy != Validation.SourceInfoLoadStrategy.Skip)
             {
                 var lazy = strategy == Validation.SourceInfoLoadStrategy.LazyLoad;
-                si = SourceInfo.FromStack( new StackTrace( 1 ), lazy: lazy );
+                si = SourceInfo.FromStack(new StackTrace(1), lazy: lazy);
             }
 
-            return new Ensure<T>( obj, si );
+            return new Ensure<T>(obj, si);
         }
     }
 
     public enum SourceInfoLoadStrategy
     {
-        Load=0,
+        Load = 0,
         Skip,
         LazyLoad
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.ComponentModel.Validation;
+﻿using Radical.ComponentModel.Validation;
 
 namespace Radical.Validation
 {
@@ -18,7 +14,7 @@ namespace Radical.Validation
         /// <returns>An instance of the requested validator.</returns>
         public IValidator<T> CreateValidator<T>()
         {
-            return this.CreateValidator<T>( null );
+            return this.CreateValidator<T>(null);
         }
 
         /// <summary>
@@ -29,9 +25,9 @@ namespace Radical.Validation
         /// <param name="ruleSet">The rule set to pass to the
         /// newly created validator.</param>
         /// <returns>An instance of the requested validator.</returns>
-        public IValidator<T> CreateValidator<T>( string ruleSet )
+        public IValidator<T> CreateValidator<T>(string ruleSet)
         {
-            return new ValidatorBase<T>( ruleSet );
+            return new ValidatorBase<T>(ruleSet);
         }
     }
 }

@@ -15,16 +15,16 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>( v =>
-            {
-                actual++;
-                return true;
-            } );
+            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(v =>
+           {
+               actual++;
+               return true;
+           });
 
-            target.ShouldInclude( new GenericParameterHelper() );
+            target.ShouldInclude(new GenericParameterHelper());
 
-            actual.Should().Be.EqualTo( expected );
-            target.ToString().Should().Be.EqualTo( expectedName );
+            actual.Should().Be.EqualTo(expected);
+            target.ToString().Should().Be.EqualTo(expectedName);
         }
 
         [TestMethod]
@@ -34,16 +34,16 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>( v =>
-            {
-                actual++;
-                return true;
-            }, expectedName );
+            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(v =>
+           {
+               actual++;
+               return true;
+           }, expectedName);
 
-            target.ShouldInclude( new GenericParameterHelper() );
+            target.ShouldInclude(new GenericParameterHelper());
 
-            actual.Should().Be.EqualTo( expected );
-            target.ToString().Should().Be.EqualTo( expectedName );
+            actual.Should().Be.EqualTo(expected);
+            target.ToString().Should().Be.EqualTo(expectedName);
         }
 
         [TestMethod]
@@ -53,30 +53,30 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>( v =>
-            {
-                actual++;
-                return true;
-            }, null );
+            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(v =>
+           {
+               actual++;
+               return true;
+           }, null);
 
-            target.ShouldInclude( new GenericParameterHelper() );
+            target.ShouldInclude(new GenericParameterHelper());
 
-            actual.Should().Be.EqualTo( expected );
-            target.ToString().Should().Be.EqualTo( expectedName );
+            actual.Should().Be.EqualTo(expected);
+            target.ToString().Should().Be.EqualTo(expectedName);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void predicateEntityItemViewFilter_ctor_null_predicate_should_raise_ArgumentNullException()
         {
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>( null );
+            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void predicateEntityItemViewFilter_ctor_null_predicate_null_string_should_raise_ArgumentNullException()
         {
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>( null, null );
+            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null, null);
         }
     }
 }

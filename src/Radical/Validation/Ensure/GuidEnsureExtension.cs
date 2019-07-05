@@ -18,13 +18,13 @@
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is an empty Guid.</exception>
-        public static IEnsure<Guid> IsNotEmpty( this IEnsure<Guid> validator )
+        public static IEnsure<Guid> IsNotEmpty(this IEnsure<Guid> validator)
         {
-            validator.If( g => g == Guid.Empty )
-                .ThenThrow( v =>
-                {
-                    return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( "The inspected guid value should be not empty." ) );
-                } );
+            validator.If(g => g == Guid.Empty)
+                .ThenThrow(v =>
+               {
+                   return new ArgumentOutOfRangeException(v.Name, v.GetFullErrorMessage("The inspected guid value should be not empty."));
+               });
 
             return validator;
         }

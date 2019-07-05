@@ -12,6 +12,6 @@
         /// <param name="svc">The service that holds the data to generate the advisory for.</param>
         /// <param name="changeSet">The subset of changes to generate the advisory for.</param>
         /// <returns>The generated advisory.</returns>
-        IAdvisory GenerateAdvisory( IChangeTrackingService svc, IChangeSet changeSet );
+        IAdvisory GenerateAdvisory(IChangeTrackingService svc, IChangeSet changeSet);
     }
 }

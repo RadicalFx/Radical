@@ -8,15 +8,15 @@ namespace Radical
     /// Extend the <see cref="EnumItemDescriptionAttribute"/> providing localization
     /// functionalities.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments" ), System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1813:AvoidUnsealedAttributes" ), AttributeUsage( AttributeTargets.Field, AllowMultiple = false, Inherited = false )]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes"), AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public class LocalizableEnumItemDescriptionAttribute : EnumItemDescriptionAttribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizableEnumItemDescriptionAttribute"/> class.
         /// </summary>
         /// <param name="captionKey">The description key.</param>
-        public LocalizableEnumItemDescriptionAttribute( String captionKey )
-            : base( captionKey )
+        public LocalizableEnumItemDescriptionAttribute(string captionKey)
+            : base(captionKey)
         {
 
         }
@@ -26,8 +26,8 @@ namespace Radical
         /// </summary>
         /// <param name="captionKey">The caption key.</param>
         /// <param name="index">The index.</param>
-        public LocalizableEnumItemDescriptionAttribute( String captionKey, Int32 index )
-            : base( captionKey, index )
+        public LocalizableEnumItemDescriptionAttribute(string captionKey, int index)
+            : base(captionKey, index)
         {
 
         }
@@ -38,8 +38,8 @@ namespace Radical
         /// <param name="captionKey">The caption key.</param>
         /// <param name="descriptionKey">The description key.</param>
         /// <param name="index">The index.</param>
-        public LocalizableEnumItemDescriptionAttribute( String captionKey, String descriptionKey, Int32 index )
-            : base( captionKey, descriptionKey, index )
+        public LocalizableEnumItemDescriptionAttribute(string captionKey, string descriptionKey, int index)
+            : base(captionKey, descriptionKey, index)
         {
 
         }
@@ -54,11 +54,11 @@ namespace Radical
         {
             get
             {
-                if ( this._resourceManager == null )
+                if (this._resourceManager == null)
                 {
                     Assembly assembly = null;
 
-                    switch ( this.AssemblyLocationBehavior )
+                    switch (this.AssemblyLocationBehavior)
                     {
                         case ResourceAssemblyLocationBehavior.UseExecutingAssembly:
                             assembly = Assembly.GetExecutingAssembly();
@@ -74,11 +74,11 @@ namespace Radical
 
                         case ResourceAssemblyLocationBehavior.ByAssemblyName:
                         default:
-                            assembly = Assembly.Load( this.AssemblyName );
+                            assembly = Assembly.Load(this.AssemblyName);
                             break;
                     }
 
-                    this._resourceManager = new ResourceManager( this.ResourceName, assembly );
+                    this._resourceManager = new ResourceManager(this.ResourceName, assembly);
                 }
 
                 return this._resourceManager;
@@ -89,13 +89,13 @@ namespace Radical
         /// Gets or sets the name of the resource.
         /// </summary>
         /// <value>The name of the resource.</value>
-        public String ResourceName { get; set; }
+        public string ResourceName { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the assembly.
         /// </summary>
         /// <value>The name of the assembly.</value>
-        public String AssemblyName { get; set; }
+        public string AssemblyName { get; set; }
 
         /// <summary>
         /// Gets or sets the caption fallback value.
@@ -103,7 +103,7 @@ namespace Radical
         /// <value>
         /// The caption fallback value.
         /// </value>
-        public String CaptionFallbackValue { get; set; }
+        public string CaptionFallbackValue { get; set; }
 
         /// <summary>
         /// Gets or sets the description fallback value.
@@ -111,7 +111,7 @@ namespace Radical
         /// <value>
         /// The description fallback value.
         /// </value>
-        public String DescriptionFallbackValue { get; set; }
+        public string DescriptionFallbackValue { get; set; }
 
         /// <summary>
         /// Gets or sets the assembly location behavior.
@@ -129,9 +129,9 @@ namespace Radical
         /// <returns>
         /// The Caption value.
         /// </returns>
-        protected override String OnGetCaption( String caption )
+        protected override string OnGetCaption(string caption)
         {
-            var value = this.ResourceManager.GetString( caption );
+            var value = this.ResourceManager.GetString(caption);
 
             return value ?? this.CaptionFallbackValue;
         }
@@ -144,9 +144,9 @@ namespace Radical
         /// <returns>
         /// The Description value.
         /// </returns>
-        protected override string OnGetDescription( String description )
+        protected override string OnGetDescription(string description)
         {
-            var value = this.ResourceManager.GetString( description );
+            var value = this.ResourceManager.GetString(description);
 
             return value ?? this.DescriptionFallbackValue;
         }

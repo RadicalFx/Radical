@@ -1,32 +1,31 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Radical.ChangeTracking.Specialized;
 using Radical.ComponentModel.ChangeTracking;
 using Radical.Linq;
-using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Radical.Model
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly" )]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     [Serializable]
     public class MementoEntityCollection<T> : EntityCollection<T>, IMemento
     {
         #region IMemento<TMemento> members
 
-        protected virtual void OnMementoChanged( IChangeTrackingService newMemento, IChangeTrackingService oldMemento )
+        protected virtual void OnMementoChanged(IChangeTrackingService newMemento, IChangeTrackingService oldMemento)
         {
             this.EnsureNotDisposed();
 
-            this.ForEach( e =>
-            {
-                IMemento memento = e as IMemento;
-                if( memento != null )
-                {
-                    memento.Memento = newMemento;
-                }
-            } );
+            this.ForEach(e =>
+           {
+               IMemento memento = e as IMemento;
+               if (memento != null)
+               {
+                   memento.Memento = newMemento;
+               }
+           });
         }
 
         IChangeTrackingService _memento = null;
@@ -39,7 +38,7 @@ namespace Radical.Model
             }
             set
             {
-                if( value != this.Memento )
+                if (value != this.Memento)
                 {
                     //this.EnsureNotDisposed();
                     //Ensure.That( value )
@@ -50,7 +49,7 @@ namespace Radical.Model
                     var old = this.Memento;
                     this._memento = value;
 
-                    this.OnMementoChanged( value, old );
+                    this.OnMementoChanged(value, old);
                 }
             }
         }
@@ -61,7 +60,7 @@ namespace Radical.Model
         /// <value>
         ///     <c>true</c> if there is an active change tracking service; otherwise, <c>false</c>.
         /// </value>
-        protected virtual Boolean IsTracking
+        protected virtual bool IsTracking
         {
             get
             {
@@ -79,14 +78,14 @@ namespace Radical.Model
             this._isCachingSuspended = true;
         }
 
-        Boolean _isCachingSuspended;
+        bool _isCachingSuspended;
         /// <summary>
         /// Gets a value indicating whether caching is suspended.
         /// </summary>
         /// <value>
         ///     <c>true</c> if caching is suspended; otherwise, <c>false</c>.
         /// </value>
-        protected Boolean IsCachingSuspended
+        protected bool IsCachingSuspended
         {
             get
             {
@@ -117,10 +116,10 @@ namespace Radical.Model
         /// notifying to the outside world the changes occurred.
         /// </summary>
         /// <param name="notify">if set to <c>true</c> raises the CollectionChanged event.</param>
-        public override void EndInit( Boolean notify )
+        public override void EndInit(bool notify)
         {
             this.ResumeCaching();
-            base.EndInit( notify );
+            base.EndInit(notify);
         }
 
         #region .ctor
@@ -138,8 +137,8 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="capacity">The initial capacity.</param>
-        public MementoEntityCollection( Int32 capacity )
-            : base( capacity )
+        public MementoEntityCollection(int capacity)
+            : base(capacity)
         {
 
         }
@@ -148,14 +147,14 @@ namespace Radical.Model
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="collection">The readonly list to use as source.</param>
-        public MementoEntityCollection( IEnumerable<T> collection )
-            : base( collection )
+        public MementoEntityCollection(IEnumerable<T> collection)
+            : base(collection)
         {
 
         }
 
-        public MementoEntityCollection( IList<T> storage )
-            : base( storage )
+        public MementoEntityCollection(IList<T> storage)
+            : base(storage)
         {
 
         }
@@ -165,8 +164,8 @@ namespace Radical.Model
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
-        protected MementoEntityCollection( SerializationInfo info, StreamingContext context )
-            : base( info, context )
+        protected MementoEntityCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
 
         }
@@ -209,7 +208,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -218,8 +217,8 @@ namespace Radical.Model
                          *    - lo rimuoviamo;
                          *    - lo aggiungiamo alla coda delle Redo
                          */
-                        this.Remove( args.CachedValue.Item );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this.Remove(args.CachedValue.Item);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -229,8 +228,8 @@ namespace Radical.Model
                          *    - dobbiamo riaggiungerlo;
                          *    - lo aggiungiamo alla coda delle Undo
                          */
-                        this.Add( args.CachedValue.Item );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this.Add(args.CachedValue.Item);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -240,7 +239,7 @@ namespace Radical.Model
                          * che è stato aggiunto:
                          *    - ci limitiamo a rimuoverlo
                          */
-                        this.Remove( args.CachedValue.Item );
+                        this.Remove(args.CachedValue.Item);
                         break;
                 }
 
@@ -255,7 +254,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -264,8 +263,8 @@ namespace Radical.Model
                          *    - lo rimettiamo al suo posto;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
-                        this.Move( args.CachedValue.NewIndex, args.CachedValue.OldIndex );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this.Move(args.CachedValue.NewIndex, args.CachedValue.OldIndex);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -275,8 +274,8 @@ namespace Radical.Model
                          *    - dobbiamo rispostarlo;
                          *    - lo aggiungiamo alla coda delle Undo
                          */
-                        this.Move( args.CachedValue.OldIndex, args.CachedValue.NewIndex );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this.Move(args.CachedValue.OldIndex, args.CachedValue.NewIndex);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -286,7 +285,7 @@ namespace Radical.Model
                          * che è stato spostato:
                          *    - ci limitiamo a rimetterlo al posto originario
                          */
-                        this.Move( args.CachedValue.NewIndex, args.CachedValue.OldIndex );
+                        this.Move(args.CachedValue.NewIndex, args.CachedValue.OldIndex);
                         break;
                 }
 
@@ -301,7 +300,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -310,8 +309,8 @@ namespace Radical.Model
                          *    - lo rimettiamo al suo posto;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
-                        this.Insert( args.CachedValue.Index, args.CachedValue.Item );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this.Insert(args.CachedValue.Index, args.CachedValue.Item);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -321,8 +320,8 @@ namespace Radical.Model
                          *    - dobbiamo rimuoverlo nuovamente;
                          *    - lo aggiungiamo alla coda delle Undo
                          */
-                        this.Remove( args.CachedValue.Item );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this.Remove(args.CachedValue.Item);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -332,7 +331,7 @@ namespace Radical.Model
                          * che è stato rimosso:
                          *    - ci limitiamo a rimetterlo definitivamente al posto originario
                          */
-                        this.Insert( args.CachedValue.Index, args.CachedValue.Item );
+                        this.Insert(args.CachedValue.Index, args.CachedValue.Item);
                         break;
                 }
 
@@ -347,7 +346,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -356,8 +355,8 @@ namespace Radical.Model
                          *    - lo togliamo;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
-                        this.RemoveAt( args.CachedValue.Index );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this.RemoveAt(args.CachedValue.Index);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -367,8 +366,8 @@ namespace Radical.Model
                          *    - dobbiamo reinserirlo;
                          *    - lo aggiungiamo alla coda delle Undo
                          */
-                        this.Insert( args.CachedValue.Index, args.CachedValue.Item );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this.Insert(args.CachedValue.Index, args.CachedValue.Item);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -378,7 +377,7 @@ namespace Radical.Model
                          * che è stato inserito:
                          *    - ci limitiamo a rimoverlo definitivamente
                          */
-                        this.RemoveAt( args.CachedValue.Index );
+                        this.RemoveAt(args.CachedValue.Index);
                         break;
                 }
 
@@ -393,7 +392,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -402,8 +401,8 @@ namespace Radical.Model
                          *    - lo togliamo e rimettiamo al suo posto quello vecchio;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
-                        this[ args.CachedValue.Index ] = args.CachedValue.ReplacedItem;
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this[args.CachedValue.Index] = args.CachedValue.ReplacedItem;
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -413,8 +412,8 @@ namespace Radical.Model
                          *    - dobbiamo rimmetere quello nuovo;
                          *    - lo aggiungiamo alla coda delle Undo
                          */
-                        this[ args.CachedValue.Index ] = args.CachedValue.NewItem;
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this[args.CachedValue.Index] = args.CachedValue.NewItem;
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -424,7 +423,7 @@ namespace Radical.Model
                          * che è stato sostituito:
                          *    - ci limitiamo a rimettere posto quello vecchio;
                          */
-                        this[ args.CachedValue.Index ] = args.CachedValue.ReplacedItem;
+                        this[args.CachedValue.Index] = args.CachedValue.ReplacedItem;
                         break;
                 }
 
@@ -439,7 +438,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -447,8 +446,8 @@ namespace Radical.Model
                          *    - rimettiamo a posto tutti gli elementi;
                          *    - aggiungiamo alla coda delle Redo;
                          */
-                        this.AddRange( args.CachedValue.Items );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this.AddRange(args.CachedValue.Items);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -458,7 +457,7 @@ namespace Radical.Model
                          *    - lo aggiungiamo alla coda delle Undo
                          */
                         this.Clear();
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -467,7 +466,7 @@ namespace Radical.Model
                          * Stiamo resettando lo stato da una clear:
                          *    - ci limitiamo a rimettere a posto tutti gli elementi;
                          */
-                        this.AddRange( args.CachedValue.Items );
+                        this.AddRange(args.CachedValue.Items);
                         break;
                 }
 
@@ -482,7 +481,7 @@ namespace Radical.Model
             {
                 this.SuspendCaching();
 
-                switch( args.Reason )
+                switch (args.Reason)
                 {
                     case RejectReason.Undo:
                         /*
@@ -490,12 +489,12 @@ namespace Radical.Model
                          *    - dobbiamo rimuovere tutti gli elementi "added";
                          *    - aggiungiamo alla coda delle Redo;
                          */
-                        foreach( var addedItem in args.CachedValue.Items )
+                        foreach (var addedItem in args.CachedValue.Items)
                         {
-                            this.Remove( addedItem );
+                            this.Remove(addedItem);
                         }
 
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.UndoRequest );
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.UndoRequest);
                         break;
 
                     case RejectReason.Redo:
@@ -504,8 +503,8 @@ namespace Radical.Model
                          *    - rifacciamo la AddRange;
                          *    - lo aggiungiamo alla coda delle Undo
                          */
-                        this.AddRange( args.CachedValue.Items );
-                        this.Memento.Add( args.Source.Clone(), AddChangeBehavior.RedoRequest );
+                        this.AddRange(args.CachedValue.Items);
+                        this.Memento.Add(args.Source.Clone(), AddChangeBehavior.RedoRequest);
                         break;
 
                     case RejectReason.RejectChanges:
@@ -514,9 +513,9 @@ namespace Radical.Model
                          * Stiamo resettando lo stato di una AddRange:
                          *    - Rimuoviamo tutti gli elementi added;
                          */
-                        foreach( var addedItem in args.CachedValue.Items )
+                        foreach (var addedItem in args.CachedValue.Items)
                         {
-                            this.Remove( addedItem );
+                            this.Remove(addedItem);
                         }
                         break;
                 }
@@ -532,12 +531,12 @@ namespace Radical.Model
         /// tipically this method is called every time an item is added to the collection.
         /// </summary>
         /// <param name="item">The item.</param>
-        protected override void WireListItem( T item )
+        protected override void WireListItem(T item)
         {
-            base.WireListItem( item );
+            base.WireListItem(item);
 
             var memento = item as IMemento;
-            if( memento != null )
+            if (memento != null)
             {
                 memento.Memento = this.Memento;
             }
@@ -549,16 +548,16 @@ namespace Radical.Model
         /// <param name="index">The index.</param>
         /// <param name="newValue">The new item.</param>
         /// <param name="overwrittenValue">The overwritten item.</param>
-        protected override void OnSetValueAtCompleted( Int32 index, T newValue, T overwrittenValue )
+        protected override void OnSetValueAtCompleted(int index, T newValue, T overwrittenValue)
         {
-            base.OnSetValueAtCompleted( index, newValue, overwrittenValue );
+            base.OnSetValueAtCompleted(index, newValue, overwrittenValue);
 
             this.EnsureNotDisposed();
-            if( !this.IsCachingSuspended && this.IsTracking )
+            if (!this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new ItemReplacedDescriptor<T>( newValue, overwrittenValue, index );
-                var change = new ItemReplacedCollectionChange<T>( this, descriptor, this.itemReplacedRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new ItemReplacedDescriptor<T>(newValue, overwrittenValue, index);
+                var change = new ItemReplacedCollectionChange<T>(this, descriptor, this.itemReplacedRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
@@ -567,29 +566,29 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected override void OnAddCompleted( Int32 index, T value )
+        protected override void OnAddCompleted(int index, T value)
         {
-            base.OnAddCompleted( index, value );
+            base.OnAddCompleted(index, value);
 
             this.EnsureNotDisposed();
-            if( !this.IsCachingSuspended && this.IsTracking )
+            if (!this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new ItemChangedDescriptor<T>( value, index );
-                var change = new ItemChangedCollectionChange<T>( this, descriptor, itemAddedRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new ItemChangedDescriptor<T>(value, index);
+                var change = new ItemChangedCollectionChange<T>(this, descriptor, itemAddedRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
-        protected override void OnAddRangeCompleted( IEnumerable<T> addedRange )
+        protected override void OnAddRangeCompleted(IEnumerable<T> addedRange)
         {
-            base.OnAddRangeCompleted( addedRange );
+            base.OnAddRangeCompleted(addedRange);
 
             this.EnsureNotDisposed();
-            if( !this.IsCachingSuspended && this.IsTracking )
+            if (!this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new CollectionRangeDescriptor<T>( addedRange );
-                var change = new AddRangeCollectionChange<T>( this, descriptor, collectionAddRangeRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new CollectionRangeDescriptor<T>(addedRange);
+                var change = new AddRangeCollectionChange<T>(this, descriptor, collectionAddRangeRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
@@ -599,33 +598,33 @@ namespace Radical.Model
         /// <param name="oldIndex">The old index.</param>
         /// <param name="newIndex">The new index.</param>
         /// <param name="value">The value.</param>
-        protected override void OnMoveCompleted( Int32 oldIndex, Int32 newIndex, T value )
+        protected override void OnMoveCompleted(int oldIndex, int newIndex, T value)
         {
-            base.OnMoveCompleted( oldIndex, newIndex, value );
+            base.OnMoveCompleted(oldIndex, newIndex, value);
 
             this.EnsureNotDisposed();
-            if( !this.IsCachingSuspended && this.IsTracking )
+            if (!this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new ItemMovedDescriptor<T>( value, newIndex, oldIndex );
-                var change = new ItemMovedCollectionChange<T>( this, descriptor, itemMovedRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new ItemMovedDescriptor<T>(value, newIndex, oldIndex);
+                var change = new ItemMovedCollectionChange<T>(this, descriptor, itemMovedRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
         /// <summary>
         /// Called when clear is completed.
         /// </summary>
-        protected override void OnClearCompleted( IEnumerable<T> clearedItems )
+        protected override void OnClearCompleted(IEnumerable<T> clearedItems)
         {
-            base.OnClearCompleted( clearedItems );
+            base.OnClearCompleted(clearedItems);
 
             this.EnsureNotDisposed();
 
-            if( clearedItems.Any() && !this.IsCachingSuspended && this.IsTracking )
+            if (clearedItems.Any() && !this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new CollectionRangeDescriptor<T>( clearedItems );
-                var change = new CollectionClearedChange<T>( this, descriptor, collectionClearedRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new CollectionRangeDescriptor<T>(clearedItems);
+                var change = new CollectionClearedChange<T>(this, descriptor, collectionClearedRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
@@ -634,16 +633,16 @@ namespace Radical.Model
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="value">The item.</param>
-        protected override void OnInsertCompleted( Int32 index, T value )
+        protected override void OnInsertCompleted(int index, T value)
         {
-            base.OnInsertCompleted( index, value );
+            base.OnInsertCompleted(index, value);
             this.EnsureNotDisposed();
 
-            if( !this.IsCachingSuspended && this.IsTracking )
+            if (!this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new ItemChangedDescriptor<T>( value, index );
-                var change = new ItemChangedCollectionChange<T>( this, descriptor, itemInsertedRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new ItemChangedDescriptor<T>(value, index);
+                var change = new ItemChangedCollectionChange<T>(this, descriptor, itemInsertedRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
@@ -652,16 +651,16 @@ namespace Radical.Model
         /// </summary>
         /// <param name="value">The item.</param>
         /// <param name="index">The index.</param>
-        protected override void OnRemoveCompleted( T value, Int32 index )
+        protected override void OnRemoveCompleted(T value, int index)
         {
-            base.OnRemoveCompleted( value, index );
+            base.OnRemoveCompleted(value, index);
             this.EnsureNotDisposed();
 
-            if( !this.IsCachingSuspended && this.IsTracking )
+            if (!this.IsCachingSuspended && this.IsTracking)
             {
-                var descriptor = new ItemChangedDescriptor<T>( value, index );
-                var change = new ItemRemovedCollectionChange<T>( this, descriptor, itemRemovedRejectCallback, null, String.Empty );
-                this.Memento.Add( change, AddChangeBehavior.Default );
+                var descriptor = new ItemChangedDescriptor<T>(value, index);
+                var change = new ItemRemovedCollectionChange<T>(this, descriptor, itemRemovedRejectCallback, null, string.Empty);
+                this.Memento.Add(change, AddChangeBehavior.Default);
             }
         }
 
@@ -670,9 +669,9 @@ namespace Radical.Model
         /// </summary>
         /// <param name="info">The serailization info.</param>
         /// <param name="context">The serailization context.</param>
-        protected override void OnDeserialization( SerializationInfo info, StreamingContext context )
+        protected override void OnDeserialization(SerializationInfo info, StreamingContext context)
         {
-            base.OnDeserialization( info, context );
+            base.OnDeserialization(info, context);
             this.SuspendCaching();
         }
 
@@ -681,10 +680,10 @@ namespace Radical.Model
         /// </summary>
         /// <param name="info">The info.</param>
         /// <param name="context">The context.</param>
-        protected override void OnDeserializationCompleted( SerializationInfo info, StreamingContext context )
+        protected override void OnDeserializationCompleted(SerializationInfo info, StreamingContext context)
         {
             this.ResumeCaching();
-            base.OnDeserializationCompleted( info, context );
+            base.OnDeserializationCompleted(info, context);
         }
 
         //WARN: non siamo in grado di cachare un eventuale cambiamento di Sort o il Reverse

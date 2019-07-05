@@ -13,12 +13,12 @@ namespace Radical.Tests
         {
             var cType = CollectionChangeType.Reset;
 
-            var target = new CollectionChangedEventArgs<Object>( cType );
+            var target = new CollectionChangedEventArgs<Object>(cType);
 
-            target.ChangeType.Should().Be.EqualTo( cType );
-            target.Index.Should().Be.EqualTo( -1 );
+            target.ChangeType.Should().Be.EqualTo(cType);
+            target.Index.Should().Be.EqualTo(-1);
             target.Item.Should().Be.Null();
-            target.OldIndex.Should().Be.EqualTo( -1 );
+            target.OldIndex.Should().Be.EqualTo(-1);
         }
 
         [TestMethod]
@@ -27,12 +27,12 @@ namespace Radical.Tests
             var cType = CollectionChangeType.Reset;
             var index = 10;
 
-            var target = new CollectionChangedEventArgs<Object>( cType, index );
+            var target = new CollectionChangedEventArgs<Object>(cType, index);
 
-            target.ChangeType.Should().Be.EqualTo( cType );
-            target.Index.Should().Be.EqualTo( index );
+            target.ChangeType.Should().Be.EqualTo(cType);
+            target.Index.Should().Be.EqualTo(index);
             target.Item.Should().Be.Null();
-            target.OldIndex.Should().Be.EqualTo( -1 );
+            target.OldIndex.Should().Be.EqualTo(-1);
         }
 
         [TestMethod]
@@ -43,12 +43,12 @@ namespace Radical.Tests
             var index = 10;
             var oldIndex = 1;
 
-            var target = new CollectionChangedEventArgs<Object>( cType, index, oldIndex, item );
+            var target = new CollectionChangedEventArgs<Object>(cType, index, oldIndex, item);
 
-            target.ChangeType.Should().Be.EqualTo( cType );
-            target.Index.Should().Be.EqualTo( index );
-            target.Item.Should().Be.EqualTo( item );
-            target.OldIndex.Should().Be.EqualTo( oldIndex );
+            target.ChangeType.Should().Be.EqualTo(cType);
+            target.Index.Should().Be.EqualTo(index);
+            target.Item.Should().Be.EqualTo(item);
+            target.OldIndex.Should().Be.EqualTo(oldIndex);
         }
     }
 }

@@ -14,12 +14,12 @@ namespace Radical.Tests.Model
             var replacedItem = new GenericParameterHelper();
             var index = 102;
 
-            var target = new ItemReplacedDescriptor<GenericParameterHelper>( newItem, replacedItem, index );
+            var target = new ItemReplacedDescriptor<GenericParameterHelper>(newItem, replacedItem, index);
 
-            target.Index.Should().Be.EqualTo( index );
-            target.Item.Should().Be.EqualTo( newItem );
-            target.ReplacedItem.Should().Be.EqualTo( replacedItem );
-            target.NewItem.Should().Be.EqualTo( newItem );
+            target.Index.Should().Be.EqualTo(index);
+            target.Item.Should().Be.EqualTo(newItem);
+            target.ReplacedItem.Should().Be.EqualTo(replacedItem);
+            target.NewItem.Should().Be.EqualTo(newItem);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
-    using System.Collections.Generic;
     using Radical.Collections;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Validation;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Identifies that an item in a collection has been changed.
@@ -19,8 +19,8 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public ItemChangedCollectionChange( Object owner, ItemChangedDescriptor<T> descriptor, RejectCallback<ItemChangedDescriptor<T>> rejectCallback, CommitCallback<ItemChangedDescriptor<T>> commitCallback, String description )
-            : base( owner, descriptor, rejectCallback, commitCallback, description )
+        public ItemChangedCollectionChange(Object owner, ItemChangedDescriptor<T> descriptor, RejectCallback<ItemChangedDescriptor<T>> rejectCallback, CommitCallback<ItemChangedDescriptor<T>> commitCallback, string description)
+            : base(owner, descriptor, rejectCallback, commitCallback, description)
         {
 
         }
@@ -31,7 +31,7 @@
         /// <returns></returns>
         public override IEnumerable<Object> GetChangedEntities()
         {
-            return new ReadOnlyCollection<Object>( new Object[] { this.Descriptor.Item } );
+            return new ReadOnlyCollection<Object>(new Object[] { this.Descriptor.Item });
         }
 
         /// <summary>
@@ -40,11 +40,11 @@
         /// <param name="changedItem"></param>
         /// <returns></returns>
         /// <value>The advised action.</value>
-        public override ProposedActions GetAdvisedAction( object changedItem )
+        public override ProposedActions GetAdvisedAction(object changedItem)
         {
-            Ensure.That( changedItem )
-                .If( o => !Object.Equals( o, this.Descriptor.Item ) )
-                .Then( o => { throw new ArgumentOutOfRangeException(); } );
+            Ensure.That(changedItem)
+                .If(o => !Object.Equals(o, this.Descriptor.Item))
+                .Then(o => { throw new ArgumentOutOfRangeException(); });
 
             return ProposedActions.Update | ProposedActions.Create;
         }
@@ -60,7 +60,7 @@
                 this.Descriptor,
                 this.RejectCallback,
                 this.CommitCallback,
-                this.Description );
+                this.Description);
         }
     }
 }

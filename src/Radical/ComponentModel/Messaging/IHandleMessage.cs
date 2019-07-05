@@ -14,7 +14,7 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        void Handle(object sender, object message );
+        void Handle(object sender, object message);
 
         /// <summary>
         /// Determines if this message handler is interested in handling the given message.
@@ -24,6 +24,6 @@
         /// <returns>
         ///   <c>True</c> if this message handler is interested in handling the given message; otherwise <c>false</c>.
         /// </returns>
-        bool ShouldHandle( object sender, object message );
+        bool ShouldHandle(object sender, object message);
     }
 }

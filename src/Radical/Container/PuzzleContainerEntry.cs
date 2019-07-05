@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Radical.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
-using Radical.ComponentModel;
 
 namespace Radical
 {
@@ -15,10 +13,10 @@ namespace Radical
         internal PuzzleContainerEntry()
         {
             this.Key = Guid.NewGuid().ToString();
-            this.Parameters = new Dictionary<String, Object>();
+            this.Parameters = new Dictionary<string, Object>();
         }
 
-        public String Key
+        public string Key
         {
             get;
             private set;
@@ -44,14 +42,14 @@ namespace Radical
             private set;
         }
 
-        Dictionary<Int32, Type> services = new Dictionary<Int32, Type>();
+        Dictionary<int, Type> services = new Dictionary<int, Type>();
 
-        internal PuzzleContainerEntry<T> AddService( Type type )
+        internal PuzzleContainerEntry<T> AddService(Type type)
         {
             var hash = type.GetHashCode();
-            if ( !services.ContainsKey( hash ) ) 
+            if (!services.ContainsKey(hash))
             {
-                this.services.Add( hash, type );
+                this.services.Add(hash, type);
             }
 
             return this;
@@ -76,27 +74,27 @@ namespace Radical
             internal set;
         }
 
-        public IDictionary<String, Object> Parameters
+        public IDictionary<string, Object> Parameters
         {
             get;
             private set;
         }
 
-        void ImplementedBy( Type type )
+        void ImplementedBy(Type type)
         {
             //Ensure.That( type ).Named( "type" ).IsFalse( t => t.IsInterface );
 
             this.Component = type;
         }
 
-        void WithParameters( IDictionary<String, Object> parameters )
+        void WithParameters(IDictionary<string, Object> parameters)
         {
             //Ensure.That( parameters ).Named( "parameters" ).IsNotNull();
 
             this.Parameters = parameters;
         }
 
-        void UsingFactory( Delegate factory )
+        void UsingFactory(Delegate factory)
         {
             //Ensure.That( factory ).Named( "factory" ).IsNotNull();
 
@@ -120,9 +118,9 @@ namespace Radical
         /// </summary>
         /// <param name="componentType">The type of the component.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy( Type componentType )
+        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy(Type componentType)
         {
-            this.ImplementedBy( componentType );
+            this.ImplementedBy(componentType);
             return this;
         }
 
@@ -133,45 +131,45 @@ namespace Radical
         /// <returns>This entry instance.</returns>
         IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.ImplementedBy<TComponent>()
         {
-            this.ImplementedBy( typeof( TComponent ) );
+            this.ImplementedBy(typeof(TComponent));
             return this;
         }
 
-        //IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.WithParameters( IDictionary<String, Object> parameters )
+        //IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.WithParameters( IDictionary<string, Object> parameters )
         //{
         //    this.WithParameters( parameters );
         //    return this;
         //}
 
-        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.WithLifestyle( Lifestyle lifestyle )
+        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.WithLifestyle(Lifestyle lifestyle)
         {
             this.Lifestyle = lifestyle;
             return this;
         }
 
-        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.UsingFactory( Func<T> factory )
+        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.UsingFactory(Func<T> factory)
         {
-            this.UsingFactory( factory );
+            this.UsingFactory(factory);
             return this;
         }
 
-        IPuzzleContainerEntry IPuzzleContainerEntry.UsingFactory( Func<Object> factory )
+        IPuzzleContainerEntry IPuzzleContainerEntry.UsingFactory(Func<Object> factory)
         {
-            this.UsingFactory( factory );
+            this.UsingFactory(factory);
             return this;
         }
 
-        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.UsingInstance<TComponent>( TComponent instance )
+        IPuzzleContainerEntry<T> IPuzzleContainerEntry<T>.UsingInstance<TComponent>(TComponent instance)
         {
-            Func<T> factory = () => instance; 
-            this.UsingFactory( factory );
+            Func<T> factory = () => instance;
+            this.UsingFactory(factory);
             return this;
         }
 
-        IPuzzleContainerEntry IPuzzleContainerEntry.UsingInstance( Object instance )
+        IPuzzleContainerEntry IPuzzleContainerEntry.UsingInstance(Object instance)
         {
             Func<Object> factory = () => instance;
-            this.UsingFactory( factory );
+            this.UsingFactory(factory);
             return this;
         }
 
@@ -180,13 +178,13 @@ namespace Radical
         /// </summary>
         /// <param name="componentType">The type of the component.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry IPuzzleContainerEntry.ImplementedBy( Type componentType )
+        IPuzzleContainerEntry IPuzzleContainerEntry.ImplementedBy(Type componentType)
         {
-            this.ImplementedBy( componentType );
+            this.ImplementedBy(componentType);
             return this;
         }
 
-        //IPuzzleContainerEntry IPuzzleContainerEntry.WithParameters( IDictionary<String, Object> parameters )
+        //IPuzzleContainerEntry IPuzzleContainerEntry.WithParameters( IDictionary<string, Object> parameters )
         //{
         //    this.WithParameters( parameters );
         //    return this;
@@ -197,13 +195,13 @@ namespace Radical
         /// </summary>
         /// <param name="lifestyle">The lifestyle.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry IPuzzleContainerEntry.WithLifestyle( Lifestyle lifestyle )
+        IPuzzleContainerEntry IPuzzleContainerEntry.WithLifestyle(Lifestyle lifestyle)
         {
             this.Lifestyle = lifestyle;
             return this;
         }
 
-        IPuzzleContainerEntry IPuzzleContainerEntry.Overridable() 
+        IPuzzleContainerEntry IPuzzleContainerEntry.Overridable()
         {
             this.IsOverridable = true;
 

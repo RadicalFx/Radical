@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Radical
 {
@@ -15,16 +12,16 @@ namespace Radical
         /// </summary>
         /// <param name="color">The color to use.</param>
         /// <returns>A IDisposable instance to automatically revert the foreground color on dispose.</returns>
-        public static IDisposable AsForegroundColor( this ConsoleColor color )
+        public static IDisposable AsForegroundColor(this ConsoleColor color)
         {
-            return new Colorizer( color );
+            return new Colorizer(color);
         }
 
         class Colorizer : IDisposable
         {
             ConsoleColor backup;
 
-            public Colorizer( ConsoleColor newColor )
+            public Colorizer(ConsoleColor newColor)
             {
                 this.backup = Console.ForegroundColor;
                 Console.ForegroundColor = newColor;

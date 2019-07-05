@@ -1,9 +1,9 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Validation;
+    using System;
 
     /// <summary>
     /// Identifies a change specific for a property change.
@@ -17,8 +17,8 @@
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="value">The value.</param>
         /// <param name="restoreCallback">The restore callback.</param>
-        public PropertyValueChange( Object owner, String propertyName, T value, RejectCallback<T> restoreCallback )
-            : this( owner, propertyName, value, restoreCallback, null, String.Empty )
+        public PropertyValueChange(Object owner, string propertyName, T value, RejectCallback<T> restoreCallback)
+            : this(owner, propertyName, value, restoreCallback, null, string.Empty)
         {
 
         }
@@ -31,8 +31,8 @@
         /// <param name="value">The value.</param>
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange( Object owner, String propertyName, T value, RejectCallback<T> restoreCallback, String description )
-            : this( owner, propertyName, value, restoreCallback, null, description )
+        public PropertyValueChange(Object owner, string propertyName, T value, RejectCallback<T> restoreCallback, string description)
+            : this(owner, propertyName, value, restoreCallback, null, description)
         {
 
         }
@@ -46,8 +46,8 @@
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange( Object owner, String propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, String description )
-            : base( owner, value, restoreCallback, commitCallback, description )
+        public PropertyValueChange(Object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, string description)
+            : base(owner, value, restoreCallback, commitCallback, description)
         {
             this.PropertyName = propertyName;
         }
@@ -58,7 +58,7 @@
         /// <value>
         /// The name of the property.
         /// </value>
-        public String PropertyName { get; private set; }
+        public string PropertyName { get; private set; }
 
         /// <summary>
         /// Gets the advised action for this IChange.
@@ -66,16 +66,16 @@
         /// <param name="changedItem"></param>
         /// <returns></returns>
         /// <value>The advised action.</value>
-        public override ProposedActions GetAdvisedAction( object changedItem )
+        public override ProposedActions GetAdvisedAction(object changedItem)
         {
-            Ensure.That( changedItem )
-                .Named( "changedItem" )
+            Ensure.That(changedItem)
+                .Named("changedItem")
                 .IsNotNull()
-                .If( v => v != this.Owner )
-                .Then( ( v, n ) => 
-                {
-                    throw new ArgumentOutOfRangeException( n );
-                } );
+                .If(v => v != this.Owner)
+                .Then((v, n) =>
+               {
+                   throw new ArgumentOutOfRangeException(n);
+               });
 
             return ProposedActions.Update | ProposedActions.Create;
         }
@@ -86,7 +86,7 @@
         /// <returns>A clone of this instance.</returns>
         public override IChange Clone()
         {
-            return new PropertyValueChange<T>( this.Owner, this.PropertyName, this.CachedValue, this.RejectCallback, this.CommitCallback, this.Description );
+            return new PropertyValueChange<T>(this.Owner, this.PropertyName, this.CachedValue, this.RejectCallback, this.CommitCallback, this.Description);
         }
     }
 }

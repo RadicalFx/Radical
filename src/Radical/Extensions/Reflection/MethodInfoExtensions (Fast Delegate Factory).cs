@@ -1,19 +1,18 @@
 ﻿using System.Linq;
-using System.Reflection;
 using System.Linq.Expressions;
-using System;
+using System.Reflection;
 
 namespace Radical.Reflection
 {
     /// <summary>
     /// Represents a fast delegate to a void method call.
     /// </summary>
-    public delegate void LateBoundVoidMethod( object target, object[] arguments );
-    
+    public delegate void LateBoundVoidMethod(object target, object[] arguments);
+
     /// <summary>
     /// Represents a fast delegate to a method call.
     /// </summary>
-    public delegate object LateBoundMethod( object target, object[] arguments );
+    public delegate object LateBoundMethod(object target, object[] arguments);
 
     /// <summary>
     /// Adds behaviors to the <see cref="MethodInfo"/> class.
@@ -26,23 +25,23 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="method">The method to create the fast delegate for.</param>
         /// <returns>A reference to the created fast delegate.</returns>
-        public static LateBoundMethod CreateDelegate( this MethodInfo method )
+        public static LateBoundMethod CreateDelegate(this MethodInfo method)
         {
-            var instanceParameter = Expression.Parameter( typeof( object ), "target" );
-            var argumentsParameter = Expression.Parameter( typeof( object[] ), "arguments" );
+            var instanceParameter = Expression.Parameter(typeof(object), "target");
+            var argumentsParameter = Expression.Parameter(typeof(object[]), "arguments");
 
             var call = MethodInfoExtensions.CreateMethodCallExpression
-            ( 
-                method, 
-                instanceParameter, 
-                argumentsParameter 
+            (
+                method,
+                instanceParameter,
+                argumentsParameter
             );
-            
+
             var lambda = Expression.Lambda<LateBoundMethod>
             (
-                Expression.Convert( call, typeof( object ) ),
+                Expression.Convert(call, typeof(object)),
                 instanceParameter,
-                argumentsParameter 
+                argumentsParameter
             );
 
             return lambda.Compile();
@@ -54,57 +53,57 @@ namespace Radical.Reflection
         /// </summary>
         /// <param name="method">The method to create the fast delegate for.</param>
         /// <returns>A reference to the created fast delegate.</returns>
-        public static LateBoundVoidMethod CreateVoidDelegate( this MethodInfo method )
+        public static LateBoundVoidMethod CreateVoidDelegate(this MethodInfo method)
         {
-            var instanceParameter = Expression.Parameter( typeof( object ), "target" );
-            var argumentsParameter = Expression.Parameter( typeof( object[] ), "arguments" );
+            var instanceParameter = Expression.Parameter(typeof(object), "target");
+            var argumentsParameter = Expression.Parameter(typeof(object[]), "arguments");
 
             var call = MethodInfoExtensions.CreateMethodCallExpression
-            ( 
-                method, 
-                instanceParameter, 
-                argumentsParameter 
+            (
+                method,
+                instanceParameter,
+                argumentsParameter
             );
-            
+
             var lambda = Expression.Lambda<LateBoundVoidMethod>
             (
                 call,
                 instanceParameter,
-                argumentsParameter 
+                argumentsParameter
             );
 
             return lambda.Compile();
         }
 
-        private static MethodCallExpression CreateMethodCallExpression( MethodInfo method, ParameterExpression instanceParameter, ParameterExpression argumentsParameter )
+        private static MethodCallExpression CreateMethodCallExpression(MethodInfo method, ParameterExpression instanceParameter, ParameterExpression argumentsParameter)
         {
             var call = Expression.Call
             (
-                Expression.Convert( instanceParameter, method.DeclaringType ),
+                Expression.Convert(instanceParameter, method.DeclaringType),
                 method,
                 MethodInfoExtensions.CreateParameterExpressions
-                ( 
-                    method, 
-                    argumentsParameter 
-                ) 
+                (
+                    method,
+                    argumentsParameter
+                )
             );
 
             return call;
         }
 
-        private static Expression[] CreateParameterExpressions( MethodInfo method, Expression argumentsParameter )
+        private static Expression[] CreateParameterExpressions(MethodInfo method, Expression argumentsParameter)
         {
             return method.GetParameters().Select
-            ( 
-                ( p, i ) => Expression.Convert
+            (
+                (p, i) => Expression.Convert
                             (
                                 Expression.ArrayIndex
-                                ( 
-                                    argumentsParameter, 
-                                    Expression.Constant( i ) 
+                                (
+                                    argumentsParameter,
+                                    Expression.Constant(i)
                                 ),
-                                p.ParameterType 
-                            ) 
+                                p.ParameterType
+                            )
             ).ToArray();
         }
     }

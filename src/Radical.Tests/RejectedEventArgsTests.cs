@@ -11,9 +11,9 @@ namespace Radical.Tests
         public void rejectedEventArgs_ctor_normal_should_set_values()
         {
             var expected = RejectReason.RejectChanges;
-            RejectedEventArgs target = new RejectedEventArgs( expected );
+            RejectedEventArgs target = new RejectedEventArgs(expected);
 
-            target.Reason.Should().Be.EqualTo( expected );
+            target.Reason.Should().Be.EqualTo(expected);
         }
     }
 }

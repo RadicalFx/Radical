@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using Radical.Linq;
+using System;
 using System.Collections.Generic;
-using Radical.Validation;
-using Radical.Linq;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -22,7 +21,7 @@ namespace Radical.Validation
         /// Initializes a new instance of the <see cref="ValidationResults"/> class.
         /// </summary>
         public ValidationResults()
-            : this( ValidationErrors.Empty )
+            : this(ValidationErrors.Empty)
         {
 
         }
@@ -31,9 +30,9 @@ namespace Radical.Validation
         /// Initializes a new instance of the <see cref="ValidationResults"/> class.
         /// </summary>
         /// <param name="errors">The initial errors.</param>
-        public ValidationResults( IEnumerable<ValidationError> errors )
+        public ValidationResults(IEnumerable<ValidationError> errors)
         {
-            Ensure.That( errors ).Named( "errors" ).IsNotNull();
+            Ensure.That(errors).Named("errors").IsNotNull();
 
             this.Errors = errors;
         }
@@ -42,7 +41,7 @@ namespace Radical.Validation
         /// Gets a value indicating whether validation succedeed or not.
         /// </summary>
         /// <value><c>true</c> if the validation succedeed; otherwise, <c>false</c>.</value>
-        public Boolean IsValid
+        public bool IsValid
         {
             get
             {
@@ -64,49 +63,49 @@ namespace Radical.Validation
         /// <param name="key">The key.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="detectedProblems">The detected problems.</param>
-        public void AddError<T>( Expression<Func<T>> key, String displayName, String[] detectedProblems )
+        public void AddError<T>(Expression<Func<T>> key, string displayName, string[] detectedProblems)
         {
-            var error = ValidationError.Create<T>( key, displayName, detectedProblems );
-            this.AddError( error );
+            var error = ValidationError.Create<T>(key, displayName, detectedProblems);
+            this.AddError(error);
         }
 
         /// <summary>
         /// Adds the given error to the validation errors list.
         /// </summary>
         /// <param name="error">The error to add.</param>
-        public void AddError( ValidationError error )
+        public void AddError(ValidationError error)
         {
-            Ensure.That( error ).Named( "error" ).IsNotNull();
+            Ensure.That(error).Named("error").IsNotNull();
 
-            var err = this.Errors.Where( e => e.Key == error.Key ).SingleOrDefault();
-            if ( err != null )
+            var err = this.Errors.Where(e => e.Key == error.Key).SingleOrDefault();
+            if (err != null)
             {
-                err.AddProblems( error.DetectedProblems );
+                err.AddProblems(error.DetectedProblems);
             }
             else
             {
-                var tmp = new List<ValidationError>( this.Errors );
-                tmp.Add( error );
+                var tmp = new List<ValidationError>(this.Errors);
+                tmp.Add(error);
 
                 this.Errors = tmp.AsReadOnly();
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="System.string" /> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        /// A <see cref="System.string" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine( "Some errors occurred during the validation process:" );
+            sb.AppendLine("Some errors occurred during the validation process:");
 
-            foreach ( var error in this.Errors )
+            foreach (var error in this.Errors)
             {
                 sb.AppendLine();
-                sb.AppendFormat( "{0}: {1}", error.Key, error );
+                sb.AppendFormat("{0}: {1}", error.Key, error);
             }
 
             return sb.ToString();

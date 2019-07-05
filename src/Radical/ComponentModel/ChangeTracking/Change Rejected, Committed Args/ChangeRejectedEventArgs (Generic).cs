@@ -16,8 +16,8 @@
         /// <param name="cachedValue">The cached value.</param>
         /// <param name="source">The source.</param>
         /// <param name="reason">The reason.</param>
-        public ChangeRejectedEventArgs( Object entity, T cachedValue, IChange source, RejectReason reason )
-            : base( entity, cachedValue, source )
+        public ChangeRejectedEventArgs(Object entity, T cachedValue, IChange source, RejectReason reason)
+            : base(entity, cachedValue, source)
         {
             this.Reason = reason;
         }

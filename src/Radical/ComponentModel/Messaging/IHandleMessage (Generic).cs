@@ -9,13 +9,13 @@
     /// </summary>
     [Contract]
     public interface IHandleMessage<T> : IHandleMessage
-        //where T : IMessage
+    //where T : IMessage
     {
         /// <summary>
         /// Handles the specified message.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        void Handle( object sender, T message );
+        void Handle(object sender, T message);
     }
 }

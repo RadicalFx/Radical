@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace Radical.Validation
@@ -19,7 +18,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="obj">The value of the parameter to validate.</param>
         /// <param name="si">The source info.</param>
-        internal Ensure( T obj, Ensure.SourceInfo si )
+        internal Ensure(T obj, Ensure.SourceInfo si)
         {
             this.inspectedObject = obj;
             this.si = si;
@@ -41,7 +40,7 @@ namespace Radical.Validation
         /// <returns>The currently inspected object value.</returns>
         public K GetValue<K>() where K : T
         {
-            return ( K )this.inspectedObject;
+            return (K)this.inspectedObject;
         }
 
         // *** prestazioni inaccettabili
@@ -66,7 +65,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="parameterName">Name of the parameter.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> Named( String parameterName )
+        public IEnsure<T> Named(string parameterName)
         {
             this._name = parameterName;
             return this;
@@ -77,12 +76,12 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="parameterName">Name of the parameter.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> Named( Expression<Func<T>> parameterName )
+        public IEnsure<T> Named(Expression<Func<T>> parameterName)
         {
             var expression = parameterName.Body as MemberExpression;
-            if( expression == null )
+            if (expression == null)
             {
-                throw new NotSupportedException( "Only MemberExpression(s) are supported." );
+                throw new NotSupportedException("Only MemberExpression(s) are supported.");
             }
 
             this.nameExpression = parameterName;
@@ -92,18 +91,18 @@ namespace Radical.Validation
         }
 
         Expression<Func<T>> nameExpression;
-        String _name;
+        string _name;
         /// <summary>
         /// Gets or sets the name of the parameter to validate.
         /// </summary>
         /// <value>The name of the parameter.</value>
-        public String Name
+        public string Name
         {
             get
             {
-                if( String.IsNullOrEmpty( this._name ) && this.nameExpression != null )
+                if (string.IsNullOrEmpty(this._name) && this.nameExpression != null)
                 {
-                    var expression = ( MemberExpression )this.nameExpression.Body;
+                    var expression = (MemberExpression)this.nameExpression.Body;
                     this._name = expression.Member.Name;
                 }
 
@@ -116,7 +115,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="errorMessage">The error message.</param>
         /// <returns>This ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> WithMessage( String errorMessage )
+        public IEnsure<T> WithMessage(string errorMessage)
         {
             this.UserErrorMessage = errorMessage;
             return this;
@@ -130,9 +129,9 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> WithMessage( String errorMessage, params Object[] formatArgs )
+        public IEnsure<T> WithMessage(string errorMessage, params Object[] formatArgs)
         {
-            this.UserErrorMessage = String.Format( errorMessage, formatArgs );
+            this.UserErrorMessage = string.Format(errorMessage, formatArgs);
             return this;
         }
 
@@ -140,7 +139,7 @@ namespace Radical.Validation
         /// Gets the user custom error message.
         /// </summary>
         /// <value>The error message.</value>
-        public String UserErrorMessage
+        public string UserErrorMessage
         {
             get;
             private set;
@@ -155,7 +154,7 @@ namespace Radical.Validation
          * {5} --> <validatorSpecificMessage>
          * {6} --> parameter name (if any)
          */
-        const String fullErrorMessageFormat = "Ensure validation failure.{0}{0}" +
+        const string fullErrorMessageFormat = "Ensure validation failure.{0}{0}" +
                                               "   {5}{0}" +
                                               "   Location: class {1} at {3} {2}.{0}" +
                                               "   Name: '{6}'{0}" +
@@ -166,9 +165,9 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="validatorSpecificMessage">The validator specific message.</param>
         /// <returns>The error message.</returns>
-        public String GetFullErrorMessage( String validatorSpecificMessage )
+        public string GetFullErrorMessage(string validatorSpecificMessage)
         {
-            var fullErrorMessage = String.Format
+            var fullErrorMessage = string.Format
             (
                 fullErrorMessageFormat,
                 Environment.NewLine,
@@ -187,9 +186,9 @@ namespace Radical.Validation
         /// Gets the full error message.
         /// </summary>
         /// <returns>The error message.</returns>
-        public String GetFullErrorMessage()
+        public string GetFullErrorMessage()
         {
-            return this.GetFullErrorMessage( String.Empty );
+            return this.GetFullErrorMessage(string.Empty);
         }
 
         /// <summary>
@@ -201,16 +200,16 @@ namespace Radical.Validation
             get { return this.inspectedObject; }
         }
 
-        Boolean state = false;
+        bool state = false;
 
         /// <summary>
         /// Execute the given predicate and saves the result for later usage.
         /// </summary>
         /// <param name="predicate">The predicate to evaluate in order to establish if the operation resault is <c>true</c> or <c>false</c>.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> If( Predicate<T> predicate )
+        public IEnsure<T> If(Predicate<T> predicate)
         {
-            state = predicate( this.inspectedObject );
+            state = predicate(this.inspectedObject);
             return this;
         }
 
@@ -219,11 +218,11 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="action">The action to execute.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public IEnsure<T> Then( Action<T> action )
+        public IEnsure<T> Then(Action<T> action)
         {
-            if( state )
+            if (state)
             {
-                action( this.inspectedObject );
+                action(this.inspectedObject);
             }
 
             return this;
@@ -236,11 +235,11 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> Else( Action<T> action )
+        public IEnsure<T> Else(Action<T> action)
         {
-            if( !state )
+            if (!state)
             {
-                action( this.inspectedObject );
+                action(this.inspectedObject);
             }
 
             return this;
@@ -253,11 +252,11 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> Then( Action<T, String> action )
+        public IEnsure<T> Then(Action<T, string> action)
         {
-            if( state )
+            if (state)
             {
-                action( this.inspectedObject, this.Name );
+                action(this.inspectedObject, this.Name);
             }
 
             return this;
@@ -270,11 +269,11 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> Else( Action<T, String> action )
+        public IEnsure<T> Else(Action<T, string> action)
         {
-            if( !state )
+            if (!state)
             {
-                action( this.inspectedObject, this.Name );
+                action(this.inspectedObject, this.Name);
             }
 
             return this;
@@ -287,12 +286,12 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the predicate result is false.</exception>
-        public IEnsure<T> IsTrue( Predicate<T> func )
+        public IEnsure<T> IsTrue(Predicate<T> func)
         {
-            return this.If( func ).Else( obj =>
-            {
-                this.Throw( new ArgumentException( this.Name, this.GetFullErrorMessage( "The supplied condition is not met, condition was expected to be true." ) ) );
-            } );
+            return this.If(func).Else(obj =>
+         {
+             this.Throw(new ArgumentException(this.Name, this.GetFullErrorMessage("The supplied condition is not met, condition was expected to be true.")));
+         });
         }
 
         /// <summary>
@@ -302,12 +301,12 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the predicate result is true.</exception>
-        public IEnsure<T> IsFalse( Predicate<T> func )
+        public IEnsure<T> IsFalse(Predicate<T> func)
         {
-            return this.If( func ).ThenThrow( v =>
-            {
-                return new ArgumentException( v.GetFullErrorMessage( "The supplied condition is not met, condition was expected to be false." ), v.Name );
-            } );
+            return this.If(func).ThenThrow(v =>
+         {
+             return new ArgumentException(v.GetFullErrorMessage("The supplied condition is not met, condition was expected to be false."), v.Name);
+         });
         }
 
         /// <summary>
@@ -317,11 +316,11 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the object equality fails.</exception>
-        public IEnsure<T> Is( T value )
+        public IEnsure<T> Is(T value)
         {
-            if( !Object.Equals( this.inspectedObject, value ) )
+            if (!Object.Equals(this.inspectedObject, value))
             {
-                this.Throw( new ArgumentException( this.GetFullErrorMessage( "The currently inspected value is not equal to the supplied value." ), this.Name ) );
+                this.Throw(new ArgumentException(this.GetFullErrorMessage("The currently inspected value is not equal to the supplied value."), this.Name));
             }
 
             return this;
@@ -334,11 +333,11 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the object equality does not fail.</exception>
-        public IEnsure<T> IsNot( T value )
+        public IEnsure<T> IsNot(T value)
         {
-            if( Object.Equals( this.inspectedObject, value ) )
+            if (Object.Equals(this.inspectedObject, value))
             {
-                this.Throw( new ArgumentException( this.GetFullErrorMessage( "The currently inspected value should be different from to the supplied value." ), this.Name ) );
+                this.Throw(new ArgumentException(this.GetFullErrorMessage("The currently inspected value should be different from to the supplied value."), this.Name));
             }
 
             return this;
@@ -351,12 +350,12 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> ThenThrow( Func<IEnsure<T>, Exception> builder )
+        public IEnsure<T> ThenThrow(Func<IEnsure<T>, Exception> builder)
         {
-            if( state )
+            if (state)
             {
-                var exception = builder( this );
-                this.Throw( exception );
+                var exception = builder(this);
+                this.Throw(exception);
             }
 
             return this;
@@ -371,7 +370,7 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> WithPreview( Action<IEnsure<T>, Exception> validationFailurePreview )
+        public IEnsure<T> WithPreview(Action<IEnsure<T>, Exception> validationFailurePreview)
         {
             this.validationFailurePreview = validationFailurePreview;
 
@@ -382,16 +381,16 @@ namespace Radical.Validation
         /// Throws the specified error.
         /// </summary>
         /// <param name="error">The error.</param>
-        public void Throw( Exception error )
+        public void Throw(Exception error)
         {
-            if( error == null )
+            if (error == null)
             {
-                throw new ArgumentNullException( "error" );
+                throw new ArgumentNullException("error");
             }
 
-            if( this.validationFailurePreview != null )
+            if (this.validationFailurePreview != null)
             {
-                this.validationFailurePreview( this, error );
+                this.validationFailurePreview(this, error);
             }
 
             throw error;

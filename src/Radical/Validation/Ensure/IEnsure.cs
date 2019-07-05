@@ -15,7 +15,7 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> Else( Action<T, String> action );
+        IEnsure<T> Else(Action<T, string> action);
 
         /// <summary>
         /// Executes the specified action only if the <c>If</c> operation has been evaluated to <c>false</c>.
@@ -24,7 +24,7 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> Else( Action<T> action );
+        IEnsure<T> Else(Action<T> action);
 
         /// <summary>
         /// Gets the full error message combining the user custom message, if any, 
@@ -34,7 +34,7 @@ namespace Radical.Validation
         /// <returns>
         /// The error message.
         /// </returns>
-        String GetFullErrorMessage( String validatorSpecificMessage );
+        string GetFullErrorMessage(string validatorSpecificMessage);
 
         /// <summary>
         /// Gets the full error message including source stack information.
@@ -42,14 +42,14 @@ namespace Radical.Validation
         /// <returns>
         /// The error message.
         /// </returns>
-        String GetFullErrorMessage();
-        
+        string GetFullErrorMessage();
+
         /// <summary>
         /// Gets the currently inspected object value.
         /// </summary>
         /// <returns>The currently inspected object value.</returns>
         T GetValue();
-        
+
         /// <summary>
         /// Gets the currently inspected object value castaed to specified type.
         /// </summary>
@@ -62,7 +62,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="predicate">The predicate to evaluate in order to establish if the operation resault is <c>true</c> or <c>false</c>.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        IEnsure<T> If( Predicate<T> predicate );
+        IEnsure<T> If(Predicate<T> predicate);
 
         /// <summary>
         /// Ensure that the supplied object is equal to the currently inspected object.
@@ -71,7 +71,7 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the object equality fails.</exception>
-        IEnsure<T> Is( T value );
+        IEnsure<T> Is(T value);
 
         /// <summary>
         /// Ensure that the supplied predicate returns false.
@@ -80,9 +80,9 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the predicate result is true.</exception>
-        IEnsure<T> IsFalse( Predicate<T> func );
+        IEnsure<T> IsFalse(Predicate<T> func);
 
-        //IEnsure<T> IsFalse( Boolean condition );
+        //IEnsure<T> IsFalse( bool condition );
 
         /// <summary>
         /// Ensure that the supplied object is not equal to the currently inspected object.
@@ -91,7 +91,7 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the object equality does not fail.</exception>
-        IEnsure<T> IsNot( T value );
+        IEnsure<T> IsNot(T value);
 
         /// <summary>
         /// Ensure that the supplied predicate returns true.
@@ -100,15 +100,15 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the predicate result is false.</exception>
-        IEnsure<T> IsTrue( Predicate<T> func );
+        IEnsure<T> IsTrue(Predicate<T> func);
 
-        //IEnsure<T> IsTrue( Boolean condition );
+        //IEnsure<T> IsTrue( bool condition );
 
         /// <summary>
         /// Gets the name of the parameter to validate.
         /// </summary>
         /// <value>The name of the parameter.</value>
-        String Name { get; }
+        string Name { get; }
 
         /// <summary>
         /// Executes the specified action only if the <c>If</c> operation has been evaluated to <c>true</c>.
@@ -117,20 +117,20 @@ namespace Radical.Validation
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> Then( Action<T, String> action );
+        IEnsure<T> Then(Action<T, string> action);
 
         /// <summary>
         /// Executes the specified action only if the <c>If</c> operation has been evaluated to <c>true</c>.
         /// </summary>
         /// <param name="action">The action to execute.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        IEnsure<T> Then( Action<T> action );
+        IEnsure<T> Then(Action<T> action);
 
         /// <summary>
         /// Gets the user custom error message.
         /// </summary>
         /// <value>The error message.</value>
-        String UserErrorMessage { get; }
+        string UserErrorMessage { get; }
 
         /// <summary>
         /// Gets the value of the validated parameter.
@@ -143,7 +143,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="errorMessage">The error message.</param>
         /// <returns>This ensure instance for fluent interface usage.</returns>
-        IEnsure<T> WithMessage( String errorMessage );
+        IEnsure<T> WithMessage(string errorMessage);
 
         /// <summary>
         /// Specifies the custom user message to be used when raising exceptions.
@@ -153,7 +153,7 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> WithMessage( String errorMessage, params Object[] formatArgs );
+        IEnsure<T> WithMessage(string errorMessage, params Object[] formatArgs);
 
         /// <summary>
         /// Throws the exception returned by the supplied exception
@@ -163,13 +163,13 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> ThenThrow( Func<IEnsure<T>, Exception> builder );
+        IEnsure<T> ThenThrow(Func<IEnsure<T>, Exception> builder);
 
         /// <summary>
         /// Throws the specified exception.
         /// </summary>
         /// <param name="error">The exception to throw.</param>
-        void Throw( Exception error );
+        void Throw(Exception error);
 
         ///// <summary>
         ///// Injects the specified exception builder into the ensure engine.
@@ -188,6 +188,6 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> WithPreview( Action<IEnsure<T>, Exception> validationFailurePreview );
+        IEnsure<T> WithPreview(Action<IEnsure<T>, Exception> validationFailurePreview);
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace Radical.ChangeTracking
 {
-    using System;
-    using System.Collections.Generic;
     using Radical;
     using Radical.Collections;
     using Radical.ComponentModel.ChangeTracking;
     using Radical.Validation;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Represents a change occurred to an object.
@@ -42,10 +42,10 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        protected Change( Object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, String description )
+        protected Change(Object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
         {
-            Ensure.That( owner ).Named( "owner" ).IsNotNull();
-            Ensure.That( rejectCallback ).Named( "rejectCallback" ).IsNotNull();
+            Ensure.That(owner).Named("owner").IsNotNull();
+            Ensure.That(rejectCallback).Named("rejectCallback").IsNotNull();
 
             this.Owner = owner;
             this.CachedValue = valueToCache;
@@ -69,30 +69,30 @@
         /// <summary>
         /// Commits this change.
         /// </summary>
-        public void Commit( CommitReason reason )
+        public void Commit(CommitReason reason)
         {
             reason.EnsureIsDefined();
-            Ensure.That( reason )
-                .Named( "reason" )
-                .If( v => v == CommitReason.None )
-                .Then( ( v, n ) => 
-                { 
-                    throw new ArgumentException( "Unsupported CommitReason value.", n ); 
-                } );
+            Ensure.That(reason)
+                .Named("reason")
+                .If(v => v == CommitReason.None)
+                .Then((v, n) =>
+               {
+                   throw new ArgumentException("Unsupported CommitReason value.", n);
+               });
 
-            this.OnCommit( reason );
-            this.OnCommitted( new CommittedEventArgs( reason ) );
+            this.OnCommit(reason);
+            this.OnCommitted(new CommittedEventArgs(reason));
         }
 
         /// <summary>
         /// Called in order to commit this change.
         /// </summary>
-        protected virtual void OnCommit( CommitReason reason )
+        protected virtual void OnCommit(CommitReason reason)
         {
-            if( this.CommitCallback != null )
+            if (this.CommitCallback != null)
             {
-                ChangeCommittedEventArgs<T> args = new ChangeCommittedEventArgs<T>( this.Owner, this.CachedValue, this, reason );
-                this.CommitCallback( args );
+                ChangeCommittedEventArgs<T> args = new ChangeCommittedEventArgs<T>(this.Owner, this.CachedValue, this, reason);
+                this.CommitCallback(args);
             }
         }
 
@@ -104,37 +104,37 @@
         /// <summary>
         /// Called when Committed event.
         /// </summary>
-        protected virtual void OnCommitted( CommittedEventArgs args )
+        protected virtual void OnCommitted(CommittedEventArgs args)
         {
             var h = this.Committed;
-            if( h != null )
+            if (h != null)
             {
-                h( this, args );
+                h(this, args);
             }
         }
 
         /// <summary>
         /// Rejects this change.
         /// </summary>
-        public void Reject( RejectReason reason )
+        public void Reject(RejectReason reason)
         {
             reason.EnsureIsDefined();
-            Ensure.That( reason )
-                .Named( "reason" )
-                .If( v => v == RejectReason.None )
-                .Then( ( v, n ) => { throw new ArgumentException( "Unsupported RejectReason value.", n ); } );
+            Ensure.That(reason)
+                .Named("reason")
+                .If(v => v == RejectReason.None)
+                .Then((v, n) => { throw new ArgumentException("Unsupported RejectReason value.", n); });
 
-            this.OnReject( reason );
-            this.OnRejected( new RejectedEventArgs( reason ) );
+            this.OnReject(reason);
+            this.OnRejected(new RejectedEventArgs(reason));
         }
 
         /// <summary>
         /// Called in order to reject this change.
         /// </summary>
-        protected virtual void OnReject( RejectReason reason )
+        protected virtual void OnReject(RejectReason reason)
         {
-            ChangeRejectedEventArgs<T> args = new ChangeRejectedEventArgs<T>( this.Owner, this.CachedValue, this, reason );
-            this.RejectCallback( args );
+            ChangeRejectedEventArgs<T> args = new ChangeRejectedEventArgs<T>(this.Owner, this.CachedValue, this, reason);
+            this.RejectCallback(args);
         }
 
         /// <summary>
@@ -145,12 +145,12 @@
         /// <summary>
         /// Raises the Rejected event.
         /// </summary>
-        protected virtual void OnRejected( RejectedEventArgs args )
+        protected virtual void OnRejected(RejectedEventArgs args)
         {
             var h = this.Rejected;
-            if( h != null )
+            if (h != null)
             {
-                h( this, args );
+                h(this, args);
             }
         }
 
@@ -160,7 +160,7 @@
         /// <value>
         ///     <c>true</c> if this instance supports commit; otherwise, <c>false</c>.
         /// </value>
-        public virtual Boolean IsCommitSupported
+        public virtual bool IsCommitSupported
         {
             get { return this.CommitCallback != null; }
         }
@@ -179,7 +179,7 @@
         /// Gets the advised action for this IChange.
         /// </summary>
         /// <value>The advised action.</value>
-        public abstract ProposedActions GetAdvisedAction( Object changedItem);
+        public abstract ProposedActions GetAdvisedAction(Object changedItem);
 
         /// <summary>
         /// Gets the changed entities.
@@ -187,7 +187,7 @@
         /// <returns></returns>
         public virtual IEnumerable<Object> GetChangedEntities()
         {
-            return new ReadOnlyCollection<Object>( new[] { this.Owner } );
+            return new ReadOnlyCollection<Object>(new[] { this.Owner });
         }
 
         /// <summary>

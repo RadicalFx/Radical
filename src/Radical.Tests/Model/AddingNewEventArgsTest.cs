@@ -16,7 +16,7 @@ namespace Radical.Tests.Model
 
             var actual = target.NewItem;
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
             target.Cancel.Should().Be.False();
         }
     }

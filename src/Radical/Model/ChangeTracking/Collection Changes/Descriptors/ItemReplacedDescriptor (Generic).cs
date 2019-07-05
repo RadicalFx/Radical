@@ -1,7 +1,5 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    using System;
-
     public class ItemReplacedDescriptor<T> : ItemChangedDescriptor<T>
     {
         /// <summary>
@@ -10,8 +8,8 @@
         /// <param name="newItem">The new item.</param>
         /// <param name="replacedItem">The replaced item.</param>
         /// <param name="index">The index.</param>
-        public ItemReplacedDescriptor( T newItem, T replacedItem, Int32 index )
-            : base( newItem, index)
+        public ItemReplacedDescriptor(T newItem, T replacedItem, int index)
+            : base(newItem, index)
         {
             this.ReplacedItem = replacedItem;
         }

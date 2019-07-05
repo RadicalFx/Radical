@@ -1,9 +1,7 @@
 namespace Radical.Linq
 {
-    using System;
-    using System.Text.RegularExpressions;
-    using Radical.Validation;
     using Radical.ComponentModel;
+    using System;
     using System.Linq;
 
     public static class QueryableExtensions
@@ -19,11 +17,11 @@ namespace Radical.Linq
         /// <param name="destination">The destination container.</param>
         /// <param name="adapter">The adapter.</param>
         /// <returns>The a reference to the supplied destination container to allow fluent interface usage.</returns>
-        public static IEntityCollection<TDest> Fill<TSource, TDest>( this IQueryable<TSource> source, IEntityCollection<TDest> destination, Func<TSource, TDest> adapter )
+        public static IEntityCollection<TDest> Fill<TSource, TDest>(this IQueryable<TSource> source, IEntityCollection<TDest> destination, Func<TSource, TDest> adapter)
             where TDest : class
         {
             destination.BeginInit();
-            source.ForEach( element => destination.Add( adapter( element ) ) );
+            source.ForEach(element => destination.Add(adapter(element)));
             destination.EndInit();
 
             return destination;
@@ -42,11 +40,11 @@ namespace Radical.Linq
         /// <returns>
         /// The a reference to the supplied destination container to allow fluent interface usage.
         /// </returns>
-        public static IEntityCollection<TDest> Fill<TSource, TDest>( this IQueryable<TSource> source, IEntityCollection<TDest> destination, Func<TSource, IEntityCollection<TDest>, TDest> adapter )
+        public static IEntityCollection<TDest> Fill<TSource, TDest>(this IQueryable<TSource> source, IEntityCollection<TDest> destination, Func<TSource, IEntityCollection<TDest>, TDest> adapter)
             where TDest : class
         {
             destination.BeginInit();
-            source.ForEach( element => destination.Add( adapter( element, destination ) ) );
+            source.ForEach(element => destination.Add(adapter(element, destination)));
             destination.EndInit();
 
             return destination;

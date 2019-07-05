@@ -2,7 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rhino.Mocks;
+    using FakeItEasy;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using SharpTestsEx;
@@ -11,28 +11,28 @@
     public class ChangeSetTests
     {
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void changeSet_ctor()
         {
-            var expected = new IChange[] 
+            var expected = new IChange[]
             {
-                MockRepository.GenerateStub<IChange>(),
-                MockRepository.GenerateStub<IChange>(),
-                MockRepository.GenerateStub<IChange>()
+                A.Fake<IChange>(),
+                A.Fake<IChange>(),
+                A.Fake<IChange>()
             };
 
-            var actual = new ChangeSet( expected );
+            var actual = new ChangeSet(expected);
 
-            actual.Count.Should().Be.EqualTo( 3 );
-            actual.Should().Have.SameSequenceAs( expected );
+            actual.Count.Should().Be.EqualTo(3);
+            actual.Should().Have.SameSequenceAs(expected);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
-        [TestCategory( "ChangeTracking" )]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestCategory("ChangeTracking")]
         public void changeSet_ctor_null_reference()
         {
-            var actual = new ChangeSet( null );
+            var actual = new ChangeSet(null);
         }
     }
 }

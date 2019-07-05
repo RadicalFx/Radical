@@ -15,30 +15,30 @@ namespace Radical.Tests.Observers
         class TestStub : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
-            void OnPropertyChanged( String name )
+            void OnPropertyChanged(string name)
             {
-                if( this.PropertyChanged != null )
+                if (this.PropertyChanged != null)
                 {
-                    this.PropertyChanged( this, new PropertyChangedEventArgs( name ) );
+                    this.PropertyChanged(this, new PropertyChangedEventArgs(name));
                 }
             }
 
-            private String _value = null;
-            public String Value
+            private string _value = null;
+            public string Value
             {
                 get { return this._value; }
                 set
                 {
-                    if( value != this.Value )
+                    if (value != this.Value)
                     {
                         this._value = value;
-                        this.OnPropertyChanged( "Value" );
+                        this.OnPropertyChanged("Value");
                     }
                 }
             }
 
-            private readonly Observable<String> _text = new Observable<String>();
-            public Observable<String> Text
+            private readonly Observable<string> _text = new Observable<string>();
+            public Observable<string> Text
             {
                 get { return this._text; }
             }
@@ -51,13 +51,13 @@ namespace Radical.Tests.Observers
             var actual = 0;
 
             var stub = new TestStub();
-            var target = new PropertyChangedMonitor<TestStub>( stub );
-            target.Observe( s => s.Value );
-            target.Changed += ( s, e ) => actual++;
+            var target = new PropertyChangedMonitor<TestStub>(stub);
+            target.Observe(s => s.Value);
+            target.Changed += (s, e) => actual++;
 
             stub.Value = "Hello!";
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -67,13 +67,13 @@ namespace Radical.Tests.Observers
             var actual = 0;
 
             var stub = new TestStub();
-            var target = new PropertyChangedMonitor<TestStub>( stub );
-            target.Observe( stub.Text );
-            target.Changed += ( s, e ) => actual++;
+            var target = new PropertyChangedMonitor<TestStub>(stub);
+            target.Observe(stub.Text);
+            target.Changed += (s, e) => actual++;
 
             stub.Text.Value = "Hello!";
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -84,17 +84,17 @@ namespace Radical.Tests.Observers
 
             var stub = new TestStub();
 
-            var target = new PropertyChangedMonitor<TestStub>( stub );
-            target.Observe( stub.Text );
-            target.Changed += ( s, e ) => actual++;
+            var target = new PropertyChangedMonitor<TestStub>(stub);
+            target.Observe(stub.Text);
+            target.Changed += (s, e) => actual++;
 
             stub.Text.Value = "Hello!";
             stub.Text.Value = "Should raise...";
 
-            target.StopObserving( stub.Text );
+            target.StopObserving(stub.Text);
             stub.Text.Value = "should not raise...";
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -104,12 +104,12 @@ namespace Radical.Tests.Observers
             var actual = 0;
 
             var stub = new TestStub();
-            var target = new PropertyChangedMonitor( stub );
-            target.Changed += ( s, e ) => actual++;
+            var target = new PropertyChangedMonitor(stub);
+            target.Changed += (s, e) => actual++;
 
             stub.Value = "Hello!";
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }

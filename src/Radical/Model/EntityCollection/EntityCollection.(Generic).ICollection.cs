@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using Radical.ComponentModel;
-using Radical.Linq;
-using Radical.Validation;
-using System.Linq.Expressions;
 
 namespace Radical.Model
 {
     partial class EntityCollection<T>
     {
-        Boolean ICollection<T>.IsReadOnly
+        bool ICollection<T>.IsReadOnly
         {
-            get {return this.IsReadOnly; }
+            get { return this.IsReadOnly; }
         }
 
         /// <summary>
@@ -26,7 +16,7 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
-        Boolean ICollection.IsSynchronized
+        bool ICollection.IsSynchronized
         {
             get
             {
@@ -63,10 +53,10 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentException">
         ///     <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
-        void ICollection.CopyTo( Array array, Int32 index )
+        void ICollection.CopyTo(Array array, int index)
         {
             this.EnsureNotDisposed();
-            this.Storage.CopyTo( ( T[] )array, index );
+            this.Storage.CopyTo((T[])array, index);
         }
     }
 }

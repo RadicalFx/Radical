@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using Radical.ComponentModel;
-using Radical.Linq;
-using Radical.Validation;
-using System.Linq.Expressions;
 
 namespace Radical.Model
 {
@@ -27,9 +16,9 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnDisposed()
         {
-            if( this.Disposed != null )
+            if (this.Disposed != null)
             {
-                this.Disposed( this, EventArgs.Empty );
+                this.Disposed(this, EventArgs.Empty);
             }
         }
 
@@ -40,8 +29,8 @@ namespace Radical.Model
         /// </summary>
         /// <item></item>
         /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
-        [Browsable( false )]
-        [DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden )]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         ISite IComponent.Site
         {
             get

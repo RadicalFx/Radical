@@ -8,15 +8,15 @@
     {
         #region ISerializationSurrogate Members
 
-        public void GetObjectData( object obj, SerializationInfo info, StreamingContext context )
+        public void GetObjectData(object obj, SerializationInfo info, StreamingContext context)
         {
-            info.AddValue( "data", ( ( GenericParameterHelper )obj ).Data );
+            info.AddValue("data", ((GenericParameterHelper)obj).Data);
         }
 
-        public object SetObjectData( object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector )
+        public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
         {
-            var data = info.GetInt32( "data" );
-            ( ( GenericParameterHelper )obj ).Data = data;
+            var data = info.GetInt32("data");
+            ((GenericParameterHelper)obj).Data = data;
 
             return obj;
         }

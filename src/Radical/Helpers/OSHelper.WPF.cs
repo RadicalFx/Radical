@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Radical.Helpers
 {
     public class OSHelper
     {
-        public Int32 GetOSArchitecture()
+        public int GetOSArchitecture()
         {
-            string pa = Environment.GetEnvironmentVariable( "PROCESSOR_ARCHITECTURE" );
-            return ( ( String.IsNullOrEmpty( pa ) || String.Compare( pa, 0, "x86", 0, 3, true ) == 0 ) ? 32 : 64 );
+            string pa = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE");
+            return ((string.IsNullOrEmpty(pa) || string.Compare(pa, 0, "x86", 0, 3, true) == 0) ? 32 : 64);
         }
 
         public string GetOSInfo()
@@ -23,16 +20,16 @@ namespace Radical.Helpers
             //Variable to hold our return value
             string operatingSystem = "";
 
-            if( os.Platform == PlatformID.Win32Windows )
+            if (os.Platform == PlatformID.Win32Windows)
             {
                 //This is a pre-NT version of Windows
-                switch( vs.Minor )
+                switch (vs.Minor)
                 {
                     case 0:
                         operatingSystem = "95";
                         break;
                     case 10:
-                        if( vs.Revision.ToString() == "2222A" )
+                        if (vs.Revision.ToString() == "2222A")
                             operatingSystem = "98SE";
                         else
                             operatingSystem = "98";
@@ -44,9 +41,9 @@ namespace Radical.Helpers
                         break;
                 }
             }
-            else if( os.Platform == PlatformID.Win32NT )
+            else if (os.Platform == PlatformID.Win32NT)
             {
-                switch( vs.Major )
+                switch (vs.Major)
                 {
                     case 3:
                         operatingSystem = "NT 3.51";
@@ -55,13 +52,13 @@ namespace Radical.Helpers
                         operatingSystem = "NT 4.0";
                         break;
                     case 5:
-                        if( vs.Minor == 0 )
+                        if (vs.Minor == 0)
                             operatingSystem = "2000";
                         else
                             operatingSystem = "XP";
                         break;
                     case 6:
-                        if( vs.Minor == 0 )
+                        if (vs.Minor == 0)
                             operatingSystem = "Vista";
                         else
                             operatingSystem = "7";
@@ -73,12 +70,12 @@ namespace Radical.Helpers
             //Make sure we actually got something in our OS check
             //We don't want to just return " Service Pack 2" or " 32-bit"
             //That information is useless without the OS version.
-            if( operatingSystem != "" )
+            if (operatingSystem != "")
             {
                 //Got something.  Let's prepend "Windows" and get more info.
                 operatingSystem = "Windows " + operatingSystem;
                 //See if there's a service pack installed.
-                if( os.ServicePack != "" )
+                if (os.ServicePack != "")
                 {
                     //Append it to the OS name.  i.e. "Windows XP Service Pack 3"
                     operatingSystem += " " + os.ServicePack;

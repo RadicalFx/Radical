@@ -26,12 +26,12 @@
             string expectedNewValue = "New Foo";
             int expectedIndex = 10;
 
-            SetValueAtEventArgs<string> obj = new SetValueAtEventArgs<string>( expectedIndex, expectedNewValue, expectedOldValue );
+            SetValueAtEventArgs<string> obj = new SetValueAtEventArgs<string>(expectedIndex, expectedNewValue, expectedOldValue);
 
-            Assert.IsFalse( obj.Cancel );
-            Assert.AreEqual<int>( expectedIndex, obj.Index );
-            Assert.AreEqual<string>( expectedNewValue, obj.NewValue );
-            Assert.AreEqual<string>( expectedOldValue, obj.OldValue );
+            Assert.IsFalse(obj.Cancel);
+            Assert.AreEqual<int>(expectedIndex, obj.Index);
+            Assert.AreEqual<string>(expectedNewValue, obj.NewValue);
+            Assert.AreEqual<string>(expectedOldValue, obj.OldValue);
         }
     }
 }

@@ -13,9 +13,9 @@ namespace Radical
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
         /// <returns></returns>
-        public static TService GetService<TService>( this IServiceProvider serviceProvider )
+        public static TService GetService<TService>(this IServiceProvider serviceProvider)
         {
-            return ( TService )serviceProvider.GetService( typeof( TService ) );
+            return (TService)serviceProvider.GetService(typeof(TService));
         }
 
         /// <summary>
@@ -25,9 +25,9 @@ namespace Radical
         /// <typeparam name="TInterface">The type of the interface.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
         /// <returns></returns>
-        public static TInterface GetService<SInterface, TInterface>( this IServiceProvider serviceProvider )
+        public static TInterface GetService<SInterface, TInterface>(this IServiceProvider serviceProvider)
         {
-            return ( TInterface )serviceProvider.GetService( typeof( SInterface ) );
+            return (TInterface)serviceProvider.GetService(typeof(SInterface));
         }
 
         /// <summary>
@@ -36,16 +36,16 @@ namespace Radical
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
         /// <returns></returns>
-        public static TService TryGetService<TService>( this IServiceProvider serviceProvider )
+        public static TService TryGetService<TService>(this IServiceProvider serviceProvider)
         {
-            object service = serviceProvider.GetService( typeof( TService ) );
+            object service = serviceProvider.GetService(typeof(TService));
 
-            if( service == null )
+            if (service == null)
             {
-                return default( TService );
+                return default(TService);
             }
 
-            return ( TService )service;
+            return (TService)service;
         }
 
         /// <summary>
@@ -55,16 +55,16 @@ namespace Radical
         /// <typeparam name="TInterface">The type of the interface.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
         /// <returns></returns>
-        public static TInterface TryGetService<SInterface, TInterface>( this IServiceProvider serviceProvider )
+        public static TInterface TryGetService<SInterface, TInterface>(this IServiceProvider serviceProvider)
         {
-            object service = serviceProvider.GetService( typeof( SInterface ) );
+            object service = serviceProvider.GetService(typeof(SInterface));
 
-            if( service == null )
+            if (service == null)
             {
-                return default( TInterface );
+                return default(TInterface);
             }
 
-            return ( TInterface )service;
+            return (TInterface)service;
         }
     }
 }

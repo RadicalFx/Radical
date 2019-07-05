@@ -1,6 +1,6 @@
-﻿using System;
-using Radical.ComponentModel.Messaging;
+﻿using Radical.ComponentModel.Messaging;
 using Radical.Validation;
+using System;
 
 namespace Radical.Observers
 {
@@ -15,9 +15,9 @@ namespace Radical.Observers
         /// </summary>
         /// <param name="broker">The message broker.</param>
         /// <returns>The new <see cref="MessageBrokerMonitor"/>.</returns>
-        public static MessageBrokerMonitor Using( IMessageBroker broker )
+        public static MessageBrokerMonitor Using(IMessageBroker broker)
         {
-            return new MessageBrokerMonitor( broker );
+            return new MessageBrokerMonitor(broker);
         }
     }
 
@@ -33,10 +33,10 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="MessageBrokerMonitor"/> class.
         /// </summary>
         /// <param name="broker">The message broker.</param>
-        public MessageBrokerMonitor( IMessageBroker broker )
-            : base( broker )
+        public MessageBrokerMonitor(IMessageBroker broker)
+            : base(broker)
         {
-            Ensure.That( broker ).Named( "broker" ).IsNotNull();
+            Ensure.That(broker).Named("broker").IsNotNull();
             this.broker = broker;
         }
 
@@ -48,7 +48,7 @@ namespace Radical.Observers
         /// <returns>This monitor instance.</returns>
         public MessageBrokerMonitor WaitingFor<TMessage>() where TMessage : class
         {
-            return this.WaitingFor<TMessage>( m => true );
+            return this.WaitingFor<TMessage>(m => true);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Radical.Observers
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="invocationModel">The invocation model.</param>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>( InvocationModel invocationModel ) where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>(InvocationModel invocationModel) where TMessage : class
         {
             return this.WaitingFor<TMessage>(m => true, invocationModel);
         }
@@ -70,15 +70,15 @@ namespace Radical.Observers
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>( Func<TMessage, Boolean> filter ) where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>(Func<TMessage, bool> filter) where TMessage : class
         {
-            this.broker.Subscribe<TMessage>( this, ( sender, msg ) =>
-            {
-                if ( filter( msg ) )
-                {
-                    this.OnChanged();
-                }
-            } );
+            this.broker.Subscribe<TMessage>(this, (sender, msg) =>
+           {
+               if (filter(msg))
+               {
+                   this.OnChanged();
+               }
+           });
 
             return this;
         }
@@ -91,7 +91,7 @@ namespace Radical.Observers
         /// <param name="filter">The filter condition.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <returns>This monitor instance.</returns>
-        public MessageBrokerMonitor WaitingFor<TMessage>(Func<TMessage, Boolean> filter, InvocationModel invocationModel ) where TMessage : class
+        public MessageBrokerMonitor WaitingFor<TMessage>(Func<TMessage, bool> filter, InvocationModel invocationModel) where TMessage : class
         {
             this.broker.Subscribe<TMessage>(this, invocationModel, (sender, msg) =>
             {
@@ -108,9 +108,9 @@ namespace Radical.Observers
         /// Called in order to allow inheritors to stop the monitoring operations.
         /// </summary>
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
-        protected override void OnStopMonitoring( bool targetDisposed )
+        protected override void OnStopMonitoring(bool targetDisposed)
         {
-            this.broker.Unsubscribe( this );
+            this.broker.Unsubscribe(this);
         }
     }
 }

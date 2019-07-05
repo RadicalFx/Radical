@@ -16,14 +16,14 @@ namespace Radical.Tests
 
         class AMessageHandler : AbstractMessageHandler<AMessage>
         {
-            public Boolean Invoked { get; private set; }
+            public bool Invoked { get; private set; }
 
             public override void Handle(Object sender, AMessage message)
             {
                 this.Invoked = true;
             }
         }
-        
+
         [TestMethod]
         public void when_registering_POCO_message_handler_facility_should_correctly_subscribe_messages()
         {

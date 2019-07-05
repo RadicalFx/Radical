@@ -10,7 +10,7 @@ namespace Radical.Tests.ChangeTracking
     public class ObjectReferenceEqualityComparerTest
     {
         [TestMethod()]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void Instance_is_not_null()
         {
             IEqualityComparer<Object> actual = ObjectReferenceEqualityComparer.Instance;
@@ -19,13 +19,13 @@ namespace Radical.Tests.ChangeTracking
         }
 
         [TestMethod()]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void Instance_is_singleton()
         {
             IEqualityComparer<Object> expected = ObjectReferenceEqualityComparer.Instance;
             IEqualityComparer<Object> actual = ObjectReferenceEqualityComparer.Instance;
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
     }
 }

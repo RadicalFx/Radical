@@ -1,5 +1,4 @@
 using Radical.Validation;
-using System;
 
 namespace Radical.DataBinding
 {
@@ -25,8 +24,8 @@ namespace Radical.DataBinding
         /// </summary>
         /// <param name="caption">The caption.</param>
         /// <param name="value">The value.</param>
-        public EnumBinder(String caption, T value)
-            : this(caption, String.Empty, value, -1)
+        public EnumBinder(string caption, T value)
+            : this(caption, string.Empty, value, -1)
         {
 
         }
@@ -37,8 +36,8 @@ namespace Radical.DataBinding
         /// <param name="caption">The caption.</param>
         /// <param name="value">The value.</param>
         /// <param name="index">The index.</param>
-        public EnumBinder(String caption, T value, Int32 index)
-            : this(caption, String.Empty, value, index)
+        public EnumBinder(string caption, T value, int index)
+            : this(caption, string.Empty, value, index)
         {
 
         }
@@ -50,7 +49,7 @@ namespace Radical.DataBinding
         /// <param name="description">The description.</param>
         /// <param name="value">The value.</param>
         /// <param name="index">The index.</param>
-        public EnumBinder(String caption, String description, T value, Int32 index)
+        public EnumBinder(string caption, string description, T value, int index)
         {
             Ensure.That(caption).Named("caption").IsNotNull();
             Ensure.That(description).Named("description").IsNotNull();
@@ -66,7 +65,7 @@ namespace Radical.DataBinding
         /// Gets the caption.
         /// </summary>
         /// <value>The caption.</value>
-        public String Caption
+        public string Caption
         {
             get;
             private set;
@@ -76,7 +75,7 @@ namespace Radical.DataBinding
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        public String Description
+        public string Description
         {
             get;
             private set;
@@ -96,7 +95,7 @@ namespace Radical.DataBinding
         /// Gets the index.
         /// </summary>
         /// <value>The index.</value>
-        public Int32 Index
+        public int Index
         {
             get;
             private set;

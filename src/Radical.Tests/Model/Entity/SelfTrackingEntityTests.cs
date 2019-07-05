@@ -16,7 +16,7 @@ namespace Radical.Tests.Model.Entity
             this.OnInitialize();
         }
 
-        public MockEntity(String initialFirstNameValue)
+        public MockEntity(string initialFirstNameValue)
         {
             this.SetInitialPropertyValue(() => this.FirstName, initialFirstNameValue);
 
@@ -25,7 +25,7 @@ namespace Radical.Tests.Model.Entity
 
         void OnInitialize()
         {
-            var metadata = new PropertyMetadata<String>(this, () => this.MainProperty);
+            var metadata = new PropertyMetadata<string>(this, () => this.MainProperty);
             metadata.AddCascadeChangeNotifications(() => this.SubProperty);
 
             this.SetPropertyMetadata(metadata);
@@ -36,31 +36,31 @@ namespace Radical.Tests.Model.Entity
             this.SetInitialPropertyValue(property, value);
         }
 
-        public String FirstName
+        public string FirstName
         {
             get { return this.GetPropertyValue(() => this.FirstName); }
             set { this.SetPropertyValue(() => this.FirstName, value); }
         }
 
-        public String LastName
+        public string LastName
         {
             get { return this.GetPropertyValue(() => this.LastName); }
             set { this.SetPropertyValue(() => this.LastName, value); }
         }
 
-        public Int32 Number
+        public int Number
         {
             get { return this.GetPropertyValue(() => this.Number); }
             set { this.SetPropertyValue(() => this.Number, value); }
         }
 
-        public String MainProperty
+        public string MainProperty
         {
             get { return this.GetPropertyValue(() => this.MainProperty); }
             set { this.SetPropertyValue(() => this.MainProperty, value); }
         }
 
-        public String SubProperty
+        public string SubProperty
         {
             get { return this.GetPropertyValue(() => this.SubProperty); }
         }
@@ -94,47 +94,12 @@ namespace Radical.Tests.Model.Entity
     [TestClass]
     public class SelfTrackingEntityTests : EntityTests
     {
-        protected override Entity CreateMock()
-        {
-            return new MockEntity();
-        }
-
-        protected virtual Entity CreateMock(String firstName)
-        {
-            return new MockEntity(firstName);
-        }
-
-        //protected override T CreateMock<T>()
-        //{
-        //    if( typeof( T ) == typeof( MockEntity ) )
-        //    {
-        //        return ( T )( new MockEntity() );
-        //    }
-
-        //    return base.CreateMock<T>();
-        //}
-
-        //protected override Radical.Model.Entity CreateMock()
-        //{
-        //    return this.CreateMockEntity();
-        //}
-
-        //protected virtual Radical.Model.Entity CreateMockEntity()
-        //{
-        //    return new MockEntity();
-        //}
-
-        //protected virtual Radical.Model.Entity CreateMockEntity( String firstName )
-        //{
-        //    return new MockEntity( firstName );
-        //}
-
         [TestMethod]
         public void entity_set_property_using_internal_values_management_should_behave_as_expected()
         {
             var expected = "Mauro";
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MockEntity();
             target.FirstName = expected;
 
             var actual = target.FirstName;
@@ -147,7 +112,7 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = "Mauro";
 
-            var target = (IMockEntity)this.CreateMock(expected);
+            var target = new MockEntity(expected);
 
             target.FirstName.Should().Be.EqualTo(expected);
             target.LastName.Should().Be.Null();
@@ -159,7 +124,7 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = "Mauro";
 
-            var target = (IMockEntity)this.CreateMock(expected);
+            var target = new MockEntity(expected);
 
             var actual = target.FirstName;
 
@@ -176,7 +141,7 @@ namespace Radical.Tests.Model.Entity
              * una exception perchè stiamo cambiando il DefaultValue
              * dopo che è stato inizializzato... non credo abbia più molto senso
              */
-            var target = (IMockEntity)this.CreateMock("Mauro");
+            var target = new MockEntity("Mauro");
             target.SetInitialValue(() => target.FirstName, "Foo");
         }
 
@@ -186,7 +151,7 @@ namespace Radical.Tests.Model.Entity
             var expected = 1;
             var actual = 0;
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MockEntity();
             target.PropertyChanged += (s, e) => actual++;
 
             target.FirstName = "Mauro";
@@ -200,7 +165,7 @@ namespace Radical.Tests.Model.Entity
             var expected = 1;
             var actual = 0;
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MockEntity();
             target.PropertyChanged += (s, e) => actual++;
 
             target.FirstName = "Mauro";
@@ -215,7 +180,7 @@ namespace Radical.Tests.Model.Entity
             var expected = 3;
             var actual = 0;
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MockEntity();
             target.PropertyChanged += (s, e) => actual++;
 
             target.FirstName = "Mauro";
@@ -232,7 +197,7 @@ namespace Radical.Tests.Model.Entity
             var expected = 1;
             var actual = 0;
 
-            var target = (IMockEntity)this.CreateMock("Mauro");
+            var target = new MockEntity("Mauro");
             target.PropertyChanged += (s, e) => actual++;
 
             target.FirstName = "Foo";
@@ -246,7 +211,7 @@ namespace Radical.Tests.Model.Entity
             var expected = 3;
             var actual = 0;
 
-            var target = (IMockEntity)this.CreateMock("initial value");
+            var target = new MockEntity("initial value");
             target.PropertyChanged += (s, e) => actual++;
 
             target.FirstName = "Mauro";
@@ -343,9 +308,9 @@ namespace Radical.Tests.Model.Entity
             var actual = 0;
 
             var expectedNotifications = new[] { "MainProperty", "SubProperty" };
-            var actualNotifications = new List<String>();
+            var actualNotifications = new List<string>();
 
-            var target = (IMockEntity)this.CreateMock();
+            var target = new MockEntity();
             target.PropertyChanged += (s, e) =>
             {
                 actual++;
@@ -365,7 +330,7 @@ namespace Radical.Tests.Model.Entity
             var actual = 0;
 
             var expectedNotifications = new[] { "BornDate", "Age" };
-            var actualNotifications = new List<String>();
+            var actualNotifications = new List<string>();
 
             var target = new Person(new DateTime(1973, 1, 10));
             target.PropertyChanged += (s, e) =>

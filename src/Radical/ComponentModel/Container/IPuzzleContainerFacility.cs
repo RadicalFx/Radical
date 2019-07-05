@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Radical.ComponentModel
+﻿namespace Radical.ComponentModel
 {
     /// <summary>
     /// Defines a facility for the puzzle container.
@@ -12,12 +9,12 @@ namespace Radical.ComponentModel
         /// Initializes this facility.
         /// </summary>
         /// <param name="container">The container hosting the facility.</param>
-        void Initialize( IPuzzleContainer container );
+        void Initialize(IPuzzleContainer container);
 
         /// <summary>
         /// Teardowns this facility.
         /// </summary>
         /// <param name="container">The container hosting the facility.</param>
-        void Teardown( IPuzzleContainer container );
+        void Teardown(IPuzzleContainer container);
     }
 }

@@ -48,7 +48,7 @@ namespace Radical.Validation
         /// Bounds are excluded.
         /// </summary>
         ExcludeBounds = ExcludeLower | ExcludeHigher,
-        
+
         /// <summary>
         /// Bounds are included.
         /// </summary>
@@ -73,9 +73,9 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is smaller then the expected value.</exception>
-        public static IEnsure<T> IsGreaterThen<T>( this IEnsure<T> validator, T expected ) where T : IComparable<T>
+        public static IEnsure<T> IsGreaterThen<T>(this IEnsure<T> validator, T expected) where T : IComparable<T>
         {
-            return ComparableEnsureExtension.IsGreaterThen( validator, expected, Or.NotEqual );
+            return ComparableEnsureExtension.IsGreaterThen(validator, expected, Or.NotEqual);
         }
 
         /// <summary>
@@ -93,29 +93,29 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is smaler then the expected value.</exception>
-        public static IEnsure<T> IsGreaterThen<T>( this IEnsure<T> validator, T expected, Or boundaryBehavior ) where T : IComparable<T>
+        public static IEnsure<T> IsGreaterThen<T>(this IEnsure<T> validator, T expected, Or boundaryBehavior) where T : IComparable<T>
         {
-            validator.If( s =>
-            {
-                var result = s.CompareTo( expected );
+            validator.If(s =>
+           {
+               var result = s.CompareTo(expected);
 
-                switch( boundaryBehavior )
-                {
-                    case Or.Equal:
-                        return result < 0;
+               switch (boundaryBehavior)
+               {
+                   case Or.Equal:
+                       return result < 0;
 
-                    case Or.NotEqual:
-                        return result <= 0;
+                   case Or.NotEqual:
+                       return result <= 0;
 
-                    default:
-                        throw new NotSupportedException();
-                }
-            } )
-            .ThenThrow( v =>
-            {
-                var msg = String.Format( "The inspected value should be greater then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "" );
-                return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( msg ) );
-            } );
+                   default:
+                       throw new NotSupportedException();
+               }
+           })
+            .ThenThrow(v =>
+           {
+               var msg = string.Format("The inspected value should be greater then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "");
+               return new ArgumentOutOfRangeException(v.Name, v.GetFullErrorMessage(msg));
+           });
 
             return validator;
         }
@@ -132,9 +132,9 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is greater then the expected value.</exception>
-        public static IEnsure<T> IsSmallerThen<T>( this IEnsure<T> validator, T expected ) where T : IComparable<T>
+        public static IEnsure<T> IsSmallerThen<T>(this IEnsure<T> validator, T expected) where T : IComparable<T>
         {
-            return ComparableEnsureExtension.IsSmallerThen( validator, expected, Or.NotEqual );
+            return ComparableEnsureExtension.IsSmallerThen(validator, expected, Or.NotEqual);
         }
 
         /// <summary>
@@ -151,29 +151,29 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is greater then the expected value.</exception>
-        public static IEnsure<T> IsSmallerThen<T>( this IEnsure<T> validator, T expected, Or boundaryBehavior ) where T : IComparable<T>
+        public static IEnsure<T> IsSmallerThen<T>(this IEnsure<T> validator, T expected, Or boundaryBehavior) where T : IComparable<T>
         {
-            validator.If( s =>
-            {
-                var result = s.CompareTo( expected );
+            validator.If(s =>
+           {
+               var result = s.CompareTo(expected);
 
-                switch( boundaryBehavior )
-                {
-                    case Or.Equal:
-                        return result > 0;
+               switch (boundaryBehavior)
+               {
+                   case Or.Equal:
+                       return result > 0;
 
-                    case Or.NotEqual:
-                        return result >= 0;
+                   case Or.NotEqual:
+                       return result >= 0;
 
-                    default:
-                        throw new NotSupportedException();
-                }
-            } )
-            .ThenThrow( v =>
-            {
-                var msg = String.Format( "The inspected value should be smaller then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "" );
-                return new ArgumentOutOfRangeException( v.Name, v.GetFullErrorMessage( msg ) );
-            } );
+                   default:
+                       throw new NotSupportedException();
+               }
+           })
+            .ThenThrow(v =>
+           {
+               var msg = string.Format("The inspected value should be smaller then{0} the given one.", boundaryBehavior == Or.Equal ? " or equal to" : "");
+               return new ArgumentOutOfRangeException(v.Name, v.GetFullErrorMessage(msg));
+           });
 
             return validator;
         }
@@ -191,9 +191,9 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is outside the expected range.</exception>
-        public static IEnsure<T> IsWithin<T>( this IEnsure<T> validator, T lowerBoundary, T higherBoundary ) where T : IComparable<T>
+        public static IEnsure<T> IsWithin<T>(this IEnsure<T> validator, T lowerBoundary, T higherBoundary) where T : IComparable<T>
         {
-            return ComparableEnsureExtension.IsWithin( validator, lowerBoundary, higherBoundary, Boundary.ExcludeBounds );
+            return ComparableEnsureExtension.IsWithin(validator, lowerBoundary, higherBoundary, Boundary.ExcludeBounds);
         }
 
         /// <summary>
@@ -211,13 +211,13 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
         /// is raised if the current inspected object is outside the expected range.</exception>
-        public static IEnsure<T> IsWithin<T>( this IEnsure<T> validator, T lowerBoundary, T higherBoundary, Boundary boundaryBehavior ) where T : IComparable<T>
+        public static IEnsure<T> IsWithin<T>(this IEnsure<T> validator, T lowerBoundary, T higherBoundary, Boundary boundaryBehavior) where T : IComparable<T>
         {
-            var includeLower = ( boundaryBehavior & Boundary.IncludeLower ) == Boundary.IncludeLower;
-            var includeHigher = ( boundaryBehavior & Boundary.IncludeHigher ) == Boundary.IncludeHigher;
+            var includeLower = (boundaryBehavior & Boundary.IncludeLower) == Boundary.IncludeLower;
+            var includeHigher = (boundaryBehavior & Boundary.IncludeHigher) == Boundary.IncludeHigher;
 
-            validator.IsGreaterThen( lowerBoundary, includeLower ? Or.Equal : Or.NotEqual )
-                .IsSmallerThen( higherBoundary, includeHigher ? Or.Equal : Or.NotEqual );
+            validator.IsGreaterThen(lowerBoundary, includeLower ? Or.Equal : Or.NotEqual)
+                .IsSmallerThen(higherBoundary, includeHigher ? Or.Equal : Or.NotEqual);
 
             return validator;
         }

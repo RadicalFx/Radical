@@ -1,29 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.Validation;
+﻿using Radical.Validation;
+using System;
 
 namespace Radical.Helpers
 {
     /// <summary>
     /// Defines the command line argument name associated to a property.
     /// </summary>
-    [AttributeUsage( AttributeTargets.Property, AllowMultiple = false, Inherited = false )]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public sealed class CommandLineArgumentAttribute : Attribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLineArgumentAttribute"/> class.
         /// </summary>
         /// <param name="argumentName">Name of the argument.</param>
-        public CommandLineArgumentAttribute( String argumentName )
+        public CommandLineArgumentAttribute(string argumentName)
         {
-            Ensure.That( argumentName )
-                .Named( () => argumentName )
+            Ensure.That(argumentName)
+                .Named(() => argumentName)
                 .IsNotNullNorEmpty();
 
             this.ArgumentName = argumentName;
-            this.Aliases = new String[ 0 ];
+            this.Aliases = new string[0];
         }
 
         /// <summary>
@@ -32,7 +29,7 @@ namespace Radical.Helpers
         /// <value>
         /// The name of the argument.
         /// </value>
-        public String ArgumentName { get; private set; }
+        public string ArgumentName { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this command line argument is required.
@@ -40,7 +37,7 @@ namespace Radical.Helpers
         /// <value>
         ///     <c>true</c> if this command line argument is required; otherwise, <c>false</c>.
         /// </value>
-        public Boolean IsRequired { get; set; }
+        public bool IsRequired { get; set; }
 
         /// <summary>
         /// Gets or sets the aliases.
@@ -48,6 +45,6 @@ namespace Radical.Helpers
         /// <value>
         /// The aliases.
         /// </value>
-        public String[] Aliases { get; set; }
+        public string[] Aliases { get; set; }
     }
 }

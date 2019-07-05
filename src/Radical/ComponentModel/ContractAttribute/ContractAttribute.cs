@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents a contract interface
     /// </summary>
-    [AttributeUsage( AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false, Inherited = true )]
+    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public sealed class ContractAttribute : Attribute
     {
         /// <summary>
@@ -13,18 +13,18 @@
         /// </summary>
         public ContractAttribute()
         {
-            
+
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContractAttribute"/> class.
         /// </summary>
         /// <param name="contractInterface">The contract interface.</param>
-        public ContractAttribute( Type contractInterface )
+        public ContractAttribute(Type contractInterface)
         {
-            if( contractInterface == null )
+            if (contractInterface == null)
             {
-                throw new ArgumentNullException( "contractInterface" );
+                throw new ArgumentNullException("contractInterface");
             }
 
             this.ContractInterface = contractInterface;

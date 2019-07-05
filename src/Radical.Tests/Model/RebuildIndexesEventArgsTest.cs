@@ -12,11 +12,11 @@ namespace Radical.Tests.Model
         {
             var expected = 10;
 
-            var target = new RebuildIndexesEventArgs( expected );
+            var target = new RebuildIndexesEventArgs(expected);
 
             var actual = target.Index;
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
             target.Cancel.Should().Be.False();
         }
     }

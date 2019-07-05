@@ -2,123 +2,117 @@
 
 namespace Radical.Tests.Model.Entity
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.ChangeTracking;
+    using Radical.ComponentModel.ChangeTracking;
     using Radical.Model;
     using SharpTestsEx;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.ComponentModel;
-    using Rhino.Mocks;
-    using Radical.ComponentModel.ChangeTracking;
-    using System.ComponentModel;
-    using Radical.ChangeTracking;
 
     [TestClass()]
     public class EntityMementoTests : EntityTests
     {
-        protected override Entity CreateMock()
+        class FakeMementoEntity : MementoEntity
         {
-            MockRepository mocks = new MockRepository();
-            var entity = mocks.PartialMock<MementoEntity>();
-            entity.Replay();
+            public FakeMementoEntity()
+            : base()
+            {
+            }
 
-            return entity;
-        }
+            public FakeMementoEntity(IChangeTrackingService memento)
+                : base(memento)
+            {
+            }
 
-        protected virtual MementoEntity CreateMock( bool registerAsrTransient ) 
-        {
-            MockRepository mocks = new MockRepository();
-            var entity = mocks.PartialMock<MementoEntity>( registerAsrTransient );
-            entity.Replay();
+            public FakeMementoEntity(bool registerAsTransient)
+                : base(registerAsTransient)
+            {
+            }
 
-            return entity;
-        }
+            public FakeMementoEntity(ChangeTrackingRegistration registration)
+                : base(registration)
+            {
+            }
 
-        protected virtual MementoEntity CreateMock( IChangeTrackingService memento )
-        {
-            MockRepository mocks = new MockRepository();
-            var entity = mocks.PartialMock<MementoEntity>( memento );
-            entity.Replay();
+            public FakeMementoEntity(IChangeTrackingService memento, ChangeTrackingRegistration registration)
+                : base(memento, registration)
+            {
+            }
 
-            return entity;
-        }
-
-        protected virtual MementoEntity CreateMock( IChangeTrackingService memento, bool registerAsrTransient ) 
-        {
-            MockRepository mocks = new MockRepository();
-            var entity = mocks.PartialMock<MementoEntity>( memento, registerAsrTransient );
-            entity.Replay();
-
-            return entity;
+            public FakeMementoEntity(IChangeTrackingService memento, bool registerAsTransient)
+                : base(memento, registerAsTransient)
+            {
+            }
         }
 
         [TestMethod]
         public void entityMemento_ctor_default_set_default_values()
         {
-            var target = ( MementoEntity )this.CreateMock();
+            var target = new FakeMementoEntity();
 
-            ( ( IMemento )target ).Memento.Should().Be.Null();
-            ( ( IMemento )target ).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
         }
 
         [TestMethod]
         public void entityMemento_ctor_memento_set_default_values()
         {
             var expected = new ChangeTrackingService();
-            var target = this.CreateMock( expected );
+            var target = new FakeMementoEntity(expected);
 
-            ( ( IMemento )target ).Memento.Should().Be.EqualTo( expected );
-            ( ( IMemento )target ).Memento.Should().Be.EqualTo( expected );
+            ((IMemento)target).Memento.Should().Be.EqualTo(expected);
+            ((IMemento)target).Memento.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
         public void entityMemento_ctor_registerAsTransient_true_set_default_values()
         {
-            var target = this.CreateMock( true );
+            var target = new FakeMementoEntity(true);
 
-            ( ( IMemento )target ).Memento.Should().Be.Null();
-            ( ( IMemento )target ).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
         }
 
         [TestMethod]
         public void entityMemento_ctor_registerAsTransient_false_set_default_values()
         {
-            var target = this.CreateMock( false );
+            var target = new FakeMementoEntity(false);
 
-            ( ( IMemento )target ).Memento.Should().Be.Null();
-            ( ( IMemento )target ).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
         }
 
         [TestMethod]
         public void entityMemento_ctor_memento_registerAsTransient_false_set_default_values()
         {
             var expected = new ChangeTrackingService();
-            var target = this.CreateMock( expected, false );
+            var target = new FakeMementoEntity(expected, false);
 
-            ( ( IMemento )target ).Memento.Should().Be.EqualTo( expected );
-            ( ( IMemento )target ).Memento.Should().Be.EqualTo( expected );
+            ((IMemento)target).Memento.Should().Be.EqualTo(expected);
+            ((IMemento)target).Memento.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
         public void entityMemento_ctor_memento_registerAsTransient_true_set_default_values()
         {
             var expected = new ChangeTrackingService();
-            var target = this.CreateMock( expected, true );
+            var target = new FakeMementoEntity(expected, true);
 
-            ( ( IMemento )target ).Memento.Should().Be.EqualTo( expected );
-            ( ( IMemento )target ).Memento.Should().Be.EqualTo( expected );
+            ((IMemento)target).Memento.Should().Be.EqualTo(expected);
+            ((IMemento)target).Memento.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
         public void entityMemento_ctor_requesting_transient_registration_successfully_register_entity_as_transient()
         {
             EntityTrackingStates expected = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove;
-            using( ChangeTrackingService svc = new ChangeTrackingService() )
+            using (ChangeTrackingService svc = new ChangeTrackingService())
             {
-                var target = this.CreateMock( true );
-                ( ( IMemento )target ).Memento = svc;
+                var target = new FakeMementoEntity(true);
+                ((IMemento)target).Memento = svc;
 
-                EntityTrackingStates actual = svc.GetEntityState( target );
+                EntityTrackingStates actual = svc.GetEntityState(target);
 
-                actual.Should().Be.EqualTo( expected );
+                actual.Should().Be.EqualTo(expected);
             }
         }
 
@@ -126,37 +120,37 @@ namespace Radical.Tests.Model.Entity
         public void entityMemento_ctor_requesting_transient_registration_to_suspended_memento_do_not_register_entity_as_transient()
         {
             EntityTrackingStates expected = EntityTrackingStates.None;
-            using( ChangeTrackingService svc = new ChangeTrackingService() )
+            using (ChangeTrackingService svc = new ChangeTrackingService())
             {
                 svc.Suspend();
 
-                var target = this.CreateMock( true );
-                ( ( IMemento )target ).Memento = svc;
+                var target = new FakeMementoEntity(true);
+                ((IMemento)target).Memento = svc;
 
-                EntityTrackingStates actual = svc.GetEntityState( target );
+                EntityTrackingStates actual = svc.GetEntityState(target);
 
-                actual.Should().Be.EqualTo( expected );
+                actual.Should().Be.EqualTo(expected);
             }
         }
 
         [TestMethod]
         public void entityMemento_ctor_requesting_transient_registration_without_memento_do_not_fail()
         {
-            var target = this.CreateMock( true );
+            var target = new FakeMementoEntity(true);
         }
 
         [TestMethod]
         public void entityMemento_ctor_requesting_transient_registration_using_base_iMemento_successfully_register_entity_as_transient()
         {
             EntityTrackingStates expected = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove;
-            using( ChangeTrackingService svc = new ChangeTrackingService() )
+            using (ChangeTrackingService svc = new ChangeTrackingService())
             {
-                var target = this.CreateMock( true );
-                ( ( IMemento )target ).Memento = svc;
+                var target = new FakeMementoEntity(true);
+                ((IMemento)target).Memento = svc;
 
-                EntityTrackingStates actual = svc.GetEntityState( target );
+                EntityTrackingStates actual = svc.GetEntityState(target);
 
-                actual.Should().Be.EqualTo( expected );
+                actual.Should().Be.EqualTo(expected);
             }
         }
 
@@ -164,16 +158,16 @@ namespace Radical.Tests.Model.Entity
         public void entityMemento_ctor_requesting_transient_registration_using_base_iMemento_to_suspended_memento_do_not_register_entity_as_transient()
         {
             EntityTrackingStates expected = EntityTrackingStates.None;
-            using( var svc = new ChangeTrackingService() )
+            using (var svc = new ChangeTrackingService())
             {
                 svc.Suspend();
 
-                var target = this.CreateMock( true );
-                ( ( IMemento )target ).Memento = svc;
+                var target = new FakeMementoEntity(true);
+                ((IMemento)target).Memento = svc;
 
-                EntityTrackingStates actual = svc.GetEntityState( target );
+                EntityTrackingStates actual = svc.GetEntityState(target);
 
-                actual.Should().Be.EqualTo( expected );
+                actual.Should().Be.EqualTo(expected);
             }
         }
 
@@ -182,11 +176,11 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = new ChangeTrackingService();
 
-            var target = (MementoEntity)this.CreateMock();
-            ( ( IMemento )target ).Memento = expected;
-            var actual = ( ( IMemento )target ).Memento;
+            var target = new FakeMementoEntity();
+            ((IMemento)target).Memento = expected;
+            var actual = ((IMemento)target).Memento;
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
@@ -194,29 +188,29 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = new ChangeTrackingService();
 
-            var target = this.CreateMock();
-            ( ( IMemento )target ).Memento = expected;
-            var actual = ( ( IMemento )target ).Memento;
+            var target = new FakeMementoEntity();
+            ((IMemento)target).Memento = expected;
+            var actual = ((IMemento)target).Memento;
 
-            actual.Should().Be.EqualTo( expected );
+            actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
         public void entityMemento_memento_can_be_set_to_null()
         {
-            var target = this.CreateMock( new ChangeTrackingService() );
-            ( ( IMemento )target ).Memento = null;
+            var target = new FakeMementoEntity(new ChangeTrackingService());
+            ((IMemento)target).Memento = null;
 
-            ( ( IMemento )target ).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
         }
 
         [TestMethod]
         public void entityMemento_memento_using_base_iMemento_can_be_set_to_null()
         {
-            var target = this.CreateMock( new ChangeTrackingService() );
-            ( ( IMemento )target ).Memento = null;
+            var target = new FakeMementoEntity(new ChangeTrackingService());
+            ((IMemento)target).Memento = null;
 
-            ( ( IMemento )target ).Memento.Should().Be.Null();
+            ((IMemento)target).Memento.Should().Be.Null();
         }
     }
 }

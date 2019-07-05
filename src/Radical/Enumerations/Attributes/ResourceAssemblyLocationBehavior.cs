@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Radical
+﻿namespace Radical
 {
     /// <summary>
     /// Determines how the assembly is located by the resource manager.
@@ -24,7 +19,7 @@ namespace Radical
         /// Use the calling assembly.
         /// </summary>
         UseCallingAssembly,
-        
+
         /// <summary>
         /// Use the entry assembly.
         /// </summary>

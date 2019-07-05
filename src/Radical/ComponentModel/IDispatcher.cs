@@ -15,13 +15,13 @@ namespace Radical.ComponentModel
         /// The delegate arguments, or null if 
         /// no arguments should be passed to the delegate.
         /// </param>
-        void Invoke( Delegate d, params Object[] args );
+        void Invoke(Delegate d, params Object[] args);
 
         /// <summary>
         /// Safely dispatches the specified action.
         /// </summary>
         /// <param name="action">The action.</param>
-        void Dispatch( Action action );
+        void Dispatch(Action action);
 
         /// <summary>
         /// Safely dispatches the given argument to the supplied action.
@@ -29,7 +29,7 @@ namespace Radical.ComponentModel
         /// <typeparam name="T">Argument type.</typeparam>
         /// <param name="arg">The argument.</param>
         /// <param name="action">The action to dispatch.</param>
-        void Dispatch<T>( T arg, Action<T> action );
+        void Dispatch<T>(T arg, Action<T> action);
 
         /// <summary>
         /// Safely dispatches the given arguments to the supplied action.
@@ -39,7 +39,7 @@ namespace Radical.ComponentModel
         /// <param name="arg1">The first argument.</param>
         /// <param name="arg2">The second argument.</param>
         /// <param name="action">The action to dispatch.</param>
-        void Dispatch<T1, T2>( T1 arg1, T2 arg2, Action<T1, T2> action );
+        void Dispatch<T1, T2>(T1 arg1, T2 arg2, Action<T1, T2> action);
 
 
         /// <summary>
@@ -48,13 +48,13 @@ namespace Radical.ComponentModel
         /// <typeparam name="TResult">The type of the Func result.</typeparam>
         /// <param name="func">The Func to dispatch.</param>
         /// <returns>The result of Func invocation.</returns>
-        TResult Dispatch<TResult>( Func<TResult> func );
+        TResult Dispatch<TResult>(Func<TResult> func);
 
 
         /// <summary>
         /// Gets a value indicating whether the caller can safely call a target method without using this dispatcher.
         /// </summary>
         /// <value><c>true</c> if the call is safe; otherwise, <c>false</c>.</value>
-        Boolean IsSafe { get; }
+        bool IsSafe { get; }
     }
 }

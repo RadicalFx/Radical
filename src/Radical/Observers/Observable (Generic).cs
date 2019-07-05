@@ -19,9 +19,9 @@ namespace Radical
         /// </summary>
         protected virtual void OnPropertyChanged()
         {
-            if( this.PropertyChanged != null )
+            if (this.PropertyChanged != null)
             {
-                this.PropertyChanged( this, new PropertyChangedEventArgs( "Value" ) );
+                this.PropertyChanged(this, new PropertyChangedEventArgs("Value"));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Radical
         /// Initializes a new instance of the <see cref="Observable&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Observable( T value )
+        public Observable(T value)
         {
             this._value = value;
         }
@@ -53,7 +53,7 @@ namespace Radical
             get { return this._value; }
             set
             {
-                if( !Object.Equals( value, this.Value ) )
+                if (!Object.Equals(value, this.Value))
                 {
                     this._value = value;
                     this.OnPropertyChanged();
@@ -66,7 +66,7 @@ namespace Radical
         /// </summary>
         /// <param name="val">The source value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator T( Observable<T> val )
+        public static implicit operator T(Observable<T> val)
         {
             return val.Value;
         }

@@ -18,14 +18,14 @@
         /// Gets the changed entities holded by this IChange instance.
         /// </summary>
         /// <returns>A list of changed entities.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate" )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         IEnumerable<Object> GetChangedEntities();
 
         /// <summary>
         /// Commits this change.
         /// </summary>
         /// <param name="reason">The reason of the commit.</param>
-        void Commit( CommitReason reason );
+        void Commit(CommitReason reason);
 
         /// <summary>
         /// Occurs when this IChange has been committed.
@@ -36,7 +36,7 @@
         /// Rejects this change.
         /// </summary>
         /// <param name="reason">The reason of the reject.</param>
-        void Reject( RejectReason reason );
+        void Reject(RejectReason reason);
 
         /// <summary>
         /// Occurs when this IChange has been rejected.
@@ -49,19 +49,19 @@
         /// <value>
         ///     <c>true</c> if this instance supports commit; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsCommitSupported { get; }
+        bool IsCommitSupported { get; }
 
         /// <summary>
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        String Description { get; }
+        string Description { get; }
 
         /// <summary>
         /// Gets the advised action for this IChange.
         /// </summary>
         /// <value>The advised action.</value>
-        ProposedActions GetAdvisedAction( Object changedItem );
+        ProposedActions GetAdvisedAction(Object changedItem);
 
         /// <summary>
         /// Clones this IChange instance.

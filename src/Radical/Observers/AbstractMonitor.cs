@@ -1,11 +1,10 @@
-﻿using System;
-using Radical.ComponentModel;
-using Radical.Validation;
-using System.Reflection;
-using System.ComponentModel;
-using Radical.Reflection;
-using System.Diagnostics;
+﻿using Radical.ComponentModel;
 using Radical.Diagnostics;
+using Radical.Reflection;
+using Radical.Validation;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Radical.Observers
 {
@@ -155,7 +154,7 @@ namespace Radical.Observers
             this.StopMonitoring(false);
         }
 
-        void StopMonitoring(Boolean targetDisposed)
+        void StopMonitoring(bool targetDisposed)
         {
             this.OnStopMonitoring(targetDisposed);
 
@@ -178,6 +177,6 @@ namespace Radical.Observers
         /// Called in order to allow inheritors to stop the monitoring operations.
         /// </summary>
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
-        protected abstract void OnStopMonitoring(Boolean targetDisposed);
+        protected abstract void OnStopMonitoring(bool targetDisposed);
     }
 }

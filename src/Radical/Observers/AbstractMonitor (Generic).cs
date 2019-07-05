@@ -12,8 +12,8 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="AbstractMonitor&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected AbstractMonitor( T source )
-            : base( source )
+        protected AbstractMonitor(T source)
+            : base(source)
         {
 
         }
@@ -23,10 +23,10 @@ namespace Radical.Observers
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="dispatcher">The dispatcher.</param>
-        protected AbstractMonitor( T source, IDispatcher dispatcher )
-            : base( source, dispatcher )
+        protected AbstractMonitor(T source, IDispatcher dispatcher)
+            : base(source, dispatcher)
         {
-            
+
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="AbstractMonitor&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="dispatcher">The dispatcher.</param>
-        protected AbstractMonitor( IDispatcher dispatcher )
-            : base( dispatcher )
+        protected AbstractMonitor(IDispatcher dispatcher)
+            : base(dispatcher)
         {
 
         }
@@ -54,7 +54,7 @@ namespace Radical.Observers
         /// <value>The monitored source.</value>
         public T Source
         {
-            get { return ( T )this.WeakSource.Target; }
+            get { return (T)this.WeakSource.Target; }
         }
     }
 }

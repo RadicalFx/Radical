@@ -28,7 +28,7 @@
         /// Gets a value indicating whether this instance is capable of creating a new instance of the managed type T.
         /// </summary>
         /// <value><c>true</c> if this.instace allo the creation of new items; otherwise, <c>false</c>.</value>
-        Boolean AllowNew { get; }
+        bool AllowNew { get; }
 
 
         /// <summary>
@@ -36,7 +36,7 @@
         /// </summary>
         /// <value>The default view.</value>
         IEntityView<T> DefaultView { get; }
-        
+
         /// <summary>
         /// Creates a new view.
         /// </summary>
@@ -53,7 +53,7 @@
         /// <param name="newIndex">The new index.</param>
         /// <exception cref="ArgumentOutOfRangeException">The supplied index (<paramref name="oldIndex" /> or <paramref name="newIndex" />)
         /// is outside the bounds of the collection.</exception>
-        void Move( Int32 oldIndex, Int32 newIndex );
+        void Move(int oldIndex, int newIndex);
 
         /// <summary>
         /// Moves the specified item to a new position, identified by the <paramref name="newIndex"/> 
@@ -65,7 +65,7 @@
         /// <exception cref="ArgumentOutOfRangeException">The supplied index (<paramref name="newIndex"/>)
         /// is outside the bounds of the collection.</exception>
         /// <exception cref="ArgumentNullException">The supplied <paramref name="item"/> is a null reference.</exception>
-        void Move( T item, Int32 newIndex );
+        void Move(T item, int newIndex);
 
         /// <summary>
         /// Occurs when this collection changes.
@@ -76,7 +76,7 @@
         /// Signals that the initialization process is completed.
         /// </summary>
         /// <param name="notify">if set to <c>true</c> raises the <see cref="CollectionChanged"/> event.</param>
-        void EndInit( Boolean notify );
+        void EndInit(bool notify);
 
         /// <summary>
         /// Gets a value indicating whether this instance is loading data.
@@ -84,7 +84,7 @@
         /// <value>
         ///     <c>true</c> if this instance is loading data; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsInitializing { get; }
+        bool IsInitializing { get; }
 
         ///// <summary>
         ///// Sorts the items in this instance.
@@ -107,6 +107,6 @@
         /// Adds a range of items.
         /// </summary>
         /// <param name="list">The range of items ot add.</param>
-        void AddRange( IEnumerable<T> list );
+        void AddRange(IEnumerable<T> list);
     }
 }

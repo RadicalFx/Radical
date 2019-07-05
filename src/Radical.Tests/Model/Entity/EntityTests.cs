@@ -2,13 +2,11 @@
 
 namespace Radical.Tests.Model.Entity
 {
-    using Radical.Model;
+    using FakeItEasy;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.ComponentModel;
-    using Rhino.Mocks;
-    using Radical.ComponentModel.ChangeTracking;
-    using System.ComponentModel;
+    using Radical.Model;
     using System;
+    using System.ComponentModel;
     using System.Linq.Expressions;
 
     [TestClass()]
@@ -16,17 +14,17 @@ namespace Radical.Tests.Model.Entity
     {
         class TestMetadata<T> : PropertyMetadata<T>
         {
-            public TestMetadata( Object propertyOwner, String propertyName )
-                : base( propertyOwner, propertyName )
+            public TestMetadata(Object propertyOwner, string propertyName)
+                : base(propertyOwner, propertyName)
             {
 
             }
 
-            public Boolean IsDisposed { get; private set; }
+            public bool IsDisposed { get; private set; }
 
-            protected override void Dispose( bool disposing )
+            protected override void Dispose(bool disposing)
             {
-                base.Dispose( disposing );
+                base.Dispose(disposing);
 
                 this.IsDisposed = true;
             }
@@ -34,44 +32,35 @@ namespace Radical.Tests.Model.Entity
 
         class SutEntity : Entity
         {
-            public TestMetadata<T> For<T>( Expression<Func<T>> property )
+            public TestMetadata<T> For<T>(Expression<Func<T>> property)
             {
-                return ( TestMetadata<T> )this.GetPropertyMetadata<T>( property );
+                return (TestMetadata<T>)this.GetPropertyMetadata<T>(property);
             }
 
-            protected override PropertyMetadata<T> GetDefaultMetadata<T>( string propertyName )
+            protected override PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
             {
-                return new TestMetadata<T>( this, propertyName );
+                return new TestMetadata<T>(this, propertyName);
             }
 
-            public String MyProperty
+            public string MyProperty
             {
-                get { return this.GetPropertyValue( () => this.MyProperty ); }
-                set { this.SetPropertyValue( () => this.MyProperty, value ); }
+                get { return this.GetPropertyValue(() => this.MyProperty); }
+                set { this.SetPropertyValue(() => this.MyProperty, value); }
             }
-        }
-
-        protected virtual Entity CreateMock()
-        {
-            MockRepository mocks = new MockRepository();
-            var entity = mocks.PartialMock<Entity>();
-            entity.Replay();
-
-            return entity;
         }
 
         [TestMethod]
         public void entity_propertyChanged_subscription_should_not_fail()
         {
-            var target = this.CreateMock();
-            target.PropertyChanged += ( s, e ) => { };
+            var target = A.Fake<Entity>();
+            target.PropertyChanged += (s, e) => { };
         }
 
         [TestMethod]
         public void entity_propertyChanged_unsubscription_should_not_fail()
         {
-            PropertyChangedEventHandler h = ( s, e ) => { };
-            var target = this.CreateMock();
+            PropertyChangedEventHandler h = (s, e) => { };
+            var target = A.Fake<Entity>();
             target.PropertyChanged += h;
             target.PropertyChanged -= h;
         }
@@ -79,7 +68,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_dispose_normal_should_not_fail()
         {
-            using( var target = this.CreateMock() )
+            using (var target = A.Fake<Entity>())
             {
 
             }
@@ -88,7 +77,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_dispose_multiple_calls_should_not_fail()
         {
-            using( var target = this.CreateMock() )
+            using (var target = A.Fake<Entity>())
             {
                 target.Dispose();
                 target.Dispose();
@@ -98,16 +87,16 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_dispose_using_metadata_should_not_fail()
         {
-            TestMetadata<String> metadata;
+            TestMetadata<string> metadata;
 
-            using( var target = new SutEntity() )
+            using (var target = new SutEntity())
             {
                 target.MyProperty = "Sample";
 
-                metadata = target.For( () => target.MyProperty );
+                metadata = target.For(() => target.MyProperty);
             }
 
-            Assert.IsTrue( metadata.IsDisposed );
+            Assert.IsTrue(metadata.IsDisposed);
         }
 
         [TestMethod]
@@ -115,17 +104,17 @@ namespace Radical.Tests.Model.Entity
         {
             var target = new SutEntity();
             target.MyProperty = "Sample";
-            var metadata = target.For( () => target.MyProperty );
+            var metadata = target.For(() => target.MyProperty);
 
-            Assert.IsFalse( metadata.IsDisposed );
+            Assert.IsFalse(metadata.IsDisposed);
         }
 
         [TestMethod]
         public void entity_dispose_with_events_subscribed_should_dispose_eventHandlerList()
         {
-            using( var target = this.CreateMock() )
+            using (var target = A.Fake<Entity>())
             {
-                target.PropertyChanged += ( s, e ) => { };
+                target.PropertyChanged += (s, e) => { };
             }
         }
     }

@@ -6,10 +6,10 @@ namespace Radical.Tests.ChangeTracking
     using Radical.ChangeTracking.Specialized;
     using Radical.ComponentModel.ChangeTracking;
 
-    class HackedPropertyValueChange : PropertyValueChange<String>
+    class HackedPropertyValueChange : PropertyValueChange<string>
     {
-        public HackedPropertyValueChange( Object owner, String value, RejectCallback<String> rc, CommitCallback<String> cc )
-            : base( owner, "property-name", value, rc, cc, String.Empty )
+        public HackedPropertyValueChange(Object owner, string value, RejectCallback<string> rc, CommitCallback<string> cc)
+            : base(owner, "property-name", value, rc, cc, string.Empty)
         {
 
         }
@@ -26,14 +26,14 @@ namespace Radical.Tests.ChangeTracking
             set;
         }
 
-        protected override void OnCommitted( CommittedEventArgs args )
+        protected override void OnCommitted(CommittedEventArgs args)
         {
-            base.OnCommitted( new CommittedEventArgs( this.HackedCommitReason ) );
+            base.OnCommitted(new CommittedEventArgs(this.HackedCommitReason));
         }
 
-        protected override void OnRejected( RejectedEventArgs args )
+        protected override void OnRejected(RejectedEventArgs args)
         {
-            base.OnRejected( new RejectedEventArgs( this.HackedRejectReason ) );
+            base.OnRejected(new RejectedEventArgs(this.HackedRejectReason));
         }
     }
 }

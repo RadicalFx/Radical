@@ -2,7 +2,7 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Rhino.Mocks;
+    using FakeItEasy;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using SharpTestsEx;
@@ -11,28 +11,28 @@
     public class AdvisoryTests
     {
         [TestMethod]
-        [TestCategory( "ChangeTracking" )]
+        [TestCategory("ChangeTracking")]
         public void advisory_ctor()
         {
-            var expected = new IAdvisedAction[] 
+            var expected = new IAdvisedAction[]
             {
-                MockRepository.GenerateStub<IAdvisedAction>(),
-                MockRepository.GenerateStub<IAdvisedAction>(),
-                MockRepository.GenerateStub<IAdvisedAction>()
+                A.Fake<IAdvisedAction>(),
+                A.Fake<IAdvisedAction>(),
+                A.Fake<IAdvisedAction>()
             };
 
-            var actual = new Advisory( expected );
+            var actual = new Advisory(expected);
 
-            actual.Count.Should().Be.EqualTo( 3 );
-            actual.Should().Have.SameSequenceAs( expected );
+            actual.Count.Should().Be.EqualTo(3);
+            actual.Should().Have.SameSequenceAs(expected);
         }
 
         [TestMethod]
-        [ExpectedException( typeof( ArgumentNullException ) )]
-        [TestCategory( "ChangeTracking" )]
+        [ExpectedException(typeof(ArgumentNullException))]
+        [TestCategory("ChangeTracking")]
         public void advisory_ctor_null_reference()
         {
-            var actual = new Advisory( null );
+            var actual = new Advisory(null);
         }
     }
 }

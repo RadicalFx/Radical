@@ -1,21 +1,21 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using Radical.ComponentModel.ChangeTracking;
 using Radical.Linq;
 using Radical.Reflection;
-using Radical.ComponentModel.ChangeTracking;
+using System;
+using System.Linq.Expressions;
 
 namespace Radical.Model
 {
     public static class MementoPropertyMetadata
     {
-        public static MementoPropertyMetadata<T> Create<T>( Object propertyOwner, Expression<Func<T>> property )
+        public static MementoPropertyMetadata<T> Create<T>(Object propertyOwner, Expression<Func<T>> property)
         {
-            return new MementoPropertyMetadata<T>( propertyOwner, property );
+            return new MementoPropertyMetadata<T>(propertyOwner, property);
         }
 
-        public static MementoPropertyMetadata<T> Create<T>( Object propertyOwner, String propertyName )
+        public static MementoPropertyMetadata<T> Create<T>(Object propertyOwner, string propertyName)
         {
-            return new MementoPropertyMetadata<T>( propertyOwner, propertyName );
+            return new MementoPropertyMetadata<T>(propertyOwner, propertyName);
         }
     }
 
@@ -26,10 +26,10 @@ namespace Radical.Model
     public class MementoPropertyMetadata<T> : PropertyMetadata<T>,
         IMementoPropertyMetadata
     {
-        public MementoPropertyMetadata( Object propertyOwner, String propertyName )
-            : base( propertyOwner, propertyName )
+        public MementoPropertyMetadata(Object propertyOwner, string propertyName)
+            : base(propertyOwner, propertyName)
         {
-            if ( this.Property.IsAttributeDefined<MementoPropertyMetadataAttribute>() )
+            if (this.Property.IsAttributeDefined<MementoPropertyMetadataAttribute>())
             {
                 var attribute = this.Property.GetAttribute<MementoPropertyMetadataAttribute>();
                 this.TrackChanges = attribute.TrackChanges;
@@ -40,13 +40,13 @@ namespace Radical.Model
             }
         }
 
-        public MementoPropertyMetadata( Object propertyOwner, Expression<Func<T>> property )
-            : this( propertyOwner, property.GetMemberName() )
+        public MementoPropertyMetadata(Object propertyOwner, Expression<Func<T>> property)
+            : this(propertyOwner, property.GetMemberName())
         {
 
         }
 
-        public Boolean TrackChanges { get; set; }
+        public bool TrackChanges { get; set; }
 
         public MementoPropertyMetadata<T> DisableChangesTracking()
         {
@@ -61,7 +61,7 @@ namespace Radical.Model
         }
     }
 
-    [AttributeUsage( AttributeTargets.Property )]
+    [AttributeUsage(AttributeTargets.Property)]
     public class MementoPropertyMetadataAttribute : PropertyMetadataAttribute
     {
         public MementoPropertyMetadataAttribute()
@@ -69,6 +69,6 @@ namespace Radical.Model
             this.TrackChanges = true;
         }
 
-        public Boolean TrackChanges { get; set; }
+        public bool TrackChanges { get; set; }
     }
 }

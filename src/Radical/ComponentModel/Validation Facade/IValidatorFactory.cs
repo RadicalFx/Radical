@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Radical.ComponentModel.Validation
+﻿namespace Radical.ComponentModel.Validation
 {
     /// <summary>
     /// Identifies a factory whose capability is to 
@@ -23,6 +21,6 @@ namespace Radical.ComponentModel.Validation
         /// <param name="ruleSet">The rule set to pass to the 
         /// newly created validator.</param>
         /// <returns>An instance of the requested validator.</returns>
-        IValidator<T> CreateValidator<T>( String ruleSet );
+        IValidator<T> CreateValidator<T>(string ruleSet);
     }
 }

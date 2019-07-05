@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.ComponentModel.ChangeTracking;
+﻿using Radical.ComponentModel.ChangeTracking;
+using System;
 
 namespace Radical.ChangeTracking
 {
     sealed class AtomicOperation : IAtomicOperation
     {
-        Boolean isCompleted = false;
+        bool isCompleted = false;
 
-        void OnCompleted( AtomicChange change )
+        void OnCompleted(AtomicChange change)
         {
-            if( this.completed != null )
+            if (this.completed != null)
             {
-                this.completed( change );
+                this.completed(change);
             }
 
             this.isCompleted = true;
@@ -22,7 +19,7 @@ namespace Radical.ChangeTracking
 
         void OnDisposed()
         {
-            if( !this.isCompleted && this.disposed != null )
+            if (!this.isCompleted && this.disposed != null)
             {
                 this.disposed();
             }
@@ -33,32 +30,32 @@ namespace Radical.ChangeTracking
 
         AtomicChange change = new AtomicChange();
 
-        public AtomicOperation( Action<AtomicChange> completed, Action disposed )
+        public AtomicOperation(Action<AtomicChange> completed, Action disposed)
         {
             this.completed = completed;
             this.disposed = disposed;
         }
 
-        public void Add( IChange change, AddChangeBehavior behavior )
+        public void Add(IChange change, AddChangeBehavior behavior)
         {
-            this.change.Add( change, behavior );
+            this.change.Add(change, behavior);
         }
 
-        public void RegisterTransient( Object entity, Boolean autoRemove )
+        public void RegisterTransient(Object entity, bool autoRemove)
         {
-            this.change.RegisterTransient( entity, autoRemove );
+            this.change.RegisterTransient(entity, autoRemove);
         }
 
         public void Complete()
         {
-            this.OnCompleted( this.change );
+            this.OnCompleted(this.change);
         }
 
         public void Dispose()
         {
-            if ( !this.isCompleted )
+            if (!this.isCompleted)
             {
-                this.change.Reject( RejectReason.RejectChanges );
+                this.change.Reject(RejectReason.RejectChanges);
             }
 
             //clear changes list if any

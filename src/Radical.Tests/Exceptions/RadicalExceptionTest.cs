@@ -61,31 +61,31 @@ namespace Radical.Tests.Exceptions
             return new RadicalException();
         }
 
-        protected virtual Exception CreateMock( String message )
+        protected virtual Exception CreateMock(string message)
         {
-            return new RadicalException( message );
+            return new RadicalException(message);
         }
 
-        protected virtual Exception CreateMock( String message, Exception innerException )
+        protected virtual Exception CreateMock(string message, Exception innerException)
         {
-            return new RadicalException( message, innerException );
+            return new RadicalException(message, innerException);
         }
 
-        protected Exception Process( Exception source )
+        protected Exception Process(Exception source)
         {
-            using( MemoryStream ms = new MemoryStream() )
+            using (MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize( ms, source );
+                formatter.Serialize(ms, source);
 
                 ms.Position = 0;
 
-                Object resVal = formatter.Deserialize( ms );
+                Object resVal = formatter.Deserialize(ms);
                 return resVal as Exception;
             }
         }
 
-        protected virtual void AssertAreEqual( Exception ex1, Exception ex2 )
+        protected virtual void AssertAreEqual(Exception ex1, Exception ex2)
         {
 
         }
@@ -94,38 +94,42 @@ namespace Radical.Tests.Exceptions
         public void ctor_default()
         {
             Exception target = this.CreateMock();
-            Assert.IsNotNull( target );
+            Assert.IsNotNull(target);
         }
+
+#if !NET_CORE
 
         [TestMethod()]
         public void serialization()
         {
             Exception expected = this.CreateMock();
-            Exception target = this.Process( expected );
+            Exception target = this.Process(expected);
 
-            AssertAreEqual( expected, target );
+            AssertAreEqual(expected, target);
         }
+
+#endif
 
         [TestMethod()]
         public void ctor_string()
         {
-            String expectedMessage = "message";
-            Exception target = this.CreateMock( expectedMessage );
+            string expectedMessage = "message";
+            Exception target = this.CreateMock(expectedMessage);
 
-            Assert.AreEqual<String>( expectedMessage, target.Message );
-            Assert.IsNull( target.InnerException );
+            Assert.AreEqual<string>(expectedMessage, target.Message);
+            Assert.IsNull(target.InnerException);
         }
 
         [TestMethod()]
         public void ctor_string_innerException()
         {
-            String expectedMessage = "message";
+            string expectedMessage = "message";
             Exception expectedInnerException = new StackOverflowException();
 
-            Exception target = this.CreateMock( expectedMessage, expectedInnerException );
+            Exception target = this.CreateMock(expectedMessage, expectedInnerException);
 
-            Assert.AreEqual<String>( expectedMessage, target.Message );
-            Assert.AreEqual<Exception>( expectedInnerException, target.InnerException );
+            Assert.AreEqual<string>(expectedMessage, target.Message);
+            Assert.AreEqual<Exception>(expectedInnerException, target.InnerException);
         }
     }
 }

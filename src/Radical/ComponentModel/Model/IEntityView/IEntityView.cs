@@ -8,11 +8,11 @@
     /// Extendes the System.ComponentModel.IBindingListView interface by providing
     /// advanced features.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix" )]
-    public interface IEntityView : 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public interface IEntityView :
         ISupportInitialize,
-        IBindingListView, 
-        ITypedList, 
+        IBindingListView,
+        ITypedList,
         INotifyPropertyChanged //, INotifyCollectionChanged
     {
         /// <summary>
@@ -25,7 +25,7 @@
         /// at the specified index.
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        void CancelNew( Int32 itemIndex );
+        void CancelNew(int itemIndex);
 
         /// <summary>
         /// Ends a pending AddNew operation.
@@ -36,7 +36,7 @@
         /// Ends a pending AddNew operation.
         /// </summary>
         /// <param name="itemIndex">Index of the item.</param>
-        void EndNew( Int32 itemIndex );
+        void EndNew(int itemIndex);
 
         /// <summary>
         /// Gets a value indicating whether this instance is adding a new item.
@@ -44,7 +44,7 @@
         /// <value>
         ///     <c>true</c> if this instance is adding a new item; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsAddingNew { get; }
+        bool IsAddingNew { get; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is array based.
@@ -53,7 +53,7 @@
         /// <value>
         ///     <c>true</c> if this instance is array based; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsArrayBased { get; }
+        bool IsArrayBased { get; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is currently filtered.
@@ -61,7 +61,7 @@
         /// <value>
         ///     <c>true</c> if this instance is currently filtered; otherwise, <c>false</c>.
         /// </value>
-        Boolean IsFiltered { get; }
+        bool IsFiltered { get; }
 
         /// <summary>
         /// Gets or sets the filter to be used to exclude items from the collection of items returned by the data source
@@ -94,15 +94,15 @@
         /// Gets a value indicating whether moving elements is allowed in this view.
         /// </summary>
         /// <value><c>true</c> if move is allowed; otherwise, <c>false</c>.</value>
-        Boolean AllowMove { get; }
+        bool AllowMove { get; }
 
         /// <summary>
         /// Moves the element at the specified source index to the specified new index.
         /// </summary>
         /// <param name="sourceIndex">Index of the source element to move.</param>
         /// <param name="newIndex">The destination index.</param>
-        void Move( Int32 sourceIndex, Int32 newIndex );
+        void Move(int sourceIndex, int newIndex);
 
-        void ApplySort( String sortDescriptions );
+        void ApplySort(string sortDescriptions);
     }
 }

@@ -18,12 +18,12 @@ namespace Radical.Tests.Extensions
         {
             None = 0,
 
-            [EnumItemDescription( "" )]
+            [EnumItemDescription("")]
             ValueWithAttribute = 1,
 
             ValueWithoutAttribute = 2,
 
-            [EnumItemDescription( "caption", "this is the description description", 0 )]
+            [EnumItemDescription("caption", "this is the description description", 0)]
             ValueWithDescription = 3,
         }
 
@@ -39,11 +39,11 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod()]
-        [ExpectedException( typeof( EnumValueOutOfRangeException ) )]
+        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         public void EnumInvalidValueValidation()
         {
-            TestEnum actual = ( TestEnum )( -1 );
-            EnumExtensions.EnsureIsDefined( actual );
+            TestEnum actual = (TestEnum)(-1);
+            EnumExtensions.EnsureIsDefined(actual);
         }
 
         [TestMethod()]
@@ -51,10 +51,10 @@ namespace Radical.Tests.Extensions
         {
             try
             {
-                TestEnum actual = ( TestEnum )( 0 );
-                EnumExtensions.EnsureIsDefined( actual );
+                TestEnum actual = (TestEnum)(0);
+                EnumExtensions.EnsureIsDefined(actual);
             }
-            catch( EnumValueOutOfRangeException )
+            catch (EnumValueOutOfRangeException)
             {
                 Assert.Fail();
             }
@@ -64,55 +64,55 @@ namespace Radical.Tests.Extensions
         public void EnumExtension_IsDescriptionAttributeDefined()
         {
             TestEnum val = TestEnum.ValueWithAttribute;
-            Boolean actual = EnumExtensions.IsDescriptionAttributeDefined( val );
+            bool actual = EnumExtensions.IsDescriptionAttributeDefined(val);
 
-            Assert.IsTrue( actual );
+            Assert.IsTrue(actual);
         }
 
         [TestMethod()]
         public void EnumExtension_not_IsDescriptionAttributeDefined()
         {
             TestEnum val = TestEnum.ValueWithoutAttribute;
-            Boolean actual = EnumExtensions.IsDescriptionAttributeDefined( val );
+            bool actual = EnumExtensions.IsDescriptionAttributeDefined(val);
 
-            Assert.IsFalse( actual );
+            Assert.IsFalse(actual);
         }
 
         [TestMethod()]
         public void EnumExtension_GetDescriptionAttribute()
         {
             TestEnum val = TestEnum.ValueWithAttribute;
-            EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute( val );
+            EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute(val);
 
-            Assert.IsNotNull( actual );
+            Assert.IsNotNull(actual);
         }
 
         [TestMethod()]
-        [ExpectedException( typeof( ArgumentException ) )]
+        [ExpectedException(typeof(ArgumentException))]
         public void EnumExtension_GetDescriptionAttribute_failure()
         {
             TestEnum val = TestEnum.ValueWithoutAttribute;
-            EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute( val );
+            EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute(val);
         }
 
         [TestMethod()]
         public void EnumExtension_GetCaption()
         {
             TestEnum val = TestEnum.ValueWithDescription;
-            String actual = EnumExtensions.GetCaption( val );
-            String expected = "caption";
+            string actual = EnumExtensions.GetCaption(val);
+            string expected = "caption";
 
-            Assert.AreEqual<String>( expected, actual );
+            Assert.AreEqual<string>(expected, actual);
         }
 
         [TestMethod]
         public void enumExtension_getDescription_normal_should_work_as_expected()
         {
             TestEnum val = TestEnum.ValueWithDescription;
-            String actual = EnumExtensions.GetDescription( val );
-            String expected = "this is the description description";
+            string actual = EnumExtensions.GetDescription(val);
+            string expected = "this is the description description";
 
-            Assert.AreEqual<String>( expected, actual );
+            Assert.AreEqual<string>(expected, actual);
         }
 
         [TestMethod]
@@ -127,7 +127,7 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void enumExtensions_isDefined_using_non_defined_value_should_return_false()
         {
-            var target = ( TestEnum )100;
+            var target = (TestEnum)100;
             var actual = target.IsDefined();
 
             actual.Should().Be.False();

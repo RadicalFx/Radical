@@ -11,7 +11,7 @@
         /// Initializes a new instance of the <see cref="RejectedEventArgs"/> class.
         /// </summary>
         /// <param name="reason">The reason.</param>
-        public RejectedEventArgs( RejectReason reason )
+        public RejectedEventArgs(RejectReason reason)
         {
             this.Reason = reason;
         }

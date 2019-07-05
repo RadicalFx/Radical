@@ -1,6 +1,5 @@
-﻿using System;
-using Radical.Validation;
-using Radical.Conversions;
+﻿using Radical.Conversions;
+using System;
 
 namespace Radical
 {
@@ -20,7 +19,7 @@ namespace Radical
         /// <param name="obj">The current object.</param>
         /// <param name="interceptor">The delagate used to intercept the exposition.</param>
         /// <returns>The originally exposed object.</returns>
-        public static TSource InterceptAs<TSource, TDestination>( this TSource obj, Action<TDestination> interceptor )
+        public static TSource InterceptAs<TSource, TDestination>(this TSource obj, Action<TDestination> interceptor)
             where TSource : class
             where TDestination : class
         {
@@ -28,7 +27,7 @@ namespace Radical
             (
                 d =>
                 {
-                    interceptor( d );
+                    interceptor(d);
                 },
 
                 () =>
@@ -49,9 +48,9 @@ namespace Radical
         /// <param name="condition">The condition to evaluate.</param>
         /// <param name="thenAction">The action if the condition evaluates to true.</param>
         /// <returns>The intercepted object.</returns>
-        public static T If<T>( this T obj, Predicate<T> condition, Action<T> thenAction ) where T : class
+        public static T If<T>(this T obj, Predicate<T> condition, Action<T> thenAction) where T : class
         {
-            return If( obj, condition, thenAction, o => { } );
+            return If(obj, condition, thenAction, o => { });
         }
 
         /// <summary>
@@ -63,15 +62,15 @@ namespace Radical
         /// <param name="thenAction">The action if the condition evaluates to true.</param>
         /// <param name="elseAction">The action if the condition evaluates to false.</param>
         /// <returns>The intercepted object.</returns>
-        public static T If<T>( this T obj, Predicate<T> condition, Action<T> thenAction, Action<T> elseAction ) where T : class
+        public static T If<T>(this T obj, Predicate<T> condition, Action<T> thenAction, Action<T> elseAction) where T : class
         {
-            if( condition( obj ) )
+            if (condition(obj))
             {
-                thenAction( obj );
+                thenAction(obj);
             }
             else
             {
-                elseAction( obj );
+                elseAction(obj);
             }
 
             return obj;
@@ -82,18 +81,18 @@ namespace Radical
 #pragma warning disable 1591
 
 
-        public static TInput If<TInput>( this TInput o, Func<TInput, bool> evaluator )
+        public static TInput If<TInput>(this TInput o, Func<TInput, bool> evaluator)
             where TInput : class
         {
-            if( o == null ) return null;
-            return evaluator( o ) ? o : null;
+            if (o == null) return null;
+            return evaluator(o) ? o : null;
         }
 
-        public static TInput Unless<TInput>( this TInput o, Func<TInput, bool> evaluator )
+        public static TInput Unless<TInput>(this TInput o, Func<TInput, bool> evaluator)
           where TInput : class
         {
-            if( o == null ) return null;
-            return evaluator( o ) ? null : o;
+            if (o == null) return null;
+            return evaluator(o) ? null : o;
         }
 
 
@@ -105,39 +104,39 @@ namespace Radical
 
 
 
-        public static TResult With<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator )
+        public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator)
         {
-            return input.Return( evaluator, () => default( TResult ), i => Object.ReferenceEquals( i, null ) );
+            return input.Return(evaluator, () => default(TResult), i => Object.ReferenceEquals(i, null));
         }
 
-        public static TResult With<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput )
+        public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput)
         {
-            return input.Return( evaluator, () => defaultValueOnNullInput, i => Object.ReferenceEquals( i, null ) );
+            return input.Return(evaluator, () => defaultValueOnNullInput, i => Object.ReferenceEquals(i, null));
         }
 
-        public static TResult With<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput )
+        public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput)
         {
-            return input.Return( evaluator, defaultValueOnNullInput, i => Object.ReferenceEquals( i, null ) );
+            return input.Return(evaluator, defaultValueOnNullInput, i => Object.ReferenceEquals(i, null));
         }
 
-        public static TResult With<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, Predicate<TInput> failureEvaluator, Func<TResult> failureValue )
+        public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Predicate<TInput> failureEvaluator, Func<TResult> failureValue)
         {
-            return input.Return( evaluator, failureValue, failureEvaluator );
+            return input.Return(evaluator, failureValue, failureEvaluator);
         }
 
-        public static TResult Return<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator )
+        public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator)
         {
-            return input.Return( evaluator, () => default( TResult ), obj => Object.ReferenceEquals( obj, null ) );
+            return input.Return(evaluator, () => default(TResult), obj => Object.ReferenceEquals(obj, null));
         }
 
-        public static TResult Return<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput )
+        public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput)
         {
-            return input.Return( evaluator, () => defaultValueOnNullInput, obj => Object.ReferenceEquals( obj, null ) );
+            return input.Return(evaluator, () => defaultValueOnNullInput, obj => Object.ReferenceEquals(obj, null));
         }
 
-        public static TResult Return<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, TResult failureValue, Predicate<TInput> failureEvaluator )
+        public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult failureValue, Predicate<TInput> failureEvaluator)
         {
-            return input.Return( evaluator, () => failureValue, failureEvaluator );
+            return input.Return(evaluator, () => failureValue, failureEvaluator);
         }
 
 #pragma warning restore 1591
@@ -154,9 +153,9 @@ namespace Radical
         /// <returns>
         /// The evaluated input value; otherwise, if the imput value reference equals null, returns the default value.
         /// </returns>
-        public static TResult Return<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput )
+        public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput)
         {
-            return input.Return( evaluator, defaultValueOnNullInput, obj => Object.ReferenceEquals( obj, null ) );
+            return input.Return(evaluator, defaultValueOnNullInput, obj => Object.ReferenceEquals(obj, null));
         }
 
         /// <summary>
@@ -171,14 +170,14 @@ namespace Radical
         /// <param name="failureValue">The failure value.</param>
         /// <param name="failureEvaluator">The failure evaluator.</param>
         /// <returns>The evaluated input value; otherwise, if the failure evaluator failes, return the failure value.</returns>
-        public static TResult Return<TInput, TResult>( this TInput input, Func<TInput, TResult> evaluator, Func<TResult> failureValue, Predicate<TInput> failureEvaluator )
+        public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> failureValue, Predicate<TInput> failureEvaluator)
         {
-            if( failureEvaluator( input ) )
+            if (failureEvaluator(input))
             {
                 return failureValue();
             }
 
-            return evaluator( input );
+            return evaluator(input);
         }
 
         /// <summary>
@@ -188,9 +187,9 @@ namespace Radical
         /// <param name="input">The input value.</param>
         /// <param name="action">The action to execute.</param>
         /// <returns>The input value.</returns>
-        public static TInput Do<TInput>( this TInput input, Action<TInput> action )
+        public static TInput Do<TInput>(this TInput input, Action<TInput> action)
         {
-            return input.Do( i => Object.ReferenceEquals( i, null ), action );
+            return input.Do(i => Object.ReferenceEquals(i, null), action);
         }
 
         /// <summary>
@@ -204,11 +203,11 @@ namespace Radical
         /// <returns>
         /// The input value.
         /// </returns>
-        public static TInput Do<TInput>( this TInput input, Predicate<TInput> failureEvaluator, Action<TInput> action )
+        public static TInput Do<TInput>(this TInput input, Predicate<TInput> failureEvaluator, Action<TInput> action)
         {
-            if( !failureEvaluator( input ) )
+            if (!failureEvaluator(input))
             {
-                action( input );
+                action(input);
             }
 
             return input;

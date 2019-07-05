@@ -9,6 +9,6 @@
     /// <typeparam name="T">The type of the collection item.</typeparam>
     public interface IReadOnlyCollection<T> : ICollection, IEnumerable, IEnumerable<T>
     {
-        
+
     }
 }

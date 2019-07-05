@@ -12,14 +12,14 @@ namespace Radical.Tests.Exceptions
             return new SuspendedChangeTrackingServiceException();
         }
 
-        protected override Exception CreateMock( String message )
+        protected override Exception CreateMock(string message)
         {
-            return new SuspendedChangeTrackingServiceException( message );
+            return new SuspendedChangeTrackingServiceException(message);
         }
 
-        protected override Exception CreateMock( String message, Exception innerException )
+        protected override Exception CreateMock(string message, Exception innerException)
         {
-            return new SuspendedChangeTrackingServiceException( message, innerException );
+            return new SuspendedChangeTrackingServiceException(message, innerException);
         }
     }
 }

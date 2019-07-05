@@ -1,35 +1,33 @@
 namespace Radical
 {
-    using System;
-    using System.Text.RegularExpressions;
-    using Radical.Validation;
     using Radical.ComponentModel;
-    using System.Linq;
+    using Radical.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
 
     public static class EntityViewExtensions
     {
-        public static IEnumerable<T> AsEntityItems<T>( this IEntityView<T> view )
+        public static IEnumerable<T> AsEntityItems<T>(this IEntityView<T> view)
             where T : class
         {
-            return view.Select( item => item.EntityItem ); ;
+            return view.Select(item => item.EntityItem); ;
         }
 
-        public static IEntityView<T> ApplySimpleSort<T>( this IEntityView<T> view, String property )
+        public static IEntityView<T> ApplySimpleSort<T>(this IEntityView<T> view, string property)
             where T : class
         {
-            Ensure.That( view ).Named( "view" ).IsNotNull();
+            Ensure.That(view).Named("view").IsNotNull();
 
             var actualDirection = view.SortDirection;
-            var actualProperty = view.SortProperty == null ? ( String )null : view.SortProperty.Name;
+            var actualProperty = view.SortProperty == null ? (string)null : view.SortProperty.Name;
 
-            if( property != null && property == actualProperty )
+            if (property != null && property == actualProperty)
             {
                 /*
                  * Dobbiamo invertire il sort attuale.
                  */
-                if( actualDirection == ListSortDirection.Ascending )
+                if (actualDirection == ListSortDirection.Ascending)
                 {
                     actualDirection = ListSortDirection.Descending;
                 }
@@ -38,8 +36,8 @@ namespace Radical
                     actualDirection = ListSortDirection.Ascending;
                 }
 
-                var lsd = new ListSortDescription( view.GetProperty( property ), actualDirection );
-                view.ApplySort( new ListSortDescriptionCollection( new[] { lsd } ) );
+                var lsd = new ListSortDescription(view.GetProperty(property), actualDirection);
+                view.ApplySort(new ListSortDescriptionCollection(new[] { lsd }));
             }
             else
             {
@@ -47,7 +45,7 @@ namespace Radical
                  * Arriviamo qui se è un "nuovo" sort o se
                  * il sort è su null
                  */
-                view.ApplySort( property );
+                view.ApplySort(property);
             }
 
             return view;

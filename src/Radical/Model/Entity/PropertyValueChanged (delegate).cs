@@ -1,6 +1,6 @@
 ﻿namespace Radical.Model
 {
-    public delegate void PropertyValueChanged<T>( PropertyValueChangedArgs<T> e );
+    public delegate void PropertyValueChanged<T>(PropertyValueChangedArgs<T> e);
 
     public class PropertyValueChangedArgs<T>
     {
@@ -9,7 +9,7 @@
         /// </summary>
         /// <param name="newValue">The new value.</param>
         /// <param name="oldValue">The old value.</param>
-        public PropertyValueChangedArgs( T newValue, T oldValue )
+        public PropertyValueChangedArgs(T newValue, T oldValue)
         {
             this.NewValue = newValue;
             this.OldValue = oldValue;

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Radical.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using Radical.Linq;
 using System.Reflection;
 
 namespace Radical.Helpers
@@ -32,7 +30,7 @@ namespace Radical.Helpers
             /// </summary>
             /// <param name="propertyRef">The property ref.</param>
             /// <returns></returns>
-            public String NameOf( Expression<Func<T, Object>> propertyRef )
+            public string NameOf(Expression<Func<T, Object>> propertyRef)
             {
                 return propertyRef.GetMemberName();
             }
@@ -42,9 +40,9 @@ namespace Radical.Helpers
             /// </summary>
             /// <param name="propertyRef">The property expression.</param>
             /// <returns>The property info.</returns>
-            public PropertyInfo GetProperty( Expression<Func<T, Object>> propertyRef )
+            public PropertyInfo GetProperty(Expression<Func<T, Object>> propertyRef)
             {
-                return typeof( T ).GetProperty( propertyRef.GetMemberName() );
+                return typeof(T).GetProperty(propertyRef.GetMemberName());
             }
 
             /// <summary>
@@ -54,30 +52,30 @@ namespace Radical.Helpers
             /// <returns>
             /// The list of property info.
             /// </returns>
-            public IEnumerable<PropertyInfo> GetProperties( Expression<Func<T, Object>> propertyExpression )
+            public IEnumerable<PropertyInfo> GetProperties(Expression<Func<T, Object>> propertyExpression)
             {
-                return this.GetProperties( propertyExpression.Body );
+                return this.GetProperties(propertyExpression.Body);
             }
 
-            private IEnumerable<PropertyInfo> GetProperties( Expression expression )
+            private IEnumerable<PropertyInfo> GetProperties(Expression expression)
             {
                 var memberExpression = expression as MemberExpression;
-                if( memberExpression == null )
+                if (memberExpression == null)
                 {
                     yield break;
                 }
 
                 var property = memberExpression.Member as PropertyInfo;
-                if( property == null )
+                if (property == null)
                 {
-                    throw new NotSupportedException( "Expression is not a property accessor" );
+                    throw new NotSupportedException("Expression is not a property accessor");
                 }
 
-                foreach( var propertyInfo in GetProperties( memberExpression.Expression ) )
+                foreach (var propertyInfo in GetProperties(memberExpression.Expression))
                 {
                     yield return propertyInfo;
                 }
-                
+
                 yield return property;
             }
         }
@@ -99,7 +97,7 @@ namespace Radical.Helpers
         /// <typeparam name="T">The type of the instance holding the property.</typeparam>
         /// <param name="propertyRef">The property expressed as a Lambda Expression Function on the given instance type.</param>
         /// <returns>The name of the property.</returns>
-        public static String GetPropertyName<T>( Expression<Func<T, Object>> propertyRef )
+        public static string GetPropertyName<T>(Expression<Func<T, Object>> propertyRef)
         {
             return propertyRef.GetMemberName();
         }

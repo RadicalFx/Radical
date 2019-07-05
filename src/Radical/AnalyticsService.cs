@@ -7,7 +7,7 @@ namespace Radical
     {
         public interface IAnalyticsServices
         {
-            Boolean IsEnabled { get; set; }
+            bool IsEnabled { get; set; }
             void TrackUserActionAsync(Analytics.AnalyticsEvent action);
         }
     }
@@ -29,7 +29,7 @@ namespace Radical
 
             public DateTimeOffset ExecutedOn { get; set; }
 
-            public String Name { get; set; }
+            public string Name { get; set; }
 
             public IDictionary<string, object> Data { get; set; }
         }

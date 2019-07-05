@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Radical.Linq;
+using Radical.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using Radical.Linq;
-using Radical.Validation;
 
 namespace Radical.Model
 {
@@ -20,18 +20,18 @@ namespace Radical.Model
         /// </summary>
         ~Entity()
         {
-            this.Dispose( false );
+            this.Dispose(false);
         }
 
-        private Boolean isDisposed;
+        private bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose( Boolean disposing )
+        protected virtual void Dispose(bool disposing)
         {
-            if ( disposing )
+            if (disposing)
             {
                 /*
                  * Se disposing è 'true' significa che dispose
@@ -40,14 +40,14 @@ namespace Radical.Model
                  * eventuali reference perchè sicuramente Finalize
                  * non è ancora stato chiamato su questi oggetti
                  */
-                if ( this._events != null )
+                if (this._events != null)
                 {
                     this.Events.Dispose();
                 }
 
                 this.valuesBag.Clear();
 
-                foreach( var item in this.propertiesMetadata.Values )
+                foreach (var item in this.propertiesMetadata.Values)
                 {
                     item.Dispose();
                 }
@@ -67,8 +67,8 @@ namespace Radical.Model
         /// </summary>
         public void Dispose()
         {
-            this.Dispose( true );
-            GC.SuppressFinalize( this );
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace Radical.Model
         /// </summary>
         protected virtual void EnsureNotDisposed()
         {
-            if ( this.isDisposed )
+            if (this.isDisposed)
             {
-                throw new ObjectDisposedException( this.GetType().FullName );
+                throw new ObjectDisposedException(this.GetType().FullName);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Radical.Model
         {
             get
             {
-                if ( this._events == null )
+                if (this._events == null)
                 {
                     this._events = new EventHandlerList();
                 }
@@ -115,29 +115,29 @@ namespace Radical.Model
         private static readonly Object propertyChangedEventKey = new Object();
         public event PropertyChangedEventHandler PropertyChanged
         {
-            add { this.Events.AddHandler( propertyChangedEventKey, value ); }
-            remove { this.Events.RemoveHandler( propertyChangedEventKey, value ); }
+            add { this.Events.AddHandler(propertyChangedEventKey, value); }
+            remove { this.Events.RemoveHandler(propertyChangedEventKey, value); }
         }
 
-        protected virtual void OnPropertyChanged( PropertyChangedEventArgs e )
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             this.EnsureNotDisposed();
 
-            PropertyChangedEventHandler h = this.Events[ propertyChangedEventKey ] as PropertyChangedEventHandler;
-            if ( h != null )
+            PropertyChangedEventHandler h = this.Events[propertyChangedEventKey] as PropertyChangedEventHandler;
+            if (h != null)
             {
-                h( this, e );
+                h(this, e);
             }
         }
 
-        protected void OnPropertyChanged( String propertyName )
+        protected void OnPropertyChanged(string propertyName)
         {
-            this.OnPropertyChanged( new PropertyChangedEventArgs( propertyName ) );
+            this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void OnPropertyChanged<T>( Expression<Func<T>> property )
+        protected void OnPropertyChanged<T>(Expression<Func<T>> property)
         {
-            this.OnPropertyChanged( new PropertyChangedEventArgs( property.GetMemberName() ) );
+            this.OnPropertyChanged(new PropertyChangedEventArgs(property.GetMemberName()));
         }
 
         #endregion
@@ -165,9 +165,9 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </remarks>
-        protected PropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, T value )
+        protected PropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, T value)
         {
-            return this.SetInitialPropertyValue<T>( property.GetMemberName(), value );
+            return this.SetInitialPropertyValue<T>(property.GetMemberName(), value);
         }
 
         /// <summary>
@@ -186,10 +186,10 @@ namespace Radical.Model
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </remarks>
-        protected PropertyMetadata<T> SetInitialPropertyValue<T>( Expression<Func<T>> property, Func<T> lazyValue )
+        protected PropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, Func<T> lazyValue)
         {
-            var metadata = this.GetPropertyMetadata<T>( property )
-                .WithDefaultValue( lazyValue );
+            var metadata = this.GetPropertyMetadata<T>(property)
+                .WithDefaultValue(lazyValue);
 
             return metadata;
         }
@@ -208,15 +208,15 @@ namespace Radical.Model
         /// <typeparam name="T">The property type</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The default value.</param>
-        protected PropertyMetadata<T> SetInitialPropertyValue<T>( String property, T value )
+        protected PropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value)
         {
-            var metadata = this.GetPropertyMetadata<T>( property )
-                .WithDefaultValue( value );
+            var metadata = this.GetPropertyMetadata<T>(property)
+                .WithDefaultValue(value);
 
             return metadata;
         }
 
-        readonly IDictionary<String, PropertyMetadata> propertiesMetadata = new Dictionary<String, PropertyMetadata>();
+        readonly IDictionary<string, PropertyMetadata> propertiesMetadata = new Dictionary<string, PropertyMetadata>();
 
         /// <summary>
         /// Gets the property metadata.
@@ -226,11 +226,11 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the requested property metadata.
         /// </returns>
-        protected PropertyMetadata<T> GetPropertyMetadata<T>( Expression<Func<T>> property )
+        protected PropertyMetadata<T> GetPropertyMetadata<T>(Expression<Func<T>> property)
         {
-            Ensure.That( property ).Named( "property" ).IsNotNull();
+            Ensure.That(property).Named("property").IsNotNull();
 
-            return ( PropertyMetadata<T> )this.GetPropertyMetadata<T>( property.GetMemberName() );
+            return (PropertyMetadata<T>)this.GetPropertyMetadata<T>(property.GetMemberName());
         }
 
         /// <summary>
@@ -239,20 +239,20 @@ namespace Radical.Model
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>An instance of the requested property metadata.</returns>
-        protected PropertyMetadata<T> GetPropertyMetadata<T>( String propertyName )
+        protected PropertyMetadata<T> GetPropertyMetadata<T>(string propertyName)
         {
-            Ensure.That( propertyName ).Named( "propertyName" ).IsNotNullNorEmpty();
+            Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
             //return ( PropertyMetadata<T> )this.GetPropertyMetadata( propertyName, typeof( T ) );
 
             PropertyMetadata md;
-            if ( !this.propertiesMetadata.TryGetValue( propertyName, out md ) )
+            if (!this.propertiesMetadata.TryGetValue(propertyName, out md))
             {
-                md = this.GetDefaultMetadata<T>( propertyName );
-                this.propertiesMetadata.Add( propertyName, md );
+                md = this.GetDefaultMetadata<T>(propertyName);
+                this.propertiesMetadata.Add(propertyName, md);
             }
 
-            return ( PropertyMetadata<T> )md;
+            return (PropertyMetadata<T>)md;
         }
 
         ///// <summary>
@@ -261,7 +261,7 @@ namespace Radical.Model
         ///// <param name="propertyName">Name of the property.</param>
         ///// <param name="propertyType">Type of the property.</param>
         ///// <returns>An instance of the requested property metadata.</returns>
-        //protected PropertyMetadata GetPropertyMetadata( String propertyName, Type propertyType )
+        //protected PropertyMetadata GetPropertyMetadata( string propertyName, Type propertyType )
         //{
         //    PropertyMetadata md;
         //    if( !this.propertiesMetadata.TryGetValue( propertyName, out md ) )
@@ -279,9 +279,9 @@ namespace Radical.Model
         /// <typeparam name="T">Type of the property.</typeparam>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>An instance of the requested default property metadata.</returns>
-        protected virtual PropertyMetadata<T> GetDefaultMetadata<T>( String propertyName )
+        protected virtual PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
         {
-            return PropertyMetadata.Create<T>( this, propertyName );
+            return PropertyMetadata.Create<T>(this, propertyName);
 
             //return ( PropertyMetadata<T> )this.GetDefaultMetadata( propertyName, typeof( T ) );
         }
@@ -294,7 +294,7 @@ namespace Radical.Model
         ///// <returns>
         ///// An instance of the requested default property metadata.
         ///// </returns>
-        //protected virtual PropertyMetadata GetDefaultMetadata( String propertyName, Type propertyType )
+        //protected virtual PropertyMetadata GetDefaultMetadata( string propertyName, Type propertyType )
         //{
         //    var type = typeof( PropertyMetadata<> ).MakeGenericType( propertyType );
 
@@ -305,15 +305,15 @@ namespace Radical.Model
         /// Sets the property metadata.
         /// </summary>
         /// <param name="metadata">The property metadata.</param>
-        protected virtual void SetPropertyMetadata<T>( PropertyMetadata<T> metadata )
+        protected virtual void SetPropertyMetadata<T>(PropertyMetadata<T> metadata)
         {
-            Ensure.That( metadata ).Named( "metadata" ).IsNotNull();
+            Ensure.That(metadata).Named("metadata").IsNotNull();
 
-            Ensure.That( propertiesMetadata )
-                .WithMessage( "Metadata for the supplied property ({0}) has already been set.", metadata.PropertyName )
-                .IsFalse( d => d.ContainsKey( metadata.PropertyName ) );
+            Ensure.That(propertiesMetadata)
+                .WithMessage("Metadata for the supplied property ({0}) has already been set.", metadata.PropertyName)
+                .IsFalse(d => d.ContainsKey(metadata.PropertyName));
 
-            propertiesMetadata.Add( metadata.PropertyName, metadata );
+            propertiesMetadata.Add(metadata.PropertyName, metadata);
         }
 
         class NotificationSuspension<T> : IDisposable
@@ -332,14 +332,14 @@ namespace Radical.Model
         /// <typeparam name="T"></typeparam>
         /// <param name="property">The property.</param>
         /// <returns></returns>
-        protected IDisposable SuspendNotificationsOf<T>( Expression<Func<T>> property ) 
+        protected IDisposable SuspendNotificationsOf<T>(Expression<Func<T>> property)
         {
-            var md = this.GetPropertyMetadata( property );
+            var md = this.GetPropertyMetadata(property);
             md.DisableChangesNotifications();
 
             return new NotificationSuspension<T>()
             {
-                Property = md 
+                Property = md
             };
         }
 
@@ -348,15 +348,15 @@ namespace Radical.Model
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="property">The property.</param>
-        protected void ResumeNotificationsFor<T>( Expression<Func<T>> property ) 
+        protected void ResumeNotificationsFor<T>(Expression<Func<T>> property)
         {
-            var md = this.GetPropertyMetadata( property );
+            var md = this.GetPropertyMetadata(property);
             md.EnableChangesNotifications();
         }
 
-        //protected IDisposable SuspendNotificationsOf( String property ) { }
+        //protected IDisposable SuspendNotificationsOf( string property ) { }
 
-        //protected void ResumeNotificationsFor<T>( String property ) { }
+        //protected void ResumeNotificationsFor<T>( string property ) { }
 
         //protected virtual void AddMetadata<T>( Expression<Func<T>> property, Action<PropertyMetadata<T>> interceptor )
         //{
@@ -374,72 +374,72 @@ namespace Radical.Model
         /// <returns>
         ///     <c>true</c> if metadata for the specified property has been set; otherwise, <c>false</c>.
         /// </returns>
-        protected virtual Boolean HasMetadata<T>( Expression<Func<T>> property )
+        protected virtual bool HasMetadata<T>(Expression<Func<T>> property)
         {
-            return this.propertiesMetadata.ContainsKey( property.GetMemberName() );
+            return this.propertiesMetadata.ContainsKey(property.GetMemberName());
         }
 
-        readonly IDictionary<String, PropertyValue> valuesBag = new Dictionary<String, PropertyValue>();
+        readonly IDictionary<string, PropertyValue> valuesBag = new Dictionary<string, PropertyValue>();
 
-        protected void SetPropertyValueCore<T>( String propertyName, T data, PropertyValueChanged<T> pvc )
+        protected void SetPropertyValueCore<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
-            var oldValue = this.GetPropertyValue<T>( propertyName );
+            var oldValue = this.GetPropertyValue<T>(propertyName);
 
-            if ( !Object.Equals( oldValue, data ) )
+            if (!Object.Equals(oldValue, data))
             {
-                if ( this.valuesBag.ContainsKey( propertyName ) )
+                if (this.valuesBag.ContainsKey(propertyName))
                 {
-                    this.valuesBag[ propertyName ] = new PropertyValue<T>( data );
+                    this.valuesBag[propertyName] = new PropertyValue<T>(data);
                 }
                 else
                 {
-                    this.valuesBag.Add( propertyName, new PropertyValue<T>( data ) );
+                    this.valuesBag.Add(propertyName, new PropertyValue<T>(data));
                 }
 
-                var args = new PropertyValueChangedArgs<T>( data, oldValue );
-                if ( pvc != null )
+                var args = new PropertyValueChangedArgs<T>(data, oldValue);
+                if (pvc != null)
                 {
-                    pvc( args );
+                    pvc(args);
                 }
 
-                var metadata = this.GetPropertyMetadata<T>( propertyName );
-                if ( metadata.NotifyChanges )
+                var metadata = this.GetPropertyMetadata<T>(propertyName);
+                if (metadata.NotifyChanges)
                 {
-                    this.OnPropertyChanged( propertyName );
+                    this.OnPropertyChanged(propertyName);
 
                     metadata
-                        .NotifyChanged( args )
+                        .NotifyChanged(args)
                         .GetCascadeChangeNotifications()
-                        .ForEach( s =>
-                        {
-                            this.OnPropertyChanged( s );
-                        } );
+                        .ForEach(s =>
+                       {
+                           this.OnPropertyChanged(s);
+                       });
                 }
             }
         }
 
-        protected void SetPropertyValue<T>( Expression<Func<T>> property, T data )
+        protected void SetPropertyValue<T>(Expression<Func<T>> property, T data)
         {
             var propertyName = property.GetMemberName();
 
-            this.SetPropertyValue( propertyName, data, null );
+            this.SetPropertyValue(propertyName, data, null);
         }
 
-        protected void SetPropertyValue<T>( Expression<Func<T>> property, T data, PropertyValueChanged<T> pvc )
+        protected void SetPropertyValue<T>(Expression<Func<T>> property, T data, PropertyValueChanged<T> pvc)
         {
             var propertyName = property.GetMemberName();
 
-            this.SetPropertyValue( propertyName, data, pvc );
+            this.SetPropertyValue(propertyName, data, pvc);
         }
 
-        protected void SetPropertyValue<T>( String propertyName, T data )
+        protected void SetPropertyValue<T>(string propertyName, T data)
         {
-            this.SetPropertyValue( propertyName, data, null );
+            this.SetPropertyValue(propertyName, data, null);
         }
 
-        protected virtual void SetPropertyValue<T>( String propertyName, T data, PropertyValueChanged<T> pvc )
+        protected virtual void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
-            this.SetPropertyValueCore( propertyName, data, pvc );
+            this.SetPropertyValueCore(propertyName, data, pvc);
         }
 
         /// <summary>
@@ -448,9 +448,9 @@ namespace Radical.Model
         /// <typeparam name="T">The property value type.</typeparam>
         /// <param name="property">A Lambda Expressione representing the property.</param>
         /// <returns>The requested property value.</returns>
-        protected T GetPropertyValue<T>( Expression<Func<T>> property )
+        protected T GetPropertyValue<T>(Expression<Func<T>> property)
         {
-            return this.GetPropertyValue<T>( property.GetMemberName() );
+            return this.GetPropertyValue<T>(property.GetMemberName());
         }
 
         /// <summary>
@@ -460,16 +460,16 @@ namespace Radical.Model
         /// <param name="property">A Lambda Expressione representing the property.</param>
         /// <param name="initialValueSetter">The initial value setter.</param>
         /// <returns>The requested property value.</returns>
-        protected T GetPropertyValue<T>( Expression<Func<T>> property, Func<T> initialValueSetter )
+        protected T GetPropertyValue<T>(Expression<Func<T>> property, Func<T> initialValueSetter)
         {
-            if ( !this.HasMetadata( property ) && initialValueSetter != null )
+            if (!this.HasMetadata(property) && initialValueSetter != null)
             {
                 var initialValue = initialValueSetter();
 
-                this.SetInitialPropertyValue( property, initialValue );
+                this.SetInitialPropertyValue(property, initialValue);
             }
 
-            return this.GetPropertyValue<T>( property.GetMemberName() );
+            return this.GetPropertyValue<T>(property.GetMemberName());
         }
 
         /// <summary>
@@ -478,15 +478,15 @@ namespace Radical.Model
         /// <typeparam name="T">The property value type.</typeparam>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>The requested property value.</returns>
-        protected internal virtual T GetPropertyValue<T>( String propertyName )
+        protected internal virtual T GetPropertyValue<T>(string propertyName)
         {
             PropertyValue actual;
-            if ( this.valuesBag.TryGetValue( propertyName, out actual ) )
+            if (this.valuesBag.TryGetValue(propertyName, out actual))
             {
-                return ( ( PropertyValue<T> )actual ).Value;
+                return ((PropertyValue<T>)actual).Value;
             }
 
-            var metadata = this.GetPropertyMetadata<T>( propertyName );
+            var metadata = this.GetPropertyMetadata<T>(propertyName);
             return metadata.DefaultValue;
         }
     }
