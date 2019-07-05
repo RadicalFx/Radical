@@ -12,7 +12,6 @@ environment:
 branches:
   only:
   - master
-  - vnext
   - develop
   - /release-.*/
   - /^\d+\.\d+\.\d+(-\S*)?$/
