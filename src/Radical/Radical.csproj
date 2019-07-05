@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <DefineConstants>NET_CORE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Mauro Servienti, Michael Denny, Nazareno Manco</Authors>
+    <Description>Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern.</Description>
+    <PackageLicenseUrl>https://github.com/RadicalFx/radical/blob/master/license.md</PackageLicenseUrl>
+    <PackageTags>Radical</PackageTags>
+    <PackageIconUrl>http://www.radicalframework.com/img/radical-ico.png</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MinVerMinimumMajorMinor>2</MinVerMinimumMajorMinor>
+  </PropertyGroup>
+
+  <Target Name="ApVeyorPullRequestsTarget" AfterTargets="MinVer" Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''">
+    <PropertyGroup>
+      <PackageVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)-PR.$(APPVEYOR_PULL_REQUEST_NUMBER).$(MinVerPreRelease)</PackageVersion>
+      <PackageVersion Condition="'$(MinVerBuildMetadata)' != ''">$(PackageVersion)+$(MinVerBuildMetadata)</PackageVersion>
+      <Version>$(PackageVersion)</Version>
+    </PropertyGroup>
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
