@@ -28,9 +28,14 @@
         }
 
         [TestMethod]
-        public void typeExtension_toShortString_using_mscorelib_type_should_not_add_assemblyName_to_type_string()
+        public void typeExtension_toShortString_using_mscorelib_type_should_add_assemblyName_to_type_string()
         {
-            var expected = "System.String";
+#if NET_CORE
+            var expected = "System.String, System.Private.CoreLib";
+#else
+            var expected = "System.String, mscorlib";
+#endif
+
             var target = typeof(string);
 
             var actual = Radical.Reflection.TypeExtensions.ToShortString(target);
@@ -38,9 +43,14 @@
         }
 
         [TestMethod]
-        public void typeExtension_toString_S_using_mscorelib_type_should_not_add_assemblyName_to_type_string()
+        public void typeExtension_toString_S_using_mscorelib_type_should_add_assemblyName_to_type_string()
         {
-            var expected = "System.String";
+#if NET_CORE
+            var expected = "System.String, System.Private.CoreLib";
+#else
+            var expected = "System.String, mscorlib";
+#endif
+
             var target = typeof(string);
 
             var actual = Radical.Reflection.TypeExtensions.ToString(target, "S");
