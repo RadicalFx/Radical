@@ -2,7 +2,6 @@
 
 namespace Radical.Tests.Model.Entity
 {
-    using FakeItEasy;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
@@ -12,10 +11,43 @@ namespace Radical.Tests.Model.Entity
     [TestClass()]
     public class EntityMementoTests : EntityTests
     {
+        class FakeMementoEntity : MementoEntity
+        {
+            public FakeMementoEntity()
+            : base()
+            {
+            }
+
+            public FakeMementoEntity(IChangeTrackingService memento)
+                : base(memento)
+            {
+            }
+
+            public FakeMementoEntity(bool registerAsTransient)
+                : base(registerAsTransient)
+            {
+            }
+
+            public FakeMementoEntity(ChangeTrackingRegistration registration)
+                : base(registration)
+            {
+            }
+
+            public FakeMementoEntity(IChangeTrackingService memento, ChangeTrackingRegistration registration)
+                : base(memento, registration)
+            {
+            }
+
+            public FakeMementoEntity(IChangeTrackingService memento, bool registerAsTransient)
+                : base(memento, registerAsTransient)
+            {
+            }
+        }
+
         [TestMethod]
         public void entityMemento_ctor_default_set_default_values()
         {
-            var target = A.Fake<MementoEntity>();
+            var target = new FakeMementoEntity();
 
             ((IMemento)target).Memento.Should().Be.Null();
             ((IMemento)target).Memento.Should().Be.Null();
@@ -25,7 +57,7 @@ namespace Radical.Tests.Model.Entity
         public void entityMemento_ctor_memento_set_default_values()
         {
             var expected = new ChangeTrackingService();
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new[] { expected }));
+            var target = new FakeMementoEntity(expected);
 
             ((IMemento)target).Memento.Should().Be.EqualTo(expected);
             ((IMemento)target).Memento.Should().Be.EqualTo(expected);
@@ -34,7 +66,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_ctor_registerAsTransient_true_set_default_values()
         {
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { true }));
+            var target = new FakeMementoEntity(true);
 
             ((IMemento)target).Memento.Should().Be.Null();
             ((IMemento)target).Memento.Should().Be.Null();
@@ -43,7 +75,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_ctor_registerAsTransient_false_set_default_values()
         {
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { false }));
+            var target = new FakeMementoEntity(false);
 
             ((IMemento)target).Memento.Should().Be.Null();
             ((IMemento)target).Memento.Should().Be.Null();
@@ -53,7 +85,7 @@ namespace Radical.Tests.Model.Entity
         public void entityMemento_ctor_memento_registerAsTransient_false_set_default_values()
         {
             var expected = new ChangeTrackingService();
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { expected, false }));
+            var target = new FakeMementoEntity(expected, false);
 
             ((IMemento)target).Memento.Should().Be.EqualTo(expected);
             ((IMemento)target).Memento.Should().Be.EqualTo(expected);
@@ -63,7 +95,7 @@ namespace Radical.Tests.Model.Entity
         public void entityMemento_ctor_memento_registerAsTransient_true_set_default_values()
         {
             var expected = new ChangeTrackingService();
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { expected, true }));
+            var target = new FakeMementoEntity(expected, true);
 
             ((IMemento)target).Memento.Should().Be.EqualTo(expected);
             ((IMemento)target).Memento.Should().Be.EqualTo(expected);
@@ -75,7 +107,7 @@ namespace Radical.Tests.Model.Entity
             EntityTrackingStates expected = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove;
             using (ChangeTrackingService svc = new ChangeTrackingService())
             {
-                var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { true }));
+                var target = new FakeMementoEntity(true);
                 ((IMemento)target).Memento = svc;
 
                 EntityTrackingStates actual = svc.GetEntityState(target);
@@ -92,7 +124,7 @@ namespace Radical.Tests.Model.Entity
             {
                 svc.Suspend();
 
-                var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { true }));
+                var target = new FakeMementoEntity(true);
                 ((IMemento)target).Memento = svc;
 
                 EntityTrackingStates actual = svc.GetEntityState(target);
@@ -104,7 +136,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_ctor_requesting_transient_registration_without_memento_do_not_fail()
         {
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { true }));
+            var target = new FakeMementoEntity(true);
         }
 
         [TestMethod]
@@ -113,7 +145,7 @@ namespace Radical.Tests.Model.Entity
             EntityTrackingStates expected = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove;
             using (ChangeTrackingService svc = new ChangeTrackingService())
             {
-                var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { true }));
+                var target = new FakeMementoEntity(true);
                 ((IMemento)target).Memento = svc;
 
                 EntityTrackingStates actual = svc.GetEntityState(target);
@@ -130,7 +162,7 @@ namespace Radical.Tests.Model.Entity
             {
                 svc.Suspend();
 
-                var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new object[] { true }));
+                var target = new FakeMementoEntity(true);
                 ((IMemento)target).Memento = svc;
 
                 EntityTrackingStates actual = svc.GetEntityState(target);
@@ -144,7 +176,7 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = new ChangeTrackingService();
 
-            var target = A.Fake<MementoEntity>();
+            var target = new FakeMementoEntity();
             ((IMemento)target).Memento = expected;
             var actual = ((IMemento)target).Memento;
 
@@ -156,7 +188,7 @@ namespace Radical.Tests.Model.Entity
         {
             var expected = new ChangeTrackingService();
 
-            var target = A.Fake<MementoEntity>();
+            var target = new FakeMementoEntity();
             ((IMemento)target).Memento = expected;
             var actual = ((IMemento)target).Memento;
 
@@ -166,7 +198,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_memento_can_be_set_to_null()
         {
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new[] { new ChangeTrackingService() }));
+            var target = new FakeMementoEntity(new ChangeTrackingService());
             ((IMemento)target).Memento = null;
 
             ((IMemento)target).Memento.Should().Be.Null();
@@ -175,7 +207,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_memento_using_base_iMemento_can_be_set_to_null()
         {
-            var target = A.Fake<MementoEntity>(options => options.WithArgumentsForConstructor(new[] { new ChangeTrackingService() }));
+            var target = new FakeMementoEntity(new ChangeTrackingService());
             ((IMemento)target).Memento = null;
 
             ((IMemento)target).Memento.Should().Be.Null();
