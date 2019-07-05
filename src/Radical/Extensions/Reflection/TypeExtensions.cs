@@ -51,8 +51,13 @@ namespace Radical.Reflection
             string tName = type.FullName;
             string aName = type.Assembly.GetName().Name;
 
+#if NET_CORE
+            var corelibName = "System.Private.CoreLib";
+#else
+            var corelibName = "mscorlib";
+#endif
 
-            if (string.Equals(aName, "mscorlib", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(aName, corelibName, StringComparison.OrdinalIgnoreCase))
             {
                 return string.Format(CultureInfo.InvariantCulture, "{0}", tName);
             }
