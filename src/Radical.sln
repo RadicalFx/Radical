@@ -1,133 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDD1DA5D-B3A3-4274-9F83-4ACDE54C34EF}"
-	ProjectSection(SolutionItems) = preProject
-		..\appveyor.yml = ..\appveyor.yml
-		Command Line Arguments.txt = Command Line Arguments.txt
-		How to build.txt = How to build.txt
-		WebEssentials-Settings.json = WebEssentials-Settings.json
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical", "Radical\Radical.csproj", "{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{D02EE7AB-5E92-4BF2-9ADC-1CFF12355895}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35", "net35", "{63E573C9-D4C7-42E6-9055-DA74A2CB42CF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4D938E88-567A-4F81-A0E4-A56650C81053}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{135601F4-F15B-4EB2-A3F9-1385E9C1AE93}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical", "net35\Radical\Radical.csproj", "{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical", "net40\Radical\Radical.csproj", "{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical", "net45\Radical\Radical.csproj", "{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{557CC2FF-843C-4096-B12B-6F9A8884FA3E}"
-	ProjectSection(SolutionItems) = preProject
-		nuget\Radical.nuspec = nuget\Radical.nuspec
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{667F5571-5118-4BDB-A011-BFB5DEAE389C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "net40\Test.Radical\Test.Radical.csproj", "{240098B2-2092-4EB7-955C-15154052F6E7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{FD7E428B-8FDB-4EEA-95E6-28598703E605}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "net45\Test.Radical\Test.Radical.csproj", "{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35", "net35", "{876AAE43-D461-4261-BE26-1AF1593FE770}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Radical", "net35\Test.Radical\Test.Radical.csproj", "{31CC206D-2014-4612-811E-82B198385343}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radical.Tests", "Radical.Tests\Radical.Tests.csproj", "{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|ARM = Debug|ARM
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|ARM = Release|ARM
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Release|ARM.ActiveCfg = Release|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Release|x64.ActiveCfg = Release|Any CPU
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97}.Release|x86.ActiveCfg = Release|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Release|ARM.ActiveCfg = Release|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Release|x64.ActiveCfg = Release|Any CPU
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF}.Release|x86.ActiveCfg = Release|Any CPU
 		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Release|ARM.ActiveCfg = Release|Any CPU
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Release|x64.ActiveCfg = Release|Any CPU
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618}.Release|x86.ActiveCfg = Release|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Release|ARM.ActiveCfg = Release|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Release|x64.ActiveCfg = Release|Any CPU
-		{240098B2-2092-4EB7-955C-15154052F6E7}.Release|x86.ActiveCfg = Release|Any CPU
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|ARM.ActiveCfg = Release|Any CPU
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|x64.ActiveCfg = Release|Any CPU
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A}.Release|x86.ActiveCfg = Release|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Release|ARM.ActiveCfg = Release|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Release|x64.ActiveCfg = Release|Any CPU
-		{31CC206D-2014-4612-811E-82B198385343}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C669FC1F-2AAF-4F22-B557-9C68F69A0B97} = {63E573C9-D4C7-42E6-9055-DA74A2CB42CF}
-		{B48B5BEC-DE0F-4310-9A36-FF9C07D77ACF} = {D02EE7AB-5E92-4BF2-9ADC-1CFF12355895}
-		{DB4E99F1-3CBE-4E76-9197-D6F884A0F618} = {135601F4-F15B-4EB2-A3F9-1385E9C1AE93}
-		{667F5571-5118-4BDB-A011-BFB5DEAE389C} = {4D938E88-567A-4F81-A0E4-A56650C81053}
-		{240098B2-2092-4EB7-955C-15154052F6E7} = {667F5571-5118-4BDB-A011-BFB5DEAE389C}
-		{FD7E428B-8FDB-4EEA-95E6-28598703E605} = {4D938E88-567A-4F81-A0E4-A56650C81053}
-		{602FFE39-19E6-4E1B-A496-CFB6D01F2B7A} = {FD7E428B-8FDB-4EEA-95E6-28598703E605}
-		{876AAE43-D461-4261-BE26-1AF1593FE770} = {4D938E88-567A-4F81-A0E4-A56650C81053}
-		{31CC206D-2014-4612-811E-82B198385343} = {876AAE43-D461-4261-BE26-1AF1593FE770}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

@@ -1,0 +1,2148 @@
+﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US", System.Resources.UltimateResourceFallbackLocation.MainAssembly)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Radical.Tests")]
+[assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
+[assembly: System.Runtime.InteropServices.GuidAttribute("ac1104e2-8764-42ea-80aa-bfd22bc6a89f")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.6", FrameworkDisplayName=".NET Framework 4.6")]
+namespace Radical
+{
+    public sealed class ActionTextWriter : System.IO.TextWriter
+    {
+        public ActionTextWriter(System.Action<string> logger) { }
+        public ActionTextWriter(System.Action<string> logger, System.IFormatProvider formatProvider) { }
+        public override System.Text.Encoding Encoding { get; }
+        public override void Write(string value) { }
+        public override void Write(char[] buffer, int index, int count) { }
+    }
+    public class static ArrayExtensions
+    {
+        public static bool IsSameAs<T>(this T[] source, T[] other)
+            where T : System.IComparable { }
+        public static bool IsSameAs<T>(this T[] source, T[] other, System.Func<T, T, bool> itemComparer) { }
+    }
+    public class BootableFacility : Radical.ComponentModel.IPuzzleContainerFacility
+    {
+        public BootableFacility() { }
+        public void Initialize(Radical.ComponentModel.IPuzzleContainer container) { }
+        public void Teardown(Radical.ComponentModel.IPuzzleContainer container) { }
+    }
+    public class static ConsoleColorExtensions
+    {
+        public static System.IDisposable AsForegroundColor(this System.ConsoleColor color) { }
+    }
+    public class static DateTimeExtensions
+    {
+        public static System.DateTime ToEndOfMonth(this System.DateTime source) { }
+    }
+    public sealed class DelegateComparer<T> : System.Collections.Generic.IComparer<T>
+    {
+        public DelegateComparer(System.Func<T, T, int> comparer) { }
+        public int Compare(T x, T y) { }
+    }
+    public sealed class DelegateEqualityComparer<T> : System.Collections.Generic.EqualityComparer<T>
+    {
+        public DelegateEqualityComparer(System.Func<T, T, bool> comparer, System.Func<T, int> hashCodeFunc) { }
+        public override bool Equals(T x, T y) { }
+        public override int GetHashCode(T obj) { }
+    }
+    public class static EntityCollectionExtensions
+    {
+        public static Radical.ComponentModel.IEntityCollection<T> BulkLoad<T>(this Radical.ComponentModel.IEntityCollection<T> list, System.Collections.Generic.IEnumerable<T> data)
+            where T :  class { }
+        public static Radical.ComponentModel.IEntityCollection<T> BulkLoad<T>(this Radical.ComponentModel.IEntityCollection<T> list, System.Collections.Generic.IEnumerable<T> data, bool clear)
+            where T :  class { }
+        public static Radical.ComponentModel.IEntityCollection<T> BulkLoad<T, TSource>(this Radical.ComponentModel.IEntityCollection<T> list, System.Collections.Generic.IEnumerable<TSource> data, System.Func<TSource, T> adapter)
+            where T :  class { }
+    }
+    public class static EntityViewExtensions
+    {
+        public static Radical.ComponentModel.IEntityView<T> ApplySimpleSort<T>(this Radical.ComponentModel.IEntityView<T> view, string property)
+            where T :  class { }
+        public static System.Collections.Generic.IEnumerable<T> AsEntityItems<T>(this Radical.ComponentModel.IEntityView<T> view)
+            where T :  class { }
+    }
+    public class static EntryBuilder
+    {
+        public static Radical.ComponentModel.IPuzzleContainerEntry For(System.Type type) { }
+        public static Radical.ComponentModel.IPuzzleContainerEntry<T> For<T>() { }
+    }
+    public class static EnumExtensions
+    {
+        public static void EnsureIsDefined(this System.Enum value) { }
+        public static string GetCaption(this System.Enum value) { }
+        public static string GetDescription(this System.Enum value) { }
+        public static Radical.EnumItemDescriptionAttribute GetDescriptionAttribute(this System.Enum value) { }
+        public static bool IsDefined(this System.Enum value) { }
+        public static bool IsDescriptionAttributeDefined(this System.Enum value) { }
+        public static bool TryGetDescriptionAttribute(this System.Enum value, out Radical.EnumItemDescriptionAttribute attribute) { }
+    }
+    public class static EnumExtensionsFx35
+    {
+        public static bool HasFlag(this System.Enum variable, System.Enum value) { }
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    public class EnumItemDescriptionAttribute : System.Attribute
+    {
+        public EnumItemDescriptionAttribute(string caption) { }
+        public EnumItemDescriptionAttribute(string caption, int index) { }
+        public EnumItemDescriptionAttribute(string caption, string description, int index) { }
+        public string Caption { get; }
+        public string Description { get; }
+        public virtual int Index { get; }
+        protected virtual string OnGetCaption(string caption) { }
+        protected virtual string OnGetDescription(string description) { }
+    }
+    public class EnumValueOutOfRangeException : System.ArgumentException
+    {
+        protected EnumValueOutOfRangeException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public EnumValueOutOfRangeException() { }
+        public EnumValueOutOfRangeException(string message) { }
+        public EnumValueOutOfRangeException(string message, System.Exception innerException) { }
+    }
+    public class static IServiceProviderExtensions
+    {
+        public static TService GetService<TService>(this System.IServiceProvider serviceProvider) { }
+        public static TInterface GetService<SInterface, TInterface>(this System.IServiceProvider serviceProvider) { }
+        public static TService TryGetService<TService>(this System.IServiceProvider serviceProvider) { }
+        public static TInterface TryGetService<SInterface, TInterface>(this System.IServiceProvider serviceProvider) { }
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    public class LocalizableEnumItemDescriptionAttribute : Radical.EnumItemDescriptionAttribute
+    {
+        public LocalizableEnumItemDescriptionAttribute(string captionKey) { }
+        public LocalizableEnumItemDescriptionAttribute(string captionKey, int index) { }
+        public LocalizableEnumItemDescriptionAttribute(string captionKey, string descriptionKey, int index) { }
+        public Radical.ResourceAssemblyLocationBehavior AssemblyLocationBehavior { get; set; }
+        public string AssemblyName { get; set; }
+        public string CaptionFallbackValue { get; set; }
+        public string DescriptionFallbackValue { get; set; }
+        protected System.Resources.ResourceManager ResourceManager { get; }
+        public string ResourceName { get; set; }
+        protected override string OnGetCaption(string caption) { }
+        protected override string OnGetDescription(string description) { }
+    }
+    public class MissingContractAttributeException : Radical.RadicalException
+    {
+        protected MissingContractAttributeException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public MissingContractAttributeException() { }
+        public MissingContractAttributeException(System.Type targetType) { }
+        public MissingContractAttributeException(string message) { }
+        public MissingContractAttributeException(string message, System.Exception innerException) { }
+        public System.Type TargetType { get; }
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+    }
+    public class static NullableExtensions
+    {
+        public static T ValueOr<T>(this System.Nullable<T> value, T defaultValue)
+            where T :  struct { }
+        public static T ValueOr<T>(this System.Nullable<T> value, T defaultValue, System.Func<T, T> ifValue)
+            where T :  struct { }
+    }
+    public class static NumbersExtensions
+    {
+        public static bool IsEven(this int value) { }
+    }
+    public class static ObjectExtensions
+    {
+        public static TInput Do<TInput>(this TInput input, System.Action<TInput> action) { }
+        public static TInput Do<TInput>(this TInput input, System.Predicate<TInput> failureEvaluator, System.Action<TInput> action) { }
+        public static T If<T>(this T obj, System.Predicate<T> condition, System.Action<T> thenAction)
+            where T :  class { }
+        public static T If<T>(this T obj, System.Predicate<T> condition, System.Action<T> thenAction, System.Action<T> elseAction)
+            where T :  class { }
+        public static TInput If<TInput>(this TInput o, System.Func<TInput, bool> evaluator)
+            where TInput :  class { }
+        public static TSource InterceptAs<TSource, TDestination>(this TSource obj, System.Action<TDestination> interceptor)
+            where TSource :  class
+            where TDestination :  class { }
+        public static TResult Return<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator) { }
+        public static TResult Return<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput) { }
+        public static TResult Return<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, TResult failureValue, System.Predicate<TInput> failureEvaluator) { }
+        public static TResult Return<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, System.Func<TResult> defaultValueOnNullInput) { }
+        public static TResult Return<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, System.Func<TResult> failureValue, System.Predicate<TInput> failureEvaluator) { }
+        public static TInput Unless<TInput>(this TInput o, System.Func<TInput, bool> evaluator)
+            where TInput :  class { }
+        public static TResult With<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator) { }
+        public static TResult With<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput) { }
+        public static TResult With<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, System.Func<TResult> defaultValueOnNullInput) { }
+        public static TResult With<TInput, TResult>(this TInput input, System.Func<TInput, TResult> evaluator, System.Predicate<TInput> failureEvaluator, System.Func<TResult> failureValue) { }
+    }
+    public class Observable<T> : System.ComponentModel.INotifyPropertyChanged
+    {
+        public Observable() { }
+        public Observable(T value) { }
+        public virtual T Value { get; set; }
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged() { }
+        public static T op_Implicit(Radical.Observable<T> val) { }
+    }
+    public class PuzzleContainer : Radical.ComponentModel.IPuzzleContainer, System.IDisposable
+    {
+        public PuzzleContainer() { }
+        public event System.EventHandler<Radical.ComponentModel.ComponentRegisteredEventArgs> ComponentRegistered;
+        public Radical.ComponentModel.IPuzzleContainer AddFacility(Radical.ComponentModel.IPuzzleContainerFacility facility) { }
+        public Radical.ComponentModel.IPuzzleContainer AddFacility<TFacility>()
+            where TFacility : Radical.ComponentModel.IPuzzleContainerFacility { }
+        protected virtual void Dispose(bool disposing) { }
+        public void Dispose() { }
+        protected override void Finalize() { }
+        public System.Collections.Generic.IEnumerable<Radical.ComponentModel.IPuzzleContainerFacility> GetFacilities() { }
+        public object GetService(System.Type serviceType) { }
+        public bool IsRegistered<TService>() { }
+        public bool IsRegistered(System.Type type) { }
+        protected virtual void OnComponentRegistered(Radical.ComponentModel.ComponentRegisteredEventArgs e) { }
+        public Radical.ComponentModel.IPuzzleContainer Register(Radical.ComponentModel.IContainerEntry entry) { }
+        public Radical.ComponentModel.IPuzzleContainer Register(System.Collections.Generic.IEnumerable<Radical.ComponentModel.IContainerEntry> entries) { }
+        public TService Resolve<TService>() { }
+        public object Resolve(System.Type serviceType) { }
+        public object Resolve(string key, System.Type serviceType) { }
+        public System.Collections.Generic.IEnumerable<T> ResolveAll<T>() { }
+        public System.Collections.Generic.IEnumerable<object> ResolveAll(System.Type t) { }
+        public void SetupWith(System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider, params Radical.ComponentModel.IPuzzleSetupDescriptor[] descriptors) { }
+    }
+    public class PuzzleContainerServiceProviderFacade : System.IServiceProvider
+    {
+        public PuzzleContainerServiceProviderFacade(Radical.ComponentModel.IPuzzleContainer container) { }
+        public object GetService(System.Type serviceType) { }
+    }
+    public class RadicalException : System.Exception
+    {
+        protected RadicalException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public RadicalException() { }
+        public RadicalException(string message) { }
+        public RadicalException(string message, System.Exception innerException) { }
+    }
+    public enum ResourceAssemblyLocationBehavior
+    {
+        ByAssemblyName = 0,
+        UseExecutingAssembly = 1,
+        UseCallingAssembly = 2,
+        UseEntryAssembly = 3,
+    }
+    public class static StringExtensions
+    {
+        public static string Append(this string value, string text) { }
+        public static System.Collections.Generic.IEnumerable<string> AsKeywords(this string source, params char[] separators) { }
+        public static System.Collections.Generic.IEnumerable<string> AsKeywords(this string source, bool applyWildChardsIfNecessary, params char[] separators) { }
+        public static string AsPackUri(this string resourceRelativeUri) { }
+        public static string AsPackUri(this string resourceRelativeUri, string assemblyName) { }
+        public static string IfNullOrEmptyReturn(this string value, string defaultValue) { }
+        public static bool IsLike(this string value, string pattern) { }
+        public static bool IsLike(this string value, params string[] patterns) { }
+        public static bool IsLike(this string value, string pattern, bool ignoreCase) { }
+        public static bool IsNullOrEmpty(this string value) { }
+        public static string ValueOr(this string value, string defaultValue) { }
+        public static string ValueOr(this string value, string defaultValue, System.Func<string, string> ifValue) { }
+        public static string ValueOrEmpty(this string value) { }
+        public static string ValueOrEmpty(this string value, System.Func<string, string> ifValue) { }
+    }
+    public sealed class SubscribeToMessageFacility : Radical.ComponentModel.IPuzzleContainerFacility
+    {
+        public SubscribeToMessageFacility() { }
+        public void Initialize(Radical.ComponentModel.IPuzzleContainer container) { }
+        public void Teardown(Radical.ComponentModel.IPuzzleContainer container) { }
+    }
+    public class SuspendedChangeTrackingServiceException : Radical.RadicalException
+    {
+        protected SuspendedChangeTrackingServiceException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public SuspendedChangeTrackingServiceException() { }
+        public SuspendedChangeTrackingServiceException(string message) { }
+        public SuspendedChangeTrackingServiceException(string message, System.Exception innerException) { }
+    }
+    public class WeakReference<T> : System.WeakReference
+        where T :  class
+    {
+        public WeakReference(T target) { }
+        public WeakReference(T target, bool trackResurrection) { }
+        protected WeakReference(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public T Target { get; set; }
+    }
+}
+namespace Radical.Analytics
+{
+    public class AnalyticsEvent
+    {
+        public AnalyticsEvent() { }
+        public System.Collections.Generic.IDictionary<string, object> Data { get; set; }
+        public System.DateTimeOffset ExecutedOn { get; set; }
+        public string Name { get; set; }
+    }
+}
+namespace Radical.ChangeTracking
+{
+    public class AdvisedAction : Radical.ComponentModel.ChangeTracking.IAdvisedAction
+    {
+        public AdvisedAction(object target, Radical.ComponentModel.ChangeTracking.ProposedActions action) { }
+        public Radical.ComponentModel.ChangeTracking.ProposedActions Action { get; }
+        public object Target { get; }
+    }
+    public class Advisory : Radical.Collections.ReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, Radical.ComponentModel.ChangeTracking.IAdvisory, Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.ICollection, System.Collections.IEnumerable
+    {
+        public Advisory(System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction> actions) { }
+    }
+    public class AdvisoryBuilder : Radical.ComponentModel.ChangeTracking.IAdvisoryBuilder
+    {
+        public AdvisoryBuilder(Radical.ComponentModel.ChangeTracking.IChangeSetDistinctVisitor visitor) { }
+        public Radical.ComponentModel.ChangeTracking.IAdvisory GenerateAdvisory(Radical.ComponentModel.ChangeTracking.IChangeTrackingService svc, Radical.ComponentModel.ChangeTracking.IChangeSet changeSet) { }
+        protected virtual Radical.ComponentModel.ChangeTracking.IAdvisedAction OnCreateAdvisedAction(object target, Radical.ComponentModel.ChangeTracking.ProposedActions proposedAction) { }
+    }
+    public class Bookmark : Radical.ComponentModel.ChangeTracking.IBookmark
+    {
+        public Bookmark(Radical.ComponentModel.ChangeTracking.IChangeTrackingService owner, Radical.ComponentModel.ChangeTracking.IChange position, System.Collections.Generic.IEnumerable<object> transientEntities) { }
+        public Radical.ComponentModel.ChangeTracking.IChangeTrackingService Owner { get; }
+        public Radical.ComponentModel.ChangeTracking.IChange Position { get; }
+        public System.Collections.Generic.IEnumerable<object> TransientEntities { get; }
+    }
+    public class ChangeSet : Radical.Collections.ReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, Radical.ComponentModel.ChangeTracking.IChangeSet, Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.ICollection, System.Collections.IEnumerable
+    {
+        public ChangeSet(System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange> changes) { }
+    }
+    public class ChangeSetDistinctVisitor : Radical.ComponentModel.ChangeTracking.IChangeSetDistinctVisitor
+    {
+        public ChangeSetDistinctVisitor() { }
+        public System.Collections.Generic.IDictionary<object, Radical.ComponentModel.ChangeTracking.IChange> Visit(Radical.ComponentModel.ChangeTracking.IChangeSet changeSet) { }
+    }
+    [System.ComponentModel.ToolboxItemAttribute(false)]
+    public class ChangeTrackingService : Radical.ComponentModel.ChangeTracking.IChangeTrackingService, System.ComponentModel.IChangeTracking, System.ComponentModel.IComponent, System.ComponentModel.IRevertibleChangeTracking, System.IDisposable
+    {
+        protected static readonly object SyncRoot;
+        public ChangeTrackingService() { }
+        public bool CanRedo { get; }
+        public bool CanUndo { get; }
+        protected System.ComponentModel.EventHandlerList Events { get; }
+        public bool HasTransientEntities { get; }
+        public virtual bool IsChanged { get; }
+        public bool IsDisposed { get; }
+        public bool IsSuspended { get; }
+        [System.ComponentModel.BrowsableAttribute(false)]
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public System.ComponentModel.ISite Site { get; set; }
+        public event System.EventHandler<System.ComponentModel.CancelEventArgs> AcceptingChanges;
+        public event System.EventHandler ChangesAccepted;
+        public event System.EventHandler ChangesRejected;
+        public event System.EventHandler Disposed;
+        public event System.EventHandler<System.ComponentModel.CancelEventArgs> RejectingChanges;
+        public event System.EventHandler TrackingServiceStateChanged;
+        public virtual void AcceptChanges() { }
+        public virtual void Add(Radical.ComponentModel.ChangeTracking.IChange change, Radical.ComponentModel.ChangeTracking.AddChangeBehavior behavior) { }
+        public void Attach(Radical.ComponentModel.ChangeTracking.IMemento item) { }
+        public Radical.ComponentModel.ChangeTracking.IAtomicOperation BeginAtomicOperation() { }
+        public virtual Radical.ComponentModel.ChangeTracking.IBookmark CreateBookmark() { }
+        public void Detach(Radical.ComponentModel.ChangeTracking.IMemento entity) { }
+        protected virtual void Dispose(bool disposing) { }
+        public void Dispose() { }
+        protected void EnsureNotSuspended() { }
+        protected override void Finalize() { }
+        public virtual Radical.ComponentModel.ChangeTracking.IAdvisory GetAdvisory() { }
+        public virtual Radical.ComponentModel.ChangeTracking.IAdvisory GetAdvisory(Radical.ComponentModel.ChangeTracking.IAdvisoryBuilder builder) { }
+        public virtual Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet() { }
+        public virtual Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet(Radical.ComponentModel.ChangeTracking.IChangeSetFilter filter) { }
+        public System.Collections.Generic.IEnumerable<object> GetEntities() { }
+        public virtual System.Collections.Generic.IEnumerable<object> GetEntities(Radical.ComponentModel.ChangeTracking.EntityTrackingStates stateFilter, bool exactMatch) { }
+        public Radical.ComponentModel.ChangeTracking.EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, System.Linq.Expressions.Expression<System.Func<TEntity, TProperty>> property) { }
+        public Radical.ComponentModel.ChangeTracking.EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, string propertyName) { }
+        public Radical.ComponentModel.ChangeTracking.EntityTrackingStates GetEntityState(object entity) { }
+        protected virtual void OnAcceptingChanges(System.ComponentModel.CancelEventArgs e) { }
+        protected virtual void OnAttach(Radical.ComponentModel.ChangeTracking.IMemento item) { }
+        protected virtual void OnChangeCommitted(Radical.ComponentModel.ChangeTracking.IChange change, Radical.ComponentModel.ChangeTracking.CommitReason reason) { }
+        protected virtual void OnChangeRejected(Radical.ComponentModel.ChangeTracking.IChange change, Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+        protected virtual void OnChangesAccepted() { }
+        protected virtual void OnChangesRejected() { }
+        protected virtual void OnDetach(Radical.ComponentModel.ChangeTracking.IMemento entity, Radical.ChangeTracking.ChangeTrackingService.StopTrackingReason reason) { }
+        protected virtual void OnDisposed() { }
+        protected virtual void OnRedo(Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+        protected virtual void OnRegisterTransient(object entity, bool autoRemove) { }
+        protected virtual void OnRejectingChanges(System.ComponentModel.CancelEventArgs e) { }
+        protected virtual void OnRevert(Radical.ComponentModel.ChangeTracking.IBookmark bookmark) { }
+        protected virtual void OnTrackingServiceStateChanged() { }
+        protected virtual void OnUndo(Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+        protected virtual void OnUnregisterTransient(object entity) { }
+        protected virtual void OnUnwire(Radical.ComponentModel.ChangeTracking.IChange change) { }
+        protected virtual void OnWire(Radical.ComponentModel.ChangeTracking.IChange change) { }
+        protected virtual void OnWire(System.ComponentModel.IComponent entity) { }
+        public void Redo() { }
+        public void RegisterTransient(object entity) { }
+        public void RegisterTransient(object entity, bool autoRemove) { }
+        public virtual void RejectChanges() { }
+        public virtual void Resume() { }
+        public void Revert(Radical.ComponentModel.ChangeTracking.IBookmark bookmark) { }
+        public virtual void Suspend() { }
+        public void Undo() { }
+        public void UnregisterTransient(object entity) { }
+        public virtual bool Validate(Radical.ComponentModel.ChangeTracking.IBookmark bookmark) { }
+        protected enum StopTrackingReason
+        {
+            UserRequest = 0,
+            DisposedEvent = 1,
+        }
+    }
+    public class static ChangeTrackingServiceExtensions
+    {
+        public static T Attach<T>(this Radical.ComponentModel.ChangeTracking.IChangeTrackingService service, T source) { }
+        public static System.Collections.Generic.IEnumerable<T> Attach<T>(this Radical.ComponentModel.ChangeTracking.IChangeTrackingService service, System.Collections.Generic.IEnumerable<T> data) { }
+        public static System.Collections.Generic.IEnumerable<T> GetChangedItems<T>(this Radical.ComponentModel.ChangeTracking.IChangeTrackingService service) { }
+        public static System.Collections.Generic.IEnumerable<T> GetDeletedItems<T>(this Radical.ComponentModel.ChangeTracking.IChangeTrackingService service) { }
+        public static System.Collections.Generic.IEnumerable<T> GetNewItems<T>(this Radical.ComponentModel.ChangeTracking.IChangeTrackingService service) { }
+        public static System.Collections.Generic.IEnumerable<T> GetRemovedItems<T>(this Radical.ComponentModel.ChangeTracking.IChangeTrackingService service) { }
+    }
+    public abstract class Change<T> : Radical.ComponentModel.ChangeTracking.IChange, Radical.ComponentModel.ChangeTracking.IChange<T>
+    {
+        protected Change(object owner, T valueToCache, Radical.ComponentModel.ChangeTracking.RejectCallback<T> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<T> commitCallback, string description) { }
+        public T CachedValue { get; }
+        protected Radical.ComponentModel.ChangeTracking.CommitCallback<T> CommitCallback { get; }
+        public string Description { get; }
+        public virtual bool IsCommitSupported { get; }
+        public object Owner { get; }
+        protected Radical.ComponentModel.ChangeTracking.RejectCallback<T> RejectCallback { get; }
+        public event System.EventHandler<Radical.ComponentModel.ChangeTracking.CommittedEventArgs> Committed;
+        public event System.EventHandler<Radical.ComponentModel.ChangeTracking.RejectedEventArgs> Rejected;
+        public abstract Radical.ComponentModel.ChangeTracking.IChange Clone();
+        public void Commit(Radical.ComponentModel.ChangeTracking.CommitReason reason) { }
+        public abstract Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem);
+        public virtual System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+        protected virtual void OnCommit(Radical.ComponentModel.ChangeTracking.CommitReason reason) { }
+        protected virtual void OnCommitted(Radical.ComponentModel.ChangeTracking.CommittedEventArgs args) { }
+        protected virtual void OnReject(Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+        protected virtual void OnRejected(Radical.ComponentModel.ChangeTracking.RejectedEventArgs args) { }
+        public void Reject(Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+    }
+    public sealed class IncludeAllChangeSetFilter : Radical.ComponentModel.ChangeTracking.IChangeSetFilter
+    {
+        public static Radical.ComponentModel.ChangeTracking.IChangeSetFilter Instance { get; }
+        public bool ShouldInclude(Radical.ComponentModel.ChangeTracking.IChange change) { }
+    }
+    public class static MementoExtensions
+    {
+        public static bool IsChanged(this Radical.ComponentModel.ChangeTracking.IMemento entity) { }
+        public static bool IsPropertyValueChanged<TEntity, TProperty>(this TEntity entity, System.Linq.Expressions.Expression<System.Func<TEntity, TProperty>> property)
+            where TEntity : Radical.ComponentModel.ChangeTracking.IMemento { }
+        public static bool IsTransient(this Radical.ComponentModel.ChangeTracking.IMemento entity) { }
+    }
+}
+namespace Radical.ChangeTracking.Specialized
+{
+    public class AddRangeCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>, T>
+    {
+        public AddRangeCollectionChange(object owner, Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> commitCallback, string description) { }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+        public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+    }
+    public abstract class CollectionChangeDescriptor<T>
+    {
+        protected CollectionChangeDescriptor() { }
+    }
+    public abstract class CollectionChange<TDescriptor, TItem> : Radical.ChangeTracking.Change<TDescriptor>, Radical.ComponentModel.ChangeTracking.IChange
+        where TDescriptor : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<>
+    {
+        protected CollectionChange(object owner, TDescriptor descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<TDescriptor> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<TDescriptor> commitCallback, string description) { }
+        public TDescriptor Descriptor { get; }
+    }
+    public class CollectionClearedChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>, T>
+    {
+        public CollectionClearedChange(object owner, Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> commitCallback, string description) { }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+        public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+    }
+    public class CollectionRangeDescriptor<T> : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<T>
+    {
+        public CollectionRangeDescriptor(System.Collections.Generic.IEnumerable<T> items) { }
+        public System.Collections.Generic.IEnumerable<T> Items { get; }
+    }
+    public class ItemChangedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>, T>
+    {
+        public ItemChangedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> commitCallback, string description) { }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+        public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+    }
+    public class ItemChangedDescriptor<T> : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<T>
+    {
+        public ItemChangedDescriptor(T item, int index) { }
+        public int Index { get; }
+        public T Item { get; }
+    }
+    public class ItemMovedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>, T>
+    {
+        public ItemMovedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>> commitCallback, string description) { }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+        public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+    }
+    public class ItemMovedDescriptor<T> : Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>
+    {
+        public ItemMovedDescriptor(T item, int newIndex, int oldIndex) { }
+        public int NewIndex { get; }
+        public int OldIndex { get; }
+    }
+    public class ItemRemovedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>, T>
+    {
+        public ItemRemovedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> commitCallback, string description) { }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+        public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+    }
+    public class ItemReplacedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>, T>
+    {
+        public ItemReplacedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>> commitCallback, string description) { }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+        public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
+    }
+    public class ItemReplacedDescriptor<T> : Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>
+    {
+        public ItemReplacedDescriptor(T newItem, T replacedItem, int index) { }
+        public T NewItem { get; }
+        public T ReplacedItem { get; }
+    }
+    public class PropertyValueChange<T> : Radical.ChangeTracking.Change<T>, Radical.ComponentModel.ChangeTracking.IChange, Radical.ComponentModel.ChangeTracking.IPropertyValueChange
+    {
+        public PropertyValueChange(object owner, string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> restoreCallback) { }
+        public PropertyValueChange(object owner, string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> restoreCallback, string description) { }
+        public PropertyValueChange(object owner, string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> restoreCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<T> commitCallback, string description) { }
+        public string PropertyName { get; }
+        public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
+        public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
+    }
+}
+namespace Radical.Collections
+{
+    public class ReadOnlyCollection<T> : Radical.ComponentModel.IReadOnlyCollection<T>, System.Collections.Generic.IEnumerable<T>, System.Collections.ICollection, System.Collections.IEnumerable
+    {
+        public ReadOnlyCollection(System.Collections.Generic.IEnumerable<T> source) { }
+        public int Count { get; }
+        protected System.Collections.Generic.List<T> InnerList { get; }
+        public bool IsSynchronized { get; }
+        public object SyncRoot { get; }
+        public void CopyTo(System.Array array, int index) { }
+        public void CopyTo(T[] array, int index) { }
+        public System.Collections.IEnumerator GetEnumerator() { }
+    }
+}
+namespace Radical.ComponentModel.ChangeTracking
+{
+    public enum AddChangeBehavior
+    {
+        None = 0,
+        Default = 1,
+        RedoRequest = 2,
+        UndoRequest = 3,
+    }
+    public class ChangeCommittedEventArgs<T> : Radical.ComponentModel.ChangeTracking.ChangeEventArgs<T>
+    {
+        public ChangeCommittedEventArgs(object entity, T cachedValue, Radical.ComponentModel.ChangeTracking.IChange source, Radical.ComponentModel.ChangeTracking.CommitReason reason) { }
+        public Radical.ComponentModel.ChangeTracking.CommitReason Reason { get; }
+    }
+    public class ChangeEventArgs<T> : System.EventArgs
+    {
+        public ChangeEventArgs(object entity, T cachedValue, Radical.ComponentModel.ChangeTracking.IChange source) { }
+        public T CachedValue { get; }
+        public object Entity { get; }
+        public Radical.ComponentModel.ChangeTracking.IChange Source { get; }
+    }
+    public class ChangeRejectedEventArgs<T> : Radical.ComponentModel.ChangeTracking.ChangeEventArgs<T>
+    {
+        public ChangeRejectedEventArgs(object entity, T cachedValue, Radical.ComponentModel.ChangeTracking.IChange source, Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+        public Radical.ComponentModel.ChangeTracking.RejectReason Reason { get; }
+    }
+    public enum ChangeTrackingRegistration
+    {
+        AsTransient = 0,
+        AsPersistent = 1,
+    }
+    public delegate void CommitCallback<T>(Radical.ComponentModel.ChangeTracking.ChangeCommittedEventArgs<T> value);
+    public enum CommitReason
+    {
+        None = 0,
+        AcceptChanges = 1,
+    }
+    public class CommittedEventArgs : System.EventArgs
+    {
+        public CommittedEventArgs(Radical.ComponentModel.ChangeTracking.CommitReason reason) { }
+        public Radical.ComponentModel.ChangeTracking.CommitReason Reason { get; }
+    }
+    [System.FlagsAttribute()]
+    public enum EntityPropertyStates
+    {
+        None = 0,
+        Changed = 1,
+        ValueChanged = 2,
+    }
+    [System.FlagsAttribute()]
+    public enum EntityTrackingStates
+    {
+        None = 0,
+        IsTransient = 1,
+        AutoRemove = 2,
+        HasBackwardChanges = 4,
+        HasForwardChanges = 8,
+    }
+    public interface IAdvisedAction
+    {
+        Radical.ComponentModel.ChangeTracking.ProposedActions Action { get; }
+        object Target { get; }
+    }
+    public interface IAdvisory : Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.ICollection, System.Collections.IEnumerable { }
+    public interface IAdvisoryBuilder
+    {
+        Radical.ComponentModel.ChangeTracking.IAdvisory GenerateAdvisory(Radical.ComponentModel.ChangeTracking.IChangeTrackingService svc, Radical.ComponentModel.ChangeTracking.IChangeSet changeSet);
+    }
+    public interface IAtomicOperation : System.IDisposable
+    {
+        void Complete();
+    }
+    public interface IBookmark
+    {
+        Radical.ComponentModel.ChangeTracking.IChangeTrackingService Owner { get; }
+        Radical.ComponentModel.ChangeTracking.IChange Position { get; }
+        System.Collections.Generic.IEnumerable<object> TransientEntities { get; }
+    }
+    public interface IChange
+    {
+        string Description { get; }
+        bool IsCommitSupported { get; }
+        object Owner { get; }
+        public event System.EventHandler<Radical.ComponentModel.ChangeTracking.CommittedEventArgs> Committed;
+        public event System.EventHandler<Radical.ComponentModel.ChangeTracking.RejectedEventArgs> Rejected;
+        Radical.ComponentModel.ChangeTracking.IChange Clone();
+        void Commit(Radical.ComponentModel.ChangeTracking.CommitReason reason);
+        Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem);
+        System.Collections.Generic.IEnumerable<object> GetChangedEntities();
+        void Reject(Radical.ComponentModel.ChangeTracking.RejectReason reason);
+    }
+    public interface IChangeSet : Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.ICollection, System.Collections.IEnumerable { }
+    public interface IChangeSetDistinctVisitor
+    {
+        System.Collections.Generic.IDictionary<object, Radical.ComponentModel.ChangeTracking.IChange> Visit(Radical.ComponentModel.ChangeTracking.IChangeSet changeSet);
+    }
+    public interface IChangeSetFilter
+    {
+        bool ShouldInclude(Radical.ComponentModel.ChangeTracking.IChange change);
+    }
+    public interface IChangeTrackingService : System.ComponentModel.IChangeTracking, System.ComponentModel.IComponent, System.ComponentModel.IRevertibleChangeTracking, System.IDisposable
+    {
+        bool CanRedo { get; }
+        bool CanUndo { get; }
+        bool HasTransientEntities { get; }
+        bool IsDisposed { get; }
+        bool IsSuspended { get; }
+        public event System.EventHandler<System.ComponentModel.CancelEventArgs> AcceptingChanges;
+        public event System.EventHandler ChangesAccepted;
+        public event System.EventHandler ChangesRejected;
+        public event System.EventHandler<System.ComponentModel.CancelEventArgs> RejectingChanges;
+        public event System.EventHandler TrackingServiceStateChanged;
+        void Add(Radical.ComponentModel.ChangeTracking.IChange change, Radical.ComponentModel.ChangeTracking.AddChangeBehavior behavior);
+        void Attach(Radical.ComponentModel.ChangeTracking.IMemento item);
+        Radical.ComponentModel.ChangeTracking.IAtomicOperation BeginAtomicOperation();
+        Radical.ComponentModel.ChangeTracking.IBookmark CreateBookmark();
+        void Detach(Radical.ComponentModel.ChangeTracking.IMemento entity);
+        Radical.ComponentModel.ChangeTracking.IAdvisory GetAdvisory();
+        Radical.ComponentModel.ChangeTracking.IAdvisory GetAdvisory(Radical.ComponentModel.ChangeTracking.IAdvisoryBuilder builder);
+        Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet();
+        Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet(Radical.ComponentModel.ChangeTracking.IChangeSetFilter builder);
+        System.Collections.Generic.IEnumerable<object> GetEntities();
+        System.Collections.Generic.IEnumerable<object> GetEntities(Radical.ComponentModel.ChangeTracking.EntityTrackingStates sateFilter, bool exactMatch);
+        Radical.ComponentModel.ChangeTracking.EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, System.Linq.Expressions.Expression<System.Func<TEntity, TProperty>> property);
+        Radical.ComponentModel.ChangeTracking.EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, string propertyName);
+        Radical.ComponentModel.ChangeTracking.EntityTrackingStates GetEntityState(object entity);
+        void Redo();
+        void RegisterTransient(object entity);
+        void RegisterTransient(object entity, bool autoRemove);
+        void Resume();
+        void Revert(Radical.ComponentModel.ChangeTracking.IBookmark bookmark);
+        void Suspend();
+        void Undo();
+        void UnregisterTransient(object entity);
+        bool Validate(Radical.ComponentModel.ChangeTracking.IBookmark bookmark);
+    }
+    public interface IChange<T> : Radical.ComponentModel.ChangeTracking.IChange
+    {
+        T CachedValue { get; }
+    }
+    public interface IMemento
+    {
+        Radical.ComponentModel.ChangeTracking.IChangeTrackingService Memento { get; set; }
+    }
+    public interface IMementoPropertyMetadata
+    {
+        bool TrackChanges { get; set; }
+    }
+    public interface IPropertyValueChange : Radical.ComponentModel.ChangeTracking.IChange
+    {
+        string PropertyName { get; }
+    }
+    [System.FlagsAttribute()]
+    public enum ProposedActions
+    {
+        None = 0,
+        Create = 1,
+        Update = 2,
+        Delete = 4,
+        Dispose = 8,
+    }
+    public delegate void RejectCallback<T>(Radical.ComponentModel.ChangeTracking.ChangeRejectedEventArgs<T> value);
+    public enum RejectReason
+    {
+        None = 0,
+        Undo = 1,
+        Redo = 2,
+        RejectChanges = 3,
+        Revert = 4,
+    }
+    public class RejectedEventArgs : System.EventArgs
+    {
+        public RejectedEventArgs(Radical.ComponentModel.ChangeTracking.RejectReason reason) { }
+        public Radical.ComponentModel.ChangeTracking.RejectReason Reason { get; }
+    }
+    public enum TransientRegistration
+    {
+        AsTransparent = 0,
+        AsPersistable = 1,
+    }
+}
+namespace Radical.ComponentModel
+{
+    public enum CollectionChangeType
+    {
+        None = 0,
+        SortChanged = 1,
+        ItemAdded = 2,
+        ItemRemoved = 3,
+        ItemChanged = 4,
+        Reset = 5,
+        ItemMoved = 6,
+        ItemReplaced = 7,
+    }
+    public class CollectionChangedEventArgs<T> : System.EventArgs
+    {
+        public CollectionChangedEventArgs(Radical.ComponentModel.CollectionChangeType changeType) { }
+        public CollectionChangedEventArgs(Radical.ComponentModel.CollectionChangeType changeType, int index) { }
+        public CollectionChangedEventArgs(Radical.ComponentModel.CollectionChangeType changeType, int index, int oldIndex, T item) { }
+        public Radical.ComponentModel.CollectionChangeType ChangeType { get; }
+        public int Index { get; }
+        public T Item { get; }
+        public int OldIndex { get; }
+    }
+    public class ComponentRegisteredEventArgs : System.EventArgs
+    {
+        public ComponentRegisteredEventArgs(Radical.ComponentModel.IContainerEntry entry) { }
+        public Radical.ComponentModel.IContainerEntry Entry { get; }
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.Interface | System.AttributeTargets.All, AllowMultiple=false, Inherited=true)]
+    public sealed class ContractAttribute : System.Attribute
+    {
+        public ContractAttribute() { }
+        public ContractAttribute(System.Type contractInterface) { }
+        public System.Type ContractInterface { get; }
+    }
+    public class EntityItemViewCustomPropertyDescriptor<T, TValue> : Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>
+    {
+        public EntityItemViewCustomPropertyDescriptor(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TValue> getter) { }
+        public EntityItemViewCustomPropertyDescriptor(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TValue> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TValue> setter) { }
+        public EntityItemViewCustomPropertyDescriptor(string customDisplayName) { }
+        public System.Func<TValue> DafaultValueInterceptor { get; set; }
+        public override string DisplayName { get; }
+        public override bool IsReadOnly { get; }
+        public override string Name { get; }
+        public override System.Type PropertyType { get; }
+        protected Radical.ComponentModel.EntityItemViewValueGetter<T, TValue> ValueGetter { get; }
+        protected Radical.ComponentModel.EntityItemViewValueSetter<T, TValue> ValueSetter { get; }
+        public TValue GetDefaultValue() { }
+        protected override object GetValueCore(Radical.ComponentModel.IEntityItemView<T> component) { }
+        protected override void SetValueCore(Radical.ComponentModel.IEntityItemView<T> component, object value) { }
+    }
+    public class EntityItemViewPropertyDescriptor<T> : System.ComponentModel.PropertyDescriptor
+    {
+        protected EntityItemViewPropertyDescriptor() { }
+        public EntityItemViewPropertyDescriptor(System.Reflection.PropertyInfo property) { }
+        public EntityItemViewPropertyDescriptor(string propertyName) { }
+        public EntityItemViewPropertyDescriptor(string propertyName, string customDisplayName) { }
+        public override System.Type ComponentType { get; }
+        public override string DisplayName { get; }
+        public override bool IsReadOnly { get; }
+        protected System.Reflection.PropertyInfo Property { get; }
+        public override System.Type PropertyType { get; }
+        public override bool CanResetValue(object component) { }
+        public virtual object GetDefaultValue() { }
+        public virtual object GetValue(object component) { }
+        protected virtual object GetValueCore(Radical.ComponentModel.IEntityItemView<T> component) { }
+        public override void ResetValue(object component) { }
+        public virtual void SetValue(object component, object value) { }
+        protected virtual void SetValueCore(Radical.ComponentModel.IEntityItemView<T> component, object value) { }
+        public override bool ShouldSerializeValue(object component) { }
+    }
+    public abstract class EntityItemViewValueArgs<T, TValue>
+    {
+        protected EntityItemViewValueArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName) { }
+        public Radical.ComponentModel.IEntityItemView<T> Item { get; }
+        public string PropertyName { get; }
+    }
+    public class EntityItemViewValueGetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T, TValue>
+    {
+        public EntityItemViewValueGetterArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName) { }
+    }
+    public delegate object EntityItemViewValueGetter<T, TValue>(Radical.ComponentModel.EntityItemViewValueGetterArgs<T, TValue> args);
+    public class EntityItemViewValueSetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T, TValue>
+    {
+        public EntityItemViewValueSetterArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName, TValue value) { }
+        public TValue Value { get; }
+    }
+    public delegate void EntityItemViewValueSetter<T, TValue>(Radical.ComponentModel.EntityItemViewValueSetterArgs<T, TValue> args);
+    public interface IAnalyticsServices
+    {
+        bool IsEnabled { get; set; }
+        void TrackUserActionAsync(Radical.Analytics.AnalyticsEvent action);
+    }
+    public interface IBootable
+    {
+        void Boot();
+    }
+    public interface IContainerEntry
+    {
+        System.Type Component { get; }
+        System.Delegate Factory { get; }
+        bool IsOverridable { get; }
+        string Key { get; }
+        Radical.ComponentModel.Lifestyle Lifestyle { get; }
+        System.Collections.Generic.IDictionary<string, object> Parameters { get; }
+        System.Collections.Generic.IEnumerable<System.Type> Services { get; }
+    }
+    public interface IDispatcher
+    {
+        bool IsSafe { get; }
+        void Dispatch(System.Action action);
+        void Dispatch<T>(T arg, System.Action<T> action);
+        void Dispatch<T1, T2>(T1 arg1, T2 arg2, System.Action<T1, T2> action);
+        TResult Dispatch<TResult>(System.Func<TResult> func);
+        void Invoke(System.Delegate d, params object[] args);
+    }
+    public interface IEntityCollection<T> : System.Collections.Generic.ICollection<T>, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IList<T>, System.Collections.IEnumerable, System.ComponentModel.ISupportInitialize
+    {
+        bool AllowNew { get; }
+        Radical.ComponentModel.IEntityView<T> DefaultView { get; }
+        bool IsInitializing { get; }
+        public event System.EventHandler<Radical.ComponentModel.CollectionChangedEventArgs<T>> CollectionChanged;
+        void AddRange(System.Collections.Generic.IEnumerable<T> list);
+        T CreateNew();
+        Radical.ComponentModel.IEntityView<T> CreateView();
+        void EndInit(bool notify);
+        void Move(int oldIndex, int newIndex);
+        void Move(T item, int newIndex);
+        T[] ToArray();
+    }
+    public interface IEntityItemView : Radical.ComponentModel.INotifyEditableObject, System.ComponentModel.ICustomTypeDescriptor, System.ComponentModel.IEditableObject, System.ComponentModel.INotifyPropertyChanged
+    {
+        object EntityItem { get; }
+        Radical.ComponentModel.IEntityView View { get; }
+        void Delete();
+        TValue GetCustomValue<TValue>(string customPropertyName);
+        void NotifyPropertyChanged(string propertyName);
+        void SetCustomValue<TValue>(string customPropertyName, TValue value);
+    }
+    public interface IEntityItemViewFilter
+    {
+        bool ShouldInclude(object item);
+    }
+    public interface IEntityItemViewFilter<T> : Radical.ComponentModel.IEntityItemViewFilter
+    {
+        bool ShouldInclude(T item);
+    }
+    public interface IEntityItemView<T> : Radical.ComponentModel.IEntityItemView, Radical.ComponentModel.INotifyEditableObject, System.ComponentModel.ICustomTypeDescriptor, System.ComponentModel.IEditableObject, System.ComponentModel.INotifyPropertyChanged
+    {
+        T EntityItem { get; }
+        Radical.ComponentModel.IEntityView<T> View { get; }
+    }
+    public interface IEntityView : System.Collections.ICollection, System.Collections.IEnumerable, System.Collections.IList, System.ComponentModel.IBindingList, System.ComponentModel.IBindingListView, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.ISupportInitialize, System.ComponentModel.ITypedList
+    {
+        bool AllowMove { get; }
+        System.Collections.IList DataSource { get; }
+        Radical.ComponentModel.IEntityItemViewFilter Filter { get; set; }
+        bool IsAddingNew { get; }
+        bool IsArrayBased { get; }
+        bool IsFiltered { get; }
+        public event System.EventHandler FilterChanged;
+        public event System.EventHandler SortChanged;
+        void ApplySort(string sortDescriptions);
+        void CancelNew();
+        void CancelNew(int itemIndex);
+        void EndNew();
+        void EndNew(int itemIndex);
+        void Move(int sourceIndex, int newIndex);
+        void Refresh();
+    }
+    public interface IEntityView<T> : Radical.ComponentModel.IEntityView, System.Collections.Generic.IEnumerable<Radical.ComponentModel.IEntityItemView<T>>, System.Collections.ICollection, System.Collections.IEnumerable, System.Collections.IList, System.ComponentModel.IBindingList, System.ComponentModel.IBindingListView, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.ISupportInitialize, System.ComponentModel.ITypedList
+    {
+        bool AutoGenerateProperties { get; set; }
+        Radical.ComponentModel.IEntityItemViewFilter<T> Filter { get; set; }
+        public event System.EventHandler<Radical.Model.AddingNewEventArgs<T>> AddingNew;
+        Radical.ComponentModel.IEntityItemView<T> AddNew();
+        Radical.ComponentModel.IEntityItemView<T> AddNew(System.Action<Radical.Model.AddingNewEventArgs<T>> addNewInterceptor);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, System.Func<TProperty> defaultValueInterceptor);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName, string displayName);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName);
+        void ApplyFilter(System.Predicate<T> predicate);
+        void ApplySort(System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>> comparer);
+        System.Collections.Generic.IEnumerable<Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>> GetCustomProperties();
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> GetCustomProperty(string name);
+        TValue GetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> item);
+        System.ComponentModel.PropertyDescriptor GetProperty(string name);
+        bool IsPropertyMappingDefined(string propertyName);
+        void Move(Radical.ComponentModel.IEntityItemView<T> item, int newIndex);
+        bool RemovePropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty);
+        bool RemovePropertyMapping(string propertyName);
+        void SetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> item, TValue value);
+    }
+    public interface IMonitor
+    {
+        public event System.EventHandler Changed;
+        void NotifyChanged();
+        void StopMonitoring();
+    }
+    public interface IMonitor<T> : Radical.ComponentModel.IMonitor
+    {
+        T Source { get; }
+    }
+    public interface INotifyEditableObject : System.ComponentModel.IEditableObject
+    {
+        public event System.EventHandler EditBegun;
+        public event System.EventHandler EditCanceled;
+        public event System.EventHandler EditEnded;
+    }
+    public interface IPuzzleContainer : System.IDisposable
+    {
+        public event System.EventHandler<Radical.ComponentModel.ComponentRegisteredEventArgs> ComponentRegistered;
+        Radical.ComponentModel.IPuzzleContainer AddFacility(Radical.ComponentModel.IPuzzleContainerFacility facility);
+        Radical.ComponentModel.IPuzzleContainer AddFacility<TFacility>()
+            where TFacility : Radical.ComponentModel.IPuzzleContainerFacility;
+        bool IsRegistered<TService>();
+        bool IsRegistered(System.Type serviceType);
+        Radical.ComponentModel.IPuzzleContainer Register(System.Collections.Generic.IEnumerable<Radical.ComponentModel.IContainerEntry> entries);
+        Radical.ComponentModel.IPuzzleContainer Register(Radical.ComponentModel.IContainerEntry entry);
+        object Resolve(System.Type serviceType);
+        object Resolve(string key, System.Type serviceType);
+        TService Resolve<TService>();
+        System.Collections.Generic.IEnumerable<T> ResolveAll<T>();
+        System.Collections.Generic.IEnumerable<object> ResolveAll(System.Type t);
+        void SetupWith(System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider, params Radical.ComponentModel.IPuzzleSetupDescriptor[] descriptors);
+    }
+    public interface IPuzzleContainerEntry : Radical.ComponentModel.IContainerEntry
+    {
+        Radical.ComponentModel.IPuzzleContainerEntry Forward(System.Type forwardedType);
+        Radical.ComponentModel.IPuzzleContainerEntry ImplementedBy(System.Type componentType);
+        Radical.ComponentModel.IPuzzleContainerEntry Overridable();
+        Radical.ComponentModel.IPuzzleContainerEntry UsingFactory(System.Func<object> factory);
+        Radical.ComponentModel.IPuzzleContainerEntry UsingInstance(object instance);
+        Radical.ComponentModel.IPuzzleContainerEntry WithLifestyle(Radical.ComponentModel.Lifestyle lifestyle);
+    }
+    public interface IPuzzleContainerEntry<T> : Radical.ComponentModel.IContainerEntry
+    {
+        Radical.ComponentModel.IPuzzleContainerEntry<T> Forward<TForwarded>();
+        Radical.ComponentModel.IPuzzleContainerEntry<T> ImplementedBy(System.Type componentType);
+        Radical.ComponentModel.IPuzzleContainerEntry<T> ImplementedBy<TComponent>()
+            where TComponent : T;
+        Radical.ComponentModel.IPuzzleContainerEntry<T> Overridable();
+        Radical.ComponentModel.IPuzzleContainerEntry<T> UsingFactory(System.Func<T> factory);
+        Radical.ComponentModel.IPuzzleContainerEntry<T> UsingInstance<TComponent>(TComponent instance)
+            where TComponent : T;
+        Radical.ComponentModel.IPuzzleContainerEntry<T> WithLifestyle(Radical.ComponentModel.Lifestyle lifestyle);
+    }
+    public interface IPuzzleContainerFacility
+    {
+        void Initialize(Radical.ComponentModel.IPuzzleContainer container);
+        void Teardown(Radical.ComponentModel.IPuzzleContainer container);
+    }
+    public interface IPuzzleSetupDescriptor
+    {
+        void Setup(Radical.ComponentModel.IPuzzleContainer container, System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider);
+    }
+    public interface IReadOnlyCollection<T> : System.Collections.Generic.IEnumerable<T>, System.Collections.ICollection, System.Collections.IEnumerable { }
+    public enum Lifestyle
+    {
+        Singleton = 0,
+        Transient = 1,
+    }
+}
+namespace Radical.ComponentModel.Factories
+{
+    public interface IChangeTrackingServiceFactory
+    {
+        Radical.ComponentModel.ChangeTracking.IChangeTrackingService Create();
+    }
+    public interface IEntityFactory
+    {
+        T Create<T>(params object[] constructorArguments);
+        object Create(System.Type type, params object[] constructorArguments);
+    }
+}
+namespace Radical.ComponentModel.Messaging
+{
+    public interface IHandleMessage
+    {
+        void Handle(object sender, object message);
+        bool ShouldHandle(object sender, object message);
+    }
+    [Radical.ComponentModel.ContractAttribute()]
+    public interface IHandleMessage<T> : Radical.ComponentModel.Messaging.IHandleMessage
+    {
+        void Handle(object sender, T message);
+    }
+    public interface IMessageBroker
+    {
+        void Broadcast(object sender, object message);
+        System.Threading.Tasks.Task BroadcastAsync(object sender, object message);
+        void Dispatch(object sender, object message);
+        void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
+        void Subscribe<T>(object subscriber, System.Action<object, T> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Unsubscribe(object subscriber);
+        void Unsubscribe<T>(object subscriber);
+        void Unsubscribe(object subscriber, object sender);
+        void Unsubscribe<T>(object subscriber, object sender);
+        void Unsubscribe<T>(object subscriber, System.Delegate callback);
+    }
+    public interface INeedSafeSubscription { }
+    public interface IRequireToBeValid
+    {
+        void Validate();
+    }
+    public enum InvocationModel
+    {
+        Default = 0,
+        Safe = 1,
+    }
+}
+namespace Radical.ComponentModel.Validation
+{
+    public interface IRequireValidationCallback<T>
+    {
+        void OnValidate(Radical.Validation.ValidationContext<T> context);
+    }
+    public interface IValidator
+    {
+        string RuleSet { get; }
+        bool IsValid(object entity);
+        Radical.Validation.ValidationResults Validate(object entity);
+        Radical.Validation.ValidationResults Validate(object entity, string propertyName);
+    }
+    public interface IValidatorFactory
+    {
+        Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>();
+        Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>(string ruleSet);
+    }
+    [Radical.ComponentModel.ContractAttribute()]
+    public interface IValidator<T> : Radical.ComponentModel.Validation.IValidator
+    {
+        new string RuleSet { get; }
+        Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Action<Radical.Validation.ValidationContext<T>> rule);
+        Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, string error);
+        Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, System.Func<Radical.Validation.ValidationContext<T>, string> error);
+        bool IsValid(T entity);
+        Radical.Validation.ValidationResults Validate(T entity);
+        Radical.Validation.ValidationResults Validate(T entity, string propertyName);
+        Radical.Validation.ValidationResults Validate<TProperty>(T entity, System.Linq.Expressions.Expression<System.Func<T, TProperty>> property);
+    }
+    public enum RuleEvaluation
+    {
+        Succeeded = 0,
+        Failed = 1,
+    }
+}
+namespace Radical.Conversions
+{
+    public class static CastExtensions
+    {
+        public static TResult As<TResult>(this object obj)
+            where TResult :  class { }
+        public static TResult As<TResult>(this object obj, System.Action invalidCastAction)
+            where TResult :  class { }
+        public static TResult As<TResult>(this object obj, System.Action<TResult> validCastAction)
+            where TResult :  class { }
+        public static TResult As<TResult>(this object obj, System.Action<TResult> validCastAction, System.Action invalidCastAction)
+            where TResult :  class { }
+        public static TResult CastTo<TResult>(this object obj) { }
+    }
+    public class static ConvertExtensions
+    {
+        public static Radical.Observable<T> AsObservable<T>(this T value) { }
+    }
+}
+namespace Radical.DataBinding
+{
+    public class EnumBinder<T>
+    {
+        public EnumBinder(Radical.EnumItemDescriptionAttribute attribute, T value) { }
+        public EnumBinder(string caption, T value) { }
+        public EnumBinder(string caption, T value, int index) { }
+        public EnumBinder(string caption, string description, T value, int index) { }
+        public string Caption { get; }
+        public string Description { get; }
+        public int Index { get; }
+        public T Value { get; }
+    }
+}
+namespace Radical.Diagnostics
+{
+    public class static TraceSourceExtensions
+    {
+        public static void Debug(this System.Diagnostics.TraceSource source, int eventId, string message) { }
+        public static void Debug(this System.Diagnostics.TraceSource source, int eventId, string format, params object[] args) { }
+        public static void Debug(this System.Diagnostics.TraceSource source, string message) { }
+        public static void Debug(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
+        public static void Debug(this System.Diagnostics.TraceSource source, string format, System.Func<object[]> args) { }
+        public static void Error(this System.Diagnostics.TraceSource source, string message) { }
+        public static void Error(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
+        public static void Error(this System.Diagnostics.TraceSource source, string message, System.Exception e) { }
+        public static void Information(this System.Diagnostics.TraceSource source, int eventId, string message) { }
+        public static void Information(this System.Diagnostics.TraceSource source, int eventId, string format, params object[] args) { }
+        public static void Information(this System.Diagnostics.TraceSource source, string message) { }
+        public static void Information(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
+        public static void Warning(this System.Diagnostics.TraceSource source, string message) { }
+        public static void Warning(this System.Diagnostics.TraceSource source, string format, params object[] args) { }
+    }
+}
+namespace Radical.Helpers
+{
+    public class CommandLine
+    {
+        public CommandLine(System.Collections.Generic.IEnumerable<string> args) { }
+        public T As<T>()
+            where T :  class, new () { }
+        public static string AsArguments<T>(T source) { }
+        public bool Contains(string arg) { }
+        public static Radical.Helpers.CommandLine GetCurrent() { }
+        public bool TryGetValue<T>(string arg, out T value) { }
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Property | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    public sealed class CommandLineArgumentAttribute : System.Attribute
+    {
+        public CommandLineArgumentAttribute(string argumentName) { }
+        public string[] Aliases { get; set; }
+        public string ArgumentName { get; }
+        public bool IsRequired { get; set; }
+    }
+    public class static EnumHelper
+    {
+        public static System.Collections.Generic.IEnumerable<Radical.DataBinding.EnumBinder<T>> ExtractBindingData<T>() { }
+        public static System.Collections.Generic.IEnumerable<Radical.DataBinding.EnumBinder<T>> ExtractBindingData<T>(System.Predicate<T> filter) { }
+        public static System.Collections.Generic.IEnumerable<string> ExtractDescriptions<T>() { }
+        public static System.Collections.Generic.IEnumerable<T> GetValues<T>() { }
+        public static System.Collections.Generic.IEnumerable<object> GetValues(System.Type enumType) { }
+    }
+    public class HashCodeBuilder
+    {
+        public HashCodeBuilder(long initialHashCode) { }
+        public long CombinedHash { get; }
+        public int CombinedHash32 { get; }
+        public void AddObject(object value) { }
+    }
+    public class static KnownRegex
+    {
+        public static readonly string MailAddress;
+        public static readonly string Url;
+        public class static CreditCards
+        {
+            public static readonly string AmericanExpress;
+            public static readonly string Diners;
+            public static readonly string Discover;
+            public static readonly string JCB;
+            public static readonly string MasterCard;
+            public static readonly string Visa;
+        }
+    }
+    public class OSHelper
+    {
+        public OSHelper() { }
+        public int GetOSArchitecture() { }
+        public string GetOSInfo() { }
+    }
+    public class static Password
+    {
+        public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt) { }
+        public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt, string hashAlgorithmName) { }
+        public static byte[] CreateRandomSalt() { }
+    }
+    public class RandomStrings
+    {
+        public RandomStrings() { }
+        public bool AllowConsecutiveCharacters { get; set; }
+        public bool AllowRepeatCharacters { get; set; }
+        public bool AllowSymbols { get; set; }
+        public System.Collections.Generic.List<char> Exclusions { get; }
+        public int MaxLenght { get; set; }
+        public int MinLenght { get; set; }
+        public static string GenerateRandom() { }
+        protected int GetCryptographicRandomNumber(int lBound, int uBound) { }
+        protected char GetRandomCharacter() { }
+        public string Next() { }
+    }
+    public class static ReflectionHelper
+    {
+        public static Radical.Helpers.ReflectionHelper.BoundReflectionHelper<T> BoundTo<T>() { }
+        public static string GetPropertyName<T>(System.Linq.Expressions.Expression<System.Func<T, object>> propertyRef) { }
+        public class BoundReflectionHelper<T>
+        {
+            public System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> GetProperties(System.Linq.Expressions.Expression<System.Func<T, object>> propertyExpression) { }
+            public System.Reflection.PropertyInfo GetProperty(System.Linq.Expressions.Expression<System.Func<T, object>> propertyRef) { }
+            public string NameOf(System.Linq.Expressions.Expression<System.Func<T, object>> propertyRef) { }
+        }
+    }
+}
+namespace Radical.Linq
+{
+    public class static EnumerableExtensions
+    {
+        public static System.Collections.Generic.IEnumerable<T> AlternateWith<T>(this System.Collections.Generic.IEnumerable<T> items, T separator) { }
+        public static bool Any(this System.Collections.IEnumerable source) { }
+        public static System.Collections.Generic.IEnumerable<T> AsReadOnly<T>(this System.Collections.Generic.IEnumerable<T> list) { }
+        public static System.Collections.IEnumerable Enumerate(this System.Collections.IEnumerable list, System.Action<object> action) { }
+        public static System.Collections.Generic.IEnumerable<T> FindNodes<T>(this System.Collections.Generic.IEnumerable<T> source, System.Func<T, System.Collections.Generic.IEnumerable<T>> childrenGetter, System.Func<T, bool> condition) { }
+        public static System.Collections.Generic.IEnumerable<T> ForEach<T>(this System.Collections.Generic.IEnumerable<T> list, System.Action<T> action) { }
+        public static System.Collections.Generic.IEnumerable<T> ForEach<TState, T>(this System.Collections.Generic.IEnumerable<T> list, TState initialState, System.Func<TState, T, TState> func) { }
+        public static bool IsChildOfAny<T>(this T item, System.Collections.Generic.IEnumerable<T> parents, System.Func<T, T> parentGetter)
+            where T :  class { }
+        public static bool IsChildOfAny<T>(this T item, System.Collections.Generic.IEnumerable<T> parents, System.Func<T, T> parentGetter, System.Func<T, T, bool> comparer) { }
+        public static bool IsChildOfAny<T>(this T item, System.Collections.Generic.IEnumerable<T> parents, System.Func<T, T> parentGetter, System.Collections.Generic.IEqualityComparer<T> comparer) { }
+        public static bool None<T>(this System.Collections.Generic.IEnumerable<T> source) { }
+        public static bool None(this System.Collections.IEnumerable source) { }
+        public static System.Collections.Generic.IEnumerable<T> Shouffle<T>(this System.Collections.Generic.IEnumerable<T> items) { }
+        public static System.Collections.Generic.IEnumerable<T> ToFlat<T>(this T root, System.Func<T, System.Collections.Generic.IEnumerable<T>> childrenGetter)
+            where T :  class { }
+        public static System.Collections.Generic.IEnumerable<T> ToFlat<T>(this System.Collections.Generic.IEnumerable<T> source, System.Func<T, System.Collections.Generic.IEnumerable<T>> childrenGetter) { }
+    }
+    public class static ExpressionExtensions
+    {
+        public static string GetMemberName<T>(this System.Linq.Expressions.Expression<System.Func<T>> source) { }
+        public static string GetMemberName<T, TProperty>(this System.Linq.Expressions.Expression<System.Func<T, TProperty>> source) { }
+    }
+    public class static ListExtensions
+    {
+        public static System.Collections.Generic.IList<T> Sync<T>(this System.Collections.Generic.IList<T> source, System.Collections.Generic.IList<T> destination) { }
+    }
+    public class static PredicateBuilder
+    {
+        public static System.Linq.Expressions.Expression<System.Func<T, bool>> And<T>(this System.Linq.Expressions.Expression<System.Func<T, bool>> expr1, System.Linq.Expressions.Expression<System.Func<T, bool>> expr2) { }
+        public static System.Linq.Expressions.Expression<System.Func<T, bool>> AndIf<T>(this System.Linq.Expressions.Expression<System.Func<T, bool>> expr1, System.Func<bool> condition, System.Linq.Expressions.Expression<System.Func<T, bool>> expr2) { }
+        public static System.Linq.Expressions.Expression<System.Func<T, bool>> False<T>() { }
+        public static System.Linq.Expressions.Expression<System.Func<T, bool>> Or<T>(this System.Linq.Expressions.Expression<System.Func<T, bool>> expr1, System.Linq.Expressions.Expression<System.Func<T, bool>> expr2) { }
+        public static System.Linq.Expressions.Expression<System.Func<T, bool>> True<T>() { }
+    }
+    public class static QueryableExtensions
+    {
+        public static Radical.ComponentModel.IEntityCollection<TDest> Fill<TSource, TDest>(this System.Linq.IQueryable<TSource> source, Radical.ComponentModel.IEntityCollection<TDest> destination, System.Func<TSource, TDest> adapter)
+            where TDest :  class { }
+        public static Radical.ComponentModel.IEntityCollection<TDest> Fill<TSource, TDest>(this System.Linq.IQueryable<TSource> source, Radical.ComponentModel.IEntityCollection<TDest> destination, System.Func<TSource, Radical.ComponentModel.IEntityCollection<TDest>, TDest> adapter)
+            where TDest :  class { }
+    }
+    public class static SelectorExtensions
+    {
+        public static T FirstOr<T>(this System.Collections.Generic.IEnumerable<T> source, System.Func<T> defaultValue) { }
+        public static T SingleOr<T>(this System.Collections.Generic.IEnumerable<T> source, System.Func<T> defaultValue) { }
+    }
+}
+namespace Radical.Messaging
+{
+    public abstract class AbstractMessageHandler<T> : Radical.ComponentModel.Messaging.IHandleMessage, Radical.ComponentModel.Messaging.IHandleMessage<T>
+    {
+        protected AbstractMessageHandler() { }
+        public abstract void Handle(object sender, T message);
+        public virtual void Handle(object sender, object message) { }
+        protected virtual bool OnShouldHandle(object sender, T message) { }
+        public bool ShouldHandle(object sender, object message) { }
+    }
+    public class MessageBroker : Radical.ComponentModel.Messaging.IMessageBroker
+    {
+        public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher) { }
+        public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher, System.Threading.Tasks.TaskFactory factory) { }
+        public void Broadcast(object sender, object message) { }
+        public System.Threading.Tasks.Task BroadcastAsync(object sender, object message) { }
+        public void Dispatch(object sender, object message) { }
+        public void Subscribe<T>(object subscriber, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback) { }
+        public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Unsubscribe(object subscriber) { }
+        public void Unsubscribe(object subscriber, object sender) { }
+        public void Unsubscribe<T>(object subscriber) { }
+        public void Unsubscribe<T>(object subscriber, object sender) { }
+        public void Unsubscribe<T>(object subscriber, System.Delegate callback) { }
+    }
+    public enum SubscriptionPriority
+    {
+        Highest = 3,
+        High = 2,
+        AboveNormal = 1,
+        Normal = 0,
+        BelowNormal = -1,
+        Low = -2,
+        Lowest = -3,
+    }
+}
+namespace Radical.Model
+{
+    public class AddingNewEventArgs<T> : System.ComponentModel.CancelEventArgs
+    {
+        public AddingNewEventArgs() { }
+        public bool AutoCommit { get; set; }
+        public T NewItem { get; set; }
+    }
+    public abstract class Entity : System.ComponentModel.INotifyPropertyChanged, System.IDisposable
+    {
+        protected Entity() { }
+        protected System.ComponentModel.EventHandlerList Events { get; }
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        protected virtual void Dispose(bool disposing) { }
+        public void Dispose() { }
+        protected virtual void EnsureNotDisposed() { }
+        protected override void Finalize() { }
+        protected virtual Radical.Model.PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName) { }
+        protected Radical.Model.PropertyMetadata<T> GetPropertyMetadata<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected Radical.Model.PropertyMetadata<T> GetPropertyMetadata<T>(string propertyName) { }
+        protected T GetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected T GetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, System.Func<T> initialValueSetter) { }
+        protected internal T GetPropertyValue<T>(string propertyName) { }
+        protected virtual bool HasMetadata<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) { }
+        protected void OnPropertyChanged(string propertyName) { }
+        protected void OnPropertyChanged<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected void ResumeNotificationsFor<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected Radical.Model.PropertyMetadata<T> SetInitialPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T value) { }
+        protected Radical.Model.PropertyMetadata<T> SetInitialPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, System.Func<T> lazyValue) { }
+        protected Radical.Model.PropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value) { }
+        protected virtual void SetPropertyMetadata<T>(Radical.Model.PropertyMetadata<T> metadata) { }
+        protected void SetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T data) { }
+        protected void SetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
+        protected void SetPropertyValue<T>(string propertyName, T data) { }
+        protected virtual void SetPropertyValue<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
+        protected void SetPropertyValueCore<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
+        protected System.IDisposable SuspendNotificationsOf<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+    }
+    public class EntityCollection<T> : Radical.ComponentModel.IEntityCollection<T>, System.Collections.Generic.ICollection<T>, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IList<T>, System.Collections.ICollection, System.Collections.IEnumerable, System.Collections.IList, System.ComponentModel.IComponent, System.ComponentModel.ISite, System.ComponentModel.ISupportInitialize, System.IDisposable, System.IServiceProvider, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable
+    {
+        protected static readonly string SerializationKey;
+        public EntityCollection() { }
+        public EntityCollection(int capacity) { }
+        public EntityCollection(System.Collections.Generic.IEnumerable<T> collection) { }
+        public EntityCollection(System.Collections.Generic.IList<T> storage) { }
+        protected EntityCollection(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        public virtual bool AllowNew { get; }
+        public int Count { get; }
+        public Radical.ComponentModel.IEntityView<T> DefaultView { get; }
+        protected System.ComponentModel.EventHandlerList Events { get; }
+        public bool IsInitializing { get; }
+        protected virtual bool IsReadOnly { get; }
+        public T this[int index] { get; set; }
+        public Radical.Model.EntityCollection<T>.CollectionSettings Settings { get; }
+        protected System.Collections.Generic.IList<T> Storage { get; }
+        public event System.EventHandler<Radical.ComponentModel.CollectionChangedEventArgs<T>> CollectionChanged;
+        public event System.EventHandler Disposed;
+        public void Add(T item) { }
+        public void AddRange(System.Collections.Generic.IEnumerable<T> list) { }
+        public virtual void BeginInit() { }
+        public void Clear() { }
+        public bool Contains(T item) { }
+        public void CopyTo(T[] array) { }
+        public void CopyTo(T[] array, int arrayIndex) { }
+        public T CreateNew() { }
+        public Radical.ComponentModel.IEntityView<T> CreateView() { }
+        protected virtual void Dispose(bool disposing) { }
+        public void Dispose() { }
+        public void EndInit() { }
+        public virtual void EndInit(bool notify) { }
+        protected void EnsureNotDisposed() { }
+        protected override void Finalize() { }
+        public virtual System.Collections.Generic.IEnumerator<T> GetEnumerator() { }
+        protected virtual T GetValueAt(int index) { }
+        public int IndexOf(T item) { }
+        public void Insert(int index, T item) { }
+        public void Move(T item, int newIndex) { }
+        public void Move(int oldIndex, int newIndex) { }
+        protected virtual void OnAddCompleted(int index, T value) { }
+        protected virtual void OnAddRange(System.Collections.Generic.IEnumerable<T> rangeToAdd) { }
+        protected virtual void OnAddRangeCompleted(System.Collections.Generic.IEnumerable<T> addedRange) { }
+        protected virtual void OnClearCompleted(System.Collections.Generic.IEnumerable<T> clearedItems) { }
+        protected virtual void OnCollectionChanged(Radical.ComponentModel.CollectionChangedEventArgs<T> e) { }
+        protected virtual Radical.ComponentModel.IEntityView<T> OnCreateView() { }
+        protected virtual T OnCreatingNew() { }
+        protected virtual void OnDeserialization(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected virtual void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected virtual void OnDisposed() { }
+        protected virtual void OnGetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected virtual void OnInitialize() { }
+        protected virtual void OnInsert(Radical.Model.InsertEventArgs<T> e) { }
+        protected virtual void OnInsertCompleted(int index, T value) { }
+        protected virtual void OnMoveCompleted(int oldIndex, int newIndex, T value) { }
+        protected virtual void OnRemoveCompleted(T value, int index) { }
+        protected virtual void OnSetValueAt(Radical.Model.SetValueAtEventArgs<T> e) { }
+        protected virtual void OnSetValueAtCompleted(int index, T newValue, T overwrittenValue) { }
+        public bool Remove(T item) { }
+        protected bool Remove(T item, bool notify) { }
+        public void RemoveAt(int index) { }
+        protected void RemoveAt(int index, bool notify) { }
+        public void Reverse() { }
+        protected void SetValueAt(int index, T value) { }
+        public T[] ToArray() { }
+        protected virtual void UnwireListItem(T item) { }
+        protected virtual void WireListItem(T item) { }
+        public class CollectionSettings<T>
+        {
+            public CollectionSettings() { }
+            public bool NotifyListItemPropertyChanged { get; set; }
+        }
+    }
+    public abstract class EntityItemViewFilterBase<T> : Radical.ComponentModel.IEntityItemViewFilter, Radical.ComponentModel.IEntityItemViewFilter<T>
+    {
+        protected EntityItemViewFilterBase() { }
+        public abstract bool ShouldInclude(T item);
+        public override string ToString() { }
+    }
+    public class EntityItemViewSortComparer<T> : System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>>
+    {
+        public EntityItemViewSortComparer(System.ComponentModel.ListSortDescriptionCollection sortDescriptions) { }
+        protected System.ComponentModel.ListSortDescriptionCollection SortDescriptions { get; }
+        public int Compare(Radical.ComponentModel.IEntityItemView<T> x, Radical.ComponentModel.IEntityItemView<T> y) { }
+        protected virtual int OnCompare(Radical.ComponentModel.IEntityItemView<T> x, Radical.ComponentModel.IEntityItemView<T> y) { }
+    }
+    public class EntityItemView<T> : Radical.ComponentModel.IEntityItemView, Radical.ComponentModel.IEntityItemView<T>, Radical.ComponentModel.INotifyEditableObject, System.ComponentModel.ICustomTypeDescriptor, System.ComponentModel.IDataErrorInfo, System.ComponentModel.IEditableObject, System.ComponentModel.INotifyPropertyChanged
+    {
+        public EntityItemView(Radical.ComponentModel.IEntityView<T> view, T entityItem) { }
+        public T EntityItem { get; }
+        public virtual string Error { get; }
+        public virtual string this[string columnName] { get; }
+        public Radical.ComponentModel.IEntityView<T> View { get; }
+        public event System.EventHandler EditBegun;
+        public event System.EventHandler EditCanceled;
+        public event System.EventHandler EditEnded;
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public void BeginEdit() { }
+        public void CancelEdit() { }
+        public void Delete() { }
+        public void EndEdit() { }
+        public override bool Equals(object obj) { }
+        public TValue GetCustomValue<TValue>(string customPropertyName) { }
+        public override int GetHashCode() { }
+        public void NotifyPropertyChanged(string propertyName) { }
+        protected virtual void OnEditBegun() { }
+        protected virtual void OnEditCanceled() { }
+        protected virtual void OnEditEnded() { }
+        protected virtual void OnInit() { }
+        protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args) { }
+        public void SetCustomValue<TValue>(string customPropertyName, TValue value) { }
+    }
+    public class EntityView<T> : Radical.ComponentModel.IEntityView, Radical.ComponentModel.IEntityView<T>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.IEntityItemView<T>>, System.Collections.ICollection, System.Collections.IEnumerable, System.Collections.IList, System.ComponentModel.IBindingList, System.ComponentModel.IBindingListView, System.ComponentModel.ICancelAddNew, System.ComponentModel.IComponent, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.IRaiseItemChangedEvents, System.ComponentModel.ISupportInitialize, System.ComponentModel.ITypedList, System.IDisposable, System.IServiceProvider
+    {
+        public EntityView() { }
+        public EntityView(Radical.ComponentModel.IEntityCollection<T> list) { }
+        public EntityView(T[] list) { }
+        public EntityView(System.Collections.Generic.IList<T> list) { }
+        protected EntityView(System.Collections.IList list) { }
+        public virtual bool AllowEdit { get; set; }
+        public bool AllowMove { get; }
+        public virtual bool AllowNew { get; set; }
+        public virtual bool AllowRemove { get; set; }
+        public virtual bool AllowSort { get; set; }
+        public bool AutoGenerateProperties { get; set; }
+        [System.ComponentModel.BrowsableAttribute(false)]
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public virtual System.ComponentModel.IContainer Container { get; }
+        public int Count { get; }
+        protected System.Collections.Generic.IDictionary<string, Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>> CustomProperties { get; }
+        public System.Collections.IList DataSource { get; }
+        [System.ComponentModel.BrowsableAttribute(false)]
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public virtual bool DesignMode { get; }
+        protected System.ComponentModel.EventHandlerList Events { get; }
+        public Radical.ComponentModel.IEntityItemViewFilter<T> Filter { get; set; }
+        protected Radical.Model.Indexer<T> Indexer { get; }
+        public bool IsAddingNew { get; }
+        public bool IsArrayBased { get; }
+        public bool IsDetached { get; }
+        public bool IsFiltered { get; }
+        protected bool IsInitializing { get; }
+        public bool IsSorted { get; }
+        public Radical.ComponentModel.IEntityItemView<T> this[int index] { get; set; }
+        protected Radical.ComponentModel.IEntityItemView<T> PendingNewItem { get; }
+        public bool RaisesItemChangedEvents { get; }
+        [System.ComponentModel.BrowsableAttribute(false)]
+        [System.ComponentModel.DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public virtual System.ComponentModel.ISite Site { get; set; }
+        public System.ComponentModel.ListSortDescriptionCollection SortDescriptions { get; }
+        public System.ComponentModel.ListSortDirection SortDirection { get; }
+        public System.ComponentModel.PropertyDescriptor SortProperty { get; }
+        public event System.EventHandler<Radical.Model.AddingNewEventArgs<T>> AddingNew;
+        public event System.EventHandler Disposed;
+        public event System.EventHandler FilterChanged;
+        public event System.ComponentModel.ListChangedEventHandler ListChanged;
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public event System.EventHandler SortChanged;
+        public void AddIndex(System.ComponentModel.PropertyDescriptor property) { }
+        public void AddIndex(string propertyName) { }
+        public Radical.ComponentModel.IEntityItemView<T> AddNew(System.Action<Radical.Model.AddingNewEventArgs<T>> addNewInterceptor) { }
+        public Radical.ComponentModel.IEntityItemView<T> AddNew() { }
+        public virtual Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName, string displayName) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, System.Func<TProperty> defaultValueInterceptor) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter, System.Func<TProperty> defaultValueInterceptor) { }
+        public void ApplyFilter(System.Predicate<T> predicate) { }
+        public void ApplySort(System.ComponentModel.PropertyDescriptor property, System.ComponentModel.ListSortDirection direction) { }
+        public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts) { }
+        public void ApplySort(string sort) { }
+        public void ApplySort(System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>> comparer) { }
+        public void CancelNew() { }
+        public void CancelNew(int itemIndex) { }
+        protected internal Radical.ComponentModel.IEntityItemView<T> CreateEntityItemView(T sourceItem) { }
+        protected virtual void Dispose(bool disposing) { }
+        public void Dispose() { }
+        public void EndNew() { }
+        public void EndNew(int itemIndex) { }
+        protected override void Finalize() { }
+        public int Find(System.ComponentModel.PropertyDescriptor property, object key) { }
+        public int Find(string propertyName, object key) { }
+        public System.Collections.Generic.IEnumerable<Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>> GetCustomProperties() { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> GetCustomProperty(string name) { }
+        public TValue GetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> owner) { }
+        protected virtual TValue GetCustomPropertyValueCore<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> owner) { }
+        public System.ComponentModel.PropertyDescriptor GetProperty(string name) { }
+        public virtual object GetService(System.Type serviceType) { }
+        public int IndexOf(Radical.ComponentModel.IEntityItemView<T> item) { }
+        public int IndexOf(T item) { }
+        protected bool IsInAddingNewQueue(T item) { }
+        public bool IsPropertyMappingDefined(string propertyName) { }
+        public void Move(int sourceIndex, int newIndex) { }
+        public void Move(Radical.ComponentModel.IEntityItemView<T> item, int newIndex) { }
+        protected virtual void OnAddingNew(Radical.Model.AddingNewEventArgs<T> e) { }
+        protected virtual void OnCancelNew(int itemIndex) { }
+        protected virtual void OnCollectionChanged(Radical.Model.RebuildIndexesEventArgs e, Radical.ComponentModel.CollectionChangeType changeType) { }
+        protected virtual Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> OnCreateDescriptor(System.Reflection.PropertyInfo property) { }
+        protected virtual System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>> OnCreateSortComparer() { }
+        protected virtual void OnEndNew(int index) { }
+        protected virtual void OnEndNewCompleted(Radical.Model.RebuildIndexesEventArgs e) { }
+        protected virtual void OnEntityItemViewEditBegun(Radical.ComponentModel.IEntityItemView<T> item) { }
+        protected virtual void OnEntityItemViewEditCanceled(Radical.ComponentModel.IEntityItemView<T> item) { }
+        protected virtual void OnEntityItemViewEditEnded(Radical.Model.RebuildIndexesEventArgs e) { }
+        protected virtual void OnFilterChanged() { }
+        protected virtual System.ComponentModel.PropertyDescriptorCollection OnGetItemProperties(System.ComponentModel.PropertyDescriptor[] listAccessors) { }
+        protected virtual string OnGetListName(System.ComponentModel.PropertyDescriptor[] listAccessors) { }
+        protected virtual void OnInit() { }
+        protected virtual void OnListChanged(System.ComponentModel.ListChangedEventArgs e) { }
+        protected virtual void OnLoad() { }
+        protected void OnPropertyChanged<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected virtual void OnPropertyChanged(string propertyName) { }
+        protected virtual void OnRemovedAt(Radical.Model.RebuildIndexesEventArgs e) { }
+        protected virtual void OnSortChanged() { }
+        protected internal void OnUnwireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
+        protected internal void OnWireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
+        public virtual void Refresh() { }
+        public void RemoveFilter() { }
+        public void RemoveIndex(System.ComponentModel.PropertyDescriptor property) { }
+        public void RemoveIndex(string propertyName) { }
+        public virtual bool RemovePropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty) { }
+        public bool RemovePropertyMapping(string propertyName) { }
+        public void RemoveSort() { }
+        public void SetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> owner, TValue value) { }
+    }
+    public sealed class Indexer<T> : System.Collections.Generic.ICollection<Radical.ComponentModel.IEntityItemView<T>>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.IEntityItemView<T>>, System.Collections.IEnumerable
+    {
+        public int Count { get; }
+        public bool IsReadOnly { get; }
+        public Radical.ComponentModel.IEntityItemView<T> this[int index] { get; }
+        public void Add(Radical.ComponentModel.IEntityItemView<T> item) { }
+        public void AddIndex(System.ComponentModel.PropertyDescriptor property) { }
+        public void ApplySort() { }
+        public void Clear() { }
+        public void ClearIndexes() { }
+        public bool Contains(Radical.ComponentModel.IEntityItemView<T> item) { }
+        public bool Contains(T item) { }
+        public void CopyTo(Radical.ComponentModel.IEntityItemView<>[] array, int arrayIndex) { }
+        public int Find(System.ComponentModel.PropertyDescriptor property, object key) { }
+        public int FindEntityItemViewIndexInView(int entityIndexInDataSource) { }
+        public int FindObjectIndexInDataSource(int objectItemViewIndexInView) { }
+        public int IndexOf(T item) { }
+        public int IndexOf(Radical.ComponentModel.IEntityItemView<T> item) { }
+        public void Rebuild() { }
+        public bool Remove(Radical.ComponentModel.IEntityItemView<T> item) { }
+        public void RemoveAt(int index) { }
+        public void RemoveIndex(System.ComponentModel.PropertyDescriptor property) { }
+        public void RemoveSort() { }
+    }
+    public class InsertEventArgs<T> : System.ComponentModel.CancelEventArgs
+    {
+        public InsertEventArgs(int index, T newValue) { }
+        public int Index { get; }
+        public T NewValue { get; }
+    }
+    public abstract class MementoEntity : Radical.Model.Entity, Radical.ComponentModel.ChangeTracking.IMemento
+    {
+        protected MementoEntity() { }
+        protected MementoEntity(Radical.ComponentModel.ChangeTracking.IChangeTrackingService memento) { }
+        protected MementoEntity(bool registerAsTransient) { }
+        protected MementoEntity(Radical.ComponentModel.ChangeTracking.ChangeTrackingRegistration registration) { }
+        protected MementoEntity(Radical.ComponentModel.ChangeTracking.IChangeTrackingService memento, Radical.ComponentModel.ChangeTracking.ChangeTrackingRegistration registration) { }
+        protected MementoEntity(Radical.ComponentModel.ChangeTracking.IChangeTrackingService memento, bool registerAsTransient) { }
+        protected virtual bool IsTracking { get; }
+        protected Radical.ComponentModel.ChangeTracking.IChange CacheChange<T>(string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> restore) { }
+        protected Radical.ComponentModel.ChangeTracking.IChange CacheChange<T>(string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> restore, Radical.ComponentModel.ChangeTracking.CommitCallback<T> commit) { }
+        protected Radical.ComponentModel.ChangeTracking.IChange CacheChange<T>(string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> restore, Radical.ComponentModel.ChangeTracking.CommitCallback<T> commit, Radical.ComponentModel.ChangeTracking.AddChangeBehavior direction) { }
+        protected virtual Radical.ComponentModel.ChangeTracking.IChange CacheChangeOnRejectCallback<T>(string propertyName, T value, Radical.ComponentModel.ChangeTracking.RejectCallback<T> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<T> commitCallback, Radical.ComponentModel.ChangeTracking.ChangeRejectedEventArgs<T> args) { }
+        protected override void Dispose(bool disposing) { }
+        protected override void EnsureNotDisposed() { }
+        protected override Radical.Model.PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName) { }
+        protected Radical.ComponentModel.ChangeTracking.IChangeTrackingService GetTrackingService() { }
+        protected virtual void OnMementoChanged(Radical.ComponentModel.ChangeTracking.IChangeTrackingService newMemento, Radical.ComponentModel.ChangeTracking.IChangeTrackingService oldMemento) { }
+        protected virtual void OnRegisterTransient(Radical.ComponentModel.ChangeTracking.TransientRegistration transientRegistration) { }
+        protected void RegisterTransient() { }
+        protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T value, bool trackChanges) { }
+        protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, System.Func<T> lazyValue, bool trackChanges) { }
+        protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges) { }
+        protected override void SetPropertyValue<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
+    }
+    public class MementoEntityCollection<T> : Radical.Model.EntityCollection<T>, Radical.ComponentModel.ChangeTracking.IMemento
+    {
+        public MementoEntityCollection() { }
+        public MementoEntityCollection(int capacity) { }
+        public MementoEntityCollection(System.Collections.Generic.IEnumerable<T> collection) { }
+        public MementoEntityCollection(System.Collections.Generic.IList<T> storage) { }
+        protected MementoEntityCollection(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected bool IsCachingSuspended { get; }
+        protected virtual bool IsTracking { get; }
+        public Radical.ComponentModel.ChangeTracking.IChangeTrackingService Memento { get; set; }
+        public override void BeginInit() { }
+        public override void EndInit(bool notify) { }
+        protected override void OnAddCompleted(int index, T value) { }
+        protected override void OnAddRangeCompleted(System.Collections.Generic.IEnumerable<T> addedRange) { }
+        protected override void OnClearCompleted(System.Collections.Generic.IEnumerable<T> clearedItems) { }
+        protected override void OnDeserialization(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected override void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        protected override void OnInitialize() { }
+        protected override void OnInsertCompleted(int index, T value) { }
+        protected virtual void OnMementoChanged(Radical.ComponentModel.ChangeTracking.IChangeTrackingService newMemento, Radical.ComponentModel.ChangeTracking.IChangeTrackingService oldMemento) { }
+        protected override void OnMoveCompleted(int oldIndex, int newIndex, T value) { }
+        protected override void OnRemoveCompleted(T value, int index) { }
+        protected override void OnSetValueAtCompleted(int index, T newValue, T overwrittenValue) { }
+        protected void ResumeCaching() { }
+        protected void SuspendCaching() { }
+        protected override void WireListItem(T item) { }
+    }
+    public class static MementoPropertyMetadata
+    {
+        public static Radical.Model.MementoPropertyMetadata<T> Create<T>(object propertyOwner, System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        public static Radical.Model.MementoPropertyMetadata<T> Create<T>(object propertyOwner, string propertyName) { }
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Property | System.AttributeTargets.All)]
+    public class MementoPropertyMetadataAttribute : Radical.Model.PropertyMetadataAttribute
+    {
+        public MementoPropertyMetadataAttribute() { }
+        public bool TrackChanges { get; set; }
+    }
+    public class MementoPropertyMetadata<T> : Radical.Model.PropertyMetadata<T>, Radical.ComponentModel.ChangeTracking.IMementoPropertyMetadata
+    {
+        public MementoPropertyMetadata(object propertyOwner, string propertyName) { }
+        public MementoPropertyMetadata(object propertyOwner, System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        public bool TrackChanges { get; set; }
+        public Radical.Model.MementoPropertyMetadata<T> DisableChangesTracking() { }
+        public Radical.Model.MementoPropertyMetadata<T> EnableChangesTracking() { }
+    }
+    public sealed class PredicateEntityItemViewFilter<T> : Radical.Model.EntityItemViewFilterBase<T>
+    {
+        public PredicateEntityItemViewFilter(System.Predicate<T> filterDelegate) { }
+        public PredicateEntityItemViewFilter(System.Predicate<T> filterDelegate, string filterName) { }
+        public System.Predicate<T> FilterDelegate { get; }
+        public override bool ShouldInclude(T item) { }
+        public override string ToString() { }
+    }
+    public abstract class PropertyMetadata : System.IDisposable
+    {
+        protected PropertyMetadata(object propertyOwner, string propertyName) { }
+        public bool NotifyChanges { get; set; }
+        protected System.Reflection.PropertyInfo Property { get; }
+        public string PropertyName { get; }
+        public Radical.Model.PropertyMetadata AddCascadeChangeNotifications<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        public Radical.Model.PropertyMetadata AddCascadeChangeNotifications(string property) { }
+        public static Radical.Model.PropertyMetadata<T> Create<T>(object propertyOwner, System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        public static Radical.Model.PropertyMetadata<T> Create<T>(object propertyOwner, string propertyName) { }
+        public Radical.Model.PropertyMetadata DisableChangesNotifications() { }
+        protected virtual void Dispose(bool disposing) { }
+        public void Dispose() { }
+        public Radical.Model.PropertyMetadata EnableChangesNotifications() { }
+        protected override void Finalize() { }
+        public System.Collections.Generic.IEnumerable<string> GetCascadeChangeNotifications() { }
+        public abstract Radical.Model.PropertyValue GetDefaultValue();
+        public Radical.Model.PropertyMetadata RemoveCascadeChangeNotifications<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        public Radical.Model.PropertyMetadata RemoveCascadeChangeNotifications(string property) { }
+        public abstract void SetDefaultValue(Radical.Model.PropertyValue value);
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Property | System.AttributeTargets.All)]
+    public class PropertyMetadataAttribute : System.Attribute
+    {
+        public PropertyMetadataAttribute() { }
+    }
+    public class PropertyMetadata<T> : Radical.Model.PropertyMetadata
+    {
+        public PropertyMetadata(object propertyOwner, string propertyName) { }
+        public PropertyMetadata(object propertyOwner, System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        public virtual T DefaultValue { get; set; }
+        public System.Func<T> DefaultValueInterceptor { get; set; }
+        protected override void Dispose(bool disposing) { }
+        public override Radical.Model.PropertyValue GetDefaultValue() { }
+        public Radical.Model.PropertyMetadata<T> OnChanged(System.Action<Radical.Model.PropertyValueChangedArgs<T>> propertyChangedHandler) { }
+        public override void SetDefaultValue(Radical.Model.PropertyValue value) { }
+        public Radical.Model.PropertyMetadata<T> WithDefaultValue(T defaultValue) { }
+        public Radical.Model.PropertyMetadata<T> WithDefaultValue(System.Func<T> defaultValueInterceptor) { }
+    }
+    public abstract class PropertyValue
+    {
+        protected PropertyValue() { }
+        public abstract object GetValue();
+    }
+    public class PropertyValueChangedArgs<T>
+    {
+        public PropertyValueChangedArgs(T newValue, T oldValue) { }
+        public T NewValue { get; }
+        public T OldValue { get; }
+    }
+    public delegate void PropertyValueChanged<T>(Radical.Model.PropertyValueChangedArgs<T> e);
+    public class PropertyValue<T> : Radical.Model.PropertyValue
+    {
+        public PropertyValue(T value) { }
+        public T Value { get; }
+        public override object GetValue() { }
+    }
+    public class RebuildIndexesEventArgs : System.ComponentModel.CancelEventArgs
+    {
+        public RebuildIndexesEventArgs(int index) { }
+        public int Index { get; }
+    }
+    public class SetValueAtEventArgs<T> : Radical.Model.InsertEventArgs<T>
+    {
+        public SetValueAtEventArgs(int index, T newValue, T oldValue) { }
+        public T OldValue { get; }
+    }
+    [System.AttributeUsageAttribute(System.AttributeTargets.Property | System.AttributeTargets.All)]
+    public sealed class SkipPropertyValidationAttribute : System.Attribute
+    {
+        public SkipPropertyValidationAttribute() { }
+    }
+    public sealed class ViewAllEntityItemViewFilter<T> : Radical.Model.EntityItemViewFilterBase<T>
+    {
+        public static Radical.ComponentModel.IEntityItemViewFilter Instance { get; }
+        public override bool ShouldInclude(T item) { }
+        public override string ToString() { }
+    }
+}
+namespace Radical.Model.Factories
+{
+    public class ChangeTrackingServiceFactory : Radical.ComponentModel.Factories.IChangeTrackingServiceFactory
+    {
+        public ChangeTrackingServiceFactory(System.IServiceProvider container) { }
+        public Radical.ComponentModel.ChangeTracking.IChangeTrackingService Create() { }
+    }
+}
+namespace Radical.Observers
+{
+    public abstract class AbstractMonitor : Radical.ComponentModel.IMonitor
+    {
+        protected AbstractMonitor() { }
+        protected AbstractMonitor(Radical.ComponentModel.IDispatcher dispatcher) { }
+        protected AbstractMonitor(object source) { }
+        protected AbstractMonitor(object source, Radical.ComponentModel.IDispatcher dispatcher) { }
+        protected Radical.ComponentModel.IDispatcher Dispatcher { get; }
+        protected System.WeakReference WeakSource { get; }
+        public event System.EventHandler Changed;
+        public void NotifyChanged() { }
+        protected virtual void OnChanged() { }
+        protected abstract void OnStopMonitoring(bool targetDisposed);
+        protected virtual void StartMonitoring(object source) { }
+        public void StopMonitoring() { }
+    }
+    public abstract class AbstractMonitor<T> : Radical.Observers.AbstractMonitor, Radical.ComponentModel.IMonitor, Radical.ComponentModel.IMonitor<T>
+    {
+        protected AbstractMonitor(T source) { }
+        protected AbstractMonitor(T source, Radical.ComponentModel.IDispatcher dispatcher) { }
+        protected AbstractMonitor() { }
+        protected AbstractMonitor(Radical.ComponentModel.IDispatcher dispatcher) { }
+        public T Source { get; }
+    }
+    public class static BrokerObserver
+    {
+        public static Radical.Observers.MessageBrokerMonitor Using(Radical.ComponentModel.Messaging.IMessageBroker broker) { }
+    }
+    public class EntityViewListChangedMonitor : Radical.Observers.AbstractMonitor<Radical.ComponentModel.IEntityView>
+    {
+        public EntityViewListChangedMonitor(Radical.ComponentModel.IEntityView source) { }
+        public EntityViewListChangedMonitor() { }
+        public EntityViewListChangedMonitor(Radical.ComponentModel.IEntityView source, Radical.ComponentModel.IDispatcher dispatcher) { }
+        public EntityViewListChangedMonitor(Radical.ComponentModel.IDispatcher dispatcher) { }
+        public void Observe(Radical.ComponentModel.IEntityView source) { }
+        protected override void OnStopMonitoring(bool targetDisposed) { }
+        protected override void StartMonitoring(object source) { }
+    }
+    public class MementoMonitor : Radical.Observers.AbstractMonitor<Radical.ComponentModel.ChangeTracking.IChangeTrackingService>
+    {
+        public MementoMonitor(Radical.ComponentModel.ChangeTracking.IChangeTrackingService source) { }
+        public MementoMonitor(Radical.ComponentModel.ChangeTracking.IChangeTrackingService source, Radical.ComponentModel.IDispatcher dispatcher) { }
+        protected override void OnStopMonitoring(bool targetDisposed) { }
+    }
+    public class static MementoObserver
+    {
+        public static Radical.Observers.MementoMonitor Monitor(Radical.ComponentModel.ChangeTracking.IChangeTrackingService source) { }
+        public static Radical.Observers.MementoMonitor Monitor(Radical.ComponentModel.ChangeTracking.IChangeTrackingService source, Radical.ComponentModel.IDispatcher dispatcher) { }
+    }
+    public class MessageBrokerMonitor : Radical.Observers.AbstractMonitor<Radical.ComponentModel.Messaging.IMessageBroker>
+    {
+        public MessageBrokerMonitor(Radical.ComponentModel.Messaging.IMessageBroker broker) { }
+        protected override void OnStopMonitoring(bool targetDisposed) { }
+        public Radical.Observers.MessageBrokerMonitor WaitingFor<TMessage>()
+            where TMessage :  class { }
+        public Radical.Observers.MessageBrokerMonitor WaitingFor<TMessage>(Radical.ComponentModel.Messaging.InvocationModel invocationModel)
+            where TMessage :  class { }
+        public Radical.Observers.MessageBrokerMonitor WaitingFor<TMessage>(System.Func<TMessage, bool> filter)
+            where TMessage :  class { }
+        public Radical.Observers.MessageBrokerMonitor WaitingFor<TMessage>(System.Func<TMessage, bool> filter, Radical.ComponentModel.Messaging.InvocationModel invocationModel)
+            where TMessage :  class { }
+    }
+    public class PropertyChangedMonitor : Radical.Observers.AbstractMonitor
+    {
+        public PropertyChangedMonitor(System.ComponentModel.INotifyPropertyChanged source) { }
+        protected override void OnStopMonitoring(bool targetDisposed) { }
+        protected override void StartMonitoring(object source) { }
+    }
+    public class PropertyChangedMonitor<T> : Radical.Observers.AbstractMonitor<T>, System.ComponentModel.INotifyPropertyChanged
+        where T : System.ComponentModel.INotifyPropertyChanged
+    {
+        public PropertyChangedMonitor(T source) { }
+        public PropertyChangedMonitor(T source, Radical.ComponentModel.IDispatcher dispatcher) { }
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public Radical.Observers.PropertyChangedMonitor<T> Observe(string property) { }
+        public Radical.Observers.PropertyChangedMonitor<T> Observe<TProperty>(System.Linq.Expressions.Expression<System.Func<T, TProperty>> property) { }
+        public Radical.Observers.PropertyChangedMonitor<T> Observe<TProperty>(System.Linq.Expressions.Expression<System.Func<T, TProperty>> property, System.Action<T, string> callback) { }
+        public Radical.Observers.PropertyChangedMonitor<T> Observe(string propertyName, System.Action<T, string> callback) { }
+        public Radical.Observers.PropertyChangedMonitor<T> Observe<TValue>(Radical.Observable<TValue> property) { }
+        protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs args) { }
+        protected override void OnStopMonitoring(bool targetDisposed) { }
+        public Radical.Observers.PropertyChangedMonitor<T> StopObserving<TProperty>(System.Linq.Expressions.Expression<System.Func<T, TProperty>> property) { }
+        public Radical.Observers.PropertyChangedMonitor<T> StopObserving<TValue>(Radical.Observable<TValue> property) { }
+    }
+    public class static PropertyObserver
+    {
+        public static Radical.Observers.PropertyChangedMonitor<T> For<T>(T source)
+            where T : System.ComponentModel.INotifyPropertyChanged { }
+        public static Radical.Observers.PropertyChangedMonitor<T> For<T>(T source, Radical.ComponentModel.IDispatcher dispatcher)
+            where T : System.ComponentModel.INotifyPropertyChanged { }
+        public static Radical.Observers.PropertyChangedMonitor ForAllPropertiesOf<T>(T source)
+            where T : System.ComponentModel.INotifyPropertyChanged { }
+    }
+}
+namespace Radical.Reflection
+{
+    public class static AssemblyExtensions
+    {
+        public static T GetAttribute<T>(this System.Reflection.Assembly assembly)
+            where T : System.Attribute { }
+        public static System.Collections.Generic.IEnumerable<T> GetAttributes<T>(this System.Reflection.Assembly assembly)
+            where T : System.Attribute { }
+        public static bool IsAttributeDefined<T>(this System.Reflection.Assembly assembly)
+            where T : System.Attribute { }
+        public static bool TryGetAttribute<T>(this System.Reflection.Assembly assembly, out T attribute)
+            where T : System.Attribute { }
+    }
+    public delegate object Function();
+    public class static GetAssembly
+    {
+        public static System.Reflection.Assembly ThatContains<T>() { }
+    }
+    public delegate object LateBoundMethod(object target, object[] arguments);
+    public delegate void LateBoundVoidMethod(object target, object[] arguments);
+    public class static MemberInfoExtensions
+    {
+        public static T GetAttribute<T>(this System.Reflection.MemberInfo memberInfo)
+            where T : System.Attribute { }
+        public static T GetAttribute<T>(this System.Reflection.MemberInfo memberInfo, bool inherit)
+            where T : System.Attribute { }
+        public static T[] GetAttributes<T>(this System.Reflection.MemberInfo memberInfo)
+            where T : System.Attribute { }
+        public static T[] GetAttributes<T>(this System.Reflection.MemberInfo memberInfo, bool inherit)
+            where T : System.Attribute { }
+        public static bool IsAttributeDefined<T>(this System.Reflection.MemberInfo memberInfo)
+            where T : System.Attribute { }
+        public static bool IsAttributeDefined<T>(this System.Reflection.MemberInfo memberInfo, bool inherit)
+            where T : System.Attribute { }
+        public static bool TryGetAttribute<T>(this System.Reflection.MemberInfo memberInfo, out T attribute)
+            where T : System.Attribute { }
+    }
+    public class static MethodInfoExtensions
+    {
+        public static Radical.Reflection.LateBoundMethod CreateDelegate(this System.Reflection.MethodInfo method) { }
+        public static Radical.Reflection.LateBoundVoidMethod CreateVoidDelegate(this System.Reflection.MethodInfo method) { }
+    }
+    public class static ObjectExtensions
+    {
+        public static System.Func<T> CreateFastPropertyGetter<T>(this object target, string propertyName) { }
+        public static System.Func<T> CreateFastPropertyGetter<T>(this object target, System.Reflection.PropertyInfo property) { }
+        public static Radical.Reflection.Function CreateFastPropertyGetter(this object target, System.Reflection.PropertyInfo property) { }
+    }
+    public class static ParameterInfoExtension
+    {
+        public static T GetAttribute<T>(this System.Reflection.ParameterInfo memberInfo)
+            where T : System.Attribute { }
+        public static T[] GetAttributes<T>(this System.Reflection.ParameterInfo memberInfo)
+            where T : System.Attribute { }
+        public static bool IsAttributeDefined<T>(this System.Reflection.ParameterInfo memberInfo)
+            where T : System.Attribute { }
+    }
+    public class static TypeExtensions
+    {
+        public static System.Collections.Generic.IEnumerable<System.Type> GetDescendants(System.Type type) { }
+        public static System.Collections.Generic.IEnumerable<System.Type> GetInheritanceChain(this System.Type type) { }
+        public static System.Collections.Generic.IEnumerable<System.Type> GetInheritanceChain(this System.Type type, System.Func<System.Type, bool> breakIf) { }
+        public static bool Is<T>(this System.Type type) { }
+        public static bool Is(this System.Type type, System.Type otherType) { }
+        public static string ToShortNameString(this System.Type type) { }
+        public static string ToShortString(this System.Type type) { }
+        public static string ToString(this System.Type type, string format) { }
+    }
+}
+namespace Radical.Threading
+{
+    public class LimitedConcurrencyLevelTaskScheduler : System.Threading.Tasks.TaskScheduler
+    {
+        public LimitedConcurrencyLevelTaskScheduler(int maxDegreeOfParallelism) { }
+        public virtual int MaximumConcurrencyLevel { get; }
+        protected virtual System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> GetScheduledTasks() { }
+        protected virtual void QueueTask(System.Threading.Tasks.Task task) { }
+        protected virtual bool TryDequeue(System.Threading.Tasks.Task task) { }
+        protected virtual bool TryExecuteTaskInline(System.Threading.Tasks.Task task, bool taskWasPreviouslyQueued) { }
+    }
+    public sealed class NullDispatcher : Radical.ComponentModel.IDispatcher
+    {
+        public NullDispatcher() { }
+        public bool IsSafe { get; }
+        public void Dispatch(System.Action action) { }
+        public void Dispatch<T>(T arg, System.Action<T> action) { }
+        public void Dispatch<T1, T2>(T1 arg1, T2 arg2, System.Action<T1, T2> action) { }
+        public TResult Dispatch<TResult>(System.Func<TResult> func) { }
+        public void Invoke(System.Delegate d, params object[] args) { }
+    }
+}
+namespace Radical.Validation
+{
+    public class static ArrayEnsureExtension
+    {
+        public static Radical.Validation.IEnsure<T[]> ContainsIndex<T>(this Radical.Validation.IEnsure<T[]> validator, int index) { }
+    }
+    [System.FlagsAttribute()]
+    public enum Boundary
+    {
+        IncludeLower = 1,
+        ExcludeLower = 2,
+        IncludeHigher = 4,
+        ExcludeHigher = 8,
+        ExcludeBounds = 10,
+        IncludeBounds = 5,
+    }
+    public class static ComparableEnsureExtension
+    {
+        public static Radical.Validation.IEnsure<T> IsGreaterThen<T>(this Radical.Validation.IEnsure<T> validator, T expected)
+            where T : System.IComparable<> { }
+        public static Radical.Validation.IEnsure<T> IsGreaterThen<T>(this Radical.Validation.IEnsure<T> validator, T expected, Radical.Validation.Or boundaryBehavior)
+            where T : System.IComparable<> { }
+        public static Radical.Validation.IEnsure<T> IsSmallerThen<T>(this Radical.Validation.IEnsure<T> validator, T expected)
+            where T : System.IComparable<> { }
+        public static Radical.Validation.IEnsure<T> IsSmallerThen<T>(this Radical.Validation.IEnsure<T> validator, T expected, Radical.Validation.Or boundaryBehavior)
+            where T : System.IComparable<> { }
+        public static Radical.Validation.IEnsure<T> IsWithin<T>(this Radical.Validation.IEnsure<T> validator, T lowerBoundary, T higherBoundary)
+            where T : System.IComparable<> { }
+        public static Radical.Validation.IEnsure<T> IsWithin<T>(this Radical.Validation.IEnsure<T> validator, T lowerBoundary, T higherBoundary, Radical.Validation.Boundary boundaryBehavior)
+            where T : System.IComparable<> { }
+    }
+    public class static Ensure
+    {
+        public static Radical.Validation.SourceInfoLoadStrategy SourceInfoLoadStrategy { get; set; }
+        public static Radical.Validation.IConfigurableEnsure<T> That<T>(T obj) { }
+        public static Radical.Validation.IConfigurableEnsure<T> That<T>(T obj, Radical.Validation.SourceInfoLoadStrategy strategy) { }
+    }
+    public class static EnsureExtensions
+    {
+        public static Radical.Validation.IEnsure<T> IsNotNull<T>(this Radical.Validation.IEnsure<T> validator)
+            where T :  class { }
+    }
+    public sealed class Ensure<T> : Radical.Validation.IConfigurableEnsure<T>, Radical.Validation.IEnsure<T>
+    {
+        public string Name { get; }
+        public string UserErrorMessage { get; }
+        public T Value { get; }
+        public Radical.Validation.IEnsure<T> Else(System.Action<T> action) { }
+        public Radical.Validation.IEnsure<T> Else(System.Action<T, string> action) { }
+        public string GetFullErrorMessage(string validatorSpecificMessage) { }
+        public string GetFullErrorMessage() { }
+        public T GetValue() { }
+        public K GetValue<K>()
+            where K : T { }
+        public Radical.Validation.IEnsure<T> If(System.Predicate<T> predicate) { }
+        public Radical.Validation.IEnsure<T> Is(T value) { }
+        public Radical.Validation.IEnsure<T> IsFalse(System.Predicate<T> func) { }
+        public Radical.Validation.IEnsure<T> IsNot(T value) { }
+        public Radical.Validation.IEnsure<T> IsTrue(System.Predicate<T> func) { }
+        public Radical.Validation.IEnsure<T> Named(string parameterName) { }
+        public Radical.Validation.IEnsure<T> Named(System.Linq.Expressions.Expression<System.Func<T>> parameterName) { }
+        public Radical.Validation.IEnsure<T> Then(System.Action<T> action) { }
+        public Radical.Validation.IEnsure<T> Then(System.Action<T, string> action) { }
+        public Radical.Validation.IEnsure<T> ThenThrow(System.Func<Radical.Validation.IEnsure<T>, System.Exception> builder) { }
+        public void Throw(System.Exception error) { }
+        public Radical.Validation.IEnsure<T> WithMessage(string errorMessage) { }
+        public Radical.Validation.IEnsure<T> WithMessage(string errorMessage, params object[] formatArgs) { }
+        public Radical.Validation.IEnsure<T> WithPreview(System.Action<Radical.Validation.IEnsure<T>, System.Exception> validationFailurePreview) { }
+    }
+    public class static EnumEnsureExtensions
+    {
+        public static Radical.Validation.IEnsure<T> IsDefined<T>(this Radical.Validation.IEnsure<T> validator) { }
+    }
+    public class static GuidEnsureExtension
+    {
+        public static Radical.Validation.IEnsure<System.Guid> IsNotEmpty(this Radical.Validation.IEnsure<System.Guid> validator) { }
+    }
+    public interface IConfigurableEnsure<T> : Radical.Validation.IEnsure<T>
+    {
+        Radical.Validation.IEnsure<T> Named(System.Linq.Expressions.Expression<System.Func<T>> parameterName);
+        Radical.Validation.IEnsure<T> Named(string parameterName);
+    }
+    public interface IEnsure<T>
+    {
+        string Name { get; }
+        string UserErrorMessage { get; }
+        T Value { get; }
+        Radical.Validation.IEnsure<T> Else(System.Action<T, string> action);
+        Radical.Validation.IEnsure<T> Else(System.Action<T> action);
+        string GetFullErrorMessage(string validatorSpecificMessage);
+        string GetFullErrorMessage();
+        T GetValue();
+        K GetValue<K>()
+            where K : T;
+        Radical.Validation.IEnsure<T> If(System.Predicate<T> predicate);
+        Radical.Validation.IEnsure<T> Is(T value);
+        Radical.Validation.IEnsure<T> IsFalse(System.Predicate<T> func);
+        Radical.Validation.IEnsure<T> IsNot(T value);
+        Radical.Validation.IEnsure<T> IsTrue(System.Predicate<T> func);
+        Radical.Validation.IEnsure<T> Then(System.Action<T, string> action);
+        Radical.Validation.IEnsure<T> Then(System.Action<T> action);
+        Radical.Validation.IEnsure<T> ThenThrow(System.Func<Radical.Validation.IEnsure<T>, System.Exception> builder);
+        void Throw(System.Exception error);
+        Radical.Validation.IEnsure<T> WithMessage(string errorMessage);
+        Radical.Validation.IEnsure<T> WithMessage(string errorMessage, params object[] formatArgs);
+        Radical.Validation.IEnsure<T> WithPreview(System.Action<Radical.Validation.IEnsure<T>, System.Exception> validationFailurePreview);
+    }
+    public enum Or
+    {
+        Equal = 0,
+        NotEqual = 1,
+    }
+    public enum SourceInfoLoadStrategy
+    {
+        Load = 0,
+        Skip = 1,
+        LazyLoad = 2,
+    }
+    public class static StringEnsureExtension
+    {
+        public static Radical.Validation.IEnsure<string> IsNotEmpty(this Radical.Validation.IEnsure<string> validator) { }
+        public static Radical.Validation.IEnsure<string> IsNotNullNorEmpty(this Radical.Validation.IEnsure<string> validator) { }
+        public static Radical.Validation.IEnsure<string> Matches(this Radical.Validation.IEnsure<string> validator, string regExPattern) { }
+    }
+    public class static TypeEnsureExtension
+    {
+        public static Radical.Validation.IEnsure<System.Type> Is<T>(this Radical.Validation.IEnsure<System.Type> validator) { }
+    }
+    public class ValidationContext<T>
+    {
+        public ValidationContext(T entity, Radical.ComponentModel.Validation.IValidator<T> validator) { }
+        public ValidationContext(T entity, Radical.ComponentModel.Validation.IValidator<T> validator, Radical.Validation.ValidationResults results) { }
+        public T Entity { get; }
+        public string PropertyName { get; set; }
+        public Radical.Validation.ValidationResults Results { get; }
+        public string RuleSet { get; set; }
+        public Radical.ComponentModel.Validation.IValidator<T> Validator { get; }
+    }
+    public class ValidationError
+    {
+        public ValidationError(string key, string keyDisplayName, System.Collections.Generic.IEnumerable<string> detectedProblems) { }
+        public System.Collections.Generic.IEnumerable<string> DetectedProblems { get; }
+        public string Key { get; }
+        public string KeyDisplayName { get; }
+        public void AddProblems(System.Collections.Generic.IEnumerable<string> problems) { }
+        public static Radical.Validation.ValidationError Create<T>(System.Linq.Expressions.Expression<System.Func<T>> key, string keyDisplayName, params string[] detectedProblems) { }
+        public override string ToString() { }
+    }
+    public class static ValidationErrors
+    {
+        public static readonly System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> Empty;
+    }
+    public class ValidationResults
+    {
+        public static readonly Radical.Validation.ValidationResults Empty;
+        public ValidationResults() { }
+        public ValidationResults(System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> errors) { }
+        public System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> Errors { get; }
+        public bool IsValid { get; }
+        public void AddError<T>(System.Linq.Expressions.Expression<System.Func<T>> key, string displayName, string[] detectedProblems) { }
+        public void AddError(Radical.Validation.ValidationError error) { }
+        public override string ToString() { }
+    }
+    public class ValidationTools
+    {
+        public ValidationTools() { }
+        public string GetPropertyDisplayName(string propertyName, object entity) { }
+    }
+    public sealed class ValidatorBaseFactory : Radical.ComponentModel.Validation.IValidatorFactory
+    {
+        public ValidatorBaseFactory() { }
+        public Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>() { }
+        public Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>(string ruleSet) { }
+    }
+    public class ValidatorBase<T> : Radical.ComponentModel.Validation.IValidator, Radical.ComponentModel.Validation.IValidator<T>
+    {
+        public ValidatorBase(string ruleSet) { }
+        public string RuleSet { get; }
+        public Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Action<Radical.Validation.ValidationContext<T>> rule) { }
+        public Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, string error) { }
+        public Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, System.Func<Radical.Validation.ValidationContext<T>, string> error) { }
+        protected virtual string GetPropertyDisplayName(string propertyName, object entity) { }
+        public bool IsValid(T entity) { }
+        protected virtual void OnValidate(Radical.Validation.ValidationContext<T> context) { }
+        public Radical.Validation.ValidationResults Validate(T entity) { }
+        public Radical.Validation.ValidationResults Validate(T entity, string propertyName) { }
+        public Radical.Validation.ValidationResults Validate<TProperty>(T entity, System.Linq.Expressions.Expression<System.Func<T, TProperty>> property) { }
+    }
+}

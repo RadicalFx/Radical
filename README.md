@@ -1,17 +1,20 @@
-[![Stories in Ready](https://badge.waffle.io/Radicalfx/Radical.png?label=ready&title=Ready)](http://waffle.io/radicalfx/housekeeping)
-[![Stories in Progress](https://badge.waffle.io/Radicalfx/Radical.png?label=in progress&title=In Progress)](http://waffle.io/radicalfx/housekeeping)
-
-[![Build status](https://ci.appveyor.com/api/projects/status/vbesg43on820lmhy?svg=true)](https://ci.appveyor.com/project/radical-bot/radical)
+# Radical
 
 --
 
-![Radical logo](Radical.png)
+![Radical logo](assets/icon.png)
 
 *Radical* is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern.
 
-In the [documentation](https://github.com/RadicalFx/radical/wiki)  there are a lot of articles that details the Radical concepts and give some guidences on how to use it.
+In the [documentation](http://docs.radicalframework.com/) there are a lot of articles that details the Radical concepts and give some guidences on how to use it.
 
 The Radical framework is not tied to WPF but some part of it can be freely used, and will be valuable, even in services and web applications.
+
+### Build Dependencies
+
+Requirements on the developer machine. Optional:
+
+* DirectX SDK
 
 ### Release
 
