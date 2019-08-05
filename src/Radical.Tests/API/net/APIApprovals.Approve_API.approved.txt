@@ -432,7 +432,7 @@ namespace Radical.ChangeTracking.Specialized
         protected CollectionChangeDescriptor() { }
     }
     public abstract class CollectionChange<TDescriptor, TItem> : Radical.ChangeTracking.Change<TDescriptor>, Radical.ComponentModel.ChangeTracking.IChange
-        where TDescriptor : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<>
+        where TDescriptor : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<TItem>
     {
         protected CollectionChange(object owner, TDescriptor descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<TDescriptor> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<TDescriptor> commitCallback, string description) { }
         public TDescriptor Descriptor { get; }
@@ -1331,7 +1331,7 @@ namespace Radical.Model
         protected Radical.Model.PropertyMetadata<T> GetPropertyMetadata<T>(string propertyName) { }
         protected T GetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
         protected T GetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, System.Func<T> initialValueSetter) { }
-        protected internal T GetPropertyValue<T>(string propertyName) { }
+        protected virtual T GetPropertyValue<T>(string propertyName) { }
         protected virtual bool HasMetadata<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
         protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) { }
         protected void OnPropertyChanged(string propertyName) { }
@@ -1524,7 +1524,7 @@ namespace Radical.Model
         public void ApplySort(System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>> comparer) { }
         public void CancelNew() { }
         public void CancelNew(int itemIndex) { }
-        protected internal Radical.ComponentModel.IEntityItemView<T> CreateEntityItemView(T sourceItem) { }
+        protected virtual Radical.ComponentModel.IEntityItemView<T> CreateEntityItemView(T sourceItem) { }
         protected virtual void Dispose(bool disposing) { }
         public void Dispose() { }
         public void EndNew() { }
@@ -1564,8 +1564,8 @@ namespace Radical.Model
         protected virtual void OnPropertyChanged(string propertyName) { }
         protected virtual void OnRemovedAt(Radical.Model.RebuildIndexesEventArgs e) { }
         protected virtual void OnSortChanged() { }
-        protected internal void OnUnwireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
-        protected internal void OnWireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
+        protected virtual void OnUnwireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
+        protected virtual void OnWireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
         public virtual void Refresh() { }
         public void RemoveFilter() { }
         public void RemoveIndex(System.ComponentModel.PropertyDescriptor property) { }
@@ -1976,17 +1976,17 @@ namespace Radical.Validation
     public class static ComparableEnsureExtension
     {
         public static Radical.Validation.IEnsure<T> IsGreaterThen<T>(this Radical.Validation.IEnsure<T> validator, T expected)
-            where T : System.IComparable<> { }
+            where T : System.IComparable<T> { }
         public static Radical.Validation.IEnsure<T> IsGreaterThen<T>(this Radical.Validation.IEnsure<T> validator, T expected, Radical.Validation.Or boundaryBehavior)
-            where T : System.IComparable<> { }
+            where T : System.IComparable<T> { }
         public static Radical.Validation.IEnsure<T> IsSmallerThen<T>(this Radical.Validation.IEnsure<T> validator, T expected)
-            where T : System.IComparable<> { }
+            where T : System.IComparable<T> { }
         public static Radical.Validation.IEnsure<T> IsSmallerThen<T>(this Radical.Validation.IEnsure<T> validator, T expected, Radical.Validation.Or boundaryBehavior)
-            where T : System.IComparable<> { }
+            where T : System.IComparable<T> { }
         public static Radical.Validation.IEnsure<T> IsWithin<T>(this Radical.Validation.IEnsure<T> validator, T lowerBoundary, T higherBoundary)
-            where T : System.IComparable<> { }
+            where T : System.IComparable<T> { }
         public static Radical.Validation.IEnsure<T> IsWithin<T>(this Radical.Validation.IEnsure<T> validator, T lowerBoundary, T higherBoundary, Radical.Validation.Boundary boundaryBehavior)
-            where T : System.IComparable<> { }
+            where T : System.IComparable<T> { }
     }
     public class static Ensure
     {
