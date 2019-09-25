@@ -59,7 +59,7 @@ namespace Radical.Tests.Validation
                 string actual = obj.GetFullErrorMessage("validator specific message");
 
                 var containsClassName = actual.Contains(typeof(ValidatorTest).Name);
-                var containsMethodName = actual.Contains(typeof(ValidatorTest).Name);
+                var containsMethodName = actual.Contains("ensure_getFullErrorMessage_should_contain_ClassName_even_w_lazy_load");
 
                 containsClassName.Should().Be.True();
                 containsMethodName.Should().Be.True();
