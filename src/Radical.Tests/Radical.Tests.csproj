@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="4.3.0" NoWarn="NU1701" />
-    <PackageReference Include="ApprovalUtilities" Version="4.3.0" NoWarn="NU1701" />
+    <PackageReference Include="ApprovalUtilities" Version="4.4.0" NoWarn="NU1701" />
     <PackageReference Include="FakeItEasy" Version="5.4.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
