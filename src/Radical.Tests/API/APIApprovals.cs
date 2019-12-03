@@ -16,14 +16,9 @@ namespace Radical.Tests.API
         [TestCategory("APIApprovals")]
         [MethodImpl(MethodImplOptions.NoInlining)]
         [UseReporter(typeof(DiffReporter))]
-#if NET_CORE
-        [UseApprovalSubdirectory("netstandard")]
-#else
-        [UseApprovalSubdirectory("net")]
-#endif
         public void Approve_API()
         {
-            var publicApi = ApiGenerator.GeneratePublicApi(typeof(IMessageBroker).Assembly);
+            var publicApi = ApiGenerator.GeneratePublicApi(typeof(IMessageBroker).Assembly, options: null);
 
             Approvals.Verify(publicApi);
         }
