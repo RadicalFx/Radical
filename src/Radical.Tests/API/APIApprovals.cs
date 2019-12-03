@@ -23,7 +23,7 @@ namespace Radical.Tests.API
 #endif
         public void Approve_API()
         {
-            var publicApi = ApiGenerator.GeneratePublicApi(typeof(IMessageBroker).Assembly);
+            var publicApi = ApiGenerator.GeneratePublicApi(typeof(IMessageBroker).Assembly, options: null);
 
             Approvals.Verify(publicApi);
         }
