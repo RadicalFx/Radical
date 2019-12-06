@@ -1356,23 +1356,15 @@ namespace Radical.Model
         public EntityCollection(System.Collections.Generic.IList<T> storage) { }
         public EntityCollection(int capacity) { }
         protected EntityCollection(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public int Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public Radical.ComponentModel.IEntityView<T> Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected System.ComponentModel.EventHandlerList Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected virtual bool Item { get; }
+        public virtual bool AllowNew { get; }
+        public int Count { get; }
+        public Radical.ComponentModel.IEntityView<T> DefaultView { get; }
+        protected System.ComponentModel.EventHandlerList Events { get; }
+        public bool IsInitializing { get; }
+        protected virtual bool IsReadOnly { get; }
         public T this[int index] { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public Radical.Model.EntityCollection<T>.CollectionSettings Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected System.Collections.Generic.IList<T> Item { get; }
+        public Radical.Model.EntityCollection<T>.CollectionSettings Settings { get; }
+        protected System.Collections.Generic.IList<T> Storage { get; }
         public event System.EventHandler<Radical.ComponentModel.CollectionChangedEventArgs<T>> CollectionChanged;
         public event System.EventHandler Disposed;
         public void Add(T item) { }
@@ -1445,13 +1437,10 @@ namespace Radical.Model
     public class EntityItemView<T> : Radical.ComponentModel.IEntityItemView, Radical.ComponentModel.IEntityItemView<T>, Radical.ComponentModel.INotifyEditableObject, System.ComponentModel.ICustomTypeDescriptor, System.ComponentModel.IDataErrorInfo, System.ComponentModel.IEditableObject, System.ComponentModel.INotifyPropertyChanged
     {
         public EntityItemView(Radical.ComponentModel.IEntityView<T> view, T entityItem) { }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public T Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual string Item { get; }
+        public T EntityItem { get; }
+        public virtual string Error { get; }
         public virtual string this[string columnName] { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public Radical.ComponentModel.IEntityView<T> Item { get; }
+        public Radical.ComponentModel.IEntityView<T> View { get; }
         public event System.EventHandler EditBegun;
         public event System.EventHandler EditCanceled;
         public event System.EventHandler EditEnded;
@@ -1478,65 +1467,39 @@ namespace Radical.Model
         public EntityView(System.Collections.Generic.IList<T> list) { }
         protected EntityView(System.Collections.IList list) { }
         public EntityView(T[] list) { }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual bool Item { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual bool Item { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual bool Item { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual bool Item { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; set; }
+        public bool AllowMove { get; }
+        public bool AutoGenerateProperties { get; set; }
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual System.ComponentModel.IContainer Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public int Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected System.Collections.Generic.IDictionary<string, Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>> Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public System.Collections.IList Item { get; }
+        public virtual System.ComponentModel.IContainer Container { get; }
+        public int Count { get; }
+        protected System.Collections.Generic.IDictionary<string, Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>> CustomProperties { get; }
+        public System.Collections.IList DataSource { get; }
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected System.ComponentModel.EventHandlerList Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public Radical.ComponentModel.IEntityItemViewFilter<T> Item { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected Radical.Model.Indexer<T> Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected bool Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
+        public virtual bool DesignMode { get; }
+        protected System.ComponentModel.EventHandlerList Events { get; }
+        public Radical.ComponentModel.IEntityItemViewFilter<T> Filter { get; set; }
+        protected Radical.Model.Indexer<T> Indexer { get; }
+        public bool IsAddingNew { get; }
+        public bool IsArrayBased { get; }
+        public bool IsDetached { get; }
+        public bool IsFiltered { get; }
+        protected bool IsInitializing { get; }
+        public bool IsSorted { get; }
         public Radical.ComponentModel.IEntityItemView<T> this[int index] { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        protected Radical.ComponentModel.IEntityItemView<T> Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
+        protected Radical.ComponentModel.IEntityItemView<T> PendingNewItem { get; }
+        public bool RaisesItemChangedEvents { get; }
+        public System.ComponentModel.ListSortDescriptionCollection SortDescriptions { get; }
+        public System.ComponentModel.ListSortDirection SortDirection { get; }
+        public System.ComponentModel.PropertyDescriptor SortProperty { get; }
+        public virtual bool AllowEdit { get; set; }
+        public virtual bool AllowNew { get; set; }
+        public virtual bool AllowRemove { get; set; }
+        public virtual bool AllowSort { get; set; }
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public virtual System.ComponentModel.ISite Item { get; set; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public System.ComponentModel.ListSortDescriptionCollection Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public System.ComponentModel.ListSortDirection Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public System.ComponentModel.PropertyDescriptor Item { get; }
+        public virtual System.ComponentModel.ISite Site { get; set; }
         public event System.EventHandler<Radical.Model.AddingNewEventArgs<T>> AddingNew;
         public event System.EventHandler Disposed;
         public event System.EventHandler FilterChanged;
@@ -1614,10 +1577,8 @@ namespace Radical.Model
     }
     public sealed class Indexer<T> : System.Collections.Generic.ICollection<Radical.ComponentModel.IEntityItemView<T>>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.IEntityItemView<T>>, System.Collections.IEnumerable
     {
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public int Item { get; }
-        [System.Runtime.CompilerServices.IndexerName("Item")]
-        public bool Item { get; }
+        public int Count { get; }
+        public bool IsReadOnly { get; }
         public Radical.ComponentModel.IEntityItemView<T> this[int index] { get; }
         public void Add(Radical.ComponentModel.IEntityItemView<T> item) { }
         public void AddIndex(System.ComponentModel.PropertyDescriptor property) { }
