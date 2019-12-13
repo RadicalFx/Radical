@@ -23,5 +23,6 @@ test: off
 
 artifacts:
 - path: ./**/*.nupkg
+- path: ./**/*.snupkg
 
 deploy: off
