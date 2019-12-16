@@ -19,12 +19,6 @@ namespace Radical
             where T : System.IComparable { }
         public static bool IsSameAs<T>(this T[] source, T[] other, System.Func<T, T, bool> itemComparer) { }
     }
-    public class BootableFacility : Radical.ComponentModel.IPuzzleContainerFacility
-    {
-        public BootableFacility() { }
-        public void Initialize(Radical.ComponentModel.IPuzzleContainer container) { }
-        public void Teardown(Radical.ComponentModel.IPuzzleContainer container) { }
-    }
     public static class ConsoleColorExtensions
     {
         public static System.IDisposable AsForegroundColor(this System.ConsoleColor color) { }
@@ -59,11 +53,6 @@ namespace Radical
             where T :  class { }
         public static System.Collections.Generic.IEnumerable<T> AsEntityItems<T>(this Radical.ComponentModel.IEntityView<T> view)
             where T :  class { }
-    }
-    public static class EntryBuilder
-    {
-        public static Radical.ComponentModel.IPuzzleContainerEntry For(System.Type type) { }
-        public static Radical.ComponentModel.IPuzzleContainerEntry<T> For<T>() { }
     }
     public static class EnumExtensions
     {
@@ -175,35 +164,6 @@ namespace Radical
         protected virtual void OnPropertyChanged() { }
         public static T op_Implicit(Radical.Observable<T> val) { }
     }
-    public class PuzzleContainer : Radical.ComponentModel.IPuzzleContainer, System.IDisposable
-    {
-        public PuzzleContainer() { }
-        public event System.EventHandler<Radical.ComponentModel.ComponentRegisteredEventArgs> ComponentRegistered;
-        public Radical.ComponentModel.IPuzzleContainer AddFacility(Radical.ComponentModel.IPuzzleContainerFacility facility) { }
-        public Radical.ComponentModel.IPuzzleContainer AddFacility<TFacility>()
-            where TFacility : Radical.ComponentModel.IPuzzleContainerFacility { }
-        public void Dispose() { }
-        protected virtual void Dispose(bool disposing) { }
-        protected override void Finalize() { }
-        public System.Collections.Generic.IEnumerable<Radical.ComponentModel.IPuzzleContainerFacility> GetFacilities() { }
-        public object GetService(System.Type serviceType) { }
-        public bool IsRegistered(System.Type type) { }
-        public bool IsRegistered<TService>() { }
-        protected virtual void OnComponentRegistered(Radical.ComponentModel.ComponentRegisteredEventArgs e) { }
-        public Radical.ComponentModel.IPuzzleContainer Register(Radical.ComponentModel.IContainerEntry entry) { }
-        public Radical.ComponentModel.IPuzzleContainer Register(System.Collections.Generic.IEnumerable<Radical.ComponentModel.IContainerEntry> entries) { }
-        public object Resolve(System.Type serviceType) { }
-        public object Resolve(string key, System.Type serviceType) { }
-        public TService Resolve<TService>() { }
-        public System.Collections.Generic.IEnumerable<object> ResolveAll(System.Type t) { }
-        public System.Collections.Generic.IEnumerable<T> ResolveAll<T>() { }
-        public void SetupWith(System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider, params Radical.ComponentModel.IPuzzleSetupDescriptor[] descriptors) { }
-    }
-    public class PuzzleContainerServiceProviderFacade : System.IServiceProvider
-    {
-        public PuzzleContainerServiceProviderFacade(Radical.ComponentModel.IPuzzleContainer container) { }
-        public object GetService(System.Type serviceType) { }
-    }
     public class RadicalException : System.Exception
     {
         public RadicalException() { }
@@ -234,12 +194,6 @@ namespace Radical
         public static string ValueOr(this string value, string defaultValue, System.Func<string, string> ifValue) { }
         public static string ValueOrEmpty(this string value) { }
         public static string ValueOrEmpty(this string value, System.Func<string, string> ifValue) { }
-    }
-    public sealed class SubscribeToMessageFacility : Radical.ComponentModel.IPuzzleContainerFacility
-    {
-        public SubscribeToMessageFacility() { }
-        public void Initialize(Radical.ComponentModel.IPuzzleContainer container) { }
-        public void Teardown(Radical.ComponentModel.IPuzzleContainer container) { }
     }
     public class SuspendedChangeTrackingServiceException : Radical.RadicalException
     {
@@ -1166,12 +1120,6 @@ namespace Radical.Helpers
             public static readonly string MasterCard;
             public static readonly string Visa;
         }
-    }
-    public class OSHelper
-    {
-        public OSHelper() { }
-        public int GetOSArchitecture() { }
-        public string GetOSInfo() { }
     }
     public static class Password
     {
