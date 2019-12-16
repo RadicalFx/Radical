@@ -17,7 +17,6 @@ namespace Radical.Model
     /// A full custom implementation of IBindingListView
     /// </summary>
     /// <typeparam name="T">The underlying object type</typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1039:ListsAreStronglyTyped"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1010:CollectionsShouldImplementGenericInterface")]
     public class EntityView<T> :
         IBindingList,
         IBindingListView,

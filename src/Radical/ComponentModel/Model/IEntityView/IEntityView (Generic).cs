@@ -11,7 +11,6 @@ namespace Radical.ComponentModel
     /// in order to build, for example, runtime evaluated columns dynamically.
     /// </summary>
     /// <typeparam name="T">The type (System.Type) of objects managed by this collection view.</typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IEntityView<T> :
         IEntityView,
         IEnumerable<IEntityItemView<T>>

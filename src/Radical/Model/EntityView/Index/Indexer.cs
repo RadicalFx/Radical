@@ -9,13 +9,12 @@ namespace Radical.Model
     using System.Linq;
 
     /// <summary>
-    /// The Indexer class is primarly an Index manager for the View,
+    /// The Indexer class is primarily an Index manager for the View,
     /// its primary target is to handle the relationship between an
     /// EntityItemView instance and the Index of the encapsulated T 
     /// element in the DataSource.
     /// </summary>
     /// <typeparam name="T">The type of the element encapsulated by the EntityView.</typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public sealed class Indexer<T> :
         IEnumerable,
         ICollection<IEntityItemView<T>>
