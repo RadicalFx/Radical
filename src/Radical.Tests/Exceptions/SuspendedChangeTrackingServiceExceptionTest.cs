@@ -1,25 +1,56 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical;
 
 namespace Radical.Tests.Exceptions
 {
     [TestClass()]
-    public class SuspendedChangeTrackingServiceExceptionTest : RadicalExceptionTest
+    public class SuspendedChangeTrackingServiceExceptionTest
     {
-        protected override Exception CreateMock()
+        Exception Process(Exception source)
         {
-            return new SuspendedChangeTrackingServiceException();
+            using MemoryStream ms = new MemoryStream();
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(ms, source);
+            ms.Position = 0;
+
+            return formatter.Deserialize(ms) as Exception;
         }
 
-        protected override Exception CreateMock(string message)
+        [TestMethod()]
+        public void serialization()
         {
-            return new SuspendedChangeTrackingServiceException(message);
+            Exception expected = new SuspendedChangeTrackingServiceException();
+            Exception target = Process(expected);
+
+            Assert.AreEqual(expected.GetType(), target.GetType());
+            Assert.AreEqual(expected.Message, target.Message);
+            Assert.AreEqual(expected.InnerException?.Message, target.InnerException?.Message);
+            Assert.AreEqual(expected.StackTrace, target.StackTrace);
         }
 
-        protected override Exception CreateMock(string message, Exception innerException)
+        [TestMethod()]
+        public void ctor_string()
         {
-            return new SuspendedChangeTrackingServiceException(message, innerException);
+            string expectedMessage = "message";
+            Exception target = new SuspendedChangeTrackingServiceException(expectedMessage);
+
+            Assert.AreEqual(expectedMessage, target.Message);
+            Assert.IsNull(target.InnerException);
+        }
+
+        [TestMethod()]
+        public void ctor_string_innerException()
+        {
+            string expectedMessage = "message";
+            Exception expectedInnerException = new StackOverflowException();
+
+            Exception target = new SuspendedChangeTrackingServiceException(expectedMessage, expectedInnerException);
+
+            Assert.AreEqual(expectedMessage, target.Message);
+            Assert.AreEqual(expectedInnerException, target.InnerException);
         }
     }
 }

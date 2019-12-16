@@ -111,11 +111,10 @@ namespace Radical
     }
     public class MissingContractAttributeException : Radical.RadicalException
     {
-        public MissingContractAttributeException() { }
-        public MissingContractAttributeException(string message) { }
         public MissingContractAttributeException(System.Type targetType) { }
         protected MissingContractAttributeException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         public MissingContractAttributeException(string message, System.Exception innerException) { }
+        public MissingContractAttributeException(System.Type targetType, string message) { }
         public System.Type TargetType { get; }
         public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }

@@ -2,45 +2,58 @@
 
 using System;
 using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical;
 
 namespace Radical.Tests.Exceptions
 {
     [TestClass()]
-    public class MissingContractAttributeExceptionTest : RadicalExceptionTest
+    public class MissingContractAttributeExceptionTest
     {
-        protected override Exception CreateMock()
+        Exception Process(Exception source)
         {
-            return new MissingContractAttributeException();
+            using MemoryStream ms = new MemoryStream();
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(ms, source);
+            ms.Position = 0;
+
+            return formatter.Deserialize(ms) as Exception;
         }
 
-        protected override Exception CreateMock(string message)
+        [TestMethod()]
+        public void serialization()
         {
-            return new MissingContractAttributeException(message);
+            Exception expected = new MissingContractAttributeException(typeof(MissingContractAttributeExceptionTest));
+            Exception target = Process(expected);
+
+            Assert.AreEqual(expected.GetType(), target.GetType());
+            Assert.AreEqual(expected.Message, target.Message);
+            Assert.AreEqual(expected.InnerException?.Message, target.InnerException?.Message);
+            Assert.AreEqual(expected.StackTrace, target.StackTrace);
         }
 
-        protected override Exception CreateMock(string message, Exception innerException)
+        [TestMethod()]
+        public void ctor_string()
         {
-            return new MissingContractAttributeException(message, innerException);
+            string expectedMessage = "message";
+            Exception target = new MissingContractAttributeException(typeof(MissingContractAttributeExceptionTest), expectedMessage);
+
+            Assert.AreEqual(expectedMessage, target.Message);
+            Assert.IsNull(target.InnerException);
         }
 
-        protected virtual MissingContractAttributeException CreateMock(Type targetType)
+        [TestMethod()]
+        public void ctor_string_innerException()
         {
-            return new MissingContractAttributeException(targetType);
-        }
+            string expectedMessage = "message";
+            Exception expectedInnerException = new StackOverflowException();
 
-        protected override void AssertAreEqual(Exception ex1, Exception ex2)
-        {
-            base.AssertAreEqual(ex1, ex2);
+            Exception target = new MissingContractAttributeException(expectedMessage, expectedInnerException);
 
-            MissingContractAttributeException mex1 = ex1 as MissingContractAttributeException;
-            MissingContractAttributeException mex2 = ex2 as MissingContractAttributeException;
-
-            Assert.IsNotNull(mex1);
-            Assert.IsNotNull(mex2);
-
-            Assert.AreEqual<Type>(mex1.TargetType, mex2.TargetType);
+            Assert.AreEqual(expectedMessage, target.Message);
+            Assert.AreEqual(expectedInnerException, target.InnerException);
         }
 
         [TestMethod()]
@@ -49,7 +62,7 @@ namespace Radical.Tests.Exceptions
             Type expected = typeof(string);
             string expectedmessage = string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", expected.FullName);
 
-            MissingContractAttributeException target = this.CreateMock(expected);
+            MissingContractAttributeException target = new MissingContractAttributeException(expected);
 
             Assert.AreEqual<string>(expectedmessage, target.Message);
             Assert.AreEqual<Type>(expected, target.TargetType);
