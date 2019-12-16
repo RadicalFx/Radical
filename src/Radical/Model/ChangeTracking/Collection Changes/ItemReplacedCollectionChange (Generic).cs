@@ -1,11 +1,11 @@
-﻿namespace Radical.ChangeTracking.Specialized
-{
-    using Radical.Collections;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
+namespace Radical.ChangeTracking.Specialized
+{
     /// <summary>
     /// Identifies that an item in a collection has been replaced.
     /// </summary>
@@ -29,9 +29,9 @@
         /// Gets the changed entities.
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<Object> GetChangedEntities()
+        public override IEnumerable<object> GetChangedEntities()
         {
-            return new ReadOnlyCollection<Object>(new Object[] { this.Descriptor.NewItem, this.Descriptor.ReplacedItem });
+            return new ReadOnlyCollection<object>(new List<object> { Descriptor.NewItem, Descriptor.ReplacedItem });
         }
 
         /// <summary>
@@ -45,16 +45,16 @@
             Ensure.That(changedItem)
                 .If(o =>
                {
-                   return !Object.Equals(o, this.Descriptor.NewItem) &&
-                       !Object.Equals(o, this.Descriptor.ReplacedItem);
+                   return !object.Equals(o, Descriptor.NewItem) &&
+                       !object.Equals(o, Descriptor.ReplacedItem);
                })
                 .Then(o => { throw new ArgumentOutOfRangeException(); });
 
-            if (Object.Equals(changedItem, this.Descriptor.NewItem))
+            if (object.Equals(changedItem, Descriptor.NewItem))
             {
                 return ProposedActions.Update | ProposedActions.Create;
             }
-            else if (Object.Equals(changedItem, this.Descriptor.ReplacedItem))
+            else if (object.Equals(changedItem, Descriptor.ReplacedItem))
             {
                 return ProposedActions.Delete | ProposedActions.Dispose;
             }
@@ -71,11 +71,11 @@
         public override IChange Clone()
         {
             return new ItemReplacedCollectionChange<T>(
-                this.Owner,
-                this.Descriptor,
-                this.RejectCallback,
-                this.CommitCallback,
-                this.Description);
+                Owner,
+                Descriptor,
+                RejectCallback,
+                CommitCallback,
+                Description);
         }
     }
 }

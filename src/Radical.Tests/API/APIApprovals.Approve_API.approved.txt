@@ -228,9 +228,9 @@ namespace Radical.ChangeTracking
         public Radical.ComponentModel.ChangeTracking.ProposedActions Action { get; }
         public object Target { get; }
     }
-    public class Advisory : Radical.Collections.ReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, Radical.ComponentModel.ChangeTracking.IAdvisory, Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.ICollection, System.Collections.IEnumerable
+    public class Advisory : System.Collections.ObjectModel.ReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, Radical.ComponentModel.ChangeTracking.IAdvisory, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.Generic.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.IEnumerable
     {
-        public Advisory(System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction> actions) { }
+        public Advisory(System.Collections.Generic.IList<Radical.ComponentModel.ChangeTracking.IAdvisedAction> actions) { }
     }
     public class AdvisoryBuilder : Radical.ComponentModel.ChangeTracking.IAdvisoryBuilder
     {
@@ -245,9 +245,9 @@ namespace Radical.ChangeTracking
         public Radical.ComponentModel.ChangeTracking.IChange Position { get; }
         public System.Collections.Generic.IEnumerable<object> TransientEntities { get; }
     }
-    public class ChangeSet : Radical.Collections.ReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, Radical.ComponentModel.ChangeTracking.IChangeSet, Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.ICollection, System.Collections.IEnumerable
+    public class ChangeSet : System.Collections.ObjectModel.ReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, Radical.ComponentModel.ChangeTracking.IChangeSet, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.Generic.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.IEnumerable
     {
-        public ChangeSet(System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange> changes) { }
+        public ChangeSet(System.Collections.Generic.IList<Radical.ComponentModel.ChangeTracking.IChange> changes) { }
     }
     public class ChangeSetDistinctVisitor : Radical.ComponentModel.ChangeTracking.IChangeSetDistinctVisitor
     {
@@ -458,20 +458,6 @@ namespace Radical.ChangeTracking.Specialized
         public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
     }
 }
-namespace Radical.Collections
-{
-    public class ReadOnlyCollection<T> : Radical.ComponentModel.IReadOnlyCollection<T>, System.Collections.Generic.IEnumerable<T>, System.Collections.ICollection, System.Collections.IEnumerable
-    {
-        public ReadOnlyCollection(System.Collections.Generic.IEnumerable<T> source) { }
-        public int Count { get; }
-        protected System.Collections.Generic.List<T> InnerList { get; }
-        public bool IsSynchronized { get; }
-        public object SyncRoot { get; }
-        public void CopyTo(System.Array array, int index) { }
-        public void CopyTo(T[] array, int index) { }
-        public System.Collections.IEnumerator GetEnumerator() { }
-    }
-}
 namespace Radical.ComponentModel.ChangeTracking
 {
     public enum AddChangeBehavior
@@ -535,7 +521,7 @@ namespace Radical.ComponentModel.ChangeTracking
         Radical.ComponentModel.ChangeTracking.ProposedActions Action { get; }
         object Target { get; }
     }
-    public interface IAdvisory : Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.ICollection, System.Collections.IEnumerable { }
+    public interface IAdvisory : System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.Generic.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IAdvisedAction>, System.Collections.IEnumerable { }
     public interface IAdvisoryBuilder
     {
         Radical.ComponentModel.ChangeTracking.IAdvisory GenerateAdvisory(Radical.ComponentModel.ChangeTracking.IChangeTrackingService svc, Radical.ComponentModel.ChangeTracking.IChangeSet changeSet);
@@ -563,7 +549,7 @@ namespace Radical.ComponentModel.ChangeTracking
         System.Collections.Generic.IEnumerable<object> GetChangedEntities();
         void Reject(Radical.ComponentModel.ChangeTracking.RejectReason reason);
     }
-    public interface IChangeSet : Radical.ComponentModel.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.ICollection, System.Collections.IEnumerable { }
+    public interface IChangeSet : System.Collections.Generic.IEnumerable<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.Generic.IReadOnlyCollection<Radical.ComponentModel.ChangeTracking.IChange>, System.Collections.IEnumerable { }
     public interface IChangeSetDistinctVisitor
     {
         System.Collections.Generic.IDictionary<object, Radical.ComponentModel.ChangeTracking.IChange> Visit(Radical.ComponentModel.ChangeTracking.IChangeSet changeSet);
@@ -911,7 +897,6 @@ namespace Radical.ComponentModel
     {
         void Setup(Radical.ComponentModel.IPuzzleContainer container, System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider);
     }
-    public interface IReadOnlyCollection<T> : System.Collections.Generic.IEnumerable<T>, System.Collections.ICollection, System.Collections.IEnumerable { }
     public enum Lifestyle
     {
         Singleton = 0,
@@ -1507,7 +1492,7 @@ namespace Radical.Model
         protected virtual void OnListChanged(System.ComponentModel.ListChangedEventArgs e) { }
         protected virtual void OnLoad() { }
         protected virtual void OnPropertyChanged(string propertyName) { }
-        protected void OnPropertyChanged<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
+        protected void OnPropertyChanged<TProperty>(System.Linq.Expressions.Expression<System.Func<TProperty>> property) { }
         protected virtual void OnRemovedAt(Radical.Model.RebuildIndexesEventArgs e) { }
         protected virtual void OnSortChanged() { }
         protected virtual void OnUnwireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }

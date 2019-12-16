@@ -1,20 +1,19 @@
-﻿namespace Radical.ChangeTracking
-{
-    using Radical.Collections;
-    using Radical.ComponentModel.ChangeTracking;
-    using System.Collections.Generic;
+﻿using Radical.ComponentModel.ChangeTracking;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
+namespace Radical.ChangeTracking
+{
     /// <summary>
-    /// A change set is a readonly list of <see cref="IChange"/> instance.
+    /// A change set is a read-only list of <see cref="IChange"/> instance.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public class ChangeSet : ReadOnlyCollection<IChange>, IChangeSet
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangeSet"/> class.
         /// </summary>
         /// <param name="changes">The changes.</param>
-        public ChangeSet(IEnumerable<IChange> changes)
+        public ChangeSet(IList<IChange> changes)
             : base(changes)
         {
 

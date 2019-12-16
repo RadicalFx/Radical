@@ -1,11 +1,11 @@
-﻿namespace Radical.ChangeTracking.Specialized
-{
-    using Radical.Collections;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
+namespace Radical.ChangeTracking.Specialized
+{
     /// <summary>
     /// Identifies that an item in a collection has been moved.
     /// </summary>
@@ -19,7 +19,7 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public ItemMovedCollectionChange(Object owner, ItemMovedDescriptor<T> descriptor, RejectCallback<ItemMovedDescriptor<T>> rejectCallback, CommitCallback<ItemMovedDescriptor<T>> commitCallback, string description)
+        public ItemMovedCollectionChange(object owner, ItemMovedDescriptor<T> descriptor, RejectCallback<ItemMovedDescriptor<T>> rejectCallback, CommitCallback<ItemMovedDescriptor<T>> commitCallback, string description)
             : base(owner, descriptor, rejectCallback, commitCallback, description)
         {
 
@@ -29,9 +29,9 @@
         /// Gets the changed entities.
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<Object> GetChangedEntities()
+        public override IEnumerable<object> GetChangedEntities()
         {
-            return new ReadOnlyCollection<Object>(new Object[] { this.Descriptor.Item });
+            return new ReadOnlyCollection<object>(new List<object> { Descriptor.Item });
         }
 
         /// <summary>
@@ -43,7 +43,7 @@
         public override ProposedActions GetAdvisedAction(object changedItem)
         {
             Ensure.That(changedItem)
-                .If(o => !Object.Equals(o, this.Descriptor.Item))
+                .If(o => !Object.Equals(o, Descriptor.Item))
                 .Then(o => { throw new ArgumentOutOfRangeException(); });
 
             return ProposedActions.Update | ProposedActions.Create;
@@ -56,11 +56,11 @@
         public override IChange Clone()
         {
             return new ItemMovedCollectionChange<T>(
-                this.Owner,
-                this.Descriptor,
-                this.RejectCallback,
-                this.CommitCallback,
-                this.Description);
+                Owner,
+                Descriptor,
+                RejectCallback,
+                CommitCallback,
+                Description);
         }
     }
 }
