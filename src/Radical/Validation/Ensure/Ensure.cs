@@ -39,15 +39,10 @@ namespace Radical.Validation
 
             public static SourceInfo FromStack(StackTrace st, bool lazy)
             {
-                SourceInfo si = SourceInfo.Empty;
-                if (st.FrameCount > 0)
+                SourceInfo si = Empty;
+                if (st.FrameCount > 1)
                 {
-#if DEBUG
-                    var frame = st.GetFrame(1);
-#else
-                    var frame = st.GetFrame( 0 );
-#endif
-                    si = new SourceInfo(frame, lazy);
+                    si = new SourceInfo(st.GetFrame(1), lazy);
                 }
 
                 return si;
