@@ -13,11 +13,6 @@ namespace Radical.ComponentModel.Validation
     public interface IValidator<T> : IValidator
     {
         /// <summary>
-        /// Gets the rule set.
-        /// </summary>
-        string RuleSet { get; }
-
-        /// <summary>
         /// Determines whether the specified entity is valid.
         /// </summary>
         /// <param name="entity">The entity.</param>

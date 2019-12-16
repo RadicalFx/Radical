@@ -71,7 +71,7 @@ namespace Radical.Helpers
         /// <typeparam name="T">The enum type to extract binding data from.</typeparam>
         /// <param name="filter">The a predicate that can be used to filer extracted data.</param>
         /// <returns>
-        /// An readonly list of <see cref="EnumBinder"/> objects.
+        /// An read-only list of <see cref="Radical.DataBinding.EnumBinder{T}"/> objects.
         /// </returns>
         public static IEnumerable<EnumBinder<T>> ExtractBindingData<T>(Predicate<T> filter)
         {

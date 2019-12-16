@@ -31,21 +31,23 @@
     }
 
     /// <summary>
-    /// Determines the type oo the transient registration.
+    /// Determines the type of the transient registration.
     /// </summary>
     public enum TransientRegistration
     {
         /// <summary>
         /// The transient entity will be registered in the change tracking service
-        /// as a transaprent entity, this means that if the transient entity has no
+        /// as a transparent entity, this means that if the transient entity has no
         /// changes it will not be considered as changed but will be ignored.
         /// </summary>
         AsTransparent = 0,
 
         /// <summary>
         /// The transient entity will be registered in the change tracking service
-        /// as a persistable entity, this means that if the transient entity has no
-        /// changes it will be considered as changed and won't be ignored.
+        /// as an entity that can be persisted, this means that if the transient
+        /// entity has no changes it will be considered as changed and won't be
+        /// ignored.
+        /// </summary>
         AsPersistable = 1
     }
 }

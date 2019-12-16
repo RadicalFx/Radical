@@ -628,8 +628,10 @@
         /// <summary>
         /// Called in order to perform the undo operation.
         /// </summary>
-        /// <param name="reason">The reason of the undo.</param>
-        /// If the RejectReason is Revert the Bookmark cannot be null.</param>
+        /// <param name="reason">
+        /// The reason of the undo. If the RejectReason is Revert 
+        /// the Bookmark cannot be null.
+        /// </param>
         protected virtual void OnUndo(RejectReason reason /*, IBookmark bmk */ )
         {
             lock (SyncRoot)

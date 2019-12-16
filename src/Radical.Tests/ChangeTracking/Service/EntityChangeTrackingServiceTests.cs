@@ -2280,7 +2280,7 @@
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+            person.SetInitialPropertyValueForTest(() => person.FirstName, "Mauro");
 
             var actual = memento.GetEntityPropertyState(person, p => p.FirstName);
 
@@ -2296,7 +2296,7 @@
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+            person.SetInitialPropertyValueForTest(() => person.FirstName, "Mauro");
 
             person.FirstName = "this is different";
 
@@ -2313,7 +2313,7 @@
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+            person.SetInitialPropertyValueForTest(() => person.FirstName, "Mauro");
 
             person.FirstName = "this is different";
             person.FirstName = "Mauro";
@@ -2331,7 +2331,7 @@
             var memento = new ChangeTrackingService();
 
             var person = new Person(memento);
-            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+            person.SetInitialPropertyValueForTest(() => person.FirstName, "Mauro");
 
             person.FirstName = "Mauro";
             person.FirstName = "Mauro";

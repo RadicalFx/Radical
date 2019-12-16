@@ -1003,7 +1003,6 @@ namespace Radical.ComponentModel.Validation
     [Radical.ComponentModel.Contract]
     public interface IValidator<T> : Radical.ComponentModel.Validation.IValidator
     {
-        new string RuleSet { get; }
         Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Action<Radical.Validation.ValidationContext<T>> rule);
         Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, System.Func<Radical.Validation.ValidationContext<T>, string> error);
         Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, string error);

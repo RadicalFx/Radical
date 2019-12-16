@@ -14,13 +14,13 @@ namespace Radical.Reflection
     public static class TypeExtensions
     {
         /// <summary>
-        /// Returns a <see cref="System.string"/> that represents this instance.
+        /// Returns a <see cref="System.String"/> that represents this instance.
         /// Use 's' for ShortString, 'sn' for ShortNameString.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="format">The format.</param>
         /// <returns>
-        /// A <see cref="System.string"/> that represents this instance.
+        /// A <see cref="System.String"/> that represents this instance.
         /// </returns>
         public static string ToString(this Type type, string format)
         {
@@ -38,7 +38,7 @@ namespace Radical.Reflection
         }
 
         /// <summary>
-        /// Returns a string rapresentation of the given System.Type composed 
+        /// Returns a string representation of the given System.Type composed 
         /// only by the type name (including the namespace) and the assembly name.
         /// The built string is compatible with a .net fully qualified type name
         /// </summary>
@@ -55,7 +55,7 @@ namespace Radical.Reflection
         }
 
         /// <summary>
-        /// Returns a string rapresentating the name of the given
+        /// Returns a string representing the name of the given
         /// System.Type (without namespaces).
         /// </summary>
         /// <param name="type">The type to build the string for.</param>
@@ -127,7 +127,7 @@ namespace Radical.Reflection
         /// Gets the inheritance chain of the given type.
         /// </summary>
         /// <param name="type">The type to search the inheritance chain.</param>
-        /// <param name="breakIf">A delegate that determinse whento stop the base type lookup.</param>
+        /// <param name="breakIf">A delegate that determines when to stop the base type lookup.</param>
         /// <returns>The inheritance chain of the given type.</returns>
         public static IEnumerable<Type> GetInheritanceChain(this Type type, Func<Type, bool> breakIf)
         {
