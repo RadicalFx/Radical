@@ -1,12 +1,11 @@
-﻿namespace Radical.Tests.Helpers
-{
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Reflection;
-    using SharpTestsEx;
-    using System.Collections.Generic;
-    using Radical.Reflection;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpTestsEx;
+using System.Collections.Generic;
+using Radical.Reflection;
 
+namespace Radical.Tests.Helpers
+{
     [TestClass()]
     public class TypeExtensionTests
     {
@@ -14,9 +13,9 @@
         public void typeExtension_toShortString_normal_should_return_valid_type_string()
         {
             var expected = "Radical.Reflection.TypeExtensions, Radical";
-            var target = typeof(Radical.Reflection.TypeExtensions);
+            var target = typeof(Reflection.TypeExtensions);
 
-            var actual = Radical.Reflection.TypeExtensions.ToShortString(target);
+            var actual = Reflection.TypeExtensions.ToShortString(target);
             actual.Should().Be.EqualTo(expected);
         }
 
@@ -24,36 +23,28 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void typeExtension_toShortString_using_null_type_reference_should_raise_ArgumentNullException()
         {
-            Radical.Reflection.TypeExtensions.ToShortString(null);
+            Reflection.TypeExtensions.ToShortString(null);
         }
 
         [TestMethod]
         public void typeExtension_toShortString_using_mscorelib_type_should_add_assemblyName_to_type_string()
         {
-#if NET_CORE
             var expected = "System.String, System.Private.CoreLib";
-#else
-            var expected = "System.String, mscorlib";
-#endif
 
             var target = typeof(string);
 
-            var actual = Radical.Reflection.TypeExtensions.ToShortString(target);
+            var actual = Reflection.TypeExtensions.ToShortString(target);
             actual.Should().Be.EqualTo(expected);
         }
 
         [TestMethod]
         public void typeExtension_toString_S_using_mscorelib_type_should_add_assemblyName_to_type_string()
         {
-#if NET_CORE
             var expected = "System.String, System.Private.CoreLib";
-#else
-            var expected = "System.String, mscorlib";
-#endif
 
             var target = typeof(string);
 
-            var actual = Radical.Reflection.TypeExtensions.ToString(target, "S");
+            var actual = Reflection.TypeExtensions.ToString(target, "S");
             actual.Should().Be.EqualTo(expected);
         }
 
