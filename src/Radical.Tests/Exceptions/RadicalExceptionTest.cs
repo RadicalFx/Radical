@@ -2,7 +2,6 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Radical;
 
 namespace Radical.Tests.Exceptions
 {
@@ -97,8 +96,6 @@ namespace Radical.Tests.Exceptions
             Assert.IsNotNull(target);
         }
 
-#if !NET_CORE
-
         [TestMethod()]
         public void serialization()
         {
@@ -107,8 +104,6 @@ namespace Radical.Tests.Exceptions
 
             AssertAreEqual(expected, target);
         }
-
-#endif
 
         [TestMethod()]
         public void ctor_string()

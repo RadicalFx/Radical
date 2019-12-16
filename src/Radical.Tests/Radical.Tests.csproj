@@ -4,10 +4,6 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
-    <DefineConstants>NET_CORE</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="4.4.0" NoWarn="NU1701" />
     <PackageReference Include="ApprovalUtilities" Version="4.4.0" NoWarn="NU1701" />

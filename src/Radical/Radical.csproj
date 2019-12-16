@@ -4,10 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
-    <DefineConstants>NET_CORE</DefineConstants>
-  </PropertyGroup>
-
   <PropertyGroup>
     <Authors>Mauro Servienti, Michael Denny, Nazareno Manco</Authors>
     <Description>Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern.</Description>
