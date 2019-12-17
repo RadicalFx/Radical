@@ -1,11 +1,11 @@
-﻿namespace Radical.ChangeTracking
-{
-    using Radical.Collections;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
+namespace Radical.ChangeTracking
+{
     /// <summary>
     /// A bookmark is a placeholder to track a specific position in
     /// the change tracking history of a change tracking service.
@@ -24,7 +24,7 @@
 
             this.Owner = owner;
             this.Position = position;
-            this.TransientEntities = transientEntities ?? new ReadOnlyCollection<Object>(new Object[0]);
+            this.TransientEntities = transientEntities ?? new ReadOnlyCollection<object>(new List<object>());
         }
 
         /// <summary>

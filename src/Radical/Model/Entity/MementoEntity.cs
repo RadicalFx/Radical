@@ -132,12 +132,12 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets the default property metadata.
+        /// Gets the default property meta-data.
         /// </summary>
         /// <typeparam name="T">Type of the property.</typeparam>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>
-        /// An instance of the requested default property metadata.
+        /// An instance of the requested default property meta-data.
         /// </returns>
         protected override PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
         {
@@ -153,7 +153,7 @@ namespace Radical.Model
         /// <param name="trackChanges">The track changes.</param>
         /// <returns>
         /// This method is a shortcut for the GetMetadata method, in order
-        /// to fine customize property metadata use the GetMetadata method.
+        /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
@@ -171,7 +171,7 @@ namespace Radical.Model
         /// <param name="trackChanges">The track changes.</param>
         /// <returns>
         /// This method is a shortcut for the GetMetadata method, in order
-        /// to fine customize property metadata use the GetMetadata method.
+        /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
@@ -193,7 +193,7 @@ namespace Radical.Model
         /// <param name="trackChanges">The track changes.</param>
         /// <returns>
         /// This method is a shortcut for the GetMetadata method, in order
-        /// to fine customize property metadata use the GetMetadata method.
+        /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
         /// </returns>
@@ -338,6 +338,7 @@ namespace Radical.Model
         /// Caches the supplied item in the active change tracking service.
         /// </summary>
         /// <typeparam name="T">The system type of the item to cache.</typeparam>
+        /// <param name="propertyName">The name of the property.</param>
         /// <param name="value">The value to cache.</param>
         /// <param name="restore">A delegate to call when the change tracking 
         /// service needs to restore the cached change.</param>
@@ -352,6 +353,7 @@ namespace Radical.Model
         /// Caches the supplied item in the active change tracking service.
         /// </summary>
         /// <typeparam name="T">The system type of the item to cache.</typeparam>
+        /// <param name="propertyName">The name of the property.</param>
         /// <param name="value">The value to cache.</param>
         /// <param name="restore">A delegate to call when the change tracking
         /// service needs to restore the cached change.</param>

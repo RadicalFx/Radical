@@ -209,16 +209,6 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod]
-        public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_radical_read_only_collection()
-        {
-            var source = new Radical.Collections.ReadOnlyCollection<string>(new[] { "" });
-            var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source);
-
-            Assert.AreNotEqual(source, actual);
-            Assert.AreNotSame(source, actual);
-        }
-
-        [TestMethod]
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_net_read_only_collection()
         {
             var source = new System.Collections.ObjectModel.ReadOnlyCollection<string>(new[] { "" });

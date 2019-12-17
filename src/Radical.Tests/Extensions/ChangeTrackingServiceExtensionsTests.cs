@@ -17,7 +17,7 @@ namespace Radical.Tests.Extensions
             var memento = new ChangeTrackingService();
 
             var person = new ChangeTracking.Person(memento);
-            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+            person.SetInitialPropertyValueForTest(() => person.FirstName, "Mauro");
 
             person.FirstName = "Another";
 
@@ -33,7 +33,7 @@ namespace Radical.Tests.Extensions
             var memento = new ChangeTrackingService();
 
             var person = new ChangeTracking.Person(memento);
-            person.SetInitialPropertyValue(() => person.FirstName, "Mauro");
+            person.SetInitialPropertyValueForTest(() => person.FirstName, "Mauro");
 
             person.FirstName = "Another";
             person.FirstName = "Mauro";

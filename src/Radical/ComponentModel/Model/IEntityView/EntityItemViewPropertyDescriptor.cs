@@ -8,7 +8,7 @@ namespace Radical.ComponentModel
     /// <summary>
     /// A specialized PropertyDescriptor
     /// </summary>
-    /// <typeparam name="T">The type incapsulated by this descriptor</typeparam>
+    /// <typeparam name="T">The type encapsulated by this descriptor</typeparam>
     public class EntityItemViewPropertyDescriptor<T> :
         PropertyDescriptor
     //where T : class
@@ -115,8 +115,6 @@ namespace Radical.ComponentModel
         {
             get { return typeof(IEntityItemView<T>); }
         }
-
-        private Type _customPropertyType = null;
 
         /// <summary>
         /// When overridden in a derived class, gets the type of the property.
@@ -243,7 +241,7 @@ namespace Radical.ComponentModel
         {
             if (this.IsReadOnly)
             {
-                throw new InvalidOperationException("Current property is readonly.");
+                throw new InvalidOperationException("Current property is read-only.");
             }
 
             if (component == null)

@@ -1,8 +1,8 @@
-﻿using Radical.Collections;
-using Radical.Validation;
+﻿using Radical.Validation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Radical.Linq
@@ -19,7 +19,7 @@ namespace Radical.Linq
         /// <param name="root">The root.</param>
         /// <param name="childrenGetter">The delegate to retrieve the children of a given node.</param>
         /// <returns>
-        /// A flat readonly list of all the items in the source tree.
+        /// A flat read-only list of all the items in the source tree.
         /// </returns>
         public static IEnumerable<T> ToFlat<T>(this T root, Func<T, IEnumerable<T>> childrenGetter)
             where T : class
@@ -36,7 +36,7 @@ namespace Radical.Linq
         /// <typeparam name="T">The type of the source items.</typeparam>
         /// <param name="source">The source tree.</param>
         /// <param name="childrenGetter">The delegate to retrieve the children of a given node.</param>
-        /// <returns>A flat readonly list of all the items in the source tree.</returns>
+        /// <returns>A flat read-only list of all the items in the source tree.</returns>
         public static IEnumerable<T> ToFlat<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter)
         {
             Ensure.That(source).Named("source").IsNotNull();
@@ -216,13 +216,12 @@ namespace Radical.Linq
         {
             Ensure.That(list).Named("list").IsNotNull();
 
-            var tmp = list as List<T>;
-            if (tmp != null)
+            if (list is List<T> tmp)
             {
                 return tmp.AsReadOnly();
             }
 
-            return new ReadOnlyCollection<T>(list);
+            return new ReadOnlyCollection<T>(list.ToList());
         }
 
         /// <summary>

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Radical;
 
 namespace Radical.Tests.Exceptions
 {
@@ -13,110 +12,35 @@ namespace Radical.Tests.Exceptions
     [TestClass()]
     public class RadicalExceptionTest
     {
-        private TestContext testContextInstance;
-        public TestContext TestContext
+        Exception Process(Exception source)
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            using MemoryStream ms = new MemoryStream();
+            var formatter = new BinaryFormatter();
+            formatter.Serialize(ms, source);
+            ms.Position = 0;
+
+            return formatter.Deserialize(ms) as Exception;
         }
-
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
-        protected virtual Exception CreateMock()
-        {
-            return new RadicalException();
-        }
-
-        protected virtual Exception CreateMock(string message)
-        {
-            return new RadicalException(message);
-        }
-
-        protected virtual Exception CreateMock(string message, Exception innerException)
-        {
-            return new RadicalException(message, innerException);
-        }
-
-        protected Exception Process(Exception source)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(ms, source);
-
-                ms.Position = 0;
-
-                Object resVal = formatter.Deserialize(ms);
-                return resVal as Exception;
-            }
-        }
-
-        protected virtual void AssertAreEqual(Exception ex1, Exception ex2)
-        {
-
-        }
-
-        [TestMethod()]
-        public void ctor_default()
-        {
-            Exception target = this.CreateMock();
-            Assert.IsNotNull(target);
-        }
-
-#if !NET_CORE
 
         [TestMethod()]
         public void serialization()
         {
-            Exception expected = this.CreateMock();
-            Exception target = this.Process(expected);
+            Exception expected = new RadicalException();
+            Exception target = Process(expected);
 
-            AssertAreEqual(expected, target);
+            Assert.AreEqual(expected.GetType(), target.GetType());
+            Assert.AreEqual(expected.Message, target.Message);
+            Assert.AreEqual(expected.InnerException?.Message, target.InnerException?.Message);
+            Assert.AreEqual(expected.StackTrace, target.StackTrace);
         }
-
-#endif
 
         [TestMethod()]
         public void ctor_string()
         {
             string expectedMessage = "message";
-            Exception target = this.CreateMock(expectedMessage);
+            Exception target = new RadicalException(expectedMessage);
 
-            Assert.AreEqual<string>(expectedMessage, target.Message);
+            Assert.AreEqual(expectedMessage, target.Message);
             Assert.IsNull(target.InnerException);
         }
 
@@ -126,10 +50,10 @@ namespace Radical.Tests.Exceptions
             string expectedMessage = "message";
             Exception expectedInnerException = new StackOverflowException();
 
-            Exception target = this.CreateMock(expectedMessage, expectedInnerException);
+            Exception target = new RadicalException(expectedMessage, expectedInnerException);
 
-            Assert.AreEqual<string>(expectedMessage, target.Message);
-            Assert.AreEqual<Exception>(expectedInnerException, target.InnerException);
+            Assert.AreEqual(expectedMessage, target.Message);
+            Assert.AreEqual(expectedInnerException, target.InnerException);
         }
     }
 }

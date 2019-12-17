@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
+
 namespace Radical.Validation
 {
 
     /// <summary>
-    /// Enusre is a simple, fluent based, engine usefull to validate
+    /// Ensure is a simple, fluent based, engine useful to validate
     /// methods and constructors parameters.
     /// </summary>
     public static class Ensure
@@ -28,8 +29,8 @@ namespace Radical.Validation
         {
             public readonly static SourceInfo Empty = new SourceInfo();
 
-            private StackFrame frame;
-            private bool lazy;
+            private readonly StackFrame frame;
+            private readonly bool lazy;
             private bool loaded;
 
             private MemberTypes _sourceType;
@@ -38,15 +39,10 @@ namespace Radical.Validation
 
             public static SourceInfo FromStack(StackTrace st, bool lazy)
             {
-                SourceInfo si = SourceInfo.Empty;
-                if (st.FrameCount > 0)
+                SourceInfo si = Empty;
+                if (st.FrameCount > 1)
                 {
-#if DEBUG
-                    var frame = st.GetFrame(1);
-#else
-                    var frame = st.GetFrame( 0 );
-#endif
-                    si = new SourceInfo(frame, lazy);
+                    si = new SourceInfo(st.GetFrame(1), lazy);
                 }
 
                 return si;
@@ -57,9 +53,9 @@ namespace Radical.Validation
             /// </summary>
             private SourceInfo()
             {
-                this._methodName = "";
-                this._className = "";
-                this._sourceType = MemberTypes.Custom;
+                _methodName = "";
+                _className = "";
+                _sourceType = MemberTypes.Custom;
 
                 /*
                  * this .ctor is called only to create the Empty instance
@@ -68,7 +64,7 @@ namespace Radical.Validation
                  * Empty instance in the end :-)
                  * Fixes: https://github.com/RadicalFx/radical/issues/70
                  */
-                this.loaded = true;
+                loaded = true;
             }
 
             private SourceInfo(StackFrame frame, bool lazy)
@@ -77,29 +73,29 @@ namespace Radical.Validation
                 this.lazy = lazy;
                 if (!this.lazy)
                 {
-                    this.EnsureDataAreLoaded();
+                    EnsureDataAreLoaded();
                 }
             }
 
             void EnsureDataAreLoaded()
             {
-                if (!this.loaded)
+                if (!loaded)
                 {
-                    var mi = this.frame.GetMethod();
+                    var mi = frame.GetMethod();
                     if (mi != null)
                     {
-                        this._methodName = mi.Name;
-                        this._className = mi.DeclaringType.Name;
-                        this._sourceType = mi.MemberType;
+                        _methodName = mi.Name;
+                        _className = mi.DeclaringType.Name;
+                        _sourceType = mi.MemberType;
                     }
                     else
                     {
-                        this._methodName = SourceInfo.Empty.MethodName;
-                        this._className = SourceInfo.Empty.ClassName;
-                        this._sourceType = SourceInfo.Empty.SourceType;
+                        _methodName = Empty.MethodName;
+                        _className = Empty.ClassName;
+                        _sourceType = Empty.SourceType;
                     }
 
-                    this.loaded = true;
+                    loaded = true;
                 }
             }
 
@@ -111,8 +107,8 @@ namespace Radical.Validation
             {
                 get
                 {
-                    this.EnsureDataAreLoaded();
-                    return this._methodName;
+                    EnsureDataAreLoaded();
+                    return _methodName;
                 }
             }
 
@@ -124,8 +120,8 @@ namespace Radical.Validation
             {
                 get
                 {
-                    this.EnsureDataAreLoaded();
-                    return this._className;
+                    EnsureDataAreLoaded();
+                    return _className;
                 }
             }
 
@@ -137,17 +133,17 @@ namespace Radical.Validation
             {
                 get
                 {
-                    this.EnsureDataAreLoaded();
-                    return this._sourceType;
+                    EnsureDataAreLoaded();
+                    return _sourceType;
                 }
             }
         }
 
         /// <summary>
         /// Initialize a new instance of the generic Ensure class using the supplied
-        /// value as the value to insepct.
+        /// value as the value to inspect.
         /// </summary>
-        /// <typeparam name="T">The type of the inepcted object value.</typeparam>
+        /// <typeparam name="T">The type of the inspect object value.</typeparam>
         /// <param name="obj">The object value to inspect.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
         public static IConfigurableEnsure<T> That<T>(T obj)
@@ -157,9 +153,9 @@ namespace Radical.Validation
 
         /// <summary>
         /// Initialize a new instance of the generic Ensure class using the supplied
-        /// value as the value to insepct.
+        /// value as the value to inspect.
         /// </summary>
-        /// <typeparam name="T">The type of the inepcted object value.</typeparam>
+        /// <typeparam name="T">The type of the inspect object value.</typeparam>
         /// <param name="obj">The object value to inspect.</param>
         /// <param name="strategy">Determines if the Ensure instance should load the current Stack.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
@@ -167,9 +163,9 @@ namespace Radical.Validation
         {
             var si = SourceInfo.Empty;
 
-            if (strategy != Validation.SourceInfoLoadStrategy.Skip)
+            if (strategy != SourceInfoLoadStrategy.Skip)
             {
-                var lazy = strategy == Validation.SourceInfoLoadStrategy.LazyLoad;
+                var lazy = strategy == SourceInfoLoadStrategy.LazyLoad;
                 si = SourceInfo.FromStack(new StackTrace(1), lazy: lazy);
             }
 

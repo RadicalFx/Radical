@@ -1,4 +1,6 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
+﻿using System;
+
+namespace Radical.ComponentModel.ChangeTracking
 {
 
     /// <summary>
@@ -34,7 +36,7 @@
     }
 
     /// <summary>
-    /// Reports the reason of a change commmit.
+    /// Reports the reason of a change commit.
     /// </summary>
     public enum CommitReason
     {

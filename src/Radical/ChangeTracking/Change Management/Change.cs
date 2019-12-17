@@ -1,38 +1,28 @@
-﻿namespace Radical.ChangeTracking
-{
-    using Radical;
-    using Radical.Collections;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
+﻿using Radical;
+using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
+namespace Radical.ChangeTracking
+{
     /// <summary>
     /// Represents a change occurred to an object.
     /// </summary>
     public abstract class Change<T> : IChange<T>
     {
-        readonly RejectCallback<T> _rejectCallback;
-
         /// <summary>
         /// The callback to invoke in order to 
         /// reject the cached value.
         /// </summary>
-        protected RejectCallback<T> RejectCallback
-        {
-            get { return this._rejectCallback; }
-        }
-
-        readonly CommitCallback<T> _commitCallback;
+        protected RejectCallback<T> RejectCallback { get; }
 
         /// <summary>
         /// The callback to invoke in order to
         /// commit the cached value.
         /// </summary>
-        protected CommitCallback<T> CommitCallback
-        {
-            get { return this._commitCallback; }
-        }
+        protected CommitCallback<T> CommitCallback { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Change&lt;T&gt;"/> class.
@@ -42,15 +32,15 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        protected Change(Object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
+        protected Change(object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
         {
             Ensure.That(owner).Named("owner").IsNotNull();
             Ensure.That(rejectCallback).Named("rejectCallback").IsNotNull();
 
             this.Owner = owner;
             this.CachedValue = valueToCache;
-            this._rejectCallback = rejectCallback;
-            this._commitCallback = commitCallback;
+            this.RejectCallback = rejectCallback;
+            this.CommitCallback = commitCallback;
             this.Description = description;
         }
 
@@ -60,7 +50,7 @@
         /// Gets the owner of this change.
         /// </summary>
         /// <value>The owner.</value>
-        public Object Owner
+        public object Owner
         {
             get;
             private set;
@@ -179,15 +169,15 @@
         /// Gets the advised action for this IChange.
         /// </summary>
         /// <value>The advised action.</value>
-        public abstract ProposedActions GetAdvisedAction(Object changedItem);
+        public abstract ProposedActions GetAdvisedAction(object changedItem);
 
         /// <summary>
         /// Gets the changed entities.
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<Object> GetChangedEntities()
+        public virtual IEnumerable<object> GetChangedEntities()
         {
-            return new ReadOnlyCollection<Object>(new[] { this.Owner });
+            return new ReadOnlyCollection<object>(new List<object> { Owner });
         }
 
         /// <summary>

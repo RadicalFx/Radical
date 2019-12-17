@@ -132,36 +132,36 @@ namespace Radical.Tests.Windows.Messaging
         public void messageBroker_POCO_broadcast_using_more_then_one_subscriber_should_call_on_different_thread()
         {
             TestRunner.Execute(ApartmentState.MTA, () =>
-           {
-               var h1 = new ManualResetEvent(false);
-               var h2 = new ManualResetEvent(false);
+            {
+                var h1 = new ManualResetEvent(false);
+                var h2 = new ManualResetEvent(false);
 
-               var currentThreadId = Thread.CurrentThread.ManagedThreadId;
-               var s1ThreadId = Thread.CurrentThread.ManagedThreadId;
-               var s2ThreadId = Thread.CurrentThread.ManagedThreadId;
+                var currentThreadId = Thread.CurrentThread.ManagedThreadId;
+                var s1ThreadId = Thread.CurrentThread.ManagedThreadId;
+                var s2ThreadId = Thread.CurrentThread.ManagedThreadId;
 
-               var dispatcher = new NullDispatcher();
-               var broker = new MessageBroker(dispatcher);
+                var dispatcher = new NullDispatcher();
+                var broker = new MessageBroker(dispatcher);
 
-               broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
-               {
-                   s1ThreadId = Thread.CurrentThread.ManagedThreadId;
-                   h1.Set();
-               });
+                broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
+                {
+                    s1ThreadId = Thread.CurrentThread.ManagedThreadId;
+                    h1.Set();
+                });
 
-               broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
-               {
-                   s2ThreadId = Thread.CurrentThread.ManagedThreadId;
-                   h2.Set();
-               });
+                broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
+                {
+                    s2ThreadId = Thread.CurrentThread.ManagedThreadId;
+                    h2.Set();
+                });
 
-               broker.Broadcast(this, new PocoTestMessage());
+                broker.Broadcast(this, new PocoTestMessage());
 
-               ManualResetEvent.WaitAll(new[] { h1, h2 });
+                ManualResetEvent.WaitAll(new[] { h1, h2 });
 
-               currentThreadId.Should().Not.Be.EqualTo(s1ThreadId);
-               currentThreadId.Should().Not.Be.EqualTo(s2ThreadId);
-           });
+                currentThreadId.Should().Not.Be.EqualTo(s1ThreadId);
+                currentThreadId.Should().Not.Be.EqualTo(s2ThreadId);
+            });
         }
 
         class TestRunner

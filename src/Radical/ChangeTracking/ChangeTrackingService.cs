@@ -51,7 +51,7 @@
         /// </summary>
         ~ChangeTrackingService()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.IsDisposed)
+            if (!IsDisposed)
             {
                 if (disposing)
                 {
@@ -75,50 +75,50 @@
                      */
                     //this.RejectChangesCore( false );
 
-                    this.backwardChangesStack.ForEach(c => this.OnUnwire(c));
-                    this.forwardChangesStack.ForEach(c => this.OnUnwire(c));
+                    backwardChangesStack.ForEach(c => OnUnwire(c));
+                    forwardChangesStack.ForEach(c => OnUnwire(c));
 
-                    this.iComponentEntities.ForEach(ic =>
+                    iComponentEntities.ForEach(ic =>
                     {
                         if (ic != null)
                         {
-                            ic.Disposed -= this.onComponentDisposed;
+                            ic.Disposed -= onComponentDisposed;
                         }
                     });
 
-                    this.backwardChangesStack.Clear();
-                    this.forwardChangesStack.Clear();
-                    this.transientEntities.Clear();
-                    this.iComponentEntities.Clear();
+                    backwardChangesStack.Clear();
+                    forwardChangesStack.Clear();
+                    transientEntities.Clear();
+                    iComponentEntities.Clear();
 
-                    if (this.Site != null && this.Site.Container != null)
+                    if (Site != null && Site.Container != null)
                     {
-                        this.Site.Container.Remove(this);
+                        Site.Container.Remove(this);
                     }
 
-                    if (this._events != null)
+                    if (_events != null)
                     {
-                        this.Events.Dispose();
+                        Events.Dispose();
                     }
                 }
 
-                this.onChangeCommitted = null;
-                this.onChangeRejected = null;
-                this.onComponentDisposed = null;
-                this.tryUnregisterTransient = null;
+                onChangeCommitted = null;
+                onChangeRejected = null;
+                onComponentDisposed = null;
+                tryUnregisterTransient = null;
 
-                this._events = null;
-                this.Site = null;
+                _events = null;
+                Site = null;
 
-                this.backwardChangesStack = null;
-                this.forwardChangesStack = null;
-                this.transientEntities = null;
-                this.iComponentEntities = null;
+                backwardChangesStack = null;
+                forwardChangesStack = null;
+                transientEntities = null;
+                iComponentEntities = null;
 
-                this.IsDisposed = true;
+                IsDisposed = true;
             }
 
-            this.OnDisposed();
+            OnDisposed();
         }
 
         /// <summary>
@@ -126,7 +126,7 @@
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -139,8 +139,8 @@
         /// </summary>
         public event EventHandler TrackingServiceStateChanged
         {
-            add { this.Events.AddHandler(trackingServiceStateChangedEventKey, value); }
-            remove { this.Events.RemoveHandler(trackingServiceStateChangedEventKey, value); }
+            add { Events.AddHandler(trackingServiceStateChangedEventKey, value); }
+            remove { Events.RemoveHandler(trackingServiceStateChangedEventKey, value); }
         }
 
         /// <summary>
@@ -148,9 +148,9 @@
         /// </summary>
         protected virtual void OnTrackingServiceStateChanged()
         {
-            if (this.Events != null)
+            if (Events != null)
             {
-                EventHandler h = this.Events[trackingServiceStateChangedEventKey] as EventHandler;
+                EventHandler h = Events[trackingServiceStateChangedEventKey] as EventHandler;
                 if (h != null)
                 {
                     h(this, EventArgs.Empty);
@@ -165,8 +165,8 @@
         /// </summary>
         public event EventHandler<CancelEventArgs> RejectingChanges
         {
-            add { this.Events.AddHandler(rejectingChangesEventKey, value); }
-            remove { this.Events.RemoveHandler(rejectingChangesEventKey, value); }
+            add { Events.AddHandler(rejectingChangesEventKey, value); }
+            remove { Events.RemoveHandler(rejectingChangesEventKey, value); }
         }
 
         /// <summary>
@@ -174,9 +174,9 @@
         /// </summary>
         protected virtual void OnRejectingChanges(CancelEventArgs e)
         {
-            if (this.Events != null)
+            if (Events != null)
             {
-                EventHandler<CancelEventArgs> h = this.Events[rejectingChangesEventKey] as EventHandler<CancelEventArgs>;
+                EventHandler<CancelEventArgs> h = Events[rejectingChangesEventKey] as EventHandler<CancelEventArgs>;
                 if (h != null)
                 {
                     h(this, e);
@@ -191,8 +191,8 @@
         /// </summary>
         public event EventHandler ChangesRejected
         {
-            add { this.Events.AddHandler(changesRejectedEventKey, value); }
-            remove { this.Events.RemoveHandler(changesRejectedEventKey, value); }
+            add { Events.AddHandler(changesRejectedEventKey, value); }
+            remove { Events.RemoveHandler(changesRejectedEventKey, value); }
         }
 
         /// <summary>
@@ -200,9 +200,9 @@
         /// </summary>
         protected virtual void OnChangesRejected()
         {
-            if (this.Events != null)
+            if (Events != null)
             {
-                EventHandler h = this.Events[changesRejectedEventKey] as EventHandler;
+                EventHandler h = Events[changesRejectedEventKey] as EventHandler;
                 if (h != null)
                 {
                     h(this, EventArgs.Empty);
@@ -214,15 +214,15 @@
 
         public event EventHandler<CancelEventArgs> AcceptingChanges
         {
-            add { this.Events.AddHandler(acceptingChangesEventKey, value); }
-            remove { this.Events.RemoveHandler(acceptingChangesEventKey, value); }
+            add { Events.AddHandler(acceptingChangesEventKey, value); }
+            remove { Events.RemoveHandler(acceptingChangesEventKey, value); }
         }
 
         protected virtual void OnAcceptingChanges(CancelEventArgs e)
         {
-            if (this.Events != null)
+            if (Events != null)
             {
-                EventHandler<CancelEventArgs> h = this.Events[acceptingChangesEventKey] as EventHandler<CancelEventArgs>;
+                EventHandler<CancelEventArgs> h = Events[acceptingChangesEventKey] as EventHandler<CancelEventArgs>;
                 if (h != null)
                 {
                     h(this, e);
@@ -237,8 +237,8 @@
         /// </summary>
         public event EventHandler ChangesAccepted
         {
-            add { this.Events.AddHandler(changesAcceptedEventKey, value); }
-            remove { this.Events.RemoveHandler(changesAcceptedEventKey, value); }
+            add { Events.AddHandler(changesAcceptedEventKey, value); }
+            remove { Events.RemoveHandler(changesAcceptedEventKey, value); }
         }
 
         /// <summary>
@@ -246,9 +246,9 @@
         /// </summary>
         protected virtual void OnChangesAccepted()
         {
-            if (this.Events != null)
+            if (Events != null)
             {
-                EventHandler h = this.Events[changesAcceptedEventKey] as EventHandler;
+                EventHandler h = Events[changesAcceptedEventKey] as EventHandler;
                 if (h != null)
                 {
                     h(this, EventArgs.Empty);
@@ -266,25 +266,25 @@
         /// </summary>
         public ChangeTrackingService()
         {
-            this.onChangeCommitted = (s, e) =>
+            onChangeCommitted = (s, e) =>
             {
                 IChange change = (IChange)s;
-                this.OnChangeCommitted(change, e.Reason);
+                OnChangeCommitted(change, e.Reason);
             };
 
-            this.onChangeRejected = (s, e) =>
+            onChangeRejected = (s, e) =>
             {
                 IChange change = (IChange)s;
-                this.OnChangeRejected(change, e.Reason);
+                OnChangeRejected(change, e.Reason);
             };
 
-            this.onComponentDisposed = (s, e) =>
+            onComponentDisposed = (s, e) =>
             {
                 var entity = (IMemento)s;
-                this.OnDetach(entity, StopTrackingReason.DisposedEvent);
+                OnDetach(entity, StopTrackingReason.DisposedEvent);
             };
 
-            this.tryUnregisterTransient = (entity, bookmark) =>
+            tryUnregisterTransient = (entity, bookmark) =>
             {
                 if (bookmark == null || !bookmark.TransientEntities.Contains(entity))
                 {
@@ -293,7 +293,7 @@
                      * transient dopo la creazione del bookmark procediamo con
                      * la deregistrazione come transient.
                      */
-                    var state = this.GetEntityState(entity);
+                    var state = GetEntityState(entity);
                     var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
                     var isAutoRemove = (state & EntityTrackingStates.AutoRemove) == EntityTrackingStates.AutoRemove;
                     var hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
@@ -301,7 +301,7 @@
 
                     if (isTransient && isAutoRemove && !hasBackwardChanges && !hasForwardChanges)
                     {
-                        this.OnUnregisterTransient(entity);
+                        OnUnregisterTransient(entity);
                     }
                 }
             };
@@ -323,8 +323,8 @@
         {
             lock (SyncRoot)
             {
-                var currentPosition = this.backwardChangesStack.LastOrDefault();
-                var transientEntitiesBeforeBookmarkCreation = this.transientEntities.Keys.AsReadOnly();
+                var currentPosition = backwardChangesStack.LastOrDefault();
+                var transientEntitiesBeforeBookmarkCreation = transientEntities.Keys.AsReadOnly();
 
                 return new Bookmark(this, currentPosition, transientEntitiesBeforeBookmarkCreation);
             }
@@ -339,18 +339,18 @@
         /// bookmark has not been created by this service.</exception>
         public void Revert(IBookmark bookmark)
         {
-            this.EnsureNotSuspended();
+            EnsureNotSuspended();
 
             Ensure.That(bookmark)
                 .Named("bookmark")
                 .IsNotNull()
-                .If(bmk => !this.Validate(bmk))
+                .If(bmk => !Validate(bmk))
                 .Then((bmk, n) => { throw new ArgumentOutOfRangeException(n); });
 
-            if (this.CanRevertTo(bookmark))
+            if (CanRevertTo(bookmark))
             {
-                this.OnRevert(bookmark);
-                this.OnTrackingServiceStateChanged();
+                OnRevert(bookmark);
+                OnTrackingServiceStateChanged();
             }
         }
 
@@ -364,8 +364,8 @@
              */
             lock (SyncRoot)
             {
-                var last = this.backwardChangesStack.LastOrDefault();
-                return /*this.EnsureIsDefined( bookmark ) &&*/ (bookmark.Position != last || this.transientEntities
+                var last = backwardChangesStack.LastOrDefault();
+                return /*this.EnsureIsDefined( bookmark ) &&*/ (bookmark.Position != last || transientEntities
                     .Where(kvp => kvp.Value && !bookmark.TransientEntities.Contains(kvp.Key))
                     .Any());
             }
@@ -380,17 +380,17 @@
         {
             lock (SyncRoot)
             {
-                IChange last = this.backwardChangesStack.LastOrDefault();
+                IChange last = backwardChangesStack.LastOrDefault();
                 while (last != bookmark.Position)
                 {
                     last.Reject(RejectReason.Revert);
                     last.GetChangedEntities().ForEach(entity => tryUnregisterTransient(entity, bookmark));
 
-                    last = this.backwardChangesStack.LastOrDefault();
+                    last = backwardChangesStack.LastOrDefault();
                 }
             }
 
-            this.transientEntities.Keys
+            transientEntities.Keys
                 .AsReadOnly()
                 .ForEach(entity => tryUnregisterTransient(entity, bookmark));
         }
@@ -403,7 +403,7 @@
         public virtual bool Validate(IBookmark bookmark)
         {
             Ensure.That(bookmark).Named("bookmark").IsNotNull();
-            return bookmark.Owner == this && (bookmark.Position == null || this.backwardChangesStack.Contains(bookmark.Position));
+            return bookmark.Owner == this && (bookmark.Position == null || backwardChangesStack.Contains(bookmark.Position));
         }
 
         /// <summary>
@@ -413,7 +413,7 @@
         /// <exception cref="ArgumentException">If the change tracking service has already registered the object or if hhas pending changes for the object an ArgumentException is raised.</exception>
         public void RegisterTransient(Object entity)
         {
-            this.RegisterTransient(entity, true);
+            RegisterTransient(entity, true);
         }
 
         /// <summary>
@@ -436,9 +436,9 @@
         /// </exception>
         public void RegisterTransient(Object entity, bool autoRemove)
         {
-            this.EnsureNotSuspended();
-            this.OnRegisterTransient(entity, autoRemove);
-            this.OnTrackingServiceStateChanged();
+            EnsureNotSuspended();
+            OnRegisterTransient(entity, autoRemove);
+            OnTrackingServiceStateChanged();
         }
 
         /// <summary>
@@ -460,7 +460,7 @@
         /// </exception>
         protected virtual void OnRegisterTransient(Object entity, bool autoRemove)
         {
-            EntityTrackingStates state = this.GetEntityState(entity);
+            EntityTrackingStates state = GetEntityState(entity);
             bool isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
 
             Ensure.That(entity)
@@ -469,14 +469,14 @@
                 .If(o => isTransient)
                 .ThenThrow(o => new ArgumentException(o.GetFullErrorMessage()));
 
-            if (this.IsInAtomicOperation)
+            if (IsInAtomicOperation)
             {
-                this.AtomicOperation.RegisterTransient(entity, autoRemove);
+                AtomicOperation.RegisterTransient(entity, autoRemove);
             }
             else
             {
-                this.OnWire(entity as IComponent);
-                this.transientEntities.Add(entity, autoRemove);
+                OnWire(entity as IComponent);
+                transientEntities.Add(entity, autoRemove);
             }
         }
 
@@ -488,9 +488,9 @@
         /// <exception cref="ArgumentOutOfRangeException">If the supplied entity is not in <c>IsTransient</c> state an ArgumentException is raised.</exception>
         public void UnregisterTransient(Object entity)
         {
-            this.EnsureNotSuspended();
-            this.OnUnregisterTransient(entity);
-            this.OnTrackingServiceStateChanged();
+            EnsureNotSuspended();
+            OnUnregisterTransient(entity);
+            OnTrackingServiceStateChanged();
         }
 
         /// <summary>
@@ -501,14 +501,14 @@
         /// <exception cref="ArgumentOutOfRangeException">If the supplied entity is not in <c>IsTransient</c> state an ArgumentException is raised.</exception>
         protected virtual void OnUnregisterTransient(object entity)
         {
-            var state = this.GetEntityState(entity);
+            var state = GetEntityState(entity);
             var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
             if (!isTransient)
             {
                 throw new ArgumentOutOfRangeException("Cannot unregister the given object, object is not in IsTransient state.", "entity");
             }
 
-            this.transientEntities.Remove(entity);
+            transientEntities.Remove(entity);
         }
 
         /// <summary>
@@ -517,7 +517,7 @@
         /// <returns>A enumerable list of tracked entities.</returns>
         public IEnumerable<Object> GetEntities()
         {
-            return this.GetEntities(EntityTrackingStates.None, false);
+            return GetEntities(EntityTrackingStates.None, false);
         }
 
         /// <summary>
@@ -530,7 +530,7 @@
         {
             HashSet<Object> all = new HashSet<Object>(ObjectReferenceEqualityComparer.Instance);
             transientEntities.Keys.ForEach(te => all.Add(te));
-            this.backwardChangesStack.ForEach(c =>
+            backwardChangesStack.ForEach(c =>
            {
                /*
                 * Recuperiamo le entity modificate incapsulate
@@ -543,7 +543,7 @@
            });
 
             var query = from entity in all
-                        let state = this.GetEntityState(entity)
+                        let state = GetEntityState(entity)
                         where exactMatch ? state == stateFilter : (state & stateFilter) == stateFilter
                         select entity;
 
@@ -563,25 +563,25 @@
 
             lock (SyncRoot)
             {
-                if (this.transientEntities != null && this.transientEntities.ContainsKey(entity))
+                if (transientEntities != null && transientEntities.ContainsKey(entity))
                 {
                     state |= EntityTrackingStates.IsTransient;
 
-                    if (this.transientEntities[entity])
+                    if (transientEntities[entity])
                     {
                         state |= EntityTrackingStates.AutoRemove;
                     }
                 }
 
-                if (this.backwardChangesStack != null)
+                if (backwardChangesStack != null)
                 {
-                    var hasBackwardChanges = this.backwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
+                    var hasBackwardChanges = backwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
                     if (hasBackwardChanges)
                     {
                         state |= EntityTrackingStates.HasBackwardChanges;
                     }
 
-                    var subSystemsState = this.backwardChangesStack.OfType<AtomicChange>()
+                    var subSystemsState = backwardChangesStack.OfType<AtomicChange>()
                         .Select(ac =>
                        {
                            var s = ac.GetEntityState(entity);
@@ -597,15 +597,15 @@
                     state |= subSystemsState;
                 }
 
-                if (this.forwardChangesStack != null)
+                if (forwardChangesStack != null)
                 {
-                    var hasForwardChanges = this.forwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
+                    var hasForwardChanges = forwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
                     if (hasForwardChanges)
                     {
                         state |= EntityTrackingStates.HasForwardChanges;
                     }
 
-                    var subSystemsState = this.forwardChangesStack.OfType<AtomicChange>()
+                    var subSystemsState = forwardChangesStack.OfType<AtomicChange>()
                         .Select(ac =>
                        {
                            var s = ac.GetEntityState(entity);
@@ -628,13 +628,15 @@
         /// <summary>
         /// Called in order to perform the undo operation.
         /// </summary>
-        /// <param name="reason">The reason of the undo.</param>
-        /// If the RejectReason is Revert the Bookmark cannot be null.</param>
+        /// <param name="reason">
+        /// The reason of the undo. If the RejectReason is Revert 
+        /// the Bookmark cannot be null.
+        /// </param>
         protected virtual void OnUndo(RejectReason reason /*, IBookmark bmk */ )
         {
             lock (SyncRoot)
             {
-                var last = this.backwardChangesStack.Last();
+                var last = backwardChangesStack.Last();
 
                 /*
                  * Questo special case mi fa veramente cagare...
@@ -644,7 +646,7 @@
                  */
                 if (last is AtomicChange)
                 {
-                    using (var tmp = this.BeginAtomicOperation(AddChangeBehavior.UndoRequest))
+                    using (var tmp = BeginAtomicOperation(AddChangeBehavior.UndoRequest))
                     {
                         last.Reject(reason);
 
@@ -679,7 +681,7 @@
         {
             lock (SyncRoot)
             {
-                var last = this.forwardChangesStack.Last();
+                var last = forwardChangesStack.Last();
 
                 /*
                  * Questo special case mi fa veramente cagare...
@@ -689,7 +691,7 @@
                  */
                 if (last is AtomicChange)
                 {
-                    using (var tmp = this.BeginAtomicOperation(AddChangeBehavior.RedoRequest))
+                    using (var tmp = BeginAtomicOperation(AddChangeBehavior.RedoRequest))
                     {
                         last.Reject(reason);
                         tmp.Complete();
@@ -708,7 +710,7 @@
         /// <value><c>true</c> if this instance can undo; otherwise, <c>false</c>.</value>
         public bool CanUndo
         {
-            get { return this.backwardChangesStack.Count > 0; }
+            get { return backwardChangesStack.Count > 0; }
         }
 
         /// <summary>
@@ -718,11 +720,11 @@
         /// </summary>
         public void Undo()
         {
-            this.EnsureNotSuspended();
-            if (this.CanUndo)
+            EnsureNotSuspended();
+            if (CanUndo)
             {
-                this.OnUndo(RejectReason.Undo);
-                this.OnTrackingServiceStateChanged();
+                OnUndo(RejectReason.Undo);
+                OnTrackingServiceStateChanged();
             }
         }
 
@@ -734,7 +736,7 @@
         /// </value>
         public bool HasTransientEntities
         {
-            get { return this.transientEntities.Count > 0; }
+            get { return transientEntities.Count > 0; }
         }
 
         /// <summary>
@@ -743,7 +745,7 @@
         /// <value><c>true</c> if this instance can redo; otherwise, <c>false</c>.</value>
         public bool CanRedo
         {
-            get { return this.forwardChangesStack.Count > 0; }
+            get { return forwardChangesStack.Count > 0; }
         }
 
         /// <summary>
@@ -751,11 +753,11 @@
         /// </summary>
         public void Redo()
         {
-            this.EnsureNotSuspended();
-            if (this.CanRedo)
+            EnsureNotSuspended();
+            if (CanRedo)
             {
-                this.OnRedo(RejectReason.Redo);
-                this.OnTrackingServiceStateChanged();
+                OnRedo(RejectReason.Redo);
+                OnTrackingServiceStateChanged();
             }
         }
 
@@ -766,11 +768,11 @@
         /// <returns></returns>
         public virtual IChangeSet GetChangeSet()
         {
-            return this.GetChangeSet(IncludeAllChangeSetFilter.Instance);
+            return GetChangeSet(IncludeAllChangeSetFilter.Instance);
         }
 
         /// <summary>
-        /// Gets all the changes currently holded by
+        /// Gets all the changes currently hold by
         /// this IChangeTrackingService filtered by the
         /// supplied IChangeSetFilter.
         /// </summary>
@@ -782,7 +784,7 @@
 
             lock (SyncRoot)
             {
-                var included = this.backwardChangesStack.Where(c => filter.ShouldInclude(c));
+                var included = backwardChangesStack.Where(c => filter.ShouldInclude(c)).ToList();
                 return new ChangeSet(included);
             }
         }
@@ -794,15 +796,15 @@
         /// <param name="behavior">The requested behavior.</param>
         public virtual void Add(IChange change, AddChangeBehavior behavior)
         {
-            this.EnsureNotSuspended();
+            EnsureNotSuspended();
 
             Ensure.That(change)
                 .Named("change")
                 .IsNotNull();
 
-            if (this.IsInAtomicOperation)
+            if (IsInAtomicOperation)
             {
-                this.AtomicOperation.Add(change, behavior);
+                AtomicOperation.Add(change, behavior);
             }
             else
             {
@@ -817,16 +819,16 @@
                     switch (behavior)
                     {
                         case AddChangeBehavior.Default:
-                            this.forwardChangesStack.Clear();
-                            this.backwardChangesStack.Add(change);
+                            forwardChangesStack.Clear();
+                            backwardChangesStack.Add(change);
                             break;
 
                         case AddChangeBehavior.RedoRequest:
-                            this.backwardChangesStack.Add(change);
+                            backwardChangesStack.Add(change);
                             break;
 
                         case AddChangeBehavior.UndoRequest:
-                            this.forwardChangesStack.Add(change);
+                            forwardChangesStack.Add(change);
                             break;
 
                         case AddChangeBehavior.None:
@@ -836,10 +838,10 @@
                             throw new EnumValueOutOfRangeException();
                     }
 
-                    this.OnWire(change);
+                    OnWire(change);
                 }
 
-                this.OnTrackingServiceStateChanged();
+                OnTrackingServiceStateChanged();
             }
         }
 
@@ -854,7 +856,7 @@
         public virtual IAdvisory GetAdvisory()
         {
             var ab = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
-            var advisory = this.GetAdvisory(ab);
+            var advisory = GetAdvisory(ab);
 
             return advisory;
         }
@@ -874,7 +876,7 @@
         {
             Ensure.That(builder).Named("builder").IsNotNull();
 
-            var cSet = this.GetChangeSet();
+            var cSet = GetChangeSet();
             var advisory = builder.GenerateAdvisory(this, cSet);
 
             return advisory;
@@ -886,10 +888,10 @@
         /// <param name="change">The change to wire to.</param>
         protected virtual void OnWire(IChange change)
         {
-            change.Committed += this.onChangeCommitted;
-            change.Rejected += this.onChangeRejected;
+            change.Committed += onChangeCommitted;
+            change.Rejected += onChangeRejected;
 
-            this.OnWire(change.Owner as IComponent);
+            OnWire(change.Owner as IComponent);
         }
 
         /// <summary>
@@ -900,10 +902,10 @@
         {
             if (entity != null)
             {
-                if (!this.iComponentEntities.Contains(entity))
+                if (!iComponentEntities.Contains(entity))
                 {
-                    entity.Disposed += this.onComponentDisposed;
-                    this.iComponentEntities.Add(entity);
+                    entity.Disposed += onComponentDisposed;
+                    iComponentEntities.Add(entity);
                 }
             }
         }
@@ -914,8 +916,8 @@
         /// <param name="change">The change to unwire from.</param>
         protected virtual void OnUnwire(IChange change)
         {
-            change.Committed -= this.onChangeCommitted;
-            change.Rejected -= this.onChangeRejected;
+            change.Committed -= onChangeCommitted;
+            change.Rejected -= onChangeRejected;
         }
 
         /// <summary>
@@ -925,7 +927,7 @@
         /// <param name="reason">The reason of the commit.</param>
         protected virtual void OnChangeCommitted(IChange change, CommitReason reason)
         {
-            this.OnUnwire(change);
+            OnUnwire(change);
 
             switch (reason)
             {
@@ -933,7 +935,7 @@
 
                     lock (SyncRoot)
                     {
-                        this.backwardChangesStack.Remove(change);
+                        backwardChangesStack.Remove(change);
                     }
 
                     break;
@@ -953,7 +955,7 @@
         /// <param name="reason">The reason of the event raise.</param>
         protected virtual void OnChangeRejected(IChange change, RejectReason reason)
         {
-            this.OnUnwire(change);
+            OnUnwire(change);
 
             switch (reason)
             {
@@ -963,7 +965,7 @@
 
                     lock (SyncRoot)
                     {
-                        this.backwardChangesStack.Remove(change);
+                        backwardChangesStack.Remove(change);
                     }
 
                     break;
@@ -972,7 +974,7 @@
 
                     lock (SyncRoot)
                     {
-                        this.forwardChangesStack.Remove(change);
+                        forwardChangesStack.Remove(change);
                     }
 
                     break;
@@ -993,7 +995,7 @@
         /// <param name="reason">The reason why OnStopTracking has been called.</param>
         protected virtual void OnDetach(IMemento entity, StopTrackingReason reason)
         {
-            EntityTrackingStates state = this.GetEntityState(entity);
+            EntityTrackingStates state = GetEntityState(entity);
 
             bool isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
             bool hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
@@ -1009,10 +1011,10 @@
             IComponent cmp = entity as IComponent;
             if (cmp != null)
             {
-                cmp.Disposed -= this.onComponentDisposed;
-                if (this.iComponentEntities != null && this.iComponentEntities.Contains(cmp))
+                cmp.Disposed -= onComponentDisposed;
+                if (iComponentEntities != null && iComponentEntities.Contains(cmp))
                 {
-                    this.iComponentEntities.Remove(cmp);
+                    iComponentEntities.Remove(cmp);
                 }
             }
 
@@ -1030,34 +1032,34 @@
 
             if (isTransient)
             {
-                this.OnUnregisterTransient(entity);
+                OnUnregisterTransient(entity);
             }
 
-            if (hasBackwardChanges && this.backwardChangesStack != null)
+            if (hasBackwardChanges && backwardChangesStack != null)
             {
                 lock (SyncRoot)
                 {
-                    this.backwardChangesStack
+                    backwardChangesStack
                         .Where(c => Object.Equals(c.Owner, entity))
                         .AsReadOnly()
-                        .ForEach(c => this.backwardChangesStack.Remove(c));
+                        .ForEach(c => backwardChangesStack.Remove(c));
                 }
             }
 
-            if (hasForwardChanges && this.forwardChangesStack != null)
+            if (hasForwardChanges && forwardChangesStack != null)
             {
                 lock (SyncRoot)
                 {
-                    this.forwardChangesStack
+                    forwardChangesStack
                         .Where(c => Object.Equals(c.Owner, entity))
                         .AsReadOnly()
-                        .ForEach(c => this.forwardChangesStack.Remove(c));
+                        .ForEach(c => forwardChangesStack.Remove(c));
                 }
             }
 
             if ((isTransient || hasBackwardChanges || hasForwardChanges))
             {
-                this.OnTrackingServiceStateChanged();
+                OnTrackingServiceStateChanged();
             }
         }
 
@@ -1068,7 +1070,7 @@
         /// <c>SuspendedChangeTrackingServiceException</c> is raised if thsi instance is in a suspended state.</exception>
         protected void EnsureNotSuspended()
         {
-            if (this.IsSuspended)
+            if (IsSuspended)
             {
                 throw new SuspendedChangeTrackingServiceException();
             }
@@ -1079,7 +1081,7 @@
         /// </summary>
         public virtual void Suspend()
         {
-            this.IsSuspended = true;
+            IsSuspended = true;
         }
 
         /// <summary>
@@ -1099,7 +1101,7 @@
         /// </summary>
         public virtual void Resume()
         {
-            this.IsSuspended = false;
+            IsSuspended = false;
         }
 
         /// <summary>
@@ -1109,9 +1111,9 @@
         /// <param name="entity">The entity to stop tracking.</param>
         public void Detach(IMemento entity)
         {
-            this.EnsureNotSuspended();
+            EnsureNotSuspended();
 
-            this.OnDetach(entity, StopTrackingReason.UserRequest);
+            OnDetach(entity, StopTrackingReason.UserRequest);
         }
 
         /// <summary>
@@ -1130,7 +1132,7 @@
                    throw new NotSupportedException(msg);
                });
 
-            this.OnAttach(item);
+            OnAttach(item);
         }
 
         /// <summary>
@@ -1151,29 +1153,29 @@
             if (shouldNotify)
             {
                 var args = new CancelEventArgs(false);
-                this.OnRejectingChanges(args);
+                OnRejectingChanges(args);
                 if (args.Cancel)
                 {
                     return;
                 }
             }
 
-            while (this.IsChanged)
+            while (IsChanged)
             {
-                this.OnUndo(RejectReason.RejectChanges);
+                OnUndo(RejectReason.RejectChanges);
             }
 
             //TODO: should it clear even the "forwardChangesStack"?
 
-            if (this.HasTransientEntities)
+            if (HasTransientEntities)
             {
-                this.transientEntities.Clear();
+                transientEntities.Clear();
             }
 
             if (shouldNotify)
             {
-                this.OnTrackingServiceStateChanged();
-                this.OnChangesRejected();
+                OnTrackingServiceStateChanged();
+                OnChangesRejected();
             }
         }
 
@@ -1182,8 +1184,8 @@
         /// </summary>
         public virtual void RejectChanges()
         {
-            this.EnsureNotSuspended();
-            this.RejectChangesCore(this.IsChanged || this.HasTransientEntities);
+            EnsureNotSuspended();
+            RejectChangesCore(IsChanged || HasTransientEntities);
         }
 
         #endregion
@@ -1195,45 +1197,45 @@
         /// </summary>
         public virtual void AcceptChanges()
         {
-            this.EnsureNotSuspended();
+            EnsureNotSuspended();
 
-            var shouldNotify = this.IsChanged || this.HasTransientEntities;
+            var shouldNotify = IsChanged || HasTransientEntities;
 
             if (shouldNotify)
             {
                 var args = new CancelEventArgs(false);
-                this.OnAcceptingChanges(args);
+                OnAcceptingChanges(args);
                 if (args.Cancel)
                 {
                     return;
                 }
             }
 
-            if (this.IsChanged)
+            if (IsChanged)
             {
                 /*
                  * In caso di Commit vengono confermate
                  * nell'ordine in cui sono state fatte
                  */
-                this.backwardChangesStack
+                backwardChangesStack
                     .Where(change => change.IsCommitSupported)
                     .AsReadOnly()
                     .ForEach(change => change.Commit(CommitReason.AcceptChanges));
 
-                this.backwardChangesStack.Clear();
+                backwardChangesStack.Clear();
 
                 //TODO: should it clear even the "forwardChangesStack"?
             }
 
-            if (this.HasTransientEntities)
+            if (HasTransientEntities)
             {
-                this.transientEntities.Clear();
+                transientEntities.Clear();
             }
 
             if (shouldNotify)
             {
-                this.OnTrackingServiceStateChanged();
-                this.OnChangesAccepted();
+                OnTrackingServiceStateChanged();
+                OnChangesAccepted();
             }
         }
 
@@ -1244,7 +1246,7 @@
         /// <returns>true if the object’s content has changed since the last call to <see cref="M:System.ComponentModel.IChangeTracking.AcceptChanges"/>; otherwise, false.</returns>
         public virtual bool IsChanged
         {
-            get { return this.backwardChangesStack.Count > 0; }
+            get { return backwardChangesStack.Count > 0; }
         }
 
         #endregion
@@ -1261,9 +1263,9 @@
         /// </summary>
         protected virtual void OnDisposed()
         {
-            if (this.Disposed != null)
+            if (Disposed != null)
             {
-                this.Disposed(this, EventArgs.Empty);
+                Disposed(this, EventArgs.Empty);
             }
         }
 
@@ -1289,45 +1291,45 @@
         /// <value>The events.</value>
         protected EventHandlerList Events
         {
-            get { return this._events; }
+            get { return _events; }
         }
 
         #endregion
 
         bool IsInAtomicOperation
         {
-            get { return this.AtomicOperation != null; }
+            get { return AtomicOperation != null; }
         }
 
         AtomicOperation AtomicOperation;
 
         IAtomicOperation BeginAtomicOperation(AddChangeBehavior behavior)
         {
-            Ensure.That(this.IsInAtomicOperation)
+            Ensure.That(IsInAtomicOperation)
                 .WithMessage("Only one single atomic operation can be created at a time.")
                 .Is(false);
 
             Action<AtomicChange> completed = c =>
             {
-                this.AtomicOperation = null;
-                this.Add(c, behavior);
+                AtomicOperation = null;
+                Add(c, behavior);
 
                 /*
                  * Qui potrebbe aver senso recuperare dalla IChange
                  * tutte le transient entities e travasarle nelle transient entities
                  * locali.
                  */
-                c.MergeTransientEntities(this.transientEntities);
+                c.MergeTransientEntities(transientEntities);
             };
 
             Action disposed = () =>
             {
-                this.AtomicOperation = null;
+                AtomicOperation = null;
             };
 
-            this.AtomicOperation = new AtomicOperation(completed, disposed);
+            AtomicOperation = new AtomicOperation(completed, disposed);
 
-            return this.AtomicOperation;
+            return AtomicOperation;
         }
 
         /// <summary>
@@ -1339,7 +1341,7 @@
         /// is another active atomic operation.</exception>
         public IAtomicOperation BeginAtomicOperation()
         {
-            return this.BeginAtomicOperation(AddChangeBehavior.Default);
+            return BeginAtomicOperation(AddChangeBehavior.Default);
         }
 
         /// <summary>
@@ -1409,7 +1411,7 @@
 
         bool TryGetOriginalValue<T>(string propertyName, out T value)
         {
-            var valueChange = this.GetChangeSet()
+            var valueChange = GetChangeSet()
                 .OfType<Specialized.PropertyValueChange<T>>()
                 .FirstOrDefault(x => x.PropertyName == propertyName);
 

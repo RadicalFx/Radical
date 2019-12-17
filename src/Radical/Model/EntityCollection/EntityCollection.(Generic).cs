@@ -632,11 +632,8 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentNullException">
         ///   <paramref name="array"/> is null. </exception>
         ///   
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        ///   <paramref name="index"/> is less than zero. </exception>
-        ///   
         /// <exception cref="T:System.ArgumentException">
-        ///   <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
+        ///   <paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space in the destination <paramref name="array"/>. </exception>
         ///   
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
         public void CopyTo(T[] array)

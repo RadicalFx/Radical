@@ -9,16 +9,15 @@
     public interface IChange
     {
         /// <summary>
-        /// Gets the owner of this change, tipically the changed object.
+        /// Gets the owner of this change, typically the changed object.
         /// </summary>
         /// <value>The owner.</value>
         Object Owner { get; }
 
         /// <summary>
-        /// Gets the changed entities holded by this IChange instance.
+        /// Gets the changed entities hold by this IChange instance.
         /// </summary>
         /// <returns>A list of changed entities.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         IEnumerable<Object> GetChangedEntities();
 
         /// <summary>

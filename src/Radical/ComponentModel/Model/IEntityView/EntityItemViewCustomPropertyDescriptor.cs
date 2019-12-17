@@ -5,7 +5,8 @@ namespace Radical.ComponentModel
     /// <summary>
     /// A specialized PropertyDescriptor
     /// </summary>
-    /// <typeparam name="T">The type incapsulated by this descriptor</typeparam>
+    /// <typeparam name="T">The type encapsulated by this descriptor</typeparam>
+    /// <typeparam name="TValue">The type of the value</typeparam>
     public class EntityItemViewCustomPropertyDescriptor<T, TValue> :
         EntityItemViewPropertyDescriptor<T>
     //where T : class
@@ -36,7 +37,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// The default value for this property.
         /// </returns>
-        public TValue GetDefaultValue()
+        public new TValue GetDefaultValue()
         {
             if (this.DafaultValueInterceptor != null)
             {
@@ -47,10 +48,10 @@ namespace Radical.ComponentModel
         }
 
         /// <summary>
-        /// Gets or sets the dafault value interceptor.
+        /// Gets or sets the default value interceptor.
         /// </summary>
         /// <value>
-        /// The dafault value interceptor.
+        /// The default value interceptor.
         /// </value>
         public Func<TValue> DafaultValueInterceptor
         {

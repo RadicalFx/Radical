@@ -5,10 +5,9 @@
     using System.ComponentModel;
 
     /// <summary>
-    /// Extendes the System.ComponentModel.IBindingListView interface by providing
+    /// Extends the System.ComponentModel.IBindingListView interface by providing
     /// advanced features.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     public interface IEntityView :
         ISupportInitialize,
         IBindingListView,
@@ -48,7 +47,7 @@
 
         /// <summary>
         /// Gets a value indicating whether this instance is array based.
-        /// Being an arrya based instance means that this list is a read-only list.
+        /// Being an array based instance means that this list is a read-only list.
         /// </summary>
         /// <value>
         ///     <c>true</c> if this instance is array based; otherwise, <c>false</c>.
@@ -81,7 +80,7 @@
         void Refresh();
 
         /// <summary>
-        /// Occurs when the applyed filter changes.
+        /// Occurs when the applied filter changes.
         /// </summary>
         event EventHandler FilterChanged;
 

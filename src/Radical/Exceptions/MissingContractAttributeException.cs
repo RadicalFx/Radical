@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using Radical.Reflection;
 
     /// <summary>
     /// Exception raised to notify that the <see cref="Radical.ComponentModel.ContractAttribute"/>
@@ -20,16 +21,8 @@
         protected MissingContractAttributeException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            Type targetType = (Type)info.GetValue("targetType", typeof(Type));
+            Type targetType = Type.GetType(info.GetString("targetType"));
             this.TargetType = targetType;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
-        /// </summary>
-        public MissingContractAttributeException()
-        {
-
         }
 
         /// <summary>
@@ -37,7 +30,7 @@
         /// </summary>
         /// <param name="targetType">The target type.</param>
         public MissingContractAttributeException(Type targetType)
-            : this(string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
+            : this(targetType, string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
         {
             this.TargetType = targetType;
         }
@@ -45,11 +38,12 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MissingContractAttributeException"/> class.
         /// </summary>
+        /// <param name="targetType">The target type.</param>
         /// <param name="message">The message.</param>
-        public MissingContractAttributeException(string message)
+        public MissingContractAttributeException(Type targetType, string message)
             : base(message)
         {
-
+            TargetType = targetType;
         }
 
         /// <summary>
@@ -64,9 +58,9 @@
         }
 
         /// <summary>
-        /// Gets the type on witch the contract atttribute is missing.
+        /// Gets the type on witch the contract attribute is missing.
         /// </summary>
-        /// <value>The type on witch the contract atttribute is missing.</value>
+        /// <value>The type on witch the contract attribute is missing.</value>
         public Type TargetType
         {
             get;
@@ -90,7 +84,7 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("targetType", this.TargetType, typeof(Type));
+            info.AddValue("targetType", TargetType.ToShortString(), typeof(string));
         }
     }
 }

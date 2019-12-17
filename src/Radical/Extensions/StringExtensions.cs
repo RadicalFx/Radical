@@ -1,7 +1,7 @@
-using Radical.Collections;
 using Radical.Validation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -209,7 +209,7 @@ namespace Radical
         /// </summary>
         /// <param name="source">The source string to split.</param>
         /// <param name="separators">The char separators.</param>
-        /// <returns>A distinct list of string spliited by the given chars.</returns>
+        /// <returns>A distinct list of string split by the given chars.</returns>
         public static IEnumerable<string> AsKeywords(this string source, params Char[] separators)
         {
             return AsKeywords(source, true, separators);
@@ -223,13 +223,13 @@ namespace Radical
         /// <param name="applyWildChardsIfNecessary">if set to <c>true</c> [apply wild chards if necessary].</param>
         /// <param name="separators">The char separators.</param>
         /// <returns>
-        /// A distinct list of string spliited by the given chars.
+        /// A distinct list of string split by the given chars.
         /// </returns>
         public static IEnumerable<string> AsKeywords(this string source, bool applyWildChardsIfNecessary, params Char[] separators)
         {
             if (string.IsNullOrEmpty(source))
             {
-                return new ReadOnlyCollection<string>(new string[0]);
+                return new ReadOnlyCollection<string>(new List<string>());
             }
 
             return source.Split(separators, StringSplitOptions.RemoveEmptyEntries)
@@ -262,10 +262,10 @@ namespace Radical
         }
 
         /// <summary>
-        /// Returns the relative uri formatted as a pack uri: pack://.
+        /// Returns the relative URI formatted as a pack URI: pack://.
         /// </summary>
         /// <param name="resourceRelativeUri">The resource relative URI.</param>
-        /// <returns>The pack uri.</returns>
+        /// <returns>The pack URI.</returns>
         public static string AsPackUri(this string resourceRelativeUri)
         {
             Ensure.That(resourceRelativeUri)
@@ -279,11 +279,11 @@ namespace Radical
         }
 
         /// <summary>
-        /// Returns the relative uri formatted as a pack uri: pack://.
+        /// Returns the relative URI formatted as a pack URI: pack://.
         /// </summary>
         /// <param name="resourceRelativeUri">The resource relative URI.</param>
         /// <param name="assemblyName">Name of the assembly containing the resource.</param>
-        /// <returns>The pack uri.</returns>
+        /// <returns>The pack URI.</returns>
         public static string AsPackUri(this string resourceRelativeUri, string assemblyName)
         {
             Ensure.That(resourceRelativeUri).Named("resourceRelativeUri").IsNotNullNorEmpty();
