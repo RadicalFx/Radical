@@ -201,14 +201,6 @@ namespace Radical
         protected SuspendedChangeTrackingServiceException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         public SuspendedChangeTrackingServiceException(string message, System.Exception innerException) { }
     }
-    public class WeakReference<T> : System.WeakReference
-        where T :  class
-    {
-        public WeakReference(T target) { }
-        protected WeakReference(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        public WeakReference(T target, bool trackResurrection) { }
-        public T Target { get; set; }
-    }
 }
 namespace Radical.Analytics
 {
