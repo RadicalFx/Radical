@@ -806,24 +806,24 @@ namespace Radical.ComponentModel
         bool AutoGenerateProperties { get; set; }
         Radical.ComponentModel.IEntityItemViewFilter<T> Filter { get; set; }
         event System.EventHandler<Radical.Model.AddingNewEventArgs<T>> AddingNew;
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName, string displayName);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter);
+        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, System.Func<TProperty> defaultValueInterceptor);
         Radical.ComponentModel.IEntityItemView<T> AddNew();
         Radical.ComponentModel.IEntityItemView<T> AddNew(System.Action<Radical.Model.AddingNewEventArgs<T>> addNewInterceptor);
-        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty);
-        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName);
-        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName, string displayName);
-        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter);
-        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter);
-        Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, System.Func<TProperty> defaultValueInterceptor);
         void ApplyFilter(System.Predicate<T> predicate);
         void ApplySort(System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>> comparer);
         System.Collections.Generic.IEnumerable<Radical.ComponentModel.EntityItemViewPropertyDescriptor<T>> GetCustomProperties();
         Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> GetCustomProperty(string name);
         TValue GetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> item);
         System.ComponentModel.PropertyDescriptor GetProperty(string name);
-        bool IsPropertyMappingDefined(string propertyName);
+        bool IsCustomPropertyDefined(string propertyName);
         void Move(Radical.ComponentModel.IEntityItemView<T> item, int newIndex);
-        bool RemovePropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty);
-        bool RemovePropertyMapping(string propertyName);
+        bool RemoveCustomProperty(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty);
+        bool RemoveCustomProperty(string propertyName);
         void SetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> item, TValue value);
     }
     public interface IMonitor
@@ -1429,17 +1429,17 @@ namespace Radical.Model
         public event System.ComponentModel.ListChangedEventHandler ListChanged;
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public event System.EventHandler SortChanged;
+        public virtual Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName, string displayName) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, System.Func<TProperty> defaultValueInterceptor) { }
+        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter, System.Func<TProperty> defaultValueInterceptor) { }
         public void AddIndex(System.ComponentModel.PropertyDescriptor property) { }
         public void AddIndex(string propertyName) { }
         public Radical.ComponentModel.IEntityItemView<T> AddNew() { }
         public Radical.ComponentModel.IEntityItemView<T> AddNew(System.Action<Radical.Model.AddingNewEventArgs<T>> addNewInterceptor) { }
-        public virtual Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty) { }
-        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName) { }
-        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName, string displayName) { }
-        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter) { }
-        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter) { }
-        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, System.Func<TProperty> defaultValueInterceptor) { }
-        public Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string customPropertyName, Radical.ComponentModel.EntityItemViewValueGetter<T, TProperty> getter, Radical.ComponentModel.EntityItemViewValueSetter<T, TProperty> setter, System.Func<TProperty> defaultValueInterceptor) { }
         public void ApplyFilter(System.Predicate<T> predicate) { }
         public void ApplySort(System.Collections.Generic.IComparer<Radical.ComponentModel.IEntityItemView<T>> comparer) { }
         public void ApplySort(System.ComponentModel.ListSortDescriptionCollection sorts) { }
@@ -1463,8 +1463,8 @@ namespace Radical.Model
         public virtual object GetService(System.Type serviceType) { }
         public int IndexOf(Radical.ComponentModel.IEntityItemView<T> item) { }
         public int IndexOf(T item) { }
+        public bool IsCustomPropertyDefined(string propertyName) { }
         protected bool IsInAddingNewQueue(T item) { }
-        public bool IsPropertyMappingDefined(string propertyName) { }
         public void Move(Radical.ComponentModel.IEntityItemView<T> item, int newIndex) { }
         public void Move(int sourceIndex, int newIndex) { }
         protected virtual void OnAddingNew(Radical.Model.AddingNewEventArgs<T> e) { }
@@ -1490,11 +1490,11 @@ namespace Radical.Model
         protected virtual void OnUnwireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
         protected virtual void OnWireEntityItemView(Radical.ComponentModel.IEntityItemView<T> item) { }
         public virtual void Refresh() { }
+        public virtual bool RemoveCustomProperty(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty) { }
+        public bool RemoveCustomProperty(string propertyName) { }
         public void RemoveFilter() { }
         public void RemoveIndex(System.ComponentModel.PropertyDescriptor property) { }
         public void RemoveIndex(string propertyName) { }
-        public virtual bool RemovePropertyMapping(Radical.ComponentModel.EntityItemViewPropertyDescriptor<T> customProperty) { }
-        public bool RemovePropertyMapping(string propertyName) { }
         public void RemoveSort() { }
         public void SetCustomPropertyValue<TValue>(string customPropertyName, Radical.ComponentModel.IEntityItemView<T> owner, TValue value) { }
     }
