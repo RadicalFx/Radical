@@ -26,7 +26,7 @@
             };
 
             var target = new EntityView<Object>(new[] { new Object() });
-            target.AddPropertyMapping<string>("Foo", getter, setter);
+            target.AddCustomProperty<string>("Foo", getter, setter);
 
             target.First().SetCustomValue("Foo", expected);
             var actual = target.First().GetCustomValue<string>("Foo");
@@ -46,7 +46,7 @@
             };
 
             var target = new EntityView<Object>(new[] { new Object() });
-            target.AddPropertyMapping<string>("Foo", e =>
+            target.AddCustomProperty<string>("Foo", e =>
            {
                return e.Item.GetCustomValue<string>(e.PropertyName);
            }, interceptor);
@@ -71,7 +71,7 @@
             };
 
             var target = new EntityView<Object>(new[] { new Object() });
-            target.AddPropertyMapping<string>("Foo", e =>
+            target.AddCustomProperty<string>("Foo", e =>
            {
                return e.Item.GetCustomValue<string>(e.PropertyName);
            }, interceptor);
@@ -83,7 +83,7 @@
         }
 
         [TestMethod]
-        public void entityView_removePropertyMapping_should_remove_property_value()
+        public void entityView_removeCustomProperty_should_remove_property_value()
         {
             var value = "Hello world!";
 
@@ -98,13 +98,13 @@
             };
 
             var target = new EntityView<Object>(new[] { new Object() });
-            target.AddPropertyMapping<string>("Foo", getter, setter);
+            target.AddCustomProperty<string>("Foo", getter, setter);
 
             var item = target.First();
             item.SetCustomValue<string>("Foo", value);
 
-            target.RemovePropertyMapping("Foo");
-            target.AddPropertyMapping<string>("Foo", getter, setter);
+            target.RemoveCustomProperty("Foo");
+            target.AddCustomProperty<string>("Foo", getter, setter);
 
             var actual = target.First().GetCustomValue<string>("Foo");
 
@@ -113,7 +113,7 @@
         }
 
         [TestMethod]
-        public void entityView_removePropertyMapping_should_remove_property_value_even_on_more_then_one_element()
+        public void entityView_removeCustomProperty_should_remove_property_value_even_on_more_then_one_element()
         {
             var propertyName = "Foo";
             var expectedFirst = "Hello world, from First!";
@@ -130,7 +130,7 @@
             };
 
             var target = new EntityView<Object>(new[] { new Object(), new Object() });
-            target.AddPropertyMapping<string>(propertyName, getter, setter);
+            target.AddCustomProperty<string>(propertyName, getter, setter);
 
             var firstItem = target.First();
             firstItem.SetCustomValue<string>(propertyName, expectedFirst);
@@ -138,8 +138,8 @@
             var lastItem = target.Last();
             lastItem.SetCustomValue<string>(propertyName, expectedLast);
 
-            target.RemovePropertyMapping(propertyName);
-            target.AddPropertyMapping<string>(propertyName, getter, setter);
+            target.RemoveCustomProperty(propertyName);
+            target.AddCustomProperty<string>(propertyName, getter, setter);
 
             var actualFirst = target.First().GetCustomValue<string>("Foo");
             var actualLast = target.Last().GetCustomValue<string>("Foo");
