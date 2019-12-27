@@ -60,19 +60,19 @@ namespace Radical.ComponentModel.Validation
         /// Adds the given rule to the list of the validation rules.
         /// </summary>
         /// <param name="propertyIdentifier">The property identifier.</param>
-        /// <param name="rule">The rule to add.</param>
         /// <param name="error">The error if the given rule is not valid.</param>
+        /// <param name="rule">The rule to add.</param>
         /// <returns>The current validator instance.</returns>
-        IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, string error);
+        IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, string error, Func<ValidationContext<T>, RuleEvaluation> rule);
 
         /// <summary>
         /// Adds the given rule to the list of the validation rules.
         /// </summary>
         /// <param name="propertyIdentifier">The property identifier.</param>
-        /// <param name="rule">The rule.</param>
         /// <param name="error">The error.</param>
+        /// <param name="rule">The rule.</param>
         /// <returns></returns>
-        IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, Func<ValidationContext<T>, string> error);
+        IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, string> error, Func<ValidationContext<T>, RuleEvaluation> rule);
     }
 
     /// <summary>

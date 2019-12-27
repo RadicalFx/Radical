@@ -136,31 +136,31 @@ namespace Radical.Validation
         /// <summary>
         /// Adds the rule.
         /// </summary>
-        /// <param name="propertyIdentifier">The property identifier.</param>
-        /// <param name="rule">The rule.</param>
+        /// <param name="property">The property identifier.</param>
         /// <param name="error">The error.</param>
+        /// <param name="rule">The rule.</param>
         /// <returns></returns>
-        public IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, string error)
+        public IValidator<T> AddRule(Expression<Func<T, object>> property, string error, Func<ValidationContext<T>, RuleEvaluation> rule)
         {
-            return this.AddRule(propertyIdentifier, rule, ctx => error);
+            return this.AddRule(property, ctx => error, rule);
         }
 
         /// <summary>
         /// Adds the rule.
         /// </summary>
-        /// <param name="propertyIdentifier">The property identifier.</param>
-        /// <param name="rule">The rule.</param>
+        /// <param name="property">The property identifier.</param>
         /// <param name="error">The error.</param>
+        /// <param name="rule">The rule.</param>
         /// <returns></returns>
         /// <exception cref="System.NotImplementedException"></exception>
-        public IValidator<T> AddRule(Expression<Func<T, object>> propertyIdentifier, Func<ValidationContext<T>, RuleEvaluation> rule, Func<ValidationContext<T>, string> error)
+        public IValidator<T> AddRule(Expression<Func<T, object>> property, Func<ValidationContext<T>, string> error, Func<ValidationContext<T>, RuleEvaluation> rule)
         {
             return this.AddRule(ctx =>
            {
                var result = rule(ctx);
                if (result == RuleEvaluation.Failed)
                {
-                   var propertyName = propertyIdentifier.GetMemberName();
+                   var propertyName = property.GetMemberName();
                    var displayName = this.GetPropertyDisplayName(propertyName, ctx.Entity);
 
                    ctx.Results.AddError(new ValidationError(propertyName, displayName, new[] { error(ctx) }));
