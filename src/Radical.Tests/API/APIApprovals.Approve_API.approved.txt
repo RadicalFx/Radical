@@ -965,34 +965,6 @@ namespace Radical.ComponentModel.Validation
     {
         void OnValidate(Radical.Validation.ValidationContext<T> context);
     }
-    public interface IValidator
-    {
-        string RuleSet { get; }
-        bool IsValid(object entity);
-        Radical.Validation.ValidationResults Validate(object entity);
-        Radical.Validation.ValidationResults Validate(object entity, string propertyName);
-    }
-    public interface IValidatorFactory
-    {
-        Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>();
-        Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>(string ruleSet);
-    }
-    [Radical.ComponentModel.Contract]
-    public interface IValidator<T> : Radical.ComponentModel.Validation.IValidator
-    {
-        Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Action<Radical.Validation.ValidationContext<T>> rule);
-        Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, System.Func<Radical.Validation.ValidationContext<T>, string> error);
-        Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, string error);
-        bool IsValid(T entity);
-        Radical.Validation.ValidationResults Validate(T entity);
-        Radical.Validation.ValidationResults Validate(T entity, string propertyName);
-        Radical.Validation.ValidationResults Validate<TProperty>(T entity, System.Linq.Expressions.Expression<System.Func<T, TProperty>> property);
-    }
-    public enum RuleEvaluation
-    {
-        Succeeded = 0,
-        Failed = 1,
-    }
 }
 namespace Radical.Conversions
 {
@@ -1953,6 +1925,10 @@ namespace Radical.Validation
     {
         public static Radical.Validation.IEnsure<T> IsDefined<T>(this Radical.Validation.IEnsure<T> validator) { }
     }
+    public sealed class FailedValidationResult : Radical.Validation.ValidationResult
+    {
+        public string Error { get; }
+    }
     public static class GuidEnsureExtension
     {
         public static Radical.Validation.IEnsure<System.Guid> IsNotEmpty(this Radical.Validation.IEnsure<System.Guid> validator) { }
@@ -2004,33 +1980,41 @@ namespace Radical.Validation
         public static Radical.Validation.IEnsure<string> IsNotNullNorEmpty(this Radical.Validation.IEnsure<string> validator) { }
         public static Radical.Validation.IEnsure<string> Matches(this Radical.Validation.IEnsure<string> validator, string regExPattern) { }
     }
+    public sealed class SuccessfulValidationResult : Radical.Validation.ValidationResult
+    {
+        public SuccessfulValidationResult() { }
+    }
     public static class TypeEnsureExtension
     {
         public static Radical.Validation.IEnsure<System.Type> Is<T>(this Radical.Validation.IEnsure<System.Type> validator) { }
     }
     public class ValidationContext<T>
     {
-        public ValidationContext(T entity, Radical.ComponentModel.Validation.IValidator<T> validator) { }
-        public ValidationContext(T entity, Radical.ComponentModel.Validation.IValidator<T> validator, Radical.Validation.ValidationResults results) { }
+        public ValidationContext(T entity, Radical.Validation.Validator<T> validator) { }
+        public ValidationContext(T entity, Radical.Validation.Validator<T> validator, Radical.Validation.ValidationResults results) { }
         public T Entity { get; }
         public string PropertyName { get; set; }
         public Radical.Validation.ValidationResults Results { get; }
-        public string RuleSet { get; set; }
-        public Radical.ComponentModel.Validation.IValidator<T> Validator { get; }
+        public Radical.Validation.Validator<T> Validator { get; }
+        public Radical.Validation.ValidationResult Failed(string error) { }
+        public Radical.Validation.ValidationResult Succeeded() { }
     }
     public class ValidationError
     {
-        public ValidationError(string key, string keyDisplayName, System.Collections.Generic.IEnumerable<string> detectedProblems) { }
+        public ValidationError(string propertyName, string propertyDisplayName, System.Collections.Generic.IEnumerable<string> detectedProblems) { }
         public System.Collections.Generic.IEnumerable<string> DetectedProblems { get; }
-        public string Key { get; }
-        public string KeyDisplayName { get; }
+        public string PropertyDisplayName { get; }
+        public string PropertyName { get; }
         public void AddProblems(System.Collections.Generic.IEnumerable<string> problems) { }
         public override string ToString() { }
-        public static Radical.Validation.ValidationError Create<T>(System.Linq.Expressions.Expression<System.Func<T>> key, string keyDisplayName, params string[] detectedProblems) { }
     }
     public static class ValidationErrors
     {
         public static readonly System.Collections.Generic.IEnumerable<Radical.Validation.ValidationError> Empty;
+    }
+    public abstract class ValidationResult
+    {
+        protected ValidationResult() { }
     }
     public class ValidationResults
     {
@@ -2043,29 +2027,16 @@ namespace Radical.Validation
         public void AddError<T>(System.Linq.Expressions.Expression<System.Func<T>> key, string displayName, string[] detectedProblems) { }
         public override string ToString() { }
     }
-    public class ValidationTools
+    public class Validator<T>
     {
-        public ValidationTools() { }
-        public string GetPropertyDisplayName(string propertyName, object entity) { }
-    }
-    public sealed class ValidatorBaseFactory : Radical.ComponentModel.Validation.IValidatorFactory
-    {
-        public ValidatorBaseFactory() { }
-        public Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>() { }
-        public Radical.ComponentModel.Validation.IValidator<T> CreateValidator<T>(string ruleSet) { }
-    }
-    public class ValidatorBase<T> : Radical.ComponentModel.Validation.IValidator, Radical.ComponentModel.Validation.IValidator<T>
-    {
-        public ValidatorBase(string ruleSet) { }
-        public string RuleSet { get; }
-        public Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Action<Radical.Validation.ValidationContext<T>> rule) { }
-        public Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, System.Func<Radical.Validation.ValidationContext<T>, string> error) { }
-        public Radical.ComponentModel.Validation.IValidator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> propertyIdentifier, System.Func<Radical.Validation.ValidationContext<T>, Radical.ComponentModel.Validation.RuleEvaluation> rule, string error) { }
-        protected virtual string GetPropertyDisplayName(string propertyName, object entity) { }
+        public Validator() { }
+        public Radical.Validation.Validator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> property, System.Func<Radical.Validation.ValidationContext<T>, Radical.Validation.ValidationResult> rule) { }
+        public bool IsValid(object entity) { }
         public bool IsValid(T entity) { }
-        protected virtual void OnValidate(Radical.Validation.ValidationContext<T> context) { }
+        public Radical.Validation.ValidationResults Validate(object entity) { }
         public Radical.Validation.ValidationResults Validate(T entity) { }
-        public Radical.Validation.ValidationResults Validate(T entity, string propertyName) { }
-        public Radical.Validation.ValidationResults Validate<TProperty>(T entity, System.Linq.Expressions.Expression<System.Func<T, TProperty>> property) { }
+        public Radical.Validation.ValidationResults ValidateProperty(object entity, string propertyName) { }
+        public Radical.Validation.ValidationResults ValidateProperty(T entity, string propertyName) { }
+        public Radical.Validation.ValidationResults ValidateProperty<TProperty>(T entity, System.Linq.Expressions.Expression<System.Func<T, TProperty>> property) { }
     }
 }
