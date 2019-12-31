@@ -6,7 +6,7 @@ using Radical.Validation;
 namespace Radical.Tests.Validation
 {
     [TestClass()]
-    public class ValidatorTest
+    public class EnsureTests
     {
         [TestMethod]
         public void ensure_getFullErrorMessage_should_contain_ClassName()
