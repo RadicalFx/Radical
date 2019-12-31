@@ -1865,7 +1865,7 @@ namespace Radical.Model
             return CustomProperties.Values.ToArray<EntityItemViewPropertyDescriptor<T>>();
         }
 
-        public bool IsPropertyMappingDefined(string propertyName)
+        public bool IsCustomPropertyDefined(string propertyName)
         {
             return CustomProperties.ContainsKey(propertyName);
         }
@@ -1950,7 +1950,7 @@ namespace Radical.Model
         /// Adds a the given property to the property mappings of this instance.
         /// </summary>
         /// <param name="customProperty">The custom property to add.</param>
-        public virtual EntityItemViewPropertyDescriptor<T> AddPropertyMapping(EntityItemViewPropertyDescriptor<T> customProperty)
+        public virtual EntityItemViewPropertyDescriptor<T> AddCustomProperty(EntityItemViewPropertyDescriptor<T> customProperty)
         {
             CustomProperties.Add(customProperty.Name, customProperty);
             OnListChanged(new ListChangedEventArgs(ListChangedType.PropertyDescriptorAdded, customProperty));
@@ -1965,10 +1965,10 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the dynamically generated property.
         /// </returns>
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName)
+        public EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName)
         {
             var pd = new EntityItemViewPropertyDescriptor<T>(propertyName);
-            return AddPropertyMapping(pd);
+            return AddCustomProperty(pd);
         }
 
         /// <summary>
@@ -1979,10 +1979,10 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the dynamically generated property.
         /// </returns>
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName, string displayName)
+        public EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName, string displayName)
         {
             var pd = new EntityItemViewPropertyDescriptor<T>(propertyName, displayName);
-            return AddPropertyMapping(pd);
+            return AddCustomProperty(pd);
         }
 
         /// <summary>
@@ -1997,19 +1997,19 @@ namespace Radical.Model
         /// <remarks>
         /// Using this overload implicitly creates a read-only property because no setter has been supplied.
         /// </remarks>
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
+        public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter)
         {
-            return AddPropertyMapping(customPropertyName, getter, null, null);
+            return AddCustomProperty(customPropertyName, getter, null, null);
         }
 
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
+        public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
             Func<TProperty> defaultValueInterceptor)
         {
-            return AddPropertyMapping(customPropertyName, getter, null, defaultValueInterceptor);
+            return AddCustomProperty(customPropertyName, getter, null, defaultValueInterceptor);
         }
 
         /// <summary>
@@ -2022,15 +2022,15 @@ namespace Radical.Model
         /// <returns>
         /// A reference to the dynamically generated property.
         /// </returns>
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
+        public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
             EntityItemViewValueSetter<T, TProperty> setter)
         {
-            return AddPropertyMapping(customPropertyName, getter, setter, null);
+            return AddCustomProperty(customPropertyName, getter, setter, null);
         }
 
-        public EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
+        public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
             EntityItemViewValueSetter<T, TProperty> setter,
@@ -2043,7 +2043,7 @@ namespace Radical.Model
 
             pd.DafaultValueInterceptor = defaultValueInterceptor;
 
-            return AddPropertyMapping(pd);
+            return AddCustomProperty(pd);
         }
 
         /// <summary>
@@ -2051,9 +2051,9 @@ namespace Radical.Model
         /// </summary>
         /// <param name="customProperty">The custom property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        public virtual bool RemovePropertyMapping(EntityItemViewPropertyDescriptor<T> customProperty)
+        public virtual bool RemoveCustomProperty(EntityItemViewPropertyDescriptor<T> customProperty)
         {
-            return RemovePropertyMapping(customProperty.Name);
+            return RemoveCustomProperty(customProperty.Name);
         }
 
         /// <summary>
@@ -2061,7 +2061,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        public bool RemovePropertyMapping(string propertyName)
+        public bool RemoveCustomProperty(string propertyName)
         {
             EntityItemViewPropertyDescriptor<T> customProperty;
             if (CustomProperties.TryGetValue(propertyName, out customProperty))

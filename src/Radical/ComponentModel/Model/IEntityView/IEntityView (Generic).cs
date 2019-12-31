@@ -23,7 +23,7 @@ namespace Radical.ComponentModel
         /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
         /// <param name="setter">A delegate to call in order to set the value of the dynamically generated property.</param>
         /// <returns>A reference to the dynamically generated property.</returns>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(
+        EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter,
             EntityItemViewValueSetter<T, TProperty> setter);
@@ -35,10 +35,10 @@ namespace Radical.ComponentModel
         /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
         /// <returns>A reference to the dynamically generated property.</returns>
         /// <remarks>Using this overload implicitly creates a read-only property because no setter has been supplied.</remarks>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName,
+        EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter);
 
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping<TProperty>(string calculatedPropertyDisplayName,
+        EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter,
             Func<TProperty> defaultValueInterceptor);
 
@@ -48,37 +48,37 @@ namespace Radical.ComponentModel
         /// <param name="propertyName">Name of the property to map to.</param>
         /// <param name="displayName">The display name.</param>
         /// <returns>A reference to the dynamically generated property.</returns>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName, string displayName);
+        EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName, string displayName);
 
         /// <summary>
         /// Adds a property mapping using the supplied property descriptor instance.
         /// </summary>
         /// <param name="customProperty">The custom property descriptor to use as mapping.</param>
         /// <returns>A reference to the dynamically generated property.</returns>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping(EntityItemViewPropertyDescriptor<T> customProperty);
+        EntityItemViewPropertyDescriptor<T> AddCustomProperty(EntityItemViewPropertyDescriptor<T> customProperty);
 
         /// <summary>
         /// Adds a property mapping that maps the supplied property.
         /// </summary>
         /// <param name="propertyName">Name of the property to map to.</param>
         /// <returns>A reference to the dynamically generated property.</returns>
-        EntityItemViewPropertyDescriptor<T> AddPropertyMapping(string propertyName);
+        EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName);
 
-        bool IsPropertyMappingDefined(string propertyName);
+        bool IsCustomPropertyDefined(string propertyName);
 
         /// <summary>
         /// Removes the property mapping.
         /// </summary>
         /// <param name="customProperty">The custom property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        bool RemovePropertyMapping(EntityItemViewPropertyDescriptor<T> customProperty);
+        bool RemoveCustomProperty(EntityItemViewPropertyDescriptor<T> customProperty);
 
         /// <summary>
         /// Removes the property mapping.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns><c>True</c> if the operation was successful, otherwise <c>false</c>.</returns>
-        bool RemovePropertyMapping(string propertyName);
+        bool RemoveCustomProperty(string propertyName);
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance must auto generate property mappings.

@@ -134,7 +134,7 @@ namespace Radical.Model
             get
             {
                 //si potrebbe trovare un sistema per rimbalzare su chi espone la proprietà
-                //if( this.View.IsPropertyMappingDefined( columnName ) ) 
+                //if( this.View.IsCustomPropertyDefined( columnName ) ) 
                 //{
 
                 //}
