@@ -6,7 +6,7 @@ using Radical.Validation;
 namespace Radical.Tests.Validation
 {
     [TestClass()]
-    public class ValidatorTest
+    public class EnsureTests
     {
         [TestMethod]
         public void ensure_getFullErrorMessage_should_contain_ClassName()
@@ -18,7 +18,7 @@ namespace Radical.Tests.Validation
                 var obj = Ensure.That("");
                 string actual = obj.GetFullErrorMessage("validator specific message");
 
-                var containsClassName = actual.Contains(typeof(ValidatorTest).Name);
+                var containsClassName = actual.Contains(typeof(EnsureTests).Name);
 
                 containsClassName.Should().Be.True();
             }
@@ -58,8 +58,8 @@ namespace Radical.Tests.Validation
                 var obj = Ensure.That("");
                 string actual = obj.GetFullErrorMessage("validator specific message");
 
-                var containsClassName = actual.Contains(typeof(ValidatorTest).Name);
-                var containsMethodName = actual.Contains(typeof(ValidatorTest).Name);
+                var containsClassName = actual.Contains(typeof(EnsureTests).Name);
+                var containsMethodName = actual.Contains(typeof(EnsureTests).Name);
 
                 containsClassName.Should().Be.True();
                 containsMethodName.Should().Be.True();

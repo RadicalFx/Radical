@@ -38,9 +38,9 @@ namespace Radical.Validation
         }
 
         /// <summary>
-        /// Gets a value indicating whether validation succedeed or not.
+        /// Gets a value indicating whether validation succeeded or not.
         /// </summary>
-        /// <value><c>true</c> if the validation succedeed; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if the validation succeeded; otherwise, <c>false</c>.</value>
         public bool IsValid
         {
             get
@@ -65,7 +65,7 @@ namespace Radical.Validation
         /// <param name="detectedProblems">The detected problems.</param>
         public void AddError<T>(Expression<Func<T>> key, string displayName, string[] detectedProblems)
         {
-            var error = ValidationError.Create<T>(key, displayName, detectedProblems);
+            var error = new ValidationError(key.GetMemberName(), displayName, detectedProblems);
             this.AddError(error);
         }
 
@@ -77,7 +77,7 @@ namespace Radical.Validation
         {
             Ensure.That(error).Named("error").IsNotNull();
 
-            var err = this.Errors.Where(e => e.Key == error.Key).SingleOrDefault();
+            var err = this.Errors.Where(e => e.PropertyName == error.PropertyName).SingleOrDefault();
             if (err != null)
             {
                 err.AddProblems(error.DetectedProblems);
@@ -105,7 +105,7 @@ namespace Radical.Validation
             foreach (var error in this.Errors)
             {
                 sb.AppendLine();
-                sb.AppendFormat("{0}: {1}", error.Key, error);
+                sb.AppendFormat("{0}: {1}", error.PropertyName, error);
             }
 
             return sb.ToString();
