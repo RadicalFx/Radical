@@ -1,8 +1,8 @@
+using System;
+using System.Linq;
+
 namespace Radical
 {
-    using System;
-    using System.Linq;
-
     /// <summary>
     /// Helper class that adds functionalities for enumerative types.
     /// </summary>
@@ -77,7 +77,7 @@ namespace Radical
         }
 
         /// <summary>
-        /// Gets the description string holded by the <see cref="EnumItemDescriptionAttribute"/> applied to the given enumaration value.
+        /// Gets the description string held by the <see cref="EnumItemDescriptionAttribute"/> applied to the given enumeration value.
         /// </summary>
         /// <param name="value">The enumeration value to search the attribute on.</param>
         /// <param name="attribute">The <see cref="EnumItemDescriptionAttribute"/> applied to given enumeration value.</param>
@@ -99,8 +99,8 @@ namespace Radical
         }
 
         /// <summary>
-        /// Gets the caption string holded by the <see cref="EnumItemDescriptionAttribute"/> 
-        /// applied to the given enumaration value.
+        /// Gets the caption string held by the <see cref="EnumItemDescriptionAttribute"/> 
+        /// applied to the given enumeration value.
         /// </summary>
         /// <param name="value">The value to extract caption from.</param>
         /// <returns>The value applied to the <c>Caption</c> property of the <see cref="EnumItemDescriptionAttribute"/>.</returns>
@@ -112,8 +112,8 @@ namespace Radical
         }
 
         /// <summary>
-        /// Gets the description string holded by the <see cref="EnumItemDescriptionAttribute"/> 
-        /// applied to the given enumaration value.
+        /// Gets the description string held by the <see cref="EnumItemDescriptionAttribute"/> 
+        /// applied to the given enumeration value.
         /// </summary>
         /// <param name="value">The value to extract description from.</param>
         /// <returns>The value applied to the <c>Description</c> property of the <see cref="EnumItemDescriptionAttribute"/>.</returns>

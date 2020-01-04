@@ -1,8 +1,8 @@
-﻿namespace Radical
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Radical
+{
     static class ObjectReferenceEqualityComparer
     {
         private static IEqualityComparer<Object> _instance = new ReferenceEqualityComparer<Object>();

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Radical
 {
     /// <summary>
-    /// Implements the generic IComparer in roder to 
+    /// Implements the generic IComparer in order to 
     /// forward comparison to a external delegate.
     /// </summary>
     /// <typeparam name="T">The type of the item to compare.</typeparam>

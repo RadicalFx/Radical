@@ -1,11 +1,11 @@
+using Radical.ComponentModel;
+using Radical.Validation;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+
 namespace Radical
 {
-    using Radical.ComponentModel;
-    using Radical.Validation;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-
     public static class EntityViewExtensions
     {
         public static IEnumerable<T> AsEntityItems<T>(this IEntityView<T> view)

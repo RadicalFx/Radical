@@ -17,7 +17,7 @@ namespace Radical
         /// <typeparam name="TSource">The type of the source.</typeparam>
         /// <typeparam name="TDestination">The type of the destination.</typeparam>
         /// <param name="obj">The current object.</param>
-        /// <param name="interceptor">The delagate used to intercept the exposition.</param>
+        /// <param name="interceptor">The delegate used to intercept the exposition.</param>
         /// <returns>The originally exposed object.</returns>
         public static TSource InterceptAs<TSource, TDestination>(this TSource obj, Action<TDestination> interceptor)
             where TSource : class
@@ -151,7 +151,7 @@ namespace Radical
         /// <param name="evaluator">The evaluator.</param>
         /// <param name="defaultValueOnNullInput">The default value on null input.</param>
         /// <returns>
-        /// The evaluated input value; otherwise, if the imput value reference equals null, returns the default value.
+        /// The evaluated input value; otherwise, if the input value reference equals null, returns the default value.
         /// </returns>
         public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput)
         {
@@ -169,7 +169,7 @@ namespace Radical
         /// <param name="evaluator">The evaluator.</param>
         /// <param name="failureValue">The failure value.</param>
         /// <param name="failureEvaluator">The failure evaluator.</param>
-        /// <returns>The evaluated input value; otherwise, if the failure evaluator failes, return the failure value.</returns>
+        /// <returns>The evaluated input value; otherwise, if the failure evaluator fails, return the failure value.</returns>
         public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> failureValue, Predicate<TInput> failureEvaluator)
         {
             if (failureEvaluator(input))

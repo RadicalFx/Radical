@@ -61,7 +61,7 @@ namespace Radical.Helpers
         /// <summary>
         /// Return a random char
         /// </summary>
-        /// <returns>The choosen char</returns>
+        /// <returns>The chosen char</returns>
         protected char GetRandomCharacter()
         {
             int upperBound = pwdCharArray.GetUpperBound(0);
@@ -149,7 +149,7 @@ namespace Radical.Helpers
         /// <summary>
         /// Minimum char number of the generated password
         /// </summary>
-        /// <value>The min lenght.</value>
+        /// <value>The min length.</value>
         public int MinLenght
         {
             get { return this._minLenght; }
@@ -168,7 +168,7 @@ namespace Radical.Helpers
         /// <summary>
         /// Maximum char number of the generated password
         /// </summary>
-        /// <value>The max lenght.</value>
+        /// <value>The max length.</value>
         public int MaxLenght
         {
             get { return this._maxLenght; }
