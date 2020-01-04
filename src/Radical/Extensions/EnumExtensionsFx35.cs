@@ -13,7 +13,7 @@ namespace Radical
         /// <param name="variable">Flags enumeration to check</param>
         /// <param name="value">Flag to check for</param>
         /// <returns>
-        /// 	<c>true</c> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <c>false</c>.
+        ///     <c>true</c> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <c>false</c>.
         /// </returns>
         public static bool HasFlag(this Enum variable, Enum value)
         {

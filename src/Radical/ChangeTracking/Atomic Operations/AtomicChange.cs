@@ -31,7 +31,7 @@ namespace Radical.ChangeTracking
         }
 
         /// <summary>
-        /// Gets the owner of this change, tipically the changed object.
+        /// Gets the owner of this change, typically the changed object.
         /// </summary>
         /// <value>The owner.</value>
         public object Owner
@@ -71,7 +71,7 @@ namespace Radical.ChangeTracking
         }
 
         /// <summary>
-        /// Gets the changed entities holded by this IChange instance.
+        /// Gets the changed entities held by this IChange instance.
         /// </summary>
         /// <returns>A list of changed entities.</returns>
         public IEnumerable<object> GetChangedEntities()

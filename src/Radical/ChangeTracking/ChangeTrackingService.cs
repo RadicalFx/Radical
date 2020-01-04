@@ -34,7 +34,7 @@
         }
 
         /// <summary>
-        /// The shared synch lock
+        /// The shared sync lock
         /// </summary>
         protected static readonly Object SyncRoot = new Object();
 
@@ -310,7 +310,7 @@
         #region IChangeTrackingService Members
 
         /// <summary>
-        /// Creates a bookmark usefull to save a position
+        /// Creates a bookmark useful to save a position
         /// in this IChangeTrackingService.
         /// </summary>
         /// <returns>An <c>IBookmark</c> instance.</returns>
@@ -410,7 +410,7 @@
         /// Registers the supplied object as a new object.
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
-        /// <exception cref="ArgumentException">If the change tracking service has already registered the object or if hhas pending changes for the object an ArgumentException is raised.</exception>
+        /// <exception cref="ArgumentException">If the change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
         public void RegisterTransient(Object entity)
         {
             RegisterTransient(entity, true);
@@ -714,7 +714,7 @@
         }
 
         /// <summary>
-        /// Undoes the last IChange holded by
+        /// Undoes the last IChange held by
         /// this instance and removes it from
         /// the cache.
         /// </summary>
@@ -749,7 +749,7 @@
         }
 
         /// <summary>
-        /// Redoes the last undoed change.
+        /// Redoes the last undone change.
         /// </summary>
         public void Redo()
         {
@@ -762,7 +762,7 @@
         }
 
         /// <summary>
-        /// Gets all the changes currently holded by
+        /// Gets all the changes currently held by
         /// this IChangeTrackingService
         /// </summary>
         /// <returns></returns>
@@ -847,11 +847,11 @@
 
         /// <summary>
         /// Generates an advisory that contains all the operations that
-        /// an ipothetical UnitOfWork must perform in order to persist
+        /// an hypothetical UnitOfWork must perform in order to persist
         /// all the changes tracked by this ChangeTrackingService.
         /// </summary>
         /// <returns>
-        /// A readonly list of <see cref="IAdvisedAction"/>.
+        /// A read-only list of <see cref="IAdvisedAction"/>.
         /// </returns>
         public virtual IAdvisory GetAdvisory()
         {
@@ -863,14 +863,14 @@
 
         /// <summary>
         /// Generates an advisory that contains all the operations that
-        /// an ipothetical UnitOfWork must perform in order to persist
+        /// an hypothetical UnitOfWork must perform in order to persist
         /// all the changes tracked by this ChangeTrackingService.
         /// The generation is customized using the supplied <see cref="IAdvisoryBuilder"/>.
         /// </summary>
         /// <param name="builder">An instance of a class implementing this <see cref="IAdvisoryBuilder"/>
         /// interface used to control the advisory generation process.</param>
         /// <returns>
-        /// A readonly list of <see cref="IAdvisedAction"/>.
+        /// A read-only list of <see cref="IAdvisedAction"/>.
         /// </returns>
         public virtual IAdvisory GetAdvisory(IAdvisoryBuilder builder)
         {
@@ -1067,7 +1067,7 @@
         /// Ensures the this service instance is not suspended.
         /// </summary>
         /// <exception cref="SuspendedChangeTrackingServiceException">A 
-        /// <c>SuspendedChangeTrackingServiceException</c> is raised if thsi instance is in a suspended state.</exception>
+        /// <c>SuspendedChangeTrackingServiceException</c> is raised if this instance is in a suspended state.</exception>
         protected void EnsureNotSuspended()
         {
             if (IsSuspended)
@@ -1333,7 +1333,7 @@
         }
 
         /// <summary>
-        /// Begins a new atomic operation. An atomic operation is usefull to
+        /// Begins a new atomic operation. An atomic operation is useful to
         /// treat a set of subsequent changes as a single change.
         /// </summary>
         /// <returns>The newly created atomic operation.</returns>
