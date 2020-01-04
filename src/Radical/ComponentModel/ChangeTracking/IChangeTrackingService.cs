@@ -143,14 +143,14 @@ namespace Radical.ComponentModel.ChangeTracking
         void Redo();
 
         /// <summary>
-        /// Gets all the changes currently holded by
+        /// Gets all the changes currently held by
         /// this IChangeTrackingService
         /// </summary>
         /// <returns></returns>
         IChangeSet GetChangeSet();
 
         /// <summary>
-        /// Gets all the changes currently holded by
+        /// Gets all the changes currently held by
         /// this IChangeTrackingService filtered by the
         /// supplied IChangeSetBuilder.
         /// </summary>
@@ -167,21 +167,21 @@ namespace Radical.ComponentModel.ChangeTracking
 
         /// <summary>
         /// Generates an advisory that contains all the operations that
-        /// an ipothetical UnitOfWork must perform in order to persist
+        /// an hypothetical UnitOfWork must perform in order to persist
         /// all the changes tracked by this ChangeTrackingService.
         /// </summary>
-        /// <returns>A readonly list of <see cref="IAdvisedAction"/>.</returns>
+        /// <returns>A read-only list of <see cref="IAdvisedAction"/>.</returns>
         IAdvisory GetAdvisory();
 
         /// <summary>
         /// Generates an advisory that contains all the operations that
-        /// an ipothetical UnitOfWork must perform in order to persist
+        /// an hypothetical UnitOfWork must perform in order to persist
         /// all the changes tracked by this ChangeTrackingService.
         /// The generation is customized using the supplied <see cref="IAdvisoryBuilder"/>.
         /// </summary>
         /// <param name="builder">An instance of a class implementing this <see cref="IAdvisoryBuilder"/> 
         /// interface used to control the advisory generation process.</param>
-        /// <returns>A readonly list of <see cref="IAdvisedAction"/>.</returns>
+        /// <returns>A read-only list of <see cref="IAdvisedAction"/>.</returns>
         IAdvisory GetAdvisory(IAdvisoryBuilder builder);
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Radical.ComponentModel.ChangeTracking
         void Attach(IMemento item);
 
         /// <summary>
-        /// Begins a new atomic operation. An atomic operation is usefull to
+        /// Begins a new atomic operation. An atomic operation is useful to
         /// treat a set of subsequent changes as a single change.
         /// </summary>
         /// <exception cref="ArgumentException">An <c>ArgumentException</c> is raised if there

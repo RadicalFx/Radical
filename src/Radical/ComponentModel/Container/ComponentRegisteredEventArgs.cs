@@ -3,7 +3,7 @@
 namespace Radical.ComponentModel
 {
     /// <summary>
-    /// Defines event args for the ComponentRegistered event.
+    /// Defines event arguments for the ComponentRegistered event.
     /// </summary>
     public class ComponentRegisteredEventArgs : EventArgs
     {

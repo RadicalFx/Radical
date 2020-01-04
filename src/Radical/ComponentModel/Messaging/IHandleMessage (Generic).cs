@@ -1,15 +1,14 @@
 ﻿namespace Radical.ComponentModel.Messaging
 {
     /// <summary>
-    /// An <c>IHandleMessage</c> is a component spcialized
-    /// in the operation of handling messages, primarly delivered
+    /// An <c>IHandleMessage</c> is a component specialized
+    /// in the operation of handling messages, primarily delivered
     /// by an <c>IMessageBroker</c>. It is designed to be registered
-    /// in an Invertion of Control system in order to do automatic message
+    /// in an Inversion of Control system in order to do automatic message
     /// handling.
     /// </summary>
     [Contract]
     public interface IHandleMessage<T> : IHandleMessage
-    //where T : IMessage
     {
         /// <summary>
         /// Handles the specified message.

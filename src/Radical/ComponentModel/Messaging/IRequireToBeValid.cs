@@ -4,7 +4,7 @@
     /// Identifies a message that has its own validation
     /// logic that must be called before Dispatch/Broadcast.
     /// </summary>
-    public interface IRequireToBeValid //: IMessage
+    public interface IRequireToBeValid
     {
         /// <summary>
         /// Validates the current message content.
