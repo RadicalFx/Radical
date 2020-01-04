@@ -3,7 +3,7 @@
 namespace Radical.ComponentModel.ChangeTracking
 {
     /// <summary>
-    /// Represents an atomic operation within the lifecycle
+    /// Represents an atomic operation within the life-cycle
     /// of an <see cref="IChangeTrackingService"/>. An atomic
     /// operation can group a set of changes as a single change.
     /// </summary>

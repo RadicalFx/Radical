@@ -1,10 +1,10 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
-{
-    using System;
+﻿using System;
 
+namespace Radical.ComponentModel.ChangeTracking
+{
     /// <summary>
     /// ChangeArgs is the base class for data describing a change commit
-    /// or a change reject, transport data containg detailed infos about 
+    /// or a change reject, transport data containing detailed infos about 
     /// the rejected change.
     /// </summary>
     /// <typeparam name="T">The type of the cached value.</typeparam>
@@ -16,21 +16,11 @@
         /// <param name="entity">The entity.</param>
         /// <param name="cachedValue">The cached value.</param>
         /// <param name="source">The source.</param>
-        public ChangeEventArgs(Object entity, T cachedValue, IChange source)
+        public ChangeEventArgs(object entity, T cachedValue, IChange source)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
-
-            if (source == null)
-            {
-                throw new ArgumentNullException("source");
-            }
-
-            this.Entity = entity;
+            this.Entity = entity ?? throw new ArgumentNullException("entity");
             this.CachedValue = cachedValue;
-            this.Source = source;
+            this.Source = source ?? throw new ArgumentNullException("source");
         }
 
         /// <summary>

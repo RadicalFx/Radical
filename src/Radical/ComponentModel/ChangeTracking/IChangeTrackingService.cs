@@ -1,10 +1,10 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
+namespace Radical.ComponentModel.ChangeTracking
+{
     /// <summary>
     /// Provides change tracking functionalities.
     /// </summary>
@@ -35,7 +35,7 @@
         event EventHandler<CancelEventArgs> RejectingChanges;
 
         /// <summary>
-        /// Creates a bookmark usefull to save a position
+        /// Creates a bookmark useful to save a position
         /// in this IChangeTrackingService.
         /// </summary>
         /// <remarks>
@@ -66,7 +66,7 @@
         /// Registers the supplied object as a new object.
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
-        /// <exception cref="ArgumentException">If thew change tracking service has already registered the object or if hhas pending changes for the object an ArgumentException is raised.</exception>
+        /// <exception cref="ArgumentException">If thew change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
         void RegisterTransient(Object entity);
 
         /// <summary>
@@ -125,7 +125,7 @@
         bool CanUndo { get; }
 
         /// <summary>
-        /// Undoes the last IChange holded by 
+        /// Undoes the last IChange held by 
         /// this instance and removes it from
         /// the cache.
         /// </summary>
@@ -138,7 +138,7 @@
         bool CanRedo { get; }
 
         /// <summary>
-        /// Redoes the last undoed change.
+        /// Redoes the last undone change.
         /// </summary>
         void Redo();
 

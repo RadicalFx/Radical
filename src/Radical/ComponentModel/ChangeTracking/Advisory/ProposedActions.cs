@@ -4,7 +4,7 @@
 
     /// <summary>
     /// A ProposedActions is a proposal by the change tracking provisioning system.
-    /// This action is an ipothetical action that can be performed by an unit of work.
+    /// This action is an hypothetical action that can be performed by an unit of work.
     /// </summary>
     [Flags]
     public enum ProposedActions
@@ -34,7 +34,7 @@
 
         /// <summary>
         /// The object has been deleted but being marked
-        /// as new is a nonsense to remove itr from the
+        /// as new is a nonsense to remove it from the
         /// underlying storage, simply dispose its instance
         /// </summary>
         Dispose = 8,

@@ -2,7 +2,7 @@
 {
 
     /// <summary>
-    /// Tha AddChangeBehavior enumeration describes the reason
+    /// The AddChangeBehavior enumeration describes the reason
     /// of the change add request.
     /// </summary>
     public enum AddChangeBehavior
@@ -14,7 +14,7 @@
 
         /// <summary>
         /// The change comes from the external environment, 
-        /// eg. is pushed because of user action.
+        /// e.g. is pushed because of user action.
         /// </summary>
         Default,
 

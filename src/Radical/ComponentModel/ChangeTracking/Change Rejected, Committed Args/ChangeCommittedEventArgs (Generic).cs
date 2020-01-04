@@ -1,10 +1,8 @@
 ﻿namespace Radical.ComponentModel.ChangeTracking
 {
-    using System;
-
     /// <summary>
     /// ChangeCommittedArgs describes the change commit request and transport
-    /// data containg detailed infos about the committed change.
+    /// data containing detailed infos about the committed change.
     /// </summary>
     /// <typeparam name="T">The type of the cached value.</typeparam>
     public class ChangeCommittedEventArgs<T> : ChangeEventArgs<T>
@@ -16,7 +14,7 @@
         /// <param name="cachedValue">The cached value.</param>
         /// <param name="source">The source.</param>
         /// <param name="reason">The reason.</param>
-        public ChangeCommittedEventArgs(Object entity, T cachedValue, IChange source, CommitReason reason)
+        public ChangeCommittedEventArgs(object entity, T cachedValue, IChange source, CommitReason reason)
             : base(entity, cachedValue, source)
         {
             this.Reason = reason;

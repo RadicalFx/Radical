@@ -9,7 +9,7 @@
     {
         /// <summary>
         /// Determines if the supplied IChange should be
-        /// included in the builded IChangeSet.
+        /// included in the built IChangeSet.
         /// </summary>
         /// <param name="change">The change to evaluate.</param>
         /// <returns></returns>
