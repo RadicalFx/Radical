@@ -38,15 +38,6 @@
         /// <param name="item">The item.</param>
         public CollectionChangedEventArgs(CollectionChangeType changeType, int index, int oldIndex, T item)
         {
-            //if( trace.IsDebugLevel )
-            //{
-            //    trace.Debug( "CollectionChangedEventArgs.ctor( CollectionChangeType, int, {0} )", typeof( T ).Name );
-            //    trace.Debug( "changeType: {0}", changeType );
-            //    trace.Debug( "index: {0}", index );
-            //    trace.Debug( "oldIndex: {0}", oldIndex );
-            //    trace.Debug( "item: {0}", item == null ? "<null>" : item.ToString() );
-            //}
-
             this.ChangeType = changeType;
             this.Index = index;
             this.OldIndex = oldIndex;
@@ -74,7 +65,7 @@
         }
 
         /// <summary>
-        /// The Old Index of the changed item, eg in case of a Move operation
+        /// The Old Index of the changed item, e.g. in case of a Move operation
         /// </summary>
         /// <value>The old index.</value>
         public int OldIndex

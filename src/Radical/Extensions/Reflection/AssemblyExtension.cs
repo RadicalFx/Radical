@@ -1,17 +1,17 @@
-﻿namespace Radical.Reflection
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
+namespace Radical.Reflection
+{
     /// <summary>
     /// Entry point for accessing assembly types.
     /// </summary>
     public static class GetAssembly
     {
         /// <summary>
-        /// Returns a reference to the assembly that contains the gievn type T.
+        /// Returns a reference to the assembly that contains the given type T.
         /// </summary>
         /// <typeparam name="T">The type whose assembly reference should be returned.</typeparam>
         /// <returns>An instance of the assembly containing the given type T.</returns>
@@ -73,7 +73,7 @@
         /// </summary>
         /// <typeparam name="T">The attribute type to look for.</typeparam>
         /// <param name="assembly">The assembly to search in.</param>
-        /// <param name="attribute">The attribute used to assign the output refence.</param>
+        /// <param name="attribute">The attribute used to assign the output reference.</param>
         /// <returns><c>True</c> if an attribute of the given type can be found; otherwise false.</returns>
         public static bool TryGetAttribute<T>(this Assembly assembly, out T attribute)
             where T : Attribute

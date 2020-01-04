@@ -1,10 +1,10 @@
+using Radical.Validation;
+using System;
+using System.Linq;
+using System.Reflection;
+
 namespace Radical.Reflection
 {
-    using Radical.Validation;
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
     /// <summary>
     /// Defines static methods to manipulates MemberInfo types.
     /// All methods are also defined as .NET extension methods.
@@ -15,7 +15,7 @@ namespace Radical.Reflection
         /// Determines whether an attribute is defined on the specified type.
         /// </summary>
         /// <typeparam name="T">The type (System.Type) of the attribute to search for.</typeparam>
-        /// <param name="memberInfo">The MemberInfo to invastigate.</param>
+        /// <param name="memberInfo">The MemberInfo to investigate.</param>
         /// <returns>
         ///     <c>true</c> if the attribute is defined; otherwise, <c>false</c>.
         /// </returns>
@@ -29,7 +29,7 @@ namespace Radical.Reflection
         /// Determines whether an attribute is defined on the specified type.
         /// </summary>
         /// <typeparam name="T">The type (System.Type) of the attribute to search for.</typeparam>
-        /// <param name="memberInfo">The MemberInfo to invastigate.</param>
+        /// <param name="memberInfo">The MemberInfo to investigate.</param>
         /// <param name="inherit">if set to <c>true</c> the search is propagated to the inheritance chain, otherwise the attribute is searched only in the given type.</param>
         /// <returns>
         ///     <c>true</c> if the attribute is defined; otherwise, <c>false</c>.

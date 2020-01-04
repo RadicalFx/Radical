@@ -3,7 +3,7 @@
 namespace Radical.ComponentModel
 {
     /// <summary>
-    /// IMonitor is the base contract to support Observer funtionalities,
+    /// IMonitor is the base contract to support Observer functionalities,
     /// such as auto-triggering support exposed by the IDelegateCommand.
     /// </summary>
     public interface IMonitor

@@ -80,13 +80,14 @@ namespace Radical.ChangeTracking
         /// <returns>The attached entity.</returns>
         public static T Attach<T>(this IChangeTrackingService service, T source)
         {
-            source.As<IMemento>(m =>
-           {
-               service.Attach(m);
-           }, () =>
-           {
-               throw new NotSupportedException("Only IMemento enties can be attached to an IChangeTrackingService.");
-           });
+            if (source is IMemento m)
+            {
+                service.Attach(m);
+            }
+            else 
+            {
+                throw new NotSupportedException("Only IMemento entities can be attached to an IChangeTrackingService.");
+            }
 
             return source;
         }

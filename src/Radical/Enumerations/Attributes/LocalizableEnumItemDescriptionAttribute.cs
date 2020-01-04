@@ -98,18 +98,18 @@ namespace Radical
         public string AssemblyName { get; set; }
 
         /// <summary>
-        /// Gets or sets the caption fallback value.
+        /// Gets or sets the caption fall-back value.
         /// </summary>
         /// <value>
-        /// The caption fallback value.
+        /// The caption fall-back value.
         /// </value>
         public string CaptionFallbackValue { get; set; }
 
         /// <summary>
-        /// Gets or sets the description fallback value.
+        /// Gets or sets the description fall-back value.
         /// </summary>
         /// <value>
-        /// The description fallback value.
+        /// The description fall-back value.
         /// </value>
         public string DescriptionFallbackValue { get; set; }
 

@@ -3,7 +3,7 @@ using Radical.Validation;
 namespace Radical.DataBinding
 {
     /// <summary>
-    /// Represents a mean to bind enuration types to controls treating enumeration types
+    /// Represents a mean to bind enumeration types to controls treating enumeration types
     /// as a common IList of items.
     /// </summary>
     public class EnumBinder<T>

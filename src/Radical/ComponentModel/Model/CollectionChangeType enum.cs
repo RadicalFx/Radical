@@ -8,7 +8,7 @@ namespace Radical.ComponentModel
     public enum CollectionChangeType
     {
         /// <summary>
-        /// No changes have occured in the collection
+        /// No changes have occurred in the collection
         /// </summary>
         None,
 
@@ -35,7 +35,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// When to many changes occurs this is the
         /// preferred way to notify listener.
-        /// Eg. in this case the DataGrid/DataGridView
+        /// E.g. in this case the DataGrid/DataGridView
         /// will fully rebind to the list
         /// </summary>
         Reset,

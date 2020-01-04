@@ -1,12 +1,12 @@
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+
 namespace Radical.Reflection
 {
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// Defines static methods to manipulates System.Type types.
     /// All methods are also defined as .NET extension methods.

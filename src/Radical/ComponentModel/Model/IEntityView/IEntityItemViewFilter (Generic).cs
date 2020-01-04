@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Provides a standard method to determine if an object instance 
-    /// should be, or shoud not, included in the result set of a filter
+    /// should be, or should not, included in the result set of a filter
     /// operation.
     /// </summary>
     /// <typeparam name="T">The type of the object to test.</typeparam>

@@ -1,9 +1,9 @@
-﻿namespace Radical.Linq
-{
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 
+namespace Radical.Linq
+{
     public static class PredicateBuilder
     {
         public static Expression<Func<T, bool>> True<T>() { return f => true; }

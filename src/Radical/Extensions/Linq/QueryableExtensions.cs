@@ -1,14 +1,14 @@
+using Radical.ComponentModel;
+using System;
+using System.Linq;
+
 namespace Radical.Linq
 {
-    using Radical.ComponentModel;
-    using System;
-    using System.Linq;
-
     public static class QueryableExtensions
     {
         /// <summary>
         /// Fills the specified destination collection using data coming from the given source
-        /// and adapting the source data to the destination format using the speficied adapter
+        /// and adapting the source data to the destination format using the specified adapter
         /// delegate.
         /// </summary>
         /// <typeparam name="TSource">The type of the source.</typeparam>
@@ -29,7 +29,7 @@ namespace Radical.Linq
 
         /// <summary>
         /// Fills the specified destination collection using data coming from the given source
-        /// and adapting the source data to the destination format using the speficied adapter
+        /// and adapting the source data to the destination format using the specified adapter
         /// delegate.
         /// </summary>
         /// <typeparam name="TSource">The type of the source.</typeparam>
