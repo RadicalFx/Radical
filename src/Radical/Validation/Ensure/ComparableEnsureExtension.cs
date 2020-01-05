@@ -80,7 +80,7 @@ namespace Radical.Validation
 
         /// <summary>
         /// Extends the Ensure class when the inspected object is a generic <c>IComparabe</c>
-        /// and can be used to ensure that the inspected value is greater then or equale to
+        /// and can be used to ensure that the inspected value is greater then or equal to
         /// an expected value.
         /// </summary>
         /// <typeparam name="T">The inspected value type.</typeparam>
@@ -92,7 +92,7 @@ namespace Radical.Validation
         /// The Ensure instance for fluent interface usage.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">An <c>ArgumentOutOfRangeException</c>
-        /// is raised if the current inspected object is smaler then the expected value.</exception>
+        /// is raised if the current inspected object is smaller then the expected value.</exception>
         public static IEnsure<T> IsGreaterThen<T>(this IEnsure<T> validator, T expected, Or boundaryBehavior) where T : IComparable<T>
         {
             validator.If(s =>

@@ -185,18 +185,18 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Called when during the inizialization process,
+        /// Called when during the initialization process,
         /// override this method to be notified when the default
-        /// ctor has been called.
+        /// constructor has been called.
         /// </summary>
         protected virtual void OnInitialize()
         {
-            //this._serializationKey = string.Format( CultureInfo.InvariantCulture, "{0}_Data_Array", typeof( T ).Name );
+    
         }
 
         /// <summary>
         /// Called every time this list needs to wire events of the given items, 
-        /// tipically this method is called every time an item is added to the collection.
+        /// topically this method is called every time an item is added to the collection.
         /// </summary>
         /// <param name="item">The item.</param>
         protected virtual void WireListItem(T item)
@@ -223,7 +223,7 @@ namespace Radical.Model
 
         /// <summary>
         /// Called every time this list needs to unwire events of the given items, 
-        /// tipically this method is called every time an item is removed to the collection.
+        /// tipycally this method is called every time an item is removed to the collection.
         /// </summary>
         /// <param name="item">The item.</param>
         protected virtual void UnwireListItem(T item)
@@ -334,7 +334,6 @@ namespace Radical.Model
         public void Add(T item)
         {
             this.EnsureNotDisposed();
-            //Aggiungiamo allo storage
             this.Storage.Add(item);
             int index = this.Count - 1;
 
@@ -430,7 +429,6 @@ namespace Radical.Model
             this.EnsureNotDisposed();
             IEnumerable<T> list = this.Storage.ToArray().AsReadOnly();
 
-            //Svuotiamo lo storage
             this.Storage.Clear();
 
             this.OnClearCompleted(list);

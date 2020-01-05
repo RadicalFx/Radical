@@ -24,7 +24,7 @@ namespace Radical.Model
 
         /// <summary>
         /// Gets or sets a value indicating whether to 
-        /// automatically call EndNew immidiatly after
+        /// automatically call EndNew immediately after
         /// the addition of the new item.
         /// </summary>
         /// <value><c>True</c> to auto commit; otherwise, <c>false</c>.</value>

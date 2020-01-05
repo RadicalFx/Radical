@@ -18,17 +18,9 @@ namespace Radical.Model
     public sealed class Indexer<T> :
         IEnumerable,
         ICollection<IEntityItemView<T>>
-    //where T : class
     {
-        /*
-         * la View per cui stiamo gestendo gli indici
-         */
-        EntityView<T> view;
-
-        /*
-         * Lo storage interno vero e proprio
-         */
-        List<IEntityItemView<T>> storage = new List<IEntityItemView<T>>();
+        readonly EntityView<T> view;
+        readonly List<IEntityItemView<T>> storage = new List<IEntityItemView<T>>();
 
         /*
          * L'indice di default, gestisce la relazione tra l'EntityItemView e l'indice 
@@ -41,11 +33,8 @@ namespace Radical.Model
          * "Pending Add", ma questa è una limitazione della View e non dell'indice che 
          * sarebbe già ora in grado di gestirne 'n'.
          */
-        Dictionary<IEntityItemView<T>, int> defaultIndex = new Dictionary<IEntityItemView<T>, int>();
-
-        Dictionary<string, Dictionary<Object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<string, Dictionary<Object, IEntityItemView<T>>>();
-
-        #region .ctor
+        readonly Dictionary<IEntityItemView<T>, int> defaultIndex = new Dictionary<IEntityItemView<T>, int>();
+        readonly Dictionary<string, Dictionary<Object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<string, Dictionary<Object, IEntityItemView<T>>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Indexer&lt;T&gt;"/> class.
@@ -55,10 +44,6 @@ namespace Radical.Model
         {
             this.view = view;
         }
-
-        #endregion
-
-        #region IEnumerable Members
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
@@ -71,10 +56,6 @@ namespace Radical.Model
             return this.storage.GetEnumerator();
         }
 
-        #endregion
-
-        #region IEnumerable<IEntityItemView<T>> Members
-
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
@@ -85,10 +66,6 @@ namespace Radical.Model
         {
             return this.storage.GetEnumerator();
         }
-
-        #endregion
-
-        #region ICollection<EntityItemView<T>> Members
 
         /// <summary>
         /// Gets a item indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
@@ -154,10 +131,8 @@ namespace Radical.Model
             }
         }
 
-        #endregion
-
         /// <summary>
-        /// Removes the corrurrence of the EntityItemView at the specified index
+        /// Removes the occurrence of the EntityItemView at the specified index
         /// </summary>
         /// <param name="index">The index.</param>
         public void RemoveAt(int index)
@@ -248,7 +223,7 @@ namespace Radical.Model
 
         /// <summary>
         /// Given a T object this method return the index
-        /// of the EntityItemView, that incapsulates the T
+        /// of the EntityItemView, that encapsulates the T
         /// object, in the View.
         /// </summary>
         /// <param name="item">The item to find the index for.</param>
@@ -309,7 +284,7 @@ namespace Radical.Model
 
         /// <summary>
         /// Given the Index of a T element, in the DataSource, returns the
-        /// Index af the EntityItemView, in the View, that incapsulates the
+        /// Index of the EntityItemView, in the View, that encapsulates the
         /// T element, otherwise -1.
         /// </summary>
         /// <param name="entityIndexInDataSource">The index of the T element in DataSource.</param>
@@ -370,7 +345,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="property">The property to look at.</param>
         /// <param name="key">The key to search.</param>
-        /// <returns>The inedex of the first item the match the given key.</returns>
+        /// <returns>The index of the first item the match the given key.</returns>
         public int Find(PropertyDescriptor property, object key)
         {
             int index = -1;
@@ -407,7 +382,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes the given PropertyDescriptor fomr the indexed properties.
+        /// Removes the given PropertyDescriptor from the indexed properties.
         /// </summary>
         /// <param name="property">The property to remove.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
@@ -485,12 +460,12 @@ namespace Radical.Model
              * e lo reinseriamo nell'indice
              */
             sourceElements.ForEach(sourceElement =>
-           {
-               IEntityItemView<T> item = this.view.CreateEntityItemView(sourceElement.Element);
-               this.view.OnWireEntityItemView(item);
+            {
+                IEntityItemView<T> item = this.view.CreateEntityItemView(sourceElement.Element);
+                this.view.OnWireEntityItemView(item);
 
-               this.Add(item);
-           });
+                this.Add(item);
+            });
 
             sourceElements = null;
 
@@ -500,12 +475,12 @@ namespace Radical.Model
                  * Riaggiungiamo gli elementi che erano in pending add
                  */
                 pendingAddElements.ForEach(element =>
-               {
-                   IEntityItemView<T> item = element.Key;
+                {
+                    IEntityItemView<T> item = element.Key;
 
-                   this.view.OnWireEntityItemView(item);
-                   this.Add(item);
-               });
+                    this.view.OnWireEntityItemView(item);
+                    this.Add(item);
+                });
             }
 
             pendingAddElements = null;
@@ -520,14 +495,14 @@ namespace Radical.Model
                  * indici
                  */
                 this.propertiesIndexes.ForEach(index =>
-               {
+                {
                     /*
                      * Ricostruiamo il PropertyDescriptor
                      * e reindicizziamo la proprietà
                      */
-                   PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(T)).Find(index.Key, false);
-                   this.IndexProperty(property, index.Value);
-               });
+                    PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(T)).Find(index.Key, false);
+                    this.IndexProperty(property, index.Value);
+                });
             }
         }
 

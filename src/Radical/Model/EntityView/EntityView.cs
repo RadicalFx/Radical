@@ -1,18 +1,18 @@
+using Radical.ComponentModel;
+using Radical.Linq;
+using Radical.Validation;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+
 namespace Radical.Model
 {
-    using Radical.ComponentModel;
-    using Radical.Linq;
-    using Radical.Validation;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Reflection;
-
     /// <summary>
     /// A full custom implementation of IBindingListView
     /// </summary>
@@ -28,9 +28,7 @@ namespace Radical.Model
         ITypedList,
         IComponent,
         IDisposable,
-        IServiceProvider //,
-    //INotifyCollectionChanged
-    //where T : class
+        IServiceProvider
     {
         private Indexer<T> _indexer;
 

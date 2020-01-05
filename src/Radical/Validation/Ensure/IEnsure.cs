@@ -51,16 +51,16 @@ namespace Radical.Validation
         T GetValue();
 
         /// <summary>
-        /// Gets the currently inspected object value castaed to specified type.
+        /// Gets the currently inspected object value casted to specified type.
         /// </summary>
-        /// <typeparam name="K">The type to cast the inspected object to, K must inherith from T.</typeparam>
+        /// <typeparam name="K">The type to cast the inspected object to, K must inherit from T.</typeparam>
         /// <returns>The currently inspected object value.</returns>
         K GetValue<K>() where K : T;
 
         /// <summary>
         /// Execute the given predicate and saves the result for later usage.
         /// </summary>
-        /// <param name="predicate">The predicate to evaluate in order to establish if the operation resault is <c>true</c> or <c>false</c>.</param>
+        /// <param name="predicate">The predicate to evaluate in order to establish if the operation result is <c>true</c> or <c>false</c>.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
         IEnsure<T> If(Predicate<T> predicate);
 
@@ -82,8 +82,6 @@ namespace Radical.Validation
         /// <exception cref="ArgumentException">An ArgumentException is raised if the predicate result is true.</exception>
         IEnsure<T> IsFalse(Predicate<T> func);
 
-        //IEnsure<T> IsFalse( bool condition );
-
         /// <summary>
         /// Ensure that the supplied object is not equal to the currently inspected object.
         /// </summary>
@@ -101,8 +99,6 @@ namespace Radical.Validation
         /// </returns>
         /// <exception cref="ArgumentException">An ArgumentException is raised if the predicate result is false.</exception>
         IEnsure<T> IsTrue(Predicate<T> func);
-
-        //IEnsure<T> IsTrue( bool condition );
 
         /// <summary>
         /// Gets the name of the parameter to validate.

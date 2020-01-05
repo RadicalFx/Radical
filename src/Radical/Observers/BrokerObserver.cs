@@ -42,7 +42,7 @@ namespace Radical.Observers
 
         /// <summary>
         /// Waits for the specified message type and raise the Changed event whenever the
-        /// specified message is dispatched or broadcasted.
+        /// specified message is dispatched or broadcast.
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <returns>This monitor instance.</returns>
@@ -53,7 +53,7 @@ namespace Radical.Observers
 
         /// <summary>
         /// Waits for the specified message type and raise the Changed event whenever the
-        /// specified message is dispatched or broadcasted.
+        /// specified message is dispatched or broadcast.
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="invocationModel">The invocation model.</param>
@@ -65,7 +65,7 @@ namespace Radical.Observers
 
         /// <summary>
         /// Waits for the specified message type and raise the Changed event 
-        /// if the supplied confition is satisfied by the dispatched or broadcasted message.
+        /// if the supplied condition is satisfied by the dispatched or broadcast message.
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>
@@ -85,7 +85,7 @@ namespace Radical.Observers
 
         /// <summary>
         /// Waits for the specified message type and raise the Changed event 
-        /// if the supplied confition is satisfied by the dispatched or broadcasted message.
+        /// if the supplied condition is satisfied by the dispatched or broadcast message.
         /// </summary>
         /// <typeparam name="TMessage">The type of the message.</typeparam>
         /// <param name="filter">The filter condition.</param>

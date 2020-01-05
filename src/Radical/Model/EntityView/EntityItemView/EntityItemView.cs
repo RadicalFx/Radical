@@ -11,12 +11,7 @@ namespace Radical.Model
         IDataErrorInfo,
         INotifyPropertyChanged,
         INotifyEditableObject
-    //where T : class
     {
-        //readonly IDictionary<string, Object> customValues = new Dictionary<string, Object>();
-
-        #region .ctor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityItemView&lt;T&gt;"/> class.
         /// </summary>
@@ -29,8 +24,6 @@ namespace Radical.Model
 
             this.OnInit();
         }
-
-        #endregion
 
         protected virtual void OnInit()
         {
@@ -133,7 +126,7 @@ namespace Radical.Model
         {
             get
             {
-                //si potrebbe trovare un sistema per rimbalzare su chi espone la proprietà
+                //TODO: si potrebbe trovare un sistema per rimbalzare su chi espone la proprietà
                 //if( this.View.IsCustomPropertyDefined( columnName ) ) 
                 //{
 
@@ -163,7 +156,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Notifies that an edit operation has benn canceled.
+        /// Notifies that an edit operation has been canceled.
         /// </summary>
         [field: NonSerialized]
         public event EventHandler EditCanceled;

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 namespace Radical.Validation
 {
     /// <summary>
-    /// Enusre is a simple, fluent based, engine usefull to validate
+    /// Ensure is a simple, fluent based, engine useful to validate
     /// methods and constructors parameters.
     /// </summary>
     /// <typeparam name="T">The type of the parameter to validate.</typeparam>
@@ -34,31 +34,14 @@ namespace Radical.Validation
         }
 
         /// <summary>
-        /// Gets the currently inspected object value castaed to specified type.
+        /// Gets the currently inspected object value casted to specified type.
         /// </summary>
-        /// <typeparam name="K">The type to cast the inspected object to, K must inherith from T.</typeparam>
+        /// <typeparam name="K">The type to cast the inspected object to, K must inherit from T.</typeparam>
         /// <returns>The currently inspected object value.</returns>
         public K GetValue<K>() where K : T
         {
             return (K)this.inspectedObject;
         }
-
-        // *** prestazioni inaccettabili
-        //
-        //internal Ensure( Expression<Func<T>> obj )
-        //{
-        //    if( obj == null )
-        //    {
-        //        throw new ArgumentNullException( "obj", "Cannot use a null Expression<Func<T>> as Ensure ctor parameter." );
-        //    }
-
-        //    Func<T> func = obj.Compile();
-        //    this.inspectedObject = func();
-
-        //    var expression = obj.Body as MemberExpression;
-        //    var member = expression.Member as FieldInfo;
-        //    this.Name = member.Name;
-        //}
 
         /// <summary>
         /// Identifies the name of the parameter that will be validated.
@@ -205,7 +188,7 @@ namespace Radical.Validation
         /// <summary>
         /// Execute the given predicate and saves the result for later usage.
         /// </summary>
-        /// <param name="predicate">The predicate to evaluate in order to establish if the operation resault is <c>true</c> or <c>false</c>.</param>
+        /// <param name="predicate">The predicate to evaluate in order to establish if the operation result is <c>true</c> or <c>false</c>.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
         public IEnsure<T> If(Predicate<T> predicate)
         {
@@ -364,7 +347,7 @@ namespace Radical.Validation
         Action<IEnsure<T>, Exception> validationFailurePreview;
 
         /// <summary>
-        /// Allows the user to interceptthe ensure failure before the exception is raised.
+        /// Allows the user to intercept the ensure failure before the exception is raised.
         /// </summary>
         /// <param name="validationFailurePreview">The validation failure preview handler.</param>
         /// <returns>
@@ -395,14 +378,5 @@ namespace Radical.Validation
 
             throw error;
         }
-
-        //Func<IEnsure<T>, Exception> builder;
-
-        //public IEnsure<T> WithException( Func<IEnsure<T>, Exception> builder ) 
-        //{
-        //    this.builder = builder;
-
-        //    return this;
-        //}
     }
 }

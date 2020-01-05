@@ -1,21 +1,18 @@
-﻿namespace Radical.Model
-{
-    using Radical.ComponentModel;
-    using System.Collections;
-    using System.Collections.Generic;
+﻿using Radical.ComponentModel;
+using System.Collections;
+using System.Collections.Generic;
 
+namespace Radical.Model
+{
     sealed class DefaultEntityItemViewSortComparer<T> :
         IComparer<IEntityItemView<T>>
-    //where T : class
     {
-        IList dataSource;
+        readonly IList dataSource;
 
         public DefaultEntityItemViewSortComparer(IList dataSource)
         {
             this.dataSource = dataSource;
         }
-
-        #region IComparer<IEntityItemView<T>> Members
 
         public int Compare(IEntityItemView<T> x, IEntityItemView<T> y)
         {
@@ -53,7 +50,5 @@
                 return xIndex.CompareTo(yIndex);
             }
         }
-
-        #endregion
     }
 }
