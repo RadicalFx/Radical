@@ -64,10 +64,6 @@ namespace Radical
         public static bool IsDescriptionAttributeDefined(this System.Enum value) { }
         public static bool TryGetDescriptionAttribute(this System.Enum value, out Radical.EnumItemDescriptionAttribute attribute) { }
     }
-    public static class EnumExtensionsFx35
-    {
-        public static bool HasFlag(this System.Enum variable, System.Enum value) { }
-    }
     [System.AttributeUsage(System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
     public class EnumItemDescriptionAttribute : System.Attribute
     {
