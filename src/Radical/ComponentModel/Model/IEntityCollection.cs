@@ -27,7 +27,7 @@
         /// <summary>
         /// Gets a value indicating whether this instance is capable of creating a new instance of the managed type T.
         /// </summary>
-        /// <value><c>true</c> if this.instace allo the creation of new items; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if this instance allows the creation of new items; otherwise, <c>false</c>.</value>
         bool AllowNew { get; }
 
 
@@ -106,7 +106,7 @@
         /// <summary>
         /// Adds a range of items.
         /// </summary>
-        /// <param name="list">The range of items ot add.</param>
+        /// <param name="list">The range of items to add.</param>
         void AddRange(IEnumerable<T> list);
     }
 }

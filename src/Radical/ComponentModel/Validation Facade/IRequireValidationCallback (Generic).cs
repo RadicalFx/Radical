@@ -11,7 +11,7 @@ namespace Radical.ComponentModel.Validation
     {
         /// <summary>
         /// Called by a validation service to let the 
-        /// implmentors inject custom validation logic 
+        /// implementors inject custom validation logic 
         /// into the validation process.
         /// </summary>
         /// <param name="context">The validation context.</param>

@@ -72,7 +72,7 @@ namespace Radical.ComponentModel.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, Action<object, T> callback);
@@ -85,7 +85,7 @@ namespace Radical.ComponentModel.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback);
 
@@ -98,7 +98,7 @@ namespace Radical.ComponentModel.Messaging
         /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback);
 
@@ -108,7 +108,7 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="messageType">Type of the message.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback);
 
@@ -119,7 +119,7 @@ namespace Radical.ComponentModel.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback);
 
@@ -127,9 +127,9 @@ namespace Radical.ComponentModel.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
@@ -137,7 +137,7 @@ namespace Radical.ComponentModel.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task> callback);
@@ -146,9 +146,9 @@ namespace Radical.ComponentModel.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, Func<object, T, System.Threading.Tasks.Task> callback);
 
@@ -157,7 +157,7 @@ namespace Radical.ComponentModel.Messaging
         /// given type of message using the supplied callback only
         /// if the sender is the specified reference.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="callback">The callback.</param>
@@ -168,7 +168,7 @@ namespace Radical.ComponentModel.Messaging
         /// given type of message using the supplied callback only
         /// if the sender is the specified reference.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
@@ -179,7 +179,7 @@ namespace Radical.ComponentModel.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
@@ -190,10 +190,10 @@ namespace Radical.ComponentModel.Messaging
         /// given type of message using the supplied callback only
         /// if the sender is the specified reference.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
@@ -202,11 +202,11 @@ namespace Radical.ComponentModel.Messaging
         /// given type of message using the supplied callback only
         /// if the sender is the specified reference.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
@@ -214,28 +214,28 @@ namespace Radical.ComponentModel.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
         void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
         /// <summary>
-        /// Unsubscribes the specified subscriber from all the subcscriptions.
+        /// Unsubscribe the specified subscriber from all the subscriptions.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         void Unsubscribe(Object subscriber);
 
         /// <summary>
-        /// Unsubscribes the specified subscriber from all the subcscriptions to the supplied IMessage type.
+        /// Unsubscribe the specified subscriber from all the subscriptions to the supplied IMessage type.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         void Unsubscribe<T>(Object subscriber);
 
         /// <summary>
-        /// Unsubscribes the specified subscriber from all the messages
+        /// Unsubscribe the specified subscriber from all the messages
         /// posted by the given sender.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
@@ -243,7 +243,7 @@ namespace Radical.ComponentModel.Messaging
         void Unsubscribe(Object subscriber, Object sender);
 
         /// <summary>
-        /// Unsubscribes the specified subscriber from all the messages,
+        /// Unsubscribe the specified subscriber from all the messages,
         /// of the given type T, posted by the given sender.
         /// </summary>
         /// <typeparam name="T">The message type filter.</typeparam>
@@ -253,15 +253,15 @@ namespace Radical.ComponentModel.Messaging
         //where T : class, IMessage;
 
         /// <summary>
-        /// Unsubscribes the specified subscriber from the subcscription to the supplied IMessage type.
+        /// Unsubscribe the specified subscriber from the subscription to the supplied IMessage type.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback to unsubscribe.</param>
         void Unsubscribe<T>(Object subscriber, Delegate callback);
 
         /// <summary>
-        /// Broadcasts the specified message in an asynchronus manner without
+        /// Broadcasts the specified message in an asynchronous manner without
         /// waiting for the execution of the subscribers.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -269,7 +269,7 @@ namespace Radical.ComponentModel.Messaging
         void Broadcast(Object sender, Object message);
 
         /// <summary>
-        /// Broadcasts the specified message in an asynchronus manner without
+        /// Broadcasts the specified message in an asynchronous manner without
         /// waiting for the execution of the subscribers.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -277,7 +277,7 @@ namespace Radical.ComponentModel.Messaging
         System.Threading.Tasks.Task BroadcastAsync(Object sender, Object message);
 
         /// <summary>
-        /// Dispatches the specified message in a synchronus manner waiting for
+        /// Dispatches the specified message in a synchronous manner waiting for
         /// the execution of all the subscribers.
         /// </summary>
         /// <param name="sender">The sender.</param>

@@ -63,8 +63,8 @@ namespace Radical.Linq
         /// <typeparam name="T">The type of the item in the source tree.</typeparam>
         /// <param name="source">The source tree..</param>
         /// <param name="childrenGetter">The delegate to retrieve the children of a given node.</param>
-        /// <param name="condition">The condition to usa as filter.</param>
-        /// <returns>A flat readonly list of all the items in the source tree that mets the given condition.</returns>
+        /// <param name="condition">The condition to use as filter.</param>
+        /// <returns>A flat read-only list of all the items in the source tree that mets the given condition.</returns>
         public static IEnumerable<T> FindNodes<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> childrenGetter, Func<T, bool> condition)
         {
             Ensure.That(source).Named("source").IsNotNull();
@@ -89,7 +89,7 @@ namespace Radical.Linq
         /// <param name="parents">The flat parent list.</param>
         /// <param name="parentGetter">A predicate to retrieve the parent of the current item.</param>
         /// <returns>
-        ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
+        ///     <c>true</c> if the item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsChildOfAny<T>(this T item, IEnumerable<T> parents, Func<T, T> parentGetter)
             where T : class
@@ -109,7 +109,7 @@ namespace Radical.Linq
         /// <param name="parentGetter">A delegate to retrieve the parent of the current item.</param>
         /// <param name="comparer">A delegate used to compare items for equality.</param>
         /// <returns>
-        ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
+        ///     <c>true</c> if the item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsChildOfAny<T>(this T item, IEnumerable<T> parents, Func<T, T> parentGetter, Func<T, T, bool> comparer)
         {
@@ -129,7 +129,7 @@ namespace Radical.Linq
         /// <param name="parentGetter">A delegate to retrieve the parent of the current item.</param>
         /// <param name="comparer">An equality comparer used to compare items for equality.</param>
         /// <returns>
-        ///     <c>true</c> if tha item is child of any of the items in the given items list; otherwise, <c>false</c>.
+        ///     <c>true</c> if the item is child of any of the items in the given items list; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsChildOfAny<T>(this T item, IEnumerable<T> parents, Func<T, T> parentGetter, IEqualityComparer<T> comparer)
         {
@@ -173,7 +173,7 @@ namespace Radical.Linq
 
         /// <summary>
         /// Executes the specified Func for each item in the enumeration 
-        /// passing throught the given state.
+        /// passing through the given state.
         /// </summary>
         /// <typeparam name="TState">The type of the state.</typeparam>
         /// <typeparam name="T">The type of the elements of the enumeration.</typeparam>
@@ -261,7 +261,7 @@ namespace Radical.Linq
         }
 
         /// <summary>
-        /// Alternates the source list with the suplied separator instance.
+        /// Alternates the source list with the supplied separator instance.
         /// </summary>
         /// <typeparam name="T">The type of the list item.</typeparam>
         /// <param name="items">The source items list.</param>
@@ -288,7 +288,7 @@ namespace Radical.Linq
         }
 
         /// <summary>
-        /// Shouffles the items in the source list in a random order.
+        /// Shuffles the items in the source list in a random order.
         /// </summary>
         /// <typeparam name="T">The type of the item in the source list.</typeparam>
         /// <param name="items">The items.</param>

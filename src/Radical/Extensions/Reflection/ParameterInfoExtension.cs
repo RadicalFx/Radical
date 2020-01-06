@@ -1,9 +1,9 @@
+using System;
+using System.Linq;
+using System.Reflection;
+
 namespace Radical.Reflection
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-
     /// <summary>
     /// Defines static methods to manipulates ParameterInfo types.
     /// All methods are also defined as .NET extension methods.

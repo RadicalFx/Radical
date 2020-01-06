@@ -21,7 +21,7 @@ namespace Radical.Reflection
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="target">The target instance that expose the property.</param>
         /// <param name="propertyName">The name of the property.</param>
-        /// <returns>A delgate to get the property value.</returns>
+        /// <returns>A delegate to get the property value.</returns>
         public static Func<T> CreateFastPropertyGetter<T>(this Object target, string propertyName)
         {
             return target.CreateFastPropertyGetter<T>(target.GetType().GetProperty(propertyName));
@@ -34,7 +34,7 @@ namespace Radical.Reflection
         /// <param name="target">The target instance that expose the property.</param>
         /// <param name="property">The property.</param>
         /// <returns>
-        /// A delgate to get the property value.
+        /// A delegate to get the property value.
         /// </returns>
         public static Func<T> CreateFastPropertyGetter<T>(this Object target, PropertyInfo property)
         {
@@ -53,18 +53,12 @@ namespace Radical.Reflection
         /// <param name="target">The target instance that expose the property.</param>
         /// <param name="property">The property.</param>
         /// <returns>
-        /// A delgate to get the property value.
+        /// A delegate to get the property value.
         /// </returns>
         public static Function CreateFastPropertyGetter(this Object target, PropertyInfo property)
         {
             var targetExp = Expression.Constant(target);
             var propExp = Expression.Property(targetExp, property);
-
-            //var funcType = typeof( Func<> ).MakeGenericType( property.PropertyType );
-            //var funcExp = Expression.Lambda( funcType, propExp );
-            //var func = funcExp.Compile();
-
-            //return null;
 
             var funcExp = Expression.Lambda<Function>(propExp);
             var func = funcExp.Compile();

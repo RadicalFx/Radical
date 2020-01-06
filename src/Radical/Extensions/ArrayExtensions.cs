@@ -4,7 +4,7 @@ using System;
 namespace Radical
 {
     /// <summary>
-    /// Adds beheviors to arrays of data.
+    /// Adds behaviors to arrays of data.
     /// </summary>
     public static class ArrayExtensions
     {

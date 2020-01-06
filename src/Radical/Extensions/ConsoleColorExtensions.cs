@@ -3,7 +3,7 @@
 namespace Radical
 {
     /// <summary>
-    /// Adds behviors to the <see cref="ConsoleColor"/> enum.
+    /// Adds behaviors to the <see cref="ConsoleColor"/> enum.
     /// </summary>
     public static class ConsoleColorExtensions
     {

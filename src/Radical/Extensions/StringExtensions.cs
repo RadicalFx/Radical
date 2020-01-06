@@ -57,7 +57,7 @@ namespace Radical
         /// <param name="pattern">The pattern to use a a search pattern.</param>
         /// <param name="ignoreCase"><c>True</c> to perform a case insensitive search, otherwise <c>false</c>.</param>
         /// <returns>
-        ///     <c>True</c> in cas of successful match, otherwise <c>false</c>.
+        ///     <c>True</c> in case of successful match, otherwise <c>false</c>.
         /// </returns>
         public static bool IsLike(this string value, string pattern, bool ignoreCase)
         {

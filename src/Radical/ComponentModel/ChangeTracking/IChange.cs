@@ -1,8 +1,8 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Radical.ComponentModel.ChangeTracking
+{
     /// <summary>
     /// Represents a change occurred to an object.
     /// </summary>
@@ -12,13 +12,13 @@
         /// Gets the owner of this change, typically the changed object.
         /// </summary>
         /// <value>The owner.</value>
-        Object Owner { get; }
+        object Owner { get; }
 
         /// <summary>
         /// Gets the changed entities hold by this IChange instance.
         /// </summary>
         /// <returns>A list of changed entities.</returns>
-        IEnumerable<Object> GetChangedEntities();
+        IEnumerable<object> GetChangedEntities();
 
         /// <summary>
         /// Commits this change.
@@ -60,7 +60,7 @@
         /// Gets the advised action for this IChange.
         /// </summary>
         /// <value>The advised action.</value>
-        ProposedActions GetAdvisedAction(Object changedItem);
+        ProposedActions GetAdvisedAction(object changedItem);
 
         /// <summary>
         /// Clones this IChange instance.

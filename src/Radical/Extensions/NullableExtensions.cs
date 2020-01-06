@@ -1,7 +1,7 @@
+using System;
+
 namespace Radical
 {
-    using System;
-
     /// <summary>
     /// Adds behaviors to the Generic <c>Nullable</c> class.
     /// </summary>

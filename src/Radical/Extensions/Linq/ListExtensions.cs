@@ -10,7 +10,7 @@ namespace Radical.Linq
         /// Syncs the specified source list with the given destination list.
         /// The sync direction is from source to destination.
         /// </summary>
-        /// <typeparam name="T">The trype of the list item.</typeparam>
+        /// <typeparam name="T">The type of the list item.</typeparam>
         /// <param name="source">The source list.</param>
         /// <param name="destination">The destination list.</param>
         /// <returns>A reference to the destination list.</returns>

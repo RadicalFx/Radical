@@ -1,8 +1,7 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Radical.ComponentModel.ChangeTracking
+{
     /// <summary>
     /// A bookmark is a placeholder to track a specific position in
     /// the change tracking history of a change tracking service.
@@ -28,6 +27,6 @@
         /// of the bookmark.
         /// </summary>
         /// <value>The transient entities.</value>
-        IEnumerable<Object> TransientEntities { get; }
+        IEnumerable<object> TransientEntities { get; }
     }
 }

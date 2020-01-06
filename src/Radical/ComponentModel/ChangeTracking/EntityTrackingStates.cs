@@ -1,7 +1,7 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
-{
-    using System;
+﻿using System;
 
+namespace Radical.ComponentModel.ChangeTracking
+{
     /// <summary>
     /// Determines the tracking state of an object.
     /// </summary>

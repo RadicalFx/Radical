@@ -48,10 +48,10 @@ namespace Radical.ComponentModel
         IDictionary<string, Object> Parameters { get; }
 
         /// <summary>
-        /// Gets an indication is this component is overridable.
+        /// Gets an indication is this component can be overrode.
         /// </summary>
         /// <value>
-        /// An indication is this component is overridable.
+        /// An indication is this component can be overrode.
         /// </value>
         bool IsOverridable { get; }
     }

@@ -1,10 +1,9 @@
-﻿namespace Radical.ChangeTracking
-{
-    using Radical;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Validation;
-    using System;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
 
+namespace Radical.ChangeTracking
+{
     /// <summary>
     /// Represents a suggested action produced by
     /// the provisioning system of a change tracking service.
@@ -16,7 +15,7 @@
         /// </summary>
         /// <param name="target">The target.</param>
         /// <param name="action">The action.</param>
-        public AdvisedAction(Object target, ProposedActions action)
+        public AdvisedAction(object target, ProposedActions action)
         {
             Ensure.That(target).Named(() => target).IsNotNull();
             Ensure.That(action)
@@ -26,14 +25,14 @@
                 .If(v => v == ProposedActions.None)
                 .ThenThrow(v => new NotSupportedException(v.GetFullErrorMessage()));
 
-            this.Target = target;
-            this.Action = action;
+            Target = target;
+            Action = action;
         }
 
         #region IAdvisedAction Members
 
         /// <summary>
-        /// Gets the suggested action for the target object incapsulated by this instance.
+        /// Gets the suggested action for the target object encapsulated by this instance.
         /// </summary>
         /// <value>The suggested action.</value>
         public ProposedActions Action
@@ -46,7 +45,7 @@
         /// Gets the target object of the suggested action.
         /// </summary>
         /// <value>The target object.</value>
-        public Object Target
+        public object Target
         {
             get;
             private set;

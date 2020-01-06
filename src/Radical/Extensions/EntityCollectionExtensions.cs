@@ -1,9 +1,9 @@
+using Radical.ComponentModel;
+using System;
+using System.Collections.Generic;
+
 namespace Radical
 {
-    using Radical.ComponentModel;
-    using System;
-    using System.Collections.Generic;
-
     public static class EntityCollectionExtensions
     {
         public static IEntityCollection<T> BulkLoad<T>(this IEntityCollection<T> list, IEnumerable<T> data)

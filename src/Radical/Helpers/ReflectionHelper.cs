@@ -81,7 +81,7 @@ namespace Radical.Helpers
         }
 
         /// <summary>
-        /// Create an instance of the BoundReflectionHelper class bound the the 
+        /// Create an instance of the BoundReflectionHelper class bound to the 
         /// specified system type.
         /// </summary>
         /// <typeparam name="T">The type to bind to.</typeparam>

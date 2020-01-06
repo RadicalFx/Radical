@@ -12,7 +12,7 @@
         void Initialize(IPuzzleContainer container);
 
         /// <summary>
-        /// Teardowns this facility.
+        /// Tears down this facility.
         /// </summary>
         /// <param name="container">The container hosting the facility.</param>
         void Teardown(IPuzzleContainer container);

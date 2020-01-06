@@ -3,7 +3,7 @@ using System;
 namespace Radical
 {
     /// <summary>
-    /// Attribue specialized in adding description info to an enuration type.
+    /// Attribute specialized in adding description info to an enumeration type.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes"), AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public class EnumItemDescriptionAttribute : Attribute

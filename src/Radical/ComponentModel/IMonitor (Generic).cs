@@ -4,7 +4,7 @@ namespace Radical.ComponentModel
     /// Extends the basic IMonitor interface adding support to
     /// trace the monitored instance.
     /// </summary>
-    /// <typeparam name="T">Ths monitored type.</typeparam>
+    /// <typeparam name="T">This monitored type.</typeparam>
     public interface IMonitor<T> : IMonitor
     {
         /// <summary>

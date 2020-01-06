@@ -1,10 +1,10 @@
-﻿namespace Radical
-{
-    using Radical.Validation;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
+﻿using Radical.Validation;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
+namespace Radical
+{
     sealed class ReferenceEqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
         where T : class
     {

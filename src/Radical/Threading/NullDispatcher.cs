@@ -6,7 +6,7 @@ namespace Radical.Threading
 {
     /// <summary>
     /// Implements the <seealso cref="IDispatcher"/> interface
-    /// without doing nothing, the NullDispatcher is usefull in
+    /// without doing nothing, the NullDispatcher is useful in
     /// scenarios, where the MessageBroker is required, but where
     /// there are no cross threading issues.
     /// </summary>
@@ -16,7 +16,7 @@ namespace Radical.Threading
         /// Safely invokes the specified delegate.
         /// </summary>
         /// <param name="d">The delegate to invoke.</param>
-        /// <param name="args">The delegate arguments, or null if no arguments shuold passed to the delegate.</param>
+        /// <param name="args">The delegate arguments, or null if no arguments should passed to the delegate.</param>
         public void Invoke(Delegate d, params object[] args)
         {
             Ensure.That(d).Named(() => d).IsNotNull();

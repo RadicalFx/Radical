@@ -1,7 +1,7 @@
-﻿namespace Radical.Validation
-{
-    using System;
+﻿using System;
 
+namespace Radical.Validation
+{
     /// <summary>
     /// Extends the generic Ensure class to add behaviors when the inspected object
     /// is an <c>Array</c>.

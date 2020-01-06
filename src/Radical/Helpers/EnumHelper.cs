@@ -12,10 +12,10 @@ namespace Radical.Helpers
     public static partial class EnumHelper
     {
         /// <summary>
-        /// Given an enuration type, where enuration items are marked with a <see cref="EnumItemDescriptionAttribute"/>,
+        /// Given an enumeration type, where enumeration items are marked with a <see cref="EnumItemDescriptionAttribute"/>,
         /// extracts descriptions.
         /// </summary>
-        /// <returns>A readonly list of strings that represents descriptions data.</returns>
+        /// <returns>A read-only list of strings that represents descriptions data.</returns>
         public static IEnumerable<string> ExtractDescriptions<T>()
         {
             List<string> lst = new List<string>();
@@ -29,7 +29,7 @@ namespace Radical.Helpers
         /// <summary>
         /// Extracts the binding data from the supplied enum type.
         /// </summary>
-        /// <returns>An readonly list of <see cref="EnumBinder&lt;T&gt;"/> objects.</returns>
+        /// <returns>An read-only list of <see cref="EnumBinder&lt;T&gt;"/> objects.</returns>
         public static IEnumerable<EnumBinder<T>> ExtractBindingData<T>()
         {
             return ExtractBindingData<T>(null);

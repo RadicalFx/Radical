@@ -8,7 +8,7 @@ namespace Radical.ComponentModel
     public interface IPuzzleContainerEntry<T> : IContainerEntry
     {
         /// <summary>
-        /// Sets the serviceinstance to use as resolve result.
+        /// Sets the service instance to use as resolve result.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>This entry instance.</returns>
@@ -44,7 +44,7 @@ namespace Radical.ComponentModel
         IPuzzleContainerEntry<T> UsingFactory(Func<T> factory);
 
         /// <summary>
-        /// Defines the specified component registration as overridable.
+        /// Defines the specified component registration as override allowed.
         /// </summary>
         /// <returns>
         /// This entry instance.

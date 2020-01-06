@@ -6,7 +6,7 @@ namespace Radical
     /// <summary>
     /// An observable generic type.
     /// </summary>
-    /// <typeparam name="T">The type proxied by this observable.</typeparam>
+    /// <typeparam name="T">The type for which this observable is the proxy.</typeparam>
     public class Observable<T> : INotifyPropertyChanged
     {
         /// <summary>

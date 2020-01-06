@@ -3,14 +3,6 @@ using System.ComponentModel;
 
 namespace Radical.Observers
 {
-    //public static class EntityViewObserver
-    //{
-    //    public static EntityViewMonitor Monitor( IEntityView source )
-    //    {
-    //        return new EntityViewMonitor( source );
-    //    }
-    //}
-
     public class EntityViewListChangedMonitor : AbstractMonitor<IEntityView>
     {
         ListChangedEventHandler handler = null;

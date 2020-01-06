@@ -1,10 +1,10 @@
-﻿namespace Radical.ComponentModel.ChangeTracking
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
+namespace Radical.ComponentModel.ChangeTracking
+{
     /// <summary>
     /// Provides change tracking functionalities.
     /// </summary>
@@ -35,7 +35,7 @@
         event EventHandler<CancelEventArgs> RejectingChanges;
 
         /// <summary>
-        /// Creates a bookmark usefull to save a position
+        /// Creates a bookmark useful to save a position
         /// in this IChangeTrackingService.
         /// </summary>
         /// <remarks>
@@ -66,7 +66,7 @@
         /// Registers the supplied object as a new object.
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
-        /// <exception cref="ArgumentException">If thew change tracking service has already registered the object or if hhas pending changes for the object an ArgumentException is raised.</exception>
+        /// <exception cref="ArgumentException">If thew change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
         void RegisterTransient(Object entity);
 
         /// <summary>
@@ -125,7 +125,7 @@
         bool CanUndo { get; }
 
         /// <summary>
-        /// Undoes the last IChange holded by 
+        /// Undoes the last IChange held by 
         /// this instance and removes it from
         /// the cache.
         /// </summary>
@@ -138,19 +138,19 @@
         bool CanRedo { get; }
 
         /// <summary>
-        /// Redoes the last undoed change.
+        /// Redoes the last undone change.
         /// </summary>
         void Redo();
 
         /// <summary>
-        /// Gets all the changes currently holded by
+        /// Gets all the changes currently held by
         /// this IChangeTrackingService
         /// </summary>
         /// <returns></returns>
         IChangeSet GetChangeSet();
 
         /// <summary>
-        /// Gets all the changes currently holded by
+        /// Gets all the changes currently held by
         /// this IChangeTrackingService filtered by the
         /// supplied IChangeSetBuilder.
         /// </summary>
@@ -167,21 +167,21 @@
 
         /// <summary>
         /// Generates an advisory that contains all the operations that
-        /// an ipothetical UnitOfWork must perform in order to persist
+        /// an hypothetical UnitOfWork must perform in order to persist
         /// all the changes tracked by this ChangeTrackingService.
         /// </summary>
-        /// <returns>A readonly list of <see cref="IAdvisedAction"/>.</returns>
+        /// <returns>A read-only list of <see cref="IAdvisedAction"/>.</returns>
         IAdvisory GetAdvisory();
 
         /// <summary>
         /// Generates an advisory that contains all the operations that
-        /// an ipothetical UnitOfWork must perform in order to persist
+        /// an hypothetical UnitOfWork must perform in order to persist
         /// all the changes tracked by this ChangeTrackingService.
         /// The generation is customized using the supplied <see cref="IAdvisoryBuilder"/>.
         /// </summary>
         /// <param name="builder">An instance of a class implementing this <see cref="IAdvisoryBuilder"/> 
         /// interface used to control the advisory generation process.</param>
-        /// <returns>A readonly list of <see cref="IAdvisedAction"/>.</returns>
+        /// <returns>A read-only list of <see cref="IAdvisedAction"/>.</returns>
         IAdvisory GetAdvisory(IAdvisoryBuilder builder);
 
         /// <summary>
@@ -217,7 +217,7 @@
         void Attach(IMemento item);
 
         /// <summary>
-        /// Begins a new atomic operation. An atomic operation is usefull to
+        /// Begins a new atomic operation. An atomic operation is useful to
         /// treat a set of subsequent changes as a single change.
         /// </summary>
         /// <exception cref="ArgumentException">An <c>ArgumentException</c> is raised if there

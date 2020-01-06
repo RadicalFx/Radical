@@ -6,7 +6,7 @@ namespace Radical.Model
 {
     /// <summary>
     /// Provides a standard method to determine if an object instance 
-    /// should be, or shoud not, included in the result set of a filter
+    /// should be, or should not, included in the result set of a filter
     /// operation.
     /// </summary>
     /// <typeparam name="T">The type of the object to test.</typeparam>
@@ -29,8 +29,6 @@ namespace Radical.Model
         /// </returns>
         public abstract bool ShouldInclude(T item);
 
-        #region IEntityItemViewFilter Members
-
         /// <summary>
         /// Gets a item that indicates if the given object instance should be included in the result set of the filter operation..
         /// </summary>
@@ -44,22 +42,13 @@ namespace Radical.Model
                 .IsNotNull()
                 .IsTrue(o => o.GetType().Is<T>());
 
-            ////T value = item as T;
-            //if( Object.ReferenceEquals( item, null ) )
-            //{
-            //    //TODO: inserire il messaggio dell'eccezione
-            //    throw new ArgumentException();
-            //}
-            //else 
-            //{
-
-            //}
-
             return this.ShouldInclude((T)item);
         }
-
-        #endregion
-
+        
+        /// <summary>
+        /// Return a string that represents the current object.
+        /// </summary>
+        /// <returns>A string representing the current object.</returns>
         public override string ToString()
         {
             return Resources.Labels.DefaultFilterName;
