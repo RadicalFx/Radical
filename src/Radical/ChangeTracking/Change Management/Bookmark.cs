@@ -1,6 +1,5 @@
 ﻿using Radical.ComponentModel.ChangeTracking;
 using Radical.Validation;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -18,13 +17,13 @@ namespace Radical.ChangeTracking
         /// <param name="owner">The owner.</param>
         /// <param name="position">The position.</param>
         /// <param name="transientEntities">The transient entities.</param>
-        public Bookmark(IChangeTrackingService owner, IChange position, IEnumerable<Object> transientEntities)
+        public Bookmark(IChangeTrackingService owner, IChange position, IEnumerable<object> transientEntities)
         {
             Ensure.That(owner).Named("owner").IsNotNull();
 
-            this.Owner = owner;
-            this.Position = position;
-            this.TransientEntities = transientEntities ?? new ReadOnlyCollection<object>(new List<object>());
+            Owner = owner;
+            Position = position;
+            TransientEntities = transientEntities ?? new ReadOnlyCollection<object>(new List<object>());
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace Radical.ChangeTracking
         /// Gets the transient entities.
         /// </summary>
         /// <value>The transient entities.</value>
-        public IEnumerable<Object> TransientEntities
+        public IEnumerable<object> TransientEntities
         {
             get;
             private set;

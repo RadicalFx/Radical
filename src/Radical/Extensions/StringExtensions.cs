@@ -210,7 +210,7 @@ namespace Radical
         /// <param name="source">The source string to split.</param>
         /// <param name="separators">The char separators.</param>
         /// <returns>A distinct list of string split by the given chars.</returns>
-        public static IEnumerable<string> AsKeywords(this string source, params Char[] separators)
+        public static IEnumerable<string> AsKeywords(this string source, params char[] separators)
         {
             return AsKeywords(source, true, separators);
         }
@@ -225,7 +225,7 @@ namespace Radical
         /// <returns>
         /// A distinct list of string split by the given chars.
         /// </returns>
-        public static IEnumerable<string> AsKeywords(this string source, bool applyWildChardsIfNecessary, params Char[] separators)
+        public static IEnumerable<string> AsKeywords(this string source, bool applyWildChardsIfNecessary, params char[] separators)
         {
             if (string.IsNullOrEmpty(source))
             {

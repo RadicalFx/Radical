@@ -14,17 +14,17 @@ namespace Radical.Model
 
             }
 
-            this.DefaultValueInterceptor = null;
-            this.propertyChangedHandler = null;
+            DefaultValueInterceptor = null;
+            propertyChangedHandler = null;
         }
 
-        public PropertyMetadata(Object propertyOwner, string propertyName)
+        public PropertyMetadata(object propertyOwner, string propertyName)
             : base(propertyOwner, propertyName)
         {
 
         }
 
-        public PropertyMetadata(Object propertyOwner, Expression<Func<T>> property)
+        public PropertyMetadata(object propertyOwner, Expression<Func<T>> property)
             : this(propertyOwner, property.GetMemberName())
         {
 
@@ -32,13 +32,13 @@ namespace Radical.Model
 
         public PropertyMetadata<T> WithDefaultValue(T defaultValue)
         {
-            this.DefaultValue = defaultValue;
+            DefaultValue = defaultValue;
             return this;
         }
 
         public PropertyMetadata<T> WithDefaultValue(Func<T> defaultValueInterceptor)
         {
-            this.DefaultValueInterceptor = defaultValueInterceptor;
+            DefaultValueInterceptor = defaultValueInterceptor;
             return this;
         }
 
@@ -48,17 +48,17 @@ namespace Radical.Model
         {
             get
             {
-                if (!this.defaultValueSet && this.DefaultValueInterceptor != null)
+                if (!defaultValueSet && DefaultValueInterceptor != null)
                 {
-                    this.SetDefaultValue(new PropertyValue<T>(this.DefaultValueInterceptor()));
+                    SetDefaultValue(new PropertyValue<T>(DefaultValueInterceptor()));
                 }
 
-                return this._defaultValue;
+                return _defaultValue;
             }
             set
             {
-                this._defaultValue = value;
-                this.defaultValueSet = true;
+                _defaultValue = value;
+                defaultValueSet = true;
             }
         }
 
@@ -70,12 +70,12 @@ namespace Radical.Model
 
         public override void SetDefaultValue(PropertyValue value)
         {
-            this.DefaultValue = ((PropertyValue<T>)value).Value;
+            DefaultValue = ((PropertyValue<T>)value).Value;
         }
 
         public override PropertyValue GetDefaultValue()
         {
-            return new PropertyValue<T>(this.DefaultValue);
+            return new PropertyValue<T>(DefaultValue);
         }
 
         Action<PropertyValueChangedArgs<T>> propertyChangedHandler;
@@ -89,9 +89,9 @@ namespace Radical.Model
 
         internal PropertyMetadata<T> NotifyChanged(PropertyValueChangedArgs<T> pvc)
         {
-            if (this.propertyChangedHandler != null)
+            if (propertyChangedHandler != null)
             {
-                this.propertyChangedHandler(pvc);
+                propertyChangedHandler(pvc);
             }
 
             return this;

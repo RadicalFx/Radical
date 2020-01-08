@@ -34,7 +34,7 @@ namespace Radical.Validation
         {
             Ensure.That(errors).Named("errors").IsNotNull();
 
-            this.Errors = errors;
+            Errors = errors;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Radical.Validation
         {
             get
             {
-                return this.Errors.None();
+                return Errors.None();
             }
         }
 
@@ -66,7 +66,7 @@ namespace Radical.Validation
         public void AddError<T>(Expression<Func<T>> key, string displayName, string[] detectedProblems)
         {
             var error = new ValidationError(key.GetMemberName(), displayName, detectedProblems);
-            this.AddError(error);
+            AddError(error);
         }
 
         /// <summary>
@@ -77,17 +77,17 @@ namespace Radical.Validation
         {
             Ensure.That(error).Named("error").IsNotNull();
 
-            var err = this.Errors.Where(e => e.PropertyName == error.PropertyName).SingleOrDefault();
+            var err = Errors.Where(e => e.PropertyName == error.PropertyName).SingleOrDefault();
             if (err != null)
             {
                 err.AddProblems(error.DetectedProblems);
             }
             else
             {
-                var tmp = new List<ValidationError>(this.Errors);
+                var tmp = new List<ValidationError>(Errors);
                 tmp.Add(error);
 
-                this.Errors = tmp.AsReadOnly();
+                Errors = tmp.AsReadOnly();
             }
         }
 
@@ -102,7 +102,7 @@ namespace Radical.Validation
             var sb = new StringBuilder();
             sb.AppendLine("Some errors occurred during the validation process:");
 
-            foreach (var error in this.Errors)
+            foreach (var error in Errors)
             {
                 sb.AppendLine();
                 sb.AppendFormat("{0}: {1}", error.PropertyName, error);

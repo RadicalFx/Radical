@@ -201,9 +201,9 @@ namespace Radical.Linq
         /// <param name="list">The enumeration to enumerate.</param>
         /// <param name="action">The action to apply/execute.</param>
         /// <returns>The source list for fluent interface usage.</returns>
-        public static IEnumerable Enumerate(this IEnumerable list, Action<Object> action)
+        public static IEnumerable Enumerate(this IEnumerable list, Action<object> action)
         {
-            return list.OfType<Object>().ForEach(action);
+            return list.OfType<object>().ForEach(action);
         }
 
         /// <summary>

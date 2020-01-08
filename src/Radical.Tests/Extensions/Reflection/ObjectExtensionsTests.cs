@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.Reflection;
+using SharpTestsEx;
 using System.Reflection;
 
 namespace Radical.Tests.Extensions.Reflection

@@ -76,7 +76,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void arrayExtensions_isSameAs_using_null_comparer_should_raise_ArgumentNullException()
         {
-            ArrayExtensions.IsSameAs(new Object[0], null, null);
+            ArrayExtensions.IsSameAs(new object[0], null, null);
         }
     }
 }

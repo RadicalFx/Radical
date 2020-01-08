@@ -24,7 +24,7 @@ namespace Radical
             /// </summary>
             public AnalyticsEvent()
             {
-                this.ExecutedOn = DateTimeOffset.Now;
+                ExecutedOn = DateTimeOffset.Now;
             }
 
             public DateTimeOffset ExecutedOn { get; set; }

@@ -149,7 +149,7 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        IEnsure<T> WithMessage(string errorMessage, params Object[] formatArgs);
+        IEnsure<T> WithMessage(string errorMessage, params object[] formatArgs);
 
         /// <summary>
         /// Throws the exception returned by the supplied exception

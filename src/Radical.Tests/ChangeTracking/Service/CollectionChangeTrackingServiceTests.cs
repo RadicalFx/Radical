@@ -2,15 +2,14 @@
 
 namespace Radical.Tests.ChangeTracking
 {
-    using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
-    using Radical.ComponentModel.ChangeTracking;
     using Radical.ChangeTracking;
+    using Radical.ComponentModel.ChangeTracking;
     using Radical.Linq;
+    using SharpTestsEx;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestClass]
     public class CollectionChangeTrackingServiceTests

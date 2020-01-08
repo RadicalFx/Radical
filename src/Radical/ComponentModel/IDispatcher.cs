@@ -15,7 +15,7 @@ namespace Radical.ComponentModel
         /// The delegate arguments, or null if 
         /// no arguments should be passed to the delegate.
         /// </param>
-        void Invoke(Delegate d, params Object[] args);
+        void Invoke(Delegate d, params object[] args);
 
         /// <summary>
         /// Safely dispatches the specified action.

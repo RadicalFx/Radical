@@ -2,13 +2,12 @@
 
 namespace Radical.Tests.Helpers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical;
     using Radical.Helpers;
+    using SharpTestsEx;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestClass()]
     public class EnumHelperTest

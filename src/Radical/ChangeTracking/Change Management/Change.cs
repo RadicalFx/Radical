@@ -1,5 +1,4 @@
-﻿using Radical;
-using Radical.ComponentModel.ChangeTracking;
+﻿using Radical.ComponentModel.ChangeTracking;
 using Radical.Validation;
 using System;
 using System.Collections.Generic;
@@ -37,11 +36,11 @@ namespace Radical.ChangeTracking
             Ensure.That(owner).Named("owner").IsNotNull();
             Ensure.That(rejectCallback).Named("rejectCallback").IsNotNull();
 
-            this.Owner = owner;
-            this.CachedValue = valueToCache;
-            this.RejectCallback = rejectCallback;
-            this.CommitCallback = commitCallback;
-            this.Description = description;
+            Owner = owner;
+            CachedValue = valueToCache;
+            RejectCallback = rejectCallback;
+            CommitCallback = commitCallback;
+            Description = description;
         }
 
         #region IChange Members
@@ -70,8 +69,8 @@ namespace Radical.ChangeTracking
                    throw new ArgumentException("Unsupported CommitReason value.", n);
                });
 
-            this.OnCommit(reason);
-            this.OnCommitted(new CommittedEventArgs(reason));
+            OnCommit(reason);
+            OnCommitted(new CommittedEventArgs(reason));
         }
 
         /// <summary>
@@ -79,10 +78,10 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnCommit(CommitReason reason)
         {
-            if (this.CommitCallback != null)
+            if (CommitCallback != null)
             {
-                ChangeCommittedEventArgs<T> args = new ChangeCommittedEventArgs<T>(this.Owner, this.CachedValue, this, reason);
-                this.CommitCallback(args);
+                ChangeCommittedEventArgs<T> args = new ChangeCommittedEventArgs<T>(Owner, CachedValue, this, reason);
+                CommitCallback(args);
             }
         }
 
@@ -96,7 +95,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnCommitted(CommittedEventArgs args)
         {
-            var h = this.Committed;
+            var h = Committed;
             if (h != null)
             {
                 h(this, args);
@@ -114,8 +113,8 @@ namespace Radical.ChangeTracking
                 .If(v => v == RejectReason.None)
                 .Then((v, n) => { throw new ArgumentException("Unsupported RejectReason value.", n); });
 
-            this.OnReject(reason);
-            this.OnRejected(new RejectedEventArgs(reason));
+            OnReject(reason);
+            OnRejected(new RejectedEventArgs(reason));
         }
 
         /// <summary>
@@ -123,8 +122,8 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnReject(RejectReason reason)
         {
-            ChangeRejectedEventArgs<T> args = new ChangeRejectedEventArgs<T>(this.Owner, this.CachedValue, this, reason);
-            this.RejectCallback(args);
+            ChangeRejectedEventArgs<T> args = new ChangeRejectedEventArgs<T>(Owner, CachedValue, this, reason);
+            RejectCallback(args);
         }
 
         /// <summary>
@@ -137,7 +136,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnRejected(RejectedEventArgs args)
         {
-            var h = this.Rejected;
+            var h = Rejected;
             if (h != null)
             {
                 h(this, args);
@@ -152,7 +151,7 @@ namespace Radical.ChangeTracking
         /// </value>
         public virtual bool IsCommitSupported
         {
-            get { return this.CommitCallback != null; }
+            get { return CommitCallback != null; }
         }
 
         /// <summary>

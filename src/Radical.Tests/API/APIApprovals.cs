@@ -1,6 +1,4 @@
 ﻿using ApprovalTests;
-using ApprovalTests.Core;
-using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PublicApiGenerator;

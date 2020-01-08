@@ -1,9 +1,9 @@
 ﻿namespace Radical.Tests.Extensions
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical;
+    using SharpTestsEx;
+    using System;
 
     [TestClass]
     public class DateTimeExtensionsTests

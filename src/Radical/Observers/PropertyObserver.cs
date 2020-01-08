@@ -80,10 +80,10 @@ namespace Radical.Observers
         {
             base.StartMonitoring(source);
 
-            this.handler = (s, e) => this.OnChanged();
+            handler = (s, e) => OnChanged();
 
             var inpc = (INotifyPropertyChanged)source;
-            inpc.PropertyChanged += this.handler;
+            inpc.PropertyChanged += handler;
         }
 
         /// <summary>
@@ -92,13 +92,13 @@ namespace Radical.Observers
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
         protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
+            if (!targetDisposed && WeakSource != null && WeakSource.IsAlive)
             {
-                var inpc = (INotifyPropertyChanged)this.WeakSource.Target;
-                inpc.PropertyChanged -= this.handler;
+                var inpc = (INotifyPropertyChanged)WeakSource.Target;
+                inpc.PropertyChanged -= handler;
             }
 
-            this.handler = null;
+            handler = null;
         }
 
     }
@@ -122,18 +122,18 @@ namespace Radical.Observers
         /// <param name="args">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            if (this.Dispatcher != null && !this.Dispatcher.IsSafe)
+            if (Dispatcher != null && !Dispatcher.IsSafe)
             {
-                this.Dispatcher.Dispatch(args, e =>
+                Dispatcher.Dispatch(args, e =>
                {
-                   this.OnPropertyChanged(e);
+                   OnPropertyChanged(e);
                });
             }
             else
             {
-                if (this.PropertyChanged != null)
+                if (PropertyChanged != null)
                 {
-                    this.PropertyChanged(this, args);
+                    PropertyChanged(this, args);
                 }
             }
         }
@@ -174,12 +174,12 @@ namespace Radical.Observers
 
                 if (propertiesToWatch.ContainsKey(e.PropertyName))
                 {
-                    this.OnPropertyChanged(e);
-                    this.OnChanged();
+                    OnPropertyChanged(e);
+                    OnChanged();
                 }
             };
 
-            this.Source.PropertyChanged += handler;
+            Source.PropertyChanged += handler;
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Radical.Observers
         {
             Ensure.That(property).Named("property").IsNotNullNorEmpty();
 
-            this.Observe(property, null);
+            Observe(property, null);
 
             return this;
         }
@@ -208,7 +208,7 @@ namespace Radical.Observers
         {
             Ensure.That(property).Named("property").IsNotNull();
 
-            this.Observe(property, null);
+            Observe(property, null);
 
             return this;
         }
@@ -224,7 +224,7 @@ namespace Radical.Observers
         {
             Ensure.That(property).Named("property").IsNotNull();
 
-            return this.Observe(property.GetMemberName(), callback);
+            return Observe(property.GetMemberName(), callback);
         }
 
         /// <summary>
@@ -261,9 +261,9 @@ namespace Radical.Observers
 
             var om = new PropertyChangedMonitor<Observable<TValue>>(property);
             om.Observe(p => p.Value);
-            om.Changed += (s, e) => this.OnChanged();
+            om.Changed += (s, e) => OnChanged();
 
-            this.observablePropertiesToWatch.Add(om);
+            observablePropertiesToWatch.Add(om);
 
             return this;
         }
@@ -295,14 +295,14 @@ namespace Radical.Observers
         {
             Ensure.That(property).Named("property").IsNotNull();
 
-            var om = this.observablePropertiesToWatch
+            var om = observablePropertiesToWatch
                 .Where(am => am.As<PropertyChangedMonitor<Observable<TValue>>>().Source == property)
                 .SingleOrDefault();
 
             if (om != null)
             {
                 om.StopMonitoring();
-                this.observablePropertiesToWatch.Remove(om);
+                observablePropertiesToWatch.Remove(om);
             }
 
             return this;
@@ -314,9 +314,9 @@ namespace Radical.Observers
         /// <param name="targetDisposed"><c>True</c> if this call is subsequent to the Dispose of the monitored instance.</param>
         protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
+            if (!targetDisposed && WeakSource != null && WeakSource.IsAlive)
             {
-                this.Source.PropertyChanged -= handler;
+                Source.PropertyChanged -= handler;
             }
 
             handler = null;

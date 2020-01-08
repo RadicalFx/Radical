@@ -41,7 +41,7 @@ namespace Radical
         /// </returns>
         public int Compare(T x, T y)
         {
-            return this.comparer(x, y);
+            return comparer(x, y);
         }
     }
 }

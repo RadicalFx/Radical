@@ -17,8 +17,8 @@ namespace Radical.Model
         protected EntityCollection(SerializationInfo info, StreamingContext context)
             : this()
         {
-            this.serializationInfo = info;
-            this.streamingContext = context;
+            serializationInfo = info;
+            streamingContext = context;
 
         }
 
@@ -33,8 +33,8 @@ namespace Radical.Model
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            this.EnsureNotDisposed();
-            this.OnGetObjectData(info, context);
+            EnsureNotDisposed();
+            OnGetObjectData(info, context);
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Radical.Model
         /// <exception cref="T:System.Security.SecurityException">The caller does not have the required permission. </exception>
         protected virtual void OnGetObjectData(SerializationInfo info, StreamingContext context)
         {
-            this.EnsureNotDisposed();
-            info.AddValue(SerializationKey, this.ToArray());
+            EnsureNotDisposed();
+            info.AddValue(SerializationKey, ToArray());
         }
 
         /// <summary>
@@ -60,19 +60,19 @@ namespace Radical.Model
         /// <param name="sender">The object that initiated the callback. The functionality for this parameter is not currently implemented.</param>
         void IDeserializationCallback.OnDeserialization(object sender)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             T[] objs = (T[])serializationInfo.GetValue(SerializationKey, typeof(T[]));
 
-            this.OnDeserialization(this.serializationInfo, this.streamingContext);
+            OnDeserialization(serializationInfo, streamingContext);
 
             foreach (T obj in objs)
             {
-                this.Add(obj);
+                Add(obj);
             }
 
-            this.OnDeserializationCompleted(this.serializationInfo, this.streamingContext);
+            OnDeserializationCompleted(serializationInfo, streamingContext);
 
-            this.serializationInfo = null;
+            serializationInfo = null;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Radical.Model
         /// <param name="context">The serailization context.</param>
         protected virtual void OnDeserialization(SerializationInfo info, StreamingContext context)
         {
-            this.BeginInit();
+            BeginInit();
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Radical.Model
         /// <param name="context">The context.</param>
         protected virtual void OnDeserializationCompleted(SerializationInfo info, StreamingContext context)
         {
-            this.EndInit();
+            EndInit();
         }
     }
 }

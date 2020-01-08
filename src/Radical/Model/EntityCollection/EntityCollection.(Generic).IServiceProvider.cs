@@ -11,10 +11,10 @@ namespace Radical.Model
         /// <returns></returns>
         object IServiceProvider.GetService(Type service)
         {
-            if (this.site != null)
+            if (site != null)
             {
-                this.EnsureNotDisposed();
-                return this.site.GetService(service);
+                EnsureNotDisposed();
+                return site.GetService(service);
             }
 
             return null;

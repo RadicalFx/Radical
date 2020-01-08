@@ -38,7 +38,7 @@ namespace Radical.Model
                 }
             }
 
-            this._memento = null;
+            _memento = null;
 
             /*
              * Prima di passare il controllo alla classe base
@@ -63,9 +63,9 @@ namespace Radical.Model
              * perchè la Dispose potrebbe fallire e noi restare 
              * in uno stato indeterminato
              */
-            if (this.isDisposed)
+            if (isDisposed)
             {
-                throw new ObjectDisposedException(this.GetType().FullName);
+                throw new ObjectDisposedException(GetType().FullName);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Radical.Model
         /// </returns>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, T value, bool trackChanges)
         {
-            return this.SetInitialPropertyValue<T>(property.GetMemberName(), value, trackChanges);
+            return SetInitialPropertyValue<T>(property.GetMemberName(), value, trackChanges);
         }
 
         /// <summary>
@@ -210,11 +210,11 @@ namespace Radical.Model
         {
             base.SetPropertyValue<T>(propertyName, data, e =>
            {
-               var md = this.GetPropertyMetadata<T>(propertyName) as MementoPropertyMetadata<T>;
+               var md = GetPropertyMetadata<T>(propertyName) as MementoPropertyMetadata<T>;
                if (md != null && md.TrackChanges)
                {
-                   var callback = this.GetRejectCallback<T>(propertyName);
-                   this.CacheChange(propertyName, e.OldValue, callback);
+                   var callback = GetRejectCallback<T>(propertyName);
+                   CacheChange(propertyName, e.OldValue, callback);
                }
 
                if (pvc != null)
@@ -229,19 +229,19 @@ namespace Radical.Model
         RejectCallback<T> GetRejectCallback<T>(string propertyName)
         {
             Delegate d;
-            if (!this.rejectCallbacks.TryGetValue(propertyName, out d))
+            if (!rejectCallbacks.TryGetValue(propertyName, out d))
             {
                 RejectCallback<T> callback = (pcr) =>
                 {
                     var owner = (MementoEntity)pcr.Source.Owner;
                     var actualValue = owner.GetPropertyValue<T>(propertyName);
-                    var cb = this.GetRejectCallback<T>(propertyName);
+                    var cb = GetRejectCallback<T>(propertyName);
 
                     owner.CacheChangeOnRejectCallback(propertyName, actualValue, cb, null, pcr);
                     owner.SetPropertyValueCore(propertyName, pcr.CachedValue, null);
                 };
 
-                this.rejectCallbacks.Add(propertyName, callback);
+                rejectCallbacks.Add(propertyName, callback);
 
                 d = callback;
             }
@@ -262,22 +262,22 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this._memento;
+                EnsureNotDisposed();
+                return _memento;
             }
             set
             {
-                this.EnsureNotDisposed();
-                if (value != this._memento)
+                EnsureNotDisposed();
+                if (value != _memento)
                 {
                     var old = ((IMemento)this).Memento;
-                    this._memento = value;
-                    if (this.registration == ChangeTrackingRegistration.AsTransient && this.IsTracking)
+                    _memento = value;
+                    if (registration == ChangeTrackingRegistration.AsTransient && IsTracking)
                     {
-                        this.OnRegisterTransient(TransientRegistration.AsTransparent);
+                        OnRegisterTransient(TransientRegistration.AsTransparent);
                     }
 
-                    this.OnMementoChanged(value, old);
+                    OnMementoChanged(value, old);
                 }
             }
         }
@@ -296,7 +296,7 @@ namespace Radical.Model
         /// </summary>
         protected void RegisterTransient()
         {
-            this.registration = ChangeTrackingRegistration.AsTransient;
+            registration = ChangeTrackingRegistration.AsTransient;
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
+                EnsureNotDisposed();
                 return ((IMemento)this).Memento != null && !((IMemento)this).Memento.IsSuspended;
             }
         }
@@ -345,8 +345,8 @@ namespace Radical.Model
         /// <returns>A reference to the cached change as an instance of <see cref="IChange"/> interface.</returns>
         protected IChange CacheChange<T>(string propertyName, T value, RejectCallback<T> restore)
         {
-            this.EnsureNotDisposed();
-            return this.CacheChange<T>(propertyName, value, restore, null, AddChangeBehavior.Default);
+            EnsureNotDisposed();
+            return CacheChange<T>(propertyName, value, restore, null, AddChangeBehavior.Default);
         }
 
         /// <summary>
@@ -366,8 +366,8 @@ namespace Radical.Model
         /// </returns>
         protected IChange CacheChange<T>(string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit)
         {
-            this.EnsureNotDisposed();
-            return this.CacheChange<T>(propertyName, value, restore, commit, AddChangeBehavior.Default);
+            EnsureNotDisposed();
+            return CacheChange<T>(propertyName, value, restore, commit, AddChangeBehavior.Default);
         }
 
         /// <summary>
@@ -388,8 +388,8 @@ namespace Radical.Model
         /// </returns>
         protected IChange CacheChange<T>(string propertyName, T value, RejectCallback<T> restore, CommitCallback<T> commit, AddChangeBehavior direction)
         {
-            this.EnsureNotDisposed();
-            if (this.IsTracking)
+            EnsureNotDisposed();
+            if (IsTracking)
             {
                 IChange iChange = new PropertyValueChange<T>(this, propertyName, value, restore, commit, string.Empty);
 
@@ -403,14 +403,14 @@ namespace Radical.Model
 
         protected virtual IChange CacheChangeOnRejectCallback<T>(string propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             switch (args.Reason)
             {
                 case RejectReason.Undo:
-                    return this.CacheChange(propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.UndoRequest);
+                    return CacheChange(propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.UndoRequest);
 
                 case RejectReason.Redo:
-                    return this.CacheChange(propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.RedoRequest);
+                    return CacheChange(propertyName, value, rejectCallback, commitCallback, AddChangeBehavior.RedoRequest);
 
                 case RejectReason.RejectChanges:
                 case RejectReason.Revert:

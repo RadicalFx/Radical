@@ -1,13 +1,13 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using FakeItEasy;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using SharpTestsEx;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestClass]
     public class BookmarkTests
@@ -48,7 +48,7 @@
         [TestCategory("ChangeTracking")]
         public void bookmark_null_owner__null_change_null_transientEntities_iChangeTrackingService_ctor_raise_argumentNullException_on_owner()
         {
-            Bookmark bmk = new Bookmark((IChangeTrackingService)null, (IChange)null, (IEnumerable<Object>)null);
+            Bookmark bmk = new Bookmark((IChangeTrackingService)null, (IChange)null, (IEnumerable<object>)null);
         }
 
         //[TestMethod]
@@ -75,7 +75,7 @@
         public void bookmark_valid_owner_null_change_null_transientEntities_iChangeTrackingService_ctor_valid_transientEntities()
         {
             IChangeTrackingService mock = A.Fake<IChangeTrackingService>();
-            Bookmark bmk = new Bookmark(mock, (IChange)null, (IEnumerable<Object>)null);
+            Bookmark bmk = new Bookmark(mock, (IChange)null, (IEnumerable<object>)null);
 
             bmk.TransientEntities.Should().Not.Be.Null();
             bmk.TransientEntities.Count().Should().Be.EqualTo(0);
@@ -86,7 +86,7 @@
         public void bookmark_valid_owner_null_iChange_valid_transientEntities_iChangeTrackingService_ctor()
         {
             IChangeTrackingService mock = A.Fake<IChangeTrackingService>();
-            Bookmark bmk = new Bookmark(mock, (IChange)null, new Object[0]);
+            Bookmark bmk = new Bookmark(mock, (IChange)null, new object[0]);
 
             bmk.Position.Should().Be.Null();
         }
@@ -98,7 +98,7 @@
             IChangeTrackingService owner = A.Fake<IChangeTrackingService>();
             IChange expected = A.Fake<IChange>();
 
-            Object[] entities = new Object[] { new Object(), new Object() };
+            object[] entities = new object[] { new object(), new object() };
 
             Bookmark bmk = new Bookmark(owner, expected, entities);
 

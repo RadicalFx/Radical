@@ -38,7 +38,7 @@ namespace Radical
         /// </returns>
         public override bool Equals(T x, T y)
         {
-            return this.comparer(x, y);
+            return comparer(x, y);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Radical
         /// </exception>
         public override int GetHashCode(T obj)
         {
-            return this.hashCodeFunc(obj);
+            return hashCodeFunc(obj);
         }
     }
 }

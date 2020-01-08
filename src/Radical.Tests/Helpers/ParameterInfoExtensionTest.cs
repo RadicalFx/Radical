@@ -1,9 +1,9 @@
 ﻿namespace Radical.Tests.Helpers
 {
-    using System;
-    using System.Reflection;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.Reflection;
+    using System;
+    using System.Reflection;
 
     [TestClass()]
     public class ParameterInfoExtensionTest

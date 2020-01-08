@@ -28,7 +28,7 @@ namespace Radical.Model.Factories
         /// </returns>
         public IChangeTrackingService Create()
         {
-            return (IChangeTrackingService)this.container.GetService(typeof(IChangeTrackingService));
+            return (IChangeTrackingService)container.GetService(typeof(IChangeTrackingService));
         }
     }
 }

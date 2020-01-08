@@ -1,8 +1,8 @@
 ﻿namespace Radical.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ComponentModel;
+    using System;
 
     [TestClass()]
     public class ContractAttributeTest
@@ -31,7 +31,7 @@
         [TestMethod()]
         public void ContractAttribute_ctor()
         {
-            ContractAttribute target = new ContractAttribute(typeof(Object));
+            ContractAttribute target = new ContractAttribute(typeof(object));
 
             Assert.IsNotNull(target);
         }
@@ -46,7 +46,7 @@
         [TestMethod()]
         public void ContractAttribute_contractInterfaceProperty_via_ctor()
         {
-            Type expected = typeof(Object);
+            Type expected = typeof(object);
             ContractAttribute target = new ContractAttribute(expected);
 
             Assert.AreEqual<Type>(expected, target.ContractInterface);

@@ -14,7 +14,7 @@ namespace Radical.Tests
         [TestMethod]
         public void changeArgs_generic_ctor_normal_should_correctly_set_values()
         {
-            var entity = new Object();
+            var entity = new object();
             var cachedValue = new GenericParameterHelper();
             var iChange = A.Dummy<IChange>();
 
@@ -29,7 +29,7 @@ namespace Radical.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void changeArgs_ctor_using_null_reference_entity_should_raise_ArgumentNullException()
         {
-            Object entity = null;
+            object entity = null;
             var cachedValue = new GenericParameterHelper();
             var iChange = A.Dummy<IChange>();
 
@@ -40,7 +40,7 @@ namespace Radical.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void changeArgs_ctor_using_null_reference_iChange_should_raise_ArgumentNullException()
         {
-            var entity = new Object();
+            var entity = new object();
             var cachedValue = new GenericParameterHelper();
             IChange iChange = null;
 

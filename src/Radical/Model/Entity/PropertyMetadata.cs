@@ -17,7 +17,7 @@ namespace Radical.Model
         /// </summary>
         ~PropertyMetadata()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Radical.Model
         {
             if (disposing)
             {
-                this.cascadeChangeNotifications.Clear();
+                cascadeChangeNotifications.Clear();
             }
         }
 
@@ -37,7 +37,7 @@ namespace Radical.Model
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -52,7 +52,7 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>(Object propertyOwner, Expression<Func<T>> property)
+        public static PropertyMetadata<T> Create<T>(object propertyOwner, Expression<Func<T>> property)
         {
             var name = property.GetMemberName();
             return PropertyMetadata.Create<T>(propertyOwner, name);
@@ -67,28 +67,28 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>(Object propertyOwner, string propertyName)
+        public static PropertyMetadata<T> Create<T>(object propertyOwner, string propertyName)
         {
             return new PropertyMetadata<T>(propertyOwner, propertyName);
         }
 
         readonly HashSet<string> cascadeChangeNotifications = new HashSet<string>();
 
-        readonly Object propertyOwner;
+        readonly object propertyOwner;
         PropertyInfo _property;
 
         protected PropertyInfo Property
         {
             get
             {
-                if (this._property == null)
+                if (_property == null)
                 {
-                    this._property = this.propertyOwner
+                    _property = propertyOwner
                         .GetType()
-                        .GetProperty(this.PropertyName);
+                        .GetProperty(PropertyName);
                 }
 
-                return this._property;
+                return _property;
             }
         }
 
@@ -97,14 +97,14 @@ namespace Radical.Model
         /// </summary>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="propertyName">Name of the property.</param>
-        protected PropertyMetadata(Object propertyOwner, string propertyName)
+        protected PropertyMetadata(object propertyOwner, string propertyName)
         {
             Ensure.That(propertyOwner).Named("propertyOwner").IsNotNull();
             Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
             this.propertyOwner = propertyOwner;
-            this.PropertyName = propertyName;
-            this.NotifyChanges = true;
+            PropertyName = propertyName;
+            NotifyChanges = true;
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Radical.Model
         /// <returns>This metadata instance.</returns>
         public PropertyMetadata DisableChangesNotifications()
         {
-            this.NotifyChanges = false;
+            NotifyChanges = false;
             return this;
         }
 
@@ -139,32 +139,32 @@ namespace Radical.Model
         /// <returns>This metadata instance.</returns>
         public PropertyMetadata EnableChangesNotifications()
         {
-            this.NotifyChanges = true;
+            NotifyChanges = true;
             return this;
         }
 
         public PropertyMetadata AddCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
-            return this.AddCascadeChangeNotifications(property.GetMemberName());
+            return AddCascadeChangeNotifications(property.GetMemberName());
         }
 
         public PropertyMetadata AddCascadeChangeNotifications(string property)
         {
-            this.cascadeChangeNotifications.Add(property);
+            cascadeChangeNotifications.Add(property);
 
             return this;
         }
 
         public PropertyMetadata RemoveCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
-            return this.RemoveCascadeChangeNotifications(property.GetMemberName());
+            return RemoveCascadeChangeNotifications(property.GetMemberName());
         }
 
         public PropertyMetadata RemoveCascadeChangeNotifications(string property)
         {
-            if (this.cascadeChangeNotifications.Contains(property))
+            if (cascadeChangeNotifications.Contains(property))
             {
-                this.cascadeChangeNotifications.Remove(property);
+                cascadeChangeNotifications.Remove(property);
             }
 
             return this;
@@ -172,7 +172,7 @@ namespace Radical.Model
 
         public IEnumerable<string> GetCascadeChangeNotifications()
         {
-            return this.cascadeChangeNotifications;
+            return cascadeChangeNotifications;
         }
 
         public abstract void SetDefaultValue(PropertyValue value);

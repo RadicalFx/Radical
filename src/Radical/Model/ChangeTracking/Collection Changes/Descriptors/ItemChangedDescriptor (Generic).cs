@@ -9,8 +9,8 @@
         /// <param name="index">The index.</param>
         public ItemChangedDescriptor(T item, int index)
         {
-            this.Item = item;
-            this.Index = index;
+            Item = item;
+            Index = index;
         }
 
         /// <summary>

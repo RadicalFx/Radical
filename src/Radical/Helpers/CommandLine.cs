@@ -24,7 +24,7 @@ namespace Radical.Helpers
             return _current;
         }
 
-        const Char SEPARATOR = '=';
+        const char SEPARATOR = '=';
 
         readonly IEnumerable<string> args;
 
@@ -70,13 +70,13 @@ namespace Radical.Helpers
         /// </returns>
         public bool Contains(string arg)
         {
-            var query = this.args.Where(s => Normalize(s).Equals(arg, StringComparison.CurrentCultureIgnoreCase));
+            var query = args.Where(s => Normalize(s).Equals(arg, StringComparison.CurrentCultureIgnoreCase));
             return query.Any();
         }
 
         string GetValue(string argumentValuePair)
         {
-            var fullValue = this.args.Where(s =>
+            var fullValue = args.Where(s =>
            {
                var sc = StringComparison.CurrentCultureIgnoreCase;
                return CommandLine.Normalize(s).Equals(argumentValuePair, sc);
@@ -103,9 +103,9 @@ namespace Radical.Helpers
         /// <returns><c>True</c> if the operation succeded, otherwise <c>false</c>.</returns>
         public bool TryGetValue<T>(string arg, out T value)
         {
-            if (this.Contains(arg))
+            if (Contains(arg))
             {
-                var v = this.GetValue(arg);
+                var v = GetValue(arg);
                 if (!string.IsNullOrEmpty(v))
                 {
                     try
@@ -163,20 +163,20 @@ namespace Radical.Helpers
 
             foreach (var property in properties)
             {
-                if (!this.Contains(property.Argument) && !property.Aliases.Any(alias => this.Contains(alias)) && property.IsRequired)
+                if (!Contains(property.Argument) && !property.Aliases.Any(alias => Contains(alias)) && property.IsRequired)
                 {
                     var msg = string.Format("The command line argument '{0}' is required.", property.Argument);
                     throw new ArgumentException(msg, property.Argument);
                 }
-                else if (this.Contains(property.Argument) || property.Aliases.Any(alias => this.Contains(alias)))
+                else if (Contains(property.Argument) || property.Aliases.Any(alias => Contains(alias)))
                 {
                     var lookFor = property.Argument;
-                    if (!this.Contains(lookFor))
+                    if (!Contains(lookFor))
                     {
-                        lookFor = property.Aliases.First(alias => this.Contains(alias));
+                        lookFor = property.Aliases.First(alias => Contains(alias));
                     }
 
-                    var value = this.GetValue(lookFor);
+                    var value = GetValue(lookFor);
                     if (!string.IsNullOrEmpty(value))
                     {
                         var t = property.Property.PropertyType;
@@ -208,7 +208,7 @@ namespace Radical.Helpers
                     }
                     else if (property.Property.PropertyType.Is<bool>())
                     {
-                        property.Property.SetValue(instance, this.Contains(property.Argument), null);
+                        property.Property.SetValue(instance, Contains(property.Argument), null);
                     }
                 }
             }

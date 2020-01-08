@@ -8,7 +8,7 @@ namespace Radical.Reflection
     /// Defines a delegate.
     /// </summary>
     /// <returns>A value.</returns>
-    public delegate Object Function();
+    public delegate object Function();
 
     /// <summary>
     /// Object extensions for Fast property getters based on Lambda Expressions.
@@ -22,7 +22,7 @@ namespace Radical.Reflection
         /// <param name="target">The target instance that expose the property.</param>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>A delegate to get the property value.</returns>
-        public static Func<T> CreateFastPropertyGetter<T>(this Object target, string propertyName)
+        public static Func<T> CreateFastPropertyGetter<T>(this object target, string propertyName)
         {
             return target.CreateFastPropertyGetter<T>(target.GetType().GetProperty(propertyName));
         }
@@ -36,7 +36,7 @@ namespace Radical.Reflection
         /// <returns>
         /// A delegate to get the property value.
         /// </returns>
-        public static Func<T> CreateFastPropertyGetter<T>(this Object target, PropertyInfo property)
+        public static Func<T> CreateFastPropertyGetter<T>(this object target, PropertyInfo property)
         {
             var targetExp = Expression.Constant(target);
             var propExp = Expression.Property(targetExp, property);
@@ -55,7 +55,7 @@ namespace Radical.Reflection
         /// <returns>
         /// A delegate to get the property value.
         /// </returns>
-        public static Function CreateFastPropertyGetter(this Object target, PropertyInfo property)
+        public static Function CreateFastPropertyGetter(this object target, PropertyInfo property)
         {
             var targetExp = Expression.Constant(target);
             var propExp = Expression.Property(targetExp, property);

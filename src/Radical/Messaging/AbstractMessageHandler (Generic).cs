@@ -29,7 +29,7 @@ namespace Radical.Messaging
                 .IsNotNull()
                 .IsTrue(msg => msg.GetType().Is<T>());
 
-            this.Handle(sender, (T)message);
+            Handle(sender, (T)message);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Radical.Messaging
                 .IsNotNull()
                 .IsTrue(msg => msg.GetType().Is<T>());
 
-            return this.OnShouldHandle(sender, (T)message);
+            return OnShouldHandle(sender, (T)message);
         }
 
         /// <summary>

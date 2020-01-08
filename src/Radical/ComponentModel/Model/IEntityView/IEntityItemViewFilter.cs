@@ -1,7 +1,5 @@
 ﻿namespace Radical.ComponentModel
 {
-    using System;
-
     /// <summary>
     /// Provides a standard method to determine if an object instance 
     /// should be, or should not, included in the result set of a filter
@@ -14,6 +12,6 @@
         /// </summary>
         /// <param name="item">The item to test.</param>
         /// <returns><c>True</c> if the item should be included, otherwise <c>false</c>.</returns>
-        bool ShouldInclude(Object item);
+        bool ShouldInclude(object item);
     }
 }

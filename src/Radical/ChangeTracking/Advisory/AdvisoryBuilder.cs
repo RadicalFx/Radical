@@ -1,5 +1,4 @@
 ﻿using Radical.ComponentModel.ChangeTracking;
-using Radical.Linq;
 using Radical.Validation;
 using System;
 using System.Collections;
@@ -36,7 +35,7 @@ namespace Radical.ChangeTracking
         {
             var result = new List<IAdvisedAction>();
 
-            var distinct = this.visitor.Visit(changeSet);
+            var distinct = visitor.Visit(changeSet);
             foreach (var kvp in distinct)
             {
                 ProposedActions proposedAction = kvp.Value.GetAdvisedAction(kvp.Key);
@@ -57,12 +56,12 @@ namespace Radical.ChangeTracking
                         throw new NotSupportedException();
                 }
 
-                var advisedAction = this.OnCreateAdvisedAction(kvp.Key, proposedAction);
+                var advisedAction = OnCreateAdvisedAction(kvp.Key, proposedAction);
                 result.Add(advisedAction);
             }
 
             IEnumerable transientEntities = svc.GetEntities(EntityTrackingStates.IsTransient, true);
-            foreach (Object te in transientEntities)
+            foreach (object te in transientEntities)
             {
                 if (result.Any(a => a.Target == te))
                 {
@@ -76,7 +75,7 @@ namespace Radical.ChangeTracking
                     continue;
                 }
 
-                var advisedAction = this.OnCreateAdvisedAction(te, ProposedActions.Create);
+                var advisedAction = OnCreateAdvisedAction(te, ProposedActions.Create);
                 result.Add(advisedAction);
             }
 
@@ -89,7 +88,7 @@ namespace Radical.ChangeTracking
         /// <param name="target">The target entity.</param>
         /// <param name="proposedAction">The proposed action.</param>
         /// <returns>The advised action.</returns>
-        protected virtual IAdvisedAction OnCreateAdvisedAction(Object target, ProposedActions proposedAction)
+        protected virtual IAdvisedAction OnCreateAdvisedAction(object target, ProposedActions proposedAction)
         {
             var advisedAction = new AdvisedAction(target, proposedAction);
             return advisedAction;

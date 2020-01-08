@@ -1,9 +1,8 @@
 ﻿namespace Radical.Tests.Helpers
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical;
+    using SharpTestsEx;
 
     [TestClass]
     public class NumbersExtensionsTests

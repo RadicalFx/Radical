@@ -1,11 +1,11 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.ChangeTracking;
+    using Radical.ComponentModel.ChangeTracking;
+    using SharpTestsEx;
     using System;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.ChangeTracking;
 
     [TestClass]
     public class AtomicChangesChangeTrackingServiceTests

@@ -1,12 +1,12 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
+    using FakeItEasy;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.ChangeTracking;
+    using Radical.ComponentModel.ChangeTracking;
+    using SharpTestsEx;
     using System;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.ChangeTracking;
-    using SharpTestsEx;
-    using FakeItEasy;
 
     [TestClass]
     public class AdvisoryBuilderTests
@@ -49,16 +49,16 @@
         public void advisoryBuilder_generateAdvisory_for_transient_and_changed_entity()
         {
             var expectedAction = ProposedActions.Create;
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove | EntityTrackingStates.HasBackwardChanges;
 
             var c1 = A.Fake<IChange>();
-            A.CallTo(() => c1.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.Update | ProposedActions.Create);
             //c1.Replay();
 
             var c2 = A.Fake<IChange>();
-            A.CallTo(() => c2.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c2.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c2.GetAdvisedAction(entity)).Returns(ProposedActions.Update | ProposedActions.Create);
 
             var cSet = new ChangeSet(new IChange[] { c1, c2 });
@@ -81,15 +81,15 @@
         public void advisoryBuilder_generateAdvisory_for_non_transient_and_changed_entity()
         {
             var expectedAction = ProposedActions.Update;
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.HasBackwardChanges;
 
             var c1 = A.Fake<IChange>();
-            A.CallTo(() => c1.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.Update | ProposedActions.Create);
 
             var c2 = A.Fake<IChange>();
-            A.CallTo(() => c2.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c2.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c2.GetAdvisedAction(entity)).Returns(ProposedActions.Update | ProposedActions.Create);
 
             var cSet = new ChangeSet(new IChange[] { c1, c2 });
@@ -112,7 +112,7 @@
         public void advisoryBuilder_generateAdvisory_for_strict_isTransient_entity()
         {
             var expectedAction = ProposedActions.Create;
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.IsTransient;
 
             var cSet = new ChangeSet(new IChange[0]);
@@ -134,7 +134,7 @@
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_for_isTransient_and_autoRemove_entity_with_no_changes_should_generate_an_empty_advisory()
         {
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove;
 
             var cSet = new ChangeSet(new IChange[0]);
@@ -155,15 +155,15 @@
         public void advisoryBuilder_generateAdvisory_for_transient_and_disposed_entity()
         {
             var expectedAction = ProposedActions.Dispose;
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.IsTransient | EntityTrackingStates.AutoRemove | EntityTrackingStates.HasBackwardChanges;
 
             var c1 = A.Fake<IChange>();
-            A.CallTo(() => c1.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.Create | ProposedActions.Update);
 
             var c2 = A.Fake<IChange>();
-            A.CallTo(() => c2.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c2.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c2.GetAdvisedAction(entity)).Returns(ProposedActions.Delete | ProposedActions.Dispose);
 
             var cSet = new ChangeSet(new IChange[] { c1, c2 });
@@ -186,15 +186,15 @@
         public void advisoryBuilder_generateAdvisory_for_non_transient_and_deleted_entity()
         {
             var expectedAction = ProposedActions.Delete;
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.HasBackwardChanges;
 
             var c1 = A.Fake<IChange>();
-            A.CallTo(() => c1.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.Create | ProposedActions.Update);
 
             var c2 = A.Fake<IChange>();
-            A.CallTo(() => c2.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c2.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c2.GetAdvisedAction(entity)).Returns(ProposedActions.Delete | ProposedActions.Dispose);
 
             var cSet = new ChangeSet(new IChange[] { c1, c2 });
@@ -217,11 +217,11 @@
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_unsupported_proposedActions_value()
         {
-            var entity = new Object();
+            var entity = new object();
             var entityState = EntityTrackingStates.HasBackwardChanges;
 
             var c1 = A.Fake<IChange>();
-            A.CallTo(() => c1.GetChangedEntities()).Returns(new Object[] { entity });
+            A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
             A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.None);
 
             var cSet = new ChangeSet(new IChange[] { c1 });

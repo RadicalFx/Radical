@@ -1,11 +1,11 @@
 ﻿namespace Radical.Tests.Model
 {
-    using System;
-    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical.ComponentModel;
     using Radical.Model;
+    using SharpTestsEx;
+    using System;
+    using System.Linq;
 
     [TestClass]
     public class EntityViewTests
@@ -15,17 +15,17 @@
         {
             var expected = "Hello World!";
 
-            EntityItemViewValueGetter<Object, string> getter = e =>
+            EntityItemViewValueGetter<object, string> getter = e =>
             {
                 return e.Item.GetCustomValue<string>(e.PropertyName);
             };
 
-            EntityItemViewValueSetter<Object, string> setter = e =>
+            EntityItemViewValueSetter<object, string> setter = e =>
             {
                 e.Item.SetCustomValue(e.PropertyName, e.Value);
             };
 
-            var target = new EntityView<Object>(new[] { new Object() });
+            var target = new EntityView<object>(new[] { new object() });
             target.AddCustomProperty<string>("Foo", getter, setter);
 
             target.First().SetCustomValue("Foo", expected);
@@ -45,7 +45,7 @@
                 return "initial value";
             };
 
-            var target = new EntityView<Object>(new[] { new Object() });
+            var target = new EntityView<object>(new[] { new object() });
             target.AddCustomProperty<string>("Foo", e =>
            {
                return e.Item.GetCustomValue<string>(e.PropertyName);
@@ -70,7 +70,7 @@
                 return expected;
             };
 
-            var target = new EntityView<Object>(new[] { new Object() });
+            var target = new EntityView<object>(new[] { new object() });
             target.AddCustomProperty<string>("Foo", e =>
            {
                return e.Item.GetCustomValue<string>(e.PropertyName);
@@ -87,17 +87,17 @@
         {
             var value = "Hello world!";
 
-            EntityItemViewValueGetter<Object, string> getter = e =>
+            EntityItemViewValueGetter<object, string> getter = e =>
             {
                 return e.Item.GetCustomValue<string>(e.PropertyName);
             };
 
-            EntityItemViewValueSetter<Object, string> setter = e =>
+            EntityItemViewValueSetter<object, string> setter = e =>
             {
                 e.Item.SetCustomValue(e.PropertyName, e.Value);
             };
 
-            var target = new EntityView<Object>(new[] { new Object() });
+            var target = new EntityView<object>(new[] { new object() });
             target.AddCustomProperty<string>("Foo", getter, setter);
 
             var item = target.First();
@@ -119,17 +119,17 @@
             var expectedFirst = "Hello world, from First!";
             var expectedLast = "Hello world, from Last!";
 
-            EntityItemViewValueGetter<Object, string> getter = e =>
+            EntityItemViewValueGetter<object, string> getter = e =>
             {
                 return e.Item.GetCustomValue<string>(e.PropertyName);
             };
 
-            EntityItemViewValueSetter<Object, string> setter = e =>
+            EntityItemViewValueSetter<object, string> setter = e =>
             {
                 e.Item.SetCustomValue(e.PropertyName, e.Value);
             };
 
-            var target = new EntityView<Object>(new[] { new Object(), new Object() });
+            var target = new EntityView<object>(new[] { new object(), new object() });
             target.AddCustomProperty<string>(propertyName, getter, setter);
 
             var firstItem = target.First();

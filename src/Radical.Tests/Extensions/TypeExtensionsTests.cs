@@ -13,7 +13,7 @@
         [TestCategory("TypeExtensions")]
         public void TypeExtensions_is_non_generic_using_same_types_should_return_true()
         {
-            var actual = typeof(Object).Is(typeof(Object));
+            var actual = typeof(object).Is(typeof(object));
             actual.Should().Be.True();
         }
 
@@ -21,7 +21,7 @@
         [TestCategory("TypeExtensions")]
         public void TypeExtensions_is_non_generic_using_valid_types_should_return_true()
         {
-            var actual = typeof(int).Is(typeof(Object));
+            var actual = typeof(int).Is(typeof(object));
             actual.Should().Be.True();
         }
 
@@ -38,7 +38,7 @@
         public void TypeExtensions_getInheritanceChain_using_valid_type_should_return_expected_inheritance_data()
         {
             IEnumerable<Type> chain = Radical.Reflection.TypeExtensions.GetInheritanceChain(typeof(string));
-            chain.Should().Have.SameSequenceAs(new Type[] { typeof(string), typeof(Object) });
+            chain.Should().Have.SameSequenceAs(new Type[] { typeof(string), typeof(object) });
         }
 
         [TestMethod]

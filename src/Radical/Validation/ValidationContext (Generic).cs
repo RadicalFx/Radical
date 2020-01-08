@@ -1,7 +1,5 @@
-﻿using Radical.ComponentModel.Validation;
-using Radical.Linq;
+﻿using Radical.Linq;
 using Radical.Reflection;
-using System;
 using System.ComponentModel;
 
 namespace Radical.Validation
@@ -34,9 +32,9 @@ namespace Radical.Validation
             Ensure.That(validator).Named("validator").IsNotNull();
             Ensure.That(results).Named("results").IsNotNull();
 
-            this.Entity = entity;
-            this.Validator = validator;
-            this.Results = results;
+            Entity = entity;
+            Validator = validator;
+            Results = results;
         }
 
         public ValidationResult Failed(string error)

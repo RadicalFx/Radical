@@ -2,11 +2,11 @@
 
 namespace Radical.Tests.Extensions
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.Linq;
+    using SharpTestsEx;
     using System;
     using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
-    using Radical.Linq;
     using System.Linq;
 
     [TestClass()]
@@ -49,7 +49,7 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void AsReadOnly_null_expects_exception()
         {
-            Radical.Linq.EnumerableExtensions.AsReadOnly<Object>(null);
+            Radical.Linq.EnumerableExtensions.AsReadOnly<object>(null);
         }
 
         [TestMethod()]
@@ -64,18 +64,18 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void iEnumerableExtensions_enumerate_normal_should_invoke_actions()
         {
-            var list = new Object[]
+            var list = new object[]
             {
-                new Object(),
-                new Object(),
-                new Object(),
-                new Object()
+                new object(),
+                new object(),
+                new object(),
+                new object()
             };
 
             int expected = list.Length;
             int actual = 0;
 
-            Action<Object> action = o => { actual++; };
+            Action<object> action = o => { actual++; };
 
             Radical.Linq.EnumerableExtensions.Enumerate(list, action);
 
@@ -93,23 +93,23 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void iEnumerableExtensions_enumerate_null_action_reference_should_raise_ArgumentNullException()
         {
-            Radical.Linq.EnumerableExtensions.Enumerate(new Object[0], null);
+            Radical.Linq.EnumerableExtensions.Enumerate(new object[0], null);
         }
 
         [TestMethod]
         public void iEnumerableExtensions_enumerate_normal_should_return_valid_list_reference()
         {
-            var expected = new Object[]
+            var expected = new object[]
             {
-                new Object(),
-                new Object(),
-                new Object(),
-                new Object()
+                new object(),
+                new object(),
+                new object(),
+                new object()
             };
 
             var actual = Radical.Linq.EnumerableExtensions.Enumerate(expected, o => { });
 
-            System.Linq.Enumerable.OfType<Object>(actual).Should().Have.SameSequenceAs(expected);
+            System.Linq.Enumerable.OfType<object>(actual).Should().Have.SameSequenceAs(expected);
         }
 
         [TestMethod]
@@ -155,7 +155,7 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void enumerableExtensions_alternateWith_using_null_list_should_throw_ArgumentNullException()
         {
-            var x = Radical.Linq.EnumerableExtensions.AlternateWith<Object>(null, null);
+            var x = Radical.Linq.EnumerableExtensions.AlternateWith<object>(null, null);
             x.ToList();
         }
 
@@ -221,7 +221,7 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_dictionary_keys()
         {
-            var source = new Dictionary<Object, Object>();
+            var source = new Dictionary<object, object>();
             var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source.Keys);
 
             Assert.AreNotEqual(source.Keys, actual);
@@ -231,7 +231,7 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_dictionary_values()
         {
-            var source = new Dictionary<Object, Object>();
+            var source = new Dictionary<object, object>();
             var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source.Values);
 
             Assert.AreNotEqual(source.Values, actual);
@@ -243,7 +243,7 @@ namespace Radical.Tests.Extensions
     {
         public Node()
         {
-            this.Nodes = new NodeList(this);
+            Nodes = new NodeList(this);
         }
 
         public string Id { get; set; }
@@ -265,7 +265,7 @@ namespace Radical.Tests.Extensions
         protected override void InsertItem(int index, Node item)
         {
             base.InsertItem(index, item);
-            item.Parent = this.parent;
+            item.Parent = parent;
         }
     }
 }

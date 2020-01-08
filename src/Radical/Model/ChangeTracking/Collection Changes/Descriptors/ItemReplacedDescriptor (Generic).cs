@@ -11,7 +11,7 @@
         public ItemReplacedDescriptor(T newItem, T replacedItem, int index)
             : base(newItem, index)
         {
-            this.ReplacedItem = replacedItem;
+            ReplacedItem = replacedItem;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@
         /// <value>The new item.</value>
         public T NewItem
         {
-            get { return this.Item; }
+            get { return Item; }
         }
     }
 }

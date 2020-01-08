@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel;
 using SharpTestsEx;
 
@@ -13,7 +12,7 @@ namespace Radical.Tests
         {
             var cType = CollectionChangeType.Reset;
 
-            var target = new CollectionChangedEventArgs<Object>(cType);
+            var target = new CollectionChangedEventArgs<object>(cType);
 
             target.ChangeType.Should().Be.EqualTo(cType);
             target.Index.Should().Be.EqualTo(-1);
@@ -27,7 +26,7 @@ namespace Radical.Tests
             var cType = CollectionChangeType.Reset;
             var index = 10;
 
-            var target = new CollectionChangedEventArgs<Object>(cType, index);
+            var target = new CollectionChangedEventArgs<object>(cType, index);
 
             target.ChangeType.Should().Be.EqualTo(cType);
             target.Index.Should().Be.EqualTo(index);
@@ -38,12 +37,12 @@ namespace Radical.Tests
         [TestMethod]
         public void collectionChangedEventArgs_ctor_changeType_index_oldIndex_item_should_set_default_values()
         {
-            var item = new Object();
+            var item = new object();
             var cType = CollectionChangeType.ItemMoved;
             var index = 10;
             var oldIndex = 1;
 
-            var target = new CollectionChangedEventArgs<Object>(cType, index, oldIndex, item);
+            var target = new CollectionChangedEventArgs<object>(cType, index, oldIndex, item);
 
             target.ChangeType.Should().Be.EqualTo(cType);
             target.Index.Should().Be.EqualTo(index);

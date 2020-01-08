@@ -1,21 +1,19 @@
-﻿using System;
-
-namespace Radical.Helpers
+﻿namespace Radical.Helpers
 {
     /// <summary>
     /// An helper class to generate hash codes based on a value set.
     /// </summary>
     public class HashCodeBuilder
     {
-        Int64 combinedHashCode;
+        long combinedHashCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HashCodeBuilder"/> class.
         /// </summary>
         /// <param name="initialHashCode">The initial hash code.</param>
-        public HashCodeBuilder(Int64 initialHashCode)
+        public HashCodeBuilder(long initialHashCode)
         {
-            this.combinedHashCode = initialHashCode;
+            combinedHashCode = initialHashCode;
         }
 
         /// <summary>
@@ -25,7 +23,7 @@ namespace Radical.Helpers
         public void AddObject(object value)
         {
             var h = value.GetHashCode();
-            this.combinedHashCode = ((this.combinedHashCode << 5) + this.combinedHashCode) ^ h;
+            combinedHashCode = ((combinedHashCode << 5) + combinedHashCode) ^ h;
         }
 
         /// <summary>
@@ -34,16 +32,16 @@ namespace Radical.Helpers
         /// <value>The combined hash code.</value>
         public int CombinedHash32
         {
-            get { return this.combinedHashCode.GetHashCode(); }
+            get { return combinedHashCode.GetHashCode(); }
         }
 
         /// <summary>
         /// Gets the combined hash code.
         /// </summary>
         /// <value>The combined hash code.</value>
-        public Int64 CombinedHash
+        public long CombinedHash
         {
-            get { return this.combinedHashCode; }
+            get { return combinedHashCode; }
         }
     }
 }

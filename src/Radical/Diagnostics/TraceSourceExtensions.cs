@@ -10,7 +10,7 @@ namespace Radical.Diagnostics
             source.TraceEvent(TraceEventType.Information, eventId, message);
         }
 
-        public static void Information(this TraceSource source, int eventId, string format, params Object[] args)
+        public static void Information(this TraceSource source, int eventId, string format, params object[] args)
         {
             source.TraceEvent(TraceEventType.Information, eventId, format, args);
         }
@@ -20,7 +20,7 @@ namespace Radical.Diagnostics
             source.TraceEvent(TraceEventType.Information, 0, message);
         }
 
-        public static void Information(this TraceSource source, string format, params Object[] args)
+        public static void Information(this TraceSource source, string format, params object[] args)
         {
             source.TraceEvent(TraceEventType.Information, 0, format, args);
         }
@@ -30,7 +30,7 @@ namespace Radical.Diagnostics
             source.TraceEvent(TraceEventType.Verbose, eventId, message);
         }
 
-        public static void Debug(this TraceSource source, int eventId, string format, params Object[] args)
+        public static void Debug(this TraceSource source, int eventId, string format, params object[] args)
         {
             source.TraceEvent(TraceEventType.Verbose, eventId, format, args);
         }
@@ -40,12 +40,12 @@ namespace Radical.Diagnostics
             source.TraceEvent(TraceEventType.Verbose, 0, message);
         }
 
-        public static void Debug(this TraceSource source, string format, params Object[] args)
+        public static void Debug(this TraceSource source, string format, params object[] args)
         {
             source.TraceEvent(TraceEventType.Verbose, 0, format, args);
         }
 
-        public static void Debug(this TraceSource source, string format, Func<Object[]> args)
+        public static void Debug(this TraceSource source, string format, Func<object[]> args)
         {
             if (source.Switch.ShouldTrace(TraceEventType.Error))
             {
@@ -58,7 +58,7 @@ namespace Radical.Diagnostics
             source.TraceEvent(TraceEventType.Warning, 0, message);
         }
 
-        public static void Warning(this TraceSource source, string format, params Object[] args)
+        public static void Warning(this TraceSource source, string format, params object[] args)
         {
             source.TraceEvent(TraceEventType.Warning, 0, format, args);
         }
@@ -68,7 +68,7 @@ namespace Radical.Diagnostics
             source.TraceEvent(TraceEventType.Error, 0, message);
         }
 
-        public static void Error(this TraceSource source, string format, params Object[] args)
+        public static void Error(this TraceSource source, string format, params object[] args)
         {
             source.TraceEvent(TraceEventType.Error, 0, format, args);
         }

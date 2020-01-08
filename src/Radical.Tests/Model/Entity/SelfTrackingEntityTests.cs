@@ -13,56 +13,56 @@ namespace Radical.Tests.Model.Entity
     {
         public MockEntity()
         {
-            this.OnInitialize();
+            OnInitialize();
         }
 
         public MockEntity(string initialFirstNameValue)
         {
-            this.SetInitialPropertyValue(() => this.FirstName, initialFirstNameValue);
+            SetInitialPropertyValue(() => FirstName, initialFirstNameValue);
 
-            this.OnInitialize();
+            OnInitialize();
         }
 
         void OnInitialize()
         {
-            var metadata = new PropertyMetadata<string>(this, () => this.MainProperty);
-            metadata.AddCascadeChangeNotifications(() => this.SubProperty);
+            var metadata = new PropertyMetadata<string>(this, () => MainProperty);
+            metadata.AddCascadeChangeNotifications(() => SubProperty);
 
-            this.SetPropertyMetadata(metadata);
+            SetPropertyMetadata(metadata);
         }
 
         public void SetInitialValue<T>(Expression<Func<T>> property, T value)
         {
-            this.SetInitialPropertyValue(property, value);
+            SetInitialPropertyValue(property, value);
         }
 
         public string FirstName
         {
-            get { return this.GetPropertyValue(() => this.FirstName); }
-            set { this.SetPropertyValue(() => this.FirstName, value); }
+            get { return GetPropertyValue(() => FirstName); }
+            set { SetPropertyValue(() => FirstName, value); }
         }
 
         public string LastName
         {
-            get { return this.GetPropertyValue(() => this.LastName); }
-            set { this.SetPropertyValue(() => this.LastName, value); }
+            get { return GetPropertyValue(() => LastName); }
+            set { SetPropertyValue(() => LastName, value); }
         }
 
         public int Number
         {
-            get { return this.GetPropertyValue(() => this.Number); }
-            set { this.SetPropertyValue(() => this.Number, value); }
+            get { return GetPropertyValue(() => Number); }
+            set { SetPropertyValue(() => Number, value); }
         }
 
         public string MainProperty
         {
-            get { return this.GetPropertyValue(() => this.MainProperty); }
-            set { this.SetPropertyValue(() => this.MainProperty, value); }
+            get { return GetPropertyValue(() => MainProperty); }
+            set { SetPropertyValue(() => MainProperty, value); }
         }
 
         public string SubProperty
         {
-            get { return this.GetPropertyValue(() => this.SubProperty); }
+            get { return GetPropertyValue(() => SubProperty); }
         }
     }
 
@@ -70,15 +70,15 @@ namespace Radical.Tests.Model.Entity
     {
         public Person(DateTime bornDate)
         {
-            var metadata = new PropertyMetadata<DateTime>(this, () => this.BornDate) { DefaultValue = bornDate };
-            metadata.AddCascadeChangeNotifications(() => this.Age);
-            this.SetPropertyMetadata(metadata);
+            var metadata = new PropertyMetadata<DateTime>(this, () => BornDate) { DefaultValue = bornDate };
+            metadata.AddCascadeChangeNotifications(() => Age);
+            SetPropertyMetadata(metadata);
         }
 
         public DateTime BornDate
         {
-            get { return this.GetPropertyValue(() => this.BornDate); }
-            set { this.SetPropertyValue(() => this.BornDate, value); }
+            get { return GetPropertyValue(() => BornDate); }
+            set { SetPropertyValue(() => BornDate, value); }
         }
 
         public int Age

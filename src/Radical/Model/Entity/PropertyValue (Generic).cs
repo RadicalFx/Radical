@@ -12,7 +12,7 @@
         /// <param name="value">The value.</param>
         public PropertyValue(T value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         /// <summary>
@@ -21,7 +21,7 @@
         /// <returns>The stored value.</returns>
         public override object GetValue()
         {
-            return this.Value;
+            return Value;
         }
 
         /// <summary>

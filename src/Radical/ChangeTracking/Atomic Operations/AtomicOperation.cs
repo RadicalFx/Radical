@@ -9,19 +9,19 @@ namespace Radical.ChangeTracking
 
         void OnCompleted(AtomicChange change)
         {
-            if (this.completed != null)
+            if (completed != null)
             {
-                this.completed(change);
+                completed(change);
             }
 
-            this.isCompleted = true;
+            isCompleted = true;
         }
 
         void OnDisposed()
         {
-            if (!this.isCompleted && this.disposed != null)
+            if (!isCompleted && disposed != null)
             {
-                this.disposed();
+                disposed();
             }
         }
 
@@ -41,26 +41,26 @@ namespace Radical.ChangeTracking
             this.change.Add(change, behavior);
         }
 
-        public void RegisterTransient(Object entity, bool autoRemove)
+        public void RegisterTransient(object entity, bool autoRemove)
         {
-            this.change.RegisterTransient(entity, autoRemove);
+            change.RegisterTransient(entity, autoRemove);
         }
 
         public void Complete()
         {
-            this.OnCompleted(this.change);
+            OnCompleted(change);
         }
 
         public void Dispose()
         {
-            if (!this.isCompleted)
+            if (!isCompleted)
             {
-                this.change.Reject(RejectReason.RejectChanges);
+                change.Reject(RejectReason.RejectChanges);
             }
 
             //clear changes list if any
-            this.change = null;
-            this.OnDisposed();
+            change = null;
+            OnDisposed();
         }
     }
 }

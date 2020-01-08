@@ -67,7 +67,7 @@ namespace Radical.ComponentModel.ChangeTracking
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
         /// <exception cref="ArgumentException">If thew change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
-        void RegisterTransient(Object entity);
+        void RegisterTransient(object entity);
 
         /// <summary>
         /// Registers the supplied entity as a new object.
@@ -79,7 +79,7 @@ namespace Radical.ComponentModel.ChangeTracking
         /// or an Undo that removes the last IChange of the object, is called the object then is automatically 
         /// removed from the list of the new objects.</remarks>
         /// <exception cref="ArgumentException">If the change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
-        void RegisterTransient(Object entity, bool autoRemove);
+        void RegisterTransient(object entity, bool autoRemove);
 
         /// <summary>
         /// Unregisters the supplied entity from the transient objects 
@@ -87,7 +87,7 @@ namespace Radical.ComponentModel.ChangeTracking
         /// </summary>
         /// <param name="entity">The entity to unregister.</param>
         /// <exception cref="ArgumentOutOfRangeException">If the supplied entity is not in <c>IsTransient</c> state an ArgumentException is raised.</exception>
-        void UnregisterTransient(Object entity);
+        void UnregisterTransient(object entity);
 
         /// <summary>
         /// Gets a value indicating whether this instance has transient entities.
@@ -102,21 +102,21 @@ namespace Radical.ComponentModel.ChangeTracking
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>A set of values from the <see cref="EntityTrackingStates"/> enumeration.</returns>
-        EntityTrackingStates GetEntityState(Object entity);
+        EntityTrackingStates GetEntityState(object entity);
 
         /// <summary>
         /// Gets all the entities tracked by this service instance.
         /// </summary>
         /// <returns>A enumerable list of tracked entities.</returns>
-        IEnumerable<Object> GetEntities();
+        IEnumerable<object> GetEntities();
 
         /// <summary>
         /// Gets a list of entities based on a filter.
         /// </summary>
-        /// <param name="sateFilter">The sate filter to use to search entities.</param>
+        /// <param name="stateFilter">The sate filter to use to search entities.</param>
         /// <param name="exactMatch">if set to <c>true</c> the search is performed using an exact match behavior.</param>
         /// <returns>An enumerable list of entities that matches the filter.</returns>
-        IEnumerable<Object> GetEntities(EntityTrackingStates sateFilter, bool exactMatch);
+        IEnumerable<object> GetEntities(EntityTrackingStates stateFilter, bool exactMatch);
 
         /// <summary>
         /// Gets a value indicating whether this instance can undo the last change.
@@ -154,9 +154,9 @@ namespace Radical.ComponentModel.ChangeTracking
         /// this IChangeTrackingService filtered by the
         /// supplied IChangeSetBuilder.
         /// </summary>
-        /// <param name="builder">The IChangeSetBuilder.</param>
+        /// <param name="filter">The IChangeSetBuilder.</param>
         /// <returns></returns>
-        IChangeSet GetChangeSet(IChangeSetFilter builder);
+        IChangeSet GetChangeSet(IChangeSetFilter filter);
 
         /// <summary>
         /// Adds a new change definition to this IChangeTrackingService.

@@ -1,9 +1,9 @@
 ﻿namespace Radical.Tests.Helpers
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.DataBinding;
     using Radical;
+    using Radical.DataBinding;
+    using System;
 
     [TestClass()]
     public class EnumBinderTest
@@ -63,7 +63,7 @@
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>(attribute, value);
 
-            Assert.AreEqual<Object>(value, target.Value);
+            Assert.AreEqual<object>(value, target.Value);
         }
 
         [TestMethod()]
@@ -133,7 +133,7 @@
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>(description, value);
 
-            Assert.AreEqual<Object>(value, target.Value);
+            Assert.AreEqual<object>(value, target.Value);
         }
 
         [TestMethod()]
@@ -143,7 +143,7 @@
             var value = TestEnum.Value2;
             var target = new EnumBinder<TestEnum>(description, value);
 
-            Assert.AreEqual<Object>(-1, target.Index);
+            Assert.AreEqual<object>(-1, target.Index);
         }
 
         [TestMethod()]
@@ -165,7 +165,7 @@
             var index = 0;
             var target = new EnumBinder<TestEnum>(description, value, index);
 
-            Assert.AreEqual<Object>(value, target.Value);
+            Assert.AreEqual<object>(value, target.Value);
         }
 
         [TestMethod()]
@@ -176,7 +176,7 @@
             var index = 0;
             var target = new EnumBinder<TestEnum>(description, value, index);
 
-            Assert.AreEqual<Object>(index, target.Index);
+            Assert.AreEqual<object>(index, target.Index);
         }
     }
 }

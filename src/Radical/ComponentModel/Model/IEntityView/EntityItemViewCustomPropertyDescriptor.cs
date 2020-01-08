@@ -39,9 +39,9 @@ namespace Radical.ComponentModel
         /// </returns>
         public new TValue GetDefaultValue()
         {
-            if (this.DafaultValueInterceptor != null)
+            if (DafaultValueInterceptor != null)
             {
-                return this.DafaultValueInterceptor();
+                return DafaultValueInterceptor();
             }
 
             return default(TValue);
@@ -68,14 +68,14 @@ namespace Radical.ComponentModel
         public EntityItemViewCustomPropertyDescriptor(string customPropertyName, EntityItemViewValueGetter<T, TValue> getter, EntityItemViewValueSetter<T, TValue> setter)
             : this(customPropertyName)
         {
-            this.ValueGetter = getter;
-            this.ValueSetter = setter;
+            ValueGetter = getter;
+            ValueSetter = setter;
         }
 
         public EntityItemViewCustomPropertyDescriptor(string customDisplayName)
             : base()
         {
-            this._customDisplayName = customDisplayName;
+            _customDisplayName = customDisplayName;
         }
 
         string _customDisplayName = null;
@@ -87,12 +87,12 @@ namespace Radical.ComponentModel
         /// <returns>The name to display for the member.</returns>
         public override string DisplayName
         {
-            get { return this.Name; }
+            get { return Name; }
         }
 
         public override string Name
         {
-            get { return this._customDisplayName; }
+            get { return _customDisplayName; }
         }
 
         /// <summary>
@@ -112,21 +112,21 @@ namespace Radical.ComponentModel
         /// <returns>true if the property is read-only; otherwise, false.</returns>
         public override bool IsReadOnly
         {
-            get { return this.ValueSetter == null; }
+            get { return ValueSetter == null; }
         }
 
         protected override object GetValueCore(IEntityItemView<T> component)
         {
-            var args = new EntityItemViewValueGetterArgs<T, TValue>(component, this.Name);
-            var returnValue = this.ValueGetter(args);
+            var args = new EntityItemViewValueGetterArgs<T, TValue>(component, Name);
+            var returnValue = ValueGetter(args);
 
             return returnValue;
         }
 
         protected override void SetValueCore(IEntityItemView<T> component, object value)
         {
-            var args = new EntityItemViewValueSetterArgs<T, TValue>(component, this.Name, (TValue)value);
-            this.ValueSetter(args);
+            var args = new EntityItemViewValueSetterArgs<T, TValue>(component, Name, (TValue)value);
+            ValueSetter(args);
         }
     }
 }

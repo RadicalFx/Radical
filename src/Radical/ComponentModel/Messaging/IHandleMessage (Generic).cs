@@ -8,7 +8,7 @@
     /// handling.
     /// </summary>
     [Contract]
-    public interface IHandleMessage<T> : IHandleMessage
+    public interface IHandleMessage<in T> : IHandleMessage
     {
         /// <summary>
         /// Handles the specified message.

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
-using Radical.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Radical.ComponentModel.Messaging;
 using Radical.Messaging;
 using Radical.Threading;
-using Radical.ComponentModel.Messaging;
-using System.Threading.Tasks;
+using SharpTestsEx;
+using System;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Radical.Tests.Windows.Messaging
 {
@@ -40,8 +37,8 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var target = new MessageBroker(dispatcher);
 
-            var subscriber1 = new Object();
-            var subscriber2 = new Object();
+            var subscriber1 = new object();
+            var subscriber2 = new object();
 
             target.Subscribe<PocoTestMessage>(subscriber1, (s, msg) => { actual++; });
             target.Subscribe<PocoTestMessage>(subscriber1, (s, msg) => { actual++; });
@@ -66,7 +63,7 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var target = new MessageBroker(dispatcher);
 
-            var subscriber = new Object();
+            var subscriber = new object();
 
             target.Subscribe<PocoTestMessage>(subscriber, (s, msg) => { actual++; });
             target.Subscribe<AnotherPocoTestMessage>(subscriber, (s, msg) => { actual++; });
@@ -97,7 +94,7 @@ namespace Radical.Tests.Windows.Messaging
                var dispatcher = new NullDispatcher();
                var broker = new MessageBroker(dispatcher);
 
-               broker.Subscribe<PocoTestMessage>(this, (Action<Object, PocoTestMessage>)null);
+               broker.Subscribe<PocoTestMessage>(this, (Action<object, PocoTestMessage>)null);
            })
             .Should().Throw<ArgumentNullException>();
         }
@@ -188,22 +185,22 @@ namespace Radical.Tests.Windows.Messaging
                {
                    try
                    {
-                       this.test();
+                       test();
                    }
                    catch (Exception e)
                    {
                        Console.WriteLine(e);
-                       this.ex = e;
+                       ex = e;
                    }
                });
 
-                worker.SetApartmentState(this.state);
+                worker.SetApartmentState(state);
                 worker.Start();
                 worker.Join();
 
-                if (this.ex != null)
+                if (ex != null)
                 {
-                    throw this.ex;
+                    throw ex;
                 }
             }
         }
@@ -217,7 +214,7 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var broker = new MessageBroker(dispatcher);
 
-            broker.Subscribe<Object>(this, (s, msg) => actual = true);
+            broker.Subscribe<object>(this, (s, msg) => actual = true);
             broker.Dispatch(this, new PocoTestMessage());
 
             actual.Should().Be.True();
@@ -232,7 +229,7 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var broker = new MessageBroker(dispatcher);
 
-            broker.Subscribe<Object>(this, (s, msg) => actual++);
+            broker.Subscribe<object>(this, (s, msg) => actual++);
             broker.Dispatch(this, new PocoTestMessage());
             broker.Dispatch(this, new AnotherPocoTestMessage());
 

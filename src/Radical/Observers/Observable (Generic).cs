@@ -19,9 +19,9 @@ namespace Radical
         /// </summary>
         protected virtual void OnPropertyChanged()
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs("Value"));
+                PropertyChanged(this, new PropertyChangedEventArgs("Value"));
             }
         }
 
@@ -39,7 +39,7 @@ namespace Radical
         /// <param name="value">The value.</param>
         public Observable(T value)
         {
-            this._value = value;
+            _value = value;
         }
 
         private T _value;
@@ -50,13 +50,13 @@ namespace Radical
         /// <value>The value.</value>
         public virtual T Value
         {
-            get { return this._value; }
+            get { return _value; }
             set
             {
-                if (!Object.Equals(value, this.Value))
+                if (!Object.Equals(value, Value))
                 {
-                    this._value = value;
-                    this.OnPropertyChanged();
+                    _value = value;
+                    OnPropertyChanged();
                 }
             }
         }

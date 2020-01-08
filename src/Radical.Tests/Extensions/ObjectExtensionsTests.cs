@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpTestsEx;
-using Radical;
 
 namespace Radical.Tests.Extensions
 {

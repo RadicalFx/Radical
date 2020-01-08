@@ -11,7 +11,7 @@
         public ItemMovedDescriptor(T item, int newIndex, int oldIndex)
             : base(item, newIndex)
         {
-            this.OldIndex = oldIndex;
+            OldIndex = oldIndex;
         }
 
         /// <summary>
@@ -20,7 +20,7 @@
         /// <value>The new index.</value>
         public int NewIndex
         {
-            get { return this.Index; }
+            get { return Index; }
         }
 
         /// <summary>

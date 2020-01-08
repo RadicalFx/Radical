@@ -18,16 +18,16 @@ namespace Radical.ComponentModel.ChangeTracking
         /// <param name="source">The source.</param>
         public ChangeEventArgs(object entity, T cachedValue, IChange source)
         {
-            this.Entity = entity ?? throw new ArgumentNullException("entity");
-            this.CachedValue = cachedValue;
-            this.Source = source ?? throw new ArgumentNullException("source");
+            Entity = entity ?? throw new ArgumentNullException("entity");
+            CachedValue = cachedValue;
+            Source = source ?? throw new ArgumentNullException("source");
         }
 
         /// <summary>
         /// Gets the changed entity.
         /// </summary>
         /// <value>The entity.</value>
-        public Object Entity
+        public object Entity
         {
             get;
             private set;

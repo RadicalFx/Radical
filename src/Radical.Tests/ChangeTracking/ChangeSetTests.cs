@@ -1,11 +1,11 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using FakeItEasy;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using SharpTestsEx;
+    using System;
 
     [TestClass]
     public class ChangeSetTests

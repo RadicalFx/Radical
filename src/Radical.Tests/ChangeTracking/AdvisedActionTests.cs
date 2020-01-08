@@ -1,11 +1,11 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.ChangeTracking;
-    using SharpTestsEx;
     using Radical;
+    using Radical.ChangeTracking;
+    using Radical.ComponentModel.ChangeTracking;
+    using SharpTestsEx;
+    using System;
 
     [TestClass]
     public class AdvisedActionTests
@@ -35,7 +35,7 @@
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_not_supported_proposed_action()
         {
-            AdvisedAction actual = new AdvisedAction(new Object(), ProposedActions.None);
+            AdvisedAction actual = new AdvisedAction(new object(), ProposedActions.None);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_invalid_proposed_action()
         {
-            AdvisedAction actual = new AdvisedAction(new Object(), (ProposedActions)1000);
+            AdvisedAction actual = new AdvisedAction(new object(), (ProposedActions)1000);
         }
     }
 }

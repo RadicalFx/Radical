@@ -1,9 +1,9 @@
 ﻿namespace Radical.Tests.Helpers
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical.Helpers;
+    using SharpTestsEx;
+    using System;
 
     [TestClass]
     public class CommandLineTests

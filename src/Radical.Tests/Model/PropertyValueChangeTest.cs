@@ -1,10 +1,10 @@
 ﻿//extern alias tpx;
 
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Radical.ComponentModel.ChangeTracking;
 using Radical.ChangeTracking.Specialized;
+using Radical.ComponentModel.ChangeTracking;
 using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.Model
 {
@@ -13,7 +13,7 @@ namespace Radical.Tests.Model
     {
         protected override IChange<T> Mock<T>(object owner, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
         {
-            return this.MockPropertyValue<T>(owner, value, rejectCallback, commitCallback, description);
+            return MockPropertyValue<T>(owner, value, rejectCallback, commitCallback, description);
         }
 
         protected virtual PropertyValueChange<T> MockPropertyValue<T>(object owner, T value, RejectCallback<T> rejectCallback)
@@ -34,9 +34,9 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void propertyValueChange_ctor_owner_value_rejectCallback_normal_should_set_expected_values()
         {
-            var expected = new Object();
+            var expected = new object();
 
-            var target = this.MockPropertyValue(expected, "Foo", cv => { });
+            var target = MockPropertyValue(expected, "Foo", cv => { });
             var actual = target.Owner;
 
             actual.Should().Be.EqualTo(expected);
@@ -48,9 +48,9 @@ namespace Radical.Tests.Model
         {
             var expected = "Foo";
             ChangeRejectedEventArgs<string> actual = null;
-            var owner = new Object();
+            var owner = new object();
 
-            var target = this.MockPropertyValue(owner, expected, cv => { actual = cv; });
+            var target = MockPropertyValue(owner, expected, cv => { actual = cv; });
             target.Reject(RejectReason.RejectChanges);
 
             actual.Should().Not.Be.Null();
@@ -64,9 +64,9 @@ namespace Radical.Tests.Model
         public void propertyValueChange_getAdvisedAction_should_return_expected_values()
         {
             var expected = ProposedActions.Create | ProposedActions.Update;
-            var owner = new Object();
+            var owner = new object();
 
-            var target = this.MockPropertyValue(owner, "Foo", cv => { });
+            var target = MockPropertyValue(owner, "Foo", cv => { });
             var actual = target.GetAdvisedAction(owner);
 
             actual.Should().Be.EqualTo(expected);
@@ -77,22 +77,22 @@ namespace Radical.Tests.Model
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void propertyVaueChange_getAdvisedAction_using_invalid_owner_should_raise_ArgumentOutOfRangeException()
         {
-            var target = this.MockPropertyValue(new Object(), "Foo", cv => { });
-            target.GetAdvisedAction(new Object());
+            var target = MockPropertyValue(new object(), "Foo", cv => { });
+            target.GetAdvisedAction(new object());
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void propertyVaueChange_getAdvisedAction_using_invalid_owner_should_raise_ArgumentNullException()
         {
-            var target = this.MockPropertyValue(new Object(), "Foo", cv => { });
+            var target = MockPropertyValue(new object(), "Foo", cv => { });
             target.GetAdvisedAction(null);
         }
 
         [TestMethod]
         public void propertyValueChange_clone_normal_should_return_cloned_value()
         {
-            var target = this.MockPropertyValue(new Object(), "Foo", cv => { });
+            var target = MockPropertyValue(new object(), "Foo", cv => { });
             var actual = target.Clone();
 
             actual.Should().Not.Be.EqualTo(target);
@@ -104,9 +104,9 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void propertyValueChange_ctor_owner_value_rejectCallback_description_normal_should_set_expected_values()
         {
-            var expected = new Object();
+            var expected = new object();
 
-            var target = this.MockPropertyValue(expected, "Foo", cv => { }, "description");
+            var target = MockPropertyValue(expected, "Foo", cv => { }, "description");
             var actual = target.Owner;
 
             actual.Should().Be.EqualTo(expected);

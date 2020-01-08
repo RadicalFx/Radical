@@ -14,7 +14,7 @@ namespace Radical.ComponentModel
         /// Gets the underlying entity item.
         /// </summary>
         /// <value>The underlying entity item.</value>
-        System.Object EntityItem { get; }
+        object EntityItem { get; }
 
         /// <summary>
         /// Deletes this IEntityItemView and removes if from the view and from the underlying collection.

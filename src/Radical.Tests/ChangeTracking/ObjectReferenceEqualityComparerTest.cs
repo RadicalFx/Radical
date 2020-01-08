@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpTestsEx;
-using Radical;
+using System.Collections.Generic;
 
 namespace Radical.Tests.ChangeTracking
 {
@@ -13,7 +11,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void Instance_is_not_null()
         {
-            IEqualityComparer<Object> actual = ObjectReferenceEqualityComparer.Instance;
+            IEqualityComparer<object> actual = ObjectReferenceEqualityComparer.Instance;
 
             actual.Should().Not.Be.Null();
         }
@@ -22,8 +20,8 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void Instance_is_singleton()
         {
-            IEqualityComparer<Object> expected = ObjectReferenceEqualityComparer.Instance;
-            IEqualityComparer<Object> actual = ObjectReferenceEqualityComparer.Instance;
+            IEqualityComparer<object> expected = ObjectReferenceEqualityComparer.Instance;
+            IEqualityComparer<object> actual = ObjectReferenceEqualityComparer.Instance;
 
             actual.Should().Be.EqualTo(expected);
         }

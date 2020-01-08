@@ -102,7 +102,7 @@ namespace Radical.Model
 
         #region INotifyPropertyChanged Members
 
-        private static readonly Object propertyChangedEventKey = new Object();
+        private static readonly object propertyChangedEventKey = new object();
         public event PropertyChangedEventHandler PropertyChanged
         {
             add { Events.AddHandler(propertyChangedEventKey, value); }

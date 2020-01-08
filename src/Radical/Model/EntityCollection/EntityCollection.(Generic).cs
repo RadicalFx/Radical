@@ -17,10 +17,7 @@ namespace Radical.Model
         IDeserializationCallback,
         IEntityCollection<T>,
         IList,
-        ICollection,
         IComponent,
-        IServiceProvider,
-        IDisposable,
         ISite
     {
 
@@ -35,13 +32,13 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this._events == null)
+                EnsureNotDisposed();
+                if (_events == null)
                 {
-                    this._events = new EventHandlerList();
+                    _events = new EventHandlerList();
                 }
 
-                return this._events;
+                return _events;
             }
         }
 
@@ -55,13 +52,13 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this._storage == null)
+                EnsureNotDisposed();
+                if (_storage == null)
                 {
-                    this._storage = new List<T>();
+                    _storage = new List<T>();
                 }
 
-                return this._storage;
+                return _storage;
             }
         }
 
@@ -72,8 +69,8 @@ namespace Radical.Model
         /// </summary>
         public virtual void BeginInit()
         {
-            this.EnsureNotDisposed();
-            this.IsInitializing = true;
+            EnsureNotDisposed();
+            IsInitializing = true;
         }
 
         /// <summary>
@@ -95,7 +92,7 @@ namespace Radical.Model
         /// </summary>
         public void EndInit()
         {
-            this.EndInit(true);
+            EndInit(true);
         }
 
         /// <summary>
@@ -105,16 +102,16 @@ namespace Radical.Model
         /// <param name="notify">if set to <c>true</c> raises the <see cref="CollectionChanged"/> event.</param>
         public virtual void EndInit(bool notify)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
 
-            if (this.IsInitializing)
+            if (IsInitializing)
             {
-                this.IsInitializing = false;
+                IsInitializing = false;
 
                 if (notify)
                 {
                     //Notifichiamo che la collection è cambiata
-                    this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset, -1));
+                    OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset, -1));
                 }
             }
         }
@@ -125,8 +122,8 @@ namespace Radical.Model
         /// </summary>
         public event EventHandler<CollectionChangedEventArgs<T>> CollectionChanged
         {
-            add { this.Events.AddHandler(collectionChangedEventKey, value); }
-            remove { this.Events.RemoveHandler(collectionChangedEventKey, value); }
+            add { Events.AddHandler(collectionChangedEventKey, value); }
+            remove { Events.RemoveHandler(collectionChangedEventKey, value); }
         }
 
         /// <summary>
@@ -135,10 +132,10 @@ namespace Radical.Model
         /// <param name="e">The <see cref="Radical.ComponentModel.CollectionChangedEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(CollectionChangedEventArgs<T> e)
         {
-            this.EnsureNotDisposed();
-            if (!this.IsInitializing)
+            EnsureNotDisposed();
+            if (!IsInitializing)
             {
-                EventHandler<CollectionChangedEventArgs<T>> handler = this.Events[collectionChangedEventKey] as EventHandler<CollectionChangedEventArgs<T>>;
+                EventHandler<CollectionChangedEventArgs<T>> handler = Events[collectionChangedEventKey] as EventHandler<CollectionChangedEventArgs<T>>;
                 if (handler != null)
                 {
                     handler(this, e);
@@ -151,7 +148,7 @@ namespace Radical.Model
         /// </summary>
         public EntityCollection()
         {
-            this.OnInitialize();
+            OnInitialize();
         }
 
         /// <summary>
@@ -161,7 +158,7 @@ namespace Radical.Model
         public EntityCollection(int capacity)
             : this()
         {
-            this._storage = new List<T>(capacity);
+            _storage = new List<T>(capacity);
         }
 
         /// <summary>
@@ -171,7 +168,7 @@ namespace Radical.Model
         public EntityCollection(IEnumerable<T> collection)
             : this()
         {
-            this.AddRange(collection);
+            AddRange(collection);
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Radical.Model
         public EntityCollection(IList<T> storage)
             : this()
         {
-            this._storage = storage;
+            _storage = storage;
         }
 
         /// <summary>
@@ -201,7 +198,7 @@ namespace Radical.Model
         /// <param name="item">The item.</param>
         protected virtual void WireListItem(T item)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             INotifyPropertyChanged inpc = item as INotifyPropertyChanged;
             if (inpc != null)
             {
@@ -211,13 +208,13 @@ namespace Radical.Model
 
         void OnListItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.EnsureNotDisposed();
-            if (this.Settings.NotifyListItemPropertyChanged)
+            EnsureNotDisposed();
+            if (Settings.NotifyListItemPropertyChanged)
             {
                 T item = (T)sender;
-                int index = this.IndexOf(item);
+                int index = IndexOf(item);
 
-                this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemChanged, index, -1, item));
+                OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemChanged, index, -1, item));
             }
         }
 
@@ -228,7 +225,7 @@ namespace Radical.Model
         /// <param name="item">The item.</param>
         protected virtual void UnwireListItem(T item)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             INotifyPropertyChanged inpc = item as INotifyPropertyChanged;
             if (inpc != null)
             {
@@ -242,7 +239,7 @@ namespace Radical.Model
         /// <param name="e">The <see cref="Radical.Model.SetValueAtEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnSetValueAt(SetValueAtEventArgs<T> e)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
         }
 
         /// <summary>
@@ -252,28 +249,28 @@ namespace Radical.Model
         /// <param name="value">The item.</param>
         protected void SetValueAt(int index, T value)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             //Recuperiamo un riferimento al valore che verrà sovrascritto
-            T oldValue = this.GetValueAt(index);
+            T oldValue = GetValueAt(index);
 
             SetValueAtEventArgs<T> args = new SetValueAtEventArgs<T>(index, value, oldValue);
-            this.OnSetValueAt(args);
+            OnSetValueAt(args);
 
             if (!args.Cancel)
             {
                 //Ci sganciamo da quello attualmente presente nella collection
-                this.UnwireListItem(oldValue);
-                if (!this.Contains(value))
+                UnwireListItem(oldValue);
+                if (!Contains(value))
                 {
                     //Ci leghiamo a quello in arrivo
-                    this.WireListItem(value);
+                    WireListItem(value);
                 }
 
                 //Impostiamo il valore
-                this.Storage[index] = value;
+                Storage[index] = value;
 
-                this.OnSetValueAtCompleted(index, value, oldValue);
-                this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemReplaced, index, index, oldValue));
+                OnSetValueAtCompleted(index, value, oldValue);
+                OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemReplaced, index, index, oldValue));
             }
         }
 
@@ -295,8 +292,8 @@ namespace Radical.Model
         /// <returns></returns>
         protected virtual T GetValueAt(int index)
         {
-            this.EnsureNotDisposed();
-            return (T)this.Storage[index];
+            EnsureNotDisposed();
+            return (T)Storage[index];
         }
 
         /// <summary>
@@ -307,13 +304,13 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this.GetValueAt(index);
+                EnsureNotDisposed();
+                return GetValueAt(index);
             }
             set
             {
-                this.EnsureNotDisposed();
-                this.SetValueAt(index, value);
+                EnsureNotDisposed();
+                SetValueAt(index, value);
             }
         }
 
@@ -333,14 +330,14 @@ namespace Radical.Model
         /// <param name="item">The item.</param>
         public void Add(T item)
         {
-            this.EnsureNotDisposed();
-            this.Storage.Add(item);
-            int index = this.Count - 1;
+            EnsureNotDisposed();
+            Storage.Add(item);
+            int index = Count - 1;
 
-            this.WireListItem(item);
+            WireListItem(item);
 
-            this.OnAddCompleted(index, item);
-            this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemAdded, index, -1, item));
+            OnAddCompleted(index, item);
+            OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemAdded, index, -1, item));
         }
 
         /// <summary>
@@ -355,19 +352,19 @@ namespace Radical.Model
         /// <exception cref="ArgumentNullException">The supplied <paramref name="item"/> is a null reference.</exception>
         public void Move(T item, int newIndex)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
 
-            int index = this.IndexOf(item);
+            int index = IndexOf(item);
             if (index == -1)
             {
                 throw new ArgumentOutOfRangeException("item");
             }
 
-            this.Move(index, newIndex);
+            Move(index, newIndex);
         }
 
         /// <summary>
@@ -381,24 +378,24 @@ namespace Radical.Model
         /// is outside the bounds of the collection.</exception>
         public void Move(int oldIndex, int newIndex)
         {
-            this.EnsureNotDisposed();
-            if (oldIndex < 0 || oldIndex >= this.Count)
+            EnsureNotDisposed();
+            if (oldIndex < 0 || oldIndex >= Count)
             {
                 throw new ArgumentOutOfRangeException("oldIndex");
             }
 
-            if (newIndex < 0 || newIndex >= this.Count)
+            if (newIndex < 0 || newIndex >= Count)
             {
                 throw new ArgumentOutOfRangeException("newIndex");
             }
 
 
             T item = this[oldIndex];
-            this.Storage.RemoveAt(oldIndex);
-            this.Storage.Insert(newIndex, item);
+            Storage.RemoveAt(oldIndex);
+            Storage.Insert(newIndex, item);
 
-            this.OnMoveCompleted(oldIndex, newIndex, item);
-            this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemMoved, newIndex, oldIndex, item));
+            OnMoveCompleted(oldIndex, newIndex, item);
+            OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemMoved, newIndex, oldIndex, item));
         }
 
         /// <summary>
@@ -426,13 +423,13 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"></see> is read-only. </exception>
         public void Clear()
         {
-            this.EnsureNotDisposed();
-            IEnumerable<T> list = this.Storage.ToArray().AsReadOnly();
+            EnsureNotDisposed();
+            IEnumerable<T> list = Storage.ToArray().AsReadOnly();
 
-            this.Storage.Clear();
+            Storage.Clear();
 
-            this.OnClearCompleted(list);
-            this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset));
+            OnClearCompleted(list);
+            OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset));
         }
 
         /// <summary>
@@ -444,8 +441,8 @@ namespace Radical.Model
         /// </returns>
         public bool Contains(T item)
         {
-            this.EnsureNotDisposed();
-            return this.Storage.Contains(item);
+            EnsureNotDisposed();
+            return Storage.Contains(item);
         }
 
         /// <summary>
@@ -455,8 +452,8 @@ namespace Radical.Model
         /// <returns></returns>
         public int IndexOf(T item)
         {
-            this.EnsureNotDisposed();
-            return this.Storage.IndexOf(item);
+            EnsureNotDisposed();
+            return Storage.IndexOf(item);
         }
 
         ///// <summary>
@@ -477,7 +474,7 @@ namespace Radical.Model
         /// <param name="e">The <see cref="Radical.Model.InsertEventArgs&lt;T&gt;"/> instance containing additional data.</param>
         protected virtual void OnInsert(InsertEventArgs<T> e)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
         }
 
         /// <summary>
@@ -487,17 +484,17 @@ namespace Radical.Model
         /// <param name="item">The item.</param>
         public void Insert(int index, T item)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             InsertEventArgs<T> args = new InsertEventArgs<T>(index, item);
-            this.OnInsert(args);
+            OnInsert(args);
             if (!args.Cancel)
             {
                 //Inseriamo il nuovo elemento
-                this.Storage.Insert(index, item);
-                this.WireListItem(item);
+                Storage.Insert(index, item);
+                WireListItem(item);
 
-                this.OnInsertCompleted(index, item);
-                this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemAdded, index, -1, item));
+                OnInsertCompleted(index, item);
+                OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemAdded, index, -1, item));
             }
         }
 
@@ -520,7 +517,7 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
+                EnsureNotDisposed();
                 return false;
             }
         }
@@ -541,8 +538,8 @@ namespace Radical.Model
         /// <param name="item">The item to remove.</param>
         public bool Remove(T item)
         {
-            this.EnsureNotDisposed();
-            return this.Remove(item, true);
+            EnsureNotDisposed();
+            return Remove(item, true);
         }
 
         /// <summary>
@@ -553,23 +550,23 @@ namespace Radical.Model
         /// <returns>true if the operation has been completed successfully; otherwise false.</returns>
         protected bool Remove(T item, bool notify)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             //Recuperiamo l'indice da rimuovere
-            int index = this.Storage.IndexOf(item);
+            int index = Storage.IndexOf(item);
 
             //Rimuoviamo
             if (index > -1)
             {
-                this.UnwireListItem(item);
+                UnwireListItem(item);
 
                 //Rimuoviamo
-                bool retVal = this.Storage.Remove(item);
+                bool retVal = Storage.Remove(item);
 
-                this.OnRemoveCompleted(item, index);
+                OnRemoveCompleted(item, index);
 
                 if (notify)
                 {
-                    this.OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemRemoved, -1, index, item));
+                    OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.ItemRemoved, -1, index, item));
                 }
 
                 return retVal;
@@ -586,8 +583,8 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"></see> is read-only.-or- The <see cref="T:System.Collections.IList"></see> has a fixed size. </exception>
         public void RemoveAt(int index)
         {
-            this.EnsureNotDisposed();
-            this.RemoveAt(index, true);
+            EnsureNotDisposed();
+            RemoveAt(index, true);
         }
 
         /// <summary>
@@ -597,11 +594,11 @@ namespace Radical.Model
         /// <param name="notify">if set to <collection>true</collection> raises the CollectionChanged event.</param>
         protected void RemoveAt(int index, bool notify)
         {
-            this.EnsureNotDisposed();
-            T value = this.GetValueAt(index);
+            EnsureNotDisposed();
+            T value = GetValueAt(index);
             if (value != null)
             {
-                this.Remove(value, notify);
+                Remove(value, notify);
             }
             else
             {
@@ -618,8 +615,8 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this.Storage.Count;
+                EnsureNotDisposed();
+                return Storage.Count;
             }
         }
 
@@ -636,8 +633,8 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
         public void CopyTo(T[] array)
         {
-            this.EnsureNotDisposed();
-            this.Storage.CopyTo(array, 0);
+            EnsureNotDisposed();
+            Storage.CopyTo(array, 0);
         }
 
         /// <summary>
@@ -653,8 +650,8 @@ namespace Radical.Model
         ///     <paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type <paramref name="T"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            this.EnsureNotDisposed();
-            this.Storage.CopyTo(array, arrayIndex);
+            EnsureNotDisposed();
+            Storage.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -665,8 +662,8 @@ namespace Radical.Model
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            this.EnsureNotDisposed();
-            return this.GetEnumerator();
+            EnsureNotDisposed();
+            return GetEnumerator();
         }
 
         /// <summary>
@@ -677,8 +674,8 @@ namespace Radical.Model
         /// </returns>
         public virtual IEnumerator<T> GetEnumerator()
         {
-            this.EnsureNotDisposed();
-            return this.Storage.GetEnumerator();
+            EnsureNotDisposed();
+            return Storage.GetEnumerator();
         }
 
         /// <summary>
@@ -686,8 +683,8 @@ namespace Radical.Model
         /// </summary>
         public void Reverse()
         {
-            this.EnsureNotDisposed();
-            this.Storage.Reverse();
+            EnsureNotDisposed();
+            Storage.Reverse();
         }
 
         [NonSerialized]
@@ -701,13 +698,13 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this._defaultView == null)
+                EnsureNotDisposed();
+                if (_defaultView == null)
                 {
-                    this._defaultView = ((IEntityCollection<T>)this).CreateView();
+                    _defaultView = ((IEntityCollection<T>)this).CreateView();
                 }
 
-                return this._defaultView;
+                return _defaultView;
             }
         }
 
@@ -717,8 +714,8 @@ namespace Radical.Model
         /// <returns>An instance of a view.</returns>
         public IEntityView<T> CreateView()
         {
-            this.EnsureNotDisposed();
-            return this.OnCreateView();
+            EnsureNotDisposed();
+            return OnCreateView();
         }
 
         /// <summary>
@@ -728,7 +725,7 @@ namespace Radical.Model
         /// <returns>An instance of a view.</returns>
         protected virtual IEntityView<T> OnCreateView()
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
             return new EntityView<T>(this);
         }
 
@@ -740,9 +737,9 @@ namespace Radical.Model
         /// </returns>
         protected virtual T OnCreatingNew()
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
 
-            if (this.HasDefaultCtor())
+            if (HasDefaultCtor())
             {
                 var returnValue = Activator.CreateInstance<T>(); // ( T )tConstructor.Invoke( null );
                 return returnValue;
@@ -777,8 +774,8 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this.HasDefaultCtor();
+                EnsureNotDisposed();
+                return HasDefaultCtor();
             }
         }
 
@@ -792,13 +789,13 @@ namespace Radical.Model
         /// <exception cref="NullReferenceException">The creation process returned a null reference.</exception>
         public T CreateNew()
         {
-            this.EnsureNotDisposed();
-            if (!this.AllowNew)
+            EnsureNotDisposed();
+            if (!AllowNew)
             {
                 throw new NotSupportedException(Resources.Exceptions.CreateNewNotSupportedException);
             }
 
-            T obj = this.OnCreatingNew();
+            T obj = OnCreatingNew();
 
             if (obj == null)
             {
@@ -823,18 +820,18 @@ namespace Radical.Model
         /// <param name="list">The range of items ot add.</param>
         public void AddRange(IEnumerable<T> list)
         {
-            this.EnsureNotDisposed();
+            EnsureNotDisposed();
 
             Ensure.That(list).Named("list").IsNotNull();
 
-            this.OnAddRange(list);
+            OnAddRange(list);
 
             foreach (T obj in list)
             {
-                this.Add((T)obj);
+                Add((T)obj);
             }
 
-            this.OnAddRangeCompleted(list);
+            OnAddRangeCompleted(list);
         }
 
         /// <summary>
@@ -852,22 +849,22 @@ namespace Radical.Model
         /// <returns>An array containing copies of the elements of the EntityCollection.</returns>
         public T[] ToArray()
         {
-            this.EnsureNotDisposed();
-            return this.Storage.ToArray();
+            EnsureNotDisposed();
+            return Storage.ToArray();
         }
 
         CollectionSettings _settings = new CollectionSettings();
 
         public CollectionSettings Settings
         {
-            get { return this._settings; }
+            get { return _settings; }
         }
 
         public class CollectionSettings
         {
             public CollectionSettings()
             {
-                this.NotifyListItemPropertyChanged = true;
+                NotifyListItemPropertyChanged = true;
             }
 
             public bool NotifyListItemPropertyChanged { get; set; }

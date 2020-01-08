@@ -1,11 +1,10 @@
 ﻿namespace Radical.Tests.Model
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.Model;
     using SharpTestsEx;
+    using System.Collections.Generic;
+    using System.Linq;
 
     class Person
     {

@@ -19,10 +19,10 @@ namespace Radical.Model
         /// <param name="entityItem">The entity item.</param>
         public EntityItemView(IEntityView<T> view, T entityItem)
         {
-            this._view = view;
-            this.EntityItem = entityItem;
+            _view = view;
+            EntityItem = entityItem;
 
-            this.OnInit();
+            OnInit();
         }
 
         protected virtual void OnInit()
@@ -37,7 +37,7 @@ namespace Radical.Model
         /// <item>The owner view.</item>
         public IEntityView<T> View
         {
-            get { return this._view; }
+            get { return _view; }
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Radical.Model
         /// </summary>
         public void Delete()
         {
-            int myIndex = this.View.IndexOf(this);
-            ((IList)this.View).RemoveAt(myIndex);
+            int myIndex = View.IndexOf(this);
+            ((IList)View).RemoveAt(myIndex);
         }
 
         private T _entityItem;
@@ -56,12 +56,12 @@ namespace Radical.Model
         /// <item>The underlying entity item.</item>
         public T EntityItem
         {
-            get { return this._entityItem; }
+            get { return _entityItem; }
             private set
             {
-                if (this.EntityItem != null /* && this.tIsINotifyPropertyChanged */ && this.EntityItem is INotifyPropertyChanged)
+                if (EntityItem != null /* && this.tIsINotifyPropertyChanged */ && EntityItem is INotifyPropertyChanged)
                 {
-                    ((INotifyPropertyChanged)this.EntityItem).PropertyChanged -= new PropertyChangedEventHandler(OnItemPropertyChanged);
+                    ((INotifyPropertyChanged)EntityItem).PropertyChanged -= new PropertyChangedEventHandler(OnItemPropertyChanged);
                 }
 
                 if (value == null)
@@ -69,17 +69,17 @@ namespace Radical.Model
                     throw new ArgumentNullException("item");
                 }
 
-                this._entityItem = value;
-                if (this.EntityItem is INotifyPropertyChanged)
+                _entityItem = value;
+                if (EntityItem is INotifyPropertyChanged)
                 {
-                    ((INotifyPropertyChanged)this.EntityItem).PropertyChanged += new PropertyChangedEventHandler(OnItemPropertyChanged);
+                    ((INotifyPropertyChanged)EntityItem).PropertyChanged += new PropertyChangedEventHandler(OnItemPropertyChanged);
                 }
             }
         }
 
         void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.OnPropertyChanged(e);
+            OnPropertyChanged(e);
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace Radical.Model
         /// <param name="args">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, args);
+                PropertyChanged(this, args);
             }
         }
 
@@ -109,9 +109,9 @@ namespace Radical.Model
         {
             get
             {
-                if (this.EntityItem is IDataErrorInfo)
+                if (EntityItem is IDataErrorInfo)
                 {
-                    return ((IDataErrorInfo)this.EntityItem).Error;
+                    return ((IDataErrorInfo)EntityItem).Error;
                 }
 
                 return string.Empty;
@@ -132,9 +132,9 @@ namespace Radical.Model
 
                 //}
 
-                if (this.EntityItem is IDataErrorInfo)
+                if (EntityItem is IDataErrorInfo)
                 {
-                    return ((IDataErrorInfo)this.EntityItem)[columnName];
+                    return ((IDataErrorInfo)EntityItem)[columnName];
                 }
 
                 return string.Empty;
@@ -149,9 +149,9 @@ namespace Radical.Model
 
         protected virtual void OnEditBegun()
         {
-            if (this.EditBegun != null)
+            if (EditBegun != null)
             {
-                this.EditBegun(this, EventArgs.Empty);
+                EditBegun(this, EventArgs.Empty);
             }
         }
 
@@ -162,9 +162,9 @@ namespace Radical.Model
         public event EventHandler EditCanceled;
         protected virtual void OnEditCanceled()
         {
-            if (this.EditCanceled != null)
+            if (EditCanceled != null)
             {
-                this.EditCanceled(this, EventArgs.Empty);
+                EditCanceled(this, EventArgs.Empty);
             }
         }
 
@@ -175,9 +175,9 @@ namespace Radical.Model
         public event EventHandler EditEnded;
         protected virtual void OnEditEnded()
         {
-            if (this.EditEnded != null)
+            if (EditEnded != null)
             {
-                this.EditEnded(this, EventArgs.Empty);
+                EditEnded(this, EventArgs.Empty);
             }
         }
 
@@ -188,16 +188,16 @@ namespace Radical.Model
         /// </summary>
         public void BeginEdit()
         {
-            if (!this.isEditing)
+            if (!isEditing)
             {
-                this.isEditing = true;
+                isEditing = true;
 
-                if (this.EntityItem is IEditableObject)
+                if (EntityItem is IEditableObject)
                 {
-                    ((IEditableObject)this.EntityItem).BeginEdit();
+                    ((IEditableObject)EntityItem).BeginEdit();
                 }
 
-                this.OnEditBegun();
+                OnEditBegun();
             }
         }
 
@@ -206,15 +206,15 @@ namespace Radical.Model
         /// </summary>
         public void CancelEdit()
         {
-            if (this.isEditing)
+            if (isEditing)
             {
-                if (this.EntityItem is IEditableObject)
+                if (EntityItem is IEditableObject)
                 {
-                    ((IEditableObject)this.EntityItem).CancelEdit();
+                    ((IEditableObject)EntityItem).CancelEdit();
                 }
 
-                this.OnEditCanceled();
-                this.isEditing = false;
+                OnEditCanceled();
+                isEditing = false;
             }
         }
 
@@ -223,15 +223,15 @@ namespace Radical.Model
         /// </summary>
         public void EndEdit()
         {
-            if (this.isEditing)
+            if (isEditing)
             {
-                if (this.EntityItem is IEditableObject)
+                if (EntityItem is IEditableObject)
                 {
-                    ((IEditableObject)this.EntityItem).EndEdit();
+                    ((IEditableObject)EntityItem).EndEdit();
                 }
 
-                this.OnEditEnded();
-                this.isEditing = false;
+                OnEditEnded();
+                isEditing = false;
             }
         }
 
@@ -243,7 +243,7 @@ namespace Radical.Model
         {
             get
             {
-                return this.EntityItem;
+                return EntityItem;
             }
         }
 
@@ -253,31 +253,31 @@ namespace Radical.Model
         /// <item>The owner view.</item>
         IEntityView IEntityItemView.View
         {
-            get { return this.View; }
+            get { return View; }
         }
 
         public void SetCustomValue<TValue>(string customPropertyName, TValue value)
         {
-            var beforeSet = this.GetCustomValue<TValue>(customPropertyName);
-            this.View.SetCustomPropertyValue(customPropertyName, this, value);
+            var beforeSet = GetCustomValue<TValue>(customPropertyName);
+            View.SetCustomPropertyValue(customPropertyName, this, value);
 
             if (!Object.Equals(beforeSet, value))
             {
-                this.OnPropertyChanged(new PropertyChangedEventArgs(customPropertyName));
+                OnPropertyChanged(new PropertyChangedEventArgs(customPropertyName));
             }
         }
 
         public void NotifyPropertyChanged(string propertyName)
         {
-            this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
         public TValue GetCustomValue<TValue>(string customPropertyName)
         {
-            return this.View.GetCustomPropertyValue<TValue>(customPropertyName, this);
+            return View.GetCustomPropertyValue<TValue>(customPropertyName, this);
         }
 
-        Object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
         {
             return this;
         }
@@ -286,7 +286,7 @@ namespace Radical.Model
         {
             //return TypeDescriptor.GetProperties( this.EntityItem );
 
-            return this._view.GetItemProperties(null);
+            return _view.GetItemProperties(null);
         }
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
@@ -334,22 +334,22 @@ namespace Radical.Model
             return null;
         }
 
-        Object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return null;
         }
 
         public override int GetHashCode()
         {
-            return this.EntityItem.GetHashCode();// base.GetHashCode();
+            return EntityItem.GetHashCode();// base.GetHashCode();
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
             var other = obj as IEntityItemView<T>;
             if (other != null)
             {
-                return Object.Equals(this.EntityItem, other.EntityItem);
+                return Object.Equals(EntityItem, other.EntityItem);
             }
 
             return Object.ReferenceEquals(this, obj); // this.EntityItem.Equals( obj );

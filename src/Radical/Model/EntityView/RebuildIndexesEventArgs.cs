@@ -17,7 +17,7 @@ namespace Radical.Model
         public RebuildIndexesEventArgs(int index)
             : base(false)
         {
-            this.Index = index;
+            Index = index;
         }
     }
 }

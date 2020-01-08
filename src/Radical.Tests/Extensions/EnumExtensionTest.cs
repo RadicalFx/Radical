@@ -2,10 +2,10 @@
 
 namespace Radical.Tests.Extensions
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical;
+    using SharpTestsEx;
+    using System;
 
     /// <summary>
     ///This is a test class for EnumExtensionTest and is intended

@@ -38,8 +38,8 @@ namespace Radical.Helpers
         {
             // Assumes lBound >= 0 && lBound < uBound
             // returns an int >= lBound and < uBound
-            UInt32 urndnum;
-            Byte[] rndnum = new Byte[4];
+            uint urndnum;
+            byte[] rndnum = new byte[4];
 
             if (lBound == uBound - 1 || lBound == uBound)
             {
@@ -47,7 +47,7 @@ namespace Radical.Helpers
                 return lBound;
             }
 
-            UInt32 xcludeRndBase = (UInt32.MaxValue - (UInt32.MaxValue % (UInt32)(uBound - lBound)));
+            uint xcludeRndBase = (uint.MaxValue - (uint.MaxValue % (uint)(uBound - lBound)));
 
             do
             {
@@ -66,7 +66,7 @@ namespace Radical.Helpers
         {
             int upperBound = pwdCharArray.GetUpperBound(0);
 
-            if (!this.AllowSymbols)
+            if (!AllowSymbols)
             {
                 upperBound = U_BOUND_DIGIT;
             }
@@ -82,11 +82,11 @@ namespace Radical.Helpers
         public string Next()
         {
             // Pick random length between minimum and maximum   
-            var pwdLength = GetCryptographicRandomNumber(this.MinLenght, this.MaxLenght);
+            var pwdLength = GetCryptographicRandomNumber(MinLenght, MaxLenght);
 
             var pwdBuffer = new StringBuilder()
             {
-                Capacity = this.MaxLenght
+                Capacity = MaxLenght
             };
 
             // Generate random characters
@@ -98,7 +98,7 @@ namespace Radical.Helpers
             {
                 nextCharacter = GetRandomCharacter();
 
-                if (!this.AllowConsecutiveCharacters)
+                if (!AllowConsecutiveCharacters)
                 {
                     while (lastCharacter == nextCharacter)
                     {
@@ -106,7 +106,7 @@ namespace Radical.Helpers
                     }
                 }
 
-                if (!this.AllowRepeatCharacters)
+                if (!AllowRepeatCharacters)
                 {
                     var temp = pwdBuffer.ToString();
                     var duplicateIndex = temp.IndexOf(nextCharacter);
@@ -117,9 +117,9 @@ namespace Radical.Helpers
                     }
                 }
 
-                if (this.Exclusions != null)
+                if (Exclusions != null)
                 {
-                    while (this.Exclusions.Contains(nextCharacter))
+                    while (Exclusions.Contains(nextCharacter))
                     {
                         nextCharacter = GetRandomCharacter();
                     }
@@ -132,16 +132,16 @@ namespace Radical.Helpers
             return pwdBuffer.ToString();
         }
 
-        private readonly List<Char> _exclusions = new List<char>();
+        private readonly List<char> _exclusions = new List<char>();
 
         /// <summary>
         /// A list of char that must be excluded from the
         /// generated password
         /// </summary>
         /// <value>The exclusions.</value>
-        public List<Char> Exclusions
+        public List<char> Exclusions
         {
-            get { return this._exclusions; }
+            get { return _exclusions; }
         }
 
         private int _minLenght = DEFAULT_MINIMUM;
@@ -152,13 +152,13 @@ namespace Radical.Helpers
         /// <value>The min length.</value>
         public int MinLenght
         {
-            get { return this._minLenght; }
+            get { return _minLenght; }
             set
             {
-                this._minLenght = value;
-                if (RandomStrings.DEFAULT_MINIMUM > this._minLenght)
+                _minLenght = value;
+                if (RandomStrings.DEFAULT_MINIMUM > _minLenght)
                 {
-                    this._minLenght = RandomStrings.DEFAULT_MINIMUM;
+                    _minLenght = RandomStrings.DEFAULT_MINIMUM;
                 }
             }
         }
@@ -171,13 +171,13 @@ namespace Radical.Helpers
         /// <value>The max length.</value>
         public int MaxLenght
         {
-            get { return this._maxLenght; }
+            get { return _maxLenght; }
             set
             {
-                this._maxLenght = value;
-                if (this._minLenght >= this._maxLenght)
+                _maxLenght = value;
+                if (_minLenght >= _maxLenght)
                 {
-                    this._maxLenght = RandomStrings.DEFAULT_MAXIMUM;
+                    _maxLenght = RandomStrings.DEFAULT_MAXIMUM;
                 }
             }
         }
@@ -191,8 +191,8 @@ namespace Radical.Helpers
         /// <value><c>true</c> if symbols are allowed; otherwise, <c>false</c>.</value>
         public bool AllowSymbols
         {
-            get { return this._allowSymbols; }
-            set { this._allowSymbols = value; }
+            get { return _allowSymbols; }
+            set { _allowSymbols = value; }
         }
 
         private bool _allowRepeatCharacters = true;
@@ -206,8 +206,8 @@ namespace Radical.Helpers
         /// </value>
         public bool AllowRepeatCharacters
         {
-            get { return this._allowRepeatCharacters; }
-            set { this._allowRepeatCharacters = value; }
+            get { return _allowRepeatCharacters; }
+            set { _allowRepeatCharacters = value; }
         }
 
 

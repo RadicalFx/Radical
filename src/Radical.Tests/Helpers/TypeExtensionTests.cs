@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.Reflection;
+using SharpTestsEx;
+using System;
+using System.Collections.Generic;
 
 namespace Radical.Tests.Helpers
 {
@@ -70,7 +70,7 @@ namespace Radical.Tests.Helpers
         public void typeextensions_toShortNameString_using_complex_generic_type_should_return_type_name()
         {
             var expected = "IDictionary<List<Object>, List<String>>";
-            var actual = typeof(IDictionary<List<Object>, List<string>>).ToShortNameString();
+            var actual = typeof(IDictionary<List<object>, List<string>>).ToShortNameString();
 
             actual.Should().Be.EqualTo(expected);
         }
@@ -79,7 +79,7 @@ namespace Radical.Tests.Helpers
         public void typeextensions_toString_SN_using_complex_generic_type_should_return_type_name()
         {
             var expected = "IDictionary<List<Object>, List<String>>";
-            var actual = typeof(IDictionary<List<Object>, List<string>>).ToString("SN");
+            var actual = typeof(IDictionary<List<object>, List<string>>).ToString("SN");
 
             actual.Should().Be.EqualTo(expected);
         }

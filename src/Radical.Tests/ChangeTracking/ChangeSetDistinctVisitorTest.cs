@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FakeItEasy;
 using Radical.ChangeTracking;
 using Radical.ComponentModel.ChangeTracking;
 using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.ChangeTracking
 {
@@ -16,7 +16,7 @@ namespace Radical.Tests.ChangeTracking
         {
             ChangeSetDistinctVisitor target = new ChangeSetDistinctVisitor();
 
-            var entities = new Object[] { new Object() };
+            var entities = new object[] { new object() };
             var c1 = A.Fake<IChange>();
             A.CallTo(() => c1.GetChangedEntities()).Returns(entities);
 

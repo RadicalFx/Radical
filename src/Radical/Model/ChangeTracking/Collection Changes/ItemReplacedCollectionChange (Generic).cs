@@ -19,7 +19,7 @@ namespace Radical.ChangeTracking.Specialized
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public ItemReplacedCollectionChange(Object owner, ItemReplacedDescriptor<T> descriptor, RejectCallback<ItemReplacedDescriptor<T>> rejectCallback, CommitCallback<ItemReplacedDescriptor<T>> commitCallback, string description)
+        public ItemReplacedCollectionChange(object owner, ItemReplacedDescriptor<T> descriptor, RejectCallback<ItemReplacedDescriptor<T>> rejectCallback, CommitCallback<ItemReplacedDescriptor<T>> commitCallback, string description)
             : base(owner, descriptor, rejectCallback, commitCallback, description)
         {
 

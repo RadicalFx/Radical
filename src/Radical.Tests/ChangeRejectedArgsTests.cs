@@ -4,7 +4,6 @@ using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel.ChangeTracking;
 using SharpTestsEx;
-using System;
 
 namespace Radical.Tests
 {
@@ -14,7 +13,7 @@ namespace Radical.Tests
         [TestMethod]
         public void changeRejectedArgs_generic_ctor_normal_should_correctly_set_values()
         {
-            var entity = new Object();
+            var entity = new object();
             var cachedValue = new GenericParameterHelper();
             var iChange = A.Dummy<IChange>();
             var reason = RejectReason.Redo;

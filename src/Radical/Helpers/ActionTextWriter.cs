@@ -51,7 +51,7 @@ namespace Radical
         /// </exception>
         public override void Write(string value)
         {
-            this.logger(value);
+            logger(value);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Radical
                 base.Write(buffer, index, count);
             }
 
-            this.logger(new string(buffer, index, count));
+            logger(new string(buffer, index, count));
         }
 
         Encoding _encoding;
@@ -99,12 +99,12 @@ namespace Radical
         {
             get
             {
-                if (this._encoding == null)
+                if (_encoding == null)
                 {
-                    this._encoding = new UnicodeEncoding(false, false);
+                    _encoding = new UnicodeEncoding(false, false);
                 }
 
-                return this._encoding;
+                return _encoding;
             }
         }
     }

@@ -2,11 +2,11 @@
 
 namespace Radical.Tests.ChangeTracking
 {
+    using Radical.ComponentModel.ChangeTracking;
+    using Radical.Model;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Model;
 
     class Person : MementoEntity, IComponent
     {
@@ -22,7 +22,7 @@ namespace Radical.Tests.ChangeTracking
                 //}
             }
 
-            this.OnDisposed();
+            OnDisposed();
         }
 
         #region IComponent Members
@@ -35,9 +35,9 @@ namespace Radical.Tests.ChangeTracking
 
         protected virtual void OnDisposed()
         {
-            if (this.Disposed != null)
+            if (Disposed != null)
             {
-                this.Disposed(this, EventArgs.Empty);
+                Disposed(this, EventArgs.Empty);
             }
         }
 
@@ -58,10 +58,10 @@ namespace Radical.Tests.ChangeTracking
         public Person(IChangeTrackingService memento, bool registerAsTransient)
             : base(memento, registerAsTransient)
         {
-            this.nameRejectCallback = (pcr) =>
+            nameRejectCallback = (pcr) =>
             {
-                this.CacheChangeOnRejectCallback("property-name", this.Name, nameRejectCallback, null, pcr);
-                this._name = pcr.CachedValue;
+                CacheChangeOnRejectCallback("property-name", Name, nameRejectCallback, null, pcr);
+                _name = pcr.CachedValue;
             };
         }
 
@@ -72,10 +72,10 @@ namespace Radical.Tests.ChangeTracking
         {
             this.transientRegistration = transientRegistration;
 
-            this.nameRejectCallback = (pcr) =>
+            nameRejectCallback = (pcr) =>
             {
-                this.CacheChangeOnRejectCallback("property-name", this.Name, nameRejectCallback, null, pcr);
-                this._name = pcr.CachedValue;
+                CacheChangeOnRejectCallback("property-name", Name, nameRejectCallback, null, pcr);
+                _name = pcr.CachedValue;
             };
         }
 
@@ -89,21 +89,21 @@ namespace Radical.Tests.ChangeTracking
 
         public string Name
         {
-            get { return this._name; }
+            get { return _name; }
             set
             {
-                if (value != this.Name)
+                if (value != Name)
                 {
-                    this.CacheChange("property-name", this.Name, nameRejectCallback);
-                    this._name = value;
+                    CacheChange("property-name", Name, nameRejectCallback);
+                    _name = value;
                 }
             }
         }
 
         public string FirstName
         {
-            get { return this.GetPropertyValue(() => this.FirstName); }
-            set { this.SetPropertyValue(() => this.FirstName, value); }
+            get { return GetPropertyValue(() => FirstName); }
+            set { SetPropertyValue(() => FirstName, value); }
         }
 
         public void SetInitialPropertyValueForTest<T>(string propertyName, T value)
