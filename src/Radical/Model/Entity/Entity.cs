@@ -227,8 +227,7 @@ namespace Radical.Model
         {
             Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
-            PropertyMetadata md;
-            if (!propertiesMetadata.TryGetValue(propertyName, out md))
+            if (!propertiesMetadata.TryGetValue(propertyName, out PropertyMetadata md))
             {
                 md = GetDefaultMetadata<T>(propertyName);
                 propertiesMetadata.Add(propertyName, md);
