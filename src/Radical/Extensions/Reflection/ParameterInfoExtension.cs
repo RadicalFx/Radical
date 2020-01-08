@@ -46,20 +46,6 @@ namespace Radical.Reflection
             return memberInfo.GetCustomAttributes(typeof(T), true)
                 .OfType<T>()
                 .ToArray();
-
-            //T[] returnValue = null;
-
-            //if( ParameterInfoExtension.IsAttributeDefined<T>( memberInfo ) )
-            //{
-            //    Object[] attributes = memberInfo.GetCustomAttributes( typeof( T ), false );
-            //    returnValue = attributes.Cast<T>().ToArray<T>();
-            //}
-            //else
-            //{
-            //    returnValue = new T[ 0 ];
-            //}
-
-            //return returnValue;
         }
 
         /// <summary>
