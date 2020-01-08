@@ -82,17 +82,6 @@ namespace Radical.ComponentModel
         /// </value>
         bool IsInitializing { get; }
 
-        ///// <summary>
-        ///// Sorts the items in this instance.
-        ///// </summary>
-        //void Sort();
-
-        ///// <summary>
-        ///// Sorts the items in this instance using the specified comparer.
-        ///// </summary>
-        ///// <param name="comparer">The comparer to use to sort items.</param>
-        //void Sort( IComparer<T> comparer );
-
         /// <summary>
         /// Copies the elements of the IEntityCollection to a new array.
         /// </summary>
