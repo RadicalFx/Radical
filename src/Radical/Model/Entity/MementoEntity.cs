@@ -207,8 +207,7 @@ namespace Radical.Model
         {
             base.SetPropertyValue<T>(propertyName, data, e =>
            {
-               var md = GetPropertyMetadata<T>(propertyName) as MementoPropertyMetadata<T>;
-               if (md != null && md.TrackChanges)
+               if (GetPropertyMetadata<T>(propertyName) is MementoPropertyMetadata<T> md && md.TrackChanges)
                {
                    var callback = GetRejectCallback<T>(propertyName);
                    CacheChange(propertyName, e.OldValue, callback);
