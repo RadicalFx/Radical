@@ -566,7 +566,7 @@ namespace Radical.ComponentModel.ChangeTracking
         Radical.ComponentModel.ChangeTracking.IAdvisory GetAdvisory();
         Radical.ComponentModel.ChangeTracking.IAdvisory GetAdvisory(Radical.ComponentModel.ChangeTracking.IAdvisoryBuilder builder);
         Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet();
-        Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet(Radical.ComponentModel.ChangeTracking.IChangeSetFilter builder);
+        Radical.ComponentModel.ChangeTracking.IChangeSet GetChangeSet(Radical.ComponentModel.ChangeTracking.IChangeSetFilter filter);
         System.Collections.Generic.IEnumerable<object> GetEntities();
         System.Collections.Generic.IEnumerable<object> GetEntities(Radical.ComponentModel.ChangeTracking.EntityTrackingStates stateFilter, bool exactMatch);
         Radical.ComponentModel.ChangeTracking.EntityPropertyStates GetEntityPropertyState<TEntity, TProperty>(TEntity entity, System.Linq.Expressions.Expression<System.Func<TEntity, TProperty>> property);

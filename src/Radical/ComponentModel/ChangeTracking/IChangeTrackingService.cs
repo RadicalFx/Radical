@@ -154,9 +154,9 @@ namespace Radical.ComponentModel.ChangeTracking
         /// this IChangeTrackingService filtered by the
         /// supplied IChangeSetBuilder.
         /// </summary>
-        /// <param name="builder">The IChangeSetBuilder.</param>
+        /// <param name="filter">The IChangeSetBuilder.</param>
         /// <returns></returns>
-        IChangeSet GetChangeSet(IChangeSetFilter builder);
+        IChangeSet GetChangeSet(IChangeSetFilter filter);
 
         /// <summary>
         /// Adds a new change definition to this IChangeTrackingService.
