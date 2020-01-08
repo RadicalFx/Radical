@@ -78,7 +78,7 @@ namespace Radical.ComponentModel
             _customDisplayName = customDisplayName;
         }
 
-        string _customDisplayName = null;
+        readonly string _customDisplayName = null;
 
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.

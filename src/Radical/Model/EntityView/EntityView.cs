@@ -84,10 +84,10 @@ namespace Radical.Model
             private set;
         }
 
-        EventHandler onEntityItemViewEditBegunHandler = null;
-        EventHandler onEntityItemViewEditCanceledHandler = null;
-        EventHandler onEntityItemViewEditEndedHandler = null;
-        PropertyChangedEventHandler onEntityItemViewPropertyChangedHandler = null;
+        readonly EventHandler onEntityItemViewEditBegunHandler = null;
+        readonly EventHandler onEntityItemViewEditCanceledHandler = null;
+        readonly EventHandler onEntityItemViewEditEndedHandler = null;
+        readonly PropertyChangedEventHandler onEntityItemViewPropertyChangedHandler = null;
 
         #region .ctor
 

@@ -19,7 +19,7 @@ namespace Radical
 
         class Colorizer : IDisposable
         {
-            ConsoleColor backup;
+            readonly ConsoleColor backup;
 
             public Colorizer(ConsoleColor newColor)
             {

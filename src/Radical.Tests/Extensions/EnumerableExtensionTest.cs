@@ -255,7 +255,7 @@ namespace Radical.Tests.Extensions
 
     class NodeList : System.Collections.ObjectModel.Collection<Node>
     {
-        Node parent;
+        readonly Node parent;
 
         public NodeList(Node parent)
         {

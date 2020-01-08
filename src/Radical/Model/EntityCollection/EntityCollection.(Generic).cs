@@ -853,7 +853,7 @@ namespace Radical.Model
             return Storage.ToArray();
         }
 
-        CollectionSettings _settings = new CollectionSettings();
+        readonly CollectionSettings _settings = new CollectionSettings();
 
         public CollectionSettings Settings
         {

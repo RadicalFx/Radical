@@ -7,8 +7,8 @@ namespace Radical.ChangeTracking
 {
     sealed class AtomicChange : IChange
     {
-        Dictionary<object, bool> transientEntities = new Dictionary<object, bool>();
-        List<Tuple<IChange, AddChangeBehavior>> changes = new List<Tuple<IChange, AddChangeBehavior>>();
+        readonly Dictionary<object, bool> transientEntities = new Dictionary<object, bool>();
+        readonly List<Tuple<IChange, AddChangeBehavior>> changes = new List<Tuple<IChange, AddChangeBehavior>>();
 
         /// <summary>
         /// Adds the specified change.
