@@ -293,7 +293,7 @@ namespace Radical.Model
         protected virtual T GetValueAt(int index)
         {
             EnsureNotDisposed();
-            return (T)Storage[index];
+            return Storage[index];
         }
 
         /// <summary>
