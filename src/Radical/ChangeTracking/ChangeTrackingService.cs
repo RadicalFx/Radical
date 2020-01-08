@@ -361,7 +361,7 @@
             lock (SyncRoot)
             {
                 var last = backwardChangesStack.LastOrDefault();
-                return /*this.EnsureIsDefined( bookmark ) &&*/ (bookmark.Position != last || transientEntities
+                return (bookmark.Position != last || transientEntities
                     .Any(kvp => kvp.Value && !bookmark.TransientEntities.Contains(kvp.Key)));
             }
         }
