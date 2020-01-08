@@ -221,8 +221,7 @@ namespace Radical.Model
 
         RejectCallback<T> GetRejectCallback<T>(string propertyName)
         {
-            Delegate d;
-            if (!rejectCallbacks.TryGetValue(propertyName, out d))
+            if (!rejectCallbacks.TryGetValue(propertyName, out Delegate d))
             {
                 RejectCallback<T> callback = (pcr) =>
                 {
