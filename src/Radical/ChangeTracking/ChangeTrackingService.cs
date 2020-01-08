@@ -1392,8 +1392,7 @@
 
             var state = EntityPropertyStates.None;
 
-            TProperty originalValue;
-            if (TryGetOriginalValue(propertyName, out originalValue))
+            if (TryGetOriginalValue(propertyName, out TProperty originalValue))
             {
                 state |= EntityPropertyStates.Changed;
 
