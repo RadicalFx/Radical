@@ -366,8 +366,7 @@
             {
                 var last = backwardChangesStack.LastOrDefault();
                 return /*this.EnsureIsDefined( bookmark ) &&*/ (bookmark.Position != last || transientEntities
-                    .Where(kvp => kvp.Value && !bookmark.TransientEntities.Contains(kvp.Key))
-                    .Any());
+                    .Any(kvp => kvp.Value && !bookmark.TransientEntities.Contains(kvp.Key)));
             }
         }
 
