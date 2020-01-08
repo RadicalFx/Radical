@@ -54,7 +54,7 @@ namespace Radical.Observers
         /// <value>The monitored source.</value>
         public T Source
         {
-            get { return (T)this.WeakSource.Target; }
+            get { return (T)WeakSource.Target; }
         }
     }
 }

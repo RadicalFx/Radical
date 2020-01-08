@@ -10,7 +10,7 @@
         /// <param name="items">The items.</param>
         public CollectionRangeDescriptor(IEnumerable<T> items)
         {
-            this.Items = items;
+            Items = items;
         }
 
         /// <summary>

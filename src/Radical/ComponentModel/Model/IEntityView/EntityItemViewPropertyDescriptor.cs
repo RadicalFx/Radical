@@ -21,7 +21,7 @@ namespace Radical.ComponentModel
         protected EntityItemViewPropertyDescriptor()
             : base(string.Format(CultureInfo.InvariantCulture, "___RuntimeEvaluatedPropertyDescriptor_{0:N}", Guid.NewGuid()), null)
         {
-            this._property = null;
+            _property = null;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Radical.ComponentModel
         public EntityItemViewPropertyDescriptor(PropertyInfo property)
             : base(property.Name, null)
         {
-            this._property = property;
+            _property = property;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Radical.ComponentModel
         public EntityItemViewPropertyDescriptor(string propertyName, string customDisplayName)
             : this(typeof(T).GetProperty(propertyName))
         {
-            this._customDisplayName = customDisplayName;
+            _customDisplayName = customDisplayName;
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace Radical.ComponentModel
         /// <returns>The default value for this property.</returns>
         public virtual object GetDefaultValue()
         {
-            if (this.PropertyType.IsValueType)
+            if (PropertyType.IsValueType)
             {
-                return Activator.CreateInstance(this.PropertyType);
+                return Activator.CreateInstance(PropertyType);
             }
             else
             {
@@ -83,7 +83,7 @@ namespace Radical.ComponentModel
         /// <value>The property.</value>
         protected PropertyInfo Property
         {
-            get { return this._property; }
+            get { return _property; }
         }
 
         string _customDisplayName = null;
@@ -97,9 +97,9 @@ namespace Radical.ComponentModel
         {
             get
             {
-                if (!string.IsNullOrEmpty(this._customDisplayName))
+                if (!string.IsNullOrEmpty(_customDisplayName))
                 {
-                    return this._customDisplayName;
+                    return _customDisplayName;
                 }
 
                 return base.DisplayName;
@@ -123,7 +123,7 @@ namespace Radical.ComponentModel
         /// <returns>A <see cref="T:System.Type"/> that represents the type of the property.</returns>
         public override Type PropertyType
         {
-            get { return this.Property.PropertyType; }
+            get { return Property.PropertyType; }
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Radical.ComponentModel
         /// <returns>true if the property is read-only; otherwise, false.</returns>
         public override bool IsReadOnly
         {
-            get { return !this.Property.CanWrite; }
+            get { return !Property.CanWrite; }
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace Radical.ComponentModel
                 throw new ArgumentException("InvalidComponentType", "component");
             }
 
-            return this.GetValueCore(oiv);
+            return GetValueCore(oiv);
         }
 
         //Radical.Reflection.Function<Object> fastGetter = null;
@@ -229,7 +229,7 @@ namespace Radical.ComponentModel
 
             //return fastGetter();
 
-            return this.Property.GetValue(component.EntityItem, null);
+            return Property.GetValue(component.EntityItem, null);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace Radical.ComponentModel
         /// <param name="value">The new value.</param>
         public override sealed void SetValue(object component, object value)
         {
-            if (this.IsReadOnly)
+            if (IsReadOnly)
             {
                 throw new InvalidOperationException("Current property is read-only.");
             }
@@ -255,12 +255,12 @@ namespace Radical.ComponentModel
                 throw new ArgumentException("InvalidComponentType", "component");
             }
 
-            this.SetValueCore(oiv, value);
+            SetValueCore(oiv, value);
         }
 
         protected virtual void SetValueCore(IEntityItemView<T> component, object value)
         {
-            this.Property.SetValue(component.EntityItem, value, null);
+            Property.SetValue(component.EntityItem, value, null);
         }
     }
 }

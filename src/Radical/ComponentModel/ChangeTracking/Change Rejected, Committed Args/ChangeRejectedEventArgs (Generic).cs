@@ -17,7 +17,7 @@
         public ChangeRejectedEventArgs(object entity, T cachedValue, IChange source, RejectReason reason)
             : base(entity, cachedValue, source)
         {
-            this.Reason = reason;
+            Reason = reason;
         }
 
         /// <summary>

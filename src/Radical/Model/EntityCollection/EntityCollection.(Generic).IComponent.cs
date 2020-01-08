@@ -16,9 +16,9 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnDisposed()
         {
-            if (this.Disposed != null)
+            if (Disposed != null)
             {
-                this.Disposed(this, EventArgs.Empty);
+                Disposed(this, EventArgs.Empty);
             }
         }
 
@@ -35,13 +35,13 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this.site;
+                EnsureNotDisposed();
+                return site;
             }
             set
             {
-                this.EnsureNotDisposed();
-                this.site = value;
+                EnsureNotDisposed();
+                site = value;
             }
         }
     }

@@ -42,7 +42,7 @@ namespace Radical.Model
                 .IsNotNull()
                 .IsTrue(o => o.GetType().Is<T>());
 
-            return this.ShouldInclude((T)item);
+            return ShouldInclude((T)item);
         }
         
         /// <summary>

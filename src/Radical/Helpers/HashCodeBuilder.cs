@@ -13,7 +13,7 @@
         /// <param name="initialHashCode">The initial hash code.</param>
         public HashCodeBuilder(long initialHashCode)
         {
-            this.combinedHashCode = initialHashCode;
+            combinedHashCode = initialHashCode;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@
         public void AddObject(object value)
         {
             var h = value.GetHashCode();
-            this.combinedHashCode = ((this.combinedHashCode << 5) + this.combinedHashCode) ^ h;
+            combinedHashCode = ((combinedHashCode << 5) + combinedHashCode) ^ h;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@
         /// <value>The combined hash code.</value>
         public int CombinedHash32
         {
-            get { return this.combinedHashCode.GetHashCode(); }
+            get { return combinedHashCode.GetHashCode(); }
         }
 
         /// <summary>
@@ -41,7 +41,7 @@
         /// <value>The combined hash code.</value>
         public long CombinedHash
         {
-            get { return this.combinedHashCode; }
+            get { return combinedHashCode; }
         }
     }
 }

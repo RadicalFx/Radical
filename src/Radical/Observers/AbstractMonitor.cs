@@ -25,31 +25,31 @@ namespace Radical.Observers
         /// </summary>
         protected virtual void OnChanged()
         {
-            if (this.Dispatcher != null && !this.Dispatcher.IsSafe)
+            if (Dispatcher != null && !Dispatcher.IsSafe)
             {
-                this.Dispatcher.Dispatch(() => this.OnChanged());
+                Dispatcher.Dispatch(() => OnChanged());
             }
             else
             {
-                if (this.WeakSource == null)
+                if (WeakSource == null)
                 {
                     logger.Warning
                     (
                         "Raising the Changed event even if the monitored source is null. ({0})",
-                        this.GetType().ToString("SN")
+                        GetType().ToString("SN")
                     );
                 }
 
-                if (this.WeakSource != null && !this.WeakSource.IsAlive)
+                if (WeakSource != null && !WeakSource.IsAlive)
                 {
                     logger.Warning
                     (
                         "Raising the Changed event even if the monitored source is not alive anymore. ({0})",
-                        this.GetType().ToString("SN")
+                        GetType().ToString("SN")
                     );
                 }
 
-                var handler = this.Changed;
+                var handler = Changed;
                 if (handler != null)
                 {
                     handler(this, EventArgs.Empty);
@@ -69,7 +69,7 @@ namespace Radical.Observers
         /// </summary>
         public void NotifyChanged()
         {
-            this.OnChanged();
+            OnChanged();
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Radical.Observers
         /// <param name="dispatcher">The dispatcher.</param>
         protected AbstractMonitor(IDispatcher dispatcher)
         {
-            this.Dispatcher = dispatcher;
+            Dispatcher = dispatcher;
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Radical.Observers
         {
             Ensure.That(source).Named("source").IsNotNull();
 
-            this.StartMonitoring(source);
+            StartMonitoring(source);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Radical.Observers
         protected AbstractMonitor(object source, IDispatcher dispatcher)
             : this(source)
         {
-            this.Dispatcher = dispatcher;
+            Dispatcher = dispatcher;
         }
 
         EventHandler disposed = null;
@@ -119,14 +119,14 @@ namespace Radical.Observers
         /// <param name="source">The source.</param>
         protected virtual void StartMonitoring(object source)
         {
-            this.WeakSource = new WeakReference(source);
+            WeakSource = new WeakReference(source);
 
             disposed = (s, e) =>
             {
                 ((IComponent)s).Disposed -= disposed;
                 disposed = null;
 
-                this.StopMonitoring(true);
+                StopMonitoring(true);
             };
 
             var ic = source as IComponent;
@@ -151,26 +151,26 @@ namespace Radical.Observers
         /// </summary>
         public void StopMonitoring()
         {
-            this.StopMonitoring(false);
+            StopMonitoring(false);
         }
 
         void StopMonitoring(bool targetDisposed)
         {
-            this.OnStopMonitoring(targetDisposed);
+            OnStopMonitoring(targetDisposed);
 
             if (!targetDisposed &&
-                this.disposed != null &&
-                this.WeakSource != null &&
-                this.WeakSource.IsAlive)
+                disposed != null &&
+                WeakSource != null &&
+                WeakSource.IsAlive)
             {
-                var ic = this.WeakSource.Target as IComponent;
+                var ic = WeakSource.Target as IComponent;
                 if (ic != null)
                 {
                     ic.Disposed -= disposed;
                 }
             }
 
-            this.WeakSource = null;
+            WeakSource = null;
         }
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace Radical.Model
              * ce lo metterebbe in testa perchè l'indice -1 è minore... ergo
              * dobbiamo gestire questo "special case"
              */
-            int xIndex = this.dataSource.IndexOf(x.EntityItem);
-            int yIndex = this.dataSource.IndexOf(y.EntityItem);
+            int xIndex = dataSource.IndexOf(x.EntityItem);
+            int yIndex = dataSource.IndexOf(y.EntityItem);
 
             if (xIndex == -1 && yIndex != -1)
             {

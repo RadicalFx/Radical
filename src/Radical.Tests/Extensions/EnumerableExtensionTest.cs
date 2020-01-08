@@ -243,7 +243,7 @@ namespace Radical.Tests.Extensions
     {
         public Node()
         {
-            this.Nodes = new NodeList(this);
+            Nodes = new NodeList(this);
         }
 
         public string Id { get; set; }
@@ -265,7 +265,7 @@ namespace Radical.Tests.Extensions
         protected override void InsertItem(int index, Node item)
         {
             base.InsertItem(index, item);
-            item.Parent = this.parent;
+            item.Parent = parent;
         }
     }
 }

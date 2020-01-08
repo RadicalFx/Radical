@@ -15,8 +15,8 @@ namespace Radical.ComponentModel
     {
         protected EntityItemViewValueArgs(IEntityItemView<T> item, string propertyName)
         {
-            this.Item = item;
-            this.PropertyName = propertyName;
+            Item = item;
+            PropertyName = propertyName;
         }
 
         public IEntityItemView<T> Item
@@ -47,7 +47,7 @@ namespace Radical.ComponentModel
         public EntityItemViewValueSetterArgs(IEntityItemView<T> item, string propertyName, TValue value)
             : base(item, propertyName)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public TValue Value

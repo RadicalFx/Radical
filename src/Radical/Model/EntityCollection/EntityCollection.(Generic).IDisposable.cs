@@ -10,7 +10,7 @@ namespace Radical.Model
         /// </summary>
         ~EntityCollection()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         private bool isDisposed;
@@ -30,21 +30,21 @@ namespace Radical.Model
                  * eventuali reference perchè sicuramente Finalize
                  * non è ancora stato chiamato su questi oggetti
                  */
-                if (this.site != null && this.site.Container != null)
+                if (site != null && site.Container != null)
                 {
-                    this.site.Container.Remove(this);
+                    site.Container.Remove(this);
                 }
 
-                if (this._events != null)
+                if (_events != null)
                 {
-                    this.Events.Dispose();
+                    Events.Dispose();
                 }
             }
 
-            this._events = null;
+            _events = null;
 
-            this.OnDisposed();
-            this.isDisposed = true;
+            OnDisposed();
+            isDisposed = true;
         }
 
         /// <summary>
@@ -52,15 +52,15 @@ namespace Radical.Model
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         protected void EnsureNotDisposed()
         {
-            if (this.isDisposed)
+            if (isDisposed)
             {
-                throw new ObjectDisposedException(this.GetType().FullName);
+                throw new ObjectDisposedException(GetType().FullName);
             }
         }
     }

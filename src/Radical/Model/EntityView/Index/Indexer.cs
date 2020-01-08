@@ -53,7 +53,7 @@ namespace Radical.Model
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.storage.GetEnumerator();
+            return storage.GetEnumerator();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Radical.Model
         /// </returns>
         IEnumerator<IEntityItemView<T>> IEnumerable<IEntityItemView<T>>.GetEnumerator()
         {
-            return this.storage.GetEnumerator();
+            return storage.GetEnumerator();
         }
 
         /// <summary>
@@ -87,10 +87,10 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
         public bool Remove(IEntityItemView<T> item)
         {
-            int index = this.storage.IndexOf(item);
+            int index = storage.IndexOf(item);
             if (index > -1)
             {
-                this.RemoveAt(index);
+                RemoveAt(index);
                 return true;
             }
 
@@ -106,14 +106,14 @@ namespace Radical.Model
             /*
              * Svuotiamo lo storage interno
              */
-            this.storage.Clear();
+            storage.Clear();
 
             /*
              * Svuotiamo l'indice di default
              */
-            this.defaultIndex.Clear();
+            defaultIndex.Clear();
 
-            if (this.propertiesIndexes.Count > 0)
+            if (propertiesIndexes.Count > 0)
             {
                 /*
                  * Se ci sono proprietà indicizzate
@@ -124,7 +124,7 @@ namespace Radical.Model
                  * Questo significa che una colonna indicizzata
                  * è da rimuovere esplictamente
                  */
-                foreach (var index in this.propertiesIndexes)
+                foreach (var index in propertiesIndexes)
                 {
                     index.Value.Clear();
                 }
@@ -137,13 +137,13 @@ namespace Radical.Model
         /// <param name="index">The index.</param>
         public void RemoveAt(int index)
         {
-            IEntityItemView<T> item = this.storage[index];
-            if (this.defaultIndex.ContainsKey(item))
+            IEntityItemView<T> item = storage[index];
+            if (defaultIndex.ContainsKey(item))
             {
-                this.defaultIndex.Remove(item);
+                defaultIndex.Remove(item);
             }
 
-            this.storage.RemoveAt(index);
+            storage.RemoveAt(index);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Radical.Model
         /// <param name="arrayIndex">The zero-based index in array at which copying begins</param>
         public void CopyTo(IEntityItemView<T>[] array, int arrayIndex)
         {
-            this.storage.CopyTo(array, arrayIndex);
+            storage.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Radical.Model
         /// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
         public int Count
         {
-            get { return this.storage.Count; }
+            get { return storage.Count; }
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Radical.Model
         /// </returns>
         public bool Contains(IEntityItemView<T> item)
         {
-            return this.storage.Contains(item);
+            return storage.Contains(item);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Radical.Model
         /// </returns>
         public bool Contains(T item)
         {
-            return this.IndexOf(item) != -1;
+            return IndexOf(item) != -1;
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Radical.Model
         /// <item></item>
         public IEntityItemView<T> this[int index]
         {
-            get { return this.storage[index]; }
+            get { return storage[index]; }
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
         public void Add(IEntityItemView<T> item)
         {
-            this.storage.Add(item);
+            storage.Add(item);
 
             /*
              * In fase di insert di un nuovo elemento
@@ -218,7 +218,7 @@ namespace Radical.Model
              * questo non sarà ancora presente nella List quindi giustamente
              * viene inserito con Value a -1
              */
-            this.defaultIndex.Add(item, this.view.DataSource.IndexOf(item.EntityItem));
+            defaultIndex.Add(item, view.DataSource.IndexOf(item.EntityItem));
         }
 
         /// <summary>
@@ -239,13 +239,13 @@ namespace Radical.Model
              * mentre l'int è l'indice dell'EntityItemView che
              * lo incapsula
              */
-            var x = (from el in this.storage
+            var x = (from el in storage
                      where el.EntityItem.Equals(item)
                      select el).FirstOrDefault<IEntityItemView<T>>();
 
             if (x != null)
             {
-                return this.IndexOf(x);
+                return IndexOf(x);
             }
 
             return -1;
@@ -258,7 +258,7 @@ namespace Radical.Model
         /// <returns></returns>
         public int IndexOf(IEntityItemView<T> item)
         {
-            return this.storage.IndexOf(item);
+            return storage.IndexOf(item);
         }
 
 
@@ -270,9 +270,9 @@ namespace Radical.Model
         /// <returns>The index of the T element, otherwise -1</returns>
         public int FindObjectIndexInDataSource(int objectItemViewIndexInView)
         {
-            if (objectItemViewIndexInView > -1 && objectItemViewIndexInView < this.storage.Count)
+            if (objectItemViewIndexInView > -1 && objectItemViewIndexInView < storage.Count)
             {
-                IEntityItemView<T> el = this.storage[objectItemViewIndexInView];
+                IEntityItemView<T> el = storage[objectItemViewIndexInView];
                 if (el != null)
                 {
                     return defaultIndex[el];
@@ -291,10 +291,10 @@ namespace Radical.Model
         /// <returns>The Index of the EntityItemView, otherwise -1</returns>
         public int FindEntityItemViewIndexInView(int entityIndexInDataSource)
         {
-            if (entityIndexInDataSource > -1 && entityIndexInDataSource < this.view.DataSource.Count)
+            if (entityIndexInDataSource > -1 && entityIndexInDataSource < view.DataSource.Count)
             {
-                T obj = (T)this.view.DataSource[entityIndexInDataSource];
-                return this.IndexOf(obj);
+                T obj = (T)view.DataSource[entityIndexInDataSource];
+                return IndexOf(obj);
             }
 
             return -1;
@@ -312,8 +312,8 @@ namespace Radical.Model
                  * Se non abbiamo già indicizzato quella proprietà
                  * lo facciamo adesso, creiamo un nuovo Dictionary
                  */
-                Dictionary<object, IEntityItemView<T>> newIndex = new Dictionary<object, IEntityItemView<T>>(this.Count);
-                this.IndexProperty(property, newIndex);
+                Dictionary<object, IEntityItemView<T>> newIndex = new Dictionary<object, IEntityItemView<T>>(Count);
+                IndexProperty(property, newIndex);
                 propertiesIndexes.Add(property.Name, newIndex);
             }
         }
@@ -350,16 +350,16 @@ namespace Radical.Model
         {
             int index = -1;
 
-            if (this.propertiesIndexes.ContainsKey(property.Name))
+            if (propertiesIndexes.ContainsKey(property.Name))
             {
                 /*
                  * Se la proprietà è indicizzata facciamo fare all'indice
                  */
-                Dictionary<object, IEntityItemView<T>> propertyIndex = this.propertiesIndexes[property.Name];
+                Dictionary<object, IEntityItemView<T>> propertyIndex = propertiesIndexes[property.Name];
                 if (propertyIndex.ContainsKey(key))
                 {
                     IEntityItemView<T> item = propertyIndex[key];
-                    index = this.IndexOf(item);
+                    index = IndexOf(item);
                 }
             }
             else
@@ -374,7 +374,7 @@ namespace Radical.Model
                 var item = this.Where(element => Object.Equals(property.GetValue(element.EntityItem), key)).FirstOrDefault();
                 if (item != null)
                 {
-                    index = this.IndexOf(item);
+                    index = IndexOf(item);
                 }
             }
 
@@ -399,10 +399,10 @@ namespace Radical.Model
         /// </summary>
         public void ClearIndexes()
         {
-            if (this.propertiesIndexes.Count > 0)
+            if (propertiesIndexes.Count > 0)
             {
-                this.propertiesIndexes.ForEach(kvp => { kvp.Value.Clear(); });
-                this.propertiesIndexes.Clear();
+                propertiesIndexes.ForEach(kvp => { kvp.Value.Clear(); });
+                propertiesIndexes.Clear();
             }
         }
 
@@ -415,14 +415,14 @@ namespace Radical.Model
         {
             IEnumerable<KeyValuePair<IEntityItemView<T>, int>> pendingAddElements = null;
 
-            if (this.Count > 0)
+            if (Count > 0)
             {
                 /*
                  * Dato che verranno ricreati da zero tutti gli elementi
                  * presenti nella EntityView, sganciamo i gestori degli
                  * eventi degli elementi attualmente presenti.
                  */
-                this.storage.ForEach(element => { this.view.OnUnwireEntityItemView(element); });
+                storage.ForEach(element => { view.OnUnwireEntityItemView(element); });
 
                 /*
                  * Dato che è possibile che ci siano elementi nuovi
@@ -435,12 +435,12 @@ namespace Radical.Model
                  * Il "ToList()" è necessario per scatenare subito il deferred
                  * loading altrimenti ci perdiamo i pezzi per strada con la clear.
                  */
-                pendingAddElements = this.defaultIndex.Where(element => element.Value == -1).AsReadOnly();
+                pendingAddElements = defaultIndex.Where(element => element.Value == -1).AsReadOnly();
 
                 /*
                  * Svuotiamo questa istanza
                  */
-                this.Clear();
+                Clear();
             }
 
             /*
@@ -450,9 +450,9 @@ namespace Radical.Model
              * PendingAdd non sarà ancora presente nella DataSource quindi correttamente
              * verrà aggiunto con Value a -1
              */
-            var sourceElements = ((IEnumerable<T>)this.view.DataSource)
-                .Where(element => this.view.Filter.ShouldInclude(element))
-                .Select(element => new { Element = (T)element, Index = this.view.DataSource.IndexOf(element) });
+            var sourceElements = ((IEnumerable<T>)view.DataSource)
+                .Where(element => view.Filter.ShouldInclude(element))
+                .Select(element => new { Element = (T)element, Index = view.DataSource.IndexOf(element) });
 
             /*
              * Scorriamo tutti gli elementi trovati, creiamo un nuovo
@@ -461,10 +461,10 @@ namespace Radical.Model
              */
             sourceElements.ForEach(sourceElement =>
             {
-                IEntityItemView<T> item = this.view.CreateEntityItemView(sourceElement.Element);
-                this.view.OnWireEntityItemView(item);
+                IEntityItemView<T> item = view.CreateEntityItemView(sourceElement.Element);
+                view.OnWireEntityItemView(item);
 
-                this.Add(item);
+                Add(item);
             });
 
             sourceElements = null;
@@ -478,30 +478,30 @@ namespace Radical.Model
                 {
                     IEntityItemView<T> item = element.Key;
 
-                    this.view.OnWireEntityItemView(item);
-                    this.Add(item);
+                    view.OnWireEntityItemView(item);
+                    Add(item);
                 });
             }
 
             pendingAddElements = null;
 
-            this.ApplySort();
+            ApplySort();
 
-            if (this.propertiesIndexes.Count > 0)
+            if (propertiesIndexes.Count > 0)
             {
                 /*
                  * Ci sono proprietà indicizzate
                  * dobbiamo ricostruire anche questi
                  * indici
                  */
-                this.propertiesIndexes.ForEach(index =>
+                propertiesIndexes.ForEach(index =>
                 {
                     /*
                      * Ricostruiamo il PropertyDescriptor
                      * e reindicizziamo la proprietà
                      */
                     PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(T)).Find(index.Key, false);
-                    this.IndexProperty(property, index.Value);
+                    IndexProperty(property, index.Value);
                 });
             }
         }
@@ -514,9 +514,9 @@ namespace Radical.Model
             /*
              * Se abbiamo impostato un sort, riapplichiamo il Sort
              */
-            if (this.view.IsSorted)
+            if (view.IsSorted)
             {
-                this.storage.Sort(this.view.SortComparer);
+                storage.Sort(view.SortComparer);
             }
         }
 
@@ -530,8 +530,8 @@ namespace Radical.Model
              * orginale che è quello della DataSource, l'unica nota
              * è che l'Indice potrebbe essere "filtrato"
              */
-            var comparer = new DefaultEntityItemViewSortComparer<T>(this.view.DataSource);
-            this.storage.Sort(comparer);
+            var comparer = new DefaultEntityItemViewSortComparer<T>(view.DataSource);
+            storage.Sort(comparer);
         }
     }
 }

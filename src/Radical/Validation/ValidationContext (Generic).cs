@@ -32,9 +32,9 @@ namespace Radical.Validation
             Ensure.That(validator).Named("validator").IsNotNull();
             Ensure.That(results).Named("results").IsNotNull();
 
-            this.Entity = entity;
-            this.Validator = validator;
-            this.Results = results;
+            Entity = entity;
+            Validator = validator;
+            Results = results;
         }
 
         public ValidationResult Failed(string error)

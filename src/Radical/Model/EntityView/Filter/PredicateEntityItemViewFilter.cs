@@ -28,7 +28,7 @@ namespace Radical.Model
             Ensure.That(filterDelegate).Named("filterDelegate").IsNotNull();
 
             this.filterName = filterName ?? Resources.Labels.DefaulPredicateFilterName;
-            this.FilterDelegate = filterDelegate;
+            FilterDelegate = filterDelegate;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Radical.Model
         /// </returns>
         public override string ToString()
         {
-            return this.filterName;
+            return filterName;
         }
 
         #region EntityItemViewFilterBase<T> Members
@@ -53,7 +53,7 @@ namespace Radical.Model
         /// </returns>
         public override bool ShouldInclude(T item)
         {
-            return this.FilterDelegate(item);
+            return FilterDelegate(item);
         }
 
         #endregion

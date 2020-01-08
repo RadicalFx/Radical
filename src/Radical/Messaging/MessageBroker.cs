@@ -24,8 +24,8 @@ namespace Radical.Messaging
         {
             public SubscriptionsContainer(Type messageType)
             {
-                this.MessageType = messageType;
-                this.Subscriptions = new List<ISubscription>();
+                MessageType = messageType;
+                Subscriptions = new List<ISubscription>();
             }
 
             public Type MessageType { get; private set; }
@@ -56,9 +56,9 @@ namespace Radical.Messaging
             Ensure.That(dispatcher).Named("dispatcher").IsNotNull();
 
             this.dispatcher = dispatcher;
-            this.msgSubsIndex = new List<SubscriptionsContainer>();
+            msgSubsIndex = new List<SubscriptionsContainer>();
 
-            this.factory = new TaskFactory();
+            factory = new TaskFactory();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Radical.Messaging
 
             this.dispatcher = dispatcher;
             this.factory = factory;
-            this.msgSubsIndex = new List<SubscriptionsContainer>();
+            msgSubsIndex = new List<SubscriptionsContainer>();
         }
 
         void SubscribeCore(Type messageType, ISubscription subscription)
@@ -81,9 +81,9 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (this.msgSubsIndex.Any(sc => sc.MessageType == messageType))
+                if (msgSubsIndex.Any(sc => sc.MessageType == messageType))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == messageType).Subscriptions;
+                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == messageType).Subscriptions;
                     msgSubsIndexLock.EnterWriteLock();
                     try
                     {
@@ -101,7 +101,7 @@ namespace Radical.Messaging
                     {
                         var sc = new SubscriptionsContainer(messageType);
                         sc.Subscriptions.Add(subscription);
-                        this.msgSubsIndex.Add(sc);
+                        msgSubsIndex.Add(sc);
                     }
                     finally
                     {
@@ -124,7 +124,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Action<object, T> callback)
         {
-            this.Subscribe<T>(subscriber, InvocationModel.Default, callback);
+            Subscribe<T>(subscriber, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, Action<object, T> callback)
         {
-            this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
+            Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, Action<object, object> callback)
         {
-            this.Subscribe(subscriber, messageType, InvocationModel.Default, callback);
+            Subscribe(subscriber, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, Action<object, object> callback)
         {
-            this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
+            Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<object, T> callback)
         {
-            this.Subscribe<T>(subscriber, invocationModel, (s, msg) => true, callback);
+            Subscribe<T>(subscriber, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
         {
-            this.Subscribe(subscriber, messageType, invocationModel, (s, msg) => true, callback);
+            Subscribe(subscriber, messageType, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
         {
-            this.Subscribe(subscriber, sender, messageType, invocationModel, (s, msg) => true, callback);
+            Subscribe(subscriber, sender, messageType, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback)
         {
-            this.Subscribe<T>(subscriber, sender, invocationModel, (s, msg) => true, callback);
+            Subscribe<T>(subscriber, sender, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                foreach (var subscription in this.msgSubsIndex)
+                foreach (var subscription in msgSubsIndex)
                 {
                     var count = subscription.Subscriptions.Count;
                     for (var k = count; k > 0; k--)
@@ -255,14 +255,14 @@ namespace Radical.Messaging
                     }
                 }
 
-                this.msgSubsIndex.Where(msgSubscriptions => msgSubscriptions.Subscriptions.Count == 0)
+                msgSubsIndex.Where(msgSubscriptions => msgSubscriptions.Subscriptions.Count == 0)
                     .ToList()
                     .ForEach(kvp =>
                    {
                        msgSubsIndexLock.EnterWriteLock();
                        try
                        {
-                           this.msgSubsIndex.Remove(kvp);
+                           msgSubsIndex.Remove(kvp);
                        }
                        finally
                        {
@@ -290,7 +290,7 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                this.msgSubsIndex.Where(msgSubscriptions =>
+                msgSubsIndex.Where(msgSubscriptions =>
                {
                    return msgSubscriptions.Subscriptions.Where(subscription =>
                    {
@@ -305,7 +305,7 @@ namespace Radical.Messaging
                    msgSubsIndexLock.EnterWriteLock();
                    try
                    {
-                       this.msgSubsIndex.Remove(kvp);
+                       msgSubsIndex.Remove(kvp);
                    }
                    finally
                    {
@@ -331,9 +331,9 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (this.msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
+                if (msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
+                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
                        return Object.Equals(subscriber, subscription.Subscriber);
@@ -374,9 +374,9 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (this.msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
+                if (msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
+                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
                        return Object.Equals(subscriber, subscription.Subscriber)
@@ -418,9 +418,9 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (this.msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
+                if (msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
                 {
-                    var allMessageSubscriptions = this.msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
+                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
                        return Object.Equals(subscriber, subscription.Subscriber)
@@ -452,7 +452,7 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterReadLock();
             try
             {
-                var subscriptions = this.msgSubsIndex
+                var subscriptions = msgSubsIndex
                                         .Where(kvp => messageType.Is(kvp.MessageType))
                                         .SelectMany(kvp => kvp.Subscriptions);
 
@@ -476,7 +476,7 @@ namespace Radical.Messaging
             message.As<IRequireToBeValid>(m => m.Validate());
 
             var messageType = message.GetType();
-            var subscriptions = this.GetSubscriptionsFor(messageType, sender);
+            var subscriptions = GetSubscriptionsFor(messageType, sender);
             var anySubscription = subscriptions.Any();
 
             if (!anySubscription)
@@ -504,7 +504,7 @@ namespace Radical.Messaging
 
             message.As<IRequireToBeValid>(m => m.Validate());
 
-            var subscriptions = this.GetSubscriptionsFor(message.GetType(), sender);
+            var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
 
             if (subscriptions.Any())
             {
@@ -512,7 +512,7 @@ namespace Radical.Messaging
                 subscriptions.Where(sub => sub.ShouldInvoke(sender, message))
                     .ForEach(sub =>
                     {
-                        this.factory.StartNew(() =>
+                        factory.StartNew(() =>
                         {
                             sub.Invoke(sender, message);
                         });
@@ -533,7 +533,7 @@ namespace Radical.Messaging
 
             message.As<IRequireToBeValid>(m => m.Validate());
 
-            var subscriptions = this.GetSubscriptionsFor(message.GetType(), sender);
+            var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
 
             var tasks = new List<Task>();
             if (subscriptions.Any())
@@ -549,7 +549,7 @@ namespace Radical.Messaging
                         }
                         else
                         {
-                            tasks.Add(this.factory.StartNew(() =>
+                            tasks.Add(factory.StartNew(() =>
                             {
                                 sub.Invoke(sender, message);
                             }));
@@ -570,7 +570,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
         {
-            this.Subscribe(subscriber, (s, msg) => Task.FromResult(true), callback);
+            Subscribe(subscriber, (s, msg) => Task.FromResult(true), callback);
         }
 
         /// <summary>
@@ -587,9 +587,9 @@ namespace Radical.Messaging
             Ensure.That(callbackFilter).Named("callbackFilter").IsNotNull();
             Ensure.That(callback).Named("callback").IsNotNull();
 
-            var subscription = new PocoAsyncSubscription<T>(subscriber, callback, callbackFilter, InvocationModel.Default, this.dispatcher);
+            var subscription = new PocoAsyncSubscription<T>(subscriber, callback, callbackFilter, InvocationModel.Default, dispatcher);
 
-            this.SubscribeCore(typeof(T), subscription);
+            SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
@@ -604,7 +604,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
-            this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callbackFilter, callback);
+            Subscribe(subscriber, sender, messageType, InvocationModel.Default, callbackFilter, callback);
         }
 
         /// <summary>
@@ -626,9 +626,9 @@ namespace Radical.Messaging
             Ensure.That(callback).Named(() => callback).IsNotNull();
             Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
 
-            var subscription = new PocoSubscription(subscriber, sender, callback, callbackFilter, invocationModel, this.dispatcher);
+            var subscription = new PocoSubscription(subscriber, sender, callback, callbackFilter, invocationModel, dispatcher);
 
-            this.SubscribeCore(messageType, subscription);
+            SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -641,7 +641,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
-            this.Subscribe(subscriber, messageType, InvocationModel.Default, callbackFilter, callback);
+            Subscribe(subscriber, messageType, InvocationModel.Default, callbackFilter, callback);
         }
 
         /// <summary>
@@ -660,9 +660,9 @@ namespace Radical.Messaging
             Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
             Ensure.That(callback).Named(() => callback).IsNotNull();
 
-            var subscription = new PocoSubscription(subscriber, callback, callbackFilter, invocationModel, this.dispatcher);
+            var subscription = new PocoSubscription(subscriber, callback, callbackFilter, invocationModel, dispatcher);
 
-            this.SubscribeCore(messageType, subscription);
+            SubscribeCore(messageType, subscription);
         }
 
         /// <summary>
@@ -675,7 +675,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            this.Subscribe<T>(subscriber, InvocationModel.Default, callbackFilter, callback);
+            Subscribe<T>(subscriber, InvocationModel.Default, callbackFilter, callback);
         }
 
         /// <summary>
@@ -690,7 +690,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
+            Subscribe<T>(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
         }
 
         /// <summary>
@@ -711,9 +711,9 @@ namespace Radical.Messaging
             Ensure.That(callback).Named(() => callback).IsNotNull();
             Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
 
-            var subscription = new PocoSubscription<T>(subscriber, sender, callback, callbackFilter, invocationModel, this.dispatcher);
+            var subscription = new PocoSubscription<T>(subscriber, sender, callback, callbackFilter, invocationModel, dispatcher);
 
-            this.SubscribeCore(typeof(T), subscription);
+            SubscribeCore(typeof(T), subscription);
         }
 
         /// <summary>
@@ -731,9 +731,9 @@ namespace Radical.Messaging
             Ensure.That(callback).Named(() => callback).IsNotNull();
             Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
 
-            var subscription = new PocoSubscription<T>(subscriber, callback, callbackFilter, invocationModel, this.dispatcher);
+            var subscription = new PocoSubscription<T>(subscriber, callback, callbackFilter, invocationModel, dispatcher);
 
-            this.SubscribeCore(typeof(T), subscription);
+            SubscribeCore(typeof(T), subscription);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
+                EnsureNotDisposed();
                 return false;
             }
         }
@@ -28,8 +28,8 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this.IsReadOnly;
+                EnsureNotDisposed();
+                return IsReadOnly;
             }
         }
 
@@ -43,10 +43,10 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
         int IList.Add(object value)
         {
-            this.EnsureNotDisposed();
-            this.Add((T)value);
+            EnsureNotDisposed();
+            Add((T)value);
 
-            return this.Count - 1;
+            return Count - 1;
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Radical.Model
         /// </returns>
         bool IList.Contains(object value)
         {
-            this.EnsureNotDisposed();
-            return this.Contains((T)value);
+            EnsureNotDisposed();
+            return Contains((T)value);
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace Radical.Model
         /// </returns>
         int IList.IndexOf(object value)
         {
-            this.EnsureNotDisposed();
-            return this.IndexOf((T)value);
+            EnsureNotDisposed();
+            return IndexOf((T)value);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace Radical.Model
         /// <exception cref="T:System.NullReferenceException"><paramref name="item" /> is null reference in the <see cref="T:System.Collections.IList" />.</exception>
         void IList.Insert(int index, object item)
         {
-            this.EnsureNotDisposed();
-            this.Insert(index, (T)item);
+            EnsureNotDisposed();
+            Insert(index, (T)item);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
         void IList.Remove(object value)
         {
-            this.EnsureNotDisposed();
-            this.Remove((T)value);
+            EnsureNotDisposed();
+            Remove((T)value);
         }
 
         /// <summary>
@@ -108,13 +108,13 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                return this.GetValueAt(index);
+                EnsureNotDisposed();
+                return GetValueAt(index);
             }
             set
             {
-                this.EnsureNotDisposed();
-                this.SetValueAt(index, (T)value);
+                EnsureNotDisposed();
+                SetValueAt(index, (T)value);
             }
         }
     }

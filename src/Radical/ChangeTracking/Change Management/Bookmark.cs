@@ -21,9 +21,9 @@ namespace Radical.ChangeTracking
         {
             Ensure.That(owner).Named("owner").IsNotNull();
 
-            this.Owner = owner;
-            this.Position = position;
-            this.TransientEntities = transientEntities ?? new ReadOnlyCollection<object>(new List<object>());
+            Owner = owner;
+            Position = position;
+            TransientEntities = transientEntities ?? new ReadOnlyCollection<object>(new List<object>());
         }
 
         /// <summary>

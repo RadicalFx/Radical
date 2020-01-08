@@ -54,11 +54,11 @@ namespace Radical
         {
             get
             {
-                if (this._resourceManager == null)
+                if (_resourceManager == null)
                 {
                     Assembly assembly = null;
 
-                    switch (this.AssemblyLocationBehavior)
+                    switch (AssemblyLocationBehavior)
                     {
                         case ResourceAssemblyLocationBehavior.UseExecutingAssembly:
                             assembly = Assembly.GetExecutingAssembly();
@@ -74,14 +74,14 @@ namespace Radical
 
                         case ResourceAssemblyLocationBehavior.ByAssemblyName:
                         default:
-                            assembly = Assembly.Load(this.AssemblyName);
+                            assembly = Assembly.Load(AssemblyName);
                             break;
                     }
 
-                    this._resourceManager = new ResourceManager(this.ResourceName, assembly);
+                    _resourceManager = new ResourceManager(ResourceName, assembly);
                 }
 
-                return this._resourceManager;
+                return _resourceManager;
             }
         }
 
@@ -131,9 +131,9 @@ namespace Radical
         /// </returns>
         protected override string OnGetCaption(string caption)
         {
-            var value = this.ResourceManager.GetString(caption);
+            var value = ResourceManager.GetString(caption);
 
-            return value ?? this.CaptionFallbackValue;
+            return value ?? CaptionFallbackValue;
         }
 
         /// <summary>
@@ -146,9 +146,9 @@ namespace Radical
         /// </returns>
         protected override string OnGetDescription(string description)
         {
-            var value = this.ResourceManager.GetString(description);
+            var value = ResourceManager.GetString(description);
 
-            return value ?? this.DescriptionFallbackValue;
+            return value ?? DescriptionFallbackValue;
         }
     }
 }

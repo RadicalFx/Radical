@@ -55,10 +55,10 @@ namespace Radical.DataBinding
             Ensure.That(description).Named("description").IsNotNull();
             Ensure.That(value).Named("value").IsFalse(o => o == null);
 
-            this.Caption = caption;
-            this.Description = description;
-            this.Value = value;
-            this.Index = index;
+            Caption = caption;
+            Description = description;
+            Value = value;
+            Index = index;
         }
 
         /// <summary>

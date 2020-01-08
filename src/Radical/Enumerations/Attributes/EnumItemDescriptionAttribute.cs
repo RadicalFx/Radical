@@ -51,9 +51,9 @@ namespace Radical
                 throw new ArgumentNullException("description");
             }
 
-            this._caption = caption;
-            this._description = description;
-            this._index = index;
+            _caption = caption;
+            _description = description;
+            _index = index;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Radical
         /// <value>The caption.</value>
         public string Caption
         {
-            get { return this.OnGetCaption(this._caption); }
+            get { return OnGetCaption(_caption); }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Radical
         /// <value>The description.</value>
         public string Description
         {
-            get { return this.OnGetDescription(this._description); }
+            get { return OnGetDescription(_description); }
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Radical
         /// <value>The index.</value>
         public virtual int Index
         {
-            get { return this._index; }
+            get { return _index; }
         }
 
         /// <summary>

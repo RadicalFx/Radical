@@ -17,7 +17,7 @@
         public ChangeCommittedEventArgs(object entity, T cachedValue, IChange source, CommitReason reason)
             : base(entity, cachedValue, source)
         {
-            this.Reason = reason;
+            Reason = reason;
         }
 
         /// <summary>

@@ -19,8 +19,8 @@ namespace Radical.Helpers
                 .Named(() => argumentName)
                 .IsNotNullNorEmpty();
 
-            this.ArgumentName = argumentName;
-            this.Aliases = new string[0];
+            ArgumentName = argumentName;
+            Aliases = new string[0];
         }
 
         /// <summary>

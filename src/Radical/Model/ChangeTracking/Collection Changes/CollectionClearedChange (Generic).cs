@@ -32,7 +32,7 @@
         /// <returns></returns>
         public override IEnumerable<object> GetChangedEntities()
         {
-            return this.Descriptor.Items.OfType<object>().AsReadOnly();
+            return Descriptor.Items.OfType<object>().AsReadOnly();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@
                 .Named("changedItem")
                 .If(o =>
                {
-                   return !this.Descriptor.Items.Where(t => Object.Equals(t, o)).Any();
+                   return !Descriptor.Items.Where(t => Object.Equals(t, o)).Any();
                })
                 .Then((o, n) =>
                {
@@ -64,11 +64,11 @@
         public override IChange Clone()
         {
             return new CollectionClearedChange<T>(
-                this.Owner,
-                this.Descriptor,
-                this.RejectCallback,
-                this.CommitCallback,
-                this.Description);
+                Owner,
+                Descriptor,
+                RejectCallback,
+                CommitCallback,
+                Description);
         }
     }
 }

@@ -19,15 +19,15 @@ namespace Radical.Tests.Threading
         public TimerTrigger(int interval, TimerTriggerMode triggerMode)
             : base(CreateDefault(interval, triggerMode))
         {
-            this.Mode = triggerMode;
+            Mode = triggerMode;
 
-            this.elapsedEventHandler = (s, e) =>
+            elapsedEventHandler = (s, e) =>
             {
-                this.Stop();
-                this.NotifyChanged();
-                if (this.Mode == TimerTriggerMode.Always)
+                Stop();
+                NotifyChanged();
+                if (Mode == TimerTriggerMode.Always)
                 {
-                    this.Start();
+                    Start();
                 }
             };
         }
@@ -37,35 +37,35 @@ namespace Radical.Tests.Threading
             base.StartMonitoring(source);
 
             var t = (Timer)source;
-            t.Elapsed += this.elapsedEventHandler;
+            t.Elapsed += elapsedEventHandler;
         }
 
         protected override void OnStopMonitoring(bool targetDisposed)
         {
             if (!targetDisposed)
             {
-                this.Stop();
+                Stop();
 
-                if (this.WeakSource.IsAlive)
+                if (WeakSource.IsAlive)
                 {
-                    this.Source.Elapsed -= this.elapsedEventHandler;
+                    Source.Elapsed -= elapsedEventHandler;
                 }
             }
         }
 
         public void Start()
         {
-            if (this.WeakSource.IsAlive)
+            if (WeakSource.IsAlive)
             {
-                this.Source.Enabled = true;
+                Source.Enabled = true;
             }
         }
 
         public void Stop()
         {
-            if (this.WeakSource.IsAlive)
+            if (WeakSource.IsAlive)
             {
-                this.Source.Enabled = false;
+                Source.Enabled = false;
             }
         }
 

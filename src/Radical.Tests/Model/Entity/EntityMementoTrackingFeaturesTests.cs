@@ -73,9 +73,9 @@ namespace Radical.Tests.Model.Entity
             {
                 base.OnMementoChanged(newMemento, oldMemento);
 
-                if (this.MementoChanged != null)
+                if (MementoChanged != null)
                 {
-                    this.MementoChanged(this, new MementoChangedEventArgs(newMemento, oldMemento));
+                    MementoChanged(this, new MementoChangedEventArgs(newMemento, oldMemento));
                 }
             }
         }
@@ -89,8 +89,8 @@ namespace Radical.Tests.Model.Entity
         {
             internal MementoChangedEventArgs(IChangeTrackingService newMemento, IChangeTrackingService oldMemento)
             {
-                this.NewMemento = newMemento;
-                this.OldMemento = oldMemento;
+                NewMemento = newMemento;
+                OldMemento = oldMemento;
             }
 
             public readonly IChangeTrackingService NewMemento;

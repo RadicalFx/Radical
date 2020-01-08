@@ -17,7 +17,7 @@ namespace Radical.ChangeTracking
         /// <param name="behavior">The behavior.</param>
         public void Add(IChange change, AddChangeBehavior behavior)
         {
-            this.changes.Add(new Tuple<IChange, AddChangeBehavior>(change, behavior));
+            changes.Add(new Tuple<IChange, AddChangeBehavior>(change, behavior));
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Radical.ChangeTracking
         /// <param name="autoRemove">if set to <c>true</c> [auto remove].</param>
         public void RegisterTransient(object entity, bool autoRemove)
         {
-            this.transientEntities.Add(entity, autoRemove);
+            transientEntities.Add(entity, autoRemove);
         }
 
         /// <summary>
@@ -50,17 +50,17 @@ namespace Radical.ChangeTracking
         {
             var state = EntityTrackingStates.None;
 
-            if (this.transientEntities != null && this.transientEntities.ContainsKey(entity))
+            if (transientEntities != null && transientEntities.ContainsKey(entity))
             {
                 state |= EntityTrackingStates.IsTransient;
 
-                if (this.transientEntities[entity])
+                if (transientEntities[entity])
                 {
                     state |= EntityTrackingStates.AutoRemove;
                 }
             }
 
-            var isChanged = this.changes.Any(c => Object.Equals(c.Item1.Owner, entity));
+            var isChanged = changes.Any(c => Object.Equals(c.Item1.Owner, entity));
             if (isChanged)
             {
                 var changed = EntityTrackingStates.HasBackwardChanges | EntityTrackingStates.HasForwardChanges;
@@ -76,7 +76,7 @@ namespace Radical.ChangeTracking
         /// <returns>A list of changed entities.</returns>
         public IEnumerable<object> GetChangedEntities()
         {
-            var tmp = this.changes.SelectMany(c => c.Item1.GetChangedEntities());
+            var tmp = changes.SelectMany(c => c.Item1.GetChangedEntities());
 
             return tmp;
         }
@@ -87,12 +87,12 @@ namespace Radical.ChangeTracking
         /// <param name="reason">The reason of the commit.</param>
         public void Commit(CommitReason reason)
         {
-            foreach (var c in this.changes)
+            foreach (var c in changes)
             {
                 c.Item1.Commit(reason);
             }
 
-            this.OnCommitted(new CommittedEventArgs(reason));
+            OnCommitted(new CommittedEventArgs(reason));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Radical.ChangeTracking
 
         void OnCommitted(CommittedEventArgs e)
         {
-            var h = this.Committed;
+            var h = Committed;
             if (h != null)
             {
                 h(this, e);
@@ -134,13 +134,13 @@ namespace Radical.ChangeTracking
              * in questo momento abbiamo uno special case sul servizio
              * in fase di reject che fa esattamente questo.
              */
-            var reversed = this.changes.ToArray().Reverse();
+            var reversed = changes.ToArray().Reverse();
             foreach (var c in reversed)
             {
                 c.Item1.Reject(reason);
             }
 
-            this.OnRejected(new RejectedEventArgs(reason));
+            OnRejected(new RejectedEventArgs(reason));
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Radical.ChangeTracking
 
         void OnRejected(RejectedEventArgs e)
         {
-            var h = this.Rejected;
+            var h = Rejected;
             if (h != null)
             {
                 h(this, e);
@@ -195,7 +195,7 @@ namespace Radical.ChangeTracking
              * importante per il changedItem
              * che stiamo considerando.
              */
-            var actions = this.changes
+            var actions = changes
                 .Where(v => v.Item1.Owner == changedItem)
                 .Select(v => v.Item1.GetAdvisedAction(changedItem));
 
@@ -217,12 +217,12 @@ namespace Radical.ChangeTracking
         /// <param name="dictionary">The dictionary.</param>
         public void MergeTransientEntities(IDictionary<object, bool> dictionary)
         {
-            foreach (var kvp in this.transientEntities)
+            foreach (var kvp in transientEntities)
             {
                 dictionary.Add(kvp);
             }
 
-            this.transientEntities.Clear();
+            transientEntities.Clear();
         }
     }
 }

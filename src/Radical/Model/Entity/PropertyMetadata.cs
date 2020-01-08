@@ -17,7 +17,7 @@ namespace Radical.Model
         /// </summary>
         ~PropertyMetadata()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Radical.Model
         {
             if (disposing)
             {
-                this.cascadeChangeNotifications.Clear();
+                cascadeChangeNotifications.Clear();
             }
         }
 
@@ -37,7 +37,7 @@ namespace Radical.Model
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -81,14 +81,14 @@ namespace Radical.Model
         {
             get
             {
-                if (this._property == null)
+                if (_property == null)
                 {
-                    this._property = this.propertyOwner
+                    _property = propertyOwner
                         .GetType()
-                        .GetProperty(this.PropertyName);
+                        .GetProperty(PropertyName);
                 }
 
-                return this._property;
+                return _property;
             }
         }
 
@@ -103,8 +103,8 @@ namespace Radical.Model
             Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
             this.propertyOwner = propertyOwner;
-            this.PropertyName = propertyName;
-            this.NotifyChanges = true;
+            PropertyName = propertyName;
+            NotifyChanges = true;
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Radical.Model
         /// <returns>This metadata instance.</returns>
         public PropertyMetadata DisableChangesNotifications()
         {
-            this.NotifyChanges = false;
+            NotifyChanges = false;
             return this;
         }
 
@@ -139,32 +139,32 @@ namespace Radical.Model
         /// <returns>This metadata instance.</returns>
         public PropertyMetadata EnableChangesNotifications()
         {
-            this.NotifyChanges = true;
+            NotifyChanges = true;
             return this;
         }
 
         public PropertyMetadata AddCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
-            return this.AddCascadeChangeNotifications(property.GetMemberName());
+            return AddCascadeChangeNotifications(property.GetMemberName());
         }
 
         public PropertyMetadata AddCascadeChangeNotifications(string property)
         {
-            this.cascadeChangeNotifications.Add(property);
+            cascadeChangeNotifications.Add(property);
 
             return this;
         }
 
         public PropertyMetadata RemoveCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
-            return this.RemoveCascadeChangeNotifications(property.GetMemberName());
+            return RemoveCascadeChangeNotifications(property.GetMemberName());
         }
 
         public PropertyMetadata RemoveCascadeChangeNotifications(string property)
         {
-            if (this.cascadeChangeNotifications.Contains(property))
+            if (cascadeChangeNotifications.Contains(property))
             {
-                this.cascadeChangeNotifications.Remove(property);
+                cascadeChangeNotifications.Remove(property);
             }
 
             return this;
@@ -172,7 +172,7 @@ namespace Radical.Model
 
         public IEnumerable<string> GetCascadeChangeNotifications()
         {
-            return this.cascadeChangeNotifications;
+            return cascadeChangeNotifications;
         }
 
         public abstract void SetDefaultValue(PropertyValue value);

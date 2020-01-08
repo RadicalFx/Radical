@@ -14,7 +14,7 @@ namespace Radical.ComponentModel
         public ComponentRegisteredEventArgs(IContainerEntry entry)
         {
             //Ensure.That( entry ).Named( "entry" ).IsNotNull();
-            this.Entry = entry;
+            Entry = entry;
         }
 
         /// <summary>

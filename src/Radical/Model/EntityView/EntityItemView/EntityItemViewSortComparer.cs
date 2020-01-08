@@ -24,7 +24,7 @@ namespace Radical.Model
         /// <param name="sortDescriptions">The sort descriptions.</param>
         public EntityItemViewSortComparer(ListSortDescriptionCollection sortDescriptions)
         {
-            this.SortDescriptions = sortDescriptions;
+            SortDescriptions = sortDescriptions;
         }
 
         static int Compare(object a, object b, ListSortDirection direction)
@@ -83,9 +83,9 @@ namespace Radical.Model
              */
             int retVal = 0;
 
-            if (this.SortDescriptions.Count == 1)
+            if (SortDescriptions.Count == 1)
             {
-                ListSortDescription sd = this.SortDescriptions[0];
+                ListSortDescription sd = SortDescriptions[0];
 
                 object valueX = sd.PropertyDescriptor.GetValue(x);
                 object valueY = sd.PropertyDescriptor.GetValue(y);
@@ -94,7 +94,7 @@ namespace Radical.Model
             }
             else
             {
-                foreach (ListSortDescription sd in this.SortDescriptions)
+                foreach (ListSortDescription sd in SortDescriptions)
                 {
                     if (retVal == 0)
                     {
@@ -118,7 +118,7 @@ namespace Radical.Model
         /// </returns>
         public int Compare(IEntityItemView<T> x, IEntityItemView<T> y)
         {
-            return this.OnCompare(x, y);
+            return OnCompare(x, y);
         }
     }
 }

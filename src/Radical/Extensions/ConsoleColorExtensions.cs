@@ -23,13 +23,13 @@ namespace Radical
 
             public Colorizer(ConsoleColor newColor)
             {
-                this.backup = Console.ForegroundColor;
+                backup = Console.ForegroundColor;
                 Console.ForegroundColor = newColor;
             }
 
             public void Dispose()
             {
-                Console.ForegroundColor = this.backup;
+                Console.ForegroundColor = backup;
             }
         }
     }

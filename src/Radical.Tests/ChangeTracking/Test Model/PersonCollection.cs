@@ -11,7 +11,7 @@ namespace Radical.Tests.ChangeTracking
         public PersonCollection(IChangeTrackingService memento)
             : base()
         {
-            this.Memento = memento;
+            Memento = memento;
         }
     }
 }

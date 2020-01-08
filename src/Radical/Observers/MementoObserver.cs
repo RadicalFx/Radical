@@ -30,16 +30,16 @@ namespace Radical.Observers
         public MementoMonitor(IChangeTrackingService source, IDispatcher dispatcher)
             : base(source, dispatcher)
         {
-            handler = (s, e) => this.OnChanged();
+            handler = (s, e) => OnChanged();
 
-            this.Source.TrackingServiceStateChanged += handler;
+            Source.TrackingServiceStateChanged += handler;
         }
 
         protected override void OnStopMonitoring(bool targetDisposed)
         {
-            if (!targetDisposed && this.WeakSource != null && this.WeakSource.IsAlive)
+            if (!targetDisposed && WeakSource != null && WeakSource.IsAlive)
             {
-                this.Source.TrackingServiceStateChanged -= handler;
+                Source.TrackingServiceStateChanged -= handler;
             }
 
             handler = null;

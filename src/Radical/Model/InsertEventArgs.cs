@@ -12,8 +12,8 @@
         public InsertEventArgs(int index, T newValue)
             : base(false)
         {
-            this.NewValue = newValue;
-            this.Index = index;
+            NewValue = newValue;
+            Index = index;
         }
 
         /// <summary>

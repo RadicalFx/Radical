@@ -28,7 +28,7 @@
         /// <value>The descriptor instance.</value>
         public TDescriptor Descriptor
         {
-            get { return this.CachedValue; }
+            get { return CachedValue; }
         }
     }
 }

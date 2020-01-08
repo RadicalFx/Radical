@@ -26,7 +26,7 @@ namespace Radical.Tests.Model.Entity
             {
                 base.Dispose(disposing);
 
-                this.IsDisposed = true;
+                IsDisposed = true;
             }
         }
 
@@ -34,7 +34,7 @@ namespace Radical.Tests.Model.Entity
         {
             public TestMetadata<T> For<T>(Expression<Func<T>> property)
             {
-                return (TestMetadata<T>)this.GetPropertyMetadata<T>(property);
+                return (TestMetadata<T>)GetPropertyMetadata<T>(property);
             }
 
             protected override PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
@@ -44,8 +44,8 @@ namespace Radical.Tests.Model.Entity
 
             public string MyProperty
             {
-                get { return this.GetPropertyValue(() => this.MyProperty); }
-                set { this.SetPropertyValue(() => this.MyProperty, value); }
+                get { return GetPropertyValue(() => MyProperty); }
+                set { SetPropertyValue(() => MyProperty, value); }
             }
         }
 

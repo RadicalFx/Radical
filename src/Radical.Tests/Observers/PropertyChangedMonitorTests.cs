@@ -16,22 +16,22 @@ namespace Radical.Tests.Observers
             public event PropertyChangedEventHandler PropertyChanged;
             void OnPropertyChanged(string name)
             {
-                if (this.PropertyChanged != null)
+                if (PropertyChanged != null)
                 {
-                    this.PropertyChanged(this, new PropertyChangedEventArgs(name));
+                    PropertyChanged(this, new PropertyChangedEventArgs(name));
                 }
             }
 
             private string _value = null;
             public string Value
             {
-                get { return this._value; }
+                get { return _value; }
                 set
                 {
-                    if (value != this.Value)
+                    if (value != Value)
                     {
-                        this._value = value;
-                        this.OnPropertyChanged("Value");
+                        _value = value;
+                        OnPropertyChanged("Value");
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace Radical.Tests.Observers
             private readonly Observable<string> _text = new Observable<string>();
             public Observable<string> Text
             {
-                get { return this._text; }
+                get { return _text; }
             }
         }
 

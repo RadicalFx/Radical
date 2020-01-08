@@ -27,7 +27,7 @@
                 throw new ArgumentNullException("contractInterface");
             }
 
-            this.ContractInterface = contractInterface;
+            ContractInterface = contractInterface;
         }
 
         /// <summary>

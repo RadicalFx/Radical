@@ -11,8 +11,8 @@
         /// <param name="oldValue">The old value.</param>
         public PropertyValueChangedArgs(T newValue, T oldValue)
         {
-            this.NewValue = newValue;
-            this.OldValue = oldValue;
+            NewValue = newValue;
+            OldValue = oldValue;
         }
 
         /// <summary>

@@ -22,7 +22,7 @@
             : base(info, context)
         {
             Type targetType = Type.GetType(info.GetString("targetType"));
-            this.TargetType = targetType;
+            TargetType = targetType;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@
         public MissingContractAttributeException(Type targetType)
             : this(targetType, string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
         {
-            this.TargetType = targetType;
+            TargetType = targetType;
         }
 
         /// <summary>

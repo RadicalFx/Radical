@@ -185,22 +185,22 @@ namespace Radical.Tests.Windows.Messaging
                {
                    try
                    {
-                       this.test();
+                       test();
                    }
                    catch (Exception e)
                    {
                        Console.WriteLine(e);
-                       this.ex = e;
+                       ex = e;
                    }
                });
 
-                worker.SetApartmentState(this.state);
+                worker.SetApartmentState(state);
                 worker.Start();
                 worker.Join();
 
-                if (this.ex != null)
+                if (ex != null)
                 {
-                    throw this.ex;
+                    throw ex;
                 }
             }
         }

@@ -27,12 +27,12 @@ namespace Radical.Tests.ChangeTracking
 
         protected override void OnCommitted(CommittedEventArgs args)
         {
-            base.OnCommitted(new CommittedEventArgs(this.HackedCommitReason));
+            base.OnCommitted(new CommittedEventArgs(HackedCommitReason));
         }
 
         protected override void OnRejected(RejectedEventArgs args)
         {
-            base.OnRejected(new RejectedEventArgs(this.HackedRejectReason));
+            base.OnRejected(new RejectedEventArgs(HackedRejectReason));
         }
     }
 }

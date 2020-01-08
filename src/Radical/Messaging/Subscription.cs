@@ -71,19 +71,19 @@ namespace Radical.Messaging
             Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
             Ensure.That(invocationModel).Is(InvocationModel.Default);
 
-            this.Subscriber = subscriber;
+            Subscriber = subscriber;
             this.action = action;
             this.actionFilter = actionFilter;
-            this.Sender = null;
-            this.InvocationModel = invocationModel;
+            Sender = null;
+            InvocationModel = invocationModel;
             this.dispatcher = dispatcher;
 
-            this.Priority = SubscriptionPriority.Normal;
+            Priority = SubscriptionPriority.Normal;
         }
 
         public Delegate GetAction()
         {
-            return this.action;
+            return action;
         }
 
         public object Subscriber { get; private set; }
@@ -111,17 +111,17 @@ namespace Radical.Messaging
 
         public System.Threading.Tasks.Task InvokeAsync(object sender, object message)
         {
-            return InvokeCoreAsync(this.dispatcher, this.action, sender, (T)message, InvocationModel.Default);
+            return InvokeCoreAsync(dispatcher, action, sender, (T)message, InvocationModel.Default);
         }
 
         public System.Threading.Tasks.Task DirectInvokeAsync(object sender, object message)
         {
-            return InvokeCoreAsync(this.dispatcher, this.action, sender, (T)message, InvocationModel.Default);
+            return InvokeCoreAsync(dispatcher, action, sender, (T)message, InvocationModel.Default);
         }
 
         public bool ShouldInvoke(object sender, object message)
         {
-            return this.actionFilter(sender, (T)message).GetAwaiter().GetResult();
+            return actionFilter(sender, (T)message).GetAwaiter().GetResult();
         }
     }
 
@@ -149,14 +149,14 @@ namespace Radical.Messaging
             Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
             Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
 
-            this.Subscriber = subscriber;
+            Subscriber = subscriber;
             this.action = action;
             this.actionFilter = actionFilter;
-            this.Sender = null;
-            this.InvocationModel = invocationModel;
+            Sender = null;
+            InvocationModel = invocationModel;
             this.dispatcher = dispatcher;
 
-            this.Priority = SubscriptionPriority.Normal;
+            Priority = SubscriptionPriority.Normal;
         }
 
         public PocoSubscription(object subscriber, object sender, Action<object, object> action, Func<object, object, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
@@ -167,19 +167,19 @@ namespace Radical.Messaging
             Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
             Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
 
-            this.Subscriber = subscriber;
+            Subscriber = subscriber;
             this.action = action;
             this.actionFilter = actionFilter;
-            this.Sender = sender;
-            this.InvocationModel = invocationModel;
+            Sender = sender;
+            InvocationModel = invocationModel;
             this.dispatcher = dispatcher;
 
-            this.Priority = SubscriptionPriority.Normal;
+            Priority = SubscriptionPriority.Normal;
         }
 
         public Delegate GetAction()
         {
-            return this.action;
+            return action;
         }
 
         public object Subscriber { get; private set; }
@@ -192,12 +192,12 @@ namespace Radical.Messaging
 
         public void Invoke(object sender, object message)
         {
-            InvokeCore(this.dispatcher, this.action, sender, message, this.InvocationModel);
+            InvokeCore(dispatcher, action, sender, message, InvocationModel);
         }
 
         public void DirectInvoke(object sender, object message)
         {
-            InvokeCore(this.dispatcher, this.action, sender, message, InvocationModel.Default);
+            InvokeCore(dispatcher, action, sender, message, InvocationModel.Default);
         }
 
         static void InvokeCore(IDispatcher dispatcher, Action<object, object> action, object sender, object message, InvocationModel type)
@@ -214,7 +214,7 @@ namespace Radical.Messaging
 
         public bool ShouldInvoke(object sender, object message)
         {
-            return this.actionFilter(sender, message);
+            return actionFilter(sender, message);
         }
     }
 
@@ -231,14 +231,14 @@ namespace Radical.Messaging
             Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
             Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
 
-            this.Subscriber = subscriber;
+            Subscriber = subscriber;
             this.action = action;
             this.actionFilter = actionFilter;
-            this.Sender = null;
-            this.InvocationModel = invocationModel;
+            Sender = null;
+            InvocationModel = invocationModel;
             this.dispatcher = dispatcher;
 
-            this.Priority = SubscriptionPriority.Normal;
+            Priority = SubscriptionPriority.Normal;
         }
 
         public PocoSubscription(object subscriber, object sender, Action<object, T> action, Func<object, T, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
@@ -249,19 +249,19 @@ namespace Radical.Messaging
             Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
             Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
 
-            this.Subscriber = subscriber;
+            Subscriber = subscriber;
             this.action = action;
             this.actionFilter = actionFilter;
-            this.Sender = sender;
-            this.InvocationModel = invocationModel;
+            Sender = sender;
+            InvocationModel = invocationModel;
             this.dispatcher = dispatcher;
 
-            this.Priority = SubscriptionPriority.Normal;
+            Priority = SubscriptionPriority.Normal;
         }
 
         public Delegate GetAction()
         {
-            return this.action;
+            return action;
         }
 
         public object Subscriber { get; private set; }
@@ -274,12 +274,12 @@ namespace Radical.Messaging
 
         public void Invoke(object sender, object message)
         {
-            InvokeCore(this.dispatcher, this.action, sender, (T)message, this.InvocationModel);
+            InvokeCore(dispatcher, action, sender, (T)message, InvocationModel);
         }
 
         public void DirectInvoke(object sender, object message)
         {
-            InvokeCore(this.dispatcher, this.action, sender, (T)message, InvocationModel.Default);
+            InvokeCore(dispatcher, action, sender, (T)message, InvocationModel.Default);
         }
 
         static void InvokeCore(IDispatcher dispatcher, Action<object, T> action, object sender, T message, InvocationModel type)
@@ -296,7 +296,7 @@ namespace Radical.Messaging
 
         public bool ShouldInvoke(object sender, object message)
         {
-            return this.actionFilter(sender, (T)message);
+            return actionFilter(sender, (T)message);
         }
     }
 }

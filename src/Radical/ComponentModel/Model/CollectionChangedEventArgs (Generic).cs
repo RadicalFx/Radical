@@ -38,10 +38,10 @@
         /// <param name="item">The item.</param>
         public CollectionChangedEventArgs(CollectionChangeType changeType, int index, int oldIndex, T item)
         {
-            this.ChangeType = changeType;
-            this.Index = index;
-            this.OldIndex = oldIndex;
-            this.Item = item;
+            ChangeType = changeType;
+            Index = index;
+            OldIndex = oldIndex;
+            Item = item;
         }
 
         /// <summary>

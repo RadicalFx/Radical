@@ -35,7 +35,7 @@ namespace Radical.ChangeTracking
         {
             var result = new List<IAdvisedAction>();
 
-            var distinct = this.visitor.Visit(changeSet);
+            var distinct = visitor.Visit(changeSet);
             foreach (var kvp in distinct)
             {
                 ProposedActions proposedAction = kvp.Value.GetAdvisedAction(kvp.Key);
@@ -56,7 +56,7 @@ namespace Radical.ChangeTracking
                         throw new NotSupportedException();
                 }
 
-                var advisedAction = this.OnCreateAdvisedAction(kvp.Key, proposedAction);
+                var advisedAction = OnCreateAdvisedAction(kvp.Key, proposedAction);
                 result.Add(advisedAction);
             }
 
@@ -75,7 +75,7 @@ namespace Radical.ChangeTracking
                     continue;
                 }
 
-                var advisedAction = this.OnCreateAdvisedAction(te, ProposedActions.Create);
+                var advisedAction = OnCreateAdvisedAction(te, ProposedActions.Create);
                 result.Add(advisedAction);
             }
 

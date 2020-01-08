@@ -49,7 +49,7 @@
         public PropertyValueChange(object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, string description)
             : base(owner, value, restoreCallback, commitCallback, description)
         {
-            this.PropertyName = propertyName;
+            PropertyName = propertyName;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
             Ensure.That(changedItem)
                 .Named("changedItem")
                 .IsNotNull()
-                .If(v => v != this.Owner)
+                .If(v => v != Owner)
                 .Then((v, n) =>
                {
                    throw new ArgumentOutOfRangeException(n);
@@ -86,7 +86,7 @@
         /// <returns>A clone of this instance.</returns>
         public override IChange Clone()
         {
-            return new PropertyValueChange<T>(this.Owner, this.PropertyName, this.CachedValue, this.RejectCallback, this.CommitCallback, this.Description);
+            return new PropertyValueChange<T>(Owner, PropertyName, CachedValue, RejectCallback, CommitCallback, Description);
         }
     }
 }

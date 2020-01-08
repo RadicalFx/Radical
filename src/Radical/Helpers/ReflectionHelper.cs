@@ -54,7 +54,7 @@ namespace Radical.Helpers
             /// </returns>
             public IEnumerable<PropertyInfo> GetProperties(Expression<Func<T, object>> propertyExpression)
             {
-                return this.GetProperties(propertyExpression.Body);
+                return GetProperties(propertyExpression.Body);
             }
 
             private IEnumerable<PropertyInfo> GetProperties(Expression expression)

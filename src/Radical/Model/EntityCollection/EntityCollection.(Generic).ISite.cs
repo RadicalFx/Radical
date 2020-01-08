@@ -14,10 +14,10 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this.site != null)
+                EnsureNotDisposed();
+                if (site != null)
                 {
-                    return this.site.DesignMode;
+                    return site.DesignMode;
                 }
 
                 return false;
@@ -34,10 +34,10 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this.site != null)
+                EnsureNotDisposed();
+                if (site != null)
                 {
-                    return this.site.Container;
+                    return site.Container;
                 }
                 return null;
             }
@@ -49,10 +49,10 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this.site != null)
+                EnsureNotDisposed();
+                if (site != null)
                 {
-                    return this.site.Component;
+                    return site.Component;
                 }
                 return null;
             }
@@ -64,19 +64,19 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
-                if (this.site != null)
+                EnsureNotDisposed();
+                if (site != null)
                 {
-                    return this.site.Name;
+                    return site.Name;
                 }
                 return null;
             }
             set
             {
-                this.EnsureNotDisposed();
-                if (this.site != null)
+                EnsureNotDisposed();
+                if (site != null)
                 {
-                    this.site.Name = value;
+                    site.Name = value;
                 }
             }
         }

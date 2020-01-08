@@ -13,7 +13,7 @@
         /// <param name="reason">The reason.</param>
         public CommittedEventArgs(CommitReason reason)
         {
-            this.Reason = reason;
+            Reason = reason;
         }
 
         /// <summary>

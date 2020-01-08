@@ -8,7 +8,7 @@ namespace Radical.Model
     {
         bool ICollection<T>.IsReadOnly
         {
-            get { return this.IsReadOnly; }
+            get { return IsReadOnly; }
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
+                EnsureNotDisposed();
                 return false;
             }
         }
@@ -36,7 +36,7 @@ namespace Radical.Model
         {
             get
             {
-                this.EnsureNotDisposed();
+                EnsureNotDisposed();
                 return syncRoot;
             }
         }
@@ -55,8 +55,8 @@ namespace Radical.Model
         /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
         void ICollection.CopyTo(Array array, int index)
         {
-            this.EnsureNotDisposed();
-            this.Storage.CopyTo((T[])array, index);
+            EnsureNotDisposed();
+            Storage.CopyTo((T[])array, index);
         }
     }
 }
