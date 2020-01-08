@@ -1,6 +1,6 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
-    public class ItemChangedDescriptor<T> : CollectionChangeDescriptor<T>
+    public class ItemChangedDescriptor<T> : CollectionChangeDescriptor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemChangedDescriptor&lt;T&gt;"/> class.

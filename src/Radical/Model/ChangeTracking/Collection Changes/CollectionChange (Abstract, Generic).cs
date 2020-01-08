@@ -6,7 +6,7 @@ namespace Radical.ChangeTracking.Specialized
     /// A base, abstract, change class specific for a collection change.
     /// </summary>
     public abstract class CollectionChange<TDescriptor, TItem> : Change<TDescriptor>
-        where TDescriptor : CollectionChangeDescriptor<TItem>
+        where TDescriptor : CollectionChangeDescriptor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CollectionChange&lt;TDescriptor, TItem&gt;"/> class.
