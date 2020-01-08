@@ -424,11 +424,11 @@ namespace Radical.Model
         public void Clear()
         {
             EnsureNotDisposed();
-            IEnumerable<T> list = Storage.ToArray().AsReadOnly();
+            var copy = Storage.ToArray();
 
             Storage.Clear();
 
-            OnClearCompleted(list);
+            OnClearCompleted(copy);
             OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset));
         }
 
