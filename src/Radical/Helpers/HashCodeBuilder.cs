@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Radical.Helpers
+﻿namespace Radical.Helpers
 {
     /// <summary>
     /// An helper class to generate hash codes based on a value set.

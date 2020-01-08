@@ -4,7 +4,6 @@ namespace Radical.Tests.ChangeTracking
 {
     using Radical.ChangeTracking.Specialized;
     using Radical.ComponentModel.ChangeTracking;
-    using System;
 
     class HackedPropertyValueChange : PropertyValueChange<string>
     {

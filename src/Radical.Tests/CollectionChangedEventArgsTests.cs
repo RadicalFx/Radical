@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel;
 using SharpTestsEx;
-using System;
 
 namespace Radical.Tests
 {

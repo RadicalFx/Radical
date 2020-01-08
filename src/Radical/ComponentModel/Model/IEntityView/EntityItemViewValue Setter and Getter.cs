@@ -1,5 +1,3 @@
-using System;
-
 namespace Radical.ComponentModel
 {
     /// <summary>

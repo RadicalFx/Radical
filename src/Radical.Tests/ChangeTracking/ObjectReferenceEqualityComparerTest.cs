@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpTestsEx;
-using System;
 using System.Collections.Generic;
 
 namespace Radical.Tests.ChangeTracking

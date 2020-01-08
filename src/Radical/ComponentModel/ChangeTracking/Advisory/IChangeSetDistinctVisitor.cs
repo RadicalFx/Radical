@@ -1,6 +1,5 @@
 ﻿namespace Radical.ComponentModel.ChangeTracking
 {
-    using System;
     using System.Collections.Generic;
 
     /// <summary>

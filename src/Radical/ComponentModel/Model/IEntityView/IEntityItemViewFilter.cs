@@ -1,7 +1,5 @@
 ﻿namespace Radical.ComponentModel
 {
-    using System;
-
     /// <summary>
     /// Provides a standard method to determine if an object instance 
     /// should be, or should not, included in the result set of a filter

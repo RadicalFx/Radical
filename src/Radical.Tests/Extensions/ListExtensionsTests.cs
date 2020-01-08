@@ -3,7 +3,6 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.Linq;
     using SharpTestsEx;
-    using System;
     using System.Collections.Generic;
 
     [TestClass]

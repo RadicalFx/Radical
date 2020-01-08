@@ -1,5 +1,4 @@
-﻿using System;
-namespace Radical.Model
+﻿namespace Radical.Model
 {
     /// <summary>
     /// Identifies a property value.

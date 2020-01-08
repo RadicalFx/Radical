@@ -4,7 +4,6 @@ using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel.ChangeTracking;
 using SharpTestsEx;
-using System;
 
 namespace Radical.Tests
 {
