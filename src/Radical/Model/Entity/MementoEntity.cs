@@ -213,10 +213,7 @@ namespace Radical.Model
                    CacheChange(propertyName, e.OldValue, callback);
                }
 
-               if (pvc != null)
-               {
-                   pvc(e);
-               }
+               pvc?.Invoke(e);
            });
         }
 
