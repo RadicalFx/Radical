@@ -214,7 +214,7 @@ namespace Radical.Model
         {
             Ensure.That(property).Named("property").IsNotNull();
 
-            return (PropertyMetadata<T>)GetPropertyMetadata<T>(property.GetMemberName());
+            return GetPropertyMetadata<T>(property.GetMemberName());
         }
 
         /// <summary>
