@@ -828,7 +828,7 @@ namespace Radical.Model
 
             foreach (T obj in list)
             {
-                Add((T)obj);
+                Add(obj);
             }
 
             OnAddRangeCompleted(list);
