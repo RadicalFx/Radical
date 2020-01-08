@@ -38,14 +38,8 @@ namespace Radical.Messaging
 
         readonly IDispatcher dispatcher;
 
-        /// <summary>
-        /// A dictionary, of all the subscriptions, whose key is the message type
-        /// and whose value is the list of Subscriptions for that message type
-        /// </summary>
         readonly List<SubscriptionsContainer> msgSubsIndex = null;
         readonly ReaderWriterLockSlim msgSubsIndexLock = new ReaderWriterLockSlim();
-
-        //Dictionary<string, IScopedMessageBroker> topics = new Dictionary<string, IScopedMessageBroker>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBroker"/> class.
