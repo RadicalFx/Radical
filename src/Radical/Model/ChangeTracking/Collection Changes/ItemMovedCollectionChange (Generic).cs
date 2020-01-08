@@ -9,7 +9,7 @@ namespace Radical.ChangeTracking.Specialized
     /// <summary>
     /// Identifies that an item in a collection has been moved.
     /// </summary>
-    public class ItemMovedCollectionChange<T> : CollectionChange<ItemMovedDescriptor<T>, T>
+    public class ItemMovedCollectionChange<T> : CollectionChange<ItemMovedDescriptor<T>>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemMovedCollectionChange&lt;T&gt;"/> class.

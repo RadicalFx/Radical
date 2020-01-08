@@ -10,7 +10,7 @@ namespace Radical.ChangeTracking.Specialized
     /// <summary>
     /// Identifies a collection clear change.
     /// </summary>
-    public class CollectionClearedChange<T> : CollectionChange<CollectionRangeDescriptor<T>, T>
+    public class CollectionClearedChange<T> : CollectionChange<CollectionRangeDescriptor<T>>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CollectionClearedChange&lt;T&gt;"/> class.
