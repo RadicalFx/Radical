@@ -6,7 +6,7 @@
     /// operation.
     /// </summary>
     /// <typeparam name="T">The type of the object to test.</typeparam>
-    public interface IEntityItemViewFilter<T> : IEntityItemViewFilter //where T : class
+    public interface IEntityItemViewFilter<in T> : IEntityItemViewFilter
     {
         /// <summary>
         /// Gets a value that indicates if the given object instance should be included in the result set of the filter operation..

@@ -770,7 +770,7 @@ namespace Radical.ComponentModel
     {
         bool ShouldInclude(object item);
     }
-    public interface IEntityItemViewFilter<T> : Radical.ComponentModel.IEntityItemViewFilter
+    public interface IEntityItemViewFilter<in T> : Radical.ComponentModel.IEntityItemViewFilter
     {
         bool ShouldInclude(T item);
     }
