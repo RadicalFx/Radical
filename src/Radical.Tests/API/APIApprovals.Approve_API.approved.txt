@@ -911,7 +911,7 @@ namespace Radical.ComponentModel.Messaging
         bool ShouldHandle(object sender, object message);
     }
     [Radical.ComponentModel.Contract]
-    public interface IHandleMessage<T> : Radical.ComponentModel.Messaging.IHandleMessage
+    public interface IHandleMessage<in T> : Radical.ComponentModel.Messaging.IHandleMessage
     {
         void Handle(object sender, T message);
     }
