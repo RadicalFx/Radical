@@ -414,8 +414,7 @@ namespace Radical.Model
         /// <returns>The requested property value.</returns>
         protected internal virtual T GetPropertyValue<T>(string propertyName)
         {
-            PropertyValue actual;
-            if (valuesBag.TryGetValue(propertyName, out actual))
+            if (valuesBag.TryGetValue(propertyName, out PropertyValue actual))
             {
                 return ((PropertyValue<T>)actual).Value;
             }
