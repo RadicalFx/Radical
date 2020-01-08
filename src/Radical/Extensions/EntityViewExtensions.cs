@@ -11,7 +11,7 @@ namespace Radical
         public static IEnumerable<T> AsEntityItems<T>(this IEntityView<T> view)
             where T : class
         {
-            return view.Select(item => item.EntityItem); ;
+            return view.Select(item => item.EntityItem);
         }
 
         public static IEntityView<T> ApplySimpleSort<T>(this IEntityView<T> view, string property)
