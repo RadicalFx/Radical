@@ -245,8 +245,6 @@ namespace Radical.Model
         protected virtual PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
         {
             return PropertyMetadata.Create<T>(this, propertyName);
-
-            //return ( PropertyMetadata<T> )this.GetDefaultMetadata( propertyName, typeof( T ) );
         }
 
         /// <summary>
