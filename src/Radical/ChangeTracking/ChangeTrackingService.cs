@@ -1001,8 +1001,7 @@
              * test(s), quindi le Dispose vengono chiamate in ordine casuale dal 
              * GC...
              */
-            IComponent cmp = entity as IComponent;
-            if (cmp != null)
+            if (entity is IComponent cmp)
             {
                 cmp.Disposed -= onComponentDisposed;
                 if (iComponentEntities != null && iComponentEntities.Contains(cmp))
@@ -1376,8 +1375,7 @@
                 state |= EntityPropertyStates.Changed;
 
                 TProperty actualValue;
-                var e = entity as Model.Entity;
-                if (e != null)
+                if (entity is Model.Entity e)
                 {
                     actualValue = e.GetPropertyValue<TProperty>(propertyName);
                 }
