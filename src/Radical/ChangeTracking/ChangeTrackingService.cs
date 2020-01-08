@@ -583,7 +583,7 @@
                            var s = ac.GetEntityState(entity);
                            if (EntityTrackingStates.HasForwardChanges == (s & EntityTrackingStates.HasForwardChanges))
                            {
-                               s = s ^ EntityTrackingStates.HasForwardChanges;
+                               s ^= EntityTrackingStates.HasForwardChanges;
                            }
 
                            return s;
@@ -607,7 +607,7 @@
                            var s = ac.GetEntityState(entity);
                            if (EntityTrackingStates.HasBackwardChanges == (s & EntityTrackingStates.HasBackwardChanges))
                            {
-                               s = s ^ EntityTrackingStates.HasBackwardChanges;
+                               s ^= EntityTrackingStates.HasBackwardChanges;
                            }
 
                            return s;
