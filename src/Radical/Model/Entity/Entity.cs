@@ -331,10 +331,7 @@ namespace Radical.Model
                 }
 
                 var args = new PropertyValueChangedArgs<T>(data, oldValue);
-                if (pvc != null)
-                {
-                    pvc(args);
-                }
+                pvc?.Invoke(args);
 
                 var metadata = GetPropertyMetadata<T>(propertyName);
                 if (metadata.NotifyChanges)
