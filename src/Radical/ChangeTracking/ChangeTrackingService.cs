@@ -686,7 +686,7 @@
                 {
                     last.Reject(reason);
 
-                    //TODO: this probably needs to go outside of the if -> write a test to verify tif it's a bug.
+                    //TODO: this probably needs to go outside of the if -> write a test to verify if it's a bug.
                     last.GetChangedEntities().ForEach(entity => tryUnregisterTransient(entity, null));
                 }
             }
