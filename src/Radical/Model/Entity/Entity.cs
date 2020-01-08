@@ -345,9 +345,9 @@ namespace Radical.Model
                         .NotifyChanged(args)
                         .GetCascadeChangeNotifications()
                         .ForEach(s =>
-                       {
-                           OnPropertyChanged(s);
-                       });
+                        {
+                            OnPropertyChanged(s);
+                        });
                 }
             }
         }
