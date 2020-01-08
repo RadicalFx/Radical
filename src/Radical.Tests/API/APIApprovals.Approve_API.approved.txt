@@ -828,7 +828,7 @@ namespace Radical.ComponentModel
         void NotifyChanged();
         void StopMonitoring();
     }
-    public interface IMonitor<T> : Radical.ComponentModel.IMonitor
+    public interface IMonitor<out T> : Radical.ComponentModel.IMonitor
     {
         T Source { get; }
     }
