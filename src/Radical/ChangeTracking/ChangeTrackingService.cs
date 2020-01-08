@@ -1427,7 +1427,7 @@
                 return true;
             };
 
-            value = default(T);
+            value = default;
             return false;
         }
     }
