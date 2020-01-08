@@ -72,7 +72,6 @@
                      * 
                      * Staminchia...
                      */
-                    //this.RejectChangesCore( false );
 
                     backwardChangesStack.ForEach(c => OnUnwire(c));
                     forwardChangesStack.ForEach(c => OnUnwire(c));
