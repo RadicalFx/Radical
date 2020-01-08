@@ -25,7 +25,6 @@
 
         }
 
-        #region IChangeSetBuilder Members
 
         /// <summary>
         /// Determines if the supplied IChange should be
@@ -40,6 +39,5 @@
             return true;
         }
 
-        #endregion
     }
 }

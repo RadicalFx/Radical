@@ -89,7 +89,6 @@ namespace Radical.Model
         readonly EventHandler onEntityItemViewEditEndedHandler = null;
         readonly PropertyChangedEventHandler onEntityItemViewPropertyChangedHandler = null;
 
-        #region .ctor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityView&lt;T&gt;"/> class.
@@ -153,7 +152,6 @@ namespace Radical.Model
             OnLoad();
         }
 
-        #endregion
 
         protected internal virtual IEntityItemView<T> CreateEntityItemView(T sourceItem)
         {
@@ -172,7 +170,6 @@ namespace Radical.Model
             }
         }
 
-        #region DataSource Collection EventHandlers
 
         /*
          * Gestisce l'evento che viene scatenato 
@@ -302,7 +299,6 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
         /// <summary>
         /// This method is called whenever the underlying DataSource fires the CollectionChanged event,
@@ -324,7 +320,6 @@ namespace Radical.Model
 
         }
 
-        #region IEntityItemView EventHandlers
 
         /// <summary>
         /// This method is called whenever a new IEntityItemView is built in order
@@ -549,7 +544,6 @@ namespace Radical.Model
             OnEntityItemViewEditCanceled(item);
         }
 
-        #endregion
 
         /// <summary>
         /// Refreshes this instance, rebuilding internal indexes
@@ -643,7 +637,6 @@ namespace Radical.Model
             Move(sourceIndex, newIndex);
         }
 
-        #region Filtering
 
         /// <summary>
         /// Gets a item indicating whether this instance is currently filtered.
@@ -857,9 +850,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region Sorting
 
         /// <summary>
         /// Called when this list needs to create the sort comparer used for data sorting.
@@ -1183,9 +1174,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region IRaiseItemChangedEvents Members
 
         /// <summary>
         /// Gets a item indicating whether the <see cref="T:System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> events.
@@ -1197,9 +1186,7 @@ namespace Radical.Model
             get { return true; }
         }
 
-        #endregion
 
-        #region IEnumerable Members
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
@@ -1212,9 +1199,7 @@ namespace Radical.Model
             return ((IEnumerable)Indexer).GetEnumerator();
         }
 
-        #endregion
 
-        #region ICollection Members
 
         /// <summary>
         /// Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
@@ -1265,9 +1250,7 @@ namespace Radical.Model
             get { return Indexer.Count; }
         }
 
-        #endregion
 
-        #region IList Members
 
         /// <summary>
         /// Adds an item to the <see cref="T:System.Collections.IList"/>.
@@ -1576,9 +1559,7 @@ namespace Radical.Model
             set { this[index] = (IEntityItemView<T>)value; }
         }
 
-        #endregion
 
-        #region IBindingList Members
 
         static readonly object listChangedEventKey = new object();
 
@@ -1793,7 +1774,6 @@ namespace Radical.Model
             Indexer.RemoveIndex(property);
         }
 
-        #endregion
 
         public PropertyDescriptor GetProperty(string name)
         {
@@ -1809,7 +1789,6 @@ namespace Radical.Model
             return null;
         }
 
-        #region Custom Property Mappings
 
         private bool _autoGenerateProperties = true;
 
@@ -2082,9 +2061,7 @@ namespace Radical.Model
             return false;
         }
 
-        #endregion
 
-        #region ITypedList Members
 
         /// <summary>
         /// Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
@@ -2224,9 +2201,7 @@ namespace Radical.Model
             return string.Empty;
         }
 
-        #endregion
 
-        #region Searching
 
         /// <summary>
         /// Returns the index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor"/>.
@@ -2264,7 +2239,6 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
         /// <summary>
         /// Gets a item indicating whether this instance is adding new.
@@ -2595,7 +2569,6 @@ namespace Radical.Model
             }
         }
 
-        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -2663,9 +2636,7 @@ namespace Radical.Model
             GC.SuppressFinalize(this);
         }
 
-        #endregion
 
-        #region IComponent, IServiceProvider
 
         private static readonly object disposedEventKey = new object();
 
@@ -2768,9 +2739,7 @@ namespace Radical.Model
             return null;
         }
 
-        #endregion
 
-        #region INotifyPropertyChanged Members
 
         static readonly object propertyChangedEventKey = new object();
 
@@ -2813,9 +2782,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region IEnumerable<IEntityItemView<T>> Members
 
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
@@ -2828,7 +2795,6 @@ namespace Radical.Model
             return ((IEnumerable<IEntityItemView<T>>)Indexer).GetEnumerator();
         }
 
-        #endregion
 
         void ISupportInitialize.BeginInit()
         {

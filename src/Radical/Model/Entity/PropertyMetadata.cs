@@ -9,7 +9,6 @@ namespace Radical.Model
 {
     public abstract class PropertyMetadata : IDisposable
     {
-        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -41,7 +40,6 @@ namespace Radical.Model
             GC.SuppressFinalize(this);
         }
 
-        #endregion
 
         /// <summary>
         /// Creates the metadata for specified property.

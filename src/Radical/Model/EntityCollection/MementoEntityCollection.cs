@@ -12,7 +12,6 @@ namespace Radical.Model
     [Serializable]
     public class MementoEntityCollection<T> : EntityCollection<T>, IMemento
     {
-        #region IMemento<TMemento> members
 
         protected virtual void OnMementoChanged(IChangeTrackingService newMemento, IChangeTrackingService oldMemento)
         {
@@ -70,7 +69,6 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
         protected void SuspendCaching()
         {
@@ -122,7 +120,6 @@ namespace Radical.Model
             base.EndInit(notify);
         }
 
-        #region .ctor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
@@ -170,7 +167,6 @@ namespace Radical.Model
 
         }
 
-        #endregion
 
         [NonSerialized]
         RejectCallback<ItemChangedDescriptor<T>> itemAddedRejectCallback = null;
@@ -202,7 +198,6 @@ namespace Radical.Model
         {
             base.OnInitialize();
 
-            #region itemAddedRejectCallback
 
             itemAddedRejectCallback = args =>
             {
@@ -246,9 +241,7 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
 
-            #region itemMovedRejectCallback
 
             itemMovedRejectCallback = args =>
             {
@@ -292,9 +285,7 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
 
-            #region itemRemovedRejectCallback
 
             itemRemovedRejectCallback = args =>
             {
@@ -338,9 +329,7 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
 
-            #region itemInsertedRejectCallback
 
             itemInsertedRejectCallback = args =>
             {
@@ -384,9 +373,7 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
 
-            #region itemReplacedRejectCallback
 
             itemReplacedRejectCallback = args =>
             {
@@ -430,9 +417,7 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
 
-            #region collectionClearedRejectCallback
 
             collectionClearedRejectCallback = args =>
             {
@@ -473,9 +458,7 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
 
-            #region collectionAddRangeRejectCallback
 
             collectionAddRangeRejectCallback = args =>
             {
@@ -523,7 +506,6 @@ namespace Radical.Model
                 ResumeCaching();
             };
 
-            #endregion
         }
 
         /// <summary>

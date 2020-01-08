@@ -18,7 +18,6 @@ namespace Radical.Model
 
         }
 
-        #region EntityItemViewFilterBase<T> Members
 
         /// <summary>
         /// Gets a item that indicates if the given object instance should be included in the result set of the filter operation..
@@ -37,9 +36,7 @@ namespace Radical.Model
             return true;
         }
 
-        #endregion
 
-        #region Singleton Pattern
 
         private readonly static ViewAllEntityItemViewFilter<T> _instance = new ViewAllEntityItemViewFilter<T>();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
@@ -48,7 +45,6 @@ namespace Radical.Model
             get { return _instance; }
         }
 
-        #endregion
 
         /// <summary>
         /// Returns a <see cref="T:System.string"/> that represents the current <see cref="T:System.Object"/>.

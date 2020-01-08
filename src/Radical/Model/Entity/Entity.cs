@@ -12,7 +12,6 @@ namespace Radical.Model
         INotifyPropertyChanged,
         IDisposable
     {
-        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -74,9 +73,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region EventHandlerList
 
         [NonSerialized]
         private EventHandlerList _events;
@@ -98,9 +95,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region INotifyPropertyChanged Members
 
         private static readonly object propertyChangedEventKey = new object();
         public event PropertyChangedEventHandler PropertyChanged
@@ -130,7 +125,6 @@ namespace Radical.Model
             OnPropertyChanged(new PropertyChangedEventArgs(property.GetMemberName()));
         }
 
-        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Entity"/> class.

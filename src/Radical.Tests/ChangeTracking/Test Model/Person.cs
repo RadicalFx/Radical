@@ -25,7 +25,6 @@ namespace Radical.Tests.ChangeTracking
             OnDisposed();
         }
 
-        #region IComponent Members
 
         /*
          * Non possiamo usare la EventHaldlerList
@@ -47,7 +46,6 @@ namespace Radical.Tests.ChangeTracking
             set;
         }
 
-        #endregion
 
         public Person(IChangeTrackingService memento)
             : this(memento, true)

@@ -14,7 +14,6 @@ namespace Radical.Tests.Model.Entity
     [TestClass()]
     public class EntityMementoTrackingFeaturesTests : EntityMementoTests
     {
-        #region Mocks
 
         public sealed class TestableMementoEntity : MementoEntity
         {
@@ -97,7 +96,6 @@ namespace Radical.Tests.Model.Entity
             public readonly IChangeTrackingService OldMemento;
         }
 
-        #endregion
 
         [TestMethod]
         public void entityMemento_isTracking_without_service_should_be_false()

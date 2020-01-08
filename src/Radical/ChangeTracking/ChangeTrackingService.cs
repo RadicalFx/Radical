@@ -43,7 +43,6 @@
         Dictionary<object, bool> transientEntities = new Dictionary<object, bool>();
         List<IComponent> iComponentEntities = new List<IComponent>();
 
-        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -130,7 +129,6 @@
             GC.SuppressFinalize(this);
         }
 
-        #endregion
 
         private static readonly object trackingServiceStateChangedEventKey = new object();
 
@@ -307,7 +305,6 @@
             };
         }
 
-        #region IChangeTrackingService Members
 
         /// <summary>
         /// Creates a bookmark useful to save a position
@@ -1143,9 +1140,7 @@
             item.Memento = this;
         }
 
-        #endregion
 
-        #region IRevertibleChangeTracking Members
 
         void RejectChangesCore(bool shouldNotify)
         {
@@ -1187,9 +1182,7 @@
             RejectChangesCore(IsChanged || HasTransientEntities);
         }
 
-        #endregion
 
-        #region IChangeTracking Members
 
         /// <summary>
         /// Resets the object’s state to unchanged by accepting the modifications.
@@ -1248,9 +1241,7 @@
             get { return backwardChangesStack.Count > 0; }
         }
 
-        #endregion
 
-        #region IComponent, ISite
 
         /// <summary>
         /// Event raised when the Dispose of this instance has completed.
@@ -1293,7 +1284,6 @@
             get { return _events; }
         }
 
-        #endregion
 
         bool IsInAtomicOperation
         {

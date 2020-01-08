@@ -42,7 +42,6 @@ namespace Radical.Model
             return filterName;
         }
 
-        #region EntityItemViewFilterBase<T> Members
 
         /// <summary>
         /// Gets a item that indicates if the given object instance should be included in the result set of the filter operation..
@@ -56,6 +55,5 @@ namespace Radical.Model
             return FilterDelegate(item);
         }
 
-        #endregion
     }
 }

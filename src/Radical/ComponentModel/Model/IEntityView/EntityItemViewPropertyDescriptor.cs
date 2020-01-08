@@ -164,7 +164,6 @@ namespace Radical.ComponentModel
              * è del tutto irrilevante bisogna andare alla ircerca di eventuali attributi
              * DefaultValue impostati sulla proprietà
              */
-            #region Possible Implementation
 
             //if( this.Property != null )
             //{
@@ -183,7 +182,6 @@ namespace Radical.ComponentModel
             //    return false;
             //}    
 
-            #endregion
         }
 
         /// <summary>
