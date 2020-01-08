@@ -896,13 +896,10 @@
         /// <param name="entity">The entity to wire to.</param>
         protected virtual void OnWire(IComponent entity)
         {
-            if (entity != null)
+            if (entity != null && !iComponentEntities.Contains(entity))
             {
-                if (!iComponentEntities.Contains(entity))
-                {
-                    entity.Disposed += onComponentDisposed;
-                    iComponentEntities.Add(entity);
-                }
+                entity.Disposed += onComponentDisposed;
+                iComponentEntities.Add(entity);
             }
         }
 
