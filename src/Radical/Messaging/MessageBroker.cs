@@ -285,14 +285,13 @@ namespace Radical.Messaging
             try
             {
                 msgSubsIndex.Where(msgSubscriptions =>
-               {
-                   return msgSubscriptions.Subscriptions.Where(subscription =>
-                   {
-                       return Object.Equals(subscription.Subscriber, subscriber)
-                              && Object.Equals(subscription.Sender, sender);
-                   })
-                   .Any();
-               })
+                {
+                    return msgSubscriptions.Subscriptions.Any(subscription =>
+                    {
+                        return Object.Equals(subscription.Subscriber, subscriber)
+                            && Object.Equals(subscription.Sender, sender);
+                    });
+                })
                 .ToList()
                 .ForEach(kvp =>
                {
