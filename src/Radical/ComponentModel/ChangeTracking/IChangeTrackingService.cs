@@ -113,10 +113,10 @@ namespace Radical.ComponentModel.ChangeTracking
         /// <summary>
         /// Gets a list of entities based on a filter.
         /// </summary>
-        /// <param name="sateFilter">The sate filter to use to search entities.</param>
+        /// <param name="stateFilter">The sate filter to use to search entities.</param>
         /// <param name="exactMatch">if set to <c>true</c> the search is performed using an exact match behavior.</param>
         /// <returns>An enumerable list of entities that matches the filter.</returns>
-        IEnumerable<Object> GetEntities(EntityTrackingStates sateFilter, bool exactMatch);
+        IEnumerable<Object> GetEntities(EntityTrackingStates stateFilter, bool exactMatch);
 
         /// <summary>
         /// Gets a value indicating whether this instance can undo the last change.
