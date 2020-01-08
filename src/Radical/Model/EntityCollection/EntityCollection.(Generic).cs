@@ -17,10 +17,7 @@ namespace Radical.Model
         IDeserializationCallback,
         IEntityCollection<T>,
         IList,
-        ICollection,
         IComponent,
-        IServiceProvider,
-        IDisposable,
         ISite
     {
 

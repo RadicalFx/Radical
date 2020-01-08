@@ -1,19 +1,15 @@
-﻿namespace Radical.ComponentModel
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
+namespace Radical.ComponentModel
+{
     /// <summary>
     /// Identifies a strongly typed collection, extends this IList, ICollection and IEnumerable generics interfaces.
     /// </summary>
     /// <typeparam name="T">The type of object that this collection uses.</typeparam>
     public interface IEntityCollection<T> :
         IList<T>,
-        ICollection<T>,
-        IEnumerable,
-        IEnumerable<T>,
         ISupportInitialize
     {
         /// <summary>
