@@ -1317,7 +1317,7 @@
                 .WithMessage("Only one single atomic operation can be created at a time.")
                 .Is(false);
 
-            Action<AtomicChange> completed = c =>
+            void completed(AtomicChange c)
             {
                 AtomicOperation = null;
                 Add(c, behavior);
@@ -1328,12 +1328,12 @@
                  * locali.
                  */
                 c.MergeTransientEntities(transientEntities);
-            };
+            }
 
-            Action disposed = () =>
+            void disposed()
             {
                 AtomicOperation = null;
-            };
+            }
 
             AtomicOperation = new AtomicOperation(completed, disposed);
 
