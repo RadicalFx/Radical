@@ -25,17 +25,14 @@ namespace Radical.Model
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && !isDisposed)
             {
-                if (!isDisposed)
-                {
-                    /*
-                     * Questa chiamata la dobbiamo fare una volta sola 
-                     * pena una bella ObjectDisposedException, altrimenti
-                     * chiamate succesive alla Dispose fallirebbero
-                     */
-                    ((IMemento)this).Memento = null;
-                }
+                /*
+                    * Questa chiamata la dobbiamo fare una volta sola 
+                    * pena una bella ObjectDisposedException, altrimenti
+                    * chiamate succesive alla Dispose fallirebbero
+                    */
+                ((IMemento)this).Memento = null;
             }
 
             _memento = null;
