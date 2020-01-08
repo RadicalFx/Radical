@@ -578,15 +578,15 @@
 
                     var subSystemsState = backwardChangesStack.OfType<AtomicChange>()
                         .Select(ac =>
-                       {
-                           var s = ac.GetEntityState(entity);
-                           if (EntityTrackingStates.HasForwardChanges == (s & EntityTrackingStates.HasForwardChanges))
-                           {
-                               s ^= EntityTrackingStates.HasForwardChanges;
-                           }
+                        {
+                            var s = ac.GetEntityState(entity);
+                            if (EntityTrackingStates.HasForwardChanges == (s & EntityTrackingStates.HasForwardChanges))
+                            {
+                                s ^= EntityTrackingStates.HasForwardChanges;
+                            }
 
-                           return s;
-                       })
+                            return s;
+                        })
                         .Aggregate(EntityTrackingStates.None, (a, s) => a |= s);
 
                     state |= subSystemsState;
@@ -602,15 +602,15 @@
 
                     var subSystemsState = forwardChangesStack.OfType<AtomicChange>()
                         .Select(ac =>
-                       {
-                           var s = ac.GetEntityState(entity);
-                           if (EntityTrackingStates.HasBackwardChanges == (s & EntityTrackingStates.HasBackwardChanges))
-                           {
-                               s ^= EntityTrackingStates.HasBackwardChanges;
-                           }
+                        {
+                            var s = ac.GetEntityState(entity);
+                            if (EntityTrackingStates.HasBackwardChanges == (s & EntityTrackingStates.HasBackwardChanges))
+                            {
+                                s ^= EntityTrackingStates.HasBackwardChanges;
+                            }
 
-                           return s;
-                       })
+                            return s;
+                        })
                         .Aggregate(EntityTrackingStates.None, (a, s) => a |= s);
 
                     state |= subSystemsState;
