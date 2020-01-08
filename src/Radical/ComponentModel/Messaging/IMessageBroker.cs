@@ -250,7 +250,6 @@ namespace Radical.ComponentModel.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender.</param>
         void Unsubscribe<T>(Object subscriber, Object sender);
-        //where T : class, IMessage;
 
         /// <summary>
         /// Unsubscribe the specified subscriber from the subscription to the supplied IMessage type.
