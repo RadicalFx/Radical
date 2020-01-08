@@ -36,11 +36,11 @@
         /// <summary>
         /// The shared sync lock
         /// </summary>
-        protected static readonly Object SyncRoot = new Object();
+        protected static readonly object SyncRoot = new object();
 
         List<IChange> backwardChangesStack = new List<IChange>();
         List<IChange> forwardChangesStack = new List<IChange>();
-        Dictionary<Object, bool> transientEntities = new Dictionary<Object, bool>();
+        Dictionary<object, bool> transientEntities = new Dictionary<object, bool>();
         List<IComponent> iComponentEntities = new List<IComponent>();
 
         #region IDisposable Members
@@ -132,7 +132,7 @@
 
         #endregion
 
-        private static readonly Object trackingServiceStateChangedEventKey = new Object();
+        private static readonly object trackingServiceStateChangedEventKey = new object();
 
         /// <summary>
         /// Occurs when the internal state of the tracking service changes.
@@ -158,7 +158,7 @@
             }
         }
 
-        private static readonly Object rejectingChangesEventKey = new Object();
+        private static readonly object rejectingChangesEventKey = new object();
 
         /// <summary>
         /// Occurs when changes are rejected.
@@ -184,7 +184,7 @@
             }
         }
 
-        private static readonly Object changesRejectedEventKey = new Object();
+        private static readonly object changesRejectedEventKey = new object();
 
         /// <summary>
         /// Occurs when changes are rejected.
@@ -210,7 +210,7 @@
             }
         }
 
-        private static readonly Object acceptingChangesEventKey = new Object();
+        private static readonly object acceptingChangesEventKey = new object();
 
         public event EventHandler<CancelEventArgs> AcceptingChanges
         {
@@ -230,7 +230,7 @@
             }
         }
 
-        private static readonly Object changesAcceptedEventKey = new Object();
+        private static readonly object changesAcceptedEventKey = new object();
 
         /// <summary>
         /// Occurs when are changes accepted.
@@ -259,7 +259,7 @@
         EventHandler<CommittedEventArgs> onChangeCommitted;
         EventHandler<RejectedEventArgs> onChangeRejected;
         EventHandler onComponentDisposed;
-        Action<Object, IBookmark> tryUnregisterTransient;
+        Action<object, IBookmark> tryUnregisterTransient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangeTrackingService"/> class.
@@ -410,7 +410,7 @@
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
         /// <exception cref="ArgumentException">If the change tracking service has already registered the object or if has pending changes for the object an ArgumentException is raised.</exception>
-        public void RegisterTransient(Object entity)
+        public void RegisterTransient(object entity)
         {
             RegisterTransient(entity, true);
         }
@@ -433,7 +433,7 @@
         /// If the change tracking service has already registered the object or if has pending 
         /// changes for the object an ArgumentException is raised.
         /// </exception>
-        public void RegisterTransient(Object entity, bool autoRemove)
+        public void RegisterTransient(object entity, bool autoRemove)
         {
             EnsureNotSuspended();
             OnRegisterTransient(entity, autoRemove);
@@ -457,7 +457,7 @@
         /// If the change tracking service has already registered the object or if has pending 
         /// changes for the object an ArgumentException is raised.
         /// </exception>
-        protected virtual void OnRegisterTransient(Object entity, bool autoRemove)
+        protected virtual void OnRegisterTransient(object entity, bool autoRemove)
         {
             EntityTrackingStates state = GetEntityState(entity);
             bool isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
@@ -485,7 +485,7 @@
         /// </summary>
         /// <param name="entity">The entity to unregister.</param>
         /// <exception cref="ArgumentOutOfRangeException">If the supplied entity is not in <c>IsTransient</c> state an ArgumentException is raised.</exception>
-        public void UnregisterTransient(Object entity)
+        public void UnregisterTransient(object entity)
         {
             EnsureNotSuspended();
             OnUnregisterTransient(entity);
@@ -514,7 +514,7 @@
         /// Gets all the entities tracked by this service instance.
         /// </summary>
         /// <returns>A enumerable list of tracked entities.</returns>
-        public IEnumerable<Object> GetEntities()
+        public IEnumerable<object> GetEntities()
         {
             return GetEntities(EntityTrackingStates.None, false);
         }
@@ -525,9 +525,9 @@
         /// <param name="stateFilter">The state filter.</param>
         /// <param name="exactMatch">if set to <c>true</c> [exact match].</param>
         /// <returns></returns>
-        public virtual IEnumerable<Object> GetEntities(EntityTrackingStates stateFilter, bool exactMatch)
+        public virtual IEnumerable<object> GetEntities(EntityTrackingStates stateFilter, bool exactMatch)
         {
-            HashSet<Object> all = new HashSet<Object>(ObjectReferenceEqualityComparer.Instance);
+            HashSet<object> all = new HashSet<object>(ObjectReferenceEqualityComparer.Instance);
             transientEntities.Keys.ForEach(te => all.Add(te));
             backwardChangesStack.ForEach(c =>
            {
@@ -556,7 +556,7 @@
         /// <returns>
         /// A set of values from the <see cref="EntityTrackingStates"/> enumeration.
         /// </returns>
-        public EntityTrackingStates GetEntityState(Object entity)
+        public EntityTrackingStates GetEntityState(object entity)
         {
             var state = EntityTrackingStates.None;
 

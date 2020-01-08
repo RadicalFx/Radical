@@ -21,7 +21,7 @@ namespace Radical.Tests.Model
         public void viewAllEntityItemViewFilter_instance_using_different_generic_types_is_not_singleton()
         {
             var expected = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
-            var actual = ViewAllEntityItemViewFilter<Object>.Instance;
+            var actual = ViewAllEntityItemViewFilter<object>.Instance;
 
             actual.Should().Not.Be.EqualTo(expected);
         }

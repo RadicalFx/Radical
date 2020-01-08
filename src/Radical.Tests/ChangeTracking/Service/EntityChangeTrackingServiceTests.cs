@@ -626,7 +626,7 @@
         public void after_suspend_no_more_changes_can_be_added()
         {
             RejectCallback<string> cb = cv => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = string.Empty;
             PropertyValueChange<string> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
@@ -794,7 +794,7 @@
             ChangeTrackingService svc = new ChangeTrackingService();
             IEnumerable entities = svc.GetEntities(EntityTrackingStates.IsTransient, false);
 
-            Assert.AreEqual<int>(0, entities.OfType<Object>().Count());
+            Assert.AreEqual<int>(0, entities.OfType<object>().Count());
         }
 
         [TestMethod]
@@ -819,7 +819,7 @@
         public void service_after_add_isChanged_is_true()
         {
             RejectCallback<string> cb = cv => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = string.Empty;
             PropertyValueChange<string> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
@@ -834,7 +834,7 @@
         public void service_after_add_getChangeSet_return_valid_cSet()
         {
             RejectCallback<string> cb = cv => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = string.Empty;
             IChange expected = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
@@ -873,7 +873,7 @@
         public void service_create_non_null_bookmark()
         {
             RejectCallback<string> cb = cv => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = string.Empty;
             IChange expected = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
@@ -909,7 +909,7 @@
         public void service_validate_a_valid_bookmark_is_true()
         {
             RejectCallback<string> cb = cv => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = string.Empty;
             IChange expected = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
@@ -1197,7 +1197,7 @@
             p.Name = "Mauro";
             p.Name = "Foo";
 
-            IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.None, false);
+            IEnumerable<object> entities = svc.GetEntities(EntityTrackingStates.None, false);
 
             Assert.AreEqual<int>(1, entities.Count());
         }
@@ -1215,7 +1215,7 @@
 
             Person p2 = new Person(svc, true);
 
-            IEnumerable<Object> entities = svc.GetEntities();
+            IEnumerable<object> entities = svc.GetEntities();
 
             Assert.AreEqual<int>(2, entities.Count());
         }
@@ -1231,7 +1231,7 @@
             p.Name = "Mauro";
             p.Name = "Foo";
 
-            IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, true);
+            IEnumerable<object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, true);
 
             Assert.AreEqual<int>(1, entities.Count());
         }
@@ -1247,7 +1247,7 @@
             p.Name = "Mauro";
             p.Name = "Foo";
 
-            IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, false);
+            IEnumerable<object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, false);
 
             Assert.AreEqual<int>(1, entities.Count());
         }
@@ -1263,7 +1263,7 @@
             p.Name = "Mauro";
             p.Name = "Foo";
 
-            IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, true);
+            IEnumerable<object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, true);
 
             Assert.AreEqual<int>(0, entities.Count());
         }
@@ -1279,7 +1279,7 @@
             p.Name = "Mauro";
             p.Name = "Foo";
 
-            IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, false);
+            IEnumerable<object> entities = svc.GetEntities(EntityTrackingStates.HasBackwardChanges, false);
 
             Assert.AreEqual<int>(1, entities.Count());
         }
@@ -1295,7 +1295,7 @@
             p.Name = "Mauro";
             p.Name = "Foo";
 
-            IEnumerable<Object> entities = svc.GetEntities(EntityTrackingStates.IsTransient, false);
+            IEnumerable<object> entities = svc.GetEntities(EntityTrackingStates.IsTransient, false);
 
             Assert.AreEqual<int>(1, entities.Count());
         }
@@ -1964,7 +1964,7 @@
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = "Foo";
 
             var iChange = new PropertyValueChange<string>(fakeOwner, "property-name", change, rc, cc, "");
@@ -1984,7 +1984,7 @@
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
@@ -2003,7 +2003,7 @@
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
@@ -2022,7 +2022,7 @@
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
@@ -2041,7 +2041,7 @@
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = "Foo";
 
             var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
@@ -2059,7 +2059,7 @@
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
-            Object fakeOwner = new Object();
+            object fakeOwner = new object();
             string change = "Foo";
 
             var iChange = new PropertyValueChange<string>(fakeOwner, "property-name", change, rc, cc, "");

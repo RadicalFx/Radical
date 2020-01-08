@@ -93,7 +93,7 @@ namespace Radical.Observers
         /// Initializes a new instance of the <see cref="AbstractMonitor"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected AbstractMonitor(Object source)
+        protected AbstractMonitor(object source)
         {
             Ensure.That(source).Named("source").IsNotNull();
 
@@ -105,7 +105,7 @@ namespace Radical.Observers
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="dispatcher">The dispatcher.</param>
-        protected AbstractMonitor(Object source, IDispatcher dispatcher)
+        protected AbstractMonitor(object source, IDispatcher dispatcher)
             : this(source)
         {
             this.Dispatcher = dispatcher;
@@ -117,7 +117,7 @@ namespace Radical.Observers
         /// Starts monitoring the given source object.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected virtual void StartMonitoring(Object source)
+        protected virtual void StartMonitoring(object source)
         {
             this.WeakSource = new WeakReference(source);
 

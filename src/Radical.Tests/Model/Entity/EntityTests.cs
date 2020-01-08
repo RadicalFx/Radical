@@ -14,7 +14,7 @@ namespace Radical.Tests.Model.Entity
     {
         class TestMetadata<T> : PropertyMetadata<T>
         {
-            public TestMetadata(Object propertyOwner, string propertyName)
+            public TestMetadata(object propertyOwner, string propertyName)
                 : base(propertyOwner, propertyName)
             {
 

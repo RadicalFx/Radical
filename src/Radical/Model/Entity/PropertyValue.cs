@@ -10,6 +10,6 @@ namespace Radical.Model
         /// Gets the stored property value.
         /// </summary>
         /// <returns>The stored value.</returns>
-        public abstract Object GetValue();
+        public abstract object GetValue();
     }
 }

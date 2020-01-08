@@ -72,7 +72,7 @@ namespace Radical.Reflection
 
             if (MemberInfoExtensions.IsAttributeDefined<T>(memberInfo, inherit))
             {
-                Object[] attributes = memberInfo.GetCustomAttributes(typeof(T), inherit);
+                object[] attributes = memberInfo.GetCustomAttributes(typeof(T), inherit);
                 returnValue = attributes.Cast<T>().ToArray<T>();
             }
             else

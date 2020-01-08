@@ -14,6 +14,6 @@
         /// </summary>
         /// <param name="item">The item to test.</param>
         /// <returns><c>True</c> if the item should be included, otherwise <c>false</c>.</returns>
-        bool ShouldInclude(Object item);
+        bool ShouldInclude(object item);
     }
 }

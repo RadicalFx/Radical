@@ -32,7 +32,7 @@ namespace Radical.Model
         /// </summary>
         /// <value></value>
         /// <returns>An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.</returns>
-        Object ICollection.SyncRoot
+        object ICollection.SyncRoot
         {
             get
             {

@@ -225,14 +225,14 @@ namespace Radical.ComponentModel.Messaging
         /// Unsubscribe the specified subscriber from all the subscriptions.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
-        void Unsubscribe(Object subscriber);
+        void Unsubscribe(object subscriber);
 
         /// <summary>
         /// Unsubscribe the specified subscriber from all the subscriptions to the supplied IMessage type.
         /// </summary>
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        void Unsubscribe<T>(Object subscriber);
+        void Unsubscribe<T>(object subscriber);
 
         /// <summary>
         /// Unsubscribe the specified subscriber from all the messages
@@ -240,7 +240,7 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender.</param>
-        void Unsubscribe(Object subscriber, Object sender);
+        void Unsubscribe(object subscriber, object sender);
 
         /// <summary>
         /// Unsubscribe the specified subscriber from all the messages,
@@ -249,7 +249,7 @@ namespace Radical.ComponentModel.Messaging
         /// <typeparam name="T">The message type filter.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender.</param>
-        void Unsubscribe<T>(Object subscriber, Object sender);
+        void Unsubscribe<T>(object subscriber, object sender);
 
         /// <summary>
         /// Unsubscribe the specified subscriber from the subscription to the supplied IMessage type.
@@ -257,7 +257,7 @@ namespace Radical.ComponentModel.Messaging
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback to unsubscribe.</param>
-        void Unsubscribe<T>(Object subscriber, Delegate callback);
+        void Unsubscribe<T>(object subscriber, Delegate callback);
 
         /// <summary>
         /// Broadcasts the specified message in an asynchronous manner without
@@ -265,7 +265,7 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        void Broadcast(Object sender, Object message);
+        void Broadcast(object sender, object message);
 
         /// <summary>
         /// Broadcasts the specified message in an asynchronous manner without
@@ -273,7 +273,7 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        System.Threading.Tasks.Task BroadcastAsync(Object sender, Object message);
+        System.Threading.Tasks.Task BroadcastAsync(object sender, object message);
 
         /// <summary>
         /// Dispatches the specified message in a synchronous manner waiting for
@@ -281,6 +281,6 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message to dispatch.</param>
-        void Dispatch(Object sender, Object message);
+        void Dispatch(object sender, object message);
     }
 }

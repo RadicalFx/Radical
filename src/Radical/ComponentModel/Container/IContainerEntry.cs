@@ -45,7 +45,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Gets the parameters.
         /// </summary>
-        IDictionary<string, Object> Parameters { get; }
+        IDictionary<string, object> Parameters { get; }
 
         /// <summary>
         /// Gets an indication is this component can be overrode.

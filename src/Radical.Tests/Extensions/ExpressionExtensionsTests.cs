@@ -19,7 +19,7 @@
         {
             var expected = "BornDate";
 
-            Expression<Func<TestPerson, Object>> target = p => p.BornDate;
+            Expression<Func<TestPerson, object>> target = p => p.BornDate;
 
             var actual = target.GetMemberName();
 

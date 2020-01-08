@@ -41,7 +41,7 @@ namespace Radical.ChangeTracking
             this.change.Add(change, behavior);
         }
 
-        public void RegisterTransient(Object entity, bool autoRemove)
+        public void RegisterTransient(object entity, bool autoRemove)
         {
             this.change.RegisterTransient(entity, autoRemove);
         }

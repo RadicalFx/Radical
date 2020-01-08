@@ -7,7 +7,7 @@ namespace Radical.ChangeTracking
 {
     sealed class AtomicChange : IChange
     {
-        Dictionary<Object, bool> transientEntities = new Dictionary<Object, bool>();
+        Dictionary<object, bool> transientEntities = new Dictionary<object, bool>();
         List<Tuple<IChange, AddChangeBehavior>> changes = new List<Tuple<IChange, AddChangeBehavior>>();
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <param name="autoRemove">if set to <c>true</c> [auto remove].</param>
-        public void RegisterTransient(Object entity, bool autoRemove)
+        public void RegisterTransient(object entity, bool autoRemove)
         {
             this.transientEntities.Add(entity, autoRemove);
         }
@@ -46,7 +46,7 @@ namespace Radical.ChangeTracking
         /// <returns>
         /// A set of values from the <see cref="EntityTrackingStates"/> enumeration.
         /// </returns>
-        public EntityTrackingStates GetEntityState(Object entity)
+        public EntityTrackingStates GetEntityState(object entity)
         {
             var state = EntityTrackingStates.None;
 

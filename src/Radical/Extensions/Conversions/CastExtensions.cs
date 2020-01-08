@@ -14,7 +14,7 @@ namespace Radical.Conversions
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="obj">The source object.</param>
         /// <returns>The casted object.</returns>
-        public static TResult CastTo<TResult>(this Object obj)
+        public static TResult CastTo<TResult>(this object obj)
         {
             return (TResult)obj;
         }
@@ -25,7 +25,7 @@ namespace Radical.Conversions
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="obj">The source object.</param>
         /// <returns>The casted object or null.</returns>
-        public static TResult As<TResult>(this Object obj)
+        public static TResult As<TResult>(this object obj)
             where TResult : class
         {
             return As<TResult>(obj, r => { }, () => { });
@@ -38,7 +38,7 @@ namespace Radical.Conversions
         /// <param name="obj">The source object.</param>
         /// <param name="invalidCastAction">The invalid cast action.</param>
         /// <returns>The casted object or null.</returns>
-        public static TResult As<TResult>(this Object obj, Action invalidCastAction)
+        public static TResult As<TResult>(this object obj, Action invalidCastAction)
             where TResult : class
         {
             return As<TResult>(obj, r => { }, invalidCastAction);
@@ -51,7 +51,7 @@ namespace Radical.Conversions
         /// <param name="obj">The source object.</param>
         /// <param name="validCastAction">The valid cast action.</param>
         /// <returns>The casted object or null.</returns>
-        public static TResult As<TResult>(this Object obj, Action<TResult> validCastAction)
+        public static TResult As<TResult>(this object obj, Action<TResult> validCastAction)
             where TResult : class
         {
             return As<TResult>(obj, validCastAction, () => { });
@@ -65,7 +65,7 @@ namespace Radical.Conversions
         /// <param name="validCastAction">The valid cast action.</param>
         /// <param name="invalidCastAction">The invalid cast action.</param>
         /// <returns>The casted object or null.</returns>
-        public static TResult As<TResult>(this Object obj, Action<TResult> validCastAction, Action invalidCastAction)
+        public static TResult As<TResult>(this object obj, Action<TResult> validCastAction, Action invalidCastAction)
             where TResult : class
         {
             Ensure.That(validCastAction).Named("validCastAction").IsNotNull();

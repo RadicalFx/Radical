@@ -16,6 +16,6 @@
         /// </summary>
         /// <param name="changeSet">The change set to visit.</param>
         /// <returns>A distinct dictionary containing a reference to all the changed entities and the most important change.</returns>
-        IDictionary<Object, IChange> Visit(IChangeSet changeSet);
+        IDictionary<object, IChange> Visit(IChangeSet changeSet);
     }
 }

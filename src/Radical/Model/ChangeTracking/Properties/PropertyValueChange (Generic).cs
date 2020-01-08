@@ -17,7 +17,7 @@
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="value">The value.</param>
         /// <param name="restoreCallback">The restore callback.</param>
-        public PropertyValueChange(Object owner, string propertyName, T value, RejectCallback<T> restoreCallback)
+        public PropertyValueChange(object owner, string propertyName, T value, RejectCallback<T> restoreCallback)
             : this(owner, propertyName, value, restoreCallback, null, string.Empty)
         {
 
@@ -31,7 +31,7 @@
         /// <param name="value">The value.</param>
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange(Object owner, string propertyName, T value, RejectCallback<T> restoreCallback, string description)
+        public PropertyValueChange(object owner, string propertyName, T value, RejectCallback<T> restoreCallback, string description)
             : this(owner, propertyName, value, restoreCallback, null, description)
         {
 
@@ -46,7 +46,7 @@
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange(Object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, string description)
+        public PropertyValueChange(object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, string description)
             : base(owner, value, restoreCallback, commitCallback, description)
         {
             this.PropertyName = propertyName;

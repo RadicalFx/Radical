@@ -5,7 +5,7 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Delegate used to get property value
     /// </summary>
-    public delegate Object EntityItemViewValueGetter<T, TValue>(EntityItemViewValueGetterArgs<T, TValue> args); //where T : class;
+    public delegate object EntityItemViewValueGetter<T, TValue>(EntityItemViewValueGetterArgs<T, TValue> args); //where T : class;
 
     /// <summary>
     /// Delegate used to set property value

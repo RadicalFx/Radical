@@ -38,8 +38,8 @@ namespace Radical.Helpers
         {
             // Assumes lBound >= 0 && lBound < uBound
             // returns an int >= lBound and < uBound
-            UInt32 urndnum;
-            Byte[] rndnum = new Byte[4];
+            uint urndnum;
+            byte[] rndnum = new byte[4];
 
             if (lBound == uBound - 1 || lBound == uBound)
             {
@@ -47,7 +47,7 @@ namespace Radical.Helpers
                 return lBound;
             }
 
-            UInt32 xcludeRndBase = (UInt32.MaxValue - (UInt32.MaxValue % (UInt32)(uBound - lBound)));
+            uint xcludeRndBase = (uint.MaxValue - (uint.MaxValue % (uint)(uBound - lBound)));
 
             do
             {
@@ -132,14 +132,14 @@ namespace Radical.Helpers
             return pwdBuffer.ToString();
         }
 
-        private readonly List<Char> _exclusions = new List<char>();
+        private readonly List<char> _exclusions = new List<char>();
 
         /// <summary>
         /// A list of char that must be excluded from the
         /// generated password
         /// </summary>
         /// <value>The exclusions.</value>
-        public List<Char> Exclusions
+        public List<char> Exclusions
         {
             get { return this._exclusions; }
         }

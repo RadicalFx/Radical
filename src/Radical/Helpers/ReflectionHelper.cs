@@ -30,7 +30,7 @@ namespace Radical.Helpers
             /// </summary>
             /// <param name="propertyRef">The property ref.</param>
             /// <returns></returns>
-            public string NameOf(Expression<Func<T, Object>> propertyRef)
+            public string NameOf(Expression<Func<T, object>> propertyRef)
             {
                 return propertyRef.GetMemberName();
             }
@@ -40,7 +40,7 @@ namespace Radical.Helpers
             /// </summary>
             /// <param name="propertyRef">The property expression.</param>
             /// <returns>The property info.</returns>
-            public PropertyInfo GetProperty(Expression<Func<T, Object>> propertyRef)
+            public PropertyInfo GetProperty(Expression<Func<T, object>> propertyRef)
             {
                 return typeof(T).GetProperty(propertyRef.GetMemberName());
             }
@@ -52,7 +52,7 @@ namespace Radical.Helpers
             /// <returns>
             /// The list of property info.
             /// </returns>
-            public IEnumerable<PropertyInfo> GetProperties(Expression<Func<T, Object>> propertyExpression)
+            public IEnumerable<PropertyInfo> GetProperties(Expression<Func<T, object>> propertyExpression)
             {
                 return this.GetProperties(propertyExpression.Body);
             }
@@ -97,7 +97,7 @@ namespace Radical.Helpers
         /// <typeparam name="T">The type of the instance holding the property.</typeparam>
         /// <param name="propertyRef">The property expressed as a Lambda Expression Function on the given instance type.</param>
         /// <returns>The name of the property.</returns>
-        public static string GetPropertyName<T>(Expression<Func<T, Object>> propertyRef)
+        public static string GetPropertyName<T>(Expression<Func<T, object>> propertyRef)
         {
             return propertyRef.GetMemberName();
         }

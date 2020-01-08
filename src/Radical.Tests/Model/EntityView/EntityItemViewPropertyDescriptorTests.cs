@@ -199,7 +199,7 @@ namespace Radical.Tests
         public void entityItemViewPropertyDescriptor_getValue_using_invalid_reference_component_should_raise_ArgumentException()
         {
             var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.GetValue(new Object());
+            target.GetValue(new object());
         }
 
         [TestMethod]
@@ -207,7 +207,7 @@ namespace Radical.Tests
         public void entityItemViewPropertyDescriptor_setValue_using_invalid_reference_component_should_raise_ArgumentException()
         {
             var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.SetValue(new Object(), 100);
+            target.SetValue(new object(), 100);
         }
     }
 }

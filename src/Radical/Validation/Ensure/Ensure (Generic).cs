@@ -112,7 +112,7 @@ namespace Radical.Validation
         /// <returns>
         /// This ensure instance for fluent interface usage.
         /// </returns>
-        public IEnsure<T> WithMessage(string errorMessage, params Object[] formatArgs)
+        public IEnsure<T> WithMessage(string errorMessage, params object[] formatArgs)
         {
             this.UserErrorMessage = string.Format(errorMessage, formatArgs);
             return this;

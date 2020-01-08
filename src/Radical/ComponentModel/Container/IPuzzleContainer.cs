@@ -64,7 +64,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="serviceType">The Type of the service.</param>
         /// <returns>The resolved service instance.</returns>
-        Object Resolve(Type serviceType);
+        object Resolve(Type serviceType);
 
         /// <summary>
         /// Resolves the entry identified by the specified key and with the given type.
@@ -72,7 +72,7 @@ namespace Radical.ComponentModel
         /// <param name="key">The key.</param>
         /// <param name="serviceType">Type of the service.</param>
         /// <returns></returns>
-        Object Resolve(string key, Type serviceType);
+        object Resolve(string key, Type serviceType);
 
         /// <summary>
         /// Resolves all entries of the given type.
@@ -86,7 +86,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="t">The type of entry to resolve.</param>
         /// <returns></returns>
-        IEnumerable<Object> ResolveAll(Type t);
+        IEnumerable<object> ResolveAll(Type t);
 
         /// <summary>
         /// Resolves the specified service type.

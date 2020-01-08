@@ -15,10 +15,10 @@ namespace Radical
 
         public bool Equals(T x, T y)
         {
-            return Object.Equals(x, y);
+            return object.Equals(x, y);
         }
 
-        bool IEqualityComparer.Equals(Object x, Object y)
+        bool IEqualityComparer.Equals(object x, object y)
         {
             return Object.Equals(x, y);
         }

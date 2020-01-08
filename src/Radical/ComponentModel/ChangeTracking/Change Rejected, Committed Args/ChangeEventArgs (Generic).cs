@@ -27,7 +27,7 @@ namespace Radical.ComponentModel.ChangeTracking
         /// Gets the changed entity.
         /// </summary>
         /// <value>The entity.</value>
-        public Object Entity
+        public object Entity
         {
             get;
             private set;

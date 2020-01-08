@@ -20,7 +20,7 @@
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public AddRangeCollectionChange(Object owner, CollectionRangeDescriptor<T> descriptor, RejectCallback<CollectionRangeDescriptor<T>> rejectCallback, CommitCallback<CollectionRangeDescriptor<T>> commitCallback, string description)
+        public AddRangeCollectionChange(object owner, CollectionRangeDescriptor<T> descriptor, RejectCallback<CollectionRangeDescriptor<T>> rejectCallback, CommitCallback<CollectionRangeDescriptor<T>> commitCallback, string description)
             : base(owner, descriptor, rejectCallback, commitCallback, description)
         {
 
@@ -30,9 +30,9 @@
         /// Gets the changed entities.
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<Object> GetChangedEntities()
+        public override IEnumerable<object> GetChangedEntities()
         {
-            return this.Descriptor.Items.OfType<Object>().AsReadOnly();
+            return this.Descriptor.Items.OfType<object>().AsReadOnly();
         }
 
         /// <summary>

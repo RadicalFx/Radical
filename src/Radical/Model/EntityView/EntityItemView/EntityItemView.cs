@@ -277,7 +277,7 @@ namespace Radical.Model
             return this.View.GetCustomPropertyValue<TValue>(customPropertyName, this);
         }
 
-        Object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
         {
             return this;
         }
@@ -334,7 +334,7 @@ namespace Radical.Model
             return null;
         }
 
-        Object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return null;
         }
@@ -344,7 +344,7 @@ namespace Radical.Model
             return this.EntityItem.GetHashCode();// base.GetHashCode();
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
             var other = obj as IEntityItemView<T>;
             if (other != null)

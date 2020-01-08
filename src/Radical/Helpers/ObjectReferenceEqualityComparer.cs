@@ -5,8 +5,8 @@ namespace Radical
 {
     static class ObjectReferenceEqualityComparer
     {
-        private static IEqualityComparer<Object> _instance = new ReferenceEqualityComparer<Object>();
-        public static IEqualityComparer<Object> Instance
+        private static IEqualityComparer<object> _instance = new ReferenceEqualityComparer<object>();
+        public static IEqualityComparer<object> Instance
         {
             get { return _instance; }
         }

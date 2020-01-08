@@ -12,7 +12,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry UsingInstance(Object instance);
+        IPuzzleContainerEntry UsingInstance(object instance);
 
         /// <summary>
         /// Defines the type that implements the service.
@@ -33,7 +33,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="factory">The factory.</param>
         /// <returns>This entry instance.</returns>
-        IPuzzleContainerEntry UsingFactory(Func<Object> factory);
+        IPuzzleContainerEntry UsingFactory(Func<object> factory);
 
         /// <summary>
         /// Defines the specified component registration as override allowed.

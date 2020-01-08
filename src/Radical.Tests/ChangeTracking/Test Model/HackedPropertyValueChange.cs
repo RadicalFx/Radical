@@ -8,7 +8,7 @@ namespace Radical.Tests.ChangeTracking
 
     class HackedPropertyValueChange : PropertyValueChange<string>
     {
-        public HackedPropertyValueChange(Object owner, string value, RejectCallback<string> rc, CommitCallback<string> cc)
+        public HackedPropertyValueChange(object owner, string value, RejectCallback<string> rc, CommitCallback<string> cc)
             : base(owner, "property-name", value, rc, cc, string.Empty)
         {
 

@@ -122,7 +122,7 @@ namespace Radical.Messaging
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, Action<Object, T> callback)
+        public void Subscribe<T>(object subscriber, Action<object, T> callback)
         {
             this.Subscribe<T>(subscriber, InvocationModel.Default, callback);
         }
@@ -136,7 +136,7 @@ namespace Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, Action<Object, T> callback)
+        public void Subscribe<T>(object subscriber, object sender, Action<object, T> callback)
         {
             this.Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
         }
@@ -148,7 +148,7 @@ namespace Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, Type messageType, Action<Object, Object> callback)
+        public void Subscribe(object subscriber, Type messageType, Action<object, object> callback)
         {
             this.Subscribe(subscriber, messageType, InvocationModel.Default, callback);
         }
@@ -162,7 +162,7 @@ namespace Radical.Messaging
         /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, Action<Object, Object> callback)
+        public void Subscribe(object subscriber, object sender, Type messageType, Action<object, object> callback)
         {
             this.Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
         }
@@ -175,7 +175,7 @@ namespace Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<Object, T> callback)
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<object, T> callback)
         {
             this.Subscribe<T>(subscriber, invocationModel, (s, msg) => true, callback);
         }
@@ -188,7 +188,7 @@ namespace Radical.Messaging
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
         {
             this.Subscribe(subscriber, messageType, invocationModel, (s, msg) => true, callback);
         }
@@ -203,7 +203,7 @@ namespace Radical.Messaging
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<Object, Object> callback)
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
         {
             this.Subscribe(subscriber, sender, messageType, invocationModel, (s, msg) => true, callback);
         }
@@ -218,7 +218,7 @@ namespace Radical.Messaging
         /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<Object, T> callback)
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback)
         {
             this.Subscribe<T>(subscriber, sender, invocationModel, (s, msg) => true, callback);
         }
@@ -282,7 +282,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender.</param>
-        public void Unsubscribe(Object subscriber, Object sender)
+        public void Unsubscribe(object subscriber, object sender)
         {
             Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
             Ensure.That(sender).Named(() => sender).IsNotNull();
@@ -447,7 +447,7 @@ namespace Radical.Messaging
             }
         }
 
-        IEnumerable<ISubscription> GetSubscriptionsFor(Type messageType, Object sender)
+        IEnumerable<ISubscription> GetSubscriptionsFor(Type messageType, object sender)
         {
             msgSubsIndexLock.EnterReadLock();
             try
@@ -468,7 +468,7 @@ namespace Radical.Messaging
             }
         }
 
-        public void Dispatch(Object sender, Object message)
+        public void Dispatch(object sender, object message)
         {
             Ensure.That(sender).Named(() => sender).IsNotNull();
             Ensure.That(message).Named(() => message).IsNotNull();
@@ -497,7 +497,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public void Broadcast(Object sender, Object message)
+        public void Broadcast(object sender, object message)
         {
             Ensure.That(message).Named(() => message).IsNotNull();
             Ensure.That(sender).Named(() => sender).IsNotNull();
@@ -526,7 +526,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public Task BroadcastAsync(Object sender, Object message)
+        public Task BroadcastAsync(object sender, object message)
         {
             Ensure.That(message).Named(() => message).IsNotNull();
             Ensure.That(sender).Named(() => sender).IsNotNull();

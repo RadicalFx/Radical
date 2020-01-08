@@ -18,13 +18,13 @@ namespace Radical.Model
             this.propertyChangedHandler = null;
         }
 
-        public PropertyMetadata(Object propertyOwner, string propertyName)
+        public PropertyMetadata(object propertyOwner, string propertyName)
             : base(propertyOwner, propertyName)
         {
 
         }
 
-        public PropertyMetadata(Object propertyOwner, Expression<Func<T>> property)
+        public PropertyMetadata(object propertyOwner, Expression<Func<T>> property)
             : this(propertyOwner, property.GetMemberName())
         {
 

@@ -24,7 +24,7 @@ namespace Radical.Helpers
             return _current;
         }
 
-        const Char SEPARATOR = '=';
+        const char SEPARATOR = '=';
 
         readonly IEnumerable<string> args;
 

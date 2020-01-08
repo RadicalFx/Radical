@@ -14,7 +14,7 @@ namespace Radical.Tests
         [TestMethod]
         public void changeCommittedArgs_generic_ctor_normal_should_correctly_set_values()
         {
-            var entity = new Object();
+            var entity = new object();
             var cachedValue = new GenericParameterHelper();
             var iChange = A.Dummy<IChange>();
             var reason = CommitReason.AcceptChanges;

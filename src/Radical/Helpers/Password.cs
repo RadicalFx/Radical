@@ -13,9 +13,9 @@ namespace Radical.Helpers
         /// Creates a random salt.
         /// </summary>
         /// <returns>The randomly created salt.</returns>
-        public static Byte[] CreateRandomSalt()
+        public static byte[] CreateRandomSalt()
         {
-            var saltBytes = new Byte[4];
+            var saltBytes = new byte[4];
             var rng = new RNGCryptoServiceProvider();
             rng.GetBytes(saltBytes);
 
@@ -28,7 +28,7 @@ namespace Radical.Helpers
         /// <param name="clearTextPassword">The clear text password.</param>
         /// <param name="passwordSalt">The password salt.</param>
         /// <returns>The hash of the given password.</returns>
-        public static Byte[] CreateHash(string clearTextPassword, Byte[] passwordSalt)
+        public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt)
         {
             return Password.CreateHash(clearTextPassword, passwordSalt, "SHA1");
         }
@@ -42,7 +42,7 @@ namespace Radical.Helpers
         /// <returns>
         /// The hash of the given password.
         /// </returns>
-        public static Byte[] CreateHash(string clearTextPassword, Byte[] passwordSalt, string hashAlgorithmName)
+        public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt, string hashAlgorithmName)
         {
             var bytes = Encoding.Unicode.GetBytes(clearTextPassword);
             var buffer = new byte[passwordSalt.Length + bytes.Length];

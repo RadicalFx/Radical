@@ -37,8 +37,8 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var target = new MessageBroker(dispatcher);
 
-            var subscriber1 = new Object();
-            var subscriber2 = new Object();
+            var subscriber1 = new object();
+            var subscriber2 = new object();
 
             target.Subscribe<PocoTestMessage>(subscriber1, (s, msg) => { actual++; });
             target.Subscribe<PocoTestMessage>(subscriber1, (s, msg) => { actual++; });
@@ -63,7 +63,7 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var target = new MessageBroker(dispatcher);
 
-            var subscriber = new Object();
+            var subscriber = new object();
 
             target.Subscribe<PocoTestMessage>(subscriber, (s, msg) => { actual++; });
             target.Subscribe<AnotherPocoTestMessage>(subscriber, (s, msg) => { actual++; });
@@ -94,7 +94,7 @@ namespace Radical.Tests.Windows.Messaging
                var dispatcher = new NullDispatcher();
                var broker = new MessageBroker(dispatcher);
 
-               broker.Subscribe<PocoTestMessage>(this, (Action<Object, PocoTestMessage>)null);
+               broker.Subscribe<PocoTestMessage>(this, (Action<object, PocoTestMessage>)null);
            })
             .Should().Throw<ArgumentNullException>();
         }
@@ -214,7 +214,7 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var broker = new MessageBroker(dispatcher);
 
-            broker.Subscribe<Object>(this, (s, msg) => actual = true);
+            broker.Subscribe<object>(this, (s, msg) => actual = true);
             broker.Dispatch(this, new PocoTestMessage());
 
             actual.Should().Be.True();
@@ -229,7 +229,7 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var broker = new MessageBroker(dispatcher);
 
-            broker.Subscribe<Object>(this, (s, msg) => actual++);
+            broker.Subscribe<object>(this, (s, msg) => actual++);
             broker.Dispatch(this, new PocoTestMessage());
             broker.Dispatch(this, new AnotherPocoTestMessage());
 

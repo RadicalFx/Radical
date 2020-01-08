@@ -61,7 +61,7 @@ namespace Radical.ChangeTracking
             }
 
             IEnumerable transientEntities = svc.GetEntities(EntityTrackingStates.IsTransient, true);
-            foreach (Object te in transientEntities)
+            foreach (object te in transientEntities)
             {
                 if (result.Any(a => a.Target == te))
                 {
@@ -88,7 +88,7 @@ namespace Radical.ChangeTracking
         /// <param name="target">The target entity.</param>
         /// <param name="proposedAction">The proposed action.</param>
         /// <returns>The advised action.</returns>
-        protected virtual IAdvisedAction OnCreateAdvisedAction(Object target, ProposedActions proposedAction)
+        protected virtual IAdvisedAction OnCreateAdvisedAction(object target, ProposedActions proposedAction)
         {
             var advisedAction = new AdvisedAction(target, proposedAction);
             return advisedAction;

@@ -27,7 +27,7 @@ namespace Radical.Model
             this.SortDescriptions = sortDescriptions;
         }
 
-        static int Compare(Object a, Object b, ListSortDirection direction)
+        static int Compare(object a, object b, ListSortDirection direction)
         {
             int retVal = 0;
 

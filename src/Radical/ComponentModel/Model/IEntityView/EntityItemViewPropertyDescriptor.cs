@@ -63,7 +63,7 @@ namespace Radical.ComponentModel
         /// Gets the default value.
         /// </summary>
         /// <returns>The default value for this property.</returns>
-        public virtual Object GetDefaultValue()
+        public virtual object GetDefaultValue()
         {
             if (this.PropertyType.IsValueType)
             {

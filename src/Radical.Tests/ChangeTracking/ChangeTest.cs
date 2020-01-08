@@ -32,7 +32,7 @@ namespace Radical.Tests.ChangeTracking
             }
         }
 
-        protected virtual IChange<T> Mock<T>(Object owner, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
+        protected virtual IChange<T> Mock<T>(object owner, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
         {
             return new ChangeMock<T>(owner, value, rejectCallback, commitCallback, description);
         }
@@ -41,7 +41,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_properties_tests()
         {
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
@@ -60,7 +60,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_null_commitCallback()
         {
-            var target = new ChangeMock<string>(new Object(), "Foo", e => { }, null, string.Empty);
+            var target = new ChangeMock<string>(new object(), "Foo", e => { }, null, string.Empty);
 
             target.IsCommitSupported.Should().Be.False();
         }
@@ -79,7 +79,7 @@ namespace Radical.Tests.ChangeTracking
         {
             var invoked = false;
 
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { invoked = true; };
             CommitCallback<string> cc = null;
@@ -97,7 +97,7 @@ namespace Radical.Tests.ChangeTracking
         {
             ChangeRejectedEventArgs<string> expected = null;
 
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { expected = e; };
             CommitCallback<string> cc = null;
@@ -119,7 +119,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_reject_invoked_with_invalid_rejectReason()
         {
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = null;
@@ -135,7 +135,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_reject_invoked_with_outOfRange_rejectReason()
         {
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = null;
@@ -151,7 +151,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_rejectCallback_argumentNullException()
         {
-            var target = new ChangeMock<string>(new Object(), "Foo", null, null, string.Empty);
+            var target = new ChangeMock<string>(new object(), "Foo", null, null, string.Empty);
         }
 
         [TestMethod]
@@ -182,7 +182,7 @@ namespace Radical.Tests.ChangeTracking
             int expected = 1;
             int actual = 0;
 
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = null;
@@ -201,7 +201,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commit_invoked_with_invalid_rejectReason()
         {
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
@@ -217,7 +217,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commit_invoked_with_outOfRange_rejectReason()
         {
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
@@ -234,7 +234,7 @@ namespace Radical.Tests.ChangeTracking
         {
             ChangeCommittedEventArgs<string> expected = null;
 
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { expected = e; };
@@ -255,14 +255,14 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_getChangedEntities()
         {
-            var owner = new Object();
+            var owner = new object();
             var value = "Foo";
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
             var description = string.Empty;
 
             var target = new ChangeMock<string>(owner, value, rc, cc, description);
-            IEnumerable<Object> ce = target.GetChangedEntities();
+            IEnumerable<object> ce = target.GetChangedEntities();
 
             ce.Should().Not.Be.Null();
             ce.Count().Should().Be.EqualTo(1);

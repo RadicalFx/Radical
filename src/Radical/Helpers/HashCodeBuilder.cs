@@ -7,13 +7,13 @@ namespace Radical.Helpers
     /// </summary>
     public class HashCodeBuilder
     {
-        Int64 combinedHashCode;
+        long combinedHashCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HashCodeBuilder"/> class.
         /// </summary>
         /// <param name="initialHashCode">The initial hash code.</param>
-        public HashCodeBuilder(Int64 initialHashCode)
+        public HashCodeBuilder(long initialHashCode)
         {
             this.combinedHashCode = initialHashCode;
         }
@@ -41,7 +41,7 @@ namespace Radical.Helpers
         /// Gets the combined hash code.
         /// </summary>
         /// <value>The combined hash code.</value>
-        public Int64 CombinedHash
+        public long CombinedHash
         {
             get { return this.combinedHashCode; }
         }

@@ -12,8 +12,8 @@
         [TestMethod]
         public void listExtensions_sync_using_empty_lists_should_not_fail()
         {
-            var source = new List<Object>();
-            var to = new List<Object>();
+            var source = new List<object>();
+            var to = new List<object>();
 
             source.Sync(to);
 
@@ -23,12 +23,12 @@
         [TestMethod]
         public void listExtensions_sync_using_non_empty_source_list_should_sync_as_expected()
         {
-            var source = new List<Object>()
+            var source = new List<object>()
             {
-                new Object(), new Object()
+                new object(), new object()
             };
 
-            var to = new List<Object>();
+            var to = new List<object>();
 
             source.Sync(to);
 
@@ -38,10 +38,10 @@
         [TestMethod]
         public void listExtensions_sync_using_empty_source_but_non_empty_to_should_sync_as_expected()
         {
-            var source = new List<Object>();
-            var to = new List<Object>()
+            var source = new List<object>();
+            var to = new List<object>()
             {
-                new Object(), new Object()
+                new object(), new object()
             };
 
             source.Sync(to);
@@ -52,14 +52,14 @@
         [TestMethod]
         public void listExtensions_sync_using_non_empty_source_and_non_empty_to_should_sync_as_expected()
         {
-            var source = new List<Object>()
+            var source = new List<object>()
             {
-                new Object()
+                new object()
             };
 
-            var to = new List<Object>()
+            var to = new List<object>()
             {
-                new Object(), new Object()
+                new object(), new object()
             };
 
             source.Sync(to);
@@ -70,16 +70,16 @@
         [TestMethod]
         public void listExtensions_sync_using_source_and_to_with_a_shared_item_should_sync_as_expected()
         {
-            var same = new Object();
-            var source = new List<Object>()
+            var same = new object();
+            var source = new List<object>()
             {
                 same,
-                new Object()
+                new object()
             };
 
-            var to = new List<Object>()
+            var to = new List<object>()
             {
-                same, new Object(), new Object()
+                same, new object(), new object()
             };
 
             source.Sync(to);
@@ -90,16 +90,16 @@
         [TestMethod]
         public void listExtensions_sync_using_source_and_to_with_a_shared_item_in_different_position_should_sync_as_expected()
         {
-            var same = new Object();
-            var source = new List<Object>()
+            var same = new object();
+            var source = new List<object>()
             {
                 same,
-                new Object()
+                new object()
             };
 
-            var to = new List<Object>()
+            var to = new List<object>()
             {
-                new Object(), same, new Object()
+                new object(), same, new object()
             };
 
             source.Sync(to);

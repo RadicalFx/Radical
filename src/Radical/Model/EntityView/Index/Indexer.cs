@@ -34,7 +34,7 @@ namespace Radical.Model
          * sarebbe già ora in grado di gestirne 'n'.
          */
         readonly Dictionary<IEntityItemView<T>, int> defaultIndex = new Dictionary<IEntityItemView<T>, int>();
-        readonly Dictionary<string, Dictionary<Object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<string, Dictionary<Object, IEntityItemView<T>>>();
+        readonly Dictionary<string, Dictionary<object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<string, Dictionary<object, IEntityItemView<T>>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Indexer&lt;T&gt;"/> class.
@@ -312,13 +312,13 @@ namespace Radical.Model
                  * Se non abbiamo già indicizzato quella proprietà
                  * lo facciamo adesso, creiamo un nuovo Dictionary
                  */
-                Dictionary<Object, IEntityItemView<T>> newIndex = new Dictionary<Object, IEntityItemView<T>>(this.Count);
+                Dictionary<object, IEntityItemView<T>> newIndex = new Dictionary<object, IEntityItemView<T>>(this.Count);
                 this.IndexProperty(property, newIndex);
                 propertiesIndexes.Add(property.Name, newIndex);
             }
         }
 
-        void IndexProperty(PropertyDescriptor property, Dictionary<Object, IEntityItemView<T>> index)
+        void IndexProperty(PropertyDescriptor property, Dictionary<object, IEntityItemView<T>> index)
         {
             foreach (EntityItemView<T> oiv in this)
             {
@@ -355,7 +355,7 @@ namespace Radical.Model
                 /*
                  * Se la proprietà è indicizzata facciamo fare all'indice
                  */
-                Dictionary<Object, IEntityItemView<T>> propertyIndex = this.propertiesIndexes[property.Name];
+                Dictionary<object, IEntityItemView<T>> propertyIndex = this.propertiesIndexes[property.Name];
                 if (propertyIndex.ContainsKey(key))
                 {
                     IEntityItemView<T> item = propertyIndex[key];

@@ -52,7 +52,7 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>(Object propertyOwner, Expression<Func<T>> property)
+        public static PropertyMetadata<T> Create<T>(object propertyOwner, Expression<Func<T>> property)
         {
             var name = property.GetMemberName();
             return PropertyMetadata.Create<T>(propertyOwner, name);
@@ -67,14 +67,14 @@ namespace Radical.Model
         /// <returns>
         /// An instance of the property metadata.
         /// </returns>
-        public static PropertyMetadata<T> Create<T>(Object propertyOwner, string propertyName)
+        public static PropertyMetadata<T> Create<T>(object propertyOwner, string propertyName)
         {
             return new PropertyMetadata<T>(propertyOwner, propertyName);
         }
 
         readonly HashSet<string> cascadeChangeNotifications = new HashSet<string>();
 
-        readonly Object propertyOwner;
+        readonly object propertyOwner;
         PropertyInfo _property;
 
         protected PropertyInfo Property
@@ -97,7 +97,7 @@ namespace Radical.Model
         /// </summary>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="propertyName">Name of the property.</param>
-        protected PropertyMetadata(Object propertyOwner, string propertyName)
+        protected PropertyMetadata(object propertyOwner, string propertyName)
         {
             Ensure.That(propertyOwner).Named("propertyOwner").IsNotNull();
             Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
