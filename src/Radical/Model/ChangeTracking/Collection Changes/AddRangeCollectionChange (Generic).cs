@@ -10,7 +10,7 @@
     /// <summary>
     /// Identifies an AddRange operation on a collection.
     /// </summary>
-    public class AddRangeCollectionChange<T> : CollectionChange<CollectionRangeDescriptor<T>, T>
+    public class AddRangeCollectionChange<T> : CollectionChange<CollectionRangeDescriptor<T>>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddRangeCollectionChange&lt;T&gt;"/> class.

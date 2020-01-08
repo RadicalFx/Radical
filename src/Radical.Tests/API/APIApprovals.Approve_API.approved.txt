@@ -361,7 +361,7 @@ namespace Radical.ChangeTracking
 }
 namespace Radical.ChangeTracking.Specialized
 {
-    public class AddRangeCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>, T>
+    public class AddRangeCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>>
     {
         public AddRangeCollectionChange(object owner, Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> commitCallback, string description) { }
         public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
@@ -372,13 +372,13 @@ namespace Radical.ChangeTracking.Specialized
     {
         protected CollectionChangeDescriptor() { }
     }
-    public abstract class CollectionChange<TDescriptor, TItem> : Radical.ChangeTracking.Change<TDescriptor>
+    public abstract class CollectionChange<TDescriptor> : Radical.ChangeTracking.Change<TDescriptor>
         where TDescriptor : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor
     {
         protected CollectionChange(object owner, TDescriptor descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<TDescriptor> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<TDescriptor> commitCallback, string description) { }
         public TDescriptor Descriptor { get; }
     }
-    public class CollectionClearedChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>, T>
+    public class CollectionClearedChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>>
     {
         public CollectionClearedChange(object owner, Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.CollectionRangeDescriptor<T>> commitCallback, string description) { }
         public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
@@ -390,7 +390,7 @@ namespace Radical.ChangeTracking.Specialized
         public CollectionRangeDescriptor(System.Collections.Generic.IEnumerable<T> items) { }
         public System.Collections.Generic.IEnumerable<T> Items { get; }
     }
-    public class ItemChangedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>, T>
+    public class ItemChangedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>>
     {
         public ItemChangedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> commitCallback, string description) { }
         public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
@@ -403,7 +403,7 @@ namespace Radical.ChangeTracking.Specialized
         public int Index { get; }
         public T Item { get; }
     }
-    public class ItemMovedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>, T>
+    public class ItemMovedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>>
     {
         public ItemMovedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemMovedDescriptor<T>> commitCallback, string description) { }
         public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
@@ -416,14 +416,14 @@ namespace Radical.ChangeTracking.Specialized
         public int NewIndex { get; }
         public int OldIndex { get; }
     }
-    public class ItemRemovedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>, T>
+    public class ItemRemovedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>>
     {
         public ItemRemovedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemChangedDescriptor<T>> commitCallback, string description) { }
         public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
         public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
         public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
     }
-    public class ItemReplacedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>, T>
+    public class ItemReplacedCollectionChange<T> : Radical.ChangeTracking.Specialized.CollectionChange<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>>
     {
         public ItemReplacedCollectionChange(object owner, Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T> descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<Radical.ChangeTracking.Specialized.ItemReplacedDescriptor<T>> commitCallback, string description) { }
         public override Radical.ComponentModel.ChangeTracking.IChange Clone() { }
