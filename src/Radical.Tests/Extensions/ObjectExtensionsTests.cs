@@ -12,7 +12,7 @@ namespace Radical.Tests.Extensions
         {
             var expected = "a string";
 
-            var actual = Radical.ObjectExtensions.Return(expected, v => v, "failed", s => string.IsNullOrEmpty(s));
+            var actual = ObjectExtensions.Return(expected, v => v, "failed", s => string.IsNullOrEmpty(s));
 
             actual.Should().Be.EqualTo(expected);
         }
@@ -23,7 +23,7 @@ namespace Radical.Tests.Extensions
         {
             var expected = "failed";
 
-            var actual = Radical.ObjectExtensions.Return("", v => v, expected, s => string.IsNullOrEmpty(s));
+            var actual = ObjectExtensions.Return("", v => v, expected, s => string.IsNullOrEmpty(s));
 
             actual.Should().Be.EqualTo(expected);
         }
@@ -34,7 +34,7 @@ namespace Radical.Tests.Extensions
         {
             var expected = "failed";
 
-            var actual = Radical.ObjectExtensions.Return((string)null, v => v, expected, s => string.IsNullOrEmpty(s));
+            var actual = ObjectExtensions.Return((string)null, v => v, expected, s => string.IsNullOrEmpty(s));
 
             actual.Should().Be.EqualTo(expected);
         }
@@ -45,7 +45,7 @@ namespace Radical.Tests.Extensions
         {
             var actual = false;
 
-            Radical.ObjectExtensions.Return("a value", v => v, () => { actual = true; return "failed"; }, s => string.IsNullOrEmpty(s));
+            ObjectExtensions.Return("a value", v => v, () => { actual = true; return "failed"; }, s => string.IsNullOrEmpty(s));
 
             actual.Should().Be.False();
         }
@@ -56,7 +56,7 @@ namespace Radical.Tests.Extensions
         {
             var actual = false;
 
-            Radical.ObjectExtensions.Return("a value", v => v, () => { actual = true; return "failed"; });
+            ObjectExtensions.Return("a value", v => v, () => { actual = true; return "failed"; });
 
             actual.Should().Be.False();
         }
@@ -66,7 +66,7 @@ namespace Radical.Tests.Extensions
         public void ObjectExtensions_With_using_valid_parameter_should_return_expected_value()
         {
             var expected = "foo";
-            var actual = Radical.ObjectExtensions.With(expected, s => s);
+            var actual = ObjectExtensions.With(expected, s => s);
 
             actual.Should().Be.EqualTo(expected);
         }

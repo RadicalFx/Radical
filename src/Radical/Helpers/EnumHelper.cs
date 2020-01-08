@@ -20,7 +20,7 @@ namespace Radical.Helpers
         {
             List<string> lst = new List<string>();
 
-            EnumHelper.ExtractBindingData<T>()
+            ExtractBindingData<T>()
                 .ForEach(eb => lst.Add(eb.Caption));
 
             return lst.AsReadOnly();
@@ -42,7 +42,7 @@ namespace Radical.Helpers
         /// <returns>The list of enum values.</returns>
         public static IEnumerable<T> GetValues<T>()
         {
-            var values = EnumHelper.GetValues(typeof(T));
+            var values = GetValues(typeof(T));
             return values.Cast<T>();
         }
 

@@ -1369,7 +1369,7 @@ namespace Radical.Model
         {
             if (item != null)
             {
-                if (IsAddingNew && Object.ReferenceEquals(PendingNewItem.EntityItem, item.EntityItem))
+                if (IsAddingNew && ReferenceEquals(PendingNewItem.EntityItem, item.EntityItem))
                 {
                     return Count - 1;
                 }

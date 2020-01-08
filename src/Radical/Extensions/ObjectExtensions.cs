@@ -106,17 +106,17 @@ namespace Radical
 
         public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator)
         {
-            return input.Return(evaluator, () => default(TResult), i => Object.ReferenceEquals(i, null));
+            return input.Return(evaluator, () => default(TResult), i => ReferenceEquals(i, null));
         }
 
         public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput)
         {
-            return input.Return(evaluator, () => defaultValueOnNullInput, i => Object.ReferenceEquals(i, null));
+            return input.Return(evaluator, () => defaultValueOnNullInput, i => ReferenceEquals(i, null));
         }
 
         public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput)
         {
-            return input.Return(evaluator, defaultValueOnNullInput, i => Object.ReferenceEquals(i, null));
+            return input.Return(evaluator, defaultValueOnNullInput, i => ReferenceEquals(i, null));
         }
 
         public static TResult With<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Predicate<TInput> failureEvaluator, Func<TResult> failureValue)
@@ -126,12 +126,12 @@ namespace Radical
 
         public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator)
         {
-            return input.Return(evaluator, () => default(TResult), obj => Object.ReferenceEquals(obj, null));
+            return input.Return(evaluator, () => default(TResult), obj => ReferenceEquals(obj, null));
         }
 
         public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult defaultValueOnNullInput)
         {
-            return input.Return(evaluator, () => defaultValueOnNullInput, obj => Object.ReferenceEquals(obj, null));
+            return input.Return(evaluator, () => defaultValueOnNullInput, obj => ReferenceEquals(obj, null));
         }
 
         public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, TResult failureValue, Predicate<TInput> failureEvaluator)
@@ -155,7 +155,7 @@ namespace Radical
         /// </returns>
         public static TResult Return<TInput, TResult>(this TInput input, Func<TInput, TResult> evaluator, Func<TResult> defaultValueOnNullInput)
         {
-            return input.Return(evaluator, defaultValueOnNullInput, obj => Object.ReferenceEquals(obj, null));
+            return input.Return(evaluator, defaultValueOnNullInput, obj => ReferenceEquals(obj, null));
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Radical
         /// <returns>The input value.</returns>
         public static TInput Do<TInput>(this TInput input, Action<TInput> action)
         {
-            return input.Do(i => Object.ReferenceEquals(i, null), action);
+            return input.Do(i => ReferenceEquals(i, null), action);
         }
 
         /// <summary>

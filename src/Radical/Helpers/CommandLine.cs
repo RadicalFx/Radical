@@ -79,7 +79,7 @@ namespace Radical.Helpers
             var fullValue = args.Where(s =>
            {
                var sc = StringComparison.CurrentCultureIgnoreCase;
-               return CommandLine.Normalize(s).Equals(argumentValuePair, sc);
+               return Normalize(s).Equals(argumentValuePair, sc);
            })
             .Single();
 

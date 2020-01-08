@@ -288,23 +288,23 @@ namespace Radical.Messaging
                 {
                     return msgSubscriptions.Subscriptions.Any(subscription =>
                     {
-                        return Object.Equals(subscription.Subscriber, subscriber)
-                            && Object.Equals(subscription.Sender, sender);
+                        return Equals(subscription.Subscriber, subscriber)
+                            && Equals(subscription.Sender, sender);
                     });
                 })
                 .ToList()
                 .ForEach(kvp =>
-               {
-                   msgSubsIndexLock.EnterWriteLock();
-                   try
-                   {
-                       msgSubsIndex.Remove(kvp);
-                   }
-                   finally
-                   {
-                       msgSubsIndexLock.ExitWriteLock();
-                   }
-               });
+                {
+                    msgSubsIndexLock.EnterWriteLock();
+                    try
+                    {
+                        msgSubsIndex.Remove(kvp);
+                    }
+                    finally
+                    {
+                        msgSubsIndexLock.ExitWriteLock();
+                    }
+                });
             }
             finally
             {
@@ -329,7 +329,7 @@ namespace Radical.Messaging
                     var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
-                       return Object.Equals(subscriber, subscription.Subscriber);
+                       return Equals(subscriber, subscription.Subscriber);
                    })
                     .ToList()
                     .ForEach(subscription =>
@@ -372,8 +372,8 @@ namespace Radical.Messaging
                     var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
-                       return Object.Equals(subscriber, subscription.Subscriber)
-                              && Object.Equals(sender, subscription.Sender);
+                       return Equals(subscriber, subscription.Subscriber)
+                              && Equals(sender, subscription.Sender);
                    })
                     .ToList()
                     .ForEach(subscription =>
@@ -416,8 +416,8 @@ namespace Radical.Messaging
                     var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
-                       return Object.Equals(subscriber, subscription.Subscriber)
-                              && Object.Equals(callback, subscription.GetAction());
+                       return Equals(subscriber, subscription.Subscriber)
+                              && Equals(callback, subscription.GetAction());
                    })
                     .ToList()
                     .ForEach(subscription =>

@@ -324,7 +324,7 @@ namespace Radical.Model
         {
             var oldValue = GetPropertyValue<T>(propertyName);
 
-            if (!Object.Equals(oldValue, data))
+            if (!Equals(oldValue, data))
             {
                 if (valuesBag.ContainsKey(propertyName))
                 {

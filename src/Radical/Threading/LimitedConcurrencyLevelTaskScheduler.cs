@@ -81,8 +81,8 @@ namespace Radical.Threading
                            _tasks.RemoveFirst();
                        }
 
-                        // Execute the task we pulled out of the queue
-                        base.TryExecuteTask(item);
+                       // Execute the task we pulled out of the queue
+                       TryExecuteTask(item);
                    }
                }
                 // We're done processing items on the current thread
@@ -103,7 +103,7 @@ namespace Radical.Threading
             if (taskWasPreviouslyQueued) TryDequeue(task);
 
             // Try to run the task.
-            return base.TryExecuteTask(task);
+            return TryExecuteTask(task);
         }
 
         /// <summary>Attempts to remove a previously scheduled task from the scheduler.</summary>

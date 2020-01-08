@@ -53,7 +53,7 @@ namespace Radical.Model
         public static PropertyMetadata<T> Create<T>(object propertyOwner, Expression<Func<T>> property)
         {
             var name = property.GetMemberName();
-            return PropertyMetadata.Create<T>(propertyOwner, name);
+            return Create<T>(propertyOwner, name);
         }
 
         /// <summary>

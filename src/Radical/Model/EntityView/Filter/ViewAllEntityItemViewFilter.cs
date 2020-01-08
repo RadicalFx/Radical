@@ -30,7 +30,7 @@ namespace Radical.Model
         {
             Ensure.That(item)
                 .Named(() => item)
-                .If(i => Object.ReferenceEquals(i, null))
+                .If(i => ReferenceEquals(i, null))
                 .ThenThrow(e => new ArgumentNullException(e.GetFullErrorMessage()));
 
             return true;

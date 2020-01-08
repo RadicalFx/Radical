@@ -61,7 +61,7 @@ namespace Radical.Reflection
         {
             T returnValue = null;
 
-            if (ParameterInfoExtension.IsAttributeDefined<T>(memberInfo))
+            if (IsAttributeDefined<T>(memberInfo))
             {
                 returnValue = (T)memberInfo.GetCustomAttributes(typeof(T), false)[0];
             }

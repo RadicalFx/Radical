@@ -371,7 +371,7 @@ namespace Radical.Model
                  * Utilizziamo Object.Equals() e non == perchè se i tipi sono
                  * ValueType vengono boxati e == confronterebe le reference
                  */
-                var item = this.Where(element => Object.Equals(property.GetValue(element.EntityItem), key)).FirstOrDefault();
+                var item = this.Where(element => Equals(property.GetValue(element.EntityItem), key)).FirstOrDefault();
                 if (item != null)
                 {
                     index = IndexOf(item);

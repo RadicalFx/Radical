@@ -177,7 +177,7 @@ namespace Radical.Model
         /// </returns>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges)
         {
-            var metadata = (MementoPropertyMetadata<T>)base.SetInitialPropertyValue(property, lazyValue);
+            var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, lazyValue);
 
             metadata.TrackChanges = trackChanges;
 
@@ -199,7 +199,7 @@ namespace Radical.Model
         /// </returns>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges)
         {
-            var metadata = (MementoPropertyMetadata<T>)base.SetInitialPropertyValue(property, value);
+            var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, value);
 
             metadata.TrackChanges = trackChanges;
 

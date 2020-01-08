@@ -43,7 +43,7 @@ namespace Radical.ChangeTracking.Specialized
         public override ProposedActions GetAdvisedAction(object changedItem)
         {
             Ensure.That(changedItem)
-                .If(o => !Object.Equals(o, Descriptor.Item))
+                .If(o => !Equals(o, Descriptor.Item))
                 .Then(o => { throw new ArgumentOutOfRangeException(); });
 
             return ProposedActions.Update | ProposedActions.Create;

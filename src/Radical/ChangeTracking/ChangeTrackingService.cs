@@ -570,7 +570,7 @@
 
                 if (backwardChangesStack != null)
                 {
-                    var hasBackwardChanges = backwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
+                    var hasBackwardChanges = backwardChangesStack.Any(c => Equals(c.Owner, entity));
                     if (hasBackwardChanges)
                     {
                         state |= EntityTrackingStates.HasBackwardChanges;
@@ -594,7 +594,7 @@
 
                 if (forwardChangesStack != null)
                 {
-                    var hasForwardChanges = forwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
+                    var hasForwardChanges = forwardChangesStack.Any(c => Equals(c.Owner, entity));
                     if (hasForwardChanges)
                     {
                         state |= EntityTrackingStates.HasForwardChanges;
@@ -1031,7 +1031,7 @@
                 lock (SyncRoot)
                 {
                     backwardChangesStack
-                        .Where(c => Object.Equals(c.Owner, entity))
+                        .Where(c => Equals(c.Owner, entity))
                         .AsReadOnly()
                         .ForEach(c => backwardChangesStack.Remove(c));
                 }
@@ -1042,7 +1042,7 @@
                 lock (SyncRoot)
                 {
                     forwardChangesStack
-                        .Where(c => Object.Equals(c.Owner, entity))
+                        .Where(c => Equals(c.Owner, entity))
                         .AsReadOnly()
                         .ForEach(c => forwardChangesStack.Remove(c));
                 }
@@ -1383,7 +1383,7 @@
                     actualValue = (TProperty)property.GetValue(entity, null);
                 }
 
-                if (!object.Equals(originalValue, actualValue))
+                if (!Equals(originalValue, actualValue))
                 {
                     state |= EntityPropertyStates.ValueChanged;
                 }

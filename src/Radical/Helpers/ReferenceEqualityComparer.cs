@@ -20,7 +20,7 @@ namespace Radical
 
         bool IEqualityComparer.Equals(object x, object y)
         {
-            return Object.Equals(x, y);
+            return Equals(x, y);
         }
 
         int IEqualityComparer.GetHashCode(object obj)

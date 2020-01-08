@@ -53,7 +53,7 @@ namespace Radical
             get { return _value; }
             set
             {
-                if (!Object.Equals(value, Value))
+                if (!Equals(value, Value))
                 {
                     _value = value;
                     OnPropertyChanged();

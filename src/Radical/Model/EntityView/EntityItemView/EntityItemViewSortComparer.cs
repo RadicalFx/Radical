@@ -31,7 +31,7 @@ namespace Radical.Model
         {
             int retVal = 0;
 
-            if (!Object.Equals(a, b))
+            if (!Equals(a, b))
             {
                 IComparable ic = a as IComparable;
                 if (ic != null)
@@ -90,7 +90,7 @@ namespace Radical.Model
                 object valueX = sd.PropertyDescriptor.GetValue(x);
                 object valueY = sd.PropertyDescriptor.GetValue(y);
 
-                retVal = EntityItemViewSortComparer<T>.Compare(valueX, valueY, sd.SortDirection);
+                retVal = Compare(valueX, valueY, sd.SortDirection);
             }
             else
             {
@@ -101,7 +101,7 @@ namespace Radical.Model
                         object valueX = sd.PropertyDescriptor.GetValue(x);
                         object valueY = sd.PropertyDescriptor.GetValue(y);
 
-                        retVal = EntityItemViewSortComparer<T>.Compare(valueX, valueY, sd.SortDirection);
+                        retVal = Compare(valueX, valueY, sd.SortDirection);
                     }
                 }
             }

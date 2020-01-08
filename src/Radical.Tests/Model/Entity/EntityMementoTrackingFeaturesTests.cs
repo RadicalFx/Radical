@@ -43,27 +43,27 @@ namespace Radical.Tests.Model.Entity
 
             internal bool GetIsTracking()
             {
-                return base.IsTracking;
+                return IsTracking;
             }
 
             internal IChange InvokeCacheChange<T>(T value, RejectCallback<T> rc)
             {
-                return base.CacheChange("property-name", value, rc);
+                return CacheChange("property-name", value, rc);
             }
 
             internal IChange InvokeCacheChange<T>(T value, RejectCallback<T> rc, CommitCallback<T> cc)
             {
-                return base.CacheChange("property-name", value, rc, cc);
+                return CacheChange("property-name", value, rc, cc);
             }
 
             internal IChange InvokeCacheChange<T>(T value, RejectCallback<T> rc, CommitCallback<T> cc, AddChangeBehavior behavior)
             {
-                return base.CacheChange("property-name", value, rc, cc, behavior);
+                return CacheChange("property-name", value, rc, cc, behavior);
             }
 
             internal IChange InvokeCacheChangeOnRejectCallback<T>(T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args)
             {
-                return base.CacheChangeOnRejectCallback("property-name", value, rejectCallback, commitCallback, args);
+                return CacheChangeOnRejectCallback("property-name", value, rejectCallback, commitCallback, args);
             }
 
             internal event EventHandler<MementoChangedEventArgs> MementoChanged;

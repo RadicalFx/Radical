@@ -106,12 +106,12 @@ namespace Radical.Tests.ChangeTracking
 
         public void SetInitialPropertyValueForTest<T>(string propertyName, T value)
         {
-            base.SetInitialPropertyValue<T>(propertyName, value);
+            SetInitialPropertyValue(propertyName, value);
         }
 
         public void SetInitialPropertyValueForTest<T>(Expression<Func<T>> property, T value)
         {
-            base.SetInitialPropertyValue<T>(property, value);
+            SetInitialPropertyValue(property, value);
         }
     }
 }

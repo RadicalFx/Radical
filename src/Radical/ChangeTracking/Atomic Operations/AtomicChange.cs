@@ -60,7 +60,7 @@ namespace Radical.ChangeTracking
                 }
             }
 
-            var isChanged = changes.Any(c => Object.Equals(c.Item1.Owner, entity));
+            var isChanged = changes.Any(c => Equals(c.Item1.Owner, entity));
             if (isChanged)
             {
                 var changed = EntityTrackingStates.HasBackwardChanges | EntityTrackingStates.HasForwardChanges;
