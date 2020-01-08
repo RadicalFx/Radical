@@ -1,10 +1,10 @@
 ﻿//extern alias tpx;
 
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Radical.ComponentModel.ChangeTracking;
 using Radical.ChangeTracking.Specialized;
+using Radical.ComponentModel.ChangeTracking;
 using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.Model
 {

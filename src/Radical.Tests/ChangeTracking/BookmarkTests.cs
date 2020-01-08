@@ -1,13 +1,13 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using FakeItEasy;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ChangeTracking;
     using Radical.ComponentModel.ChangeTracking;
     using SharpTestsEx;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [TestClass]
     public class BookmarkTests

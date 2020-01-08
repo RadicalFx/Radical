@@ -1,12 +1,12 @@
 ﻿namespace Radical.Tests.ChangeTracking
 {
+    using FakeItEasy;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.ChangeTracking;
+    using Radical.ComponentModel.ChangeTracking;
+    using SharpTestsEx;
     using System;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.ChangeTracking;
-    using SharpTestsEx;
-    using FakeItEasy;
 
     [TestClass]
     public class AdvisoryBuilderTests

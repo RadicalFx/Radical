@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.Validation;
+using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.Validation
 {

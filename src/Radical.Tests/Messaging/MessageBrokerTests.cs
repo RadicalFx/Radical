@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
-using Radical.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Radical.ComponentModel.Messaging;
 using Radical.Messaging;
 using Radical.Threading;
-using Radical.ComponentModel.Messaging;
-using System.Threading.Tasks;
+using SharpTestsEx;
+using System;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Radical.Tests.Windows.Messaging
 {

@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.Model;
 using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.Model
 {

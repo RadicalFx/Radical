@@ -2,13 +2,11 @@
 
 namespace Radical.Tests.Model.Entity
 {
-    using Radical.Model;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.ComponentModel;
+    using Radical.Model;
     using SharpTestsEx;
-    using FakeItEasy;
-    using System.ComponentModel;
     using System;
+    using System.ComponentModel;
 
     [TestClass()]
     public class EntityPropertyChangedEventsTests : EntityTests

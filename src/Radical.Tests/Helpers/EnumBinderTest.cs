@@ -1,9 +1,9 @@
 ﻿namespace Radical.Tests.Helpers
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Radical.DataBinding;
     using Radical;
+    using Radical.DataBinding;
+    using System;
 
     [TestClass()]
     public class EnumBinderTest

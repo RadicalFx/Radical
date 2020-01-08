@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpTestsEx;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.Reflection;
+using SharpTestsEx;
+using System;
+using System.Collections.Generic;
 
 namespace Radical.Tests.Helpers
 {

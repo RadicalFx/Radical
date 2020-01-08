@@ -1,8 +1,8 @@
 ﻿namespace Radical.Tests.Validation
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.Validation;
+    using System;
 
     [TestClass]
     public class ComparableEnsureExtensionTests

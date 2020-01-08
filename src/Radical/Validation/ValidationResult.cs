@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Radical.Validation
+﻿namespace Radical.Validation
 {
     public abstract class ValidationResult
     {

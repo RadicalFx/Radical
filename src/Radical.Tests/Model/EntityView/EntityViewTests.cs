@@ -1,11 +1,11 @@
 ﻿namespace Radical.Tests.Model
 {
-    using System;
-    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical.ComponentModel;
     using Radical.Model;
+    using SharpTestsEx;
+    using System;
+    using System.Linq;
 
     [TestClass]
     public class EntityViewTests

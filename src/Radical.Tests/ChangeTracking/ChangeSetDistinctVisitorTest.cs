@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FakeItEasy;
 using Radical.ChangeTracking;
 using Radical.ComponentModel.ChangeTracking;
 using SharpTestsEx;
+using System;
 
 namespace Radical.Tests.ChangeTracking
 {

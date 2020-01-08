@@ -1,11 +1,10 @@
 ﻿namespace Radical.Tests.Extensions
 {
-    using System;
-    using System.Reflection;
-    using Radical.Linq;
-    using System.Linq.Expressions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.Linq;
     using SharpTestsEx;
+    using System;
+    using System.Linq.Expressions;
 
     [TestClass]
     public class ExpressionExtensionsTests

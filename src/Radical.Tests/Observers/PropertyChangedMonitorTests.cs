@@ -2,12 +2,11 @@
 
 namespace Radical.Tests.Observers
 {
-    using System;
-    using System.ComponentModel;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using SharpTestsEx;
     using Radical;
     using Radical.Observers;
+    using SharpTestsEx;
+    using System.ComponentModel;
 
     [TestClass]
     public class PropertyChangedMonitorTests

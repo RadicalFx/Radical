@@ -2,11 +2,11 @@
 
 namespace Radical.Tests.ChangeTracking
 {
+    using Radical.ComponentModel.ChangeTracking;
+    using Radical.Model;
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Model;
 
     class Person : MementoEntity, IComponent
     {

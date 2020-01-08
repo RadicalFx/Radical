@@ -1,8 +1,7 @@
 ﻿namespace Radical.Tests.Model.EntityCollection
 {
-    using System;
-    using System.Runtime.Serialization;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Runtime.Serialization;
 
     public class GenericParameterHelperSerializationSurrogate : ISerializationSurrogate
     {

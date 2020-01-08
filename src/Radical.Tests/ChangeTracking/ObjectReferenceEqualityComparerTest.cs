@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpTestsEx;
-using Radical;
+using System;
+using System.Collections.Generic;
 
 namespace Radical.Tests.ChangeTracking
 {

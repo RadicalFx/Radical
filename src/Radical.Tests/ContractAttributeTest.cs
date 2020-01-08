@@ -1,8 +1,8 @@
 ﻿namespace Radical.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.ComponentModel;
+    using System;
 
     [TestClass()]
     public class ContractAttributeTest

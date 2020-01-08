@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Radical.ComponentModel;
-using Radical.Observers;
+﻿using Radical.Observers;
 using System.Timers;
 
 namespace Radical.Tests.Threading

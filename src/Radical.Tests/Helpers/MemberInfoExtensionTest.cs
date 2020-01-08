@@ -1,8 +1,8 @@
 ﻿namespace Radical.Tests.Helpers
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.Reflection;
+    using System;
 
     [TestClass()]
     public class MemberInfoExtensionTest

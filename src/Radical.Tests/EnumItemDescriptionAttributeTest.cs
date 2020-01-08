@@ -2,9 +2,9 @@
 
 namespace Radical.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical;
+    using System;
 
     [TestClass()]
     public class EnumItemDescriptionAttributeTest

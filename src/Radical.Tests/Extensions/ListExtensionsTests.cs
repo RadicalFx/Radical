@@ -1,11 +1,10 @@
 ﻿namespace Radical.Tests
 {
-    using System;
-    using System.Linq;
-    using Radical.Linq;
-    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Radical.Linq;
     using SharpTestsEx;
+    using System;
+    using System.Collections.Generic;
 
     [TestClass]
     public class ListExtensionsTests

@@ -1,10 +1,10 @@
 ﻿namespace Radical
 {
+    using Radical.Reflection;
     using System;
     using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using Radical.Reflection;
 
     /// <summary>
     /// Exception raised to notify that the <see cref="Radical.ComponentModel.ContractAttribute"/>
