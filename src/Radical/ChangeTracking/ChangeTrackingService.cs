@@ -545,6 +545,82 @@
             return query.AsReadOnly();
         }
 
+        EntityTrackingStates AnalyzeEntityTransientState(object entity)
+        {
+            var state = EntityTrackingStates.None;
+            if (transientEntities != null && transientEntities.ContainsKey(entity))
+            {
+                state |= EntityTrackingStates.IsTransient;
+
+                if (transientEntities[entity])
+                {
+                    state |= EntityTrackingStates.AutoRemove;
+                }
+            }
+
+            return state;
+        }
+
+        EntityTrackingStates AnalyzeEntityBackwardChanges(object entity)
+        {
+            var state = EntityTrackingStates.None;
+            if (backwardChangesStack != null)
+            {
+                var hasBackwardChanges = backwardChangesStack.Any(c => Equals(c.Owner, entity));
+                if (hasBackwardChanges)
+                {
+                    state |= EntityTrackingStates.HasBackwardChanges;
+                }
+
+                var subSystemsState = backwardChangesStack.OfType<AtomicChange>()
+                    .Select(ac =>
+                    {
+                        var s = ac.GetEntityState(entity);
+                        if (EntityTrackingStates.HasForwardChanges == (s & EntityTrackingStates.HasForwardChanges))
+                        {
+                            s ^= EntityTrackingStates.HasForwardChanges;
+                        }
+
+                        return s;
+                    })
+                    .Aggregate(EntityTrackingStates.None, (a, s) => a |= s);
+
+                state |= subSystemsState;
+            }
+
+            return state;
+        }
+
+        EntityTrackingStates AnalyzeEntityForwardChanges(object entity)
+        {
+            var state = EntityTrackingStates.None;
+            if (forwardChangesStack != null)
+            {
+                var hasForwardChanges = forwardChangesStack.Any(c => Equals(c.Owner, entity));
+                if (hasForwardChanges)
+                {
+                    state |= EntityTrackingStates.HasForwardChanges;
+                }
+
+                var subSystemsState = forwardChangesStack.OfType<AtomicChange>()
+                    .Select(ac =>
+                    {
+                        var s = ac.GetEntityState(entity);
+                        if (EntityTrackingStates.HasBackwardChanges == (s & EntityTrackingStates.HasBackwardChanges))
+                        {
+                            s ^= EntityTrackingStates.HasBackwardChanges;
+                        }
+
+                        return s;
+                    })
+                    .Aggregate(EntityTrackingStates.None, (a, s) => a |= s);
+
+                state |= subSystemsState;
+            }
+
+            return state;
+        }
+
         /// <summary>
         /// Gets the state of the entity.
         /// </summary>
@@ -554,70 +630,16 @@
         /// </returns>
         public EntityTrackingStates GetEntityState(object entity)
         {
-            var state = EntityTrackingStates.None;
-
             lock (SyncRoot)
             {
-                if (transientEntities != null && transientEntities.ContainsKey(entity))
-                {
-                    state |= EntityTrackingStates.IsTransient;
+                var state = EntityTrackingStates.None;
+                
+                state |= AnalyzeEntityTransientState(entity);
+                state |= AnalyzeEntityBackwardChanges(entity);
+                state |= AnalyzeEntityForwardChanges(entity);
 
-                    if (transientEntities[entity])
-                    {
-                        state |= EntityTrackingStates.AutoRemove;
-                    }
-                }
-
-                if (backwardChangesStack != null)
-                {
-                    var hasBackwardChanges = backwardChangesStack.Any(c => Equals(c.Owner, entity));
-                    if (hasBackwardChanges)
-                    {
-                        state |= EntityTrackingStates.HasBackwardChanges;
-                    }
-
-                    var subSystemsState = backwardChangesStack.OfType<AtomicChange>()
-                        .Select(ac =>
-                        {
-                            var s = ac.GetEntityState(entity);
-                            if (EntityTrackingStates.HasForwardChanges == (s & EntityTrackingStates.HasForwardChanges))
-                            {
-                                s ^= EntityTrackingStates.HasForwardChanges;
-                            }
-
-                            return s;
-                        })
-                        .Aggregate(EntityTrackingStates.None, (a, s) => a |= s);
-
-                    state |= subSystemsState;
-                }
-
-                if (forwardChangesStack != null)
-                {
-                    var hasForwardChanges = forwardChangesStack.Any(c => Equals(c.Owner, entity));
-                    if (hasForwardChanges)
-                    {
-                        state |= EntityTrackingStates.HasForwardChanges;
-                    }
-
-                    var subSystemsState = forwardChangesStack.OfType<AtomicChange>()
-                        .Select(ac =>
-                        {
-                            var s = ac.GetEntityState(entity);
-                            if (EntityTrackingStates.HasBackwardChanges == (s & EntityTrackingStates.HasBackwardChanges))
-                            {
-                                s ^= EntityTrackingStates.HasBackwardChanges;
-                            }
-
-                            return s;
-                        })
-                        .Aggregate(EntityTrackingStates.None, (a, s) => a |= s);
-
-                    state |= subSystemsState;
-                }
+                return state;
             }
-
-            return state;
         }
 
         /// <summary>
