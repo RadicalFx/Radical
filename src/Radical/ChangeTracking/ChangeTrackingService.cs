@@ -1,14 +1,14 @@
-﻿namespace Radical.ChangeTracking
-{
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Linq;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Linq.Expressions;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Linq;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
 
+namespace Radical.ChangeTracking
+{
     /// <summary>
     /// Provides a default implementation of the <see cref="IChangeTrackingService"/>
     /// interface in order to provide change tracking functionalities.
