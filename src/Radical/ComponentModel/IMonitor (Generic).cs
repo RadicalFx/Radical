@@ -5,7 +5,7 @@ namespace Radical.ComponentModel
     /// trace the monitored instance.
     /// </summary>
     /// <typeparam name="T">This monitored type.</typeparam>
-    public interface IMonitor<T> : IMonitor
+    public interface IMonitor<out T> : IMonitor
     {
         /// <summary>
         /// Gets the monitored source.

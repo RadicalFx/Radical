@@ -14,7 +14,7 @@ namespace Radical.Tests.Threading
             return t;
         }
 
-        ElapsedEventHandler elapsedEventHandler = null;
+        readonly ElapsedEventHandler elapsedEventHandler = null;
 
         public TimerTrigger(int interval, TimerTriggerMode triggerMode)
             : base(CreateDefault(interval, triggerMode))

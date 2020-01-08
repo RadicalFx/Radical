@@ -75,7 +75,7 @@ namespace Radical.ComponentModel
             }
         }
 
-        private PropertyInfo _property;
+        private readonly PropertyInfo _property;
 
         /// <summary>
         /// Gets the property.
@@ -86,7 +86,7 @@ namespace Radical.ComponentModel
             get { return _property; }
         }
 
-        string _customDisplayName = null;
+        readonly string _customDisplayName = null;
 
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.

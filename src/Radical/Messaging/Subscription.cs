@@ -140,7 +140,7 @@ namespace Radical.Messaging
     {
         readonly IDispatcher dispatcher;
         readonly Action<object, object> action;
-        private Func<object, object, bool> actionFilter;
+        private readonly Func<object, object, bool> actionFilter;
 
         public PocoSubscription(object subscriber, Action<object, object> action, Func<object, object, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {
@@ -222,7 +222,7 @@ namespace Radical.Messaging
     {
         readonly IDispatcher dispatcher;
         readonly Action<object, T> action;
-        private Func<object, T, bool> actionFilter;
+        private readonly Func<object, T, bool> actionFilter;
 
         public PocoSubscription(object subscriber, Action<object, T> action, Func<object, T, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {

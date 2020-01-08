@@ -65,7 +65,7 @@ namespace Radical.Tests.ChangeTracking
             };
         }
 
-        TransientRegistration transientRegistration = TransientRegistration.AsTransparent;
+        readonly TransientRegistration transientRegistration = TransientRegistration.AsTransparent;
 
         public Person(IChangeTrackingService memento, ChangeTrackingRegistration registration, TransientRegistration transientRegistration)
             : base(memento, registration)

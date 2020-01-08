@@ -34,7 +34,7 @@ namespace Radical.Messaging
         }
 
         static readonly TraceSource logger = new TraceSource(typeof(MessageBroker).FullName);
-        TaskFactory factory = null;
+        readonly TaskFactory factory = null;
 
         readonly IDispatcher dispatcher;
 

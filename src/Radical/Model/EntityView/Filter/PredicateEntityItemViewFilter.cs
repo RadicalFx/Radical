@@ -6,7 +6,7 @@ namespace Radical.Model
     public sealed class PredicateEntityItemViewFilter<T> : EntityItemViewFilterBase<T> // where T : class
     {
         public Predicate<T> FilterDelegate { get; private set; }
-        private string filterName;
+        private readonly string filterName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PredicateEntityItemViewFilter&lt;T&gt;"/> class.

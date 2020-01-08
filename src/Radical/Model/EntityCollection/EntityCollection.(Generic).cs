@@ -293,7 +293,7 @@ namespace Radical.Model
         protected virtual T GetValueAt(int index)
         {
             EnsureNotDisposed();
-            return (T)Storage[index];
+            return Storage[index];
         }
 
         /// <summary>
@@ -424,11 +424,11 @@ namespace Radical.Model
         public void Clear()
         {
             EnsureNotDisposed();
-            IEnumerable<T> list = Storage.ToArray().AsReadOnly();
+            var copy = Storage.ToArray();
 
             Storage.Clear();
 
-            OnClearCompleted(list);
+            OnClearCompleted(copy);
             OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset));
         }
 
@@ -828,7 +828,7 @@ namespace Radical.Model
 
             foreach (T obj in list)
             {
-                Add((T)obj);
+                Add(obj);
             }
 
             OnAddRangeCompleted(list);
@@ -853,7 +853,7 @@ namespace Radical.Model
             return Storage.ToArray();
         }
 
-        CollectionSettings _settings = new CollectionSettings();
+        readonly CollectionSettings _settings = new CollectionSettings();
 
         public CollectionSettings Settings
         {

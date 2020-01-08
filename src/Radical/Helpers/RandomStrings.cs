@@ -10,7 +10,7 @@ namespace Radical.Helpers
     /// </summary>
     public class RandomStrings
     {
-        static RandomStrings instance = new RandomStrings();
+        static readonly RandomStrings instance = new RandomStrings();
 
         /// <summary>
         /// Generates a random string using default settings.
@@ -25,8 +25,8 @@ namespace Radical.Helpers
         const int DEFAULT_MAXIMUM = 10;
         const int U_BOUND_DIGIT = 61;
 
-        private RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-        private char[] pwdCharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}\\|;:'\",<.>/?".ToCharArray();
+        private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        private readonly char[] pwdCharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}\\|;:'\",<.>/?".ToCharArray();
 
         /// <summary>
         /// Given 2 bound returns a random number between them

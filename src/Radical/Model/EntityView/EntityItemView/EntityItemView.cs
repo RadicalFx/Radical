@@ -30,7 +30,7 @@ namespace Radical.Model
 
         }
 
-        private IEntityView<T> _view;
+        private readonly IEntityView<T> _view;
         /// <summary>
         /// Gets a reference the view that owns this instance.
         /// </summary>
