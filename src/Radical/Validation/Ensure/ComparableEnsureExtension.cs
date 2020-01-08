@@ -75,7 +75,7 @@ namespace Radical.Validation
         /// is raised if the current inspected object is smaller then the expected value.</exception>
         public static IEnsure<T> IsGreaterThen<T>(this IEnsure<T> validator, T expected) where T : IComparable<T>
         {
-            return ComparableEnsureExtension.IsGreaterThen(validator, expected, Or.NotEqual);
+            return IsGreaterThen(validator, expected, Or.NotEqual);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Radical.Validation
         /// is raised if the current inspected object is greater then the expected value.</exception>
         public static IEnsure<T> IsSmallerThen<T>(this IEnsure<T> validator, T expected) where T : IComparable<T>
         {
-            return ComparableEnsureExtension.IsSmallerThen(validator, expected, Or.NotEqual);
+            return IsSmallerThen(validator, expected, Or.NotEqual);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Radical.Validation
         /// is raised if the current inspected object is outside the expected range.</exception>
         public static IEnsure<T> IsWithin<T>(this IEnsure<T> validator, T lowerBoundary, T higherBoundary) where T : IComparable<T>
         {
-            return ComparableEnsureExtension.IsWithin(validator, lowerBoundary, higherBoundary, Boundary.ExcludeBounds);
+            return IsWithin(validator, lowerBoundary, higherBoundary, Boundary.ExcludeBounds);
         }
 
         /// <summary>

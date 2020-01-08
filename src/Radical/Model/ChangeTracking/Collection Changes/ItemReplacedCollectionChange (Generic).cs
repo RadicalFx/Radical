@@ -45,16 +45,16 @@ namespace Radical.ChangeTracking.Specialized
             Ensure.That(changedItem)
                 .If(o =>
                {
-                   return !object.Equals(o, Descriptor.NewItem) &&
-                       !object.Equals(o, Descriptor.ReplacedItem);
+                   return !Equals(o, Descriptor.NewItem) &&
+                       !Equals(o, Descriptor.ReplacedItem);
                })
                 .Then(o => { throw new ArgumentOutOfRangeException(); });
 
-            if (object.Equals(changedItem, Descriptor.NewItem))
+            if (Equals(changedItem, Descriptor.NewItem))
             {
                 return ProposedActions.Update | ProposedActions.Create;
             }
-            else if (object.Equals(changedItem, Descriptor.ReplacedItem))
+            else if (Equals(changedItem, Descriptor.ReplacedItem))
             {
                 return ProposedActions.Delete | ProposedActions.Dispose;
             }

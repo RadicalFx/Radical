@@ -53,7 +53,7 @@ namespace Radical.Reflection
         {
             Ensure.That(memberInfo).Named("memberInfo").IsNotNull();
 
-            return MemberInfoExtensions.GetAttributes<T>(memberInfo, true);
+            return GetAttributes<T>(memberInfo, true);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Radical.Reflection
 
             T[] returnValue = null;
 
-            if (MemberInfoExtensions.IsAttributeDefined<T>(memberInfo, inherit))
+            if (IsAttributeDefined<T>(memberInfo, inherit))
             {
                 object[] attributes = memberInfo.GetCustomAttributes(typeof(T), inherit);
                 returnValue = attributes.Cast<T>().ToArray<T>();

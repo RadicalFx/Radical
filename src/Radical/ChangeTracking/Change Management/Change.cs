@@ -43,7 +43,6 @@ namespace Radical.ChangeTracking
             Description = description;
         }
 
-        #region IChange Members
 
         /// <summary>
         /// Gets the owner of this change.
@@ -185,9 +184,7 @@ namespace Radical.ChangeTracking
         /// <returns>A clone of this instance.</returns>
         public abstract IChange Clone();
 
-        #endregion
 
-        #region IChange<T> Members
 
         /// <summary>
         /// Gets the cached value.
@@ -199,6 +196,5 @@ namespace Radical.ChangeTracking
             private set;
         }
 
-        #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
 
-    public abstract class CollectionChangeDescriptor<T>
+    public abstract class CollectionChangeDescriptor
     {
 
     }

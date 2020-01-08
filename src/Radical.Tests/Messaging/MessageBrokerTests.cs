@@ -154,7 +154,7 @@ namespace Radical.Tests.Windows.Messaging
 
                 broker.Broadcast(this, new PocoTestMessage());
 
-                ManualResetEvent.WaitAll(new[] { h1, h2 });
+                WaitHandle.WaitAll(new[] { h1, h2 });
 
                 currentThreadId.Should().Not.Be.EqualTo(s1ThreadId);
                 currentThreadId.Should().Not.Be.EqualTo(s2ThreadId);

@@ -25,17 +25,14 @@ namespace Radical.Model
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && !isDisposed)
             {
-                if (!isDisposed)
-                {
-                    /*
-                     * Questa chiamata la dobbiamo fare una volta sola 
-                     * pena una bella ObjectDisposedException, altrimenti
-                     * chiamate succesive alla Dispose fallirebbero
-                     */
-                    ((IMemento)this).Memento = null;
-                }
+                /*
+                    * Questa chiamata la dobbiamo fare una volta sola 
+                    * pena una bella ObjectDisposedException, altrimenti
+                    * chiamate succesive alla Dispose fallirebbero
+                    */
+                ((IMemento)this).Memento = null;
             }
 
             _memento = null;
@@ -177,7 +174,7 @@ namespace Radical.Model
         /// </returns>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges)
         {
-            var metadata = (MementoPropertyMetadata<T>)base.SetInitialPropertyValue(property, lazyValue);
+            var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, lazyValue);
 
             metadata.TrackChanges = trackChanges;
 
@@ -199,7 +196,7 @@ namespace Radical.Model
         /// </returns>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges)
         {
-            var metadata = (MementoPropertyMetadata<T>)base.SetInitialPropertyValue(property, value);
+            var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, value);
 
             metadata.TrackChanges = trackChanges;
 
@@ -210,17 +207,13 @@ namespace Radical.Model
         {
             base.SetPropertyValue<T>(propertyName, data, e =>
            {
-               var md = GetPropertyMetadata<T>(propertyName) as MementoPropertyMetadata<T>;
-               if (md != null && md.TrackChanges)
+               if (GetPropertyMetadata<T>(propertyName) is MementoPropertyMetadata<T> md && md.TrackChanges)
                {
                    var callback = GetRejectCallback<T>(propertyName);
                    CacheChange(propertyName, e.OldValue, callback);
                }
 
-               if (pvc != null)
-               {
-                   pvc(e);
-               }
+               pvc?.Invoke(e);
            });
         }
 
@@ -228,8 +221,7 @@ namespace Radical.Model
 
         RejectCallback<T> GetRejectCallback<T>(string propertyName)
         {
-            Delegate d;
-            if (!rejectCallbacks.TryGetValue(propertyName, out d))
+            if (!rejectCallbacks.TryGetValue(propertyName, out Delegate d))
             {
                 RejectCallback<T> callback = (pcr) =>
                 {

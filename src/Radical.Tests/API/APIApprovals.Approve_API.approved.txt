@@ -368,12 +368,12 @@ namespace Radical.ChangeTracking.Specialized
         public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
         public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
     }
-    public abstract class CollectionChangeDescriptor<T>
+    public abstract class CollectionChangeDescriptor
     {
         protected CollectionChangeDescriptor() { }
     }
-    public abstract class CollectionChange<TDescriptor, TItem> : Radical.ChangeTracking.Change<TDescriptor>, Radical.ComponentModel.ChangeTracking.IChange
-        where TDescriptor : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<TItem>
+    public abstract class CollectionChange<TDescriptor, TItem> : Radical.ChangeTracking.Change<TDescriptor>
+        where TDescriptor : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor
     {
         protected CollectionChange(object owner, TDescriptor descriptor, Radical.ComponentModel.ChangeTracking.RejectCallback<TDescriptor> rejectCallback, Radical.ComponentModel.ChangeTracking.CommitCallback<TDescriptor> commitCallback, string description) { }
         public TDescriptor Descriptor { get; }
@@ -385,7 +385,7 @@ namespace Radical.ChangeTracking.Specialized
         public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
         public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
     }
-    public class CollectionRangeDescriptor<T> : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<T>
+    public class CollectionRangeDescriptor<T> : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor
     {
         public CollectionRangeDescriptor(System.Collections.Generic.IEnumerable<T> items) { }
         public System.Collections.Generic.IEnumerable<T> Items { get; }
@@ -397,7 +397,7 @@ namespace Radical.ChangeTracking.Specialized
         public override Radical.ComponentModel.ChangeTracking.ProposedActions GetAdvisedAction(object changedItem) { }
         public override System.Collections.Generic.IEnumerable<object> GetChangedEntities() { }
     }
-    public class ItemChangedDescriptor<T> : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor<T>
+    public class ItemChangedDescriptor<T> : Radical.ChangeTracking.Specialized.CollectionChangeDescriptor
     {
         public ItemChangedDescriptor(T item, int index) { }
         public int Index { get; }
@@ -698,18 +698,18 @@ namespace Radical.ComponentModel
         protected virtual void SetValueCore(Radical.ComponentModel.IEntityItemView<T> component, object value) { }
         public override bool ShouldSerializeValue(object component) { }
     }
-    public abstract class EntityItemViewValueArgs<T, TValue>
+    public abstract class EntityItemViewValueArgs<T>
     {
         protected EntityItemViewValueArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName) { }
         public Radical.ComponentModel.IEntityItemView<T> Item { get; }
         public string PropertyName { get; }
     }
-    public class EntityItemViewValueGetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T, TValue>
+    public class EntityItemViewValueGetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T>
     {
         public EntityItemViewValueGetterArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName) { }
     }
     public delegate object EntityItemViewValueGetter<T, TValue>(Radical.ComponentModel.EntityItemViewValueGetterArgs<T, TValue> args);
-    public class EntityItemViewValueSetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T, TValue>
+    public class EntityItemViewValueSetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T>
     {
         public EntityItemViewValueSetterArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName, TValue value) { }
         public TValue Value { get; }

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class CollectionRangeDescriptor<T> : CollectionChangeDescriptor<T>
+    public class CollectionRangeDescriptor<T> : CollectionChangeDescriptor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CollectionRangeDescriptor&lt;T&gt;"/> class.

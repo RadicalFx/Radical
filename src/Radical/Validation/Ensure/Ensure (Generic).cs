@@ -301,7 +301,7 @@ namespace Radical.Validation
         /// <exception cref="ArgumentException">An ArgumentException is raised if the object equality fails.</exception>
         public IEnsure<T> Is(T value)
         {
-            if (!Object.Equals(inspectedObject, value))
+            if (!Equals(inspectedObject, value))
             {
                 Throw(new ArgumentException(GetFullErrorMessage("The currently inspected value is not equal to the supplied value."), Name));
             }
@@ -318,7 +318,7 @@ namespace Radical.Validation
         /// <exception cref="ArgumentException">An ArgumentException is raised if the object equality does not fail.</exception>
         public IEnsure<T> IsNot(T value)
         {
-            if (Object.Equals(inspectedObject, value))
+            if (Equals(inspectedObject, value))
             {
                 Throw(new ArgumentException(GetFullErrorMessage("The currently inspected value should be different from to the supplied value."), Name));
             }

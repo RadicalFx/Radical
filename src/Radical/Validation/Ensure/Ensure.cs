@@ -148,7 +148,7 @@ namespace Radical.Validation
         /// <returns>The Ensure instance for fluent interface usage.</returns>
         public static IConfigurableEnsure<T> That<T>(T obj)
         {
-            return That<T>(obj, Ensure.SourceInfoLoadStrategy);
+            return That<T>(obj, SourceInfoLoadStrategy);
         }
 
         /// <summary>

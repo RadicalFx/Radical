@@ -261,7 +261,7 @@ namespace Radical.Model
             var beforeSet = GetCustomValue<TValue>(customPropertyName);
             View.SetCustomPropertyValue(customPropertyName, this, value);
 
-            if (!Object.Equals(beforeSet, value))
+            if (!Equals(beforeSet, value))
             {
                 OnPropertyChanged(new PropertyChangedEventArgs(customPropertyName));
             }
@@ -349,10 +349,10 @@ namespace Radical.Model
             var other = obj as IEntityItemView<T>;
             if (other != null)
             {
-                return Object.Equals(EntityItem, other.EntityItem);
+                return Equals(EntityItem, other.EntityItem);
             }
 
-            return Object.ReferenceEquals(this, obj); // this.EntityItem.Equals( obj );
+            return ReferenceEquals(this, obj); // this.EntityItem.Equals( obj );
         }
     }
 }

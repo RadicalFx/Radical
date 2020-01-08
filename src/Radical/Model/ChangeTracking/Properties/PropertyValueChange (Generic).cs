@@ -1,14 +1,13 @@
-﻿namespace Radical.ChangeTracking.Specialized
-{
-    using Radical.ChangeTracking;
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Validation;
-    using System;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Validation;
+using System;
 
+namespace Radical.ChangeTracking.Specialized
+{
     /// <summary>
     /// Identifies a change specific for a property change.
     /// </summary>
-    public class PropertyValueChange<T> : Change<T>, IChange, IPropertyValueChange
+    public class PropertyValueChange<T> : Change<T>, IPropertyValueChange
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyValueChange&lt;T&gt;"/> class.
@@ -73,9 +72,9 @@
                 .IsNotNull()
                 .If(v => v != Owner)
                 .Then((v, n) =>
-               {
-                   throw new ArgumentOutOfRangeException(n);
-               });
+                {
+                    throw new ArgumentOutOfRangeException(n);
+                });
 
             return ProposedActions.Update | ProposedActions.Create;
         }

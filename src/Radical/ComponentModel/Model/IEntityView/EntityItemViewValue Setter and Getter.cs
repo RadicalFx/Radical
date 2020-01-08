@@ -10,7 +10,7 @@ namespace Radical.ComponentModel
     /// </summary>
     public delegate void EntityItemViewValueSetter<T, TValue>(EntityItemViewValueSetterArgs<T, TValue> args);
 
-    public abstract class EntityItemViewValueArgs<T, TValue>
+    public abstract class EntityItemViewValueArgs<T>
     {
         protected EntityItemViewValueArgs(IEntityItemView<T> item, string propertyName)
         {
@@ -30,7 +30,7 @@ namespace Radical.ComponentModel
             private set;
         }
     }
-    public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T, TValue>
+    public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
         public EntityItemViewValueGetterArgs(IEntityItemView<T> item, string propertyName)
             : base(item, propertyName)
@@ -39,7 +39,7 @@ namespace Radical.ComponentModel
         }
     }
 
-    public class EntityItemViewValueSetterArgs<T, TValue> : EntityItemViewValueArgs<T, TValue>
+    public class EntityItemViewValueSetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
         public EntityItemViewValueSetterArgs(IEntityItemView<T> item, string propertyName, TValue value)
             : base(item, propertyName)

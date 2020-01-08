@@ -47,7 +47,7 @@
                 .Named("changedItem")
                 .If(o =>
                {
-                   return !Descriptor.Items.Where(t => Object.Equals(t, o)).Any();
+                   return !Descriptor.Items.Where(t => Equals(t, o)).Any();
                })
                 .Then((o, n) =>
                {

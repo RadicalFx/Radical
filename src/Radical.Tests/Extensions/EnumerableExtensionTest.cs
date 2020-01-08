@@ -16,14 +16,14 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void ForEachTest_null_list()
         {
-            Radical.Linq.EnumerableExtensions.ForEach<int>(null, a => a++);
+            Linq.EnumerableExtensions.ForEach<int>(null, a => a++);
         }
 
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ForEachTest_null_action()
         {
-            Radical.Linq.EnumerableExtensions.ForEach<int>(new[] { 0, 1, 2 }, null);
+            Linq.EnumerableExtensions.ForEach<int>(new[] { 0, 1, 2 }, null);
         }
 
         [TestMethod()]
@@ -31,7 +31,7 @@ namespace Radical.Tests.Extensions
         {
             var count = 0;
             var source = new[] { 0, 1, 2 };
-            Radical.Linq.EnumerableExtensions.ForEach<int>(source, a => count++);
+            Linq.EnumerableExtensions.ForEach<int>(source, a => count++);
 
             Assert.AreEqual<int>(source.Length, count);
         }
@@ -40,7 +40,7 @@ namespace Radical.Tests.Extensions
         public void ForEachTest_return_value_not_null()
         {
             var source = new[] { 0, 1, 2 };
-            var actual = Radical.Linq.EnumerableExtensions.ForEach<int>(source, a => a++);
+            var actual = Linq.EnumerableExtensions.ForEach<int>(source, a => a++);
 
             Assert.IsNotNull(actual);
         }
@@ -49,14 +49,14 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void AsReadOnly_null_expects_exception()
         {
-            Radical.Linq.EnumerableExtensions.AsReadOnly<object>(null);
+            Linq.EnumerableExtensions.AsReadOnly<object>(null);
         }
 
         [TestMethod()]
         public void AsReadOnly_result_isNotNull()
         {
             var source = new[] { 0, 1, 2 };
-            IEnumerable<int> actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source);
+            IEnumerable<int> actual = Linq.EnumerableExtensions.AsReadOnly(source);
 
             Assert.IsNotNull(actual);
         }
@@ -77,7 +77,7 @@ namespace Radical.Tests.Extensions
 
             Action<object> action = o => { actual++; };
 
-            Radical.Linq.EnumerableExtensions.Enumerate(list, action);
+            Linq.EnumerableExtensions.Enumerate(list, action);
 
             actual.Should().Be.EqualTo(expected);
         }
@@ -86,14 +86,14 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void iEnumerableExtensions_enumerate_null_list_reference_should_raise_ArgumentNullException()
         {
-            Radical.Linq.EnumerableExtensions.Enumerate(null, null);
+            Linq.EnumerableExtensions.Enumerate(null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void iEnumerableExtensions_enumerate_null_action_reference_should_raise_ArgumentNullException()
         {
-            Radical.Linq.EnumerableExtensions.Enumerate(new object[0], null);
+            Linq.EnumerableExtensions.Enumerate(new object[0], null);
         }
 
         [TestMethod]
@@ -107,9 +107,9 @@ namespace Radical.Tests.Extensions
                 new object()
             };
 
-            var actual = Radical.Linq.EnumerableExtensions.Enumerate(expected, o => { });
+            var actual = Linq.EnumerableExtensions.Enumerate(expected, o => { });
 
-            System.Linq.Enumerable.OfType<object>(actual).Should().Have.SameSequenceAs(expected);
+            Enumerable.OfType<object>(actual).Should().Have.SameSequenceAs(expected);
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace Radical.Tests.Extensions
                 1,2,3,4
             };
 
-            var actual = Radical.Linq.EnumerableExtensions.AlternateWith(list, 0);
+            var actual = Linq.EnumerableExtensions.AlternateWith(list, 0);
 
             actual.Count().Should().Be.EqualTo(7);
             actual.ElementAt(1).Should().Be.EqualTo(0);
@@ -132,7 +132,7 @@ namespace Radical.Tests.Extensions
         public void enumerableExtensions_alternateWith_using_empty_list_should_return_empty_list()
         {
             var list = new List<string>();
-            var actual = Radical.Linq.EnumerableExtensions.AlternateWith(list, "");
+            var actual = Linq.EnumerableExtensions.AlternateWith(list, "");
 
             actual.Count().Should().Be.EqualTo(0);
         }
@@ -145,7 +145,7 @@ namespace Radical.Tests.Extensions
                 "Foo"
             };
 
-            var actual = Radical.Linq.EnumerableExtensions.AlternateWith(list, "Bar");
+            var actual = Linq.EnumerableExtensions.AlternateWith(list, "Bar");
 
             actual.Count().Should().Be.EqualTo(list.Count);
             actual.ElementAt(0).Should().Be.EqualTo(list[0]);
@@ -155,7 +155,7 @@ namespace Radical.Tests.Extensions
         [ExpectedException(typeof(ArgumentNullException))]
         public void enumerableExtensions_alternateWith_using_null_list_should_throw_ArgumentNullException()
         {
-            var x = Radical.Linq.EnumerableExtensions.AlternateWith<object>(null, null);
+            var x = Linq.EnumerableExtensions.AlternateWith<object>(null, null);
             x.ToList();
         }
 
@@ -179,7 +179,7 @@ namespace Radical.Tests.Extensions
                 root
             };
 
-            var actual = Radical.Linq.EnumerableExtensions.IsChildOfAny(node, tree, n => n.Parent);
+            var actual = Linq.EnumerableExtensions.IsChildOfAny(node, tree, n => n.Parent);
 
             Assert.IsTrue(actual);
         }
@@ -202,7 +202,7 @@ namespace Radical.Tests.Extensions
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_list()
         {
             var source = new List<string>();
-            var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source);
+            var actual = Linq.EnumerableExtensions.AsReadOnly(source);
 
             Assert.AreNotEqual(source, actual);
             Assert.AreNotSame(source, actual);
@@ -212,7 +212,7 @@ namespace Radical.Tests.Extensions
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_net_read_only_collection()
         {
             var source = new System.Collections.ObjectModel.ReadOnlyCollection<string>(new[] { "" });
-            var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source);
+            var actual = Linq.EnumerableExtensions.AsReadOnly(source);
 
             Assert.AreNotEqual(source, actual);
             Assert.AreNotSame(source, actual);
@@ -222,7 +222,7 @@ namespace Radical.Tests.Extensions
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_dictionary_keys()
         {
             var source = new Dictionary<object, object>();
-            var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source.Keys);
+            var actual = Linq.EnumerableExtensions.AsReadOnly(source.Keys);
 
             Assert.AreNotEqual(source.Keys, actual);
             Assert.AreNotSame(source.Keys, actual);
@@ -232,7 +232,7 @@ namespace Radical.Tests.Extensions
         public void enumerableExtensions_asReadOnly_should_return_new_list_when_source_is_dictionary_values()
         {
             var source = new Dictionary<object, object>();
-            var actual = Radical.Linq.EnumerableExtensions.AsReadOnly(source.Values);
+            var actual = Linq.EnumerableExtensions.AsReadOnly(source.Values);
 
             Assert.AreNotEqual(source.Values, actual);
             Assert.AreNotSame(source.Values, actual);

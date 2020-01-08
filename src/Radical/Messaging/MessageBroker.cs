@@ -38,14 +38,8 @@ namespace Radical.Messaging
 
         readonly IDispatcher dispatcher;
 
-        /// <summary>
-        /// A dictionary, of all the subscriptions, whose key is the message type
-        /// and whose value is the list of Subscriptions for that message type
-        /// </summary>
         readonly List<SubscriptionsContainer> msgSubsIndex = null;
         readonly ReaderWriterLockSlim msgSubsIndexLock = new ReaderWriterLockSlim();
-
-        //Dictionary<string, IScopedMessageBroker> topics = new Dictionary<string, IScopedMessageBroker>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBroker"/> class.
@@ -291,27 +285,26 @@ namespace Radical.Messaging
             try
             {
                 msgSubsIndex.Where(msgSubscriptions =>
-               {
-                   return msgSubscriptions.Subscriptions.Where(subscription =>
-                   {
-                       return Object.Equals(subscription.Subscriber, subscriber)
-                              && Object.Equals(subscription.Sender, sender);
-                   })
-                   .Any();
-               })
+                {
+                    return msgSubscriptions.Subscriptions.Any(subscription =>
+                    {
+                        return Equals(subscription.Subscriber, subscriber)
+                            && Equals(subscription.Sender, sender);
+                    });
+                })
                 .ToList()
                 .ForEach(kvp =>
-               {
-                   msgSubsIndexLock.EnterWriteLock();
-                   try
-                   {
-                       msgSubsIndex.Remove(kvp);
-                   }
-                   finally
-                   {
-                       msgSubsIndexLock.ExitWriteLock();
-                   }
-               });
+                {
+                    msgSubsIndexLock.EnterWriteLock();
+                    try
+                    {
+                        msgSubsIndex.Remove(kvp);
+                    }
+                    finally
+                    {
+                        msgSubsIndexLock.ExitWriteLock();
+                    }
+                });
             }
             finally
             {
@@ -336,7 +329,7 @@ namespace Radical.Messaging
                     var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
-                       return Object.Equals(subscriber, subscription.Subscriber);
+                       return Equals(subscriber, subscription.Subscriber);
                    })
                     .ToList()
                     .ForEach(subscription =>
@@ -379,8 +372,8 @@ namespace Radical.Messaging
                     var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
-                       return Object.Equals(subscriber, subscription.Subscriber)
-                              && Object.Equals(sender, subscription.Sender);
+                       return Equals(subscriber, subscription.Subscriber)
+                              && Equals(sender, subscription.Sender);
                    })
                     .ToList()
                     .ForEach(subscription =>
@@ -423,8 +416,8 @@ namespace Radical.Messaging
                     var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
                     allMessageSubscriptions.Where(subscription =>
                    {
-                       return Object.Equals(subscriber, subscription.Subscriber)
-                              && Object.Equals(callback, subscription.GetAction());
+                       return Equals(subscriber, subscription.Subscriber)
+                              && Equals(callback, subscription.GetAction());
                    })
                     .ToList()
                     .ForEach(subscription =>

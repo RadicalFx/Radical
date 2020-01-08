@@ -50,14 +50,12 @@ namespace Radical.Linq
 
         static MemberExpression FindMemberExpression(Expression exp)
         {
-            if (exp is MemberExpression)
+            switch (exp)
             {
-                return (MemberExpression)exp;
-            }
-
-            if (exp is UnaryExpression)
-            {
-                return FindMemberExpression(((UnaryExpression)exp).Operand);
+                case MemberExpression _:
+                    return (MemberExpression)exp;
+                case UnaryExpression _:
+                    return FindMemberExpression(((UnaryExpression)exp).Operand);
             }
 
             throw new NotSupportedException("The supplied expression type is not supported.");

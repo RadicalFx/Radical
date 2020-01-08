@@ -5,7 +5,6 @@
 
     public class GenericParameterHelperSerializationSurrogate : ISerializationSurrogate
     {
-        #region ISerializationSurrogate Members
 
         public void GetObjectData(object obj, SerializationInfo info, StreamingContext context)
         {
@@ -20,6 +19,5 @@
             return obj;
         }
 
-        #endregion
     }
 }

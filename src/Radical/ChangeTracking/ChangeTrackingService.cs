@@ -43,7 +43,6 @@
         Dictionary<object, bool> transientEntities = new Dictionary<object, bool>();
         List<IComponent> iComponentEntities = new List<IComponent>();
 
-        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -73,7 +72,6 @@
                      * 
                      * Staminchia...
                      */
-                    //this.RejectChangesCore( false );
 
                     backwardChangesStack.ForEach(c => OnUnwire(c));
                     forwardChangesStack.ForEach(c => OnUnwire(c));
@@ -130,7 +128,6 @@
             GC.SuppressFinalize(this);
         }
 
-        #endregion
 
         private static readonly object trackingServiceStateChangedEventKey = new object();
 
@@ -307,7 +304,6 @@
             };
         }
 
-        #region IChangeTrackingService Members
 
         /// <summary>
         /// Creates a bookmark useful to save a position
@@ -365,7 +361,7 @@
             lock (SyncRoot)
             {
                 var last = backwardChangesStack.LastOrDefault();
-                return /*this.EnsureIsDefined( bookmark ) &&*/ (bookmark.Position != last || transientEntities
+                return (bookmark.Position != last || transientEntities
                     .Any(kvp => kvp.Value && !bookmark.TransientEntities.Contains(kvp.Key)));
             }
         }
@@ -574,7 +570,7 @@
 
                 if (backwardChangesStack != null)
                 {
-                    var hasBackwardChanges = backwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
+                    var hasBackwardChanges = backwardChangesStack.Any(c => Equals(c.Owner, entity));
                     if (hasBackwardChanges)
                     {
                         state |= EntityTrackingStates.HasBackwardChanges;
@@ -586,7 +582,7 @@
                            var s = ac.GetEntityState(entity);
                            if (EntityTrackingStates.HasForwardChanges == (s & EntityTrackingStates.HasForwardChanges))
                            {
-                               s = s ^ EntityTrackingStates.HasForwardChanges;
+                               s ^= EntityTrackingStates.HasForwardChanges;
                            }
 
                            return s;
@@ -598,7 +594,7 @@
 
                 if (forwardChangesStack != null)
                 {
-                    var hasForwardChanges = forwardChangesStack.Any(c => Object.Equals(c.Owner, entity));
+                    var hasForwardChanges = forwardChangesStack.Any(c => Equals(c.Owner, entity));
                     if (hasForwardChanges)
                     {
                         state |= EntityTrackingStates.HasForwardChanges;
@@ -610,7 +606,7 @@
                            var s = ac.GetEntityState(entity);
                            if (EntityTrackingStates.HasBackwardChanges == (s & EntityTrackingStates.HasBackwardChanges))
                            {
-                               s = s ^ EntityTrackingStates.HasBackwardChanges;
+                               s ^= EntityTrackingStates.HasBackwardChanges;
                            }
 
                            return s;
@@ -899,13 +895,10 @@
         /// <param name="entity">The entity to wire to.</param>
         protected virtual void OnWire(IComponent entity)
         {
-            if (entity != null)
+            if (entity != null && !iComponentEntities.Contains(entity))
             {
-                if (!iComponentEntities.Contains(entity))
-                {
-                    entity.Disposed += onComponentDisposed;
-                    iComponentEntities.Add(entity);
-                }
+                entity.Disposed += onComponentDisposed;
+                iComponentEntities.Add(entity);
             }
         }
 
@@ -1007,8 +1000,7 @@
              * test(s), quindi le Dispose vengono chiamate in ordine casuale dal 
              * GC...
              */
-            IComponent cmp = entity as IComponent;
-            if (cmp != null)
+            if (entity is IComponent cmp)
             {
                 cmp.Disposed -= onComponentDisposed;
                 if (iComponentEntities != null && iComponentEntities.Contains(cmp))
@@ -1039,7 +1031,7 @@
                 lock (SyncRoot)
                 {
                     backwardChangesStack
-                        .Where(c => Object.Equals(c.Owner, entity))
+                        .Where(c => Equals(c.Owner, entity))
                         .AsReadOnly()
                         .ForEach(c => backwardChangesStack.Remove(c));
                 }
@@ -1050,7 +1042,7 @@
                 lock (SyncRoot)
                 {
                     forwardChangesStack
-                        .Where(c => Object.Equals(c.Owner, entity))
+                        .Where(c => Equals(c.Owner, entity))
                         .AsReadOnly()
                         .ForEach(c => forwardChangesStack.Remove(c));
                 }
@@ -1143,9 +1135,7 @@
             item.Memento = this;
         }
 
-        #endregion
 
-        #region IRevertibleChangeTracking Members
 
         void RejectChangesCore(bool shouldNotify)
         {
@@ -1187,9 +1177,7 @@
             RejectChangesCore(IsChanged || HasTransientEntities);
         }
 
-        #endregion
 
-        #region IChangeTracking Members
 
         /// <summary>
         /// Resets the object’s state to unchanged by accepting the modifications.
@@ -1248,9 +1236,7 @@
             get { return backwardChangesStack.Count > 0; }
         }
 
-        #endregion
 
-        #region IComponent, ISite
 
         /// <summary>
         /// Event raised when the Dispose of this instance has completed.
@@ -1293,7 +1279,6 @@
             get { return _events; }
         }
 
-        #endregion
 
         bool IsInAtomicOperation
         {
@@ -1389,8 +1374,7 @@
                 state |= EntityPropertyStates.Changed;
 
                 TProperty actualValue;
-                var e = entity as Model.Entity;
-                if (e != null)
+                if (entity is Model.Entity e)
                 {
                     actualValue = e.GetPropertyValue<TProperty>(propertyName);
                 }
@@ -1399,7 +1383,7 @@
                     actualValue = (TProperty)property.GetValue(entity, null);
                 }
 
-                if (!object.Equals(originalValue, actualValue))
+                if (!Equals(originalValue, actualValue))
                 {
                     state |= EntityPropertyStates.ValueChanged;
                 }

@@ -25,7 +25,6 @@ namespace Radical.Tests.ChangeTracking
             OnDisposed();
         }
 
-        #region IComponent Members
 
         /*
          * Non possiamo usare la EventHaldlerList
@@ -47,7 +46,6 @@ namespace Radical.Tests.ChangeTracking
             set;
         }
 
-        #endregion
 
         public Person(IChangeTrackingService memento)
             : this(memento, true)
@@ -108,12 +106,12 @@ namespace Radical.Tests.ChangeTracking
 
         public void SetInitialPropertyValueForTest<T>(string propertyName, T value)
         {
-            base.SetInitialPropertyValue<T>(propertyName, value);
+            SetInitialPropertyValue(propertyName, value);
         }
 
         public void SetInitialPropertyValueForTest<T>(Expression<Func<T>> property, T value)
         {
-            base.SetInitialPropertyValue<T>(property, value);
+            SetInitialPropertyValue(property, value);
         }
     }
 }

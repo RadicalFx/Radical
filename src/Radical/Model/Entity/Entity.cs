@@ -12,7 +12,6 @@ namespace Radical.Model
         INotifyPropertyChanged,
         IDisposable
     {
-        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged resources and performs other cleanup operations before the
@@ -74,9 +73,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region EventHandlerList
 
         [NonSerialized]
         private EventHandlerList _events;
@@ -98,9 +95,7 @@ namespace Radical.Model
             }
         }
 
-        #endregion
 
-        #region INotifyPropertyChanged Members
 
         private static readonly object propertyChangedEventKey = new object();
         public event PropertyChangedEventHandler PropertyChanged
@@ -130,7 +125,6 @@ namespace Radical.Model
             OnPropertyChanged(new PropertyChangedEventArgs(property.GetMemberName()));
         }
 
-        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Entity"/> class.
@@ -220,7 +214,7 @@ namespace Radical.Model
         {
             Ensure.That(property).Named("property").IsNotNull();
 
-            return (PropertyMetadata<T>)GetPropertyMetadata<T>(property.GetMemberName());
+            return GetPropertyMetadata<T>(property.GetMemberName());
         }
 
         /// <summary>
@@ -233,10 +227,7 @@ namespace Radical.Model
         {
             Ensure.That(propertyName).Named("propertyName").IsNotNullNorEmpty();
 
-            //return ( PropertyMetadata<T> )this.GetPropertyMetadata( propertyName, typeof( T ) );
-
-            PropertyMetadata md;
-            if (!propertiesMetadata.TryGetValue(propertyName, out md))
+            if (!propertiesMetadata.TryGetValue(propertyName, out PropertyMetadata md))
             {
                 md = GetDefaultMetadata<T>(propertyName);
                 propertiesMetadata.Add(propertyName, md);
@@ -254,8 +245,6 @@ namespace Radical.Model
         protected virtual PropertyMetadata<T> GetDefaultMetadata<T>(string propertyName)
         {
             return PropertyMetadata.Create<T>(this, propertyName);
-
-            //return ( PropertyMetadata<T> )this.GetDefaultMetadata( propertyName, typeof( T ) );
         }
 
         /// <summary>
@@ -330,7 +319,7 @@ namespace Radical.Model
         {
             var oldValue = GetPropertyValue<T>(propertyName);
 
-            if (!Object.Equals(oldValue, data))
+            if (!Equals(oldValue, data))
             {
                 if (valuesBag.ContainsKey(propertyName))
                 {
@@ -342,10 +331,7 @@ namespace Radical.Model
                 }
 
                 var args = new PropertyValueChangedArgs<T>(data, oldValue);
-                if (pvc != null)
-                {
-                    pvc(args);
-                }
+                pvc?.Invoke(args);
 
                 var metadata = GetPropertyMetadata<T>(propertyName);
                 if (metadata.NotifyChanges)
@@ -356,9 +342,9 @@ namespace Radical.Model
                         .NotifyChanged(args)
                         .GetCascadeChangeNotifications()
                         .ForEach(s =>
-                       {
-                           OnPropertyChanged(s);
-                       });
+                        {
+                            OnPropertyChanged(s);
+                        });
                 }
             }
         }
@@ -425,8 +411,7 @@ namespace Radical.Model
         /// <returns>The requested property value.</returns>
         protected internal virtual T GetPropertyValue<T>(string propertyName)
         {
-            PropertyValue actual;
-            if (valuesBag.TryGetValue(propertyName, out actual))
+            if (valuesBag.TryGetValue(propertyName, out PropertyValue actual))
             {
                 return ((PropertyValue<T>)actual).Value;
             }

@@ -48,7 +48,7 @@ namespace Radical
                 return false;
             }
 
-            if (Object.ReferenceEquals(source, other))
+            if (ReferenceEquals(source, other))
             {
                 return true;
             }

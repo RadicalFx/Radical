@@ -30,7 +30,7 @@ namespace Radical.Helpers
         /// <returns>The hash of the given password.</returns>
         public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt)
         {
-            return Password.CreateHash(clearTextPassword, passwordSalt, "SHA1");
+            return CreateHash(clearTextPassword, passwordSalt, "SHA1");
         }
 
         /// <summary>

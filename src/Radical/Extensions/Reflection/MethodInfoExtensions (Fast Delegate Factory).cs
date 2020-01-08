@@ -30,7 +30,7 @@ namespace Radical.Reflection
             var instanceParameter = Expression.Parameter(typeof(object), "target");
             var argumentsParameter = Expression.Parameter(typeof(object[]), "arguments");
 
-            var call = MethodInfoExtensions.CreateMethodCallExpression
+            var call = CreateMethodCallExpression
             (
                 method,
                 instanceParameter,
@@ -58,7 +58,7 @@ namespace Radical.Reflection
             var instanceParameter = Expression.Parameter(typeof(object), "target");
             var argumentsParameter = Expression.Parameter(typeof(object[]), "arguments");
 
-            var call = MethodInfoExtensions.CreateMethodCallExpression
+            var call = CreateMethodCallExpression
             (
                 method,
                 instanceParameter,
@@ -81,7 +81,7 @@ namespace Radical.Reflection
             (
                 Expression.Convert(instanceParameter, method.DeclaringType),
                 method,
-                MethodInfoExtensions.CreateParameterExpressions
+                CreateParameterExpressions
                 (
                     method,
                     argumentsParameter

@@ -20,7 +20,7 @@ namespace Radical
             Ensure.That(view).Named("view").IsNotNull();
 
             var actualDirection = view.SortDirection;
-            var actualProperty = view.SortProperty == null ? (string)null : view.SortProperty.Name;
+            var actualProperty = view.SortProperty?.Name;
 
             if (property != null && property == actualProperty)
             {

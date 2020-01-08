@@ -156,9 +156,9 @@ namespace Radical.Helpers
             set
             {
                 _minLenght = value;
-                if (RandomStrings.DEFAULT_MINIMUM > _minLenght)
+                if (DEFAULT_MINIMUM > _minLenght)
                 {
-                    _minLenght = RandomStrings.DEFAULT_MINIMUM;
+                    _minLenght = DEFAULT_MINIMUM;
                 }
             }
         }
@@ -177,7 +177,7 @@ namespace Radical.Helpers
                 _maxLenght = value;
                 if (_minLenght >= _maxLenght)
                 {
-                    _maxLenght = RandomStrings.DEFAULT_MAXIMUM;
+                    _maxLenght = DEFAULT_MAXIMUM;
                 }
             }
         }

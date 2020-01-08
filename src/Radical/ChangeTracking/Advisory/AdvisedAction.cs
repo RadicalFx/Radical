@@ -29,8 +29,6 @@ namespace Radical.ChangeTracking
             Action = action;
         }
 
-        #region IAdvisedAction Members
-
         /// <summary>
         /// Gets the suggested action for the target object encapsulated by this instance.
         /// </summary>
@@ -50,7 +48,5 @@ namespace Radical.ChangeTracking
             get;
             private set;
         }
-
-        #endregion
     }
 }
