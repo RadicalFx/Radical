@@ -455,18 +455,6 @@ namespace Radical.Model
             return Storage.IndexOf(item);
         }
 
-        ///// <summary>
-        ///// Returns the index of the supplied item, starting search at the specified index.
-        ///// </summary>
-        ///// <param name="value">The item.</param>
-        ///// <param name="startIndex">The start index.</param>
-        ///// <returns></returns>
-        //public int IndexOf( T value, int startIndex )
-        //{
-        //    this.EnsureNotDisposed();
-        //    return this.Storage.IndexOf( value, startIndex );
-        //}
-
         /// <summary>
         /// Called just before the Insert
         /// </summary>
