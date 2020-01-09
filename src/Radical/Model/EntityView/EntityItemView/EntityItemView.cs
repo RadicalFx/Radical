@@ -270,8 +270,6 @@ namespace Radical.Model
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
         {
-            //return TypeDescriptor.GetProperties( this.EntityItem );
-
             return _view.GetItemProperties(null);
         }
 
