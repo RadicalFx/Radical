@@ -109,7 +109,6 @@ namespace Radical.Model
 
                 if (notify)
                 {
-                    //Notifichiamo che la collection è cambiata
                     OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.Reset, -1));
                 }
             }
@@ -163,7 +162,7 @@ namespace Radical.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
-        /// <param name="collection">The readonly list to use as source.</param>
+        /// <param name="collection">The read-only list to use as source.</param>
         public EntityCollection(IEnumerable<T> collection)
             : this()
         {
@@ -219,7 +218,7 @@ namespace Radical.Model
 
         /// <summary>
         /// Called every time this list needs to unwire events of the given items, 
-        /// tipycally this method is called every time an item is removed to the collection.
+        /// typically this method is called every time an item is removed to the collection.
         /// </summary>
         /// <param name="item">The item.</param>
         protected virtual void UnwireListItem(T item)
@@ -249,7 +248,6 @@ namespace Radical.Model
         protected void SetValueAt(int index, T value)
         {
             EnsureNotDisposed();
-            //Recuperiamo un riferimento al valore che verrà sovrascritto
             T oldValue = GetValueAt(index);
 
             SetValueAtEventArgs<T> args = new SetValueAtEventArgs<T>(index, value, oldValue);
@@ -257,15 +255,12 @@ namespace Radical.Model
 
             if (!args.Cancel)
             {
-                //Ci sganciamo da quello attualmente presente nella collection
                 UnwireListItem(oldValue);
                 if (!Contains(value))
                 {
-                    //Ci leghiamo a quello in arrivo
                     WireListItem(value);
                 }
 
-                //Impostiamo il valore
                 Storage[index] = value;
 
                 OnSetValueAtCompleted(index, value, oldValue);
@@ -476,7 +471,6 @@ namespace Radical.Model
             OnInsert(args);
             if (!args.Cancel)
             {
-                //Inseriamo il nuovo elemento
                 Storage.Insert(index, item);
                 WireListItem(item);
 
@@ -801,7 +795,7 @@ namespace Radical.Model
         /// <summary>
         /// Adds a range of items.
         /// </summary>
-        /// <param name="list">The range of items ot add.</param>
+        /// <param name="list">The range of items to add.</param>
         public void AddRange(IEnumerable<T> list)
         {
             EnsureNotDisposed();
