@@ -7,14 +7,14 @@ namespace Radical.Model
         /// <summary>
         /// Gets the service.
         /// </summary>
-        /// <param name="service">The service.</param>
+        /// <param name="serviceType">The service.</param>
         /// <returns></returns>
-        object IServiceProvider.GetService(Type service)
+        object IServiceProvider.GetService(Type serviceType)
         {
             if (site != null)
             {
                 EnsureNotDisposed();
-                return site.GetService(service);
+                return site.GetService(serviceType);
             }
 
             return null;
