@@ -44,7 +44,7 @@ namespace Radical.Model
         public void Delete()
         {
             int myIndex = View.IndexOf(this);
-            ((IList)View).RemoveAt(myIndex);
+            View.RemoveAt(myIndex);
         }
 
         private T _entityItem;
