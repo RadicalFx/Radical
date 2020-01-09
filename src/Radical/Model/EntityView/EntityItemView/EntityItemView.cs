@@ -330,8 +330,7 @@ namespace Radical.Model
 
         public override bool Equals(object obj)
         {
-            var other = obj as IEntityItemView<T>;
-            if (other != null)
+            if (obj is IEntityItemView<T> other)
             {
                 return Equals(EntityItem, other.EntityItem);
             }
