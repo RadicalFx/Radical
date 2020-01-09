@@ -137,7 +137,7 @@ namespace Radical.Helpers
                 }
             }
 
-            value = default(T);
+            value = default;
             return false;
         }
 
@@ -154,8 +154,8 @@ namespace Radical.Helpers
                    {
                        Property = pi,
                        Argument = attribute.ArgumentName,
-                       IsRequired = attribute.IsRequired,
-                       Aliases = attribute.Aliases
+                       attribute.IsRequired,
+                       attribute.Aliases
                    };
                });
 
