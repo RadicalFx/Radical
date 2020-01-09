@@ -85,9 +85,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Ripristina la generazione degli eventi che la Collection
-        /// scatena alla modifica (aggiunta/rimozione), ripristina
-        /// anche il meccanismo di caching.
+        /// Signals the object that initialization is complete.
+        /// Restores collection events publishing that signal collection
+        /// changes. Restores the caching mechanism.
         /// </summary>
         public void EndInit()
         {
