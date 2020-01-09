@@ -538,15 +538,12 @@ namespace Radical.Model
         protected bool Remove(T item, bool notify)
         {
             EnsureNotDisposed();
-            //Recuperiamo l'indice da rimuovere
             int index = Storage.IndexOf(item);
 
-            //Rimuoviamo
             if (index > -1)
             {
                 UnwireListItem(item);
 
-                //Rimuoviamo
                 bool retVal = Storage.Remove(item);
 
                 OnRemoveCompleted(item, index);
@@ -707,7 +704,7 @@ namespace Radical.Model
 
         /// <summary>
         /// Called in order to create a new view.
-        /// Overrdie this memeber to customize the creation process.
+        /// Override this member to customize the creation process.
         /// </summary>
         /// <returns>An instance of a view.</returns>
         protected virtual IEntityView<T> OnCreateView()
