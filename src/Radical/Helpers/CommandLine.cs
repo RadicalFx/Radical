@@ -234,9 +234,7 @@ namespace Radical.Helpers
                 builder.Append(' ');
             }
 
-            var args = builder.ToString().TrimEnd(' ');
-
-            return args;
+            return builder.ToString().TrimEnd(' ');
         }
     }
 }
