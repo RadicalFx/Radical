@@ -335,7 +335,7 @@ namespace Radical.Model
                 return Equals(EntityItem, other.EntityItem);
             }
 
-            return ReferenceEquals(this, obj); // this.EntityItem.Equals( obj );
+            return ReferenceEquals(this, obj);
         }
     }
 }
