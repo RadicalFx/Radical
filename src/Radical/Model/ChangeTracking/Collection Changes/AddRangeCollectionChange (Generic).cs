@@ -45,14 +45,11 @@
         {
             Ensure.That(changedItem)
                 .Named("changedItem")
-                .If(o =>
-               {
-                   return !Descriptor.Items.Where(t => Equals(t, o)).Any();
-               })
+                .If(o =>!Descriptor.Items.Any(t => Equals(t, o)))
                 .Then((o, n) =>
-               {
-                   throw new ArgumentOutOfRangeException(n);
-               });
+                {
+                    throw new ArgumentOutOfRangeException(n);
+                });
 
             return ProposedActions.Create | ProposedActions.Update;
         }
