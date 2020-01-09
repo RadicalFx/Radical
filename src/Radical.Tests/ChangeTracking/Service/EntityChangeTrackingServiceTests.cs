@@ -847,7 +847,7 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof(NotSupportedException))]
         [TestCategory("ChangeTracking")]
         public void service_add_notSupported_AddChangeBehavior()
         {
@@ -2035,9 +2035,9 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof(NotSupportedException))]
         [TestCategory("ChangeTracking")]
-        public void service_on_change_reject_ArgumentOutOfRangeException_on_none_commit_reason_with_hacked_property_change()
+        public void service_on_change_reject_NotSupportedException_on_none_commit_reason_with_hacked_property_change()
         {
             RejectCallback<string> rc = e => { };
             CommitCallback<string> cc = e => { };
