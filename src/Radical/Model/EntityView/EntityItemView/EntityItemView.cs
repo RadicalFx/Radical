@@ -325,7 +325,7 @@ namespace Radical.Model
 
         public override int GetHashCode()
         {
-            return EntityItem.GetHashCode();// base.GetHashCode();
+            return EntityItem.GetHashCode();
         }
 
         public override bool Equals(object obj)
