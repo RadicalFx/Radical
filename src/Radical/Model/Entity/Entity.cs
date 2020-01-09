@@ -107,12 +107,7 @@ namespace Radical.Model
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             EnsureNotDisposed();
-
-            PropertyChangedEventHandler h = Events[propertyChangedEventKey] as PropertyChangedEventHandler;
-            if (h != null)
-            {
-                h(this, e);
-            }
+            (Events[propertyChangedEventKey] as PropertyChangedEventHandler)?.Invoke(this, e);
         }
 
         protected void OnPropertyChanged(string propertyName)

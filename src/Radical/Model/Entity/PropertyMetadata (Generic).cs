@@ -85,10 +85,7 @@ namespace Radical.Model
 
         internal PropertyMetadata<T> NotifyChanged(PropertyValueChangedArgs<T> pvc)
         {
-            if (propertyChangedHandler != null)
-            {
-                propertyChangedHandler(pvc);
-            }
+            propertyChangedHandler?.Invoke(pvc);
 
             return this;
         }

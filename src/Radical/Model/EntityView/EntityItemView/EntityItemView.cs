@@ -92,10 +92,7 @@ namespace Radical.Model
         /// <param name="args">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, args);
-            }
+            PropertyChanged?.Invoke(this, args);
         }
 
         /// <summary>
@@ -147,10 +144,7 @@ namespace Radical.Model
 
         protected virtual void OnEditBegun()
         {
-            if (EditBegun != null)
-            {
-                EditBegun(this, EventArgs.Empty);
-            }
+            EditBegun?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -160,10 +154,7 @@ namespace Radical.Model
         public event EventHandler EditCanceled;
         protected virtual void OnEditCanceled()
         {
-            if (EditCanceled != null)
-            {
-                EditCanceled(this, EventArgs.Empty);
-            }
+            EditCanceled?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -173,10 +164,7 @@ namespace Radical.Model
         public event EventHandler EditEnded;
         protected virtual void OnEditEnded()
         {
-            if (EditEnded != null)
-            {
-                EditEnded(this, EventArgs.Empty);
-            }
+            EditEnded?.Invoke(this, EventArgs.Empty);
         }
 
         private bool isEditing;

@@ -147,11 +147,7 @@ namespace Radical.ChangeTracking
         {
             if (Events != null)
             {
-                EventHandler h = Events[trackingServiceStateChangedEventKey] as EventHandler;
-                if (h != null)
-                {
-                    h(this, EventArgs.Empty);
-                }
+                (Events[trackingServiceStateChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -173,11 +169,7 @@ namespace Radical.ChangeTracking
         {
             if (Events != null)
             {
-                EventHandler<CancelEventArgs> h = Events[rejectingChangesEventKey] as EventHandler<CancelEventArgs>;
-                if (h != null)
-                {
-                    h(this, e);
-                }
+                (Events[rejectingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
             }
         }
 
@@ -199,11 +191,7 @@ namespace Radical.ChangeTracking
         {
             if (Events != null)
             {
-                EventHandler h = Events[changesRejectedEventKey] as EventHandler;
-                if (h != null)
-                {
-                    h(this, EventArgs.Empty);
-                }
+                (Events[changesRejectedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -219,11 +207,7 @@ namespace Radical.ChangeTracking
         {
             if (Events != null)
             {
-                EventHandler<CancelEventArgs> h = Events[acceptingChangesEventKey] as EventHandler<CancelEventArgs>;
-                if (h != null)
-                {
-                    h(this, e);
-                }
+                (Events[acceptingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
             }
         }
 
@@ -245,11 +229,7 @@ namespace Radical.ChangeTracking
         {
             if (Events != null)
             {
-                EventHandler h = Events[changesAcceptedEventKey] as EventHandler;
-                if (h != null)
-                {
-                    h(this, EventArgs.Empty);
-                }
+                (Events[changesAcceptedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -1272,10 +1252,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnDisposed()
         {
-            if (Disposed != null)
-            {
-                Disposed(this, EventArgs.Empty);
-            }
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

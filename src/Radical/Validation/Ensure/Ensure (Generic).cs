@@ -371,10 +371,7 @@ namespace Radical.Validation
                 throw new ArgumentNullException("error");
             }
 
-            if (validationFailurePreview != null)
-            {
-                validationFailurePreview(this, error);
-            }
+            validationFailurePreview?.Invoke(this, error);
 
             throw error;
         }

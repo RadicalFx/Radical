@@ -94,11 +94,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnCommitted(CommittedEventArgs args)
         {
-            var h = Committed;
-            if (h != null)
-            {
-                h(this, args);
-            }
+            Committed?.Invoke(this, args);
         }
 
         /// <summary>
@@ -135,11 +131,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnRejected(RejectedEventArgs args)
         {
-            var h = Rejected;
-            if (h != null)
-            {
-                h(this, args);
-            }
+            Rejected?.Invoke(this, args);
         }
 
         /// <summary>

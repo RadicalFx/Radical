@@ -16,10 +16,7 @@ namespace Radical.Tests.Observers
             public event PropertyChangedEventHandler PropertyChanged;
             void OnPropertyChanged(string name)
             {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(name));
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             }
 
             private string _value = null;

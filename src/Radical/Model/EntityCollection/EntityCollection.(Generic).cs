@@ -133,11 +133,7 @@ namespace Radical.Model
             EnsureNotDisposed();
             if (!IsInitializing)
             {
-                EventHandler<CollectionChangedEventArgs<T>> handler = Events[collectionChangedEventKey] as EventHandler<CollectionChangedEventArgs<T>>;
-                if (handler != null)
-                {
-                    handler(this, e);
-                }
+                (Events[collectionChangedEventKey] as EventHandler<CollectionChangedEventArgs<T>>)?.Invoke(this, e);
             }
         }
 
