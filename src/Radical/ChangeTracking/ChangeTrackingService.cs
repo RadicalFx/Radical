@@ -851,7 +851,7 @@ namespace Radical.ChangeTracking
                             break;
 
                         case AddChangeBehavior.None:
-                            throw new ArgumentOutOfRangeException();
+                            throw new NotSupportedException("When pushing a new change the AddChangeBehavior value cannot be None.");
 
                         default:
                             throw new EnumValueOutOfRangeException();
