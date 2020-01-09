@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a change occurred to an object.
     /// </summary>
-    public interface IChange<T> : IChange
+    public interface IChange<out T> : IChange
     {
         /// <summary>
         /// Gets the cached value.

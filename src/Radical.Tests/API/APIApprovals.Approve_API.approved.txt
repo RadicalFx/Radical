@@ -582,7 +582,7 @@ namespace Radical.ComponentModel.ChangeTracking
         void UnregisterTransient(object entity);
         bool Validate(Radical.ComponentModel.ChangeTracking.IBookmark bookmark);
     }
-    public interface IChange<T> : Radical.ComponentModel.ChangeTracking.IChange
+    public interface IChange<out T> : Radical.ComponentModel.ChangeTracking.IChange
     {
         T CachedValue { get; }
     }
