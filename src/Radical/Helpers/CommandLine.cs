@@ -76,12 +76,11 @@ namespace Radical.Helpers
 
         string GetValue(string argumentValuePair)
         {
-            var fullValue = args.Where(s =>
+            var fullValue = args.Single(s =>
             {
                 var sc = StringComparison.CurrentCultureIgnoreCase;
                 return Normalize(s).Equals(argumentValuePair, sc);
-            })
-            .Single();
+            });
 
             var idx = fullValue.IndexOf(SEPARATOR);
 
