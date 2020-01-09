@@ -31,10 +31,10 @@ namespace Radical.Helpers
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLine"/> class.
         /// </summary>
-        /// <param name="args">The current command line args.</param>
+        /// <param name="args">The current command line arguments.</param>
         public CommandLine(IEnumerable<string> args)
         {
-            Ensure.That(args).Named("args").IsNotNull();
+            Ensure.That(args).Named(nameof(args)).IsNotNull();
 
             this.args = args;
         }
@@ -100,7 +100,7 @@ namespace Radical.Helpers
         /// <typeparam name="T">The expected type of the argument value</typeparam>
         /// <param name="arg">The argument name.</param>
         /// <param name="value">The current argument value.</param>
-        /// <returns><c>True</c> if the operation succeded, otherwise <c>false</c>.</returns>
+        /// <returns><c>True</c> if the operation succeeded, otherwise <c>false</c>.</returns>
         public bool TryGetValue<T>(string arg, out T value)
         {
             if (Contains(arg))
