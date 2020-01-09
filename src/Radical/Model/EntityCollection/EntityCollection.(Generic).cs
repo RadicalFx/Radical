@@ -728,7 +728,7 @@ namespace Radical.Model
 
             if (HasDefaultCtor())
             {
-                var returnValue = Activator.CreateInstance<T>(); // ( T )tConstructor.Invoke( null );
+                var returnValue = Activator.CreateInstance<T>();
                 return returnValue;
             }
 
