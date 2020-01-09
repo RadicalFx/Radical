@@ -6,10 +6,8 @@ using System.ComponentModel;
 namespace Radical.Model
 {
     public class EntityItemView<T> :
-        IEntityItemView,
         IEntityItemView<T>,
         IDataErrorInfo,
-        INotifyPropertyChanged,
         INotifyEditableObject
     {
         /// <summary>
