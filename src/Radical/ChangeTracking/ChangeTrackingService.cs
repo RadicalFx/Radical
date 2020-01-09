@@ -1425,7 +1425,7 @@ namespace Radical.ChangeTracking
             {
                 value = valueChange.CachedValue;
                 return true;
-            };
+            }
 
             value = default;
             return false;
