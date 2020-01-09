@@ -107,12 +107,7 @@ namespace Radical.Model
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             EnsureNotDisposed();
-
-            PropertyChangedEventHandler h = Events[propertyChangedEventKey] as PropertyChangedEventHandler;
-            if (h != null)
-            {
-                h(this, e);
-            }
+            (Events[propertyChangedEventKey] as PropertyChangedEventHandler)?.Invoke(this, e);
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -264,12 +259,17 @@ namespace Radical.Model
 
         class NotificationSuspension<T> : IDisposable
         {
-            public void Dispose()
+            readonly PropertyMetadata<T> property;
+            
+            public NotificationSuspension(PropertyMetadata<T> property)
             {
-                Property.EnableChangesNotifications();
+                this.property = property;
             }
 
-            public PropertyMetadata<T> Property { get; set; }
+            public void Dispose()
+            {
+                property.EnableChangesNotifications();
+            }
         }
 
         /// <summary>
@@ -283,10 +283,7 @@ namespace Radical.Model
             var md = GetPropertyMetadata(property);
             md.DisableChangesNotifications();
 
-            return new NotificationSuspension<T>()
-            {
-                Property = md
-            };
+            return new NotificationSuspension<T>(md);
         }
 
         /// <summary>

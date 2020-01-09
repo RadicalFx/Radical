@@ -843,11 +843,7 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnFilterChanged()
         {
-            EventHandler h = Events[filterChangedEventKey] as EventHandler;
-            if (h != null)
-            {
-                h(this, EventArgs.Empty);
-            }
+            (Events[filterChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
 
@@ -1167,11 +1163,7 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnSortChanged()
         {
-            EventHandler h = Events[sortChangedEventKey] as EventHandler;
-            if (h != null)
-            {
-                h(this, EventArgs.Empty);
-            }
+            (Events[sortChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
 
@@ -1580,11 +1572,7 @@ namespace Radical.Model
         {
             if (!IsInitializing)
             {
-                ListChangedEventHandler h = Events[listChangedEventKey] as ListChangedEventHandler;
-                if (h != null)
-                {
-                    h(this, e);
-                }
+                (Events[listChangedEventKey] as ListChangedEventHandler)?.Invoke(this, e);
 
                 if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.Reset)
                 {
@@ -2282,11 +2270,7 @@ namespace Radical.Model
         /// <param name="e">The <see cref="Radical.Model.AddingNewEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnAddingNew(AddingNewEventArgs<T> e)
         {
-            EventHandler<AddingNewEventArgs<T>> h = Events[addingNewEventKey] as EventHandler<AddingNewEventArgs<T>>;
-            if (h != null)
-            {
-                h(this, e);
-            }
+            (Events[addingNewEventKey] as EventHandler<AddingNewEventArgs<T>>)?.Invoke(this, e);
 
             if (!e.Cancel)
             {
@@ -2607,11 +2591,7 @@ namespace Radical.Model
 
                         if (_events != null)
                         {
-                            EventHandler h = Events[disposedEventKey] as EventHandler;
-                            if (h != null)
-                            {
-                                h(this, EventArgs.Empty);
-                            }
+                            (Events[disposedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
                         }
                     }
                 }
@@ -2774,12 +2754,7 @@ namespace Radical.Model
             Ensure.That(propertyName)
                 .IsNotNull()
                 .IsNotEmpty();
-
-            var h = Events[propertyChangedEventKey] as PropertyChangedEventHandler;
-            if (h != null)
-            {
-                h(this, new PropertyChangedEventArgs(propertyName));
-            }
+            (Events[propertyChangedEventKey] as PropertyChangedEventHandler)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 

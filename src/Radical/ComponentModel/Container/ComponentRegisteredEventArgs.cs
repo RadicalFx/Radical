@@ -13,7 +13,6 @@ namespace Radical.ComponentModel
         /// <param name="entry">The entry.</param>
         public ComponentRegisteredEventArgs(IContainerEntry entry)
         {
-            //Ensure.That( entry ).Named( "entry" ).IsNotNull();
             Entry = entry;
         }
 

@@ -72,10 +72,7 @@ namespace Radical.Tests.Model.Entity
             {
                 base.OnMementoChanged(newMemento, oldMemento);
 
-                if (MementoChanged != null)
-                {
-                    MementoChanged(this, new MementoChangedEventArgs(newMemento, oldMemento));
-                }
+                MementoChanged?.Invoke(this, new MementoChangedEventArgs(newMemento, oldMemento));
             }
         }
 

@@ -8,7 +8,7 @@ namespace Radical.ComponentModel.ChangeTracking
     /// <summary>
     /// Provides change tracking functionalities.
     /// </summary>
-    public interface IChangeTrackingService : IRevertibleChangeTracking, IDisposable, IComponent
+    public interface IChangeTrackingService : IRevertibleChangeTracking, IComponent
     {
         /// <summary>
         /// Whether this component is disposed or not.

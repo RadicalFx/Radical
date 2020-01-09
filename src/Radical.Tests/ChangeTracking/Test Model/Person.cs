@@ -34,10 +34,7 @@ namespace Radical.Tests.ChangeTracking
 
         protected virtual void OnDisposed()
         {
-            if (Disposed != null)
-            {
-                Disposed(this, EventArgs.Empty);
-            }
+            Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         public ISite Site

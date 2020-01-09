@@ -131,10 +131,7 @@ namespace Radical.Observers
             }
             else
             {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, args);
-                }
+                PropertyChanged?.Invoke(this, args);
             }
         }
 
@@ -166,10 +163,7 @@ namespace Radical.Observers
                 Action<T, string> callback;
                 if (propertiesToWatch.TryGetValue(e.PropertyName, out callback))
                 {
-                    if (callback != null)
-                    {
-                        callback(source, e.PropertyName);
-                    }
+                    callback?.Invoke(source, e.PropertyName);
                 }
 
                 if (propertiesToWatch.ContainsKey(e.PropertyName))

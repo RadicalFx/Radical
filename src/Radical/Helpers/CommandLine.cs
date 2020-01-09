@@ -31,10 +31,10 @@ namespace Radical.Helpers
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandLine"/> class.
         /// </summary>
-        /// <param name="args">The current command line args.</param>
+        /// <param name="args">The current command line arguments.</param>
         public CommandLine(IEnumerable<string> args)
         {
-            Ensure.That(args).Named("args").IsNotNull();
+            Ensure.That(args).Named(nameof(args)).IsNotNull();
 
             this.args = args;
         }
@@ -76,12 +76,11 @@ namespace Radical.Helpers
 
         string GetValue(string argumentValuePair)
         {
-            var fullValue = args.Where(s =>
-           {
-               var sc = StringComparison.CurrentCultureIgnoreCase;
-               return Normalize(s).Equals(argumentValuePair, sc);
-           })
-            .Single();
+            var fullValue = args.Single(s =>
+            {
+                var sc = StringComparison.CurrentCultureIgnoreCase;
+                return Normalize(s).Equals(argumentValuePair, sc);
+            });
 
             var idx = fullValue.IndexOf(SEPARATOR);
 
@@ -100,7 +99,7 @@ namespace Radical.Helpers
         /// <typeparam name="T">The expected type of the argument value</typeparam>
         /// <param name="arg">The argument name.</param>
         /// <param name="value">The current argument value.</param>
-        /// <returns><c>True</c> if the operation succeded, otherwise <c>false</c>.</returns>
+        /// <returns><c>True</c> if the operation succeeded, otherwise <c>false</c>.</returns>
         public bool TryGetValue<T>(string arg, out T value)
         {
             if (Contains(arg))
@@ -132,12 +131,12 @@ namespace Radical.Helpers
                     }
                     catch
                     {
-
+                        //NOP: if something goes badly during the conversion attempt nothing needs to be done.
                     }
                 }
             }
 
-            value = default(T);
+            value = default;
             return false;
         }
 
@@ -147,17 +146,17 @@ namespace Radical.Helpers
                 .GetProperties()
                 .Where(pi => pi.IsAttributeDefined<CommandLineArgumentAttribute>())
                 .Select(pi =>
-               {
-                   var attribute = pi.GetAttribute<CommandLineArgumentAttribute>();
+                {
+                    var attribute = pi.GetAttribute<CommandLineArgumentAttribute>();
 
-                   return new
-                   {
-                       Property = pi,
-                       Argument = attribute.ArgumentName,
-                       IsRequired = attribute.IsRequired,
-                       Aliases = attribute.Aliases
-                   };
-               });
+                    return new
+                    {
+                        Property = pi,
+                        Argument = attribute.ArgumentName,
+                        attribute.IsRequired,
+                        attribute.Aliases
+                    };
+                });
 
             var instance = new T();
 
@@ -235,9 +234,7 @@ namespace Radical.Helpers
                 builder.Append(' ');
             }
 
-            var args = builder.ToString().TrimEnd(' ');
-
-            return args;
+            return builder.ToString().TrimEnd(' ');
         }
     }
 }

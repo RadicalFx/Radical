@@ -6,10 +6,8 @@ using System.ComponentModel;
 namespace Radical.Model
 {
     public class EntityItemView<T> :
-        IEntityItemView,
         IEntityItemView<T>,
         IDataErrorInfo,
-        INotifyPropertyChanged,
         INotifyEditableObject
     {
         /// <summary>
@@ -46,7 +44,7 @@ namespace Radical.Model
         public void Delete()
         {
             int myIndex = View.IndexOf(this);
-            ((IList)View).RemoveAt(myIndex);
+            View.RemoveAt(myIndex);
         }
 
         private T _entityItem;
@@ -94,10 +92,7 @@ namespace Radical.Model
         /// <param name="args">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, args);
-            }
+            PropertyChanged?.Invoke(this, args);
         }
 
         /// <summary>
@@ -149,10 +144,7 @@ namespace Radical.Model
 
         protected virtual void OnEditBegun()
         {
-            if (EditBegun != null)
-            {
-                EditBegun(this, EventArgs.Empty);
-            }
+            EditBegun?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -162,10 +154,7 @@ namespace Radical.Model
         public event EventHandler EditCanceled;
         protected virtual void OnEditCanceled()
         {
-            if (EditCanceled != null)
-            {
-                EditCanceled(this, EventArgs.Empty);
-            }
+            EditCanceled?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -175,10 +164,7 @@ namespace Radical.Model
         public event EventHandler EditEnded;
         protected virtual void OnEditEnded()
         {
-            if (EditEnded != null)
-            {
-                EditEnded(this, EventArgs.Empty);
-            }
+            EditEnded?.Invoke(this, EventArgs.Empty);
         }
 
         private bool isEditing;
@@ -284,8 +270,6 @@ namespace Radical.Model
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
         {
-            //return TypeDescriptor.GetProperties( this.EntityItem );
-
             return _view.GetItemProperties(null);
         }
 
@@ -341,18 +325,17 @@ namespace Radical.Model
 
         public override int GetHashCode()
         {
-            return EntityItem.GetHashCode();// base.GetHashCode();
+            return EntityItem.GetHashCode();
         }
 
         public override bool Equals(object obj)
         {
-            var other = obj as IEntityItemView<T>;
-            if (other != null)
+            if (obj is IEntityItemView<T> other)
             {
                 return Equals(EntityItem, other.EntityItem);
             }
 
-            return ReferenceEquals(this, obj); // this.EntityItem.Equals( obj );
+            return ReferenceEquals(this, obj);
         }
     }
 }

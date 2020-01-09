@@ -1,12 +1,12 @@
-﻿namespace Radical.ChangeTracking.Specialized
-{
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Linq;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Linq;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Radical.ChangeTracking.Specialized
+{
     /// <summary>
     /// Identifies an AddRange operation on a collection.
     /// </summary>
@@ -45,14 +45,11 @@
         {
             Ensure.That(changedItem)
                 .Named("changedItem")
-                .If(o =>
-               {
-                   return !Descriptor.Items.Where(t => Equals(t, o)).Any();
-               })
+                .If(o =>!Descriptor.Items.Any(t => Equals(t, o)))
                 .Then((o, n) =>
-               {
-                   throw new ArgumentOutOfRangeException(n);
-               });
+                {
+                    throw new ArgumentOutOfRangeException(n);
+                });
 
             return ProposedActions.Create | ProposedActions.Update;
         }

@@ -73,9 +73,11 @@ namespace Radical
                             break;
 
                         case ResourceAssemblyLocationBehavior.ByAssemblyName:
-                        default:
                             assembly = Assembly.Load(AssemblyName);
                             break;
+
+                        default:
+                            throw new NotSupportedException($"ResourceAssemblyLocationBehavior value ('{AssemblyLocationBehavior}') not supported.");
                     }
 
                     _resourceManager = new ResourceManager(ResourceName, assembly);

@@ -9,10 +9,7 @@ namespace Radical.ChangeTracking
 
         void OnCompleted(AtomicChange change)
         {
-            if (completed != null)
-            {
-                completed(change);
-            }
+            completed?.Invoke(change);
 
             isCompleted = true;
         }

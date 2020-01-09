@@ -19,10 +19,7 @@ namespace Radical
         /// </summary>
         protected virtual void OnPropertyChanged()
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("Value"));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
         }
 
         /// <summary>

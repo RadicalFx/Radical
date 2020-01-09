@@ -183,19 +183,11 @@ namespace Radical.Helpers
         }
 
 
-        private bool _allowSymbols = true;
-
         /// <summary>
         /// Gets or sets a value indicating whether symbols are allowed.
         /// </summary>
         /// <value><c>true</c> if symbols are allowed; otherwise, <c>false</c>.</value>
-        public bool AllowSymbols
-        {
-            get { return _allowSymbols; }
-            set { _allowSymbols = value; }
-        }
-
-        private bool _allowRepeatCharacters = true;
+        public bool AllowSymbols{ get; set; }
 
         /// <summary>
         /// If true the resulting string can contains
@@ -204,11 +196,7 @@ namespace Radical.Helpers
         /// <value>
         ///     <c>true</c> if [allow repeat characters]; otherwise, <c>false</c>.
         /// </value>
-        public bool AllowRepeatCharacters
-        {
-            get { return _allowRepeatCharacters; }
-            set { _allowRepeatCharacters = value; }
-        }
+        public bool AllowRepeatCharacters { get; set; }
 
 
         /// <summary>
@@ -218,10 +206,6 @@ namespace Radical.Helpers
         /// <value>
         ///     <c>true</c> if [allow consecutive characters]; otherwise, <c>false</c>.
         /// </value>
-        public bool AllowConsecutiveCharacters
-        {
-            get;
-            set;
-        }
+        public bool AllowConsecutiveCharacters { get; set; }
     }
 }

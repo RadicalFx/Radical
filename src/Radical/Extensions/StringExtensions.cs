@@ -165,18 +165,6 @@ namespace Radical
         }
 
         /// <summary>
-        /// If the given string is null or empty returns the supplied default value.
-        /// </summary>
-        /// <param name="value">The value to test against.</param>
-        /// <param name="defaultValue">The default value.</param>
-        /// <returns>The supplied value or default if the supplied one is null or empty.</returns>
-        public static string IfNullOrEmptyReturn(this string value, string defaultValue)
-        {
-            var tmp = value.ValueOrEmpty().Trim();
-            return string.IsNullOrEmpty(tmp) ? defaultValue : value;
-        }
-
-        /// <summary>
         /// If the input string is null returns an empty string.
         /// </summary>
         /// <param name="value">The value to test.</param>
@@ -201,6 +189,18 @@ namespace Radical
         public static bool IsNullOrEmpty(this string value)
         {
             return string.IsNullOrEmpty(value);
+        }
+
+        /// <summary>
+        /// If the given string is null or empty returns the supplied default value.
+        /// </summary>
+        /// <param name="value">The value to test against.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>The supplied value or default if the supplied one is null or empty.</returns>
+        public static string IfNullOrEmptyReturn(this string value, string defaultValue)
+        {
+            var tmp = value.ValueOrEmpty().Trim();
+            return string.IsNullOrEmpty(tmp) ? defaultValue : value;
         }
 
         /// <summary>

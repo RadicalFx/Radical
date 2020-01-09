@@ -49,11 +49,7 @@ namespace Radical.Observers
                     );
                 }
 
-                var handler = Changed;
-                if (handler != null)
-                {
-                    handler(this, EventArgs.Empty);
-                }
+                Changed?.Invoke(this, EventArgs.Empty);
             }
         }
 

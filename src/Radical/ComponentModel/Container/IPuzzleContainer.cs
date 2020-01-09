@@ -75,6 +75,13 @@ namespace Radical.ComponentModel
         object Resolve(string key, Type serviceType);
 
         /// <summary>
+        /// Resolves the specified service type.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <returns>The resolved service instance.</returns>
+        TService Resolve<TService>();
+
+        /// <summary>
         /// Resolves all entries of the given type.
         /// </summary>
         /// <typeparam name="T">The type of entry to resolve.</typeparam>
@@ -87,13 +94,6 @@ namespace Radical.ComponentModel
         /// <param name="t">The type of entry to resolve.</param>
         /// <returns></returns>
         IEnumerable<object> ResolveAll(Type t);
-
-        /// <summary>
-        /// Resolves the specified service type.
-        /// </summary>
-        /// <typeparam name="TService">The type of the service.</typeparam>
-        /// <returns>The resolved service instance.</returns>
-        TService Resolve<TService>();
 
         /// <summary>
         /// Setups the container using the supplied setup descriptors.
