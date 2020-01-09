@@ -42,13 +42,13 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Creates the metadata for specified property.
+        /// Creates the meta-data for specified property.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="property">The property.</param>
         /// <returns>
-        /// An instance of the property metadata.
+        /// An instance of the property meta-data.
         /// </returns>
         public static PropertyMetadata<T> Create<T>(object propertyOwner, Expression<Func<T>> property)
         {
@@ -57,13 +57,13 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Creates the metadata for specified property.
+        /// Creates the meta-data for specified property.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>
-        /// An instance of the property metadata.
+        /// An instance of the property meta-data.
         /// </returns>
         public static PropertyMetadata<T> Create<T>(object propertyOwner, string propertyName)
         {
@@ -114,7 +114,7 @@ namespace Radical.Model
         public string PropertyName { get; private set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the property represented by this metadata should notify changes.
+        /// Gets or sets a value indicating whether the property represented by this meta-data should notify changes.
         /// </summary>
         /// <value>
         ///   <c>true</c> if the property should notify changes; otherwise, <c>false</c>.
@@ -124,7 +124,7 @@ namespace Radical.Model
         /// <summary>
         /// Disables changes notifications for this property.
         /// </summary>
-        /// <returns>This metadata instance.</returns>
+        /// <returns>This meta-data instance.</returns>
         public PropertyMetadata DisableChangesNotifications()
         {
             NotifyChanges = false;
@@ -134,7 +134,7 @@ namespace Radical.Model
         /// <summary>
         /// Enables changes notifications for this property.
         /// </summary>
-        /// <returns>This metadata instance.</returns>
+        /// <returns>This meta-data instance.</returns>
         public PropertyMetadata EnableChangesNotifications()
         {
             NotifyChanges = true;
@@ -176,15 +176,5 @@ namespace Radical.Model
         public abstract void SetDefaultValue(PropertyValue value);
 
         public abstract PropertyValue GetDefaultValue();
-
-        //public void AddCustomMetadata<T>( string key, T value ) 
-        //{
-
-        //}
-
-        //public T GetCustomMetadata<T>( string key )
-        //{
-
-        //}
     }
 }
