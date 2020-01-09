@@ -132,7 +132,7 @@ namespace Radical.Helpers
                     }
                     catch
                     {
-
+                        //NOP: if something goes badly during the conversion attempt nothing needs to be done.
                     }
                 }
             }
