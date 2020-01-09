@@ -36,7 +36,6 @@ namespace Radical.ChangeTracking
         public ProposedActions Action
         {
             get;
-            private set;
         }
 
         /// <summary>
@@ -46,7 +45,6 @@ namespace Radical.ChangeTracking
         public object Target
         {
             get;
-            private set;
         }
     }
 }
