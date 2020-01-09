@@ -1,12 +1,12 @@
-﻿namespace Radical.ChangeTracking.Specialized
-{
-    using Radical.ComponentModel.ChangeTracking;
-    using Radical.Linq;
-    using Radical.Validation;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using Radical.ComponentModel.ChangeTracking;
+using Radical.Linq;
+using Radical.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Radical.ChangeTracking.Specialized
+{
     /// <summary>
     /// Identifies an AddRange operation on a collection.
     /// </summary>
