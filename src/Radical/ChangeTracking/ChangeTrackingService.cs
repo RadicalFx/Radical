@@ -996,7 +996,7 @@ namespace Radical.ChangeTracking
                     break;
 
                 case RejectReason.None:
-                    throw new ArgumentOutOfRangeException();
+                    throw new NotSupportedException("When rejecting changes the RejectReason value cannot be None.");
 
                 default:
                     throw new EnumValueOutOfRangeException();
