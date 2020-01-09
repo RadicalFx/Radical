@@ -77,10 +77,10 @@ namespace Radical.Helpers
         string GetValue(string argumentValuePair)
         {
             var fullValue = args.Where(s =>
-           {
-               var sc = StringComparison.CurrentCultureIgnoreCase;
-               return Normalize(s).Equals(argumentValuePair, sc);
-           })
+            {
+                var sc = StringComparison.CurrentCultureIgnoreCase;
+                return Normalize(s).Equals(argumentValuePair, sc);
+            })
             .Single();
 
             var idx = fullValue.IndexOf(SEPARATOR);
@@ -147,17 +147,17 @@ namespace Radical.Helpers
                 .GetProperties()
                 .Where(pi => pi.IsAttributeDefined<CommandLineArgumentAttribute>())
                 .Select(pi =>
-               {
-                   var attribute = pi.GetAttribute<CommandLineArgumentAttribute>();
+                {
+                    var attribute = pi.GetAttribute<CommandLineArgumentAttribute>();
 
-                   return new
-                   {
-                       Property = pi,
-                       Argument = attribute.ArgumentName,
-                       attribute.IsRequired,
-                       attribute.Aliases
-                   };
-               });
+                    return new
+                    {
+                        Property = pi,
+                        Argument = attribute.ArgumentName,
+                        attribute.IsRequired,
+                        attribute.Aliases
+                    };
+                });
 
             var instance = new T();
 
