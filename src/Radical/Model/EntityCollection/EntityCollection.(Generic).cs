@@ -755,7 +755,7 @@ namespace Radical.Model
         /// Gets a value indicating whether this instance is capable of creating a new instance of the managed type T.
         /// </summary>
         /// <item>
-        ///     <collection>true</collection> if this.instace allo the creation of new items; otherwise, <collection>false</collection>.
+        ///     <collection>true</collection> if this instance allows the creation of new items; otherwise, <collection>false</collection>.
         /// </item>
         public virtual bool AllowNew
         {
