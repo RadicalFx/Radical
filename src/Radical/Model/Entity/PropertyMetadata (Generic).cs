@@ -9,10 +9,6 @@ namespace Radical.Model
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            if (disposing)
-            {
-
-            }
 
             DefaultValueInterceptor = null;
             propertyChangedHandler = null;
