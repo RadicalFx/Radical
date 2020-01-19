@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Radical.Model
 {
@@ -360,13 +361,10 @@ namespace Radical.Model
             SetPropertyValue(propertyName, data, pvc);
         }
 
-        protected void SetPropertyValue<T>(string propertyName, T data)
+        protected virtual void SetPropertyValue<T>([CallerMemberName]string propertyName = null, T data = default, PropertyValueChanged<T> pvc = default)
         {
-            SetPropertyValue(propertyName, data, null);
-        }
+            Ensure.That(propertyName).Named(nameof(propertyName)).IsNotNullNorEmpty();
 
-        protected virtual void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
-        {
             SetPropertyValueCore(propertyName, data, pvc);
         }
 
@@ -406,8 +404,10 @@ namespace Radical.Model
         /// <typeparam name="T">The property value type.</typeparam>
         /// <param name="propertyName">The name of the property.</param>
         /// <returns>The requested property value.</returns>
-        protected internal virtual T GetPropertyValue<T>(string propertyName)
+        protected internal virtual T GetPropertyValue<T>([CallerMemberName]string propertyName = null)
         {
+            Ensure.That(propertyName).Named(nameof(propertyName)).IsNotNullNorEmpty();
+
             if (valuesBag.TryGetValue(propertyName, out PropertyValue actual))
             {
                 return ((PropertyValue<T>)actual).Value;

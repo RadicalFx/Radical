@@ -1221,7 +1221,7 @@ namespace Radical.Model
         protected Radical.Model.PropertyMetadata<T> GetPropertyMetadata<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
         protected Radical.Model.PropertyMetadata<T> GetPropertyMetadata<T>(string propertyName) { }
         protected T GetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
-        protected virtual T GetPropertyValue<T>(string propertyName) { }
+        protected virtual T GetPropertyValue<T>([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null) { }
         protected T GetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, System.Func<T> initialValueSetter) { }
         protected virtual bool HasMetadata<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
         protected virtual void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e) { }
@@ -1233,9 +1233,8 @@ namespace Radical.Model
         protected Radical.Model.PropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value) { }
         protected virtual void SetPropertyMetadata<T>(Radical.Model.PropertyMetadata<T> metadata) { }
         protected void SetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T data) { }
-        protected void SetPropertyValue<T>(string propertyName, T data) { }
         protected void SetPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
-        protected virtual void SetPropertyValue<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
+        protected virtual void SetPropertyValue<T>([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null, T data = null, Radical.Model.PropertyValueChanged<T> pvc = null) { }
         protected void SetPropertyValueCore<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
         protected System.IDisposable SuspendNotificationsOf<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
     }
@@ -1519,7 +1518,7 @@ namespace Radical.Model
         protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, System.Func<T> lazyValue, bool trackChanges) { }
         protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(System.Linq.Expressions.Expression<System.Func<T>> property, T value, bool trackChanges) { }
         protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges) { }
-        protected override void SetPropertyValue<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
+        protected override void SetPropertyValue<T>([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null, T data = null, Radical.Model.PropertyValueChanged<T> pvc = null) { }
     }
     public class MementoEntityCollection<T> : Radical.Model.EntityCollection<T>, Radical.ComponentModel.ChangeTracking.IMemento
     {

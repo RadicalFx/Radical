@@ -1,10 +1,12 @@
 ﻿using Radical.ChangeTracking.Specialized;
 using Radical.ComponentModel.ChangeTracking;
 using Radical.Linq;
+using Radical.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Radical.Model
 {
@@ -203,18 +205,20 @@ namespace Radical.Model
             return metadata;
         }
 
-        protected override void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
+        protected override void SetPropertyValue<T>([CallerMemberName]string propertyName = null, T data = default, PropertyValueChanged<T> pvc = default)
         {
-            base.SetPropertyValue<T>(propertyName, data, e =>
-           {
-               if (GetPropertyMetadata<T>(propertyName) is MementoPropertyMetadata<T> md && md.TrackChanges)
-               {
-                   var callback = GetRejectCallback<T>(propertyName);
-                   CacheChange(propertyName, e.OldValue, callback);
-               }
+            Ensure.That(propertyName).Named(nameof(propertyName)).IsNotNullNorEmpty();
 
-               pvc?.Invoke(e);
-           });
+            base.SetPropertyValue<T>(propertyName, data, e =>
+            {
+                if (GetPropertyMetadata<T>(propertyName) is MementoPropertyMetadata<T> md && md.TrackChanges)
+                {
+                    var callback = GetRejectCallback<T>(propertyName);
+                    CacheChange(propertyName, e.OldValue, callback);
+                }
+
+                pvc?.Invoke(e);
+            });
         }
 
         readonly IDictionary<string, Delegate> rejectCallbacks = new Dictionary<string, Delegate>();
