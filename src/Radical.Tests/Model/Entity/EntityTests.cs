@@ -44,8 +44,14 @@ namespace Radical.Tests.Model.Entity
 
             public string MyProperty
             {
-                get { return GetPropertyValue(() => MyProperty); }
-                set { SetPropertyValue(() => MyProperty, value); }
+                get { return GetPropertyValue<string>(); }
+                set { SetPropertyValue<string>(value); }
+            }
+
+            public string MyOtherProperty
+            {
+                get { return GetPropertyValue<string>(); }
+                set { SetPropertyValue<string>(value); }
             }
         }
 
@@ -116,6 +122,21 @@ namespace Radical.Tests.Model.Entity
             {
                 target.PropertyChanged += (s, e) => { };
             }
+        }
+
+        [TestMethod]
+        public void entity_property_value_should_be_set_correctly()
+        {
+            var expectedMyProperty = "expectedMyProperty";
+            var expectedMyOtherProperty = "expectedMyOtherProperty";
+            var target = new SutEntity()
+            {
+                MyProperty = expectedMyProperty,
+                MyOtherProperty = expectedMyOtherProperty
+            };
+
+            Assert.AreEqual(expectedMyProperty, target.MyProperty);
+            Assert.AreEqual(expectedMyOtherProperty, target.MyOtherProperty);
         }
     }
 }
