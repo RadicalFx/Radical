@@ -659,7 +659,7 @@ namespace Radical.Model
         {
             EnsureNotDisposed();
             _storage = Storage.Reverse().ToList();
-            _defaultView = null;
+            _defaultView?.Refresh();
         }
 
         [NonSerialized]
