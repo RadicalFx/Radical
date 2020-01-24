@@ -8,6 +8,7 @@ using SharpTestsEx;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -557,6 +558,43 @@ namespace Radical.Tests.Model
             var second = target.DefaultView;
 
             first.Should().Be.Equals(second);
+        }
+
+        [TestMethod]
+        public void entityCollection_reverse_should_reverse_elements()
+        {
+            var target = new EntityCollection<GenericParameterHelper>
+            {
+                new GenericParameterHelper() { Data = 1 },
+                new GenericParameterHelper() { Data = 2 }
+            };
+
+            target.Reverse();
+
+            var firstElement = target[0];
+            var secondElement = target[1];
+            Assert.AreEqual(2, firstElement.Data);
+            Assert.AreEqual(1, secondElement.Data);
+        }
+
+        [TestMethod]
+        public void entityCollection_defaultView_should_respect_reverse()
+        {
+            var target = new EntityCollection<GenericParameterHelper>
+            {
+                new GenericParameterHelper() { Data = 1 },
+                new GenericParameterHelper() { Data = 2 }
+            };
+
+            //this creates the default view that is cached internally
+            var _ = target.DefaultView;
+
+            target.Reverse();
+
+            var firstElement = target.DefaultView.ElementAt(0);
+            var secondElement = target.DefaultView.ElementAt(1);
+            Assert.AreEqual(2, firstElement.EntityItem.Data);
+            Assert.AreEqual(1, secondElement.EntityItem.Data);
         }
     }
 }

@@ -658,7 +658,8 @@ namespace Radical.Model
         public void Reverse()
         {
             EnsureNotDisposed();
-            Storage.Reverse();
+            _storage = Storage.Reverse().ToList();
+            _defaultView?.Refresh();
         }
 
         [NonSerialized]
