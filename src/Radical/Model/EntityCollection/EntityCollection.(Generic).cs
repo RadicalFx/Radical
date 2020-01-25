@@ -659,7 +659,7 @@ namespace Radical.Model
         {
             EnsureNotDisposed();
             _storage = Storage.Reverse().ToList();
-            _defaultView?.Refresh();
+            OnCollectionChanged(new CollectionChangedEventArgs<T>(CollectionChangeType.SortChanged));
         }
 
         [NonSerialized]
