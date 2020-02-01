@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ApprovalTests" Version="4.4.0" NoWarn="NU1701" />
+    <PackageReference Include="ApprovalTests" Version="4.5.0" NoWarn="NU1701" />
     <PackageReference Include="ApprovalUtilities" Version="4.5.0" NoWarn="NU1701" />
     <PackageReference Include="FakeItEasy" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
