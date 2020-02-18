@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+    - master
+    - release-*
+    tags:
+    - '*.*.*'
+  pull_request:
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runs-on: [windows-latest]
+    name: ${{ matrix.runs-on }}
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+    - run: dotnet --info
+    - uses: actions/checkout@v2.0.0
+    - if: contains(matrix.runs-on, 'windows')
+      run: ./build.cmd
