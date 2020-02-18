@@ -128,82 +128,79 @@ namespace Radical.Tests.Windows.Messaging
         [TestCategory("MessageBroker")]
         public void messageBroker_POCO_broadcast_using_more_then_one_subscriber_should_call_on_different_thread()
         {
-            TestRunner.Execute(ApartmentState.MTA, () =>
+            var h1 = new ManualResetEvent(false);
+            var h2 = new ManualResetEvent(false);
+
+            var currentThreadId = Thread.CurrentThread.ManagedThreadId;
+            var s1ThreadId = Thread.CurrentThread.ManagedThreadId;
+            var s2ThreadId = Thread.CurrentThread.ManagedThreadId;
+
+            var dispatcher = new NullDispatcher();
+            var broker = new MessageBroker(dispatcher);
+
+            broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
             {
-                var h1 = new ManualResetEvent(false);
-                var h2 = new ManualResetEvent(false);
-
-                var currentThreadId = Thread.CurrentThread.ManagedThreadId;
-                var s1ThreadId = Thread.CurrentThread.ManagedThreadId;
-                var s2ThreadId = Thread.CurrentThread.ManagedThreadId;
-
-                var dispatcher = new NullDispatcher();
-                var broker = new MessageBroker(dispatcher);
-
-                broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
-                {
-                    s1ThreadId = Thread.CurrentThread.ManagedThreadId;
-                    h1.Set();
-                });
-
-                broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
-                {
-                    s2ThreadId = Thread.CurrentThread.ManagedThreadId;
-                    h2.Set();
-                });
-
-                broker.Broadcast(this, new PocoTestMessage());
-
-                WaitHandle.WaitAll(new[] { h1, h2 });
-
-                currentThreadId.Should().Not.Be.EqualTo(s1ThreadId);
-                currentThreadId.Should().Not.Be.EqualTo(s2ThreadId);
+                s1ThreadId = Thread.CurrentThread.ManagedThreadId;
+                h1.Set();
             });
+
+            broker.Subscribe<PocoTestMessage>(this, (s, msg) =>
+            {
+                s2ThreadId = Thread.CurrentThread.ManagedThreadId;
+                h2.Set();
+            });
+
+            broker.Broadcast(this, new PocoTestMessage());
+
+            WaitHandle.WaitAll(new[] { h1, h2 });
+
+            currentThreadId.Should().Not.Be.EqualTo(s1ThreadId);
+            currentThreadId.Should().Not.Be.EqualTo(s2ThreadId);
         }
 
-        class TestRunner
-        {
-            readonly Action test;
-            readonly ApartmentState state;
-            Exception ex;
+        //class TestRunner
+        //{
+        //    readonly Action test;
+        //    readonly ApartmentState state;
+        //    Exception ex;
 
-            private TestRunner(ApartmentState state, Action test)
-            {
-                this.state = state;
-                this.test = test;
-            }
+        //    private TestRunner(ApartmentState state, Action test)
+        //    {
+        //        this.state = state;
+        //        this.test = test;
+        //    }
 
-            public static void Execute(ApartmentState state, Action test)
-            {
-                var runner = new TestRunner(state, test);
-                runner.Execute();
-            }
+        //    public static void Execute(ApartmentState state, Action test)
+        //    {
+        //        var runner = new TestRunner(state, test);
+        //        runner.Execute();
+        //    }
 
-            private void Execute()
-            {
-                var worker = new Thread(() =>
-               {
-                   try
-                   {
-                       test();
-                   }
-                   catch (Exception e)
-                   {
-                       Console.WriteLine(e);
-                       ex = e;
-                   }
-               });
+        //    private void Execute()
+        //    {
+        //        var worker = new Thread(() =>
+        //       {
+        //           try
+        //           {
+        //               test();
+        //           }
+        //           catch (Exception e)
+        //           {
+        //               Console.WriteLine(e);
+        //               ex = e;
+        //           }
+        //       });
 
-                worker.SetApartmentState(state);
-                worker.Start();
-                worker.Join();
+        //        worker.SetApartmentState(state);
+        //        worker.Start();
+        //        worker.Join();
 
-                if (ex != null)
-                {
-                    throw ex;
-                }
-            }
-        }
+        //        if (ex != null)
+        //        {
+        //            throw ex;
+        //        }
+        //    }
+        //}
 
         [TestMethod]
         [TestCategory("MessageBroker")]
