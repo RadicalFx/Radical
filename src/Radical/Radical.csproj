@@ -38,6 +38,14 @@
       <Version>$(PackageVersion)</Version>
     </PropertyGroup>
   </Target>
+   
+  <Target Name="AppVeyorPullRequestsTarget" AfterTargets="MinVer" Condition="'$(GITHUB_PULL_REQUEST_NUMBER)' != ''">
+    <PropertyGroup>
+      <PackageVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)-$(MinVerPreRelease).PR.$(GITHUB_PULL_REQUEST_NUMBER).$(GITHUB_RUN_ID)</PackageVersion>
+      <PackageVersion Condition="'$(MinVerBuildMetadata)' != ''">$(PackageVersion)+$(MinVerBuildMetadata)</PackageVersion>
+      <Version>$(PackageVersion)</Version>
+    </PropertyGroup>
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
