@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ApprovalTests" Version="5.0.0" NoWarn="NU1701" />
+    <PackageReference Include="ApprovalTests" Version="5.0.4" NoWarn="NU1701" />
     <PackageReference Include="FakeItEasy" Version="6.0.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.1" />
     <PackageReference Include="PublicApiGenerator" Version="10.0.2" />
