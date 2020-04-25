@@ -15,10 +15,21 @@ jobs:
         runs-on: [macOS-latest, ubuntu-latest, windows-latest]
     name: ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
+    env:
+      GITHUB_PULL_REQUEST_NUMBER: ${{ github.event.number }}
+
     steps:
-    - run: dotnet --info
-    - uses: actions/checkout@v2.0.0
-    - if: contains(matrix.runs-on, 'windows')
-      run: ./build.cmd
-    - if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
-      run: ./build.sh
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Build and Test
+      - if: contains(matrix.runs-on, 'windows')
+        run: ./build.cmd
+      - if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
+        run: ./build.sh
+    
+      - name: Push to MyGet
+      - if: matrix.runs-on == 'ubuntu-latest'
+        run: dotnet nuget push src\Radical\Bin\Release\*.nupkg --skip-duplicate --source https://www.myget.org/F/radical-unstable/api/v2/package --api-key ${{ secrets.MyGet_API_Key }}
