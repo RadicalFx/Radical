@@ -7,6 +7,7 @@ on:
     tags:
     - '*.*.*'
   pull_request:
+
 jobs:
   build:
     strategy:
@@ -24,12 +25,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build and Test
-      - if: contains(matrix.runs-on, 'windows')
+      - name: Build and Test on ${{ matrix.runs-on }}
+        if: contains(matrix.runs-on, 'windows')
         run: ./build.cmd
-      - if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
+      
+      - name: Build and Test on ${{ matrix.runs-on }}
+        if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
         run: ./build.sh
     
-      - name: Push to MyGet
-      - if: matrix.runs-on == 'ubuntu-latest'
+      - name: Push to MyGet (on Windows)
+        if: contains(matrix.runs-on, 'windows')
         run: dotnet nuget push src\Radical\Bin\Release\*.nupkg --skip-duplicate --source https://www.myget.org/F/radical-unstable/api/v2/package --api-key ${{ secrets.MyGet_API_Key }}
