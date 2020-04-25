@@ -25,14 +25,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build and Test on ${{ matrix.runs-on }}
+      - name: Build and Test (Windows only)
         if: contains(matrix.runs-on, 'windows')
         run: ./build.cmd
       
-      - name: Build and Test on ${{ matrix.runs-on }}
+      - name: Build and Test (MacOS or Ubuntu)
         if: contains(matrix.runs-on, 'macOS') || contains(matrix.runs-on, 'ubuntu')
         run: ./build.sh
     
-      - name: Push to MyGet (on Windows)
+      - name: Push to MyGet (Windows only)
         if: contains(matrix.runs-on, 'windows')
         run: dotnet nuget push src\Radical\Bin\Release\*.nupkg --skip-duplicate --source https://www.myget.org/F/radical-unstable/api/v2/package --api-key ${{ secrets.MyGet_API_Key }}
