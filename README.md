@@ -1,4 +1,4 @@
-# Radical.Windows
+# Radical
 
 ![Radical logo](assets/icon.png)
 
