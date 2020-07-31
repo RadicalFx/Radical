@@ -76,6 +76,7 @@ namespace Radical
         protected virtual string OnGetCaption(string caption) { }
         protected virtual string OnGetDescription(string description) { }
     }
+    [System.Serializable]
     public class EnumValueOutOfRangeException : System.ArgumentException
     {
         public EnumValueOutOfRangeException() { }
@@ -105,6 +106,7 @@ namespace Radical
         protected override string OnGetCaption(string caption) { }
         protected override string OnGetDescription(string description) { }
     }
+    [System.Serializable]
     public class MissingContractAttributeException : Radical.RadicalException
     {
         public MissingContractAttributeException(System.Type targetType) { }
@@ -159,6 +161,7 @@ namespace Radical
         protected virtual void OnPropertyChanged() { }
         public static T op_Implicit(Radical.Observable<T> val) { }
     }
+    [System.Serializable]
     public class RadicalException : System.Exception
     {
         public RadicalException() { }
@@ -190,6 +193,7 @@ namespace Radical
         public static string ValueOrEmpty(this string value) { }
         public static string ValueOrEmpty(this string value, System.Func<string, string> ifValue) { }
     }
+    [System.Serializable]
     public class SuspendedChangeTrackingServiceException : Radical.RadicalException
     {
         public SuspendedChangeTrackingServiceException() { }
@@ -1208,6 +1212,7 @@ namespace Radical.Model
         public bool AutoCommit { get; set; }
         public T NewItem { get; set; }
     }
+    [System.Serializable]
     public abstract class Entity : System.ComponentModel.INotifyPropertyChanged, System.IDisposable
     {
         protected Entity() { }
@@ -1239,6 +1244,7 @@ namespace Radical.Model
         protected void SetPropertyValueCore<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
         protected System.IDisposable SuspendNotificationsOf<T>(System.Linq.Expressions.Expression<System.Func<T>> property) { }
     }
+    [System.Serializable]
     public class EntityCollection<T> : Radical.ComponentModel.IEntityCollection<T>, System.Collections.Generic.ICollection<T>, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IList<T>, System.Collections.ICollection, System.Collections.IEnumerable, System.Collections.IList, System.ComponentModel.IComponent, System.ComponentModel.ISite, System.ComponentModel.ISupportInitialize, System.IDisposable, System.IServiceProvider, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable
     {
         protected static readonly string SerializationKey;
@@ -1496,6 +1502,7 @@ namespace Radical.Model
         public int Index { get; }
         public T NewValue { get; }
     }
+    [System.Serializable]
     public abstract class MementoEntity : Radical.Model.Entity, Radical.ComponentModel.ChangeTracking.IMemento
     {
         protected MementoEntity() { }
@@ -1521,6 +1528,7 @@ namespace Radical.Model
         protected Radical.Model.MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges) { }
         protected override void SetPropertyValue<T>(string propertyName, T data, Radical.Model.PropertyValueChanged<T> pvc) { }
     }
+    [System.Serializable]
     public class MementoEntityCollection<T> : Radical.Model.EntityCollection<T>, Radical.ComponentModel.ChangeTracking.IMemento
     {
         public MementoEntityCollection() { }
