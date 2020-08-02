@@ -128,6 +128,12 @@ namespace Radical.Tests.Windows.Messaging
         [TestCategory("MessageBroker")]
         public void messageBroker_POCO_broadcast_using_more_then_one_subscriber_should_call_on_different_thread()
         {
+            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+            {
+                Assert.Inconclusive("Test that depends on setting the ApartmentState to MTA can only be run on Windows");
+                return;
+            }
+
             TestRunner.Execute(ApartmentState.MTA, () =>
             {
                 var h1 = new ManualResetEvent(false);
