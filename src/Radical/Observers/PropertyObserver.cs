@@ -1,5 +1,4 @@
 ﻿using Radical.ComponentModel;
-using Radical.Conversions;
 using Radical.Linq;
 using Radical.Validation;
 using System;
@@ -290,8 +289,7 @@ namespace Radical.Observers
             Ensure.That(property).Named("property").IsNotNull();
 
             var om = observablePropertiesToWatch
-                .Where(am => am.As<PropertyChangedMonitor<Observable<TValue>>>().Source == property)
-                .SingleOrDefault();
+                .SingleOrDefault(am => ((PropertyChangedMonitor<Observable<TValue>>)am).Source == property);
 
             if (om != null)
             {

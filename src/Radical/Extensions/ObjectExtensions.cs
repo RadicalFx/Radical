@@ -1,5 +1,4 @@
-﻿using Radical.Conversions;
-using System;
+﻿using System;
 
 namespace Radical
 {
@@ -23,18 +22,14 @@ namespace Radical
             where TSource : class
             where TDestination : class
         {
-            obj.As<TDestination>
-            (
-                d =>
-                {
-                    interceptor(d);
-                },
-
-                () =>
-                {
-                    throw new InvalidCastException();
-                }
-            );
+            if (obj is TDestination destination)
+            {
+                interceptor(destination);
+            }
+            else
+            {
+                throw new InvalidCastException();
+            }
 
             return obj;
         }

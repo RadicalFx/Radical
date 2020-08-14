@@ -14,6 +14,7 @@ namespace Radical.Conversions
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="obj">The source object.</param>
         /// <returns>The casted object.</returns>
+        [Obsolete("CastTo<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult CastTo<TResult>(this object obj)
         {
             return (TResult)obj;
@@ -25,6 +26,7 @@ namespace Radical.Conversions
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="obj">The source object.</param>
         /// <returns>The casted object or null.</returns>
+        [Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj)
             where TResult : class
         {
@@ -38,6 +40,7 @@ namespace Radical.Conversions
         /// <param name="obj">The source object.</param>
         /// <param name="invalidCastAction">The invalid cast action.</param>
         /// <returns>The casted object or null.</returns>
+        [Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj, Action invalidCastAction)
             where TResult : class
         {
@@ -51,6 +54,7 @@ namespace Radical.Conversions
         /// <param name="obj">The source object.</param>
         /// <param name="validCastAction">The valid cast action.</param>
         /// <returns>The casted object or null.</returns>
+        [Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj, Action<TResult> validCastAction)
             where TResult : class
         {
@@ -65,6 +69,7 @@ namespace Radical.Conversions
         /// <param name="validCastAction">The valid cast action.</param>
         /// <param name="invalidCastAction">The invalid cast action.</param>
         /// <returns>The casted object or null.</returns>
+        [Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj, Action<TResult> validCastAction, Action invalidCastAction)
             where TResult : class
         {
