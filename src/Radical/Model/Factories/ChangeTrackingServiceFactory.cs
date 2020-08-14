@@ -5,6 +5,7 @@ using System;
 
 namespace Radical.Model.Factories
 {
+    [Obsolete("ChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
     public class ChangeTrackingServiceFactory : IChangeTrackingServiceFactory
     {
         readonly IServiceProvider container;
