@@ -1,8 +1,11 @@
-﻿namespace Radical.ComponentModel
+﻿using System;
+
+namespace Radical.ComponentModel
 {
     /// <summary>
     /// Defines a facility for the puzzle container.
     /// </summary>
+    [Obsolete("IPuzzleContainerFacility has been obsoleted and will be removed in v3.0.0")]
     public interface IPuzzleContainerFacility
     {
         /// <summary>
