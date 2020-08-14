@@ -7,6 +7,7 @@ namespace Radical.Helpers
     /// <summary>
     /// Helper class to manage passwords.
     /// </summary>
+    [Obsolete("Password Helper has been obsoleted and will be removed in v3.0.0")]
     public static class Password
     {
         /// <summary>
