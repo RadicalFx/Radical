@@ -7,7 +7,7 @@ namespace Radical.ComponentModel.Factories
     /// Provides a way to programmatically create
     /// <see cref="IChangeTrackingService"/> instances.
     /// </summary>
-    [Obsolete("ChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
+    [Obsolete("IChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
     public interface IChangeTrackingServiceFactory
     {
         /// <summary>
