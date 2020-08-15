@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Radical.Helpers
 {
+    [Obsolete("CommandLine Helper has been obsoleted and will be removed in v3.0.0")]
     public class CommandLine
     {
         static CommandLine _current;

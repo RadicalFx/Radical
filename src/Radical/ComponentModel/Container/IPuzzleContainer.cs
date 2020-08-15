@@ -6,6 +6,7 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Defines the contract of the Puzzle Inversion of Control container.
     /// </summary>
+    [Obsolete("IPuzzleContainer has been obsoleted and will be removed in v3.0.0")]
     public interface IPuzzleContainer : IDisposable
     {
         /// <summary>

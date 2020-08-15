@@ -1,4 +1,5 @@
-﻿using Radical.ComponentModel.ChangeTracking;
+﻿using System;
+using Radical.ComponentModel.ChangeTracking;
 
 namespace Radical.ComponentModel.Factories
 {
@@ -6,6 +7,7 @@ namespace Radical.ComponentModel.Factories
     /// Provides a way to programmatically create
     /// <see cref="IChangeTrackingService"/> instances.
     /// </summary>
+    [Obsolete("IChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
     public interface IChangeTrackingServiceFactory
     {
         /// <summary>

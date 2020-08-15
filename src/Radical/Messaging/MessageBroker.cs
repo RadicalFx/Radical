@@ -1,6 +1,5 @@
 ﻿using Radical.ComponentModel;
 using Radical.ComponentModel.Messaging;
-using Radical.Conversions;
 using Radical.Diagnostics;
 using Radical.Linq;
 using Radical.Reflection;
@@ -466,7 +465,10 @@ namespace Radical.Messaging
             Ensure.That(sender).Named(() => sender).IsNotNull();
             Ensure.That(message).Named(() => message).IsNotNull();
 
-            message.As<IRequireToBeValid>(m => m.Validate());
+            if (message is IRequireToBeValid requireToBeValid)
+            {
+                requireToBeValid.Validate();
+            }
 
             var messageType = message.GetType();
             var subscriptions = GetSubscriptionsFor(messageType, sender);
@@ -495,7 +497,10 @@ namespace Radical.Messaging
             Ensure.That(message).Named(() => message).IsNotNull();
             Ensure.That(sender).Named(() => sender).IsNotNull();
 
-            message.As<IRequireToBeValid>(m => m.Validate());
+            if (message is IRequireToBeValid requireToBeValid)
+            {
+                requireToBeValid.Validate();
+            }
 
             var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
 
@@ -524,7 +529,10 @@ namespace Radical.Messaging
             Ensure.That(message).Named(() => message).IsNotNull();
             Ensure.That(sender).Named(() => sender).IsNotNull();
 
-            message.As<IRequireToBeValid>(m => m.Validate());
+            if (message is IRequireToBeValid requireToBeValid)
+            {
+                requireToBeValid.Validate();
+            }
 
             var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
 

@@ -842,7 +842,6 @@ namespace Radical.ComponentModel
         event System.EventHandler EditCanceled;
         event System.EventHandler EditEnded;
     }
-    [System.Obsolete("IPuzzleContainer has been obsoleted and will be removed in v3.0.0")]
     public interface IPuzzleContainer : System.IDisposable
     {
         event System.EventHandler<Radical.ComponentModel.ComponentRegisteredEventArgs> ComponentRegistered;
@@ -881,13 +880,11 @@ namespace Radical.ComponentModel
             where TComponent : T;
         Radical.ComponentModel.IPuzzleContainerEntry<T> WithLifestyle(Radical.ComponentModel.Lifestyle lifestyle);
     }
-    [System.Obsolete("IPuzzleContainerFacility has been obsoleted and will be removed in v3.0.0")]
     public interface IPuzzleContainerFacility
     {
         void Initialize(Radical.ComponentModel.IPuzzleContainer container);
         void Teardown(Radical.ComponentModel.IPuzzleContainer container);
     }
-    [System.Obsolete("IPuzzleSetupDescriptor has been obsoleted and will be removed in v3.0.0")]
     public interface IPuzzleSetupDescriptor
     {
         void Setup(Radical.ComponentModel.IPuzzleContainer container, System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider);
@@ -900,12 +897,10 @@ namespace Radical.ComponentModel
 }
 namespace Radical.ComponentModel.Factories
 {
-    [System.Obsolete("IChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
     public interface IChangeTrackingServiceFactory
     {
         Radical.ComponentModel.ChangeTracking.IChangeTrackingService Create();
     }
-    [System.Obsolete("IEntityFactory has been obsoleted and will be removed in v3.0.0")]
     public interface IEntityFactory
     {
         object Create(System.Type type, params object[] constructorArguments);
@@ -975,19 +970,14 @@ namespace Radical.Conversions
 {
     public static class CastExtensions
     {
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj)
             where TResult :  class { }
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj, System.Action invalidCastAction)
             where TResult :  class { }
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj, System.Action<TResult> validCastAction)
             where TResult :  class { }
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult As<TResult>(this object obj, System.Action<TResult> validCastAction, System.Action invalidCastAction)
             where TResult :  class { }
-        [System.Obsolete("CastTo<> has been obsoleted and will be removed in v3.0.0")]
         public static TResult CastTo<TResult>(this object obj) { }
     }
     public static class ConvertExtensions
@@ -1031,7 +1021,6 @@ namespace Radical.Diagnostics
 }
 namespace Radical.Helpers
 {
-    [System.Obsolete("CommandLine Helper has been obsoleted and will be removed in v3.0.0")]
     public class CommandLine
     {
         public CommandLine(System.Collections.Generic.IEnumerable<string> args) { }
@@ -1079,7 +1068,6 @@ namespace Radical.Helpers
             public static readonly string Visa;
         }
     }
-    [System.Obsolete("Password Helper has been obsoleted and will be removed in v3.0.0")]
     public static class Password
     {
         public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt) { }
@@ -1676,7 +1664,6 @@ namespace Radical.Model
 }
 namespace Radical.Model.Factories
 {
-    [System.Obsolete("ChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
     public class ChangeTrackingServiceFactory : Radical.ComponentModel.Factories.IChangeTrackingServiceFactory
     {
         public ChangeTrackingServiceFactory(System.IServiceProvider container) { }
