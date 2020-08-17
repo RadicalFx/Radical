@@ -966,6 +966,7 @@ namespace Radical.ComponentModel.Messaging
 }
 namespace Radical.ComponentModel.Validation
 {
+    [System.Obsolete("IRequireValidationCallback has been obsoleted and will be removed in v3.0.0")]
     public interface IRequireValidationCallback<T>
     {
         void OnValidate(Radical.Validation.ValidationContext<T> context);

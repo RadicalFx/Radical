@@ -7,6 +7,7 @@ namespace Radical.ComponentModel.Validation
     /// validation logic into the validation process.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
+    [System.Obsolete("IRequireValidationCallback has been obsoleted and will be removed in v3.0.0")]
     public interface IRequireValidationCallback<T>
     {
         /// <summary>
