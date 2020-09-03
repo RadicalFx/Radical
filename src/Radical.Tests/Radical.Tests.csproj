@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.4.1" NoWarn="NU1701" />
-    <PackageReference Include="FakeItEasy" Version="6.2.0" />
+    <PackageReference Include="FakeItEasy" Version="6.2.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
