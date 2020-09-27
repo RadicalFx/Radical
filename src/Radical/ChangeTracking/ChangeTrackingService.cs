@@ -480,7 +480,7 @@ namespace Radical.ChangeTracking
             var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
             if (!isTransient)
             {
-                throw new ArgumentOutOfRangeException("entity", "Cannot unregister the given object, object is not in IsTransient state.");
+                throw new ArgumentOutOfRangeException(nameof(entity), "Cannot unregister the given object, object is not in IsTransient state.");
             }
 
             transientEntities.Remove(entity);
