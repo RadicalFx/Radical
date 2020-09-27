@@ -145,10 +145,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnTrackingServiceStateChanged()
         {
-            if (Events != null)
-            {
-                (Events[trackingServiceStateChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-            }
+            (Events?[trackingServiceStateChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
         private static readonly object rejectingChangesEventKey = new object();
@@ -167,10 +164,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnRejectingChanges(CancelEventArgs e)
         {
-            if (Events != null)
-            {
-                (Events[rejectingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
-            }
+            (Events?[rejectingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
         }
 
         private static readonly object changesRejectedEventKey = new object();
