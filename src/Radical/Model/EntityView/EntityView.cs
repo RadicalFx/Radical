@@ -17,7 +17,7 @@ namespace Radical.Model
     /// A full custom implementation of IBindingListView
     /// </summary>
     /// <typeparam name="T">The underlying object type</typeparam>
-    public class EntityView<T> : 
+    public class EntityView<T> :
         IEntityView<T>,
         IRaiseItemChangedEvents,
         ICancelAddNew,
@@ -41,11 +41,7 @@ namespace Radical.Model
         /// <value>
         ///     <c>true</c> if this instance is detached; otherwise, <c>false</c>.
         /// </value>
-        public bool IsDetached
-        {
-            get;
-            private set;
-        }
+        public bool IsDetached { get; }
 
         /// <summary>
         /// Returns a item indicating this instance has an array
@@ -54,21 +50,13 @@ namespace Radical.Model
         /// <item>
         ///     <collection>true</collection> if this instance is array based; otherwise, <collection>false</collection>.
         /// </item>
-        public bool IsArrayBased
-        {
-            get;
-            private set;
-        }
+        public bool IsArrayBased { get; }
 
         /// <summary>
         /// Gets the underlying DataSource as IList
         /// </summary>
         /// <item>The DataSource</item>
-        public IList DataSource
-        {
-            get;
-            private set;
-        }
+        public IList DataSource { get; }
 
         readonly EventHandler onEntityItemViewEditBegunHandler = null;
         readonly EventHandler onEntityItemViewEditCanceledHandler = null;
