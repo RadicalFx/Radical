@@ -206,10 +206,7 @@ namespace Radical.ChangeTracking
         /// <param name="e">The <c>CancelEventArgs</c> that can be used to cancel the process of accepting changes.</param>
         protected virtual void OnAcceptingChanges(CancelEventArgs e)
         {
-            if (Events != null)
-            {
-                (Events[acceptingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
-            }
+            (Events?[acceptingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
         }
 
         private static readonly object changesAcceptedEventKey = new object();
@@ -228,10 +225,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnChangesAccepted()
         {
-            if (Events != null)
-            {
-                (Events[changesAcceptedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-            }
+            (Events?[changesAcceptedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
         EventHandler<CommittedEventArgs> onChangeCommitted;
