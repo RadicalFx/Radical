@@ -57,7 +57,7 @@ namespace Radical.ChangeTracking.Specialized
         /// <value>
         /// The name of the property.
         /// </value>
-        public string PropertyName { get; private set; }
+        public string PropertyName { get; }
 
         /// <summary>
         /// Gets the advised action for this IChange.
