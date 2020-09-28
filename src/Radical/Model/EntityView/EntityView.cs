@@ -2584,23 +2584,13 @@ namespace Radical.Model
                      */
                     lock (this)
                     {
-                        if (site != null && site.Container != null)
-                        {
-                            site.Container.Remove(this);
-                        }
-
-                        if (_events != null)
-                        {
-                            (Events[disposedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-                        }
+                        site?.Container?.Remove(this);
+                        (_events?[disposedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
                     }
                 }
 
-                if (_events != null)
-                {
-                    Events.Dispose();
-                    _events = null;
-                }
+                _events?.Dispose();
+                _events = null;
 
                 //Set isDisposed flag
                 isDisposed = true;
