@@ -32,15 +32,7 @@ namespace Radical.Model
         /// <value>The indexer.</value>
         protected Indexer<T> Indexer
         {
-            get
-            {
-                if (_indexer == null)
-                {
-                    _indexer = new Indexer<T>(this);
-                }
-
-                return _indexer;
-            }
+            get { return _indexer ?? (_indexer = new Indexer<T>(this)); }
         }
 
         /// <summary>
