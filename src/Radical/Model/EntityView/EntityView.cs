@@ -2564,6 +2564,7 @@ namespace Radical.Model
         }
 
         private bool isDisposed;
+        object syncRoot = new object();
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -2582,7 +2583,7 @@ namespace Radical.Model
                      * eventuali reference perchè sicuramente Finalize
                      * non è ancora stato chiamato su questi oggetti
                      */
-                    lock (this)
+                    lock (syncRoot)
                     {
                         site?.Container?.Remove(this);
                         (_events?[disposedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
