@@ -2652,15 +2652,7 @@ namespace Radical.Model
         /// <value>The events.</value>
         protected EventHandlerList Events
         {
-            get
-            {
-                if (_events == null)
-                {
-                    _events = new EventHandlerList();
-                }
-
-                return _events;
-            }
+            get{ return _events ?? (_events = new EventHandlerList()); }
         }
 
         /// <summary>
