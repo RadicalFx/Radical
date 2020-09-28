@@ -58,10 +58,10 @@ namespace Radical.Model
         /// <item>The DataSource</item>
         public IList DataSource { get; }
 
-        readonly EventHandler onEntityItemViewEditBegunHandler = null;
-        readonly EventHandler onEntityItemViewEditCanceledHandler = null;
-        readonly EventHandler onEntityItemViewEditEndedHandler = null;
-        readonly PropertyChangedEventHandler onEntityItemViewPropertyChangedHandler = null;
+        readonly EventHandler onEntityItemViewEditBegunHandler;
+        readonly EventHandler onEntityItemViewEditCanceledHandler;
+        readonly EventHandler onEntityItemViewEditEndedHandler;
+        readonly PropertyChangedEventHandler onEntityItemViewPropertyChangedHandler;
 
 
         /// <summary>
