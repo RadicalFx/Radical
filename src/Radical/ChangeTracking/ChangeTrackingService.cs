@@ -191,6 +191,9 @@ namespace Radical.ChangeTracking
 
         private static readonly object acceptingChangesEventKey = new object();
 
+        /// <summary>
+        /// The AcceptingChanges event, raised to signal that changes are going to be accepted
+        /// </summary>
         public event EventHandler<CancelEventArgs> AcceptingChanges
         {
             add { Events.AddHandler(acceptingChangesEventKey, value); }
