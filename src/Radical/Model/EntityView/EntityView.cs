@@ -17,17 +17,11 @@ namespace Radical.Model
     /// A full custom implementation of IBindingListView
     /// </summary>
     /// <typeparam name="T">The underlying object type</typeparam>
-    public class EntityView<T> :
-        IBindingList,
-        IBindingListView,
-        IEntityView,
+    public class EntityView<T> : 
         IEntityView<T>,
-        IList,
         IRaiseItemChangedEvents,
         ICancelAddNew,
-        ITypedList,
         IComponent,
-        IDisposable,
         IServiceProvider
     {
         private Indexer<T> _indexer;
