@@ -45,7 +45,7 @@ namespace Radical.ChangeTracking.Specialized
         /// <param name="restoreCallback">The restore callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        public PropertyValueChange(object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T> commitCallback, string description)
+        public PropertyValueChange(object owner, string propertyName, T value, RejectCallback<T> restoreCallback, CommitCallback<T>? commitCallback, string description)
             : base(owner, value, restoreCallback, commitCallback, description)
         {
             PropertyName = propertyName;
