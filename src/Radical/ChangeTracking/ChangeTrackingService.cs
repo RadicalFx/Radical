@@ -197,6 +197,10 @@ namespace Radical.ChangeTracking
             remove { Events.RemoveHandler(acceptingChangesEventKey, value); }
         }
 
+        /// <summary>
+        /// Invoked when changes are accepted.
+        /// </summary>
+        /// <param name="e">The <c>CancelEventArgs</c> that can be used to cancel the process of accepting changes.</param>
         protected virtual void OnAcceptingChanges(CancelEventArgs e)
         {
             if (Events != null)
