@@ -134,8 +134,7 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnInit()
         {
-            IEntityCollection<T> dataSource = DataSource as IEntityCollection<T>;
-            if (dataSource != null)
+            if (DataSource is IEntityCollection<T> dataSource)
             {
                 dataSource.CollectionChanged += OnDataSourceCollectionChanged;
             }
