@@ -21,7 +21,7 @@ namespace Radical.ChangeTracking
         /// The callback to invoke in order to
         /// commit the cached value.
         /// </summary>
-        protected CommitCallback<T> CommitCallback { get; }
+        protected CommitCallback<T>? CommitCallback { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Change&lt;T&gt;"/> class.
@@ -31,7 +31,7 @@ namespace Radical.ChangeTracking
         /// <param name="rejectCallback">The reject callback.</param>
         /// <param name="commitCallback">The commit callback.</param>
         /// <param name="description">The description.</param>
-        protected Change(object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, string description)
+        protected Change(object owner, T valueToCache, RejectCallback<T> rejectCallback, CommitCallback<T>? commitCallback, string description)
         {
             Ensure.That(owner).Named("owner").IsNotNull();
             Ensure.That(rejectCallback).Named("rejectCallback").IsNotNull();
