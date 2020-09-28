@@ -2702,8 +2702,7 @@ namespace Radical.Model
         /// <param name="property">The name of the property.</param>
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
         {
-            var h = Events[propertyChangedEventKey] as PropertyChangedEventHandler;
-            if (h != null)
+            if (Events[propertyChangedEventKey] is PropertyChangedEventHandler)
             {
                 OnPropertyChanged(property.GetMemberName());
             }
