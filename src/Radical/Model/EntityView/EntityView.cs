@@ -106,7 +106,6 @@ namespace Radical.Model
         public EntityView(IEntityCollection<T> list)
             : this((IList)list)
         {
-
         }
 
         /// <summary>
@@ -118,7 +117,6 @@ namespace Radical.Model
         public EntityView(T[] list)
             : this((IList)list)
         {
-
         }
 
         /// <summary>
@@ -130,7 +128,6 @@ namespace Radical.Model
         public EntityView(IList<T> list)
             : this((IList)list)
         {
-
         }
 
         /// <summary>
@@ -239,6 +236,7 @@ namespace Radical.Model
                         Debug.Fail("...CollectionChangeType.ItemChanged and newIndex = -1...");
                         OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, oldIndex));
                     }
+
                     break;
 
                 case CollectionChangeType.ItemRemoved:
@@ -294,6 +292,7 @@ namespace Radical.Model
                     {
                         Indexer.Rebuild();
                     }
+
                     OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
                     break;
             }
@@ -309,7 +308,6 @@ namespace Radical.Model
         /// <param name="changeType">Type of the change.</param>
         protected virtual void OnCollectionChanged(RebuildIndexesEventArgs e, CollectionChangeType changeType)
         {
-
         }
 
         /// <summary>
@@ -317,7 +315,6 @@ namespace Radical.Model
         /// </summary>
         protected virtual void OnLoad()
         {
-
         }
 
 
@@ -429,7 +426,6 @@ namespace Radical.Model
         /// <param name="item">The item. entered in edit mode</param>
         protected virtual void OnEntityItemViewEditBegun(IEntityItemView<T> item)
         {
-
         }
 
         void OnEntityItemViewEditBegun(object sender, EventArgs e)
@@ -447,7 +443,6 @@ namespace Radical.Model
         /// <param name="e">A RebuildIndexesEventArgs wich allow derived classes to change the rebuild indexes behavior</param>
         protected virtual void OnEntityItemViewEditEnded(RebuildIndexesEventArgs e)
         {
-
         }
 
         void OnEntityItemViewEditEnded(object sender, EventArgs e)
@@ -525,8 +520,6 @@ namespace Radical.Model
                 OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, preFilterIndex));
                 //this.OnCollectionChanged( new NotifyCollectionChangedEventArgs( NotifyCollectionChangedAction.Remove, item, preFilterIndex ) );
             }
-
-
         }
 
         /// <summary>
@@ -535,7 +528,6 @@ namespace Radical.Model
         /// <param name="item">The item which editing has been cancelled</param>
         protected virtual void OnEntityItemViewEditCanceled(IEntityItemView<T> item)
         {
-
         }
 
         void OnEntityItemViewEditCanceled(object sender, EventArgs e)
@@ -847,7 +839,6 @@ namespace Radical.Model
         }
 
 
-
         /// <summary>
         /// Called when this list needs to create the sort comparer used for data sorting.
         /// </summary>
@@ -860,6 +851,7 @@ namespace Radical.Model
         bool IsCustomComparer = false;
 
         private IComparer<IEntityItemView<T>> _sortComparer;
+
         internal IComparer<IEntityItemView<T>> SortComparer
         {
             get
@@ -903,7 +895,7 @@ namespace Radical.Model
         ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public void ApplySort(PropertyDescriptor property, ListSortDirection direction)
         {
-            ListSortDescription[] sorts = new ListSortDescription[] { new ListSortDescription(property, direction) };
+            ListSortDescription[] sorts = new ListSortDescription[] {new ListSortDescription(property, direction)};
             ApplySort(new ListSortDescriptionCollection(sorts));
         }
 
@@ -1099,6 +1091,7 @@ namespace Radical.Model
         }
 
         private ListSortDescriptionCollection _sortDescriptions;
+
         /// <summary>
         /// Gets the collection of sort descriptions currently applied to the data source.
         /// </summary>
@@ -1167,7 +1160,6 @@ namespace Radical.Model
         }
 
 
-
         /// <summary>
         /// Gets a item indicating whether the <see cref="T:System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> events.
         /// </summary>
@@ -1177,7 +1169,6 @@ namespace Radical.Model
         {
             get { return true; }
         }
-
 
 
         /// <summary>
@@ -1190,7 +1181,6 @@ namespace Radical.Model
         {
             return ((IEnumerable)Indexer).GetEnumerator();
         }
-
 
 
         /// <summary>
@@ -1243,7 +1233,6 @@ namespace Radical.Model
         }
 
 
-
         /// <summary>
         /// Adds an item to the <see cref="T:System.Collections.IList"/>.
         /// </summary>
@@ -1254,7 +1243,8 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
         int IList.Add(object value)
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Add"));
+            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
+                Resources.Exceptions.CannotAccessEntityViewException, "Add"));
         }
 
         /// <summary>
@@ -1263,7 +1253,8 @@ namespace Radical.Model
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only. </exception>
         void IList.Clear()
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Clear"));
+            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
+                Resources.Exceptions.CannotAccessEntityViewException, "Clear"));
         }
 
         /// <summary>
@@ -1397,7 +1388,8 @@ namespace Radical.Model
         ///     <paramref name="item"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
         void IList.Insert(int index, object item)
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Insert"));
+            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
+                Resources.Exceptions.CannotAccessEntityViewException, "Insert"));
         }
 
         /// <summary>
@@ -1453,7 +1445,8 @@ namespace Radical.Model
             }
             else
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Remove"));
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
+                    Resources.Exceptions.CannotAccessEntityViewException, "Remove"));
             }
         }
 
@@ -1533,12 +1526,19 @@ namespace Radical.Model
         /// Gets or sets the <see cref="IEntityItemView&lt;T&gt;"/> at the specified index.
         /// </summary>
         /// <item></item>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "index")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
+            MessageId = "value")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
+            MessageId = "index")]
         public IEntityItemView<T> this[int index]
         {
             get { return Indexer[index]; }
-            set { throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException, "Set Accessor"), "index"); }
+            set
+            {
+                throw new ArgumentException(
+                    string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.CannotAccessEntityViewException,
+                        "Set Accessor"), "index");
+            }
         }
 
         /// <summary>
@@ -1550,7 +1550,6 @@ namespace Radical.Model
             get { return this[index]; }
             set { this[index] = (IEntityItemView<T>)value; }
         }
-
 
 
         static readonly object listChangedEventKey = new object();
@@ -1574,7 +1573,8 @@ namespace Radical.Model
             {
                 (Events[listChangedEventKey] as ListChangedEventHandler)?.Invoke(this, e);
 
-                if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.Reset)
+                if (e.ListChangedType == ListChangedType.ItemAdded ||
+                    e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.Reset)
                 {
                     OnPropertyChanged("Count");
                 }
@@ -1613,6 +1613,7 @@ namespace Radical.Model
         }
 
         private bool _allowEdit = true;
+
         /// <summary>
         /// Gets whether you can update items in the list.
         /// </summary>
@@ -1634,6 +1635,7 @@ namespace Radical.Model
         }
 
         private bool _allowNew = true;
+
         /// <summary>
         /// Gets whether you can add items to the list using <see cref="M:System.ComponentModel.IBindingList.AddNew"/>.
         /// </summary>
@@ -1669,6 +1671,7 @@ namespace Radical.Model
         }
 
         private bool _allowRemove = true;
+
         /// <summary>
         /// Gets whether you can remove items from the list, using <see cref="M:System.Collections.IList.Remove(System.Object)"/> or <see cref="M:System.Collections.IList.RemoveAt(System.int)"/>.
         /// </summary>
@@ -1705,6 +1708,7 @@ namespace Radical.Model
         }
 
         private bool _allowSort = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether this list allow sort.
         /// </summary>
@@ -1805,7 +1809,8 @@ namespace Radical.Model
         /// Gets the custom properties.
         /// </summary>
         /// <value>The custom properties.</value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         protected IDictionary<string, EntityItemViewPropertyDescriptor<T>> CustomProperties
         {
             get
@@ -1840,7 +1845,8 @@ namespace Radical.Model
             return CustomProperties[name];
         }
 
-        readonly IDictionary<T, IDictionary<string, PropertyValue>> customPropertyValues = new Dictionary<T, IDictionary<string, PropertyValue>>();
+        readonly IDictionary<T, IDictionary<string, PropertyValue>> customPropertyValues =
+            new Dictionary<T, IDictionary<string, PropertyValue>>();
 
         public TValue GetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> owner)
         {
@@ -1915,7 +1921,8 @@ namespace Radical.Model
         /// Adds a the given property to the property mappings of this instance.
         /// </summary>
         /// <param name="customProperty">The custom property to add.</param>
-        public virtual EntityItemViewPropertyDescriptor<T> AddCustomProperty(EntityItemViewPropertyDescriptor<T> customProperty)
+        public virtual EntityItemViewPropertyDescriptor<T> AddCustomProperty(
+            EntityItemViewPropertyDescriptor<T> customProperty)
         {
             CustomProperties.Add(customProperty.Name, customProperty);
             OnListChanged(new ListChangedEventArgs(ListChangedType.PropertyDescriptorAdded, customProperty));
@@ -2042,13 +2049,12 @@ namespace Radical.Model
                 CustomProperties.Remove(propertyName);
 
                 OnListChanged(new ListChangedEventArgs(ListChangedType.PropertyDescriptorDeleted, customProperty));
-                
+
                 return true;
             }
 
             return false;
         }
-
 
 
         /// <summary>
@@ -2093,13 +2099,13 @@ namespace Radical.Model
                     {
                         bindableProperties = FlattenInterfaces()
                             .Aggregate(new List<EntityItemViewPropertyDescriptor<T>>(), (a, t) =>
-                           {
-                               var all = GetBindablePropertiesForType(t);
+                            {
+                                var all = GetBindablePropertiesForType(t);
 
-                               a.AddRange(all);
+                                a.AddRange(all);
 
-                               return a;
-                           });
+                                return a;
+                            });
                     }
                     else
                     {
@@ -2133,9 +2139,9 @@ namespace Radical.Model
         IEnumerable<EntityItemViewPropertyDescriptor<T>> GetBindablePropertiesForType(Type t)
         {
             var all = TypeDescriptor.GetProperties(t)
-                        .OfType<PropertyDescriptor>()
-                        .Where(pd => !pd.Attributes.Matches(BindableAttribute.No))
-                        .Select(pd => OnCreateDescriptor(pd.ComponentType.GetProperty(pd.Name)));
+                .OfType<PropertyDescriptor>()
+                .Where(pd => !pd.Attributes.Matches(BindableAttribute.No))
+                .Select(pd => OnCreateDescriptor(pd.ComponentType.GetProperty(pd.Name)));
 
             return all;
         }
@@ -2190,7 +2196,6 @@ namespace Radical.Model
         }
 
 
-
         /// <summary>
         /// Returns the index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor"/>.
         /// </summary>
@@ -2223,7 +2228,9 @@ namespace Radical.Model
             }
             else
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.PropertyNotFoundException, propertyName), "propertyName");
+                throw new ArgumentException(
+                    string.Format(CultureInfo.CurrentCulture, Resources.Exceptions.PropertyNotFoundException,
+                        propertyName), "propertyName");
             }
         }
 
@@ -2411,7 +2418,6 @@ namespace Radical.Model
         /// <param name="index">The index.</param>
         protected virtual void OnEndNew(int index)
         {
-
         }
 
         /// <summary>
@@ -2523,7 +2529,6 @@ namespace Radical.Model
         /// <param name="itemIndex">Index of the item.</param>
         protected virtual void OnCancelNew(int itemIndex)
         {
-
         }
 
         /// <summary>
@@ -2608,7 +2613,6 @@ namespace Radical.Model
         }
 
 
-
         private static readonly object disposedEventKey = new object();
 
         /// <summary>
@@ -2634,8 +2638,7 @@ namespace Radical.Model
             set { site = value; }
         }
 
-        [NonSerialized]
-        private EventHandlerList _events;
+        [NonSerialized] private EventHandlerList _events;
 
         /// <summary>
         /// Gets the events.
@@ -2643,7 +2646,7 @@ namespace Radical.Model
         /// <value>The events.</value>
         protected EventHandlerList Events
         {
-            get{ return _events ?? (_events = new EventHandlerList()); }
+            get { return _events ?? (_events = new EventHandlerList()); }
         }
 
         /// <summary>
@@ -2654,15 +2657,7 @@ namespace Radical.Model
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool DesignMode
         {
-            get
-            {
-                if (site != null)
-                {
-                    return site.DesignMode;
-                }
-
-                return false;
-            }
+            get { return site != null && site.DesignMode; }
         }
 
         /// <summary>
@@ -2673,14 +2668,7 @@ namespace Radical.Model
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual IContainer Container
         {
-            get
-            {
-                if (site != null)
-                {
-                    return site.Container;
-                }
-                return null;
-            }
+            get { return site?.Container; }
         }
 
         /// <summary>
@@ -2694,15 +2682,8 @@ namespace Radical.Model
         /// </returns>
         public virtual object GetService(Type serviceType)
         {
-            if (site != null)
-            {
-                return site.GetService(serviceType);
-            }
-
-            return null;
+            return site?.GetService(serviceType);
         }
-
-
 
         static readonly object propertyChangedEventKey = new object();
 
@@ -2737,9 +2718,9 @@ namespace Radical.Model
             Ensure.That(propertyName)
                 .IsNotNull()
                 .IsNotEmpty();
-            (Events[propertyChangedEventKey] as PropertyChangedEventHandler)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            (Events[propertyChangedEventKey] as PropertyChangedEventHandler)?.Invoke(this,
+                new PropertyChangedEventArgs(propertyName));
         }
-
 
 
         /// <summary>
