@@ -207,7 +207,7 @@ namespace Radical.Model
                          * L'introduzione di ItemRemoved non dovrebbe più portare qui...
                          */
                         Debug.Fail("...CollectionChangeType.ItemChanged and newIndex = -1...");
-                        OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, oldIndex));
+                        //OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, oldIndex));
                     }
 
                     break;
