@@ -1094,8 +1094,12 @@ namespace Radical.Helpers
         public bool AllowRepeatCharacters { get; set; }
         public bool AllowSymbols { get; set; }
         public System.Collections.Generic.List<char> Exclusions { get; }
+        [System.Obsolete("Use the MaxLength property, this will be removed in v3.0.0")]
         public int MaxLenght { get; set; }
+        public int MaxLength { get; set; }
+        [System.Obsolete("Use the MinLength property, this will be removed in v3.0.0")]
         public int MinLenght { get; set; }
+        public int MinLength { get; set; }
         protected int GetCryptographicRandomNumber(int lBound, int uBound) { }
         protected char GetRandomCharacter() { }
         public string Next() { }
