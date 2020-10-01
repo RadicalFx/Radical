@@ -1280,7 +1280,7 @@ namespace Radical.ChangeTracking
                 .WithMessage("Only one single atomic operation can be created at a time.")
                 .Is(false);
 
-            void completed(AtomicChange c)
+            void Completed(AtomicChange c)
             {
                 AtomicOperation = null;
                 Add(c, behavior);
@@ -1293,12 +1293,12 @@ namespace Radical.ChangeTracking
                 c.MergeTransientEntities(transientEntities);
             }
 
-            void disposed()
+            void Disposed()
             {
                 AtomicOperation = null;
             }
 
-            AtomicOperation = new AtomicOperation(completed, disposed);
+            AtomicOperation = new AtomicOperation(Completed, Disposed);
 
             return AtomicOperation;
         }
