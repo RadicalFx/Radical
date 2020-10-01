@@ -73,8 +73,8 @@ namespace Radical.ChangeTracking
                      * Staminchia...
                      */
 
-                    backwardChangesStack.ForEach(c => OnUnwire(c));
-                    forwardChangesStack.ForEach(c => OnUnwire(c));
+                    backwardChangesStack.ForEach(OnUnwire);
+                    forwardChangesStack.ForEach(OnUnwire);
 
                     iComponentEntities.ForEach(ic =>
                     {
