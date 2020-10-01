@@ -156,17 +156,12 @@ namespace Radical.Helpers
             return nextCharacter;
         }
 
-        private readonly List<char> _exclusions = new List<char>();
-
         /// <summary>
         /// A list of char that must be excluded from the
         /// generated password
         /// </summary>
         /// <value>The exclusions.</value>
-        public List<char> Exclusions
-        {
-            get { return _exclusions; }
-        }
+        public List<char> Exclusions { get; } = new List<char>();
 
         private int _minLenght = DEFAULT_MINIMUM;
 
