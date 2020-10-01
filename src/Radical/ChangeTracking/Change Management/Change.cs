@@ -63,10 +63,7 @@ namespace Radical.ChangeTracking
             Ensure.That(reason)
                 .Named("reason")
                 .If(v => v == CommitReason.None)
-                .Then((v, n) =>
-               {
-                   throw new ArgumentException("Unsupported CommitReason value.", n);
-               });
+                .Then((v, n) => throw new ArgumentException("Unsupported CommitReason value.", n));
 
             OnCommit(reason);
             OnCommitted(new CommittedEventArgs(reason));
