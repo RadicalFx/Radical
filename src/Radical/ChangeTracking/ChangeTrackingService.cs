@@ -235,23 +235,25 @@ namespace Radical.ChangeTracking
 
             tryUnregisterTransient = (entity, bookmark) =>
             {
-                if (bookmark == null || !bookmark.TransientEntities.Contains(entity))
+                if (bookmark != null && bookmark.TransientEntities.Contains(entity))
                 {
-                    /*
-                     * Se non c'è un bookmark o se l'entity è stata registrata
-                     * transient dopo la creazione del bookmark procediamo con
-                     * la deregistrazione come transient.
-                     */
-                    var state = GetEntityState(entity);
-                    var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
-                    var isAutoRemove = (state & EntityTrackingStates.AutoRemove) == EntityTrackingStates.AutoRemove;
-                    var hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
-                    var hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
+                    return;
+                }
 
-                    if (isTransient && isAutoRemove && !hasBackwardChanges && !hasForwardChanges)
-                    {
-                        OnUnregisterTransient(entity);
-                    }
+                /*
+                 * Se non c'è un bookmark o se l'entity è stata registrata
+                 * transient dopo la creazione del bookmark procediamo con
+                 * la deregistrazione come transient.
+                 */
+                var state = GetEntityState(entity);
+                var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
+                var isAutoRemove = (state & EntityTrackingStates.AutoRemove) == EntityTrackingStates.AutoRemove;
+                var hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
+                var hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
+
+                if (isTransient && isAutoRemove && !hasBackwardChanges && !hasForwardChanges)
+                {
+                    OnUnregisterTransient(entity);
                 }
             };
         }
