@@ -295,7 +295,7 @@ namespace Radical.ChangeTracking
                 .Named("bookmark")
                 .IsNotNull()
                 .If(bmk => !Validate(bmk))
-                .Then((bmk, n) => { throw new ArgumentOutOfRangeException(n); });
+                .Then((bmk, n) => throw new ArgumentOutOfRangeException(n));
 
             if (CanRevertTo(bookmark))
             {
