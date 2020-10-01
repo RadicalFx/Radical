@@ -12,7 +12,7 @@ namespace Radical.ChangeTracking
     public abstract class Change<T> : IChange<T>
     {
         /// <summary>
-        /// The callback to invoke in order to 
+        /// The callback to invoke in order to
         /// reject the cached value.
         /// </summary>
         protected RejectCallback<T> RejectCallback { get; }
@@ -149,11 +149,7 @@ namespace Radical.ChangeTracking
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        public string Description
-        {
-            get;
-            private set;
-        }
+        public string Description { get; }
 
         /// <summary>
         /// Gets the advised action for this IChange.
@@ -176,17 +172,11 @@ namespace Radical.ChangeTracking
         /// <returns>A clone of this instance.</returns>
         public abstract IChange Clone();
 
-
-
         /// <summary>
         /// Gets the cached value.
         /// </summary>
         /// <value>The cached value.</value>
-        public T CachedValue
-        {
-            get;
-            private set;
-        }
+        public T CachedValue { get; }
 
     }
 }
