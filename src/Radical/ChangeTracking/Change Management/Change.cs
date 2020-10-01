@@ -48,11 +48,7 @@ namespace Radical.ChangeTracking
         /// Gets the owner of this change.
         /// </summary>
         /// <value>The owner.</value>
-        public object Owner
-        {
-            get;
-            private set;
-        }
+        public object Owner { get; }
 
         /// <summary>
         /// Commits this change.
