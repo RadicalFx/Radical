@@ -1208,7 +1208,10 @@ namespace Radical.ChangeTracking
         /// Gets the object's changed status.
         /// </summary>
         /// <value></value>
-        /// <returns>true if the object’s content has changed since the last call to <see cref="M:System.ComponentModel.IChangeTracking.AcceptChanges"/>; otherwise, false.</returns>
+        /// <returns>true if the object’s content has changed since the last call to <see>
+        ///         <cref>M:System.ComponentModel.IChangeTracking.AcceptChanges</cref>
+        ///     </see>
+        ///     ; otherwise, false.</returns>
         public virtual bool IsChanged
         {
             get { return backwardChangesStack.Count > 0; }
@@ -1230,10 +1233,19 @@ namespace Radical.ChangeTracking
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="T:System.ComponentModel.ISite"/> associated with the <see cref="T:System.ComponentModel.IComponent"/>.
+        /// Gets or sets the <see>
+        ///     <cref>T:System.ComponentModel.ISite</cref>
+        /// </see>
+        /// associated with the <see>
+        ///     <cref>T:System.ComponentModel.IComponent</cref>
+        /// </see>
+        /// .
         /// </summary>
         /// <value></value>
-        /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
+        /// <returns>The <see>
+        ///         <cref>T:System.ComponentModel.ISite</cref>
+        ///     </see>
+        ///     object associated with the component; or null, if the component does not have a site.</returns>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ISite Site
