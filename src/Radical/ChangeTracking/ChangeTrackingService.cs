@@ -177,10 +177,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnChangesRejected()
         {
-            if (Events != null)
-            {
-                (Events[changesRejectedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-            }
+            (Events?[changesRejectedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
         private static readonly object acceptingChangesEventKey = new object();
@@ -232,23 +229,9 @@ namespace Radical.ChangeTracking
         /// </summary>
         public ChangeTrackingService()
         {
-            onChangeCommitted = (s, e) =>
-            {
-                IChange change = (IChange)s;
-                OnChangeCommitted(change, e.Reason);
-            };
-
-            onChangeRejected = (s, e) =>
-            {
-                IChange change = (IChange)s;
-                OnChangeRejected(change, e.Reason);
-            };
-
-            onComponentDisposed = (s, e) =>
-            {
-                var entity = (IMemento)s;
-                OnDetach(entity, StopTrackingReason.DisposedEvent);
-            };
+            onChangeCommitted = (s, e) => OnChangeCommitted((IChange)s, e.Reason);
+            onChangeRejected = (s, e) => OnChangeRejected((IChange)s, e.Reason);
+            onComponentDisposed = (s, e) => OnDetach((IMemento)s, StopTrackingReason.DisposedEvent);
 
             tryUnregisterTransient = (entity, bookmark) =>
             {
