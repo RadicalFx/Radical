@@ -9,16 +9,11 @@
     /// </summary>
     public sealed class IncludeAllChangeSetFilter : IChangeSetFilter
     {
-        static readonly IChangeSetFilter _instance = new IncludeAllChangeSetFilter();
-
         /// <summary>
         /// Gets the filter instance.
         /// </summary>
         /// <value>The filter instance.</value>
-        public static IChangeSetFilter Instance
-        {
-            get { return _instance; }
-        }
+        public static IChangeSetFilter Instance { get; } = new IncludeAllChangeSetFilter();
 
         private IncludeAllChangeSetFilter()
         {
