@@ -22,6 +22,9 @@ build/
 [Bb]uild[Ll]og.*
 *.Approve_API.received.txt
 
+# Code coverage reports
+coverage.opencover.xml
+
 # ReSharper is a .NET coding add-in
 _ReSharper*/
 *.[Rr]e[Ss]harper
