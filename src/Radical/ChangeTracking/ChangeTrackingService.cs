@@ -17,7 +17,7 @@ namespace Radical.ChangeTracking
     public class ChangeTrackingService : IChangeTrackingService
     {
         /// <summary>
-        /// Provides information about the reason why 
+        /// Provides information about the reason why
         /// the stopTracking method has been called
         /// </summary>
         protected enum StopTrackingReason
@@ -66,15 +66,15 @@ namespace Radical.ChangeTracking
                     /*
                      * Se disposing è 'true' significa che dispose
                      * è stato invocato direttamentente dall'utente
-                     * è quindi lecito accedere ai 'field' e ad 
+                     * è quindi lecito accedere ai 'field' e ad
                      * eventuali reference perchè sicuramente Finalize
                      * non è ancora stato chiamato su questi oggetti
-                     * 
+                     *
                      * Staminchia...
                      */
 
-                    backwardChangesStack.ForEach(c => OnUnwire(c));
-                    forwardChangesStack.ForEach(c => OnUnwire(c));
+                    backwardChangesStack.ForEach(OnUnwire);
+                    forwardChangesStack.ForEach(OnUnwire);
 
                     iComponentEntities.ForEach(ic =>
                     {
@@ -89,15 +89,9 @@ namespace Radical.ChangeTracking
                     transientEntities.Clear();
                     iComponentEntities.Clear();
 
-                    if (Site != null && Site.Container != null)
-                    {
-                        Site.Container.Remove(this);
-                    }
+                    Site?.Container?.Remove(this);
 
-                    if (_events != null)
-                    {
-                        Events.Dispose();
-                    }
+                    _events?.Dispose();
                 }
 
                 onChangeCommitted = null;
@@ -145,10 +139,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnTrackingServiceStateChanged()
         {
-            if (Events != null)
-            {
-                (Events[trackingServiceStateChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-            }
+            (Events?[trackingServiceStateChangedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
         private static readonly object rejectingChangesEventKey = new object();
@@ -167,10 +158,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnRejectingChanges(CancelEventArgs e)
         {
-            if (Events != null)
-            {
-                (Events[rejectingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
-            }
+            (Events?[rejectingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
         }
 
         private static readonly object changesRejectedEventKey = new object();
@@ -189,26 +177,27 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnChangesRejected()
         {
-            if (Events != null)
-            {
-                (Events[changesRejectedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-            }
+            (Events?[changesRejectedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
         private static readonly object acceptingChangesEventKey = new object();
 
+        /// <summary>
+        /// The AcceptingChanges event, raised to signal that changes are going to be accepted
+        /// </summary>
         public event EventHandler<CancelEventArgs> AcceptingChanges
         {
             add { Events.AddHandler(acceptingChangesEventKey, value); }
             remove { Events.RemoveHandler(acceptingChangesEventKey, value); }
         }
 
+        /// <summary>
+        /// Invoked when changes are accepted.
+        /// </summary>
+        /// <param name="e">The <c>CancelEventArgs</c> that can be used to cancel the process of accepting changes.</param>
         protected virtual void OnAcceptingChanges(CancelEventArgs e)
         {
-            if (Events != null)
-            {
-                (Events[acceptingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
-            }
+            (Events?[acceptingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
         }
 
         private static readonly object changesAcceptedEventKey = new object();
@@ -227,10 +216,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         protected virtual void OnChangesAccepted()
         {
-            if (Events != null)
-            {
-                (Events[changesAcceptedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
-            }
+            (Events?[changesAcceptedEventKey] as EventHandler)?.Invoke(this, EventArgs.Empty);
         }
 
         EventHandler<CommittedEventArgs> onChangeCommitted;
@@ -243,43 +229,31 @@ namespace Radical.ChangeTracking
         /// </summary>
         public ChangeTrackingService()
         {
-            onChangeCommitted = (s, e) =>
-            {
-                IChange change = (IChange)s;
-                OnChangeCommitted(change, e.Reason);
-            };
-
-            onChangeRejected = (s, e) =>
-            {
-                IChange change = (IChange)s;
-                OnChangeRejected(change, e.Reason);
-            };
-
-            onComponentDisposed = (s, e) =>
-            {
-                var entity = (IMemento)s;
-                OnDetach(entity, StopTrackingReason.DisposedEvent);
-            };
+            onChangeCommitted = (s, e) => OnChangeCommitted((IChange)s, e.Reason);
+            onChangeRejected = (s, e) => OnChangeRejected((IChange)s, e.Reason);
+            onComponentDisposed = (s, e) => OnDetach((IMemento)s, StopTrackingReason.DisposedEvent);
 
             tryUnregisterTransient = (entity, bookmark) =>
             {
-                if (bookmark == null || !bookmark.TransientEntities.Contains(entity))
+                if (bookmark != null && bookmark.TransientEntities.Contains(entity))
                 {
-                    /*
-                     * Se non c'è un bookmark o se l'entity è stata registrata
-                     * transient dopo la creazione del bookmark procediamo con
-                     * la deregistrazione come transient.
-                     */
-                    var state = GetEntityState(entity);
-                    var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
-                    var isAutoRemove = (state & EntityTrackingStates.AutoRemove) == EntityTrackingStates.AutoRemove;
-                    var hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
-                    var hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
+                    return;
+                }
 
-                    if (isTransient && isAutoRemove && !hasBackwardChanges && !hasForwardChanges)
-                    {
-                        OnUnregisterTransient(entity);
-                    }
+                /*
+                 * Se non c'è un bookmark o se l'entity è stata registrata
+                 * transient dopo la creazione del bookmark procediamo con
+                 * la deregistrazione come transient.
+                 */
+                var state = GetEntityState(entity);
+                var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
+                var isAutoRemove = (state & EntityTrackingStates.AutoRemove) == EntityTrackingStates.AutoRemove;
+                var hasBackwardChanges = (state & EntityTrackingStates.HasBackwardChanges) == EntityTrackingStates.HasBackwardChanges;
+                var hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
+
+                if (isTransient && isAutoRemove && !hasBackwardChanges && !hasForwardChanges)
+                {
+                    OnUnregisterTransient(entity);
                 }
             };
         }
@@ -321,7 +295,7 @@ namespace Radical.ChangeTracking
                 .Named("bookmark")
                 .IsNotNull()
                 .If(bmk => !Validate(bmk))
-                .Then((bmk, n) => { throw new ArgumentOutOfRangeException(n); });
+                .Then((bmk, n) => throw new ArgumentOutOfRangeException(n));
 
             if (CanRevertTo(bookmark))
             {
@@ -396,17 +370,17 @@ namespace Radical.ChangeTracking
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
         /// <param name="autoRemove">
-        /// if set to <c>true</c> the object is automatically removed from the list of registered objects in 
+        /// if set to <c>true</c> the object is automatically removed from the list of registered objects in
         /// case of Undo and RejectChanges.
         /// </param>
         /// <remarks>
-        /// if <c>autoRemove</c> is set to true (the default value) and RejectChnages, or an Undo that removes 
-        /// the last IChange of the object, is called the object then is automatically removed from the list of 
-        /// the new objects. An object marked as auto remove is not included in any advisory if it has no pending 
+        /// if <c>autoRemove</c> is set to true (the default value) and RejectChnages, or an Undo that removes
+        /// the last IChange of the object, is called the object then is automatically removed from the list of
+        /// the new objects. An object marked as auto remove is not included in any advisory if it has no pending
         /// changes.
         /// </remarks>
         /// <exception cref="ArgumentException">
-        /// If the change tracking service has already registered the object or if has pending 
+        /// If the change tracking service has already registered the object or if has pending
         /// changes for the object an ArgumentException is raised.
         /// </exception>
         public void RegisterTransient(object entity, bool autoRemove)
@@ -421,16 +395,16 @@ namespace Radical.ChangeTracking
         /// </summary>
         /// <param name="entity">The object to track as transient.</param>
         /// <param name="autoRemove">
-        /// if set to <c>true</c> the object is automatically removed from the list of registered objects in 
+        /// if set to <c>true</c> the object is automatically removed from the list of registered objects in
         /// case of Undo and RejectChanges.
         /// </param>
         /// <remarks>
-        /// if <c>autoRemove</c> is set to true (the default value) and RejectChnages, or an Undo that removes 
-        /// the last IChange of the object, is called the object then is automatically removed from the list of 
+        /// if <c>autoRemove</c> is set to true (the default value) and RejectChnages, or an Undo that removes
+        /// the last IChange of the object, is called the object then is automatically removed from the list of
         /// the new objects.
         /// </remarks>
         /// <exception cref="ArgumentException">
-        /// If the change tracking service has already registered the object or if has pending 
+        /// If the change tracking service has already registered the object or if has pending
         /// changes for the object an ArgumentException is raised.
         /// </exception>
         protected virtual void OnRegisterTransient(object entity, bool autoRemove)
@@ -480,7 +454,7 @@ namespace Radical.ChangeTracking
             var isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
             if (!isTransient)
             {
-                throw new ArgumentOutOfRangeException("entity", "Cannot unregister the given object, object is not in IsTransient state.");
+                throw new ArgumentOutOfRangeException(nameof(entity), @"Cannot unregister the given object, object is not in IsTransient state.");
             }
 
             transientEntities.Remove(entity);
@@ -613,7 +587,7 @@ namespace Radical.ChangeTracking
             lock (SyncRoot)
             {
                 var state = EntityTrackingStates.None;
-                
+
                 state |= AnalyzeEntityTransientState(entity);
                 state |= AnalyzeEntityBackwardChanges(entity);
                 state |= AnalyzeEntityForwardChanges(entity);
@@ -626,7 +600,7 @@ namespace Radical.ChangeTracking
         /// Called in order to perform the undo operation.
         /// </summary>
         /// <param name="reason">
-        /// The reason of the undo. If the RejectReason is Revert 
+        /// The reason of the undo. If the RejectReason is Revert
         /// the Bookmark cannot be null.
         /// </param>
         protected virtual void OnUndo(RejectReason reason /*, IBookmark bmk */ )
@@ -637,8 +611,8 @@ namespace Radical.ChangeTracking
 
                 /*
                  * Questo special case mi fa veramente cagare...
-                 * dovremmo poter passare alla change il servizio 
-                 * di change tracking e lasciare che sia lei a 
+                 * dovremmo poter passare alla change il servizio
+                 * di change tracking e lasciare che sia lei a
                  * decidere cosa fare...
                  */
                 if (last is AtomicChange)
@@ -649,9 +623,9 @@ namespace Radical.ChangeTracking
 
                         /*
                          * Qui dovrebbe anche cercare di deregistrare
-                         * le eventuali entità "transient" presenti 
+                         * le eventuali entità "transient" presenti
                          * nella atomic change
-                         * 
+                         *
                          * Dovremmo valutare se ha senso che le transient
                          * entities vengano registrate nella AtomicChange o no
                          * a quanto pare non c'è nessuna logica legata al HasTransientEntities
@@ -684,8 +658,8 @@ namespace Radical.ChangeTracking
 
                 /*
                  * Questo special case mi fa veramente cagare...
-                 * dovremmo poter passare alla change il servizio 
-                 * di change tracking e lasciare che sia lei a 
+                 * dovremmo poter passare alla change il servizio
+                 * di change tracking e lasciare che sia lei a
                  * decidere cosa fare...
                  */
                 if (last is AtomicChange)
@@ -998,10 +972,10 @@ namespace Radical.ChangeTracking
             bool hasForwardChanges = (state & EntityTrackingStates.HasForwardChanges) == EntityTrackingStates.HasForwardChanges;
 
             /*
-             * questo handler potrebbe venire invocato in maniera un po' strana 
+             * questo handler potrebbe venire invocato in maniera un po' strana
              * perchè il programmatore che ci usa non fa buon uso delle Dispose
-             * e/o del costrutto using, come ad esempio simuliamo negli unit 
-             * test(s), quindi le Dispose vengono chiamate in ordine casuale dal 
+             * e/o del costrutto using, come ad esempio simuliamo negli unit
+             * test(s), quindi le Dispose vengono chiamate in ordine casuale dal
              * GC...
              */
             if (entity is IComponent cmp)
@@ -1017,8 +991,8 @@ namespace Radical.ChangeTracking
             {
                 /*
                  * Se arriviamo qui a seguito del Disposed event non
-                 * possiamo accedere ai membri della Entity perchè 
-                 * rischiamo, giustamente, una ObjectDisposedException 
+                 * possiamo accedere ai membri della Entity perchè
+                 * rischiamo, giustamente, una ObjectDisposedException
                  * quidi lo facciamo solo ed esclusivamente se la richiesta
                  * di StopTracking è una richiesta esplicita dell'utente.
                  */
@@ -1061,7 +1035,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Ensures the this service instance is not suspended.
         /// </summary>
-        /// <exception cref="SuspendedChangeTrackingServiceException">A 
+        /// <exception cref="SuspendedChangeTrackingServiceException">A
         /// <c>SuspendedChangeTrackingServiceException</c> is raised if this instance is in a suspended state.</exception>
         protected void EnsureNotSuspended()
         {
@@ -1234,7 +1208,10 @@ namespace Radical.ChangeTracking
         /// Gets the object's changed status.
         /// </summary>
         /// <value></value>
-        /// <returns>true if the object’s content has changed since the last call to <see cref="M:System.ComponentModel.IChangeTracking.AcceptChanges"/>; otherwise, false.</returns>
+        /// <returns>true if the object’s content has changed since the last call to <see>
+        ///         <cref>M:System.ComponentModel.IChangeTracking.AcceptChanges</cref>
+        ///     </see>
+        ///     ; otherwise, false.</returns>
         public virtual bool IsChanged
         {
             get { return backwardChangesStack.Count > 0; }
@@ -1256,10 +1233,19 @@ namespace Radical.ChangeTracking
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="T:System.ComponentModel.ISite"/> associated with the <see cref="T:System.ComponentModel.IComponent"/>.
+        /// Gets or sets the <see>
+        ///     <cref>T:System.ComponentModel.ISite</cref>
+        /// </see>
+        /// associated with the <see>
+        ///     <cref>T:System.ComponentModel.IComponent</cref>
+        /// </see>
+        /// .
         /// </summary>
         /// <value></value>
-        /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
+        /// <returns>The <see>
+        ///         <cref>T:System.ComponentModel.ISite</cref>
+        ///     </see>
+        ///     object associated with the component; or null, if the component does not have a site.</returns>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ISite Site
@@ -1294,7 +1280,7 @@ namespace Radical.ChangeTracking
                 .WithMessage("Only one single atomic operation can be created at a time.")
                 .Is(false);
 
-            void completed(AtomicChange c)
+            void Completed(AtomicChange c)
             {
                 AtomicOperation = null;
                 Add(c, behavior);
@@ -1307,12 +1293,12 @@ namespace Radical.ChangeTracking
                 c.MergeTransientEntities(transientEntities);
             }
 
-            void disposed()
+            void Disposed()
             {
                 AtomicOperation = null;
             }
 
-            AtomicOperation = new AtomicOperation(completed, disposed);
+            AtomicOperation = new AtomicOperation(Completed, Disposed);
 
             return AtomicOperation;
         }

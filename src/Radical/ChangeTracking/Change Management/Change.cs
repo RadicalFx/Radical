@@ -12,7 +12,7 @@ namespace Radical.ChangeTracking
     public abstract class Change<T> : IChange<T>
     {
         /// <summary>
-        /// The callback to invoke in order to 
+        /// The callback to invoke in order to
         /// reject the cached value.
         /// </summary>
         protected RejectCallback<T> RejectCallback { get; }
@@ -48,11 +48,7 @@ namespace Radical.ChangeTracking
         /// Gets the owner of this change.
         /// </summary>
         /// <value>The owner.</value>
-        public object Owner
-        {
-            get;
-            private set;
-        }
+        public object Owner { get; }
 
         /// <summary>
         /// Commits this change.
@@ -63,10 +59,7 @@ namespace Radical.ChangeTracking
             Ensure.That(reason)
                 .Named("reason")
                 .If(v => v == CommitReason.None)
-                .Then((v, n) =>
-               {
-                   throw new ArgumentException("Unsupported CommitReason value.", n);
-               });
+                .Then((v, n) => throw new ArgumentException("Unsupported CommitReason value.", n));
 
             OnCommit(reason);
             OnCommitted(new CommittedEventArgs(reason));
@@ -149,11 +142,7 @@ namespace Radical.ChangeTracking
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        public string Description
-        {
-            get;
-            private set;
-        }
+        public string Description { get; }
 
         /// <summary>
         /// Gets the advised action for this IChange.
@@ -176,17 +165,11 @@ namespace Radical.ChangeTracking
         /// <returns>A clone of this instance.</returns>
         public abstract IChange Clone();
 
-
-
         /// <summary>
         /// Gets the cached value.
         /// </summary>
         /// <value>The cached value.</value>
-        public T CachedValue
-        {
-            get;
-            private set;
-        }
+        public T CachedValue { get; }
 
     }
 }

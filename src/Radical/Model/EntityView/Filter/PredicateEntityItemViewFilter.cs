@@ -5,7 +5,7 @@ namespace Radical.Model
 {
     public sealed class PredicateEntityItemViewFilter<T> : EntityItemViewFilterBase<T> // where T : class
     {
-        public Predicate<T> FilterDelegate { get; private set; }
+        public Predicate<T> FilterDelegate { get; }
         private readonly string filterName;
 
         /// <summary>

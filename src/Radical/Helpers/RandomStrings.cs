@@ -81,7 +81,7 @@ namespace Radical.Helpers
         /// <returns>The generated string.</returns>
         public string Next()
         {
-            // Pick random length between minimum and maximum   
+            // Pick random length between minimum and maximum
             var pwdLength = GetCryptographicRandomNumber(MinLenght, MaxLenght);
 
             var pwdBuffer = new StringBuilder()
@@ -97,33 +97,9 @@ namespace Radical.Helpers
             for (var i = 0; i < pwdLength; i++)
             {
                 nextCharacter = GetRandomCharacter();
-
-                if (!AllowConsecutiveCharacters)
-                {
-                    while (lastCharacter == nextCharacter)
-                    {
-                        nextCharacter = GetRandomCharacter();
-                    }
-                }
-
-                if (!AllowRepeatCharacters)
-                {
-                    var temp = pwdBuffer.ToString();
-                    var duplicateIndex = temp.IndexOf(nextCharacter);
-                    while (-1 != duplicateIndex)
-                    {
-                        nextCharacter = GetRandomCharacter();
-                        duplicateIndex = temp.IndexOf(nextCharacter);
-                    }
-                }
-
-                if (Exclusions != null)
-                {
-                    while (Exclusions.Contains(nextCharacter))
-                    {
-                        nextCharacter = GetRandomCharacter();
-                    }
-                }
+                nextCharacter = EvaluateAllowConsecutiveCharacters(lastCharacter, nextCharacter);
+                nextCharacter = EvaluateAllowRepeatCharacters(pwdBuffer, nextCharacter);
+                nextCharacter = EvaluateExclusions(nextCharacter);
 
                 pwdBuffer.Append(nextCharacter);
                 lastCharacter = nextCharacter;
@@ -132,17 +108,60 @@ namespace Radical.Helpers
             return pwdBuffer.ToString();
         }
 
-        private readonly List<char> _exclusions = new List<char>();
+        private char EvaluateAllowConsecutiveCharacters(char lastCharacter, char nextCharacter)
+        {
+            if (AllowConsecutiveCharacters)
+            {
+                return nextCharacter;
+            }
+
+            while (lastCharacter == nextCharacter)
+            {
+                nextCharacter = GetRandomCharacter();
+            }
+
+            return nextCharacter;
+        }
+
+        char EvaluateAllowRepeatCharacters(StringBuilder pwdBuffer, char nextCharacter)
+        {
+            if (AllowRepeatCharacters)
+            {
+                return nextCharacter;
+            }
+
+            var temp = pwdBuffer.ToString();
+            var duplicateIndex = temp.IndexOf(nextCharacter);
+            while (-1 != duplicateIndex)
+            {
+                nextCharacter = GetRandomCharacter();
+                duplicateIndex = temp.IndexOf(nextCharacter);
+            }
+
+            return nextCharacter;
+        }
+
+        char EvaluateExclusions(char nextCharacter)
+        {
+            if (Exclusions == null)
+            {
+                return nextCharacter;
+            }
+
+            while (Exclusions.Contains(nextCharacter))
+            {
+                nextCharacter = GetRandomCharacter();
+            }
+
+            return nextCharacter;
+        }
 
         /// <summary>
         /// A list of char that must be excluded from the
         /// generated password
         /// </summary>
         /// <value>The exclusions.</value>
-        public List<char> Exclusions
-        {
-            get { return _exclusions; }
-        }
+        public List<char> Exclusions { get; } = new List<char>();
 
         private int _minLength = DEFAULT_MINIMUM;
 

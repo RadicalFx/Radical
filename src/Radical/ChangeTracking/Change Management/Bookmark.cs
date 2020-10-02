@@ -31,31 +31,19 @@ namespace Radical.ChangeTracking
         /// been created to.
         /// </summary>
         /// <value>The position of the bookmark.</value>
-        public IChange Position
-        {
-            get;
-            private set;
-        }
+        public IChange Position { get; }
 
         /// <summary>
         /// Gets the change tracking service that created
         /// the bookmark.
         /// </summary>
         /// <value>The owner service.</value>
-        public IChangeTrackingService Owner
-        {
-            get;
-            private set;
-        }
+        public IChangeTrackingService Owner { get; }
 
         /// <summary>
         /// Gets the transient entities.
         /// </summary>
         /// <value>The transient entities.</value>
-        public IEnumerable<object> TransientEntities
-        {
-            get;
-            private set;
-        }
+        public IEnumerable<object> TransientEntities { get; }
     }
 }
