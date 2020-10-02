@@ -25,7 +25,6 @@ namespace Radical.Helpers
         const int DEFAULT_MAXIMUM = 10;
         const int U_BOUND_DIGIT = 61;
 
-        private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         private readonly char[] pwdCharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}\\|;:'\",<.>/?".ToCharArray();
 
         /// <summary>
@@ -49,6 +48,7 @@ namespace Radical.Helpers
 
             uint xcludeRndBase = (uint.MaxValue - (uint.MaxValue % (uint)(uBound - lBound)));
 
+            using var rng = new RNGCryptoServiceProvider();
             do
             {
                 rng.GetBytes(rndnum);
