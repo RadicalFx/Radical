@@ -144,42 +144,64 @@ namespace Radical.Helpers
             get { return _exclusions; }
         }
 
-        private int _minLenght = DEFAULT_MINIMUM;
+        private int _minLength = DEFAULT_MINIMUM;
 
         /// <summary>
         /// Minimum char number of the generated password
         /// </summary>
         /// <value>The min length.</value>
-        public int MinLenght
+        public int MinLength
         {
-            get { return _minLenght; }
+            get { return _minLength; }
             set
             {
-                _minLenght = value;
-                if (DEFAULT_MINIMUM > _minLenght)
+                _minLength = value;
+                if (DEFAULT_MINIMUM > _minLength)
                 {
-                    _minLenght = DEFAULT_MINIMUM;
+                    _minLength = DEFAULT_MINIMUM;
                 }
             }
         }
 
-        private int _maxLenght = DEFAULT_MAXIMUM;
+        /// <summary>
+        /// Minimum char number of the generated password
+        /// </summary>
+        /// <value>The min length.</value>
+        [Obsolete("Use the MinLength property, this will be removed in v3.0.0")]
+        public int MinLenght
+        {
+            get { return MinLength; }
+            set { MinLength = value; }
+        }
+
+        private int _maxLength = DEFAULT_MAXIMUM;
 
         /// <summary>
         /// Maximum char number of the generated password
         /// </summary>
         /// <value>The max length.</value>
-        public int MaxLenght
+        public int MaxLength
         {
-            get { return _maxLenght; }
+            get { return _maxLength; }
             set
             {
-                _maxLenght = value;
-                if (_minLenght >= _maxLenght)
+                _maxLength = value;
+                if (_minLength >= _maxLength)
                 {
-                    _maxLenght = DEFAULT_MAXIMUM;
+                    _maxLength = DEFAULT_MAXIMUM;
                 }
             }
+        }
+
+        /// <summary>
+        /// Maximum char number of the generated password
+        /// </summary>
+        /// <value>The max length.</value>
+        [Obsolete("Use the MaxLength property, this will be removed in v3.0.0")]
+        public int MaxLenght
+        {
+            get { return MaxLength; }
+            set { MaxLength = value; }
         }
 
 
