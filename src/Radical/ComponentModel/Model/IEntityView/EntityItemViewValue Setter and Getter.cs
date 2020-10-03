@@ -18,17 +18,9 @@ namespace Radical.ComponentModel
             PropertyName = propertyName;
         }
 
-        public IEntityItemView<T> Item
-        {
-            get;
-            private set;
-        }
+        public IEntityItemView<T> Item { get; }
 
-        public string PropertyName
-        {
-            get;
-            private set;
-        }
+        public string PropertyName { get; }
     }
     public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
@@ -47,10 +39,6 @@ namespace Radical.ComponentModel
             Value = value;
         }
 
-        public TValue Value
-        {
-            get;
-            private set;
-        }
+        public TValue Value { get; }
     }
 }
