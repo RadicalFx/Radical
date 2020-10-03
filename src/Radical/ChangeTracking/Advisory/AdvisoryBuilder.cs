@@ -33,6 +33,11 @@ namespace Radical.ChangeTracking
         /// <returns>The generated advisory.</returns>
         public IAdvisory GenerateAdvisory(IChangeTrackingService svc, IChangeSet changeSet)
         {
+            if (svc == null)
+            {
+                throw new ArgumentNullException(nameof(svc));
+            }
+
             var result = new List<IAdvisedAction>();
 
             var distinct = visitor.Visit(changeSet);
