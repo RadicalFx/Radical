@@ -25,7 +25,6 @@ namespace Radical.Helpers
         const int DEFAULT_MAXIMUM = 10;
         const int U_BOUND_DIGIT = 61;
 
-        private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         private readonly char[] pwdCharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}\\|;:'\",<.>/?".ToCharArray();
 
         /// <summary>
@@ -49,6 +48,7 @@ namespace Radical.Helpers
 
             uint xcludeRndBase = (uint.MaxValue - (uint.MaxValue % (uint)(uBound - lBound)));
 
+            using var rng = new RNGCryptoServiceProvider();
             do
             {
                 rng.GetBytes(rndnum);
@@ -81,12 +81,22 @@ namespace Radical.Helpers
         /// <returns>The generated string.</returns>
         public string Next()
         {
+            if (AllowConsecutiveCharacters && !AllowRepeatCharacters)
+            {
+                throw new ArgumentException("Invalid settings: If AllowConsecutiveCharacters is true, AllowRepeatCharacters must be true as well.");
+            }
+
+            if (MinLength > MaxLength)
+            {
+                throw new ArgumentException("Invalid settings: MinLength cannot be greater than MaxLength.");
+            }
+            
             // Pick random length between minimum and maximum
             var pwdLength = GetCryptographicRandomNumber(MinLenght, MaxLenght);
 
             var pwdBuffer = new StringBuilder()
             {
-                Capacity = MaxLenght
+                Capacity = pwdLength
             };
 
             // Generate random characters
@@ -231,21 +241,21 @@ namespace Radical.Helpers
         public bool AllowSymbols{ get; set; }
 
         /// <summary>
-        /// If true the resulting string can contains
-        /// equals chars.
+        /// If true the resulting string can contain
+        /// equals characters.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [allow repeat characters]; otherwise, <c>false</c>.
+        ///     <c>true</c> if the resulting string can contain equals characters; otherwise, <c>false</c>.
         /// </value>
         public bool AllowRepeatCharacters { get; set; }
 
 
         /// <summary>
-        /// If true the resulting string can contains
+        /// If true the resulting string can contain
         /// consecutive equals chars.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [allow consecutive characters]; otherwise, <c>false</c>.
+        ///     <c>true</c> if the resulting string can contain consecutive equals characters; otherwise, <c>false</c>.
         /// </value>
         public bool AllowConsecutiveCharacters { get; set; }
     }
