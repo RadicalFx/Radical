@@ -216,6 +216,11 @@ namespace Radical.ComponentModel
             return GetValueCore(oiv);
         }
 
+        /// <summary>
+        /// Extracts the value from the given component.
+        /// </summary>
+        /// <param name="component">The component</param>
+        /// <returns>The component value.</returns>
         protected virtual object GetValueCore(IEntityItemView<T> component)
         {
             if (component == null)
@@ -252,6 +257,11 @@ namespace Radical.ComponentModel
             SetValueCore(oiv, value);
         }
 
+        /// <summary>
+        /// Sets the value of the given component.
+        /// </summary>
+        /// <param name="component">The component</param>
+        /// <param name="value">The value to set.</param>
         protected virtual void SetValueCore(IEntityItemView<T> component, object value)
         {
             Property.SetValue(component.EntityItem, value, null);
