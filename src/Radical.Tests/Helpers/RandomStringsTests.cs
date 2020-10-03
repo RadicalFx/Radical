@@ -41,7 +41,7 @@ namespace Radical.Tests.Helpers
             var sut = new RandomStrings();
             var rndStr = sut.Next();
 
-            Assert.IsFalse(rndStr.All(c=> symbolsArray.Contains(c)));
+            Assert.IsFalse(rndStr.All(c=> symbolsArray.Contains(c)),$"{rndStr} contains symbols.");
         }
         
         [TestMethod]
