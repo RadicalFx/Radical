@@ -216,17 +216,8 @@ namespace Radical.ComponentModel
             return GetValueCore(oiv);
         }
 
-        //Radical.Reflection.Function<Object> fastGetter = null;
-
         protected virtual object GetValueCore(IEntityItemView<T> component)
         {
-            //if( fastGetter == null ) 
-            //{
-            //    fastGetter = Radical.Reflection.ObjectExtensions.CreateFastPropertyGetter( component.EntityItem, this.Property );
-            //}
-
-            //return fastGetter();
-
             return Property.GetValue(component.EntityItem, null);
         }
 
