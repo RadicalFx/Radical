@@ -10,6 +10,9 @@ namespace Radical.ComponentModel
     /// </summary>
     public delegate void EntityItemViewValueSetter<T, TValue>(EntityItemViewValueSetterArgs<T, TValue> args);
 
+    /// <summary>
+    /// Base class for argument for an EntityItemViewValueGetter or EntityItemViewValueSetter
+    /// </summary>
     public abstract class EntityItemViewValueArgs<T>
     {
         /// <summary>
@@ -33,6 +36,10 @@ namespace Radical.ComponentModel
         /// </summary>
         public string PropertyName { get; }
     }
+    
+    /// <summary>
+    /// Argument for an EntityItemViewValueGetter
+    /// </summary>
     public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
         /// <summary>
@@ -47,6 +54,9 @@ namespace Radical.ComponentModel
         }
     }
 
+    /// <summary>
+    /// Argument for an EntityItemViewValueSetter
+    /// </summary>
     public class EntityItemViewValueSetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
         /// <summary>
