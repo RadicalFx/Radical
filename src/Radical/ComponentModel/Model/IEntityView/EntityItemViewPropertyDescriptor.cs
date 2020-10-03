@@ -101,7 +101,13 @@ namespace Radical.ComponentModel
         /// <returns>A <see>
         ///         <cref>T:System.Type</cref>
         ///     </see>
-        ///     that represents the type of component this property is bound to. When the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)"/> or <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)"/> methods are invoked, the object specified might be an instance of this type.</returns>
+        ///     that represents the type of component this property is bound to. When the <see>
+        ///         <cref>M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)</cref>
+        ///     </see>
+        ///     or <see>
+        ///         <cref>M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)</cref>
+        ///     </see>
+        ///     methods are invoked, the object specified might be an instance of this type.</returns>
         public override Type ComponentType
         {
             get { return typeof(IEntityItemView<T>); }
@@ -111,7 +117,10 @@ namespace Radical.ComponentModel
         /// When overridden in a derived class, gets the type of the property.
         /// </summary>
         /// <value></value>
-        /// <returns>A <see cref="T:System.Type"/> that represents the type of the property.</returns>
+        /// <returns>A <see>
+        ///         <cref>T:System.Type</cref>
+        ///     </see>
+        ///     that represents the type of the property.</returns>
         public override Type PropertyType
         {
             get { return Property.PropertyType; }
