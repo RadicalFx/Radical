@@ -68,12 +68,23 @@
         }
 
         /// <summary>
-        /// When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+        /// When overridden in a derived class, sets the <see>
+        ///     <cref>T:System.Runtime.Serialization.SerializationInfo</cref>
+        /// </see>
+        /// with information about the exception.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// The <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic).
+        /// <param name="info">The <see>
+        ///         <cref>T:System.Runtime.Serialization.SerializationInfo</cref>
+        ///     </see>
+        ///     that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see>
+        ///         <cref>T:System.Runtime.Serialization.StreamingContext</cref>
+        ///     </see>
+        ///     that contains contextual information about the source or destination.</param>
+        /// <exception>
+        /// The
+        /// <cref>T:System.ArgumentNullException</cref>
+        /// <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic).
         /// </exception>
         /// <PermissionSet>
         ///     <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/>
