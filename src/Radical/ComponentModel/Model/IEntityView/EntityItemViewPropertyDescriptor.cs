@@ -264,6 +264,11 @@ namespace Radical.ComponentModel
         /// <param name="value">The value to set.</param>
         protected virtual void SetValueCore(IEntityItemView<T> component, object value)
         {
+            if (component == null)
+            {
+                throw new ArgumentNullException(nameof(component));
+            }
+
             Property.SetValue(component.EntityItem, value, null);
         }
     }
