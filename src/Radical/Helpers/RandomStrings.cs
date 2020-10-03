@@ -86,7 +86,7 @@ namespace Radical.Helpers
 
             var pwdBuffer = new StringBuilder()
             {
-                Capacity = MaxLenght
+                Capacity = pwdLength
             };
 
             // Generate random characters
