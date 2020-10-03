@@ -90,12 +90,7 @@ namespace Radical.ComponentModel
         {
             get
             {
-                if (!string.IsNullOrEmpty(_customDisplayName))
-                {
-                    return _customDisplayName;
-                }
-
-                return base.DisplayName;
+                return !string.IsNullOrEmpty(_customDisplayName) ? _customDisplayName : base.DisplayName;
             }
         }
 
