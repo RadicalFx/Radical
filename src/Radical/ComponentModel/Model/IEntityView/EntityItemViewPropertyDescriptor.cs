@@ -9,9 +9,7 @@ namespace Radical.ComponentModel
     /// A specialized PropertyDescriptor
     /// </summary>
     /// <typeparam name="T">The type encapsulated by this descriptor</typeparam>
-    public class EntityItemViewPropertyDescriptor<T> :
-        PropertyDescriptor
-    //where T : class
+    public class EntityItemViewPropertyDescriptor<T> : PropertyDescriptor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityItemViewPropertyDescriptor&lt;T&gt;"/> 
