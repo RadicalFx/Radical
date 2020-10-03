@@ -290,12 +290,15 @@ namespace Radical.ChangeTracking
         public void Revert(IBookmark bookmark)
         {
             EnsureNotSuspended();
+            if (bookmark == null)
+            {
+                throw new ArgumentNullException(nameof(bookmark));
+            }
 
-            Ensure.That(bookmark)
-                .Named("bookmark")
-                .IsNotNull()
-                .If(bmk => !Validate(bmk))
-                .Then((bmk, n) => throw new ArgumentOutOfRangeException(n));
+            if (!Validate(bookmark))
+            {
+                throw new ArgumentOutOfRangeException(nameof(bookmark));
+            }
 
             if (CanRevertTo(bookmark))
             {
@@ -327,11 +330,17 @@ namespace Radical.ChangeTracking
         /// <param name="bookmark">The bookmark.</param>
         protected virtual void OnRevert(IBookmark bookmark)
         {
+            if (bookmark == null)
+            {
+                throw new ArgumentNullException(nameof(bookmark));
+            }
+
             lock (SyncRoot)
             {
                 IChange last = backwardChangesStack.LastOrDefault();
                 while (last != bookmark.Position)
                 {
+                    // ReSharper disable once PossibleNullReferenceException
                     last.Reject(RejectReason.Revert);
                     last.GetChangedEntities().ForEach(entity => tryUnregisterTransient(entity, bookmark));
 
@@ -351,7 +360,11 @@ namespace Radical.ChangeTracking
         /// <returns><c>True</c> if the given bookmark is valid; otherwise <c>false</c>.</returns>
         public virtual bool Validate(IBookmark bookmark)
         {
-            Ensure.That(bookmark).Named("bookmark").IsNotNull();
+            if (bookmark == null)
+            {
+                throw new ArgumentNullException(nameof(bookmark));
+            }
+
             return bookmark.Owner == this && (bookmark.Position == null || backwardChangesStack.Contains(bookmark.Position));
         }
 
