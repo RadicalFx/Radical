@@ -52,5 +52,14 @@ namespace Radical.Tests.Helpers
 
             Assert.IsTrue(rndStr.Any(c=> symbolsArray.Contains(c)), $"{rndStr} does not contain symbols.");
         }
+        
+        [TestMethod]
+        public void Generated_string_should_allow_min_len_equal_to_max_len()
+        {
+            var sut = new RandomStrings {MaxLength = 30, MinLength = 30};
+            var rndStr = sut.Next();
+
+            Assert.AreEqual(30, rndStr.Length);
+        }
     }
 }
