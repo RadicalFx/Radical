@@ -61,11 +61,7 @@
         /// Gets the type on witch the contract attribute is missing.
         /// </summary>
         /// <value>The type on witch the contract attribute is missing.</value>
-        public Type TargetType
-        {
-            get;
-            private set;
-        }
+        public Type TargetType { get; }
 
         /// <summary>
         /// When overridden in a derived class, sets the <see>
