@@ -24,7 +24,7 @@
         {
             if (contractInterface == null)
             {
-                throw new ArgumentNullException("contractInterface");
+                throw new ArgumentNullException(nameof(contractInterface));
             }
 
             ContractInterface = contractInterface;
