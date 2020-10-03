@@ -12,7 +12,7 @@ namespace Radical.ChangeTracking
     /// </summary>
     public class AdvisoryBuilder : IAdvisoryBuilder
     {
-        readonly IChangeSetDistinctVisitor visitor = null;
+        readonly IChangeSetDistinctVisitor visitor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AdvisoryBuilder"/> class.
