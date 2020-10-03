@@ -14,7 +14,7 @@ namespace Radical.DataBinding
         /// <param name="attribute">The attribute.</param>
         /// <param name="value">The value.</param>
         public EnumBinder(EnumItemDescriptionAttribute attribute, T value)
-            : this(attribute.Caption, value, attribute.Index)
+            : this(attribute?.Caption, value, attribute?.Index ?? -1)
         {
 
         }
