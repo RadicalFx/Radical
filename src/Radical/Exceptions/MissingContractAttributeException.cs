@@ -43,7 +43,7 @@
         public MissingContractAttributeException(Type targetType, string message)
             : base(message)
         {
-            TargetType = targetType;
+            TargetType = targetType ?? throw new ArgumentNullException(nameof(targetType));
         }
 
         /// <summary>
