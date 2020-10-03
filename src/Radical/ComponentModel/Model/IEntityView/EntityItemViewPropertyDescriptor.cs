@@ -65,14 +65,7 @@ namespace Radical.ComponentModel
         /// <returns>The default value for this property.</returns>
         public virtual object GetDefaultValue()
         {
-            if (PropertyType.IsValueType)
-            {
-                return Activator.CreateInstance(PropertyType);
-            }
-            else
-            {
-                return null;
-            }
+            return PropertyType.IsValueType ? Activator.CreateInstance(PropertyType) : null;
         }
 
         private readonly PropertyInfo _property;
@@ -161,8 +154,8 @@ namespace Radical.ComponentModel
 
             /*
              * Per farlo funzionare correttamente, anche se per l'uso che ne facciamo noi
-             * Ë del tutto irrilevante bisogna andare alla ircerca di eventuali attributi
-             * DefaultValue impostati sulla propriet‡
+             * √® del tutto irrilevante bisogna andare alla ircerca di eventuali attributi
+             * DefaultValue impostati sulla propriet√†
              */
 
             //if( this.Property != null )
