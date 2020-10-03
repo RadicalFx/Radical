@@ -200,7 +200,7 @@ namespace Radical.ComponentModel
         /// <returns>
         /// The value of a property for a given component.
         /// </returns>
-        public override sealed object GetValue(object component)
+        public sealed override object GetValue(object component)
         {
             if (component == null)
             {
@@ -235,7 +235,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="component">The component with the property value that is to be set.</param>
         /// <param name="value">The new value.</param>
-        public override sealed void SetValue(object component, object value)
+        public sealed override void SetValue(object component, object value)
         {
             if (IsReadOnly)
             {
