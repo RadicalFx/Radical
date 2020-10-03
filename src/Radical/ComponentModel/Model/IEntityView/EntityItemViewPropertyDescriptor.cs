@@ -218,6 +218,11 @@ namespace Radical.ComponentModel
 
         protected virtual object GetValueCore(IEntityItemView<T> component)
         {
+            if (component == null)
+            {
+                throw new ArgumentNullException(nameof(component));
+            }
+
             return Property.GetValue(component.EntityItem, null);
         }
 
