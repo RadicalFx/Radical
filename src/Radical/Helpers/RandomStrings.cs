@@ -231,21 +231,21 @@ namespace Radical.Helpers
         public bool AllowSymbols{ get; set; }
 
         /// <summary>
-        /// If true the resulting string can contains
-        /// equals chars.
+        /// If true the resulting string can contain
+        /// equals characters.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [allow repeat characters]; otherwise, <c>false</c>.
+        ///     <c>true</c> if the resulting string can contain equals characters; otherwise, <c>false</c>.
         /// </value>
         public bool AllowRepeatCharacters { get; set; }
 
 
         /// <summary>
-        /// If true the resulting string can contains
+        /// If true the resulting string can contain
         /// consecutive equals chars.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [allow consecutive characters]; otherwise, <c>false</c>.
+        ///     <c>true</c> if the resulting string can contain consecutive equals characters; otherwise, <c>false</c>.
         /// </value>
         public bool AllowConsecutiveCharacters { get; set; }
     }
