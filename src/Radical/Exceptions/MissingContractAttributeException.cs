@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="targetType">The target type.</param>
         public MissingContractAttributeException(Type targetType)
-            : this(targetType, string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
+            : this(targetType ?? throw new ArgumentNullException(nameof(targetType)), string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
         {
             TargetType = targetType;
         }
