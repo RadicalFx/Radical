@@ -207,6 +207,7 @@ namespace Radical.Analytics
     public class AnalyticsEvent
     {
         public AnalyticsEvent() { }
+        [set: System.Obsolete("Data property setter has been obsoleted and will be removed in v3.0.0.")]
         public System.Collections.Generic.IDictionary<string, object> Data { get; set; }
         public System.DateTimeOffset ExecutedOn { get; set; }
         public string Name { get; set; }
