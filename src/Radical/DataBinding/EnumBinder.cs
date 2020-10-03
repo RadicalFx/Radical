@@ -16,7 +16,6 @@ namespace Radical.DataBinding
         public EnumBinder(EnumItemDescriptionAttribute attribute, T value)
             : this(attribute?.Caption, value, attribute?.Index ?? -1)
         {
-
         }
 
         /// <summary>
@@ -27,7 +26,6 @@ namespace Radical.DataBinding
         public EnumBinder(string caption, T value)
             : this(caption, string.Empty, value, -1)
         {
-
         }
 
         /// <summary>
@@ -39,7 +37,6 @@ namespace Radical.DataBinding
         public EnumBinder(string caption, T value, int index)
             : this(caption, string.Empty, value, index)
         {
-
         }
 
         /// <summary>
@@ -65,40 +62,24 @@ namespace Radical.DataBinding
         /// Gets the caption.
         /// </summary>
         /// <value>The caption.</value>
-        public string Caption
-        {
-            get;
-            private set;
-        }
+        public string Caption { get; }
 
         /// <summary>
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        public string Description
-        {
-            get;
-            private set;
-        }
+        public string Description { get; }
 
         /// <summary>
         /// Gets the value.
         /// </summary>
         /// <value>The value.</value>
-        public T Value
-        {
-            get;
-            private set;
-        }
+        public T Value { get; }
 
         /// <summary>
         /// Gets the index.
         /// </summary>
         /// <value>The index.</value>
-        public int Index
-        {
-            get;
-            private set;
-        }
+        public int Index { get; }
     }
 }
