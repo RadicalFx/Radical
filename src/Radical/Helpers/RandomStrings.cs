@@ -81,6 +81,16 @@ namespace Radical.Helpers
         /// <returns>The generated string.</returns>
         public string Next()
         {
+            if (AllowConsecutiveCharacters && !AllowRepeatCharacters)
+            {
+                throw new ArgumentException("Invalid settings: If AllowConsecutiveCharacters is true, AllowRepeatCharacters must be true as well.");
+            }
+
+            if (MinLength > MaxLength)
+            {
+                throw new ArgumentException("Invalid settings: MinLength cannot be greater than MaxLength.");
+            }
+            
             // Pick random length between minimum and maximum
             var pwdLength = GetCryptographicRandomNumber(MinLenght, MaxLenght);
 
