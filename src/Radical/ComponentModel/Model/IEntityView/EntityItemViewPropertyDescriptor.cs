@@ -245,13 +245,13 @@ namespace Radical.ComponentModel
 
             if (component == null)
             {
-                throw new ArgumentNullException("component");
+                throw new ArgumentNullException(nameof(component));
             }
 
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
             if (oiv == null)
             {
-                throw new ArgumentException("InvalidComponentType", "component");
+                throw new ArgumentException("InvalidComponentType", nameof(component));
             }
 
             SetValueCore(oiv, value);
