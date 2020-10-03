@@ -210,7 +210,7 @@ namespace Radical.ComponentModel
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
             if (oiv == null)
             {
-                throw new ArgumentException("InvalidComponentType", nameof(component));
+                throw new ArgumentException(@"InvalidComponentType", nameof(component));
             }
 
             return GetValueCore(oiv);
@@ -251,7 +251,7 @@ namespace Radical.ComponentModel
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
             if (oiv == null)
             {
-                throw new ArgumentException("InvalidComponentType", nameof(component));
+                throw new ArgumentException(@"InvalidComponentType", nameof(component));
             }
 
             SetValueCore(oiv, value);
