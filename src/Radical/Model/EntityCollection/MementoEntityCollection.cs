@@ -189,8 +189,16 @@ namespace Radical.Model
         [NonSerialized]
         RejectCallback<CollectionRangeDescriptor<T>> collectionAddRangeRejectCallback = null;
 
+        private bool _initInvoked;
         void _init()
         {
+            if (_initInvoked)
+            {
+                return;
+            }
+
+            _initInvoked = true;
+            
             itemAddedRejectCallback = args =>
             {
                 SuspendCaching();
