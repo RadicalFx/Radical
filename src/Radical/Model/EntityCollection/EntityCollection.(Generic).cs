@@ -335,13 +335,13 @@ namespace Radical.Model
             EnsureNotDisposed();
             if (item == null)
             {
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
             }
 
             int index = IndexOf(item);
             if (index == -1)
             {
-                throw new ArgumentOutOfRangeException("item");
+                throw new ArgumentOutOfRangeException(nameof(item));
             }
 
             Move(index, newIndex);
@@ -361,12 +361,12 @@ namespace Radical.Model
             EnsureNotDisposed();
             if (oldIndex < 0 || oldIndex >= Count)
             {
-                throw new ArgumentOutOfRangeException("oldIndex");
+                throw new ArgumentOutOfRangeException(nameof(oldIndex));
             }
 
             if (newIndex < 0 || newIndex >= Count)
             {
-                throw new ArgumentOutOfRangeException("newIndex");
+                throw new ArgumentOutOfRangeException(nameof(newIndex));
             }
 
 
@@ -566,7 +566,7 @@ namespace Radical.Model
             }
             else
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
         }
 
