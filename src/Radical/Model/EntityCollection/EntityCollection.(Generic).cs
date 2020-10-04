@@ -720,7 +720,7 @@ namespace Radical.Model
             if (!defaultCtorSearched)
             {
                 var tType = typeof(T);
-                var ctor = tType.GetConstructor(new Type[0]);
+                var ctor = tType.GetConstructor(Array.Empty<Type>());
 
                 hasDefaultCtor = ctor != null;
                 defaultCtorSearched = true;
