@@ -36,7 +36,7 @@ namespace Radical.Model
             }
         }
 
-        private IList<T> _storage = null;
+        private IList<T> _storage;
 
         /// <summary>
         /// Gets the internal storage.
