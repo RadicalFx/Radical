@@ -32,12 +32,7 @@ namespace Radical.Model
             get
             {
                 EnsureNotDisposed();
-                if (_events == null)
-                {
-                    _events = new EventHandlerList();
-                }
-
-                return _events;
+                return _events ??= new EventHandlerList();
             }
         }
 
