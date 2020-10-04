@@ -47,12 +47,7 @@ namespace Radical.Model
             get
             {
                 EnsureNotDisposed();
-                if (_storage == null)
-                {
-                    _storage = new List<T>();
-                }
-
-                return _storage;
+                return _storage ??= new List<T>();
             }
         }
 
