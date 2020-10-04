@@ -115,7 +115,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Raises the <see cref="E:CollectionChanged"/> event.
+        /// Raises the <see cref="CollectionChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="Radical.ComponentModel.CollectionChangedEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(CollectionChangedEventArgs<T> e)
@@ -277,7 +277,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="T:T"/> at the specified index.
+        /// Gets or sets the <see cref="T"/> at the specified index.
         /// </summary>
         /// <item></item>
         public T this[int index]
@@ -398,9 +398,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes all items from the <see cref="T:System.Collections.IList"></see>.
+        /// Removes all items from the <see cref="System.Collections.IList"></see>.
         /// </summary>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"></see> is read-only. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"></see> is read-only. </exception>
         public void Clear()
         {
             EnsureNotDisposed();
@@ -413,11 +413,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific item.
+        /// Determines whether the collection contains a specific item.
         /// </summary>
-        /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to locate in the collection.</param>
         /// <returns>
-        /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+        /// true if <paramref name="item"/> is found in the collection; otherwise, false.
         /// </returns>
         public bool Contains(T item)
         {
@@ -476,10 +476,10 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// Gets a value indicating whether the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/> is read-only.
         /// </summary>
         /// <value></value>
-        /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/> is read-only; otherwise, false.</returns>
         protected virtual bool IsReadOnly
         {
             get
@@ -540,11 +540,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes the <see cref="T:System.Collections.IList"></see> item at the specified index.
+        /// Removes the <see cref="System.Collections.IList"></see> item at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index of the item to remove.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">index is not a valid index in the <see cref="T:System.Collections.IList"></see>. </exception>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"></see> is read-only.-or- The <see cref="T:System.Collections.IList"></see> has a fixed size. </exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">index is not a valid index in the <see cref="System.Collections.IList"></see>. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"></see> is read-only.-or- The <see cref="System.Collections.IList"></see> has a fixed size. </exception>
         public void RemoveAt(int index)
         {
             EnsureNotDisposed();
@@ -571,10 +571,10 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Gets the number of elements contained in the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>.
         /// </summary>
         /// <value></value>
-        /// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+        /// <returns>The number of elements contained in the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>.</returns>
         public int Count
         {
             get
@@ -588,13 +588,13 @@ namespace Radical.Model
         /// Copies the elements of this collection to a T[].
         /// </summary>
         /// <param name="array">The one-dimensional T[] that is the destination of the elements copied from collection. The T[] must have zero-based indexing.</param>
-        /// <exception cref="T:System.ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         ///   <paramref name="array"/> is null. </exception>
         ///   
-        /// <exception cref="T:System.ArgumentException">
-        ///   <paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space in the destination <paramref name="array"/>. </exception>
+        /// <exception cref="System.ArgumentException">
+        ///   <paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="System.Collections.ICollection"/> is greater than the available space in the destination <paramref name="array"/>. </exception>
         ///   
-        /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
+        /// <exception cref="System.ArgumentException">The type of the source <see cref="System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
         public void CopyTo(T[] array)
         {
             EnsureNotDisposed();
@@ -602,16 +602,16 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+        /// Copies the elements of the <see cref="System.Collections.Generic.ICollection`1"/> to an <see cref="System.Array"/>, starting at a particular <see cref="System.Array"/> index.
         /// </summary>
-        /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+        /// <param name="array">The one-dimensional <see cref="System.Array"/> that is the destination of the elements copied from <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>. The <see cref="System.Array"/> must have zero-based indexing.</param>
         /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-        /// <exception cref="T:System.ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         ///     <paramref name="array"/> is null.</exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// <exception cref="System.ArgumentOutOfRangeException">
         ///     <paramref name="arrayIndex"/> is less than 0.</exception>
-        /// <exception cref="T:System.ArgumentException">
-        ///     <paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type T cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        /// <exception cref="System.ArgumentException">
+        ///     <paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type T cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
             EnsureNotDisposed();
@@ -622,7 +622,7 @@ namespace Radical.Model
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.
+        /// An <see cref="System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -634,7 +634,7 @@ namespace Radical.Model
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// A <see cref="System.Collections.Generic.IEnumerator&lt;T&gt;"/> that can be used to iterate through the collection.
         /// </returns>
         public virtual IEnumerator<T> GetEnumerator()
         {
