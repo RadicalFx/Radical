@@ -14,22 +14,20 @@ namespace Radical.Tests.Windows.Messaging
     {
         class PocoTestMessage
         {
-
         }
 
         class PocoMessageDerivedFromTestMessage : PocoTestMessage
         {
-
         }
 
         class AnotherPocoTestMessage
         {
-
         }
 
         [TestMethod]
         [TestCategory("MessageBroker")]
-        public void messageBroker_POCO_unsubscribe_specific_subscriber_should_remove_only_subscriptions_for_that_subscriber()
+        public void
+            messageBroker_POCO_unsubscribe_specific_subscriber_should_remove_only_subscriptions_for_that_subscriber()
         {
             const int expected = 1;
             var actual = 0;
@@ -55,7 +53,8 @@ namespace Radical.Tests.Windows.Messaging
 
         [TestMethod]
         [TestCategory("MessageBroker")]
-        public void messageBroker_POCO_unsubscribe_specific_subscriber_and_specific_messageType_should_remove_only_subscriptions_for_that_subscriber()
+        public void
+            messageBroker_POCO_unsubscribe_specific_subscriber_and_specific_messageType_should_remove_only_subscriptions_for_that_subscriber()
         {
             const int expected = 1;
             var actual = 0;
@@ -90,13 +89,13 @@ namespace Radical.Tests.Windows.Messaging
         public void messageBroker_POCO_subscribe_using_null_action_should_raise_ArgumentNullException()
         {
             Executing.This(() =>
-           {
-               var dispatcher = new NullDispatcher();
-               var broker = new MessageBroker(dispatcher);
+                {
+                    var dispatcher = new NullDispatcher();
+                    var broker = new MessageBroker(dispatcher);
 
-               broker.Subscribe<PocoTestMessage>(this, (Action<object, PocoTestMessage>)null);
-           })
-            .Should().Throw<ArgumentNullException>();
+                    broker.Subscribe<PocoTestMessage>(this, (Action<object, PocoTestMessage>)null);
+                })
+                .Should().Throw<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -128,9 +127,11 @@ namespace Radical.Tests.Windows.Messaging
         [TestCategory("MessageBroker")]
         public void messageBroker_POCO_broadcast_using_more_then_one_subscriber_should_call_on_different_thread()
         {
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+            if (Environment.OSVersion.Platform == PlatformID.Unix ||
+                Environment.OSVersion.Platform == PlatformID.MacOSX)
             {
-                Assert.Inconclusive("Test that depends on setting the ApartmentState to MTA can only be run on Windows");
+                Assert.Inconclusive(
+                    "Test that depends on setting the ApartmentState to MTA can only be run on Windows");
                 return;
             }
 
@@ -160,7 +161,7 @@ namespace Radical.Tests.Windows.Messaging
 
                 broker.Broadcast(this, new PocoTestMessage());
 
-                WaitHandle.WaitAll(new[] { h1, h2 });
+                WaitHandle.WaitAll(new[] {h1, h2});
 
                 currentThreadId.Should().Not.Be.EqualTo(s1ThreadId);
                 currentThreadId.Should().Not.Be.EqualTo(s2ThreadId);
@@ -188,17 +189,17 @@ namespace Radical.Tests.Windows.Messaging
             private void Execute()
             {
                 var worker = new Thread(() =>
-               {
-                   try
-                   {
-                       test();
-                   }
-                   catch (Exception e)
-                   {
-                       Console.WriteLine(e);
-                       ex = e;
-                   }
-               });
+                {
+                    try
+                    {
+                        test();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        ex = e;
+                    }
+                });
 
                 worker.SetApartmentState(state);
                 worker.Start();
@@ -213,7 +214,8 @@ namespace Radical.Tests.Windows.Messaging
 
         [TestMethod]
         [TestCategory("MessageBroker")]
-        public void MessageBroker_POCO_subscriber_using_a_base_class_should_be_dispatched_using_a_derived_class_message()
+        public void
+            MessageBroker_POCO_subscriber_using_a_base_class_should_be_dispatched_using_a_derived_class_message()
         {
             var actual = false;
 
@@ -228,7 +230,8 @@ namespace Radical.Tests.Windows.Messaging
 
         [TestMethod]
         [TestCategory("MessageBroker")]
-        public void MessageBroker_POCO_subscriber_using_a_base_class_should_be_dispatched_using_a_derived_class_message_even_using_different_messages()
+        public void
+            MessageBroker_POCO_subscriber_using_a_base_class_should_be_dispatched_using_a_derived_class_message_even_using_different_messages()
         {
             var actual = 0;
 
@@ -244,7 +247,8 @@ namespace Radical.Tests.Windows.Messaging
 
         [TestMethod]
         [TestCategory("MessageBroker")]
-        public void MessageBroker_POCO_subscriber_using_a_base_class_should_be_dispatched_only_to_the_expected_inheritance_chain()
+        public void
+            MessageBroker_POCO_subscriber_using_a_base_class_should_be_dispatched_only_to_the_expected_inheritance_chain()
         {
             var actual = 0;
 
@@ -293,7 +297,8 @@ namespace Radical.Tests.Windows.Messaging
                 : sw.ElapsedMilliseconds;
 
             var subCountForLongRunning = (longRunningTiming / elapsedMilliseconds) * metricsCount;
-            Trace.WriteLine(string.Format("Need {0} subscriptions to run for at least {1} ms. {2} took {3} ms.", subCountForLongRunning, longRunningTiming, metricsCount, sw.ElapsedMilliseconds));
+            Trace.WriteLine(string.Format("Need {0} subscriptions to run for at least {1} ms. {2} took {3} ms.",
+                subCountForLongRunning, longRunningTiming, metricsCount, sw.ElapsedMilliseconds));
 
             for (int i = 0; i < subCountForLongRunning - metricsCount; i++)
             {
@@ -302,25 +307,25 @@ namespace Radical.Tests.Windows.Messaging
 
             // this will take approximately 100 ms to do 1 broadcast
             var broadcastThread1 = new Thread(payload =>
-           {
-               while (run)
-               {
-                   try
-                   {
-                       broker.Broadcast(this, new PocoTestMessage());
-                   }
-                   catch (Exception e)
-                   {
-                       lock (this)
-                       {
-                           failure = e;
-                           wh.Set();
-                       }
+            {
+                while (run)
+                {
+                    try
+                    {
+                        broker.Broadcast(this, new PocoTestMessage());
+                    }
+                    catch (Exception e)
+                    {
+                        lock (this)
+                        {
+                            failure = e;
+                            wh.Set();
+                        }
 
-                       break;
-                   }
-               }
-           });
+                        break;
+                    }
+                }
+            });
             broadcastThread1.IsBackground = true;
             broadcastThread1.Start();
 
@@ -347,7 +352,6 @@ namespace Radical.Tests.Windows.Messaging
                         }
                     }
                 }
-
             });
             subscriberThread1.IsBackground = true;
             subscriberThread1.Start();
@@ -364,7 +368,6 @@ namespace Radical.Tests.Windows.Messaging
             subscriberThread1.Join();
 
             Assert.IsNull(failure, failure != null ? failure.ToString() : "--");
-
         }
 
         [TestMethod]
@@ -394,7 +397,11 @@ namespace Radical.Tests.Windows.Messaging
             var dispatcher = new NullDispatcher();
             var broker = new MessageBroker(dispatcher);
 
-            broker.Subscribe(this, this, typeof(PocoTestMessage), InvocationModel.Default, (s, msg) => false, (s, msg) => { /* NOP */ });
+            broker.Subscribe(this, this, typeof(PocoTestMessage), InvocationModel.Default, (s, msg) => false,
+                (s, msg) =>
+                {
+                    /* NOP */
+                });
         }
     }
 }
