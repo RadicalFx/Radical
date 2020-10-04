@@ -127,7 +127,7 @@ namespace Radical.Model
         public MementoEntityCollection()
             : base()
         {
-
+            _init();
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Radical.Model
         public MementoEntityCollection(int capacity)
             : base(capacity)
         {
-
+            _init();
         }
 
         /// <summary>
@@ -147,13 +147,13 @@ namespace Radical.Model
         public MementoEntityCollection(IEnumerable<T> collection)
             : base(collection)
         {
-
+            _init();
         }
 
         public MementoEntityCollection(IList<T> storage)
             : base(storage)
         {
-
+            _init();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Radical.Model
         protected MementoEntityCollection(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-
+            _init();
         }
 
 
@@ -189,16 +189,8 @@ namespace Radical.Model
         [NonSerialized]
         RejectCallback<CollectionRangeDescriptor<T>> collectionAddRangeRejectCallback = null;
 
-        /// <summary>
-        /// Called when during the inizialization process,
-        /// override this method to be notified when the default
-        /// ctor has been called.
-        /// </summary>
-        protected override void OnInitialize()
+        void _init()
         {
-            base.OnInitialize();
-
-
             itemAddedRejectCallback = args =>
             {
                 SuspendCaching();
@@ -208,7 +200,7 @@ namespace Radical.Model
                     case RejectReason.Undo:
                         /*
                          * Stiamo facendo l'Undo di un elemento
-                         * che è stato aggiunto:
+                         * che Ã¨ stato aggiunto:
                          *    - lo rimuoviamo;
                          *    - lo aggiungiamo alla coda delle Redo
                          */
@@ -218,7 +210,7 @@ namespace Radical.Model
 
                     case RejectReason.Redo:
                         /*
-                         * Stiamo facendo la Redo di un elemento che è 
+                         * Stiamo facendo la Redo di un elemento che Ã¨ 
                          * stato aggiunto:
                          *    - dobbiamo riaggiungerlo;
                          *    - lo aggiungiamo alla coda delle Undo
@@ -231,7 +223,7 @@ namespace Radical.Model
                     case RejectReason.Revert:
                         /*
                          * Stiamo resettando lo stato di un elemento
-                         * che è stato aggiunto:
+                         * che Ã¨ stato aggiunto:
                          *    - ci limitiamo a rimuoverlo
                          */
                         Remove(args.CachedValue.Item);
@@ -252,7 +244,7 @@ namespace Radical.Model
                     case RejectReason.Undo:
                         /*
                          * Stiamo facendo l'Undo di un elemento
-                         * che è stato spostato:
+                         * che Ã¨ stato spostato:
                          *    - lo rimettiamo al suo posto;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
@@ -262,7 +254,7 @@ namespace Radical.Model
 
                     case RejectReason.Redo:
                         /*
-                         * Stiamo facendo la Redo di un elemento che è 
+                         * Stiamo facendo la Redo di un elemento che Ã¨ 
                          * stato spostato:
                          *    - dobbiamo rispostarlo;
                          *    - lo aggiungiamo alla coda delle Undo
@@ -275,7 +267,7 @@ namespace Radical.Model
                     case RejectReason.Revert:
                         /*
                          * Stiamo resettando lo stato di un elemento
-                         * che è stato spostato:
+                         * che Ã¨ stato spostato:
                          *    - ci limitiamo a rimetterlo al posto originario
                          */
                         Move(args.CachedValue.NewIndex, args.CachedValue.OldIndex);
@@ -296,7 +288,7 @@ namespace Radical.Model
                     case RejectReason.Undo:
                         /*
                          * Stiamo facendo l'Undo di un elemento
-                         * che è stato rimosso:
+                         * che Ã¨ stato rimosso:
                          *    - lo rimettiamo al suo posto;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
@@ -306,7 +298,7 @@ namespace Radical.Model
 
                     case RejectReason.Redo:
                         /*
-                         * Stiamo facendo la Redo di un elemento che è 
+                         * Stiamo facendo la Redo di un elemento che Ã¨ 
                          * stato rimosso:
                          *    - dobbiamo rimuoverlo nuovamente;
                          *    - lo aggiungiamo alla coda delle Undo
@@ -319,7 +311,7 @@ namespace Radical.Model
                     case RejectReason.Revert:
                         /*
                          * Stiamo resettando lo stato di un elemento
-                         * che è stato rimosso:
+                         * che Ã¨ stato rimosso:
                          *    - ci limitiamo a rimetterlo definitivamente al posto originario
                          */
                         Insert(args.CachedValue.Index, args.CachedValue.Item);
@@ -340,7 +332,7 @@ namespace Radical.Model
                     case RejectReason.Undo:
                         /*
                          * Stiamo facendo l'Undo di un elemento
-                         * che è stato inserito:
+                         * che Ã¨ stato inserito:
                          *    - lo togliamo;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
@@ -350,7 +342,7 @@ namespace Radical.Model
 
                     case RejectReason.Redo:
                         /*
-                         * Stiamo facendo la Redo di un elemento che è 
+                         * Stiamo facendo la Redo di un elemento che Ã¨ 
                          * stato inserito:
                          *    - dobbiamo reinserirlo;
                          *    - lo aggiungiamo alla coda delle Undo
@@ -363,7 +355,7 @@ namespace Radical.Model
                     case RejectReason.Revert:
                         /*
                          * Stiamo resettando lo stato di un elemento
-                         * che è stato inserito:
+                         * che Ã¨ stato inserito:
                          *    - ci limitiamo a rimoverlo definitivamente
                          */
                         RemoveAt(args.CachedValue.Index);
@@ -384,7 +376,7 @@ namespace Radical.Model
                     case RejectReason.Undo:
                         /*
                          * Stiamo facendo l'Undo di un elemento
-                         * che è stato sostituito:
+                         * che Ã¨ stato sostituito:
                          *    - lo togliamo e rimettiamo al suo posto quello vecchio;
                          *    - lo aggiungiamo alla coda delle Redo;
                          */
@@ -394,7 +386,7 @@ namespace Radical.Model
 
                     case RejectReason.Redo:
                         /*
-                         * Stiamo facendo la Redo di un elemento che è 
+                         * Stiamo facendo la Redo di un elemento che Ã¨ 
                          * stato sostituito:
                          *    - dobbiamo rimmetere quello nuovo;
                          *    - lo aggiungiamo alla coda delle Undo
@@ -407,7 +399,7 @@ namespace Radical.Model
                     case RejectReason.Revert:
                         /*
                          * Stiamo resettando lo stato di un elemento
-                         * che è stato sostituito:
+                         * che Ã¨ stato sostituito:
                          *    - ci limitiamo a rimettere posto quello vecchio;
                          */
                         this[args.CachedValue.Index] = args.CachedValue.ReplacedItem;
