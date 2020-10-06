@@ -180,6 +180,7 @@ namespace Radical.Model
         /// override this method to be notified when the default
         /// constructor has been called.
         /// </summary>
+        [Obsolete("OnInitialize has been obsoleted. Move initialization code to collection constructor. Will be removed in v3.0.0.")]
         protected virtual void OnInitialize()
         {
     
