@@ -10,28 +10,43 @@ namespace Radical.ComponentModel
     /// </summary>
     public delegate void EntityItemViewValueSetter<T, TValue>(EntityItemViewValueSetterArgs<T, TValue> args);
 
+    /// <summary>
+    /// Base class for argument for an EntityItemViewValueGetter or EntityItemViewValueSetter
+    /// </summary>
     public abstract class EntityItemViewValueArgs<T>
     {
+        /// <summary>
+        /// EntityItemViewValueArgs constructor.
+        /// </summary>
+        /// <param name="item">The entity item view.</param>
+        /// <param name="propertyName">The property name.</param>
         protected EntityItemViewValueArgs(IEntityItemView<T> item, string propertyName)
         {
             Item = item;
             PropertyName = propertyName;
         }
 
-        public IEntityItemView<T> Item
-        {
-            get;
-            private set;
-        }
+        /// <summary>
+        /// The entity item view item.
+        /// </summary>
+        public IEntityItemView<T> Item { get; }
 
-        public string PropertyName
-        {
-            get;
-            private set;
-        }
+        /// <summary>
+        /// The name of the property.
+        /// </summary>
+        public string PropertyName { get; }
     }
+    
+    /// <summary>
+    /// Argument for an EntityItemViewValueGetter
+    /// </summary>
     public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
+        /// <summary>
+        /// EntityItemViewValueArgs constructor.
+        /// </summary>
+        /// <param name="item">The entity item view.</param>
+        /// <param name="propertyName">The property name.</param>
         public EntityItemViewValueGetterArgs(IEntityItemView<T> item, string propertyName)
             : base(item, propertyName)
         {
@@ -39,18 +54,26 @@ namespace Radical.ComponentModel
         }
     }
 
+    /// <summary>
+    /// Argument for an EntityItemViewValueSetter
+    /// </summary>
     public class EntityItemViewValueSetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
+        /// <summary>
+        /// EntityItemViewValueArgs constructor.
+        /// </summary>
+        /// <param name="item">The entity item view.</param>
+        /// <param name="propertyName">The property name.</param>
+        /// <param name="value">The set value.</param>
         public EntityItemViewValueSetterArgs(IEntityItemView<T> item, string propertyName, TValue value)
             : base(item, propertyName)
         {
             Value = value;
         }
 
-        public TValue Value
-        {
-            get;
-            private set;
-        }
+        /// <summary>
+        /// The value stored in the setter.
+        /// </summary>
+        public TValue Value { get; }
     }
 }

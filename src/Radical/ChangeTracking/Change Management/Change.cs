@@ -56,10 +56,10 @@ namespace Radical.ChangeTracking
         public void Commit(CommitReason reason)
         {
             reason.EnsureIsDefined();
-            Ensure.That(reason)
-                .Named("reason")
-                .If(v => v == CommitReason.None)
-                .Then((v, n) => throw new ArgumentException("Unsupported CommitReason value.", n));
+            if (reason == CommitReason.None)
+            {
+                throw new ArgumentException($@"Unsupported CommitReason value: {reason}.", nameof(reason));
+            }
 
             OnCommit(reason);
             OnCommitted(new CommittedEventArgs(reason));

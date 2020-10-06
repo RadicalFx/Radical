@@ -39,7 +39,7 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void EnumBinder_enumItemDescriptionAttribute_object_ctor_null_attribute()
         {
             var value = TestEnum.Value2;

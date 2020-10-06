@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="targetType">The target type.</param>
         public MissingContractAttributeException(Type targetType)
-            : this(targetType, string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
+            : this(targetType ?? throw new ArgumentNullException(nameof(targetType)), string.Format(CultureInfo.CurrentCulture, "ContractAttribute missing on type: {0}.", targetType.FullName))
         {
             TargetType = targetType;
         }
@@ -43,7 +43,7 @@
         public MissingContractAttributeException(Type targetType, string message)
             : base(message)
         {
-            TargetType = targetType;
+            TargetType = targetType ?? throw new ArgumentNullException(nameof(targetType));
         }
 
         /// <summary>
@@ -61,19 +61,26 @@
         /// Gets the type on witch the contract attribute is missing.
         /// </summary>
         /// <value>The type on witch the contract attribute is missing.</value>
-        public Type TargetType
-        {
-            get;
-            private set;
-        }
+        public Type TargetType { get; }
 
         /// <summary>
-        /// When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+        /// When overridden in a derived class, sets the <see>
+        ///     <cref>T:System.Runtime.Serialization.SerializationInfo</cref>
+        /// </see>
+        /// with information about the exception.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// The <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic).
+        /// <param name="info">The <see>
+        ///         <cref>T:System.Runtime.Serialization.SerializationInfo</cref>
+        ///     </see>
+        ///     that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see>
+        ///         <cref>T:System.Runtime.Serialization.StreamingContext</cref>
+        ///     </see>
+        ///     that contains contextual information about the source or destination.</param>
+        /// <exception>
+        /// The
+        /// <cref>T:System.ArgumentNullException</cref>
+        /// <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic).
         /// </exception>
         /// <PermissionSet>
         ///     <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/>

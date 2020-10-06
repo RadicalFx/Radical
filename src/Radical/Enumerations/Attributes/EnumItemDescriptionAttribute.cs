@@ -41,8 +41,8 @@ namespace Radical
         /// <param name="index">The index.</param>
         public EnumItemDescriptionAttribute(string caption, string description, int index)
         {
-            _caption = caption ?? throw new ArgumentNullException("caption");
-            _description = description ?? throw new ArgumentNullException("description");
+            _caption = caption ?? throw new ArgumentNullException(nameof(caption));
+            _description = description ?? throw new ArgumentNullException(nameof(description));
             _index = index;
         }
 

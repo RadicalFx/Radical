@@ -12,7 +12,7 @@ namespace Radical.ChangeTracking
     /// </summary>
     public class AdvisoryBuilder : IAdvisoryBuilder
     {
-        readonly IChangeSetDistinctVisitor visitor = null;
+        readonly IChangeSetDistinctVisitor visitor;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AdvisoryBuilder"/> class.
@@ -33,6 +33,11 @@ namespace Radical.ChangeTracking
         /// <returns>The generated advisory.</returns>
         public IAdvisory GenerateAdvisory(IChangeTrackingService svc, IChangeSet changeSet)
         {
+            if (svc == null)
+            {
+                throw new ArgumentNullException(nameof(svc));
+            }
+
             var result = new List<IAdvisedAction>();
 
             var distinct = visitor.Visit(changeSet);
