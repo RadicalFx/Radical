@@ -1326,6 +1326,8 @@ namespace Radical.Model
         protected virtual void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         protected virtual void OnDisposed() { }
         protected virtual void OnGetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        [System.Obsolete("OnInitialize has been obsoleted. Move initialization code to collection construct" +
+            "or. Will be removed in v3.0.0.")]
         protected virtual void OnInitialize() { }
         protected virtual void OnInsert(Radical.Model.InsertEventArgs<T> e) { }
         protected virtual void OnInsertCompleted(int index, T value) { }
@@ -1576,7 +1578,6 @@ namespace Radical.Model
         protected override void OnClearCompleted(System.Collections.Generic.IEnumerable<T> clearedItems) { }
         protected override void OnDeserialization(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         protected override void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        protected override void OnInitialize() { }
         protected override void OnInsertCompleted(int index, T value) { }
         protected virtual void OnMementoChanged(Radical.ComponentModel.ChangeTracking.IChangeTrackingService newMemento, Radical.ComponentModel.ChangeTracking.IChangeTrackingService oldMemento) { }
         protected override void OnMoveCompleted(int oldIndex, int newIndex, T value) { }
