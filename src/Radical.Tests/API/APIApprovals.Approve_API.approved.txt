@@ -1,4 +1,5 @@
-﻿[assembly: System.Resources.NeutralResourcesLanguage("en-US", System.Resources.UltimateResourceFallbackLocation.MainAssembly)]
+﻿[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/RadicalFx/Radical.git")]
+[assembly: System.Resources.NeutralResourcesLanguage("en-US", System.Resources.UltimateResourceFallbackLocation.MainAssembly)]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Radical.Tests")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 [assembly: System.Runtime.InteropServices.Guid("ac1104e2-8764-42ea-80aa-bfd22bc6a89f")]
