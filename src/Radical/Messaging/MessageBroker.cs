@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Radical.Messaging
 {
     /// <summary>
-    /// A message broker is a mediator used to dispatch and 
+    /// A message broker is a mediator used to dispatch and
     /// broadcast messages to all the subscribers in the system.
     /// </summary>
     public class MessageBroker : IMessageBroker
@@ -508,7 +508,7 @@ namespace Radical.Messaging
                         factory.StartNew(() =>
                         {
                             sub.Invoke(sender, message);
-                        });
+                        }, TaskCreationOptions.LongRunning);
                     });
             }
         }
@@ -545,7 +545,7 @@ namespace Radical.Messaging
                             tasks.Add(factory.StartNew(() =>
                             {
                                 sub.Invoke(sender, message);
-                            }));
+                            }, TaskCreationOptions.LongRunning));
                         }
                     });
 
