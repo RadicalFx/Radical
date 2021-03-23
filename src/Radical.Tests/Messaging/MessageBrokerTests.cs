@@ -273,8 +273,6 @@ namespace Radical.Tests.Windows.Messaging
         [TestCategory("MessageBroker")]
         public void MessageBroker_broadcast_from_multiple_thread_should_not_fail()
         {
-            Assert.Inconclusive();
-            
             Exception failure = null;
             var wh = new ManualResetEvent(false);
             var run = true;
