@@ -1,10 +1,12 @@
-﻿namespace Radical.Tests.Helpers
+﻿// ReSharper disable ConditionIsAlwaysTrueOrFalse
+namespace Radical.Tests.Helpers
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Radical.Helpers;
     using SharpTestsEx;
     using System;
 
+#pragma warning disable 618
     [TestClass]
     public class CommandLineTests
     {
@@ -269,4 +271,5 @@
             actual.Password.Should().Be.EqualTo("P@ssw0rd");
         }
     }
+#pragma warning restore 618
 }

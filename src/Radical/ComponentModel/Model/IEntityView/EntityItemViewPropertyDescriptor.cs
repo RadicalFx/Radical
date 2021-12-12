@@ -9,9 +9,7 @@ namespace Radical.ComponentModel
     /// A specialized PropertyDescriptor
     /// </summary>
     /// <typeparam name="T">The type encapsulated by this descriptor</typeparam>
-    public class EntityItemViewPropertyDescriptor<T> :
-        PropertyDescriptor
-    //where T : class
+    public class EntityItemViewPropertyDescriptor<T> : PropertyDescriptor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityItemViewPropertyDescriptor&lt;T&gt;"/> 
@@ -65,14 +63,7 @@ namespace Radical.ComponentModel
         /// <returns>The default value for this property.</returns>
         public virtual object GetDefaultValue()
         {
-            if (PropertyType.IsValueType)
-            {
-                return Activator.CreateInstance(PropertyType);
-            }
-            else
-            {
-                return null;
-            }
+            return PropertyType.IsValueType ? Activator.CreateInstance(PropertyType) : null;
         }
 
         private readonly PropertyInfo _property;
@@ -86,7 +77,7 @@ namespace Radical.ComponentModel
             get { return _property; }
         }
 
-        readonly string _customDisplayName = null;
+        readonly string _customDisplayName;
 
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.
@@ -97,12 +88,7 @@ namespace Radical.ComponentModel
         {
             get
             {
-                if (!string.IsNullOrEmpty(_customDisplayName))
-                {
-                    return _customDisplayName;
-                }
-
-                return base.DisplayName;
+                return !string.IsNullOrEmpty(_customDisplayName) ? _customDisplayName : base.DisplayName;
             }
         }
 
@@ -110,7 +96,16 @@ namespace Radical.ComponentModel
         /// When overridden in a derived class, gets the type of the component this property is bound to.
         /// </summary>
         /// <value></value>
-        /// <returns>A <see cref="T:System.Type"/> that represents the type of component this property is bound to. When the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)"/> or <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)"/> methods are invoked, the object specified might be an instance of this type.</returns>
+        /// <returns>A <see>
+        ///         <cref>T:System.Type</cref>
+        ///     </see>
+        ///     that represents the type of component this property is bound to. When the <see>
+        ///         <cref>M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)</cref>
+        ///     </see>
+        ///     or <see>
+        ///         <cref>M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)</cref>
+        ///     </see>
+        ///     methods are invoked, the object specified might be an instance of this type.</returns>
         public override Type ComponentType
         {
             get { return typeof(IEntityItemView<T>); }
@@ -120,7 +115,10 @@ namespace Radical.ComponentModel
         /// When overridden in a derived class, gets the type of the property.
         /// </summary>
         /// <value></value>
-        /// <returns>A <see cref="T:System.Type"/> that represents the type of the property.</returns>
+        /// <returns>A <see>
+        ///         <cref>T:System.Type</cref>
+        ///     </see>
+        ///     that represents the type of the property.</returns>
         public override Type PropertyType
         {
             get { return Property.PropertyType; }
@@ -161,8 +159,8 @@ namespace Radical.ComponentModel
 
             /*
              * Per farlo funzionare correttamente, anche se per l'uso che ne facciamo noi
-             * Ë del tutto irrilevante bisogna andare alla ircerca di eventuali attributi
-             * DefaultValue impostati sulla propriet‡
+             * √® del tutto irrilevante bisogna andare alla ircerca di eventuali attributi
+             * DefaultValue impostati sulla propriet√†
              */
 
             //if( this.Property != null )
@@ -200,32 +198,33 @@ namespace Radical.ComponentModel
         /// <returns>
         /// The value of a property for a given component.
         /// </returns>
-        public override sealed object GetValue(object component)
+        public sealed override object GetValue(object component)
         {
             if (component == null)
             {
-                throw new ArgumentNullException("component");
+                throw new ArgumentNullException(nameof(component));
             }
 
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
             if (oiv == null)
             {
-                throw new ArgumentException("InvalidComponentType", "component");
+                throw new ArgumentException(@"InvalidComponentType", nameof(component));
             }
 
             return GetValueCore(oiv);
         }
 
-        //Radical.Reflection.Function<Object> fastGetter = null;
-
+        /// <summary>
+        /// Extracts the value from the given component.
+        /// </summary>
+        /// <param name="component">The component</param>
+        /// <returns>The component value.</returns>
         protected virtual object GetValueCore(IEntityItemView<T> component)
         {
-            //if( fastGetter == null ) 
-            //{
-            //    fastGetter = Radical.Reflection.ObjectExtensions.CreateFastPropertyGetter( component.EntityItem, this.Property );
-            //}
-
-            //return fastGetter();
+            if (component == null)
+            {
+                throw new ArgumentNullException(nameof(component));
+            }
 
             return Property.GetValue(component.EntityItem, null);
         }
@@ -235,7 +234,7 @@ namespace Radical.ComponentModel
         /// </summary>
         /// <param name="component">The component with the property value that is to be set.</param>
         /// <param name="value">The new value.</param>
-        public override sealed void SetValue(object component, object value)
+        public sealed override void SetValue(object component, object value)
         {
             if (IsReadOnly)
             {
@@ -244,20 +243,30 @@ namespace Radical.ComponentModel
 
             if (component == null)
             {
-                throw new ArgumentNullException("component");
+                throw new ArgumentNullException(nameof(component));
             }
 
             IEntityItemView<T> oiv = component as IEntityItemView<T>;
             if (oiv == null)
             {
-                throw new ArgumentException("InvalidComponentType", "component");
+                throw new ArgumentException(@"InvalidComponentType", nameof(component));
             }
 
             SetValueCore(oiv, value);
         }
 
+        /// <summary>
+        /// Sets the value of the given component.
+        /// </summary>
+        /// <param name="component">The component</param>
+        /// <param name="value">The value to set.</param>
         protected virtual void SetValueCore(IEntityItemView<T> component, object value)
         {
+            if (component == null)
+            {
+                throw new ArgumentNullException(nameof(component));
+            }
+
             Property.SetValue(component.EntityItem, value, null);
         }
     }

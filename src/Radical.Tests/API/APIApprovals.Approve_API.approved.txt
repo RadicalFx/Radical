@@ -1,4 +1,5 @@
-﻿[assembly: System.Resources.NeutralResourcesLanguage("en-US", System.Resources.UltimateResourceFallbackLocation.MainAssembly)]
+﻿[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/RadicalFx/Radical.git")]
+[assembly: System.Resources.NeutralResourcesLanguage("en-US", System.Resources.UltimateResourceFallbackLocation.MainAssembly)]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Radical.Tests")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 [assembly: System.Runtime.InteropServices.Guid("ac1104e2-8764-42ea-80aa-bfd22bc6a89f")]
@@ -206,6 +207,7 @@ namespace Radical.Analytics
     public class AnalyticsEvent
     {
         public AnalyticsEvent() { }
+        [set: System.Obsolete("Data property setter has been obsoleted and will be removed in v3.0.0.")]
         public System.Collections.Generic.IDictionary<string, object> Data { get; set; }
         public System.DateTimeOffset ExecutedOn { get; set; }
         public string Name { get; set; }
@@ -653,6 +655,8 @@ namespace Radical.ComponentModel
         public T Item { get; }
         public int OldIndex { get; }
     }
+    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
+        "v3.0.0.")]
     public class ComponentRegisteredEventArgs : System.EventArgs
     {
         public ComponentRegisteredEventArgs(Radical.ComponentModel.IContainerEntry entry) { }
@@ -723,10 +727,14 @@ namespace Radical.ComponentModel
         bool IsEnabled { get; set; }
         void TrackUserActionAsync(Radical.Analytics.AnalyticsEvent action);
     }
+    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
+        "v3.0.0.")]
     public interface IBootable
     {
         void Boot();
     }
+    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
+        "v3.0.0.")]
     public interface IContainerEntry
     {
         System.Type Component { get; }
@@ -859,6 +867,8 @@ namespace Radical.ComponentModel
         System.Collections.Generic.IEnumerable<T> ResolveAll<T>();
         void SetupWith(System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider, params Radical.ComponentModel.IPuzzleSetupDescriptor[] descriptors);
     }
+    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
+        "v3.0.0.")]
     public interface IPuzzleContainerEntry : Radical.ComponentModel.IContainerEntry
     {
         Radical.ComponentModel.IPuzzleContainerEntry Forward(System.Type forwardedType);
@@ -868,6 +878,8 @@ namespace Radical.ComponentModel
         Radical.ComponentModel.IPuzzleContainerEntry UsingInstance(object instance);
         Radical.ComponentModel.IPuzzleContainerEntry WithLifestyle(Radical.ComponentModel.Lifestyle lifestyle);
     }
+    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
+        "v3.0.0.")]
     public interface IPuzzleContainerEntry<T> : Radical.ComponentModel.IContainerEntry
     {
         Radical.ComponentModel.IPuzzleContainerEntry<T> Forward<TForwarded>();
@@ -891,6 +903,8 @@ namespace Radical.ComponentModel
     {
         void Setup(Radical.ComponentModel.IPuzzleContainer container, System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider);
     }
+    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
+        "v3.0.0.")]
     public enum Lifestyle
     {
         Singleton = 0,
@@ -1145,8 +1159,12 @@ namespace Radical.Helpers
         public bool AllowRepeatCharacters { get; set; }
         public bool AllowSymbols { get; set; }
         public System.Collections.Generic.List<char> Exclusions { get; }
+        [System.Obsolete("Use the MaxLength property, this will be removed in v3.0.0")]
         public int MaxLenght { get; set; }
+        public int MaxLength { get; set; }
+        [System.Obsolete("Use the MinLength property, this will be removed in v3.0.0")]
         public int MinLenght { get; set; }
+        public int MinLength { get; set; }
         protected int GetCryptographicRandomNumber(int lBound, int uBound) { }
         protected char GetRandomCharacter() { }
         public string Next() { }
@@ -1412,6 +1430,8 @@ namespace Radical.Model
         protected virtual void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         protected virtual void OnDisposed() { }
         protected virtual void OnGetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+        [System.Obsolete("OnInitialize has been obsoleted. Move initialization code to collection construct" +
+            "or. Will be removed in v3.0.0.")]
         protected virtual void OnInitialize() { }
         protected virtual void OnInsert(Radical.Model.InsertEventArgs<T> e) { }
         protected virtual void OnInsertCompleted(int index, T value) { }
@@ -1662,7 +1682,6 @@ namespace Radical.Model
         protected override void OnClearCompleted(System.Collections.Generic.IEnumerable<T> clearedItems) { }
         protected override void OnDeserialization(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         protected override void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        protected override void OnInitialize() { }
         protected override void OnInsertCompleted(int index, T value) { }
         protected virtual void OnMementoChanged(Radical.ComponentModel.ChangeTracking.IChangeTrackingService newMemento, Radical.ComponentModel.ChangeTracking.IChangeTrackingService oldMemento) { }
         protected override void OnMoveCompleted(int oldIndex, int newIndex, T value) { }

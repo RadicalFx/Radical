@@ -523,7 +523,7 @@ namespace Radical.Messaging
                         factory.StartNew(() =>
                         {
                             sub.Invoke(sender, message);
-                        });
+                        }, TaskCreationOptions.LongRunning);
                     });
             }
         }
@@ -563,7 +563,7 @@ namespace Radical.Messaging
                             tasks.Add(factory.StartNew(() =>
                             {
                                 sub.Invoke(sender, message);
-                            }));
+                            }, TaskCreationOptions.LongRunning));
                         }
                     });
 

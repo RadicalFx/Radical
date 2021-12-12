@@ -5,7 +5,7 @@ namespace Radical.ChangeTracking
 {
     sealed class AtomicOperation : IAtomicOperation
     {
-        bool isCompleted = false;
+        bool isCompleted;
 
         void OnCompleted(AtomicChange change)
         {
@@ -16,15 +16,14 @@ namespace Radical.ChangeTracking
 
         void OnDisposed()
         {
-            if (!isCompleted && disposed != null)
+            if (!isCompleted)
             {
-                disposed();
+                disposed?.Invoke();
             }
         }
 
         readonly Action<AtomicChange> completed;
         readonly Action disposed;
-
         AtomicChange change = new AtomicChange();
 
         public AtomicOperation(Action<AtomicChange> completed, Action disposed)

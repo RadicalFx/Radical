@@ -45,11 +45,26 @@ namespace Radical.Validation
             return context.Results;
         }
 
+        /// <summary>
+        /// Validates the given entity running all the validation rules.
+        /// </summary>
+        /// <param name="entity">The entity to run the validation against.</param>
+        /// <returns>
+        /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
+        /// </returns>
         public ValidationResults Validate(T entity)
         {
             return OnValidate(new ValidationContext<T>(entity, this));
         }
 
+        /// <summary>
+        /// Validates the given property of the supplied entity running all the validation rules for the given property.
+        /// </summary>
+        /// <param name="entity">The entity to run the validation against.</param>
+        /// <param name="propertyName">The property to validate.</param>
+        /// <returns>
+        /// An instance of the <see cref="ValidationResults"/> with the results of the validation process.
+        /// </returns>
         public ValidationResults ValidateProperty(T entity, string propertyName)
         {
             return OnValidate(new ValidationContext<T>(entity, this)
@@ -72,6 +87,11 @@ namespace Radical.Validation
             return ValidateProperty(entity, property.GetMemberName());
         }
 
+        /// <summary>
+        /// Add a new validation rule.
+        /// </summary>
+        /// <param name="property">The property to validate.</param>
+        /// <param name="rule">The callback executed to run the rule.</param>
         public Validator<T> AddRule(Expression<Func<T, object>> property, Func<ValidationContext<T>, ValidationResult> rule)
         {
             rules.Add(new ValidationRule<T> 

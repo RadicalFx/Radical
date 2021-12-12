@@ -25,7 +25,6 @@ namespace Radical.Helpers
         const int DEFAULT_MAXIMUM = 10;
         const int U_BOUND_DIGIT = 61;
 
-        private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         private readonly char[] pwdCharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`~!@#$%^&*()-_=+[]{}\\|;:'\",<.>/?".ToCharArray();
 
         /// <summary>
@@ -49,6 +48,7 @@ namespace Radical.Helpers
 
             uint xcludeRndBase = (uint.MaxValue - (uint.MaxValue % (uint)(uBound - lBound)));
 
+            using var rng = new RNGCryptoServiceProvider();
             do
             {
                 rng.GetBytes(rndnum);
@@ -81,12 +81,22 @@ namespace Radical.Helpers
         /// <returns>The generated string.</returns>
         public string Next()
         {
-            // Pick random length between minimum and maximum   
+            if (AllowConsecutiveCharacters && !AllowRepeatCharacters)
+            {
+                throw new ArgumentException("Invalid settings: If AllowConsecutiveCharacters is true, AllowRepeatCharacters must be true as well.");
+            }
+
+            if (MinLength > MaxLength)
+            {
+                throw new ArgumentException("Invalid settings: MinLength cannot be greater than MaxLength.");
+            }
+            
+            // Pick random length between minimum and maximum
             var pwdLength = GetCryptographicRandomNumber(MinLenght, MaxLenght);
 
             var pwdBuffer = new StringBuilder()
             {
-                Capacity = MaxLenght
+                Capacity = pwdLength
             };
 
             // Generate random characters
@@ -97,33 +107,9 @@ namespace Radical.Helpers
             for (var i = 0; i < pwdLength; i++)
             {
                 nextCharacter = GetRandomCharacter();
-
-                if (!AllowConsecutiveCharacters)
-                {
-                    while (lastCharacter == nextCharacter)
-                    {
-                        nextCharacter = GetRandomCharacter();
-                    }
-                }
-
-                if (!AllowRepeatCharacters)
-                {
-                    var temp = pwdBuffer.ToString();
-                    var duplicateIndex = temp.IndexOf(nextCharacter);
-                    while (-1 != duplicateIndex)
-                    {
-                        nextCharacter = GetRandomCharacter();
-                        duplicateIndex = temp.IndexOf(nextCharacter);
-                    }
-                }
-
-                if (Exclusions != null)
-                {
-                    while (Exclusions.Contains(nextCharacter))
-                    {
-                        nextCharacter = GetRandomCharacter();
-                    }
-                }
+                nextCharacter = EvaluateAllowConsecutiveCharacters(lastCharacter, nextCharacter);
+                nextCharacter = EvaluateAllowRepeatCharacters(pwdBuffer, nextCharacter);
+                nextCharacter = EvaluateExclusions(nextCharacter);
 
                 pwdBuffer.Append(nextCharacter);
                 lastCharacter = nextCharacter;
@@ -132,54 +118,119 @@ namespace Radical.Helpers
             return pwdBuffer.ToString();
         }
 
-        private readonly List<char> _exclusions = new List<char>();
+        private char EvaluateAllowConsecutiveCharacters(char lastCharacter, char nextCharacter)
+        {
+            if (AllowConsecutiveCharacters)
+            {
+                return nextCharacter;
+            }
+
+            while (lastCharacter == nextCharacter)
+            {
+                nextCharacter = GetRandomCharacter();
+            }
+
+            return nextCharacter;
+        }
+
+        char EvaluateAllowRepeatCharacters(StringBuilder pwdBuffer, char nextCharacter)
+        {
+            if (AllowRepeatCharacters)
+            {
+                return nextCharacter;
+            }
+
+            var temp = pwdBuffer.ToString();
+            var duplicateIndex = temp.IndexOf(nextCharacter);
+            while (-1 != duplicateIndex)
+            {
+                nextCharacter = GetRandomCharacter();
+                duplicateIndex = temp.IndexOf(nextCharacter);
+            }
+
+            return nextCharacter;
+        }
+
+        char EvaluateExclusions(char nextCharacter)
+        {
+            if (Exclusions == null)
+            {
+                return nextCharacter;
+            }
+
+            while (Exclusions.Contains(nextCharacter))
+            {
+                nextCharacter = GetRandomCharacter();
+            }
+
+            return nextCharacter;
+        }
 
         /// <summary>
         /// A list of char that must be excluded from the
         /// generated password
         /// </summary>
         /// <value>The exclusions.</value>
-        public List<char> Exclusions
-        {
-            get { return _exclusions; }
-        }
+        public List<char> Exclusions { get; } = new List<char>();
 
-        private int _minLenght = DEFAULT_MINIMUM;
+        private int _minLength = DEFAULT_MINIMUM;
 
         /// <summary>
         /// Minimum char number of the generated password
         /// </summary>
         /// <value>The min length.</value>
-        public int MinLenght
+        public int MinLength
         {
-            get { return _minLenght; }
+            get { return _minLength; }
             set
             {
-                _minLenght = value;
-                if (DEFAULT_MINIMUM > _minLenght)
+                _minLength = value;
+                if (DEFAULT_MINIMUM > _minLength)
                 {
-                    _minLenght = DEFAULT_MINIMUM;
+                    _minLength = DEFAULT_MINIMUM;
                 }
             }
         }
 
-        private int _maxLenght = DEFAULT_MAXIMUM;
+        /// <summary>
+        /// Minimum char number of the generated password
+        /// </summary>
+        /// <value>The min length.</value>
+        [Obsolete("Use the MinLength property, this will be removed in v3.0.0")]
+        public int MinLenght
+        {
+            get { return MinLength; }
+            set { MinLength = value; }
+        }
+
+        private int _maxLength = DEFAULT_MAXIMUM;
 
         /// <summary>
         /// Maximum char number of the generated password
         /// </summary>
         /// <value>The max length.</value>
-        public int MaxLenght
+        public int MaxLength
         {
-            get { return _maxLenght; }
+            get { return _maxLength; }
             set
             {
-                _maxLenght = value;
-                if (_minLenght >= _maxLenght)
+                _maxLength = value;
+                if (_minLength >= _maxLength)
                 {
-                    _maxLenght = DEFAULT_MAXIMUM;
+                    _maxLength = DEFAULT_MAXIMUM;
                 }
             }
+        }
+
+        /// <summary>
+        /// Maximum char number of the generated password
+        /// </summary>
+        /// <value>The max length.</value>
+        [Obsolete("Use the MaxLength property, this will be removed in v3.0.0")]
+        public int MaxLenght
+        {
+            get { return MaxLength; }
+            set { MaxLength = value; }
         }
 
 
@@ -190,21 +241,21 @@ namespace Radical.Helpers
         public bool AllowSymbols{ get; set; }
 
         /// <summary>
-        /// If true the resulting string can contains
-        /// equals chars.
+        /// If true the resulting string can contain
+        /// equals characters.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [allow repeat characters]; otherwise, <c>false</c>.
+        ///     <c>true</c> if the resulting string can contain equals characters; otherwise, <c>false</c>.
         /// </value>
         public bool AllowRepeatCharacters { get; set; }
 
 
         /// <summary>
-        /// If true the resulting string can contains
+        /// If true the resulting string can contain
         /// consecutive equals chars.
         /// </summary>
         /// <value>
-        ///     <c>true</c> if [allow consecutive characters]; otherwise, <c>false</c>.
+        ///     <c>true</c> if the resulting string can contain consecutive equals characters; otherwise, <c>false</c>.
         /// </value>
         public bool AllowConsecutiveCharacters { get; set; }
     }

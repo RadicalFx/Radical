@@ -24,7 +24,7 @@
         {
             if (contractInterface == null)
             {
-                throw new ArgumentNullException("contractInterface");
+                throw new ArgumentNullException(nameof(contractInterface));
             }
 
             ContractInterface = contractInterface;
@@ -34,10 +34,6 @@
         /// Gets the contract interface.
         /// </summary>
         /// <value>The contract interface.</value>
-        public Type ContractInterface
-        {
-            get;
-            private set;
-        }
+        public Type ContractInterface { get; }
     }
 }

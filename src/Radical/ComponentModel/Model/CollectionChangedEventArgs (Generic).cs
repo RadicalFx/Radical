@@ -48,41 +48,25 @@
         /// The type of change occurred in the collection
         /// </summary>
         /// <value>The type of the change.</value>
-        public CollectionChangeType ChangeType
-        {
-            get;
-            private set;
-        }
+        public CollectionChangeType ChangeType { get; }
 
         /// <summary>
         /// The Index of the changed Item
         /// </summary>
         /// <value>The index.</value>
-        public int Index
-        {
-            get;
-            private set;
-        }
+        public int Index { get; }
 
         /// <summary>
         /// The Old Index of the changed item, e.g. in case of a Move operation
         /// </summary>
         /// <value>The old index.</value>
-        public int OldIndex
-        {
-            get;
-            private set;
-        }
+        public int OldIndex { get; }
 
         /// <summary>
         /// A reference to the changed Item, this filed will be null
         /// according to the ChangeType value
         /// </summary>
         /// <value>The item.</value>
-        public T Item
-        {
-            get;
-            private set;
-        }
+        public T Item { get; }
     }
 }
