@@ -1229,6 +1229,7 @@ namespace Radical.Messaging
     public class MessageBroker : Radical.ComponentModel.Messaging.IMessageBroker
     {
         public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher) { }
+        [System.Obsolete("Constructing a message broker with a task factory is deprecated.", false)]
         public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher, System.Threading.Tasks.TaskFactory factory) { }
         [System.Obsolete("Broadcast is deprecated. Use BroadcastAsync. It will be treated as an error in v3" +
             " and removed in v4.", false)]

@@ -59,6 +59,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="dispatcher">The dispatcher.</param>
         /// <param name="factory">The factory.</param>
+        [Obsolete("Constructing a message broker with a task factory is deprecated.", error: false)]
         public MessageBroker(IDispatcher dispatcher, TaskFactory factory)
         {
             Ensure.That(dispatcher).Named("dispatcher").IsNotNull();
