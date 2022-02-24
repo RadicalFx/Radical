@@ -65,7 +65,7 @@ namespace Radical
         public static bool IsDescriptionAttributeDefined(this System.Enum value) { }
         public static bool TryGetDescriptionAttribute(this System.Enum value, out Radical.EnumItemDescriptionAttribute attribute) { }
     }
-    [System.AttributeUsage(System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple=false, Inherited=false)]
     public class EnumItemDescriptionAttribute : System.Attribute
     {
         public EnumItemDescriptionAttribute(string caption) { }
@@ -92,7 +92,7 @@ namespace Radical
         public static TService TryGetService<TService>(this System.IServiceProvider serviceProvider) { }
         public static TInterface TryGetService<SInterface, TInterface>(this System.IServiceProvider serviceProvider) { }
     }
-    [System.AttributeUsage(System.AttributeTargets.Field | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple=false, Inherited=false)]
     public class LocalizableEnumItemDescriptionAttribute : Radical.EnumItemDescriptionAttribute
     {
         public LocalizableEnumItemDescriptionAttribute(string captionKey) { }
@@ -663,7 +663,7 @@ namespace Radical.ComponentModel
         public ComponentRegisteredEventArgs(Radical.ComponentModel.IContainerEntry entry) { }
         public Radical.ComponentModel.IContainerEntry Entry { get; }
     }
-    [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Interface | System.AttributeTargets.All, AllowMultiple=false, Inherited=true)]
+    [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Interface, AllowMultiple=false, Inherited=true)]
     public sealed class ContractAttribute : System.Attribute
     {
         public ContractAttribute() { }
@@ -1057,7 +1057,7 @@ namespace Radical.Helpers
         public static string AsArguments<T>(T source) { }
         public static Radical.Helpers.CommandLine GetCurrent() { }
     }
-    [System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    [System.AttributeUsage(System.AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
     public sealed class CommandLineArgumentAttribute : System.Attribute
     {
         public CommandLineArgumentAttribute(string argumentName) { }
@@ -1517,7 +1517,7 @@ namespace Radical.Model
         public void ClearIndexes() { }
         public bool Contains(Radical.ComponentModel.IEntityItemView<T> item) { }
         public bool Contains(T item) { }
-        public void CopyTo(Radical.ComponentModel.IEntityItemView<>[] array, int arrayIndex) { }
+        public void CopyTo(Radical.ComponentModel.IEntityItemView<T>[] array, int arrayIndex) { }
         public int Find(System.ComponentModel.PropertyDescriptor property, object key) { }
         public int FindEntityItemViewIndexInView(int entityIndexInDataSource) { }
         public int FindObjectIndexInDataSource(int objectItemViewIndexInView) { }
@@ -1593,7 +1593,7 @@ namespace Radical.Model
         public static Radical.Model.MementoPropertyMetadata<T> Create<T>(object propertyOwner, System.Linq.Expressions.Expression<System.Func<T>> property) { }
         public static Radical.Model.MementoPropertyMetadata<T> Create<T>(object propertyOwner, string propertyName) { }
     }
-    [System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.All)]
+    [System.AttributeUsage(System.AttributeTargets.Property)]
     public class MementoPropertyMetadataAttribute : Radical.Model.PropertyMetadataAttribute
     {
         public MementoPropertyMetadataAttribute() { }
@@ -1636,7 +1636,7 @@ namespace Radical.Model
         public static Radical.Model.PropertyMetadata<T> Create<T>(object propertyOwner, System.Linq.Expressions.Expression<System.Func<T>> property) { }
         public static Radical.Model.PropertyMetadata<T> Create<T>(object propertyOwner, string propertyName) { }
     }
-    [System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.All)]
+    [System.AttributeUsage(System.AttributeTargets.Property)]
     public class PropertyMetadataAttribute : System.Attribute
     {
         public PropertyMetadataAttribute() { }
@@ -1682,7 +1682,7 @@ namespace Radical.Model
         public SetValueAtEventArgs(int index, T newValue, T oldValue) { }
         public T OldValue { get; }
     }
-    [System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.All)]
+    [System.AttributeUsage(System.AttributeTargets.Property)]
     public sealed class SkipPropertyValidationAttribute : System.Attribute
     {
         public SkipPropertyValidationAttribute() { }
