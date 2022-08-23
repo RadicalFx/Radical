@@ -1,7 +1,7 @@
 version: '{build}'
 image:
 - ubuntu2004
-- Visual Studio 2019
+- Visual Studio 2022
 
 skip_branch_with_pr: true
 pull_requests:
@@ -42,7 +42,7 @@ for:
 -
   matrix:
     only:
-      - image: Visual Studio 2019
+      - image: Visual Studio 2022
 
   build_script:
   - cmd: .\build.cmd
