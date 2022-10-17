@@ -3,6 +3,7 @@
 *.user
 .vs/
 *.orig
+.idea/
 
 # Nuget packages 
 [Pp]ackages/

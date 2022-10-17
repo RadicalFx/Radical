@@ -20,6 +20,6 @@ internal class Program
             Directory.EnumerateFiles("src", "*Tests.csproj", SearchOption.AllDirectories),
             proj => Run(dotnet, $"test \"{proj}\" --configuration Release --no-build"));
         
-        RunTargetsAndExit(args);
+        await RunTargetsAndExitAsync(args);
     }
 }
