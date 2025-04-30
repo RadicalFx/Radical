@@ -110,8 +110,8 @@ namespace Radical
     {
         public MissingContractAttributeException(System.Type targetType) { }
         protected MissingContractAttributeException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        public MissingContractAttributeException(string message, System.Exception innerException) { }
         public MissingContractAttributeException(System.Type targetType, string message) { }
+        public MissingContractAttributeException(string message, System.Exception innerException) { }
         public System.Type TargetType { get; }
         public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
     }
@@ -680,7 +680,7 @@ namespace Radical.ComponentModel
         public override System.Type PropertyType { get; }
         protected Radical.ComponentModel.EntityItemViewValueGetter<T, TValue> ValueGetter { get; }
         protected Radical.ComponentModel.EntityItemViewValueSetter<T, TValue> ValueSetter { get; }
-        public TValue GetDefaultValue() { }
+        public new TValue GetDefaultValue() { }
         protected override object GetValueCore(Radical.ComponentModel.IEntityItemView<T> component) { }
         protected override void SetValueCore(Radical.ComponentModel.IEntityItemView<T> component, object value) { }
     }
@@ -763,8 +763,8 @@ namespace Radical.ComponentModel
         T CreateNew();
         Radical.ComponentModel.IEntityView<T> CreateView();
         void EndInit(bool notify);
-        void Move(int oldIndex, int newIndex);
         void Move(T item, int newIndex);
+        void Move(int oldIndex, int newIndex);
         T[] ToArray();
     }
     public interface IEntityItemView : Radical.ComponentModel.INotifyEditableObject, System.ComponentModel.ICustomTypeDescriptor, System.ComponentModel.IEditableObject, System.ComponentModel.INotifyPropertyChanged
@@ -942,18 +942,18 @@ namespace Radical.ComponentModel.Messaging
         System.Threading.Tasks.Task BroadcastAsync(object sender, object message);
         void Dispatch(object sender, object message);
         void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback);
-        void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback);
         void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
         void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
         void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
-        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe<T>(object subscriber, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback);
         void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
-        void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
@@ -1186,8 +1186,8 @@ namespace Radical.Messaging
     public abstract class AbstractMessageHandler<T> : Radical.ComponentModel.Messaging.IHandleMessage, Radical.ComponentModel.Messaging.IHandleMessage<T>
     {
         protected AbstractMessageHandler() { }
-        public virtual void Handle(object sender, object message) { }
         public abstract void Handle(object sender, T message);
+        public virtual void Handle(object sender, object message) { }
         protected virtual bool OnShouldHandle(object sender, T message) { }
         public bool ShouldHandle(object sender, object message) { }
     }
@@ -1199,18 +1199,18 @@ namespace Radical.Messaging
         public System.Threading.Tasks.Task BroadcastAsync(object sender, object message) { }
         public void Dispatch(object sender, object message) { }
         public void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback) { }
-        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
-        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe<T>(object subscriber, System.Action<object, T> callback) { }
         public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
         public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
-        public void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
         public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
         public void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback) { }
         public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
         public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
@@ -1312,8 +1312,8 @@ namespace Radical.Model
         protected virtual T GetValueAt(int index) { }
         public int IndexOf(T item) { }
         public void Insert(int index, T item) { }
-        public void Move(int oldIndex, int newIndex) { }
         public void Move(T item, int newIndex) { }
+        public void Move(int oldIndex, int newIndex) { }
         protected virtual void OnAddCompleted(int index, T value) { }
         protected virtual void OnAddRange(System.Collections.Generic.IEnumerable<T> rangeToAdd) { }
         protected virtual void OnAddRangeCompleted(System.Collections.Generic.IEnumerable<T> addedRange) { }
@@ -1395,7 +1395,11 @@ namespace Radical.Model
         public EntityView(System.Collections.Generic.IList<T> list) { }
         protected EntityView(System.Collections.IList list) { }
         public EntityView(T[] list) { }
+        public virtual bool AllowEdit { get; set; }
         public bool AllowMove { get; }
+        public virtual bool AllowNew { get; set; }
+        public virtual bool AllowRemove { get; set; }
+        public virtual bool AllowSort { get; set; }
         public bool AutoGenerateProperties { get; set; }
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -1418,16 +1422,12 @@ namespace Radical.Model
         public Radical.ComponentModel.IEntityItemView<T> this[int index] { get; set; }
         protected Radical.ComponentModel.IEntityItemView<T> PendingNewItem { get; }
         public bool RaisesItemChangedEvents { get; }
-        public System.ComponentModel.ListSortDescriptionCollection SortDescriptions { get; }
-        public System.ComponentModel.ListSortDirection SortDirection { get; }
-        public System.ComponentModel.PropertyDescriptor SortProperty { get; }
-        public virtual bool AllowEdit { get; set; }
-        public virtual bool AllowNew { get; set; }
-        public virtual bool AllowRemove { get; set; }
-        public virtual bool AllowSort { get; set; }
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public virtual System.ComponentModel.ISite Site { get; set; }
+        public System.ComponentModel.ListSortDescriptionCollection SortDescriptions { get; }
+        public System.ComponentModel.ListSortDirection SortDirection { get; }
+        public System.ComponentModel.PropertyDescriptor SortProperty { get; }
         public event System.EventHandler<Radical.Model.AddingNewEventArgs<T>> AddingNew;
         public event System.EventHandler Disposed;
         public event System.EventHandler FilterChanged;
@@ -1870,7 +1870,7 @@ namespace Radical.Threading
     public class LimitedConcurrencyLevelTaskScheduler : System.Threading.Tasks.TaskScheduler
     {
         public LimitedConcurrencyLevelTaskScheduler(int maxDegreeOfParallelism) { }
-        public virtual int MaximumConcurrencyLevel { get; }
+        public override sealed int MaximumConcurrencyLevel { get; }
         protected override sealed System.Collections.Generic.IEnumerable<System.Threading.Tasks.Task> GetScheduledTasks() { }
         protected override sealed void QueueTask(System.Threading.Tasks.Task task) { }
         protected override sealed bool TryDequeue(System.Threading.Tasks.Task task) { }
@@ -2066,12 +2066,12 @@ namespace Radical.Validation
     {
         public Validator() { }
         public Radical.Validation.Validator<T> AddRule(System.Linq.Expressions.Expression<System.Func<T, object>> property, System.Func<Radical.Validation.ValidationContext<T>, Radical.Validation.ValidationResult> rule) { }
-        public bool IsValid(object entity) { }
         public bool IsValid(T entity) { }
-        public Radical.Validation.ValidationResults Validate(object entity) { }
+        public bool IsValid(object entity) { }
         public Radical.Validation.ValidationResults Validate(T entity) { }
-        public Radical.Validation.ValidationResults ValidateProperty(object entity, string propertyName) { }
+        public Radical.Validation.ValidationResults Validate(object entity) { }
         public Radical.Validation.ValidationResults ValidateProperty(T entity, string propertyName) { }
+        public Radical.Validation.ValidationResults ValidateProperty(object entity, string propertyName) { }
         public Radical.Validation.ValidationResults ValidateProperty<TProperty>(T entity, System.Linq.Expressions.Expression<System.Func<T, TProperty>> property) { }
     }
 }
