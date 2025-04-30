@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using MessagePack;
+using MessagePack.Resolvers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,21 +10,11 @@ namespace Radical.Tests.Exceptions
     [TestClass()]
     public class SuspendedChangeTrackingServiceExceptionTest
     {
-        Exception Process(Exception source)
-        {
-            using MemoryStream ms = new MemoryStream();
-            var formatter = new BinaryFormatter();
-            formatter.Serialize(ms, source);
-            ms.Position = 0;
-
-            return formatter.Deserialize(ms) as Exception;
-        }
-
         [TestMethod()]
         public void serialization()
         {
-            Exception expected = new SuspendedChangeTrackingServiceException();
-            Exception target = Process(expected);
+            var expected = new SuspendedChangeTrackingServiceException();
+            var target = expected.SerializeAndDeserialize();
 
             Assert.AreEqual(expected.GetType(), target.GetType());
             Assert.AreEqual(expected.Message, target.Message);
