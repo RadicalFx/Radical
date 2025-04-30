@@ -3,7 +3,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Radical.ComponentModel;
 using Radical.Model;
-using Radical.Tests.Model.EntityCollection;
 using SharpTestsEx;
 using System;
 using System.Collections.Generic;
@@ -160,57 +159,21 @@ namespace Radical.Tests.Model
         }
 
         [TestMethod]
-        public void entityCollection_serialization_normal_should_work_as_expected()
-        {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
-
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-
-                var surrogateSelector = new SurrogateSelector();
-
-                surrogateSelector.AddSurrogate(
-                    typeof(GenericParameterHelper),
-                    new StreamingContext(StreamingContextStates.All),
-                    new GenericParameterHelperSerializationSurrogate());
-
-                formatter.SurrogateSelector = surrogateSelector;
-                formatter.Serialize(ms, target);
-            }
-        }
-
-        [TestMethod]
         public void entityCollection_deserialization_normal_should_deserialize_the_same_structure()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            var target = CreateMock<TestPerson>();
+            target.Add(new TestPerson());
+            target.Add(new TestPerson());
+            target.Add(new TestPerson());
 
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-
-                var surrogateSelector = new SurrogateSelector();
-
-                surrogateSelector.AddSurrogate(
-                    typeof(GenericParameterHelper),
-                    new StreamingContext(StreamingContextStates.All),
-                    new GenericParameterHelperSerializationSurrogate());
-
-                formatter.SurrogateSelector = surrogateSelector;
-                formatter.Serialize(ms, target);
-
-                ms.Position = 0;
-
-                var actual = formatter.Deserialize(ms) as EntityCollection<GenericParameterHelper>;
-
-                target.Should().Have.SameSequenceAs(actual);
-            }
+            var s = System.Text.Json.JsonSerializer.Serialize(target);
+            var actual  =  System.Text.Json.JsonSerializer.Deserialize<EntityCollection<TestPerson>>(s);
+            
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(target.Count, actual.Count);
+            Assert.AreEqual(target[0].Name, actual[0].Name);
+            Assert.AreEqual(target[1].Name, actual[1].Name);
+            Assert.AreEqual(target[2].Name, actual[2].Name);
         }
 
         [TestMethod]
