@@ -2,15 +2,15 @@
 
 ![Radical logo](assets/icon.png)
 
-Radical framework is designed to help developing composite WPF applications based on the Model-View-ViewModel presentation pattern.
+The Radical framework is designed to help develop composite WPF applications based on the Model-View-ViewModel (MVVM) presentation pattern.
 
-[Documentation](http://docs.radicalframework.com/) is composed of articles and guidance detailing how to get the most out of Radical.
+[Documentation](http://docs.radicalframework.com/) consists of articles and guidance on how to get the most out of Radical.
 
 ### Release
 
 * Latest release is available on NuGet: http://www.nuget.org/profiles/radical
-* Development releases are available on MyGet: https://www.myget.org/F/radical-unstable/api/v3/index.json
+* Development releases are available on Feedz.io: https://f.feedz.io/radical-framework/pre-releases/nuget/index.json
 
 ### Q&A
 
-For questions or issues do not hesitate to [raise an issue](https://github.com/RadicalFx/Radical/issues/new) or [get in touch](https://groups.google.com/forum/#!forum/radical-mvvm-framework).
+For questions or issues, do not hesitate to [raise an issue](https://github.com/RadicalFx/Radical/issues/new) or [get in touch](https://groups.google.com/forum/#!forum/radical-mvvm-framework).
