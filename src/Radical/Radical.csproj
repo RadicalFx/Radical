@@ -33,14 +33,6 @@
     <NoWarn>1701;1702;NU5105;1591</NoWarn>
   </PropertyGroup>
 
-  <Target Name="ApVeyorPullRequestsTarget" AfterTargets="MinVer" Condition="'$(APPVEYOR_PULL_REQUEST_NUMBER)' != ''">
-    <PropertyGroup>
-      <PackageVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)-$(MinVerPreRelease).PR.$(APPVEYOR_PULL_REQUEST_NUMBER).$(APPVEYOR_BUILD_ID)</PackageVersion>
-      <PackageVersion Condition="'$(MinVerBuildMetadata)' != ''">$(PackageVersion)+$(MinVerBuildMetadata)</PackageVersion>
-      <Version>$(PackageVersion)</Version>
-    </PropertyGroup>
-  </Target>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
