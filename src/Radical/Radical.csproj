@@ -10,6 +10,7 @@
     <Description>Radical is an infrastructure framework whose primary role is to help in the development of composite WPF applications based on the Model View ViewModel pattern.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Radical</PackageTags>
+    <PackageOutputPath>../../nugets</PackageOutputPath>
     <PackageIcon>icon.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
