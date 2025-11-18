@@ -357,14 +357,16 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         [TestCategory("ChangeTracking")]
         public void explicit_registerAsTransient_throws_exception_if_already_registered()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            svc.RegisterTransient(p);
+                Person p = new Person(svc);
+                svc.RegisterTransient(p);
+            });
         }
 
         [TestMethod]
@@ -399,13 +401,15 @@
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
-        [ExpectedException(typeof(ArgumentException))]
         public void explicit_registerAsTransient_without_autoRemove_throws_exception_if_already_registered()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            svc.RegisterTransient(p, false);
+                Person p = new Person(svc);
+                svc.RegisterTransient(p, false);
+            });
         }
 
         [TestMethod]
@@ -621,125 +625,143 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_no_more_changes_can_be_added()
         {
-            RejectCallback<string> cb = cv => { };
-            object fakeOwner = new object();
-            string change = string.Empty;
-            PropertyValueChange<string> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                RejectCallback<string> cb = cv => { };
+                object fakeOwner = new object();
+                string change = string.Empty;
+                PropertyValueChange<string> stub = new PropertyValueChange<string>(fakeOwner, "property-name", change, cb);
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Suspend();
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Suspend();
 
-            svc.Add(stub, AddChangeBehavior.RedoRequest);
+                svc.Add(stub, AddChangeBehavior.RedoRequest);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RegisterTransient()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc, false);
-            svc.Suspend();
-            svc.RegisterTransient(p);
+                Person p = new Person(svc, false);
+                svc.Suspend();
+                svc.RegisterTransient(p);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RegisterTransient_with_explicit_autoRemove_true()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc, false);
-            svc.Suspend();
-            svc.RegisterTransient(p, true);
+                Person p = new Person(svc, false);
+                svc.Suspend();
+                svc.RegisterTransient(p, true);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RegisterTransient_with_explicit_autoRemove_false()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc, false);
-            svc.Suspend();
-            svc.RegisterTransient(p, false);
+                Person p = new Person(svc, false);
+                svc.Suspend();
+                svc.RegisterTransient(p, false);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_Undo()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            p.Name = "Mauro";
+                Person p = new Person(svc);
+                p.Name = "Mauro";
 
-            svc.Suspend();
-            svc.Undo();
+                svc.Suspend();
+                svc.Undo();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_Redo()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            p.Name = "Mauro";
-            svc.Undo();
+                Person p = new Person(svc);
+                p.Name = "Mauro";
+                svc.Undo();
 
-            svc.Suspend();
-            svc.Redo();
+                svc.Suspend();
+                svc.Redo();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_AcceptChanges()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            p.Name = "Mauro";
+                Person p = new Person(svc);
+                p.Name = "Mauro";
 
-            svc.Suspend();
-            svc.AcceptChanges();
+                svc.Suspend();
+                svc.AcceptChanges();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RejectChanges()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            p.Name = "Mauro";
+                Person p = new Person(svc);
+                p.Name = "Mauro";
 
-            svc.Suspend();
-            svc.RejectChanges();
+                svc.Suspend();
+                svc.RejectChanges();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(SuspendedChangeTrackingServiceException))]
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_UnregisterTransient()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
+                Person p = new Person(svc);
 
-            svc.Suspend();
-            svc.UnregisterTransient(p);
+                svc.Suspend();
+                svc.UnregisterTransient(p);
+            });
         }
 
         [TestMethod]
@@ -806,12 +828,14 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_on_null_iChange_add_argumentNullException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(null, AddChangeBehavior.RedoRequest);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(null, AddChangeBehavior.RedoRequest);
+            });
         }
 
         [TestMethod]
@@ -847,25 +871,29 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         [TestCategory("ChangeTracking")]
         public void service_add_notSupported_AddChangeBehavior()
         {
-            IChange stub = A.Dummy<IChange>();
+            Assert.ThrowsException<NotSupportedException>(() =>
+            {
+                IChange stub = A.Dummy<IChange>();
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(stub, AddChangeBehavior.None);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(stub, AddChangeBehavior.None);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_add_invalid_AddChangeBehavior()
         {
-            IChange stub = A.Dummy<IChange>();
+            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            {
+                IChange stub = A.Dummy<IChange>();
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(stub, (AddChangeBehavior)1000);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(stub, (AddChangeBehavior)1000);
+            });
         }
 
         [TestMethod]
@@ -896,12 +924,14 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_cannot_validate_a_null_bookmark()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Validate(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Validate(null);
+            });
         }
 
         [TestMethod]
@@ -949,24 +979,28 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_revert_with_a_null_bookmark()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Revert(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Revert(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_revert_to_a_bookmark_created_by_another_service()
         {
-            ChangeTrackingService svc1 = new ChangeTrackingService();
-            IBookmark bmk = svc1.CreateBookmark();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                ChangeTrackingService svc1 = new ChangeTrackingService();
+                IBookmark bmk = svc1.CreateBookmark();
 
-            ChangeTrackingService svc2 = new ChangeTrackingService();
-            svc2.Revert(bmk);
+                ChangeTrackingService svc2 = new ChangeTrackingService();
+                svc2.Revert(bmk);
+            });
         }
 
         [TestMethod]
@@ -1028,18 +1062,20 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_cannot_revert_to_an_invalid_bookmark()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
 
-            Person p = new Person(svc);
-            p.Name = "Mauro";
+                Person p = new Person(svc);
+                p.Name = "Mauro";
 
-            var bmk = svc.CreateBookmark();
-            svc.Undo();
-            svc.Revert(bmk);
+                var bmk = svc.CreateBookmark();
+                svc.Undo();
+                svc.Revert(bmk);
+            });
         }
 
         [TestMethod]
@@ -1104,12 +1140,14 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_getAdvisory_with_null_iAdvisoryBuilder_argumentNull_Exception()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.GetAdvisory(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.GetAdvisory(null);
+            });
         }
 
         [TestMethod]
@@ -1124,21 +1162,25 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_getChangeSet_with_null_iChangeSetFilter_argumentNullExeption()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.GetChangeSet(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.GetChangeSet(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_getChangeSet_with_null_iChangeSetFilter()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.GetChangeSet(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.GetChangeSet(null);
+            });
         }
 
         [TestMethod]
@@ -1301,60 +1343,72 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_registerTransient_null_reference_argumentNullException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.RegisterTransient(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.RegisterTransient(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_registerTransient_null_reference_explicit_autoRemove_true_argumentNullException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.RegisterTransient(null, true);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.RegisterTransient(null, true);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_registerTransient_null_reference_explicit_autoRemove_false_argumentNullException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.RegisterTransient(null, false);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.RegisterTransient(null, false);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         [TestCategory("ChangeTracking")]
         public void service_double_registerTransient_with_same_reference_invalidOperationException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            Person p = new Person(svc);
-            svc.RegisterTransient(p);
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                Person p = new Person(svc);
+                svc.RegisterTransient(p);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         [TestCategory("ChangeTracking")]
         public void service_double_registerTransient_with_same_reference_and_explicit_autoRemove_true_invalidOperationException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            Person p = new Person(svc);
-            svc.RegisterTransient(p, true);
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                Person p = new Person(svc);
+                svc.RegisterTransient(p, true);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         [TestCategory("ChangeTracking")]
         public void service_double_registerTransient_with_same_reference_and_explicit_autoRemove_false_invalidOperationException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            Person p = new Person(svc);
-            svc.RegisterTransient(p, false);
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                Person p = new Person(svc);
+                svc.RegisterTransient(p, false);
+            });
         }
 
         [TestMethod]
@@ -1388,12 +1442,14 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void service_unregisterTransient_null_reference_argumentNullException()
         {
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.UnregisterTransient(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.UnregisterTransient(null);
+            });
         }
 
         [TestMethod]
@@ -1411,14 +1467,16 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_unregisterTransient_reference_not_registered_as_transient()
         {
-            Person p = new Person(null);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Person p = new Person(null);
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.UnregisterTransient(p);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.UnregisterTransient(p);
+            });
         }
 
         [TestMethod]
@@ -1978,79 +2036,87 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_EnumValueOutOfRangeException_on_invalid_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = e => { };
-            object fakeOwner = new object();
-            string change = "Foo";
+            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            {
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = e => { };
+                object fakeOwner = new object();
+                string change = "Foo";
 
-            var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
-            iChange.HackedCommitReason = (CommitReason)1000;
+                var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
+                iChange.HackedCommitReason = (CommitReason)1000;
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(iChange, AddChangeBehavior.Default);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(iChange, AddChangeBehavior.Default);
 
-            iChange.Commit(CommitReason.AcceptChanges);
+                iChange.Commit(CommitReason.AcceptChanges);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_ArgumentOutOfRangeException_on_none_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = e => { };
-            object fakeOwner = new object();
-            string change = "Foo";
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = e => { };
+                object fakeOwner = new object();
+                string change = "Foo";
 
-            var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
-            iChange.HackedCommitReason = CommitReason.None;
+                var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
+                iChange.HackedCommitReason = CommitReason.None;
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(iChange, AddChangeBehavior.Default);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(iChange, AddChangeBehavior.Default);
 
-            iChange.Commit(CommitReason.AcceptChanges);
+                iChange.Commit(CommitReason.AcceptChanges);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void service_on_change_reject_EnumValueOutOfRangeException_on_invalid_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = e => { };
-            object fakeOwner = new object();
-            string change = "Foo";
+            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            {
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = e => { };
+                object fakeOwner = new object();
+                string change = "Foo";
 
-            var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
-            iChange.HackedRejectReason = (RejectReason)1000;
+                var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
+                iChange.HackedRejectReason = (RejectReason)1000;
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(iChange, AddChangeBehavior.Default);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(iChange, AddChangeBehavior.Default);
 
-            iChange.Reject(RejectReason.RejectChanges);
+                iChange.Reject(RejectReason.RejectChanges);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         [TestCategory("ChangeTracking")]
         public void service_on_change_reject_NotSupportedException_on_none_commit_reason_with_hacked_property_change()
         {
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = e => { };
-            object fakeOwner = new object();
-            string change = "Foo";
+            Assert.ThrowsException<NotSupportedException>(() =>
+            {
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = e => { };
+                object fakeOwner = new object();
+                string change = "Foo";
 
-            var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
-            iChange.HackedRejectReason = RejectReason.None;
+                var iChange = new HackedPropertyValueChange(fakeOwner, change, rc, cc);
+                iChange.HackedRejectReason = RejectReason.None;
 
-            ChangeTrackingService svc = new ChangeTrackingService();
-            svc.Add(iChange, AddChangeBehavior.Default);
+                ChangeTrackingService svc = new ChangeTrackingService();
+                svc.Add(iChange, AddChangeBehavior.Default);
 
-            iChange.Reject(RejectReason.RejectChanges);
+                iChange.Reject(RejectReason.RejectChanges);
+            });
         }
 
         [TestMethod]
