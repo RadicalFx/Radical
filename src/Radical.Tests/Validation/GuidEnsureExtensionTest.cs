@@ -16,11 +16,13 @@ namespace Radical.Tests.Validation
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void guidEnsureExtension_isNotEmpty_using_empty_guid_should_raise_ArgumentOutOfRangeException()
         {
-            var v = Ensure.That(Guid.Empty);
-            v.IsNotEmpty();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                var v = Ensure.That(Guid.Empty);
+                v.IsNotEmpty();
+            });
         }
 
         [TestMethod]

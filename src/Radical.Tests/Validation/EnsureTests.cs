@@ -206,22 +206,26 @@ namespace Radical.Tests.Validation
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentNullException))]
         public void validator_instpect_on_nullString_Throw()
         {
-            string expected = "null";
-            Ensure.That((string)null).If(s => s == null)
-                .Then((val) =>
-               {
-                   throw new System.ArgumentNullException(expected);
-               });
+            Assert.ThrowsException<System.ArgumentNullException>(() =>
+            {
+                string expected = "null";
+                Ensure.That((string)null).If(s => s == null)
+                    .Then((val) =>
+                   {
+                       throw new System.ArgumentNullException(expected);
+                   });
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentNullException))]
         public void validator_instpect_on_nullString_exception()
         {
-            Ensure.That((string)null).IsNotNull();
+            Assert.ThrowsException<System.ArgumentNullException>(() =>
+            {
+                Ensure.That((string)null).IsNotNull();
+            });
         }
 
         [TestMethod()]

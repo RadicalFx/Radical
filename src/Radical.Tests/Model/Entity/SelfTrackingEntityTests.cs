@@ -133,16 +133,18 @@ namespace Radical.Tests.Model.Entity
 
         [Ignore]
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void entity_create_using_initial_value_is_reset_initial_value_should_raise_ArgumentException()
         {
-            /*
-             * Questo in teoria dovrebbe sollevare 
-             * una exception perchè stiamo cambiando il DefaultValue
-             * dopo che è stato inizializzato... non credo abbia più molto senso
-             */
-            var target = new MockEntity("Mauro");
-            target.SetInitialValue(() => target.FirstName, "Foo");
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                /*
+                 * Questo in teoria dovrebbe sollevare 
+                 * una exception perchè stiamo cambiando il DefaultValue
+                 * dopo che è stato inizializzato... non credo abbia più molto senso
+                 */
+                var target = new MockEntity("Mauro");
+                target.SetInitialValue(() => target.FirstName, "Foo");
+            });
         }
 
         [TestMethod]
