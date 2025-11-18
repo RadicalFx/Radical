@@ -15,12 +15,12 @@ namespace Radical.Tests
         public void entityItemViewPropertyDescriptor_ctor_default_should_correctly_set_default_values()
         {
             var expected = "Data";
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>(expected);
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>(expected);
 
             target.Category.Should().Be.EqualTo("Misc");
             target.Attributes.OfType<Attribute>().Should().Have.SameSequenceAs(new Attribute[0]);
-            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<GenericParameterHelper>));
-            target.Converter.GetType().Should().Be.EqualTo(typeof(Int32Converter));
+            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<TestTypeHelper>));
+            target.Converter.GetType().Should().Be.EqualTo(typeof(NullableConverter));
             target.Description.Should().Be.EqualTo(string.Empty);
             target.DesignTimeOnly.Should().Be.False();
             target.DisplayName.Should().Be.EqualTo(expected);
@@ -28,7 +28,7 @@ namespace Radical.Tests
             target.IsLocalizable.Should().Be.False();
             target.IsReadOnly.Should().Be.False();
             target.Name.Should().Be.EqualTo(expected);
-            target.PropertyType.Should().Be.EqualTo(typeof(int));
+            target.PropertyType.Should().Be.EqualTo(typeof(int?));
         }
 
         [TestMethod]
@@ -37,12 +37,12 @@ namespace Radical.Tests
             var propertyName = "Data";
             var customDisplayName = "Foo";
 
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>(propertyName, customDisplayName);
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>(propertyName, customDisplayName);
 
             target.Category.Should().Be.EqualTo("Misc");
             target.Attributes.OfType<Attribute>().Should().Have.SameSequenceAs(new Attribute[0]);
-            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<GenericParameterHelper>));
-            target.Converter.GetType().Should().Be.EqualTo(typeof(Int32Converter));
+            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<TestTypeHelper>));
+            target.Converter.GetType().Should().Be.EqualTo(typeof(NullableConverter));
             target.Description.Should().Be.EqualTo(string.Empty);
             target.DesignTimeOnly.Should().Be.False();
             target.DisplayName.Should().Be.EqualTo(customDisplayName);
@@ -50,20 +50,20 @@ namespace Radical.Tests
             target.IsLocalizable.Should().Be.False();
             target.IsReadOnly.Should().Be.False();
             target.Name.Should().Be.EqualTo(propertyName);
-            target.PropertyType.Should().Be.EqualTo(typeof(int));
+            target.PropertyType.Should().Be.EqualTo(typeof(int?));
         }
 
         [TestMethod]
         public void entityItemViewPropertyDescriptor_ctor_propertyInfo_should_correctly_set_default_values()
         {
-            var expected = typeof(GenericParameterHelper).GetProperty("Data");
+            var expected = typeof(TestTypeHelper).GetProperty("Data");
 
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>(expected);
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>(expected);
 
             target.Category.Should().Be.EqualTo("Misc");
             target.Attributes.OfType<Attribute>().Should().Have.SameSequenceAs(new Attribute[0]);
-            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<GenericParameterHelper>));
-            target.Converter.GetType().Should().Be.EqualTo(typeof(Int32Converter));
+            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<TestTypeHelper>));
+            target.Converter.GetType().Should().Be.EqualTo(typeof(NullableConverter));
             target.Description.Should().Be.EqualTo(string.Empty);
             target.DesignTimeOnly.Should().Be.False();
             target.DisplayName.Should().Be.EqualTo(expected.Name);
@@ -78,13 +78,13 @@ namespace Radical.Tests
         public void entityItemViewCustomPropertyDescriptor_ctor_customDisplayName_propertyType_valueGetter_should_correctly_set_default_values()
         {
             var customPropertyName = "Foo";
-            EntityItemViewValueGetter<GenericParameterHelper, int> getter = (obj) => { return null; };
+            EntityItemViewValueGetter<TestTypeHelper, int> getter = (obj) => { return null; };
 
-            var target = new EntityItemViewCustomPropertyDescriptor<GenericParameterHelper, int>(customPropertyName, getter);
+            var target = new EntityItemViewCustomPropertyDescriptor<TestTypeHelper, int>(customPropertyName, getter);
 
             target.Category.Should().Be.EqualTo("Misc");
             target.Attributes.OfType<Attribute>().Should().Have.SameSequenceAs(new Attribute[0]);
-            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<GenericParameterHelper>));
+            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<TestTypeHelper>));
             target.Converter.GetType().Should().Be.EqualTo(typeof(Int32Converter));
             target.Description.Should().Be.EqualTo(string.Empty);
             target.DesignTimeOnly.Should().Be.False();
@@ -100,14 +100,14 @@ namespace Radical.Tests
         public void entityItemViewCustomPropertyDescriptor_ctor_customDisplayName_propertyType_valueGetter_valueSetter_should_correctly_set_default_values()
         {
             var customPropertyName = "Foo";
-            EntityItemViewValueGetter<GenericParameterHelper, int> getter = arg => { return null; };
-            EntityItemViewValueSetter<GenericParameterHelper, int> setter = arg => { };
+            EntityItemViewValueGetter<TestTypeHelper, int> getter = arg => { return null; };
+            EntityItemViewValueSetter<TestTypeHelper, int> setter = arg => { };
 
-            var target = new EntityItemViewCustomPropertyDescriptor<GenericParameterHelper, int>(customPropertyName, getter, setter);
+            var target = new EntityItemViewCustomPropertyDescriptor<TestTypeHelper, int>(customPropertyName, getter, setter);
 
             target.Category.Should().Be.EqualTo("Misc");
             target.Attributes.OfType<Attribute>().Should().Have.SameSequenceAs(new Attribute[0]);
-            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<GenericParameterHelper>));
+            target.ComponentType.Should().Be.EqualTo(typeof(IEntityItemView<TestTypeHelper>));
             target.Converter.GetType().Should().Be.EqualTo(typeof(Int32Converter));
             target.Description.Should().Be.EqualTo(string.Empty);
             target.DesignTimeOnly.Should().Be.False();
@@ -122,7 +122,7 @@ namespace Radical.Tests
         [TestMethod]
         public void entityItemViewPropertyDescriptor_canResetValue_normal_should_return_always_false()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
 
             bool actual = target.CanResetValue(null);
             actual.Should().Be.False();
@@ -131,15 +131,15 @@ namespace Radical.Tests
         [TestMethod]
         public void entityItemViewPropertyDescriptor_resetValue_normal_should_do_nothing()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.ResetValue(new GenericParameterHelper());
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
+            target.ResetValue(new TestTypeHelper());
         }
 
         [TestMethod]
         public void entityItemViewPropertyDescriptor_shouldSerializeValue_normal_return_false()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            bool actual = target.ShouldSerializeValue(new GenericParameterHelper());
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
+            bool actual = target.ShouldSerializeValue(new TestTypeHelper());
 
             actual.Should().Be.False();
         }
@@ -148,12 +148,12 @@ namespace Radical.Tests
         public void entityItemViewPropertyDescriptor_getValue_using_default_ctor_should_return_expected_value()
         {
             var expected = 100;
-            var component = A.Fake<IEntityItemView<GenericParameterHelper>>();
+            var component = A.Fake<IEntityItemView<TestTypeHelper>>();
             A.CallTo(() => component.EntityItem)
-                .Returns(new GenericParameterHelper(expected))
+                .Returns(new TestTypeHelper(expected))
                 .NumberOfTimes(1);
 
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
             int actual = (int)target.GetValue(component);
 
             actual.Should().Be.EqualTo(expected);
@@ -164,14 +164,14 @@ namespace Radical.Tests
         public void entityItemViewPropertyDescriptor_setValue_using_default_ctor_should_set_expected_value()
         {
             var expected = 100;
-            var entityItem = new GenericParameterHelper(0);
+            var entityItem = new TestTypeHelper(0);
 
-            var component = A.Fake<IEntityItemView<GenericParameterHelper>>();
+            var component = A.Fake<IEntityItemView<TestTypeHelper>>();
             A.CallTo(() => component.EntityItem)
                 .Returns(entityItem)
                 .NumberOfTimes(1);
 
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+            var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
             target.SetValue(component, expected);
 
             entityItem.Data.Should().Be.EqualTo(expected);
@@ -183,7 +183,7 @@ namespace Radical.Tests
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
                 target.GetValue(null);
             });
         }
@@ -193,7 +193,7 @@ namespace Radical.Tests
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
                 target.SetValue(null, 100);
             });
         }
@@ -203,7 +203,7 @@ namespace Radical.Tests
         {
             Assert.ThrowsExactly<ArgumentException>(() =>
             {
-                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
                 target.GetValue(new object());
             });
         }
@@ -213,7 +213,7 @@ namespace Radical.Tests
         {
             Assert.ThrowsExactly<ArgumentException>(() =>
             {
-                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                var target = new EntityItemViewPropertyDescriptor<TestTypeHelper>("Data");
                 target.SetValue(new object(), 100);
             });
         }

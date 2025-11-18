@@ -13,16 +13,16 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void referenceEqualityComparer_ctor()
         {
-            ReferenceEqualityComparer<GenericParameterHelper> instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            ReferenceEqualityComparer<TestTypeHelper> instance = new ReferenceEqualityComparer<TestTypeHelper>();
         }
 
         [TestMethod]
         [TestCategory("ChangeTracking")]
         public void generic_iEqualityComparer_equals_with_equal_instances()
         {
-            var instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            var instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var x = new GenericParameterHelper();
+            var x = new TestTypeHelper();
             var y = x;
 
             bool actual = instance.Equals(x, y);
@@ -34,9 +34,9 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iEqualityComparer_equals_with_instance_and_null()
         {
-            var instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            var instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var x = new GenericParameterHelper();
+            var x = new TestTypeHelper();
             bool actual = instance.Equals(x, null);
 
             actual.Should().Be.False();
@@ -46,9 +46,9 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iEqualityComparer_equals_with_null_and_instance()
         {
-            var instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            var instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var y = new GenericParameterHelper();
+            var y = new TestTypeHelper();
             bool actual = instance.Equals(null, y);
 
             actual.Should().Be.False();
@@ -58,7 +58,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iEqualityComparer_equals_with_null_and_null()
         {
-            var instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            var instance = new ReferenceEqualityComparer<TestTypeHelper>();
             bool actual = instance.Equals(null, null);
 
             actual.Should().Be.True();
@@ -68,9 +68,9 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iEqualityComparer_getHashCode()
         {
-            IEqualityComparer<GenericParameterHelper> instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            IEqualityComparer<TestTypeHelper> instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var obj = new GenericParameterHelper();
+            var obj = new TestTypeHelper();
             int expected = obj.GetHashCode();
 
             int actual = instance.GetHashCode(obj);
@@ -84,7 +84,7 @@ namespace Radical.Tests.ChangeTracking
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                IEqualityComparer<GenericParameterHelper> instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+                IEqualityComparer<TestTypeHelper> instance = new ReferenceEqualityComparer<TestTypeHelper>();
                 int actual = instance.GetHashCode(null);
             });
         }
@@ -93,9 +93,9 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void iEqualityComparer_equals_with_equal_instances()
         {
-            IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            IEqualityComparer instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var x = new GenericParameterHelper();
+            var x = new TestTypeHelper();
             var y = x;
 
             bool actual = instance.Equals(x, y);
@@ -107,9 +107,9 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void iEqualityComparer_equals_with_instance_and_null()
         {
-            IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            IEqualityComparer instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var x = new GenericParameterHelper();
+            var x = new TestTypeHelper();
             bool actual = instance.Equals(x, null);
 
             actual.Should().Be.False();
@@ -119,9 +119,9 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void iEqualityComparer_equals_with_null_and_instance()
         {
-            IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            IEqualityComparer instance = new ReferenceEqualityComparer<TestTypeHelper>();
 
-            var y = new GenericParameterHelper();
+            var y = new TestTypeHelper();
             bool actual = instance.Equals(null, y);
 
             actual.Should().Be.False();
@@ -131,7 +131,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void iEqualityComparer_equals_with_null_and_null()
         {
-            IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+            IEqualityComparer instance = new ReferenceEqualityComparer<TestTypeHelper>();
             bool actual = instance.Equals(null, null);
 
             actual.Should().Be.True();
@@ -141,8 +141,8 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void iEqualityComparer_getHashCode()
         {
-            IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
-            var obj = new GenericParameterHelper();
+            IEqualityComparer instance = new ReferenceEqualityComparer<TestTypeHelper>();
+            var obj = new TestTypeHelper();
 
             int expected = obj.GetHashCode();
             int actual = instance.GetHashCode(obj);
@@ -156,7 +156,7 @@ namespace Radical.Tests.ChangeTracking
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
+                IEqualityComparer instance = new ReferenceEqualityComparer<TestTypeHelper>();
                 int actual = instance.GetHashCode(null);
             });
         }

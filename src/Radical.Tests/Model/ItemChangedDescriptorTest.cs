@@ -10,10 +10,10 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void itemChangedDescriptor_ctor_normal_should_set_expected_values()
         {
-            var item = new GenericParameterHelper();
+            var item = new TestTypeHelper();
             var index = 10;
 
-            var target = new ItemChangedDescriptor<GenericParameterHelper>(item, index);
+            var target = new ItemChangedDescriptor<TestTypeHelper>(item, index);
 
             target.Index.Should().Be.EqualTo(index);
             target.Item.Should().Be.EqualTo(item);

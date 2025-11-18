@@ -15,13 +15,13 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(v =>
+            var target = new PredicateEntityItemViewFilter<TestTypeHelper>(v =>
            {
                actual++;
                return true;
            });
 
-            target.ShouldInclude(new GenericParameterHelper());
+            target.ShouldInclude(new TestTypeHelper());
 
             actual.Should().Be.EqualTo(expected);
             target.ToString().Should().Be.EqualTo(expectedName);
@@ -34,13 +34,13 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(v =>
+            var target = new PredicateEntityItemViewFilter<TestTypeHelper>(v =>
            {
                actual++;
                return true;
            }, expectedName);
 
-            target.ShouldInclude(new GenericParameterHelper());
+            target.ShouldInclude(new TestTypeHelper());
 
             actual.Should().Be.EqualTo(expected);
             target.ToString().Should().Be.EqualTo(expectedName);
@@ -53,13 +53,13 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(v =>
+            var target = new PredicateEntityItemViewFilter<TestTypeHelper>(v =>
            {
                actual++;
                return true;
            }, null);
 
-            target.ShouldInclude(new GenericParameterHelper());
+            target.ShouldInclude(new TestTypeHelper());
 
             actual.Should().Be.EqualTo(expected);
             target.ToString().Should().Be.EqualTo(expectedName);
@@ -70,7 +70,7 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null);
+                var target = new PredicateEntityItemViewFilter<TestTypeHelper>(null);
             });
         }
 
@@ -79,7 +79,7 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null, null);
+                var target = new PredicateEntityItemViewFilter<TestTypeHelper>(null, null);
             });
         }
     }
