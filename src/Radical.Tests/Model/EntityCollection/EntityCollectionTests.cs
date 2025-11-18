@@ -34,7 +34,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_ctor_default_should_initialize_expected_values()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
 
             target.Count.Should().Be.EqualTo(0);
             target.AllowNew.Should().Be.True();
@@ -43,7 +43,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_ctor_capacity_should_initialize_expected_values()
         {
-            var target = CreateMock<GenericParameterHelper>(10);
+            var target = CreateMock<TestTypeHelper>(10);
 
             target.Count.Should().Be.EqualTo(0);
             target.AllowNew.Should().Be.True();
@@ -52,7 +52,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_ctor_iEnumerable_should_initialize_expected_values()
         {
-            var target = CreateMock<GenericParameterHelper>(new GenericParameterHelper[0]);
+            var target = CreateMock<TestTypeHelper>(new TestTypeHelper[0]);
 
             target.Count.Should().Be.EqualTo(0);
             target.AllowNew.Should().Be.True();
@@ -63,7 +63,7 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                CreateMock((IEnumerable<GenericParameterHelper>)null);
+                CreateMock((IEnumerable<TestTypeHelper>)null);
             });
         }
 
@@ -72,15 +72,15 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
-                CreateMock<GenericParameterHelper>(-1);
+                CreateMock<TestTypeHelper>(-1);
             });
         }
 
         [TestMethod]
         public void entityCollection_add_normal_should_increment_count_property()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper());
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper());
 
             target.Count.Should().Be.EqualTo(1);
         }
@@ -88,7 +88,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_add_null_value_should_increment_count_property()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.Add(null);
 
             target.Count.Should().Be.EqualTo(1);
@@ -97,9 +97,9 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_add_more_then_once_the_same_reference_works_as_expected()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
 
-            GenericParameterHelper item = new GenericParameterHelper();
+            TestTypeHelper item = new TestTypeHelper();
             target.Add(item);
             target.Add(item);
             target.Add(item);
@@ -110,11 +110,11 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_add_more_then_one_different_reference_works_as_expected()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
 
-            target.Add(new GenericParameterHelper());
-            target.Add(new GenericParameterHelper());
-            target.Add(new GenericParameterHelper());
+            target.Add(new TestTypeHelper());
+            target.Add(new TestTypeHelper());
+            target.Add(new TestTypeHelper());
 
             target.Count.Should().Be.EqualTo(3);
         }
@@ -122,13 +122,13 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_remove_normal_removes_the_item_from_the_collection()
         {
-            var item = new GenericParameterHelper(2);
-            var data = new GenericParameterHelper[]
+            var item = new TestTypeHelper(2);
+            var data = new TestTypeHelper[]
             {
-                new GenericParameterHelper(0),
-                new GenericParameterHelper(1),
+                new TestTypeHelper(0),
+                new TestTypeHelper(1),
                 item,
-                new GenericParameterHelper(3)
+                new TestTypeHelper(3)
             };
 
             var target = CreateMock(data);
@@ -143,7 +143,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_remove_null_reference_should_return_false()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             var actual = target.Remove(null);
 
             actual.Should().Be.False();
@@ -152,12 +152,12 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_remove_a_reference_not_in_the_collection_should_return_false()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper(0));
+            target.Add(new TestTypeHelper(1));
+            target.Add(new TestTypeHelper(2));
 
-            var actual = target.Remove(new GenericParameterHelper());
+            var actual = target.Remove(new TestTypeHelper());
 
             actual.Should().Be.False();
         }
@@ -183,14 +183,14 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_normal_isInitializing_should_be_false()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.IsInitializing.Should().Be.False();
         }
 
         [TestMethod]
         public void entityCollection_beginInit_normal_should_set_isInitializing_to_true()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.BeginInit();
             target.IsInitializing.Should().Be.True();
         }
@@ -198,7 +198,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_endInit_normal_should_set_isInitializing_to_false()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.BeginInit();
             target.EndInit();
             target.IsInitializing.Should().Be.False();
@@ -207,7 +207,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_endInit_without_calling_beginInit_should_not_fail_and_set_isInitializing_to_false()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.EndInit();
             target.IsInitializing.Should().Be.False();
         }
@@ -218,7 +218,7 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += (s, e) => { actual++; };
 
             target.BeginInit();
@@ -233,7 +233,7 @@ namespace Radical.Tests.Model
             var expected = 0;
             var actual = 0;
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += (s, e) => { actual++; };
 
             target.EndInit();
@@ -247,7 +247,7 @@ namespace Radical.Tests.Model
             var expected = 0;
             var actual = 0;
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += (s, e) => { actual++; };
 
             target.BeginInit();
@@ -262,7 +262,7 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += (s, e) => { actual++; };
 
             target.BeginInit();
@@ -277,15 +277,15 @@ namespace Radical.Tests.Model
             var expected = 1;
             var actual = 0;
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += (s, e) => { actual++; };
 
             target.BeginInit();
 
-            target.Add(new GenericParameterHelper());
-            target.Add(new GenericParameterHelper());
-            target.Add(new GenericParameterHelper());
-            target.Add(new GenericParameterHelper());
+            target.Add(new TestTypeHelper());
+            target.Add(new TestTypeHelper());
+            target.Add(new TestTypeHelper());
+            target.Add(new TestTypeHelper());
 
             target.EndInit(true);
 
@@ -295,12 +295,12 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_set_Item_normal_should_set_correct_item()
         {
-            var expected = new GenericParameterHelper(0);
+            var expected = new TestTypeHelper(0);
 
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
-            target.Add(new GenericParameterHelper(3));
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper(1));
+            target.Add(new TestTypeHelper(2));
+            target.Add(new TestTypeHelper(3));
 
             target[1] = expected;
             var actual = target[1];
@@ -313,9 +313,9 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
-                var target = CreateMock<GenericParameterHelper>();
+                var target = CreateMock<TestTypeHelper>();
 
-                target[2] = new GenericParameterHelper();
+                target[2] = new TestTypeHelper();
             });
         }
 
@@ -324,7 +324,7 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
-                var target = CreateMock<GenericParameterHelper>();
+                var target = CreateMock<TestTypeHelper>();
 
                 var actual = target[2];
             });
@@ -333,16 +333,16 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_add_handler_to_collectionChanged_normal_should_work_as_expected()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += (s, e) => { };
         }
 
         [TestMethod]
         public void entityCollection_revove_handler_to_collectionChanged_normal_should_work_as_expected()
         {
-            EventHandler<CollectionChangedEventArgs<GenericParameterHelper>> h = (s, e) => { };
+            EventHandler<CollectionChangedEventArgs<TestTypeHelper>> h = (s, e) => { };
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged += h;
             target.CollectionChanged -= h;
         }
@@ -350,22 +350,22 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_revove_handler_to_collectionChanged_even_if_add_handler_has_not_been_called_should_work_as_expected()
         {
-            EventHandler<CollectionChangedEventArgs<GenericParameterHelper>> h = (s, e) => { };
+            EventHandler<CollectionChangedEventArgs<TestTypeHelper>> h = (s, e) => { };
 
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             target.CollectionChanged -= h;
         }
 
         [TestMethod]
         public void entityCollection_addRange_normal_should_add_items()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
 
             var range = new[]
             {
-                new GenericParameterHelper( 0 ),
-                new GenericParameterHelper( 1 ),
-                new GenericParameterHelper( 2 )
+                new TestTypeHelper( 0 ),
+                new TestTypeHelper( 1 ),
+                new TestTypeHelper( 2 )
             };
 
             target.AddRange(range);
@@ -376,13 +376,13 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_addRange_normal_should_increment_count()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
 
             var range = new[]
             {
-                new GenericParameterHelper( 0 ),
-                new GenericParameterHelper( 1 ),
-                new GenericParameterHelper( 2 )
+                new TestTypeHelper( 0 ),
+                new TestTypeHelper( 1 ),
+                new TestTypeHelper( 2 )
             };
 
             target.AddRange(range);
@@ -395,7 +395,7 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = CreateMock<GenericParameterHelper>();
+                var target = CreateMock<TestTypeHelper>();
 
                 target.AddRange(null);
             });
@@ -404,10 +404,10 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_clear_normal_should_empty_the_collection()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper(0));
+            target.Add(new TestTypeHelper(1));
+            target.Add(new TestTypeHelper(2));
 
             target.Clear();
             target.Count.Should().Be.EqualTo(0);
@@ -416,7 +416,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_clear_empty_collection_should_behave_as_expected()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
 
             target.Clear();
             target.Count.Should().Be.EqualTo(0);
@@ -425,12 +425,12 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_copyTo_array_normal_should_copy_elements_to_given_array()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper(0));
+            target.Add(new TestTypeHelper(1));
+            target.Add(new TestTypeHelper(2));
 
-            var destination = new GenericParameterHelper[3];
+            var destination = new TestTypeHelper[3];
             target.CopyTo(destination);
 
             destination.Should().Have.SameSequenceAs(target);
@@ -441,10 +441,10 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = CreateMock<GenericParameterHelper>();
-                target.Add(new GenericParameterHelper(0));
-                target.Add(new GenericParameterHelper(1));
-                target.Add(new GenericParameterHelper(2));
+                var target = CreateMock<TestTypeHelper>();
+                target.Add(new TestTypeHelper(0));
+                target.Add(new TestTypeHelper(1));
+                target.Add(new TestTypeHelper(2));
 
                 target.CopyTo(null);
             });
@@ -455,12 +455,12 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentException>(() =>
             {
-                var target = CreateMock<GenericParameterHelper>();
-                target.Add(new GenericParameterHelper(0));
-                target.Add(new GenericParameterHelper(1));
-                target.Add(new GenericParameterHelper(2));
+                var target = CreateMock<TestTypeHelper>();
+                target.Add(new TestTypeHelper(0));
+                target.Add(new TestTypeHelper(1));
+                target.Add(new TestTypeHelper(2));
 
-                var destination = new GenericParameterHelper[1];
+                var destination = new TestTypeHelper[1];
                 target.CopyTo(destination);
             });
         }
@@ -468,12 +468,12 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_copyTo_array_destination_array_greater_then_source_should_copy_elements_to_given_array()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper(0));
+            target.Add(new TestTypeHelper(1));
+            target.Add(new TestTypeHelper(2));
 
-            var destination = new GenericParameterHelper[5];
+            var destination = new TestTypeHelper[5];
             target.CopyTo(destination);
 
             target[0].Should().Be.EqualTo(destination[0]);
@@ -484,12 +484,12 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_copyTo_array_index_should_copy_elements_starting_at_the_given_index()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            var target = CreateMock<TestTypeHelper>();
+            target.Add(new TestTypeHelper(0));
+            target.Add(new TestTypeHelper(1));
+            target.Add(new TestTypeHelper(2));
 
-            var destination = new GenericParameterHelper[5];
+            var destination = new TestTypeHelper[5];
             target.CopyTo(destination, 2);
 
             destination[0].Should().Be.Null();
@@ -502,7 +502,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_createView_normal_should_create_non_null_view()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             var actual = target.CreateView();
 
             actual.Should().Not.Be.Null();
@@ -511,7 +511,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_createView_normal_should_create_different_views()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             var first = target.CreateView();
             var second = target.CreateView();
 
@@ -521,7 +521,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_defaultView_normal_should_return_non_null_view()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             var actual = target.DefaultView;
 
             actual.Should().Not.Be.Null();
@@ -530,7 +530,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_defaultView_normal_should_return_singleton_view()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            var target = CreateMock<TestTypeHelper>();
             var first = target.DefaultView;
             var second = target.DefaultView;
 
@@ -540,10 +540,10 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_reverse_should_reverse_elements()
         {
-            var target = new EntityCollection<GenericParameterHelper>
+            var target = new EntityCollection<TestTypeHelper>
             {
-                new GenericParameterHelper() { Data = 1 },
-                new GenericParameterHelper() { Data = 2 }
+                new TestTypeHelper() { Data = 1 },
+                new TestTypeHelper() { Data = 2 }
             };
 
             target.Reverse();
@@ -557,10 +557,10 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_defaultView_should_respect_reverse()
         {
-            var target = new EntityCollection<GenericParameterHelper>
+            var target = new EntityCollection<TestTypeHelper>
             {
-                new GenericParameterHelper() { Data = 1 },
-                new GenericParameterHelper() { Data = 2 }
+                new TestTypeHelper() { Data = 1 },
+                new TestTypeHelper() { Data = 2 }
             };
 
             //this creates the default view that is cached internally

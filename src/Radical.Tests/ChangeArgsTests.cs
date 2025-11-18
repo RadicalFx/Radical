@@ -15,10 +15,10 @@ namespace Radical.Tests
         public void changeArgs_generic_ctor_normal_should_correctly_set_values()
         {
             var entity = new object();
-            var cachedValue = new GenericParameterHelper();
+            var cachedValue = new TestTypeHelper();
             var iChange = A.Dummy<IChange>();
 
-            var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+            var target = new ChangeEventArgs<TestTypeHelper>(entity, cachedValue, iChange);
 
             target.Entity.Should().Be.EqualTo(entity);
             target.CachedValue.Should().Be.EqualTo(cachedValue);
@@ -31,10 +31,10 @@ namespace Radical.Tests
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 object entity = null;
-                var cachedValue = new GenericParameterHelper();
+                var cachedValue = new TestTypeHelper();
                 var iChange = A.Dummy<IChange>();
 
-                var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+                var target = new ChangeEventArgs<TestTypeHelper>(entity, cachedValue, iChange);
             });
         }
 
@@ -44,10 +44,10 @@ namespace Radical.Tests
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var entity = new object();
-                var cachedValue = new GenericParameterHelper();
+                var cachedValue = new TestTypeHelper();
                 IChange iChange = null;
 
-                var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+                var target = new ChangeEventArgs<TestTypeHelper>(entity, cachedValue, iChange);
             });
         }
     }

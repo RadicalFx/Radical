@@ -12,12 +12,12 @@ namespace Radical.Tests.Model
         {
             var items = new[]
             {
-                new GenericParameterHelper(),
-                new GenericParameterHelper(),
-                new GenericParameterHelper()
+                new TestTypeHelper(),
+                new TestTypeHelper(),
+                new TestTypeHelper()
             };
 
-            var target = new CollectionRangeDescriptor<GenericParameterHelper>(items);
+            var target = new CollectionRangeDescriptor<TestTypeHelper>(items);
 
             target.Items.Should().Have.SameSequenceAs(items);
         }

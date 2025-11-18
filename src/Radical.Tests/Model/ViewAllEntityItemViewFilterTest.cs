@@ -11,8 +11,8 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void viewAllEntityItemViewFilter_instance_normal_is_singleton()
         {
-            var expected = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
-            var actual = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
+            var expected = ViewAllEntityItemViewFilter<TestTypeHelper>.Instance;
+            var actual = ViewAllEntityItemViewFilter<TestTypeHelper>.Instance;
 
             actual.Should().Be.EqualTo(expected);
         }
@@ -20,7 +20,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void viewAllEntityItemViewFilter_instance_using_different_generic_types_is_not_singleton()
         {
-            var expected = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
+            var expected = ViewAllEntityItemViewFilter<TestTypeHelper>.Instance;
             var actual = ViewAllEntityItemViewFilter<object>.Instance;
 
             actual.Should().Not.Be.EqualTo(expected);
@@ -29,8 +29,8 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void viewAllEntityItemViewFilter_shouldInclude_should_always_return_true()
         {
-            var target = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
-            var actual = target.ShouldInclude(new GenericParameterHelper());
+            var target = ViewAllEntityItemViewFilter<TestTypeHelper>.Instance;
+            var actual = target.ShouldInclude(new TestTypeHelper());
 
             actual.Should().Be.True();
         }
@@ -40,8 +40,8 @@ namespace Radical.Tests.Model
         {
             Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
-                var target = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
-                ((ViewAllEntityItemViewFilter<GenericParameterHelper>)target).ShouldInclude(null);
+                var target = ViewAllEntityItemViewFilter<TestTypeHelper>.Instance;
+                ((ViewAllEntityItemViewFilter<TestTypeHelper>)target).ShouldInclude(null);
             });
         }
 
@@ -49,7 +49,7 @@ namespace Radical.Tests.Model
         public void viewAllEntityItemViewFilter_toString_normal_should_return_expected_value()
         {
             var expected = "View all.";
-            var target = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
+            var target = ViewAllEntityItemViewFilter<TestTypeHelper>.Instance;
 
             var actual = target.ToString();
 

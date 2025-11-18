@@ -14,11 +14,11 @@ namespace Radical.Tests
         public void changeCommittedArgs_generic_ctor_normal_should_correctly_set_values()
         {
             var entity = new object();
-            var cachedValue = new GenericParameterHelper();
+            var cachedValue = new TestTypeHelper();
             var iChange = A.Dummy<IChange>();
             var reason = CommitReason.AcceptChanges;
 
-            var target = new ChangeCommittedEventArgs<GenericParameterHelper>(entity, cachedValue, iChange, reason);
+            var target = new ChangeCommittedEventArgs<TestTypeHelper>(entity, cachedValue, iChange, reason);
 
             target.Entity.Should().Be.EqualTo(entity);
             target.CachedValue.Should().Be.EqualTo(cachedValue);

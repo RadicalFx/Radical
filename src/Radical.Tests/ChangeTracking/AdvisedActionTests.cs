@@ -14,7 +14,7 @@
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor()
         {
-            GenericParameterHelper target = new GenericParameterHelper();
+            TestTypeHelper target = new TestTypeHelper();
 
             AdvisedAction actual = new AdvisedAction(target, ProposedActions.Delete);
 
