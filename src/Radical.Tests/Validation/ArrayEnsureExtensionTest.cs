@@ -9,35 +9,43 @@ namespace Radical.Tests.Validation
     public class ArrayEnsureExtensionTest
     {
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_lower()
         {
-            int[] data = new int[1] { 0 };
-            Ensure.That(data).ContainsIndex(-1);
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            {
+                int[] data = new int[1] { 0 };
+                Ensure.That(data).ContainsIndex(-1);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_lower_using_named_ensure()
         {
-            int[] data = new int[1] { 0 };
-            Ensure.That(data).Named("foo").ContainsIndex(-1);
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            {
+                int[] data = new int[1] { 0 };
+                Ensure.That(data).Named("foo").ContainsIndex(-1);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_upper()
         {
-            int[] data = new int[1] { 0 };
-            Ensure.That(data).ContainsIndex(2);
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            {
+                int[] data = new int[1] { 0 };
+                Ensure.That(data).ContainsIndex(2);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_upper_using_named_ensure()
         {
-            int[] data = new int[1] { 0 };
-            Ensure.That(data).Named("foo").ContainsIndex(2);
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            {
+                int[] data = new int[1] { 0 };
+                Ensure.That(data).Named("foo").ContainsIndex(2);
+            });
         }
 
         [TestMethod()]
