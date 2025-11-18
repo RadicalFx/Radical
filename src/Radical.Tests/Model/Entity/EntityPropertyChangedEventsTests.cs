@@ -51,25 +51,29 @@ namespace Radical.Tests.Model.Entity
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entity_propertyChanged_event_on_disposed_entity_using_propertyChangedEventArgs_should_raise_ObjectDisposedException()
         {
-            var expected = "Foo";
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
+            {
+                var expected = "Foo";
 
-            var target = new TestableEntity();
-            target.Dispose();
-            target.RaisePropertyChanged(new PropertyChangedEventArgs(expected));
+                var target = new TestableEntity();
+                target.Dispose();
+                target.RaisePropertyChanged(new PropertyChangedEventArgs(expected));
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entity_propertyChanged_event_on_disposed_entity_using_propertyName_should_raise_ObjectDisposedException()
         {
-            var expected = "Foo";
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
+            {
+                var expected = "Foo";
 
-            var target = new TestableEntity();
-            target.Dispose();
-            target.RaisePropertyChanged(expected);
+                var target = new TestableEntity();
+                target.Dispose();
+                target.RaisePropertyChanged(expected);
+            });
         }
     }
 }

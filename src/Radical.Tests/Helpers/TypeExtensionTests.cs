@@ -20,10 +20,12 @@ namespace Radical.Tests.Helpers
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void typeExtension_toShortString_using_null_type_reference_should_raise_ArgumentNullException()
         {
-            Reflection.TypeExtensions.ToShortString(null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                Reflection.TypeExtensions.ToShortString(null);
+            });
         }
 
         [TestMethod]

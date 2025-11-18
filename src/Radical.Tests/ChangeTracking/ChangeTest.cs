@@ -66,11 +66,13 @@ namespace Radical.Tests.ChangeTracking
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_owner_argumentNullException()
         {
-            var target = new ChangeMock<string>(null, "Foo", null, null, string.Empty);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var target = new ChangeMock<string>(null, "Foo", null, null, string.Empty);
+            });
         }
 
         [TestMethod]
@@ -115,43 +117,49 @@ namespace Radical.Tests.ChangeTracking
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_reject_invoked_with_invalid_rejectReason()
         {
-            var owner = new object();
-            var value = "Foo";
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = null;
-            var description = string.Empty;
-            var reason = RejectReason.None;
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var owner = new object();
+                var value = "Foo";
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = null;
+                var description = string.Empty;
+                var reason = RejectReason.None;
 
-            var target = new ChangeMock<string>(owner, value, rc, cc, description);
-            target.Reject(reason);
+                var target = new ChangeMock<string>(owner, value, rc, cc, description);
+                target.Reject(reason);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_reject_invoked_with_outOfRange_rejectReason()
         {
-            var owner = new object();
-            var value = "Foo";
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = null;
-            var description = string.Empty;
-            var reason = (RejectReason)1000;
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
+            {
+                var owner = new object();
+                var value = "Foo";
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = null;
+                var description = string.Empty;
+                var reason = (RejectReason)1000;
 
-            var target = new ChangeMock<string>(owner, value, rc, cc, description);
-            target.Reject(reason);
+                var target = new ChangeMock<string>(owner, value, rc, cc, description);
+                target.Reject(reason);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_rejectCallback_argumentNullException()
         {
-            var target = new ChangeMock<string>(new object(), "Foo", null, null, string.Empty);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var target = new ChangeMock<string>(new object(), "Foo", null, null, string.Empty);
+            });
         }
 
         [TestMethod]
@@ -197,35 +205,39 @@ namespace Radical.Tests.ChangeTracking
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commit_invoked_with_invalid_rejectReason()
         {
-            var owner = new object();
-            var value = "Foo";
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = e => { };
-            var description = string.Empty;
-            var reason = CommitReason.None;
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var owner = new object();
+                var value = "Foo";
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = e => { };
+                var description = string.Empty;
+                var reason = CommitReason.None;
 
-            var target = new ChangeMock<string>(owner, value, rc, cc, description);
-            target.Commit(reason);
+                var target = new ChangeMock<string>(owner, value, rc, cc, description);
+                target.Commit(reason);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commit_invoked_with_outOfRange_rejectReason()
         {
-            var owner = new object();
-            var value = "Foo";
-            RejectCallback<string> rc = e => { };
-            CommitCallback<string> cc = e => { };
-            var description = string.Empty;
-            var reason = (CommitReason)1000;
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
+            {
+                var owner = new object();
+                var value = "Foo";
+                RejectCallback<string> rc = e => { };
+                CommitCallback<string> cc = e => { };
+                var description = string.Empty;
+                var reason = (CommitReason)1000;
 
-            var target = new ChangeMock<string>(owner, value, rc, cc, description);
-            target.Commit(reason);
+                var target = new ChangeMock<string>(owner, value, rc, cc, description);
+                target.Commit(reason);
+            });
         }
 
         [TestMethod]

@@ -23,27 +23,33 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_null_reference_target()
         {
-            AdvisedAction actual = new AdvisedAction(null, ProposedActions.Delete);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                AdvisedAction actual = new AdvisedAction(null, ProposedActions.Delete);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_not_supported_proposed_action()
         {
-            AdvisedAction actual = new AdvisedAction(new object(), ProposedActions.None);
+            Assert.ThrowsExactly<NotSupportedException>(() =>
+            {
+                AdvisedAction actual = new AdvisedAction(new object(), ProposedActions.None);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_invalid_proposed_action()
         {
-            AdvisedAction actual = new AdvisedAction(new object(), (ProposedActions)1000);
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
+            {
+                AdvisedAction actual = new AdvisedAction(new object(), (ProposedActions)1000);
+            });
         }
     }
 }

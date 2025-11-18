@@ -26,25 +26,29 @@ namespace Radical.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void changeArgs_ctor_using_null_reference_entity_should_raise_ArgumentNullException()
         {
-            object entity = null;
-            var cachedValue = new GenericParameterHelper();
-            var iChange = A.Dummy<IChange>();
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                object entity = null;
+                var cachedValue = new GenericParameterHelper();
+                var iChange = A.Dummy<IChange>();
 
-            var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+                var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void changeArgs_ctor_using_null_reference_iChange_should_raise_ArgumentNullException()
         {
-            var entity = new object();
-            var cachedValue = new GenericParameterHelper();
-            IChange iChange = null;
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var entity = new object();
+                var cachedValue = new GenericParameterHelper();
+                IChange iChange = null;
 
-            var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+                var target = new ChangeEventArgs<GenericParameterHelper>(entity, cachedValue, iChange);
+            });
         }
     }
 }

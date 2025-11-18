@@ -9,10 +9,12 @@ namespace Radical.Tests.Validation
     public class StringValidatorTest
     {
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentOutOfRangeException))]
         public void stringEnsureTest_IsNotEmpty()
         {
-            Ensure.That("").IsNotEmpty();
+            Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(() =>
+            {
+                Ensure.That("").IsNotEmpty();
+            });
         }
 
         [TestMethod()]
@@ -38,19 +40,23 @@ namespace Radical.Tests.Validation
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void stringEnsureExtension_isNotNullNorEmpty_null_string_should_raise_ArgumentNullException()
         {
-            string value = null;
-            Ensure.That(value).IsNotNullNorEmpty();
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                string value = null;
+                Ensure.That(value).IsNotNullNorEmpty();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void stringEnsureExtension_isNotNullNorEmpty_empty_string_should_raise_ArgumentOutOfRangeException()
         {
-            string value = string.Empty;
-            Ensure.That(value).IsNotNullNorEmpty();
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
+            {
+                string value = string.Empty;
+                Ensure.That(value).IsNotNullNorEmpty();
+            });
         }
 
         [TestMethod]
@@ -62,12 +68,14 @@ namespace Radical.Tests.Validation
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void stringEnsureExtension_matches_using_non_valid_email_address_should_raise_FormatException()
         {
-            var pattern = Radical.Helpers.KnownRegex.MailAddress;
+            Assert.ThrowsExactly<FormatException>(() =>
+            {
+                var pattern = Radical.Helpers.KnownRegex.MailAddress;
 
-            Ensure.That("name_domain.tld").Matches(pattern);
+                Ensure.That("name_domain.tld").Matches(pattern);
+            });
         }
 
         [TestMethod]

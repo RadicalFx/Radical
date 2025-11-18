@@ -108,7 +108,7 @@ namespace Radical.Tests.Helpers
         [TestMethod]
         public void Generated_string_by_default_allow_consecutive_and_no_allow_repeated_should_throw()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var sut = new RandomStrings { AllowConsecutiveCharacters = true, AllowRepeatCharacters = false};
                 sut.Next(); 

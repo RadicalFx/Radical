@@ -28,11 +28,13 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void changeSet_ctor_null_reference()
         {
-            var actual = new ChangeSet(null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var actual = new ChangeSet(null);
+            });
         }
     }
 }

@@ -32,12 +32,14 @@ namespace Radical.Tests.ChangeTracking
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void changeSetDistinctVisitor_visit_null_changeSet_reference()
         {
-            ChangeSetDistinctVisitor target = new ChangeSetDistinctVisitor();
-            target.Visit(null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                ChangeSetDistinctVisitor target = new ChangeSetDistinctVisitor();
+                target.Visit(null);
+            });
         }
     }
 }

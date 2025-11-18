@@ -179,35 +179,43 @@ namespace Radical.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void entityItemViewPropertyDescriptor_getValue_using_null_reference_component_should_raise_ArgumentNullException()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.GetValue(null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                target.GetValue(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void entityItemViewPropertyDescriptor_setValue_using_null_reference_component_should_raise_ArgumentNullException()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.SetValue(null, 100);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                target.SetValue(null, 100);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void entityItemViewPropertyDescriptor_getValue_using_invalid_reference_component_should_raise_ArgumentException()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.GetValue(new object());
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                target.GetValue(new object());
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void entityItemViewPropertyDescriptor_setValue_using_invalid_reference_component_should_raise_ArgumentException()
         {
-            var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
-            target.SetValue(new object(), 100);
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
+                target.SetValue(new object(), 100);
+            });
         }
     }
 }

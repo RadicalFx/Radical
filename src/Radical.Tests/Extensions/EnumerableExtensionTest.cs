@@ -13,17 +13,21 @@ namespace Radical.Tests.Extensions
     public class EnumerableExtensionTest
     {
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ForEachTest_null_list()
         {
-            Linq.EnumerableExtensions.ForEach<int>(null, a => a++);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                Linq.EnumerableExtensions.ForEach<int>(null, a => a++);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ForEachTest_null_action()
         {
-            Linq.EnumerableExtensions.ForEach<int>(new[] { 0, 1, 2 }, null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                Linq.EnumerableExtensions.ForEach<int>(new[] { 0, 1, 2 }, null);
+            });
         }
 
         [TestMethod()]
@@ -46,10 +50,12 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AsReadOnly_null_expects_exception()
         {
-            Linq.EnumerableExtensions.AsReadOnly<object>(null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                Linq.EnumerableExtensions.AsReadOnly<object>(null);
+            });
         }
 
         [TestMethod()]
@@ -83,17 +89,21 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void iEnumerableExtensions_enumerate_null_list_reference_should_raise_ArgumentNullException()
         {
-            Linq.EnumerableExtensions.Enumerate(null, null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                Linq.EnumerableExtensions.Enumerate(null, null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void iEnumerableExtensions_enumerate_null_action_reference_should_raise_ArgumentNullException()
         {
-            Linq.EnumerableExtensions.Enumerate(new object[0], null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                Linq.EnumerableExtensions.Enumerate(new object[0], null);
+            });
         }
 
         [TestMethod]
@@ -152,11 +162,13 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void enumerableExtensions_alternateWith_using_null_list_should_throw_ArgumentNullException()
         {
-            var x = Linq.EnumerableExtensions.AlternateWith<object>(null, null);
-            x.ToList();
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var x = Linq.EnumerableExtensions.AlternateWith<object>(null, null);
+                x.ToList();
+            });
         }
 
         [TestMethod]

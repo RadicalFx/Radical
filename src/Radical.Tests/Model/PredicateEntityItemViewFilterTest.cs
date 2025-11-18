@@ -66,17 +66,21 @@ namespace Radical.Tests.Model
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void predicateEntityItemViewFilter_ctor_null_predicate_should_raise_ArgumentNullException()
         {
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void predicateEntityItemViewFilter_ctor_null_predicate_null_string_should_raise_ArgumentNullException()
         {
-            var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null, null);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null, null);
+            });
         }
     }
 }
