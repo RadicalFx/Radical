@@ -181,7 +181,7 @@ namespace Radical.Tests
         [TestMethod]
         public void entityItemViewPropertyDescriptor_getValue_using_null_reference_component_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
                 target.GetValue(null);
@@ -191,7 +191,7 @@ namespace Radical.Tests
         [TestMethod]
         public void entityItemViewPropertyDescriptor_setValue_using_null_reference_component_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
                 target.SetValue(null, 100);
@@ -201,7 +201,7 @@ namespace Radical.Tests
         [TestMethod]
         public void entityItemViewPropertyDescriptor_getValue_using_invalid_reference_component_should_raise_ArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
                 target.GetValue(new object());
@@ -211,7 +211,7 @@ namespace Radical.Tests
         [TestMethod]
         public void entityItemViewPropertyDescriptor_setValue_using_invalid_reference_component_should_raise_ArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var target = new EntityItemViewPropertyDescriptor<GenericParameterHelper>("Data");
                 target.SetValue(new object(), 100);

@@ -28,7 +28,7 @@
         [TestMethod]
         public void comparableEnsureExtension_isGreaterThen_using_non_valid_value_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Ensure.That(10).IsGreaterThen(15);
             });
@@ -37,7 +37,7 @@
         [TestMethod]
         public void comparableEnsureExtension_isGreaterThen_using_non_valid_boundary_value_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Ensure.That(10).IsGreaterThen(10);
             });
@@ -46,7 +46,7 @@
         [TestMethod]
         public void comparableEnsureExtension_isGreaterThen_Or_Equal_using_non_valid_value_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Ensure.That(10).IsGreaterThen(11, Or.Equal);
             });
@@ -61,7 +61,7 @@
         [TestMethod]
         public void comparableEnsureExtension_isWithin_using_value_out_of_range_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Ensure.That(100).IsWithin(8, 11);
             });

@@ -21,7 +21,7 @@
         [TestMethod]
         public void iconUriHelper_buildPackUri_using_null_relative_uri_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Radical.StringExtensions.AsPackUri(null);
             });
@@ -30,7 +30,7 @@
         [TestMethod]
         public void iconUriHelper_buildPackUri_using_empty_relative_uri_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Radical.StringExtensions.AsPackUri(string.Empty);
             });

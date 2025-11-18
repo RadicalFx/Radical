@@ -28,7 +28,7 @@ namespace Radical.Tests
         [TestMethod]
         public void changeArgs_ctor_using_null_reference_entity_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 object entity = null;
                 var cachedValue = new GenericParameterHelper();
@@ -41,7 +41,7 @@ namespace Radical.Tests
         [TestMethod]
         public void changeArgs_ctor_using_null_reference_iChange_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var entity = new object();
                 var cachedValue = new GenericParameterHelper();

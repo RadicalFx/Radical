@@ -230,7 +230,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_memento_changing_on_disposed_entity_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var memento = new ChangeTrackingService();
                 var target = new TestableMementoEntity(memento);
@@ -242,7 +242,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_memento_changing_on_disposed_entity_using_base_iMemento_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var memento = new ChangeTrackingService();
                 var target = new TestableMementoEntity(memento);
@@ -278,7 +278,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_chacheChange_value_rejectCallback_on_disposed_object_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var memento = new ChangeTrackingService();
                 var target = new TestableMementoEntity(memento);
@@ -338,7 +338,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_chacheChange_value_rejectCallback_commitCallback_on_disposed_object_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var memento = new ChangeTrackingService();
                 var target = new TestableMementoEntity(memento);
@@ -398,7 +398,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_chacheChange_value_rejectCallback_commitCallback_addChangeBeahvior_on_disposed_object_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var memento = new ChangeTrackingService();
                 var target = new TestableMementoEntity(memento);
@@ -502,7 +502,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_chacheChangeOnRejectCallback_on_disposed_entity_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var iChange = A.Dummy<IChange>();
                 var memento = A.Fake<IChangeTrackingService>();
@@ -521,7 +521,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_cacheChangeOnRejectCallback_rejectReason_none_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 var iChange = A.Dummy<IChange>();
                 var memento = A.Fake<IChangeTrackingService>();
@@ -539,7 +539,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entityMemento_cacheChangeOnRejectCallback_invalid_rejectReason_should_raise_EnumValueOutOfRangeException()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 var iChange = A.Dummy<IChange>();
                 var memento = A.Fake<IChangeTrackingService>();

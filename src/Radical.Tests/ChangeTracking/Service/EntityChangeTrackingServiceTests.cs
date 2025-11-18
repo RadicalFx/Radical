@@ -360,7 +360,7 @@
         [TestCategory("ChangeTracking")]
         public void explicit_registerAsTransient_throws_exception_if_already_registered()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -403,7 +403,7 @@
         [TestCategory("ChangeTracking")]
         public void explicit_registerAsTransient_without_autoRemove_throws_exception_if_already_registered()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -628,7 +628,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_no_more_changes_can_be_added()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 RejectCallback<string> cb = cv => { };
                 object fakeOwner = new object();
@@ -646,7 +646,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RegisterTransient()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -660,7 +660,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RegisterTransient_with_explicit_autoRemove_true()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -674,7 +674,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RegisterTransient_with_explicit_autoRemove_false()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -688,7 +688,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_Undo()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -704,7 +704,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_Redo()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -721,7 +721,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_AcceptChanges()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -737,7 +737,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_RejectChanges()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -753,7 +753,7 @@
         [TestCategory("ChangeTracking")]
         public void after_suspend_cannot_call_UnregisterTransient()
         {
-            Assert.ThrowsException<SuspendedChangeTrackingServiceException>(() =>
+            Assert.ThrowsExactly<SuspendedChangeTrackingServiceException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -831,7 +831,7 @@
         [TestCategory("ChangeTracking")]
         public void service_on_null_iChange_add_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.Add(null, AddChangeBehavior.RedoRequest);
@@ -874,7 +874,7 @@
         [TestCategory("ChangeTracking")]
         public void service_add_notSupported_AddChangeBehavior()
         {
-            Assert.ThrowsException<NotSupportedException>(() =>
+            Assert.ThrowsExactly<NotSupportedException>(() =>
             {
                 IChange stub = A.Dummy<IChange>();
 
@@ -887,7 +887,7 @@
         [TestCategory("ChangeTracking")]
         public void service_add_invalid_AddChangeBehavior()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 IChange stub = A.Dummy<IChange>();
 
@@ -927,7 +927,7 @@
         [TestCategory("ChangeTracking")]
         public void service_cannot_validate_a_null_bookmark()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.Validate(null);
@@ -982,7 +982,7 @@
         [TestCategory("ChangeTracking")]
         public void service_revert_with_a_null_bookmark()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.Revert(null);
@@ -993,7 +993,7 @@
         [TestCategory("ChangeTracking")]
         public void service_revert_to_a_bookmark_created_by_another_service()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 ChangeTrackingService svc1 = new ChangeTrackingService();
                 IBookmark bmk = svc1.CreateBookmark();
@@ -1065,7 +1065,7 @@
         [TestCategory("ChangeTracking")]
         public void service_cannot_revert_to_an_invalid_bookmark()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
 
@@ -1143,7 +1143,7 @@
         [TestCategory("ChangeTracking")]
         public void service_getAdvisory_with_null_iAdvisoryBuilder_argumentNull_Exception()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.GetAdvisory(null);
@@ -1165,7 +1165,7 @@
         [TestCategory("ChangeTracking")]
         public void service_getChangeSet_with_null_iChangeSetFilter_argumentNullExeption()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.GetChangeSet(null);
@@ -1176,7 +1176,7 @@
         [TestCategory("ChangeTracking")]
         public void service_getChangeSet_with_null_iChangeSetFilter()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.GetChangeSet(null);
@@ -1346,7 +1346,7 @@
         [TestCategory("ChangeTracking")]
         public void service_registerTransient_null_reference_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.RegisterTransient(null);
@@ -1357,7 +1357,7 @@
         [TestCategory("ChangeTracking")]
         public void service_registerTransient_null_reference_explicit_autoRemove_true_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.RegisterTransient(null, true);
@@ -1368,7 +1368,7 @@
         [TestCategory("ChangeTracking")]
         public void service_registerTransient_null_reference_explicit_autoRemove_false_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.RegisterTransient(null, false);
@@ -1379,7 +1379,7 @@
         [TestCategory("ChangeTracking")]
         public void service_double_registerTransient_with_same_reference_invalidOperationException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 Person p = new Person(svc);
@@ -1391,7 +1391,7 @@
         [TestCategory("ChangeTracking")]
         public void service_double_registerTransient_with_same_reference_and_explicit_autoRemove_true_invalidOperationException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 Person p = new Person(svc);
@@ -1403,7 +1403,7 @@
         [TestCategory("ChangeTracking")]
         public void service_double_registerTransient_with_same_reference_and_explicit_autoRemove_false_invalidOperationException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 Person p = new Person(svc);
@@ -1445,7 +1445,7 @@
         [TestCategory("ChangeTracking")]
         public void service_unregisterTransient_null_reference_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeTrackingService svc = new ChangeTrackingService();
                 svc.UnregisterTransient(null);
@@ -1470,7 +1470,7 @@
         [TestCategory("ChangeTracking")]
         public void service_unregisterTransient_reference_not_registered_as_transient()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Person p = new Person(null);
 
@@ -2039,7 +2039,7 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_EnumValueOutOfRangeException_on_invalid_commit_reason_with_hacked_property_change()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 RejectCallback<string> rc = e => { };
                 CommitCallback<string> cc = e => { };
@@ -2060,7 +2060,7 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_commit_ArgumentOutOfRangeException_on_none_commit_reason_with_hacked_property_change()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 RejectCallback<string> rc = e => { };
                 CommitCallback<string> cc = e => { };
@@ -2081,7 +2081,7 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_reject_EnumValueOutOfRangeException_on_invalid_commit_reason_with_hacked_property_change()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 RejectCallback<string> rc = e => { };
                 CommitCallback<string> cc = e => { };
@@ -2102,7 +2102,7 @@
         [TestCategory("ChangeTracking")]
         public void service_on_change_reject_NotSupportedException_on_none_commit_reason_with_hacked_property_change()
         {
-            Assert.ThrowsException<NotSupportedException>(() =>
+            Assert.ThrowsExactly<NotSupportedException>(() =>
             {
                 RejectCallback<string> rc = e => { };
                 CommitCallback<string> cc = e => { };

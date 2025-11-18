@@ -76,7 +76,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void propertyVaueChange_getAdvisedAction_using_invalid_owner_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 var target = MockPropertyValue(new object(), "Foo", cv => { });
                 target.GetAdvisedAction(new object());
@@ -86,7 +86,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void propertyVaueChange_getAdvisedAction_using_invalid_owner_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = MockPropertyValue(new object(), "Foo", cv => { });
                 target.GetAdvisedAction(null);

@@ -68,7 +68,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void predicateEntityItemViewFilter_ctor_null_predicate_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null);
             });
@@ -77,7 +77,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void predicateEntityItemViewFilter_ctor_null_predicate_null_string_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = new PredicateEntityItemViewFilter<GenericParameterHelper>(null, null);
             });

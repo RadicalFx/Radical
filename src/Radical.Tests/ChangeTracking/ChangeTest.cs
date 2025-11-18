@@ -69,7 +69,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_owner_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = new ChangeMock<string>(null, "Foo", null, null, string.Empty);
             });
@@ -120,7 +120,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_reject_invoked_with_invalid_rejectReason()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var owner = new object();
                 var value = "Foo";
@@ -138,7 +138,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_reject_invoked_with_outOfRange_rejectReason()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 var owner = new object();
                 var value = "Foo";
@@ -156,7 +156,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_ctor_null_rejectCallback_argumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = new ChangeMock<string>(new object(), "Foo", null, null, string.Empty);
             });
@@ -208,7 +208,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commit_invoked_with_invalid_rejectReason()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var owner = new object();
                 var value = "Foo";
@@ -226,7 +226,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iChange_commit_invoked_with_outOfRange_rejectReason()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 var owner = new object();
                 var value = "Foo";

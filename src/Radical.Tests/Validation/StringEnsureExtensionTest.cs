@@ -11,7 +11,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void stringEnsureTest_IsNotEmpty()
         {
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(() =>
             {
                 Ensure.That("").IsNotEmpty();
             });
@@ -42,7 +42,7 @@ namespace Radical.Tests.Validation
         [TestMethod]
         public void stringEnsureExtension_isNotNullNorEmpty_null_string_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 string value = null;
                 Ensure.That(value).IsNotNullNorEmpty();
@@ -52,7 +52,7 @@ namespace Radical.Tests.Validation
         [TestMethod]
         public void stringEnsureExtension_isNotNullNorEmpty_empty_string_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 string value = string.Empty;
                 Ensure.That(value).IsNotNullNorEmpty();
@@ -70,7 +70,7 @@ namespace Radical.Tests.Validation
         [TestMethod]
         public void stringEnsureExtension_matches_using_non_valid_email_address_should_raise_FormatException()
         {
-            Assert.ThrowsException<FormatException>(() =>
+            Assert.ThrowsExactly<FormatException>(() =>
             {
                 var pattern = Radical.Helpers.KnownRegex.MailAddress;
 

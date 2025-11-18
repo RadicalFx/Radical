@@ -35,7 +35,7 @@
         [TestCategory("ChangeTracking")]
         public void filter_argumentNullException_on_shouldInclude_null_iChange_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = IncludeAllChangeSetFilter.Instance;
                 target.ShouldInclude(null);

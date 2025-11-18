@@ -82,7 +82,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void generic_iEqualityComparer_getHashCode_null_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 IEqualityComparer<GenericParameterHelper> instance = new ReferenceEqualityComparer<GenericParameterHelper>();
                 int actual = instance.GetHashCode(null);
@@ -154,7 +154,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void iEqualityComparer_getHashCode_null_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 IEqualityComparer instance = new ReferenceEqualityComparer<GenericParameterHelper>();
                 int actual = instance.GetHashCode(null);

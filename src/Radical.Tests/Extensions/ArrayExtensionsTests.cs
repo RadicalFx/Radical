@@ -68,7 +68,7 @@
         [TestMethod]
         public void arrayExtensions_isSameAs_using_null_source_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ArrayExtensions.IsSameAs(null, new[] { 1, 2, 3 });
             });
@@ -77,7 +77,7 @@
         [TestMethod]
         public void arrayExtensions_isSameAs_using_null_comparer_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ArrayExtensions.IsSameAs(new object[0], null, null);
             });

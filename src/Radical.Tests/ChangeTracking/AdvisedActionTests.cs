@@ -26,7 +26,7 @@
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_null_reference_target()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 AdvisedAction actual = new AdvisedAction(null, ProposedActions.Delete);
             });
@@ -36,7 +36,7 @@
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_not_supported_proposed_action()
         {
-            Assert.ThrowsException<NotSupportedException>(() =>
+            Assert.ThrowsExactly<NotSupportedException>(() =>
             {
                 AdvisedAction actual = new AdvisedAction(new object(), ProposedActions.None);
             });
@@ -46,7 +46,7 @@
         [TestCategory("ChangeTracking")]
         public void advisedAction_ctor_invalid_proposed_action()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 AdvisedAction actual = new AdvisedAction(new object(), (ProposedActions)1000);
             });

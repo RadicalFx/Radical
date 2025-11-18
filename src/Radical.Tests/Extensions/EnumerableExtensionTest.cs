@@ -15,7 +15,7 @@ namespace Radical.Tests.Extensions
         [TestMethod()]
         public void ForEachTest_null_list()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Linq.EnumerableExtensions.ForEach<int>(null, a => a++);
             });
@@ -24,7 +24,7 @@ namespace Radical.Tests.Extensions
         [TestMethod()]
         public void ForEachTest_null_action()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Linq.EnumerableExtensions.ForEach<int>(new[] { 0, 1, 2 }, null);
             });
@@ -52,7 +52,7 @@ namespace Radical.Tests.Extensions
         [TestMethod()]
         public void AsReadOnly_null_expects_exception()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Linq.EnumerableExtensions.AsReadOnly<object>(null);
             });
@@ -91,7 +91,7 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void iEnumerableExtensions_enumerate_null_list_reference_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Linq.EnumerableExtensions.Enumerate(null, null);
             });
@@ -100,7 +100,7 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void iEnumerableExtensions_enumerate_null_action_reference_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Linq.EnumerableExtensions.Enumerate(new object[0], null);
             });
@@ -164,7 +164,7 @@ namespace Radical.Tests.Extensions
         [TestMethod]
         public void enumerableExtensions_alternateWith_using_null_list_should_throw_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var x = Linq.EnumerableExtensions.AlternateWith<object>(null, null);
                 x.ToList();

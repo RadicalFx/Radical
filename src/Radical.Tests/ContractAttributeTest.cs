@@ -39,7 +39,7 @@
         [TestMethod()]
         public void ContractAttribute_ctor_argumentNullException_on_null_contract()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ContractAttribute target = new ContractAttribute(null);
             });

@@ -72,7 +72,7 @@
         [TestMethod()]
         public void IsAttributeDefined_null_memberInfo()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null);
             });
@@ -81,7 +81,7 @@
         [TestMethod()]
         public void IsAttributeDefined_null_memberInfo_false()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null, false);
             });
@@ -90,7 +90,7 @@
         [TestMethod()]
         public void IsAttributeDefined_null_memberInfo_true()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null, true);
             });
@@ -153,7 +153,7 @@
         [TestMethod()]
         public void GetAttribute_null_memberInfo_true()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.GetAttribute<MyTestAttribute>(null, true);
             });
@@ -162,7 +162,7 @@
         [TestMethod()]
         public void GetAttribute_null_memberInfo_false()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.GetAttribute<MyTestAttribute>(null, true);
             });
@@ -171,7 +171,7 @@
         [TestMethod()]
         public void GetAttribute_null_memberInfo()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.GetAttribute<MyTestAttribute>(null);
             });
@@ -180,7 +180,7 @@
         [TestMethod()]
         public void GetAttributes_null_memberInfo()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 MemberInfoExtensions.GetAttributes<MyTestAttribute>(null);
             });

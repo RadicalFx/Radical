@@ -22,7 +22,7 @@
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_ctor_null_visitor()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var actual = new AdvisoryBuilder(null);
             });
@@ -32,7 +32,7 @@
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_null_service_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
                 actual.GenerateAdvisory(null, null);
@@ -43,7 +43,7 @@
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_null_changeSet_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
                 actual.GenerateAdvisory(new ChangeTrackingService(), null);
@@ -222,10 +222,10 @@
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_unsupported_proposedActions_value()
         {
-            Assert.ThrowsException<NotSupportedException>(() =>
+            Assert.ThrowsExactly<NotSupportedException>(() =>
             {
                 var entity = new object();
-                var entityState = EntityTrackingStates.HasBackwardChanges();
+                var entityState = EntityTrackingStates.HasBackwardChanges;
 
                 var c1 = A.Fake<IChange>();
                 A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });

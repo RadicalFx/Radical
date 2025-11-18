@@ -41,7 +41,7 @@ namespace Radical.Tests.Extensions
         [TestMethod()]
         public void EnumInvalidValueValidation()
         {
-            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            Assert.ThrowsExactly<EnumValueOutOfRangeException>(() =>
             {
                 TestEnum actual = (TestEnum)(-1);
                 EnumExtensions.EnsureIsDefined(actual);
@@ -92,7 +92,7 @@ namespace Radical.Tests.Extensions
         [TestMethod()]
         public void EnumExtension_GetDescriptionAttribute_failure()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 TestEnum val = TestEnum.ValueWithoutAttribute;
                 EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute(val);

@@ -93,7 +93,7 @@ namespace Radical.Tests
         [TestMethod()]
         public void EnumItemDescriptionAttribute_ctor_null_caption()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 EnumItemDescriptionAttribute target = CreateMock(null);
             });

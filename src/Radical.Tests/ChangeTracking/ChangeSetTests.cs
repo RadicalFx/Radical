@@ -31,7 +31,7 @@
         [TestCategory("ChangeTracking")]
         public void changeSet_ctor_null_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var actual = new ChangeSet(null);
             });

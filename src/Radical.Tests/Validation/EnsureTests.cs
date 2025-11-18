@@ -208,7 +208,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void validator_instpect_on_nullString_Throw()
         {
-            Assert.ThrowsException<System.ArgumentNullException>(() =>
+            Assert.ThrowsExactly<System.ArgumentNullException>(() =>
             {
                 string expected = "null";
                 Ensure.That((string)null).If(s => s == null)
@@ -222,7 +222,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void validator_instpect_on_nullString_exception()
         {
-            Assert.ThrowsException<System.ArgumentNullException>(() =>
+            Assert.ThrowsExactly<System.ArgumentNullException>(() =>
             {
                 Ensure.That((string)null).IsNotNull();
             });

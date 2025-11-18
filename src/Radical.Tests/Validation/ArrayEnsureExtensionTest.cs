@@ -11,7 +11,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_lower()
         {
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(() =>
             {
                 int[] data = new int[1] { 0 };
                 Ensure.That(data).ContainsIndex(-1);
@@ -21,7 +21,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_lower_using_named_ensure()
         {
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(() =>
             {
                 int[] data = new int[1] { 0 };
                 Ensure.That(data).Named("foo").ContainsIndex(-1);
@@ -31,7 +31,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_upper()
         {
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(() =>
             {
                 int[] data = new int[1] { 0 };
                 Ensure.That(data).ContainsIndex(2);
@@ -41,7 +41,7 @@ namespace Radical.Tests.Validation
         [TestMethod()]
         public void arrayEnsureExtension_containsIndex_using_an_out_of_range_index_upper_using_named_ensure()
         {
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(() =>
             {
                 int[] data = new int[1] { 0 };
                 Ensure.That(data).Named("foo").ContainsIndex(2);

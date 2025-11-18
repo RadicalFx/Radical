@@ -41,7 +41,7 @@
         [TestMethod()]
         public void EnumBinder_enumItemDescriptionAttribute_object_ctor_null_attribute()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var value = TestEnum.Value2;
                 var target = new EnumBinder<TestEnum>((EnumItemDescriptionAttribute)null, value);
@@ -102,7 +102,7 @@
         [TestMethod()]
         public void EnumBinder_string_object_null_description()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var description = (string)null;
                 var value = TestEnum.Value2;
@@ -113,7 +113,7 @@
         [TestMethod()]
         public void EnumBinder_string_object_int32_null_description()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var description = (string)null;
                 var value = TestEnum.Value2;

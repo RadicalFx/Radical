@@ -135,7 +135,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_create_using_initial_value_is_reset_initial_value_should_raise_ArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 /*
                  * Questo in teoria dovrebbe sollevare 

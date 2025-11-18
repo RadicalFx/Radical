@@ -53,7 +53,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_propertyChanged_event_on_disposed_entity_using_propertyChangedEventArgs_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var expected = "Foo";
 
@@ -66,7 +66,7 @@ namespace Radical.Tests.Model.Entity
         [TestMethod]
         public void entity_propertyChanged_event_on_disposed_entity_using_propertyName_should_raise_ObjectDisposedException()
         {
-            Assert.ThrowsException<ObjectDisposedException>(() =>
+            Assert.ThrowsExactly<ObjectDisposedException>(() =>
             {
                 var expected = "Foo";
 

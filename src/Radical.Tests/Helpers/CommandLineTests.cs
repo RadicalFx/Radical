@@ -163,7 +163,7 @@ namespace Radical.Tests.Helpers
         [TestCategory("CommandLine")]
         public void CommandLine_as_using_valid_command_line_and_class_should_not_convert_command_line_to_class_instance_using_missing_required_arguments()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var target = new CommandLine(new string[0]);
                 var instance = target.As<Sample>();

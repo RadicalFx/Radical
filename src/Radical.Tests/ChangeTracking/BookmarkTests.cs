@@ -47,7 +47,7 @@
         [TestCategory("ChangeTracking")]
         public void bookmark_null_owner__null_change_null_transientEntities_iChangeTrackingService_ctor_raise_argumentNullException_on_owner()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Bookmark bmk = new Bookmark((IChangeTrackingService)null, (IChange)null, (IEnumerable<object>)null);
             });

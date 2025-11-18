@@ -61,7 +61,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_ctor_iEnumerable_null_list_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 CreateMock((IEnumerable<GenericParameterHelper>)null);
             });
@@ -70,7 +70,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_ctor_int_less_then_zero_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 CreateMock<GenericParameterHelper>(-1);
             });
@@ -311,7 +311,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_set_Item_invalid_index_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 var target = CreateMock<GenericParameterHelper>();
 
@@ -322,7 +322,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_get_Item_invalid_index_should_raise_ArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 var target = CreateMock<GenericParameterHelper>();
 
@@ -393,7 +393,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_addRange_null_reference_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = CreateMock<GenericParameterHelper>();
 
@@ -439,7 +439,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_copyTo_array_null_reference_destination_array_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = CreateMock<GenericParameterHelper>();
                 target.Add(new GenericParameterHelper(0));
@@ -453,7 +453,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void entityCollection_copyTo_array_destination_array_smaller_then_source_should_raise_ArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 var target = CreateMock<GenericParameterHelper>();
                 target.Add(new GenericParameterHelper(0));

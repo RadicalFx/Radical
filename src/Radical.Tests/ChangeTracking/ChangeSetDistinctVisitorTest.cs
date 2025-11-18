@@ -35,7 +35,7 @@ namespace Radical.Tests.ChangeTracking
         [TestCategory("ChangeTracking")]
         public void changeSetDistinctVisitor_visit_null_changeSet_reference()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 ChangeSetDistinctVisitor target = new ChangeSetDistinctVisitor();
                 target.Visit(null);

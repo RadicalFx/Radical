@@ -38,7 +38,7 @@ namespace Radical.Tests.Model
         [TestMethod]
         public void viewAllEntityItemViewFilter_shouldInclude_using_null_reference_should_raise_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 var target = ViewAllEntityItemViewFilter<GenericParameterHelper>.Instance;
                 ((ViewAllEntityItemViewFilter<GenericParameterHelper>)target).ShouldInclude(null);
