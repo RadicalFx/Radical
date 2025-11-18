@@ -39,11 +39,13 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         public void EnumInvalidValueValidation()
         {
-            TestEnum actual = (TestEnum)(-1);
-            EnumExtensions.EnsureIsDefined(actual);
+            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            {
+                TestEnum actual = (TestEnum)(-1);
+                EnumExtensions.EnsureIsDefined(actual);
+            });
         }
 
         [TestMethod()]
@@ -88,11 +90,13 @@ namespace Radical.Tests.Extensions
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
         public void EnumExtension_GetDescriptionAttribute_failure()
         {
-            TestEnum val = TestEnum.ValueWithoutAttribute;
-            EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute(val);
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                TestEnum val = TestEnum.ValueWithoutAttribute;
+                EnumItemDescriptionAttribute actual = EnumExtensions.GetDescriptionAttribute(val);
+            });
         }
 
         [TestMethod()]
