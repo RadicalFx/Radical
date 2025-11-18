@@ -19,29 +19,35 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_ctor_null_visitor()
         {
-            var actual = new AdvisoryBuilder(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var actual = new AdvisoryBuilder(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_null_service_reference()
         {
-            var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
-            actual.GenerateAdvisory(null, null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
+                actual.GenerateAdvisory(null, null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_null_changeSet_reference()
         {
-            var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
-            actual.GenerateAdvisory(new ChangeTrackingService(), null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
+                actual.GenerateAdvisory(new ChangeTrackingService(), null);
+            });
         }
 
         [TestMethod]
@@ -213,25 +219,27 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
         [TestCategory("ChangeTracking")]
         public void advisoryBuilder_generateAdvisory_unsupported_proposedActions_value()
         {
-            var entity = new object();
-            var entityState = EntityTrackingStates.HasBackwardChanges;
+            Assert.ThrowsException<NotSupportedException>(() =>
+            {
+                var entity = new object();
+                var entityState = EntityTrackingStates.HasBackwardChanges();
 
-            var c1 = A.Fake<IChange>();
-            A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
-            A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.None);
+                var c1 = A.Fake<IChange>();
+                A.CallTo(() => c1.GetChangedEntities()).Returns(new object[] { entity });
+                A.CallTo(() => c1.GetAdvisedAction(entity)).Returns(ProposedActions.None);
 
-            var cSet = new ChangeSet(new IChange[] { c1 });
+                var cSet = new ChangeSet(new IChange[] { c1 });
 
-            var svc = A.Fake<IChangeTrackingService>();
-            A.CallTo(() => svc.GetEntityState(entity)).Returns(entityState);
-            A.CallTo(() => svc.GetEntities(EntityTrackingStates.IsTransient, true)).Returns(new object[0]);
+                var svc = A.Fake<IChangeTrackingService>();
+                A.CallTo(() => svc.GetEntityState(entity)).Returns(entityState);
+                A.CallTo(() => svc.GetEntities(EntityTrackingStates.IsTransient, true)).Returns(new object[0]);
 
-            var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
-            IAdvisory advisory = actual.GenerateAdvisory(svc, cSet);
+                var actual = new AdvisoryBuilder(new ChangeSetDistinctVisitor());
+                IAdvisory advisory = actual.GenerateAdvisory(svc, cSet);
+            });
         }
     }
 }
