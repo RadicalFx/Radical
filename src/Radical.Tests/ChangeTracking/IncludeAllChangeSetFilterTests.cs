@@ -32,12 +32,14 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void filter_argumentNullException_on_shouldInclude_null_iChange_reference()
         {
-            var target = IncludeAllChangeSetFilter.Instance;
-            target.ShouldInclude(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var target = IncludeAllChangeSetFilter.Instance;
+                target.ShouldInclude(null);
+            });
         }
     }
 }

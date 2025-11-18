@@ -28,11 +28,13 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         [TestCategory("ChangeTracking")]
         public void advisory_ctor_null_reference()
         {
-            var actual = new Advisory(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var actual = new Advisory(null);
+            });
         }
     }
 }
