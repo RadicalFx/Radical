@@ -70,24 +70,30 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void IsAttributeDefined_null_memberInfo()
         {
-            MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void IsAttributeDefined_null_memberInfo_false()
         {
-            MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null, false);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null, false);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void IsAttributeDefined_null_memberInfo_true()
         {
-            MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null, true);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.IsAttributeDefined<MyTestAttribute>(null, true);
+            });
         }
 
         [TestMethod()]
@@ -145,31 +151,39 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetAttribute_null_memberInfo_true()
         {
-            MemberInfoExtensions.GetAttribute<MyTestAttribute>(null, true);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.GetAttribute<MyTestAttribute>(null, true);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetAttribute_null_memberInfo_false()
         {
-            MemberInfoExtensions.GetAttribute<MyTestAttribute>(null, true);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.GetAttribute<MyTestAttribute>(null, true);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetAttribute_null_memberInfo()
         {
-            MemberInfoExtensions.GetAttribute<MyTestAttribute>(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.GetAttribute<MyTestAttribute>(null);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetAttributes_null_memberInfo()
         {
-            MemberInfoExtensions.GetAttributes<MyTestAttribute>(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                MemberInfoExtensions.GetAttributes<MyTestAttribute>(null);
+            });
         }
 
         [TestMethod()]

@@ -19,17 +19,21 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void iconUriHelper_buildPackUri_using_null_relative_uri_should_raise_ArgumentNullException()
         {
-            Radical.StringExtensions.AsPackUri(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                Radical.StringExtensions.AsPackUri(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void iconUriHelper_buildPackUri_using_empty_relative_uri_should_raise_ArgumentOutOfRangeException()
         {
-            Radical.StringExtensions.AsPackUri(string.Empty);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Radical.StringExtensions.AsPackUri(string.Empty);
+            });
         }
 
         [TestMethod]

@@ -37,10 +37,12 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ContractAttribute_ctor_argumentNullException_on_null_contract()
         {
-            ContractAttribute target = new ContractAttribute(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ContractAttribute target = new ContractAttribute(null);
+            });
         }
 
         [TestMethod()]

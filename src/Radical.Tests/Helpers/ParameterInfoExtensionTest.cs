@@ -85,10 +85,12 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void IsAttributeDefined_null_parameterInfo()
         {
-            ParameterInfoExtension.IsAttributeDefined<MyTestAttribute>(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ParameterInfoExtension.IsAttributeDefined<MyTestAttribute>(null);
+            });
         }
 
         [TestMethod()]
@@ -101,17 +103,21 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetAttribute_null_parameterInfo()
         {
-            ParameterInfoExtension.GetAttribute<MyTestAttribute>(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ParameterInfoExtension.GetAttribute<MyTestAttribute>(null);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetAttributes_null_parameterInfo()
         {
-            ParameterInfoExtension.GetAttributes<MyTestAttribute>(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ParameterInfoExtension.GetAttributes<MyTestAttribute>(null);
+            });
         }
 
         [TestMethod()]

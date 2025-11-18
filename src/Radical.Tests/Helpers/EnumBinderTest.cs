@@ -39,11 +39,13 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void EnumBinder_enumItemDescriptionAttribute_object_ctor_null_attribute()
         {
-            var value = TestEnum.Value2;
-            var target = new EnumBinder<TestEnum>((EnumItemDescriptionAttribute)null, value);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var value = TestEnum.Value2;
+                var target = new EnumBinder<TestEnum>((EnumItemDescriptionAttribute)null, value);
+            });
         }
 
         [TestMethod()]
@@ -98,22 +100,26 @@
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void EnumBinder_string_object_null_description()
         {
-            var description = (string)null;
-            var value = TestEnum.Value2;
-            var target = new EnumBinder<TestEnum>(description, value);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var description = (string)null;
+                var value = TestEnum.Value2;
+                var target = new EnumBinder<TestEnum>(description, value);
+            });
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void EnumBinder_string_object_int32_null_description()
         {
-            var description = (string)null;
-            var value = TestEnum.Value2;
-            var index = 0;
-            var target = new EnumBinder<TestEnum>(description, value, index);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var description = (string)null;
+                var value = TestEnum.Value2;
+                var index = 0;
+                var target = new EnumBinder<TestEnum>(description, value, index);
+            });
         }
 
         [TestMethod()]

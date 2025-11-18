@@ -66,17 +66,21 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void arrayExtensions_isSameAs_using_null_source_should_raise_ArgumentNullException()
         {
-            ArrayExtensions.IsSameAs(null, new[] { 1, 2, 3 });
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ArrayExtensions.IsSameAs(null, new[] { 1, 2, 3 });
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void arrayExtensions_isSameAs_using_null_comparer_should_raise_ArgumentNullException()
         {
-            ArrayExtensions.IsSameAs(new object[0], null, null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                ArrayExtensions.IsSameAs(new object[0], null, null);
+            });
         }
     }
 }
