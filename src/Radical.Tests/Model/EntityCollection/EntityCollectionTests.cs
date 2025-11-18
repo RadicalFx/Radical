@@ -59,17 +59,21 @@ namespace Radical.Tests.Model
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void entityCollection_ctor_iEnumerable_null_list_should_raise_ArgumentNullException()
         {
-            CreateMock((IEnumerable<GenericParameterHelper>)null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                CreateMock((IEnumerable<GenericParameterHelper>)null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void entityCollection_ctor_int_less_then_zero_should_raise_ArgumentNullException()
         {
-            CreateMock<GenericParameterHelper>(-1);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                CreateMock<GenericParameterHelper>(-1);
+            });
         }
 
         [TestMethod]
@@ -305,21 +309,25 @@ namespace Radical.Tests.Model
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void entityCollection_set_Item_invalid_index_should_raise_ArgumentOutOfRangeException()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                var target = CreateMock<GenericParameterHelper>();
 
-            target[2] = new GenericParameterHelper();
+                target[2] = new GenericParameterHelper();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void entityCollection_get_Item_invalid_index_should_raise_ArgumentOutOfRangeException()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                var target = CreateMock<GenericParameterHelper>();
 
-            var actual = target[2];
+                var actual = target[2];
+            });
         }
 
         [TestMethod]
@@ -383,12 +391,14 @@ namespace Radical.Tests.Model
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void entityCollection_addRange_null_reference_should_raise_ArgumentNullException()
         {
-            var target = CreateMock<GenericParameterHelper>();
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var target = CreateMock<GenericParameterHelper>();
 
-            target.AddRange(null);
+                target.AddRange(null);
+            });
         }
 
         [TestMethod]
@@ -427,28 +437,32 @@ namespace Radical.Tests.Model
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void entityCollection_copyTo_array_null_reference_destination_array_should_raise_ArgumentNullException()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var target = CreateMock<GenericParameterHelper>();
+                target.Add(new GenericParameterHelper(0));
+                target.Add(new GenericParameterHelper(1));
+                target.Add(new GenericParameterHelper(2));
 
-            target.CopyTo(null);
+                target.CopyTo(null);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void entityCollection_copyTo_array_destination_array_smaller_then_source_should_raise_ArgumentException()
         {
-            var target = CreateMock<GenericParameterHelper>();
-            target.Add(new GenericParameterHelper(0));
-            target.Add(new GenericParameterHelper(1));
-            target.Add(new GenericParameterHelper(2));
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                var target = CreateMock<GenericParameterHelper>();
+                target.Add(new GenericParameterHelper(0));
+                target.Add(new GenericParameterHelper(1));
+                target.Add(new GenericParameterHelper(2));
 
-            var destination = new GenericParameterHelper[1];
-            target.CopyTo(destination);
+                var destination = new GenericParameterHelper[1];
+                target.CopyTo(destination);
+            });
         }
 
         [TestMethod]

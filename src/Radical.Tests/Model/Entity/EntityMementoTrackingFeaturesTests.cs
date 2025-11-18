@@ -228,23 +228,27 @@ namespace Radical.Tests.Model.Entity
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entityMemento_memento_changing_on_disposed_entity_should_raise_ObjectDisposedException()
         {
-            var memento = new ChangeTrackingService();
-            var target = new TestableMementoEntity(memento);
-            target.Dispose();
-            ((IMemento)target).Memento = null;
+            Assert.ThrowsException<ObjectDisposedException>(() =>
+            {
+                var memento = new ChangeTrackingService();
+                var target = new TestableMementoEntity(memento);
+                target.Dispose();
+                ((IMemento)target).Memento = null;
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entityMemento_memento_changing_on_disposed_entity_using_base_iMemento_should_raise_ObjectDisposedException()
         {
-            var memento = new ChangeTrackingService();
-            var target = new TestableMementoEntity(memento);
-            target.Dispose();
-            ((IMemento)target).Memento = null;
+            Assert.ThrowsException<ObjectDisposedException>(() =>
+            {
+                var memento = new ChangeTrackingService();
+                var target = new TestableMementoEntity(memento);
+                target.Dispose();
+                ((IMemento)target).Memento = null;
+            });
         }
 
         [TestMethod]
@@ -272,14 +276,16 @@ namespace Radical.Tests.Model.Entity
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entityMemento_chacheChange_value_rejectCallback_on_disposed_object_should_raise_ObjectDisposedException()
         {
-            var memento = new ChangeTrackingService();
-            var target = new TestableMementoEntity(memento);
-            target.Dispose();
+            Assert.ThrowsException<ObjectDisposedException>(() =>
+            {
+                var memento = new ChangeTrackingService();
+                var target = new TestableMementoEntity(memento);
+                target.Dispose();
 
-            target.InvokeCacheChange("Foo", cv => { });
+                target.InvokeCacheChange("Foo", cv => { });
+            });
         }
 
         [TestMethod]
@@ -330,14 +336,16 @@ namespace Radical.Tests.Model.Entity
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entityMemento_chacheChange_value_rejectCallback_commitCallback_on_disposed_object_should_raise_ObjectDisposedException()
         {
-            var memento = new ChangeTrackingService();
-            var target = new TestableMementoEntity(memento);
-            target.Dispose();
+            Assert.ThrowsException<ObjectDisposedException>(() =>
+            {
+                var memento = new ChangeTrackingService();
+                var target = new TestableMementoEntity(memento);
+                target.Dispose();
 
-            target.InvokeCacheChange("Foo", cv => { }, cv => { });
+                target.InvokeCacheChange("Foo", cv => { }, cv => { });
+            });
         }
 
         [TestMethod]
@@ -388,14 +396,16 @@ namespace Radical.Tests.Model.Entity
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entityMemento_chacheChange_value_rejectCallback_commitCallback_addChangeBeahvior_on_disposed_object_should_raise_ObjectDisposedException()
         {
-            var memento = new ChangeTrackingService();
-            var target = new TestableMementoEntity(memento);
-            target.Dispose();
+            Assert.ThrowsException<ObjectDisposedException>(() =>
+            {
+                var memento = new ChangeTrackingService();
+                var target = new TestableMementoEntity(memento);
+                target.Dispose();
 
-            target.InvokeCacheChange("Foo", cv => { }, cv => { }, AddChangeBehavior.Default);
+                target.InvokeCacheChange("Foo", cv => { }, cv => { }, AddChangeBehavior.Default);
+            });
         }
 
         [TestMethod]
@@ -490,52 +500,58 @@ namespace Radical.Tests.Model.Entity
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ObjectDisposedException))]
         public void entityMemento_chacheChangeOnRejectCallback_on_disposed_entity_should_raise_ObjectDisposedException()
         {
-            var iChange = A.Dummy<IChange>();
-            var memento = A.Fake<IChangeTrackingService>();
-            A.CallTo(() => memento.IsSuspended).Returns(false);
+            Assert.ThrowsException<ObjectDisposedException>(() =>
+            {
+                var iChange = A.Dummy<IChange>();
+                var memento = A.Fake<IChangeTrackingService>();
+                A.CallTo(() => memento.IsSuspended).Returns(false);
 
-            var target = new TestableMementoEntity(memento);
-            target.Dispose();
+                var target = new TestableMementoEntity(memento);
+                target.Dispose();
 
-            var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.Revert);
+                var value = "foo";
+                var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.Revert);
 
-            target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
+                target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void entityMemento_cacheChangeOnRejectCallback_rejectReason_none_should_raise_ArgumentOutOfRangeException()
         {
-            var iChange = A.Dummy<IChange>();
-            var memento = A.Fake<IChangeTrackingService>();
-            A.CallTo(() => memento.IsSuspended).Returns(false);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                var iChange = A.Dummy<IChange>();
+                var memento = A.Fake<IChangeTrackingService>();
+                A.CallTo(() => memento.IsSuspended).Returns(false);
 
-            var target = new TestableMementoEntity(memento);
+                var target = new TestableMementoEntity(memento);
 
-            var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.None);
+                var value = "foo";
+                var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, RejectReason.None);
 
-            target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
+                target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EnumValueOutOfRangeException))]
         public void entityMemento_cacheChangeOnRejectCallback_invalid_rejectReason_should_raise_EnumValueOutOfRangeException()
         {
-            var iChange = A.Dummy<IChange>();
-            var memento = A.Fake<IChangeTrackingService>();
-            A.CallTo(() => memento.IsSuspended).Returns(false);
+            Assert.ThrowsException<EnumValueOutOfRangeException>(() =>
+            {
+                var iChange = A.Dummy<IChange>();
+                var memento = A.Fake<IChangeTrackingService>();
+                A.CallTo(() => memento.IsSuspended).Returns(false);
 
-            var target = new TestableMementoEntity(memento);
+                var target = new TestableMementoEntity(memento);
 
-            var value = "foo";
-            var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, (RejectReason)1000);
+                var value = "foo";
+                var rejArgs = new ChangeRejectedEventArgs<string>(target, value, iChange, (RejectReason)1000);
 
-            target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
+                target.InvokeCacheChangeOnRejectCallback(value, cv => { }, cv => { }, rejArgs);
+            });
         }
     }
 }
