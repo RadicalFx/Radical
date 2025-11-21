@@ -555,9 +555,10 @@ namespace Radical.Messaging
         /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance. This method will be removed in version 4.0.", error: true)]
         public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
         {
-            Subscribe(subscriber, (s, msg) => Task.FromResult(true), callback);
+            throw new NotSupportedException("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance.");
         }
 
         /// <summary>
@@ -568,15 +569,10 @@ namespace Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance. This method will be removed in version 4.0.", error: true)]
         public void Subscribe<T>(object subscriber, Func<object, T, Task<bool>> callbackFilter, Func<object, T, Task> callback)
         {
-            Ensure.That(subscriber).Named("subscriber").IsNotNull();
-            Ensure.That(callbackFilter).Named("callbackFilter").IsNotNull();
-            Ensure.That(callback).Named("callback").IsNotNull();
-
-            var subscription = new PocoAsyncSubscription<T>(subscriber, callback, callbackFilter, InvocationModel.Default, dispatcher);
-
-            SubscribeCore(typeof(T), subscription);
+            throw new NotSupportedException("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance.");
         }
 
         /// <summary>
