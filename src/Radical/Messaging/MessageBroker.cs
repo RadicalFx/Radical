@@ -111,7 +111,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Action<object, T> callback)
         {
-            Subscribe<T>(subscriber, InvocationModel.Default, callback);
+            Subscribe(subscriber, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -529,10 +529,9 @@ namespace Radical.Messaging
                     .Where(sub => sub.ShouldInvoke(sender, message))
                     .ForEach(sub =>
                     {
-                        var _as = sub as IAsyncSubscription;
-                        if (_as != null)
+                        if (sub is IAsyncSubscription @as)
                         {
-                            tasks.Add(_as.InvokeAsync(sender, message));
+                            tasks.Add(@as.InvokeAsync(sender, message));
                         }
                         else
                         {
@@ -658,7 +657,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            Subscribe<T>(subscriber, InvocationModel.Default, callbackFilter, callback);
+            Subscribe(subscriber, InvocationModel.Default, callbackFilter, callback);
         }
 
         /// <summary>
@@ -673,7 +672,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            Subscribe<T>(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
+            Subscribe(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
         }
 
         /// <summary>
