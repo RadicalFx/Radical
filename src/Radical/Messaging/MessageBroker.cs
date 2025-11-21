@@ -497,7 +497,7 @@ namespace Radical.Messaging
                         factory.StartNew(() =>
                         {
                             sub.Invoke(sender, message);
-                        }, TaskCreationOptions.LongRunning);
+                        }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
                     });
             }
         }
@@ -539,7 +539,7 @@ namespace Radical.Messaging
                             tasks.Add(factory.StartNew(() =>
                             {
                                 sub.Invoke(sender, message);
-                            }, TaskCreationOptions.LongRunning));
+                            }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
                         }
                     });
 
