@@ -433,7 +433,7 @@ namespace Radical.Messaging
             }
         }
 
-        IEnumerable<ISubscription> GetSubscriptionsFor(Type messageType, object sender)
+        ISubscription[] GetSubscriptionsFor(Type messageType, object sender)
         {
             msgSubsIndexLock.EnterReadLock();
             try
@@ -444,7 +444,7 @@ namespace Radical.Messaging
 
                 var effectiveSubscribers = subscriptions.Where(s => s.Sender == null || s.Sender == sender)
                                                         .OrderByDescending(s => s.Priority)
-                                                        .AsReadOnly();
+                                                        .ToArray(); // Materialize the collection before releasing the lock
 
                 return effectiveSubscribers;
             }
