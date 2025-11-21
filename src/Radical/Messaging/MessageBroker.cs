@@ -19,26 +19,20 @@ namespace Radical.Messaging
     /// </summary>
     public class MessageBroker : IMessageBroker
     {
-        class SubscriptionsContainer
+        class SubscriptionsContainer(Type messageType)
         {
-            public SubscriptionsContainer(Type messageType)
-            {
-                MessageType = messageType;
-                Subscriptions = new List<ISubscription>();
-            }
+            public Type MessageType { get; } = messageType;
 
-            public Type MessageType { get; private set; }
-
-            public List<ISubscription> Subscriptions { get; private set; }
+            public List<ISubscription> Subscriptions { get; } = [];
         }
 
-        static readonly TraceSource logger = new TraceSource(typeof(MessageBroker).FullName);
-        readonly TaskFactory factory = null;
+        static readonly TraceSource logger = new (typeof(MessageBroker).FullName!);
+        readonly TaskFactory factory;
 
         readonly IDispatcher dispatcher;
 
-        readonly List<SubscriptionsContainer> msgSubsIndex = null;
-        readonly ReaderWriterLockSlim msgSubsIndexLock = new ReaderWriterLockSlim();
+        readonly List<SubscriptionsContainer> msgSubsIndex;
+        readonly ReaderWriterLockSlim msgSubsIndexLock = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBroker"/> class.
@@ -49,7 +43,7 @@ namespace Radical.Messaging
             Ensure.That(dispatcher).Named("dispatcher").IsNotNull();
 
             this.dispatcher = dispatcher;
-            msgSubsIndex = new List<SubscriptionsContainer>();
+            msgSubsIndex = [];
 
             factory = new TaskFactory();
         }
@@ -66,7 +60,7 @@ namespace Radical.Messaging
 
             this.dispatcher = dispatcher;
             this.factory = factory;
-            msgSubsIndex = new List<SubscriptionsContainer>();
+            msgSubsIndex = [];
         }
 
         void SubscribeCore(Type messageType, ISubscription subscription)
@@ -131,7 +125,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, Action<object, T> callback)
         {
-            Subscribe<T>(subscriber, sender, InvocationModel.Default, callback);
+            Subscribe(subscriber, sender, InvocationModel.Default, callback);
         }
 
         /// <summary>
@@ -170,7 +164,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<object, T> callback)
         {
-            Subscribe<T>(subscriber, invocationModel, (s, msg) => true, callback);
+            Subscribe(subscriber, invocationModel, (s, msg) => true, callback);
         }
 
         /// <summary>
@@ -213,7 +207,7 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback)
         {
-            Subscribe<T>(subscriber, sender, invocationModel, (s, msg) => true, callback);
+            Subscribe(subscriber, sender, invocationModel, (_, _) => true, callback);
         }
 
         /// <summary>
@@ -470,7 +464,9 @@ namespace Radical.Messaging
                 requireToBeValid.Validate();
             }
 
+#pragma warning disable CA1062
             var messageType = message.GetType();
+#pragma warning restore CA1062
             var subscriptions = GetSubscriptionsFor(messageType, sender);
             var anySubscription = subscriptions.Any();
 
@@ -501,8 +497,10 @@ namespace Radical.Messaging
             {
                 requireToBeValid.Validate();
             }
-
+            
+#pragma warning disable CA1062
             var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
+#pragma warning restore CA1062
 
             if (subscriptions.Any())
             {
@@ -534,7 +532,9 @@ namespace Radical.Messaging
                 requireToBeValid.Validate();
             }
 
+#pragma warning disable CA1062
             var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
+#pragma warning restore CA1062
 
             var tasks = new List<Task>();
             if (subscriptions.Any())
