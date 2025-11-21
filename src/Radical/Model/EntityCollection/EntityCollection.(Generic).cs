@@ -130,10 +130,7 @@ namespace Radical.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
         /// </summary>
-        public EntityCollection()
-        {
-            OnInitialize();
-        }
+        public EntityCollection() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityCollection&lt;T&gt;"/> class.
@@ -163,17 +160,6 @@ namespace Radical.Model
             : this()
         {
             _storage = storage;
-        }
-
-        /// <summary>
-        /// Called when during the initialization process,
-        /// override this method to be notified when the default
-        /// constructor has been called.
-        /// </summary>
-        [Obsolete("OnInitialize has been obsoleted. Move initialization code to collection constructor. Will be removed in v3.0.0.")]
-        protected virtual void OnInitialize()
-        {
-    
         }
 
         /// <summary>
