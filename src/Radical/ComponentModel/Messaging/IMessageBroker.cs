@@ -140,6 +140,7 @@ namespace Radical.ComponentModel.Messaging
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use BroadcastAsync/DispatchAsync with fully async callbacks instead. This method will be removed in version 4.0.", error: true)]
         void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task> callback);
 
         /// <summary>
@@ -150,6 +151,7 @@ namespace Radical.ComponentModel.Messaging
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use BroadcastAsync/DispatchAsync with fully async callbacks instead. This method will be removed in version 4.0.", error: true)]
         void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, Func<object, T, System.Threading.Tasks.Task> callback);
 
         /// <summary>
