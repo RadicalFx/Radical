@@ -18,8 +18,8 @@ jobs:
     strategy:
       matrix:
         include:
-          # - os: windows-latest
-          #  name: Windows
+          - os: windows-latest
+            name: Windows
           - os: ubuntu-latest
             name: Linux
       fail-fast: false
