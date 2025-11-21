@@ -92,7 +92,7 @@ namespace Radical.Helpers
             }
             
             // Pick random length between minimum and maximum
-            var pwdLength = GetCryptographicRandomNumber(MinLenght, MaxLenght);
+            var pwdLength = GetCryptographicRandomNumber(MinLength, MaxLength);
 
             var pwdBuffer = new StringBuilder()
             {
@@ -202,7 +202,7 @@ namespace Radical.Helpers
         /// generated password
         /// </summary>
         /// <value>The exclusions.</value>
-        public List<char> Exclusions { get; } = new List<char>();
+        public List<char> Exclusions { get; } = [];
 
         private int _minLength = DEFAULT_MINIMUM;
 
@@ -224,46 +224,21 @@ namespace Radical.Helpers
         }
 
         /// <summary>
-        /// Minimum char number of the generated password
-        /// </summary>
-        /// <value>The min length.</value>
-        [Obsolete("Use the MinLength property, this will be removed in v3.0.0")]
-        public int MinLenght
-        {
-            get { return MinLength; }
-            set { MinLength = value; }
-        }
-
-        private int _maxLength = DEFAULT_MAXIMUM;
-
-        /// <summary>
         /// Maximum char number of the generated password
         /// </summary>
         /// <value>The max length.</value>
         public int MaxLength
         {
-            get { return _maxLength; }
+            get;
             set
             {
-                _maxLength = value;
-                if (_minLength >= _maxLength)
+                field = value;
+                if (_minLength >= field)
                 {
-                    _maxLength = DEFAULT_MAXIMUM;
+                    field = DEFAULT_MAXIMUM;
                 }
             }
-        }
-
-        /// <summary>
-        /// Maximum char number of the generated password
-        /// </summary>
-        /// <value>The max length.</value>
-        [Obsolete("Use the MaxLength property, this will be removed in v3.0.0")]
-        public int MaxLenght
-        {
-            get { return MaxLength; }
-            set { MaxLength = value; }
-        }
-
+        } = DEFAULT_MAXIMUM;
 
         /// <summary>
         /// Gets or sets a value indicating whether symbols are allowed.

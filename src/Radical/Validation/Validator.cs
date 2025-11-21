@@ -1,5 +1,4 @@
-﻿using Radical.ComponentModel.Validation;
-using Radical.Linq;
+﻿using Radical.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +35,6 @@ namespace Radical.Validation
             }
 
             rulesToEvaluate.ForEach(rule => context.Evaluate(rule));
-
-            if (context.Entity is IRequireValidationCallback<T> irvc)
-            {
-                irvc.OnValidate(context);
-            }
 
             return context.Results;
         }

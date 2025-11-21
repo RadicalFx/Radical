@@ -46,8 +46,6 @@ namespace Radical
             public IDictionary<string, object> Data
             {
                 get; 
-                [Obsolete("Data property setter has been obsoleted and will be removed in v3.0.0.")]
-                set;
             } = new Dictionary<string, object>();
         }
     }

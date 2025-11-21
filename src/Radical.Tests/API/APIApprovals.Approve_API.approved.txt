@@ -206,8 +206,7 @@ namespace Radical.Analytics
     public class AnalyticsEvent
     {
         public AnalyticsEvent() { }
-        [set: System.Obsolete("Data property setter has been obsoleted and will be removed in v3.0.0.")]
-        public System.Collections.Generic.IDictionary<string, object> Data { get; set; }
+        public System.Collections.Generic.IDictionary<string, object> Data { get; }
         public System.DateTimeOffset ExecutedOn { get; set; }
         public string Name { get; set; }
     }
@@ -654,13 +653,6 @@ namespace Radical.ComponentModel
         public T Item { get; }
         public int OldIndex { get; }
     }
-    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
-        "v3.0.0.")]
-    public class ComponentRegisteredEventArgs : System.EventArgs
-    {
-        public ComponentRegisteredEventArgs(Radical.ComponentModel.IContainerEntry entry) { }
-        public Radical.ComponentModel.IContainerEntry Entry { get; }
-    }
     [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Interface, AllowMultiple=false, Inherited=true)]
     public sealed class ContractAttribute : System.Attribute
     {
@@ -725,24 +717,6 @@ namespace Radical.ComponentModel
     {
         bool IsEnabled { get; set; }
         void TrackUserActionAsync(Radical.Analytics.AnalyticsEvent action);
-    }
-    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
-        "v3.0.0.")]
-    public interface IBootable
-    {
-        void Boot();
-    }
-    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
-        "v3.0.0.")]
-    public interface IContainerEntry
-    {
-        System.Type Component { get; }
-        System.Delegate Factory { get; }
-        bool IsOverridable { get; }
-        string Key { get; }
-        Radical.ComponentModel.Lifestyle Lifestyle { get; }
-        System.Collections.Generic.IDictionary<string, object> Parameters { get; }
-        System.Collections.Generic.IEnumerable<System.Type> Services { get; }
     }
     public interface IDispatcher
     {
@@ -848,81 +822,6 @@ namespace Radical.ComponentModel
         event System.EventHandler EditCanceled;
         event System.EventHandler EditEnded;
     }
-    [System.Obsolete("IPuzzleContainer has been obsoleted and will be removed in v3.0.0")]
-    public interface IPuzzleContainer : System.IDisposable
-    {
-        event System.EventHandler<Radical.ComponentModel.ComponentRegisteredEventArgs> ComponentRegistered;
-        Radical.ComponentModel.IPuzzleContainer AddFacility(Radical.ComponentModel.IPuzzleContainerFacility facility);
-        Radical.ComponentModel.IPuzzleContainer AddFacility<TFacility>()
-            where TFacility : Radical.ComponentModel.IPuzzleContainerFacility;
-        bool IsRegistered(System.Type serviceType);
-        bool IsRegistered<TService>();
-        Radical.ComponentModel.IPuzzleContainer Register(Radical.ComponentModel.IContainerEntry entry);
-        Radical.ComponentModel.IPuzzleContainer Register(System.Collections.Generic.IEnumerable<Radical.ComponentModel.IContainerEntry> entries);
-        object Resolve(System.Type serviceType);
-        object Resolve(string key, System.Type serviceType);
-        TService Resolve<TService>();
-        System.Collections.Generic.IEnumerable<object> ResolveAll(System.Type t);
-        System.Collections.Generic.IEnumerable<T> ResolveAll<T>();
-        void SetupWith(System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider, params Radical.ComponentModel.IPuzzleSetupDescriptor[] descriptors);
-    }
-    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
-        "v3.0.0.")]
-    public interface IPuzzleContainerEntry : Radical.ComponentModel.IContainerEntry
-    {
-        Radical.ComponentModel.IPuzzleContainerEntry Forward(System.Type forwardedType);
-        Radical.ComponentModel.IPuzzleContainerEntry ImplementedBy(System.Type componentType);
-        Radical.ComponentModel.IPuzzleContainerEntry Overridable();
-        Radical.ComponentModel.IPuzzleContainerEntry UsingFactory(System.Func<object> factory);
-        Radical.ComponentModel.IPuzzleContainerEntry UsingInstance(object instance);
-        Radical.ComponentModel.IPuzzleContainerEntry WithLifestyle(Radical.ComponentModel.Lifestyle lifestyle);
-    }
-    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
-        "v3.0.0.")]
-    public interface IPuzzleContainerEntry<T> : Radical.ComponentModel.IContainerEntry
-    {
-        Radical.ComponentModel.IPuzzleContainerEntry<T> Forward<TForwarded>();
-        Radical.ComponentModel.IPuzzleContainerEntry<T> ImplementedBy(System.Type componentType);
-        Radical.ComponentModel.IPuzzleContainerEntry<T> ImplementedBy<TComponent>()
-            where TComponent : T;
-        Radical.ComponentModel.IPuzzleContainerEntry<T> Overridable();
-        Radical.ComponentModel.IPuzzleContainerEntry<T> UsingFactory(System.Func<T> factory);
-        Radical.ComponentModel.IPuzzleContainerEntry<T> UsingInstance<TComponent>(TComponent instance)
-            where TComponent : T;
-        Radical.ComponentModel.IPuzzleContainerEntry<T> WithLifestyle(Radical.ComponentModel.Lifestyle lifestyle);
-    }
-    [System.Obsolete("IPuzzleContainerFacility has been obsoleted and will be removed in v3.0.0")]
-    public interface IPuzzleContainerFacility
-    {
-        void Initialize(Radical.ComponentModel.IPuzzleContainer container);
-        void Teardown(Radical.ComponentModel.IPuzzleContainer container);
-    }
-    [System.Obsolete("IPuzzleSetupDescriptor has been obsoleted and will be removed in v3.0.0")]
-    public interface IPuzzleSetupDescriptor
-    {
-        void Setup(Radical.ComponentModel.IPuzzleContainer container, System.Func<System.Collections.Generic.IEnumerable<System.Type>> knownTypesProvider);
-    }
-    [System.Obsolete("PuzzleContainer has been removed in v2.0.0. Related contracts will be removed in " +
-        "v3.0.0.")]
-    public enum Lifestyle
-    {
-        Singleton = 0,
-        Transient = 1,
-    }
-}
-namespace Radical.ComponentModel.Factories
-{
-    [System.Obsolete("IChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
-    public interface IChangeTrackingServiceFactory
-    {
-        Radical.ComponentModel.ChangeTracking.IChangeTrackingService Create();
-    }
-    [System.Obsolete("IEntityFactory has been obsoleted and will be removed in v3.0.0")]
-    public interface IEntityFactory
-    {
-        object Create(System.Type type, params object[] constructorArguments);
-        T Create<T>(params object[] constructorArguments);
-    }
 }
 namespace Radical.ComponentModel.Messaging
 {
@@ -976,33 +875,8 @@ namespace Radical.ComponentModel.Messaging
         Safe = 1,
     }
 }
-namespace Radical.ComponentModel.Validation
-{
-    [System.Obsolete("IRequireValidationCallback has been obsoleted and will be removed in v3.0.0")]
-    public interface IRequireValidationCallback<T>
-    {
-        void OnValidate(Radical.Validation.ValidationContext<T> context);
-    }
-}
 namespace Radical.Conversions
 {
-    public static class CastExtensions
-    {
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
-        public static TResult As<TResult>(this object obj)
-            where TResult :  class { }
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
-        public static TResult As<TResult>(this object obj, System.Action invalidCastAction)
-            where TResult :  class { }
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
-        public static TResult As<TResult>(this object obj, System.Action<TResult> validCastAction)
-            where TResult :  class { }
-        [System.Obsolete("As<> has been obsoleted and will be removed in v3.0.0")]
-        public static TResult As<TResult>(this object obj, System.Action<TResult> validCastAction, System.Action invalidCastAction)
-            where TResult :  class { }
-        [System.Obsolete("CastTo<> has been obsoleted and will be removed in v3.0.0")]
-        public static TResult CastTo<TResult>(this object obj) { }
-    }
     public static class ConvertExtensions
     {
         public static Radical.Observable<T> AsObservable<T>(this T value) { }
@@ -1044,17 +918,6 @@ namespace Radical.Diagnostics
 }
 namespace Radical.Helpers
 {
-    [System.Obsolete("CommandLine Helper has been obsoleted and will be removed in v3.0.0")]
-    public class CommandLine
-    {
-        public CommandLine(System.Collections.Generic.IEnumerable<string> args) { }
-        public T As<T>()
-            where T :  class, new () { }
-        public bool Contains(string arg) { }
-        public bool TryGetValue<T>(string arg, out T value) { }
-        public static string AsArguments<T>(T source) { }
-        public static Radical.Helpers.CommandLine GetCurrent() { }
-    }
     [System.AttributeUsage(System.AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
     public sealed class CommandLineArgumentAttribute : System.Attribute
     {
@@ -1092,13 +955,6 @@ namespace Radical.Helpers
             public static readonly string Visa;
         }
     }
-    [System.Obsolete("Password Helper has been obsoleted and will be removed in v3.0.0")]
-    public static class Password
-    {
-        public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt) { }
-        public static byte[] CreateHash(string clearTextPassword, byte[] passwordSalt, string hashAlgorithmName) { }
-        public static byte[] CreateRandomSalt() { }
-    }
     public class RandomStrings
     {
         public RandomStrings() { }
@@ -1106,11 +962,7 @@ namespace Radical.Helpers
         public bool AllowRepeatCharacters { get; set; }
         public bool AllowSymbols { get; set; }
         public System.Collections.Generic.List<char> Exclusions { get; }
-        [System.Obsolete("Use the MaxLength property, this will be removed in v3.0.0")]
-        public int MaxLenght { get; set; }
         public int MaxLength { get; set; }
-        [System.Obsolete("Use the MinLength property, this will be removed in v3.0.0")]
-        public int MinLenght { get; set; }
         public int MinLength { get; set; }
         protected int GetCryptographicRandomNumber(int lBound, int uBound) { }
         protected char GetRandomCharacter() { }
@@ -1325,9 +1177,6 @@ namespace Radical.Model
         protected virtual void OnDeserializationCompleted(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
         protected virtual void OnDisposed() { }
         protected virtual void OnGetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
-        [System.Obsolete("OnInitialize has been obsoleted. Move initialization code to collection construct" +
-            "or. Will be removed in v3.0.0.")]
-        protected virtual void OnInitialize() { }
         protected virtual void OnInsert(Radical.Model.InsertEventArgs<T> e) { }
         protected virtual void OnInsertCompleted(int index, T value) { }
         protected virtual void OnMoveCompleted(int oldIndex, int newIndex, T value) { }
@@ -1690,15 +1539,6 @@ namespace Radical.Model
         public static Radical.ComponentModel.IEntityItemViewFilter Instance { get; }
         public override bool ShouldInclude(T item) { }
         public override string ToString() { }
-    }
-}
-namespace Radical.Model.Factories
-{
-    [System.Obsolete("ChangeTrackingServiceFactory has been obsoleted and will be removed in v3.0.0")]
-    public class ChangeTrackingServiceFactory : Radical.ComponentModel.Factories.IChangeTrackingServiceFactory
-    {
-        public ChangeTrackingServiceFactory(System.IServiceProvider container) { }
-        public Radical.ComponentModel.ChangeTracking.IChangeTrackingService Create() { }
     }
 }
 namespace Radical.Observers
