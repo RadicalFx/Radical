@@ -849,8 +849,14 @@ namespace Radical.ComponentModel.Messaging
         void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
         void Subscribe<T>(object subscriber, System.Action<object, T> callback);
+        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use Bro" +
+            "adcastAsync/DispatchAsync with fully async callbacks instead. This method will b" +
+            "e removed in version 4.0.", true)]
         void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback);
         void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
+        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use Bro" +
+            "adcastAsync/DispatchAsync with fully async callbacks instead. This method will b" +
+            "e removed in version 4.0.", true)]
         void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
         void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
         void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback);
@@ -1059,8 +1065,14 @@ namespace Radical.Messaging
         public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
         public void Subscribe<T>(object subscriber, System.Action<object, T> callback) { }
+        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the" +
+            " upgade guide for migration guidance. This method will be removed in version 4.0" +
+            ".", true)]
         public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
         public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
+        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the" +
+            " upgade guide for migration guidance. This method will be removed in version 4.0" +
+            ".", true)]
         public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
         public void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
         public void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback) { }
