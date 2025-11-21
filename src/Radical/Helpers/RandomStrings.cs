@@ -125,8 +125,18 @@ namespace Radical.Helpers
                 return nextCharacter;
             }
 
+            int attempts = 0;
+            const int maxAttempts = 1000;
+            
             while (lastCharacter == nextCharacter)
             {
+                if (++attempts > maxAttempts)
+                {
+                    throw new InvalidOperationException(
+                        "Unable to generate a string that satisfies the AllowConsecutiveCharacters constraint. " +
+                        "The character pool may be too small for the requested length, or try enabling AllowConsecutiveCharacters.");
+                }
+                
                 nextCharacter = GetRandomCharacter();
             }
 
@@ -142,8 +152,19 @@ namespace Radical.Helpers
 
             var temp = pwdBuffer.ToString();
             var duplicateIndex = temp.IndexOf(nextCharacter);
+            
+            int attempts = 0;
+            const int maxAttempts = 1000;
+            
             while (-1 != duplicateIndex)
             {
+                if (++attempts > maxAttempts)
+                {
+                    throw new InvalidOperationException(
+                        "Unable to generate a string that satisfies the AllowRepeatCharacters constraint. " +
+                        "The requested length exceeds the available character pool size, or try enabling AllowRepeatCharacters.");
+                }
+                
                 nextCharacter = GetRandomCharacter();
                 duplicateIndex = temp.IndexOf(nextCharacter);
             }
@@ -158,8 +179,18 @@ namespace Radical.Helpers
                 return nextCharacter;
             }
 
+            int attempts = 0;
+            const int maxAttempts = 1000;
+            
             while (Exclusions.Contains(nextCharacter))
             {
+                if (++attempts > maxAttempts)
+                {
+                    throw new InvalidOperationException(
+                        "Unable to generate a string that satisfies the Exclusions constraint. " +
+                        "Too many characters are excluded from the available character pool.");
+                }
+                
                 nextCharacter = GetRandomCharacter();
             }
 
