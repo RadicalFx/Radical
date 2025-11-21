@@ -221,41 +221,29 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                foreach (var subscription in msgSubsIndex)
+                // Collect containers that need modification (materialize before lock upgrade)
+                var containersToModify = msgSubsIndex
+                    .Where(container => container.Subscriptions.Any(sub => sub.Subscriber == subscriber))
+                    .ToList();
+
+                if (containersToModify.Any())
                 {
-                    var count = subscription.Subscriptions.Count;
-                    for (var k = count; k > 0; k--)
+                    msgSubsIndexLock.EnterWriteLock();
+                    try
                     {
-                        var sub = subscription.Subscriptions[k - 1];
-                        if (sub.Subscriber == subscriber)
+                        foreach (var container in containersToModify)
                         {
-                            msgSubsIndexLock.EnterWriteLock();
-                            try
-                            {
-                                subscription.Subscriptions.Remove(sub);
-                            }
-                            finally
-                            {
-                                msgSubsIndexLock.ExitWriteLock();
-                            }
+                            container.Subscriptions.RemoveAll(sub => sub.Subscriber == subscriber);
                         }
+
+                        // Remove empty containers
+                        msgSubsIndex.RemoveAll(container => container.Subscriptions.Count == 0);
+                    }
+                    finally
+                    {
+                        msgSubsIndexLock.ExitWriteLock();
                     }
                 }
-
-                msgSubsIndex.Where(msgSubscriptions => msgSubscriptions.Subscriptions.Count == 0)
-                    .ToList()
-                    .ForEach(kvp =>
-                   {
-                       msgSubsIndexLock.EnterWriteLock();
-                       try
-                       {
-                           msgSubsIndex.Remove(kvp);
-                       }
-                       finally
-                       {
-                           msgSubsIndexLock.ExitWriteLock();
-                       }
-                   });
             }
             finally
             {
@@ -277,27 +265,30 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                msgSubsIndex.Where(msgSubscriptions =>
-                {
-                    return msgSubscriptions.Subscriptions.Any(subscription =>
-                    {
-                        return Equals(subscription.Subscriber, subscriber)
-                            && Equals(subscription.Sender, sender);
-                    });
-                })
-                .ToList()
-                .ForEach(kvp =>
+                var containersToModify = msgSubsIndex
+                    .Where(container => container.Subscriptions.Any(sub => 
+                        Equals(sub.Subscriber, subscriber) && Equals(sub.Sender, sender)))
+                    .ToList();
+
+                if (containersToModify.Any())
                 {
                     msgSubsIndexLock.EnterWriteLock();
                     try
                     {
-                        msgSubsIndex.Remove(kvp);
+                        foreach (var container in containersToModify)
+                        {
+                            container.Subscriptions.RemoveAll(sub => 
+                                Equals(sub.Subscriber, subscriber) && Equals(sub.Sender, sender));
+                        }
+
+                        // Remove empty containers
+                        msgSubsIndex.RemoveAll(container => container.Subscriptions.Count == 0);
                     }
                     finally
                     {
                         msgSubsIndexLock.ExitWriteLock();
                     }
-                });
+                }
             }
             finally
             {
@@ -317,26 +308,24 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
+                var container = msgSubsIndex.FirstOrDefault(sc => sc.MessageType == typeof(T));
+                if (container != null && container.Subscriptions.Any(sub => Equals(subscriber, sub.Subscriber)))
                 {
-                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
-                    allMessageSubscriptions.Where(subscription =>
-                   {
-                       return Equals(subscriber, subscription.Subscriber);
-                   })
-                    .ToList()
-                    .ForEach(subscription =>
-                   {
-                       msgSubsIndexLock.EnterWriteLock();
-                       try
-                       {
-                           allMessageSubscriptions.Remove(subscription);
-                       }
-                       finally
-                       {
-                           msgSubsIndexLock.ExitWriteLock();
-                       }
-                   });
+                    msgSubsIndexLock.EnterWriteLock();
+                    try
+                    {
+                        container.Subscriptions.RemoveAll(subscription => Equals(subscriber, subscription.Subscriber));
+                        
+                        // Remove container if empty
+                        if (container.Subscriptions.Count == 0)
+                        {
+                            msgSubsIndex.Remove(container);
+                        }
+                    }
+                    finally
+                    {
+                        msgSubsIndexLock.ExitWriteLock();
+                    }
                 }
             }
             finally
@@ -360,28 +349,26 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
+                var container = msgSubsIndex.FirstOrDefault(sc => sc.MessageType == typeof(T));
+                if (container != null && container.Subscriptions.Any(sub => 
+                    Equals(subscriber, sub.Subscriber) && Equals(sender, sub.Sender)))
                 {
-                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
-                    allMessageSubscriptions.Where(subscription =>
-                   {
-                       return Equals(subscriber, subscription.Subscriber)
-                              && Equals(sender, subscription.Sender);
-                   })
-                    .ToList()
-                    .ForEach(subscription =>
-                   {
-                       msgSubsIndexLock.EnterWriteLock();
-                       try
-                       {
-                           allMessageSubscriptions.Remove(subscription);
-                       }
-                       finally
-                       {
-                           msgSubsIndexLock.ExitWriteLock();
-                       }
-
-                   });
+                    msgSubsIndexLock.EnterWriteLock();
+                    try
+                    {
+                        container.Subscriptions.RemoveAll(subscription =>
+                            Equals(subscriber, subscription.Subscriber) && Equals(sender, subscription.Sender));
+                        
+                        // Remove container if empty
+                        if (container.Subscriptions.Count == 0)
+                        {
+                            msgSubsIndex.Remove(container);
+                        }
+                    }
+                    finally
+                    {
+                        msgSubsIndexLock.ExitWriteLock();
+                    }
                 }
             }
             finally
@@ -404,27 +391,26 @@ namespace Radical.Messaging
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
             {
-                if (msgSubsIndex.Any(sc => sc.MessageType == typeof(T)))
+                var container = msgSubsIndex.FirstOrDefault(sc => sc.MessageType == typeof(T));
+                if (container != null && container.Subscriptions.Any(sub => 
+                    Equals(subscriber, sub.Subscriber) && Equals(callback, sub.GetAction())))
                 {
-                    var allMessageSubscriptions = msgSubsIndex.Single(sc => sc.MessageType == typeof(T)).Subscriptions;
-                    allMessageSubscriptions.Where(subscription =>
-                   {
-                       return Equals(subscriber, subscription.Subscriber)
-                              && Equals(callback, subscription.GetAction());
-                   })
-                    .ToList()
-                    .ForEach(subscription =>
-                   {
-                       msgSubsIndexLock.EnterWriteLock();
-                       try
-                       {
-                           allMessageSubscriptions.Remove(subscription);
-                       }
-                       finally
-                       {
-                           msgSubsIndexLock.ExitWriteLock();
-                       }
-                   });
+                    msgSubsIndexLock.EnterWriteLock();
+                    try
+                    {
+                        container.Subscriptions.RemoveAll(subscription =>
+                            Equals(subscriber, subscription.Subscriber) && Equals(callback, subscription.GetAction()));
+                        
+                        // Remove container if empty
+                        if (container.Subscriptions.Count == 0)
+                        {
+                            msgSubsIndex.Remove(container);
+                        }
+                    }
+                    finally
+                    {
+                        msgSubsIndexLock.ExitWriteLock();
+                    }
                 }
             }
             finally
