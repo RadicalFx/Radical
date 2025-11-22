@@ -132,7 +132,7 @@ namespace Radical.Helpers
             {
                 if (++attempts > maxAttempts)
                 {
-                    throw new InvalidOperationException(
+                    throw new ArgumentException(
                         "Unable to generate a string that satisfies the AllowConsecutiveCharacters constraint. " +
                         "The character pool may be too small for the requested length, or try enabling AllowConsecutiveCharacters.");
                 }
@@ -160,7 +160,7 @@ namespace Radical.Helpers
             {
                 if (++attempts > maxAttempts)
                 {
-                    throw new InvalidOperationException(
+                    throw new ArgumentException(
                         "Unable to generate a string that satisfies the AllowRepeatCharacters constraint. " +
                         "The requested length exceeds the available character pool size, or try enabling AllowRepeatCharacters.");
                 }
@@ -186,7 +186,7 @@ namespace Radical.Helpers
             {
                 if (++attempts > maxAttempts)
                 {
-                    throw new InvalidOperationException(
+                    throw new ArgumentException(
                         "Unable to generate a string that satisfies the Exclusions constraint. " +
                         "Too many characters are excluded from the available character pool.");
                 }
