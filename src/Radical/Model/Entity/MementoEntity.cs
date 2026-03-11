@@ -17,7 +17,7 @@ namespace Radical.Model
         Entity,
         IMemento
     {
-        bool isDisposed = false;
+        bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources

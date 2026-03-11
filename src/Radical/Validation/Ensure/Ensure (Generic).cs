@@ -152,10 +152,11 @@ namespace Radical.Validation
         {
             var fullErrorMessage = string.Format
             (
+                System.Globalization.CultureInfo.InvariantCulture,
                 fullErrorMessageFormat,
                 Environment.NewLine,
                 si.ClassName,
-                si.SourceType.ToString().ToLower(),
+                si.SourceType.ToString().ToLower(System.Globalization.CultureInfo.InvariantCulture),
                 si.MethodName,
                 UserErrorMessage ?? "--",
                 validatorSpecificMessage,
@@ -183,7 +184,7 @@ namespace Radical.Validation
             get { return inspectedObject; }
         }
 
-        bool state = false;
+        bool state;
 
         /// <summary>
         /// Execute the given predicate and saves the result for later usage.

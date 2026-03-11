@@ -5,7 +5,7 @@ namespace Radical.Observers
 {
     public class EntityViewListChangedMonitor : AbstractMonitor<IEntityView>
     {
-        ListChangedEventHandler handler = null;
+        ListChangedEventHandler handler;
 
         public EntityViewListChangedMonitor(IEntityView source)
             : base(source)
