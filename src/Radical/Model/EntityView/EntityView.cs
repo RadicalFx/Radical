@@ -124,6 +124,11 @@ namespace Radical.Model
         }
 
 
+        /// <summary>
+        /// Creates an <see cref="IEntityItemView{T}"/> wrapper for the specified source item.
+        /// </summary>
+        /// <param name="sourceItem">The source entity item to wrap.</param>
+        /// <returns>A new <see cref="IEntityItemView{T}"/> wrapping the source item.</returns>
         protected internal virtual IEntityItemView<T> CreateEntityItemView(T sourceItem)
         {
             return new EntityItemView<T>(this, sourceItem);
@@ -667,6 +672,10 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Applies a filter to the view using the specified predicate, or clears the filter if <paramref name="predicate"/> is <c>null</c>.
+        /// </summary>
+        /// <param name="predicate">The predicate to use for filtering, or <c>null</c> to remove the current filter.</param>
         public void ApplyFilter(Predicate<T> predicate)
         {
             if (predicate == null)
@@ -977,6 +986,10 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Applies a sort to the view using the specified comparer.
+        /// </summary>
+        /// <param name="comparer">The comparer to use for sorting the view items.</param>
         public void ApplySort(IComparer<IEntityItemView<T>> comparer)
         {
             //this.SortDescriptions = null;
@@ -1740,6 +1753,11 @@ namespace Radical.Model
         }
 
 
+        /// <summary>
+        /// Gets the <see cref="PropertyDescriptor"/> with the specified name from the view's item properties.
+        /// </summary>
+        /// <param name="name">The name of the property to retrieve.</param>
+        /// <returns>The matching <see cref="PropertyDescriptor"/>, or <c>null</c> if not found.</returns>
         public PropertyDescriptor GetProperty(string name)
         {
             var all = ((ITypedList)this).GetItemProperties(null);
@@ -1808,11 +1826,21 @@ namespace Radical.Model
             return CustomProperties.Values.ToArray<EntityItemViewPropertyDescriptor<T>>();
         }
 
+        /// <summary>
+        /// Determines whether a custom property with the specified name has been defined on this view.
+        /// </summary>
+        /// <param name="propertyName">The name of the custom property to check.</param>
+        /// <returns><c>true</c> if the custom property is defined; otherwise, <c>false</c>.</returns>
         public bool IsCustomPropertyDefined(string propertyName)
         {
             return CustomProperties.ContainsKey(propertyName);
         }
 
+        /// <summary>
+        /// Gets the custom property descriptor with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the custom property.</param>
+        /// <returns>The <see cref="EntityItemViewPropertyDescriptor{T}"/> for the named custom property.</returns>
         public EntityItemViewPropertyDescriptor<T> GetCustomProperty(string name)
         {
             return CustomProperties[name];
@@ -1821,6 +1849,13 @@ namespace Radical.Model
         readonly IDictionary<T, IDictionary<string, PropertyValue>> customPropertyValues =
             new Dictionary<T, IDictionary<string, PropertyValue>>();
 
+        /// <summary>
+        /// Gets the value of a custom property for the specified view item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="owner">The view item that owns the custom property value.</param>
+        /// <returns>The current value of the custom property.</returns>
         public TValue GetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> owner)
         {
             Ensure.That(customPropertyName)
@@ -1833,6 +1868,13 @@ namespace Radical.Model
             return GetCustomPropertyValueCore<TValue>(customPropertyName, owner);
         }
 
+        /// <summary>
+        /// Core implementation for retrieving a custom property value for the specified view item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="owner">The view item that owns the custom property value.</param>
+        /// <returns>The current value of the custom property, or the default value if not yet set.</returns>
         protected virtual TValue GetCustomPropertyValueCore<TValue>(string customPropertyName, IEntityItemView<T> owner)
         {
             var item = owner.EntityItem;
@@ -1858,6 +1900,13 @@ namespace Radical.Model
             return default(TValue);
         }
 
+        /// <summary>
+        /// Sets the value of a custom property for the specified view item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="owner">The view item that owns the custom property value.</param>
+        /// <param name="value">The value to set.</param>
         public void SetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> owner, TValue value)
         {
             Ensure.That(customPropertyName)
@@ -1949,6 +1998,14 @@ namespace Radical.Model
             return AddCustomProperty(customPropertyName, getter, null, null);
         }
 
+        /// <summary>
+        /// Adds a custom property mapping with a getter and a default value interceptor.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
+        /// <param name="defaultValueInterceptor">A delegate that returns the default value for the property when no value has been set.</param>
+        /// <returns>A reference to the dynamically generated property.</returns>
         public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
@@ -1975,6 +2032,15 @@ namespace Radical.Model
             return AddCustomProperty(customPropertyName, getter, setter, null);
         }
 
+        /// <summary>
+        /// Adds a custom property mapping with a getter, setter, and a default value interceptor.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
+        /// <param name="setter">A delegate to call in order to set the value of the dynamically generated property.</param>
+        /// <param name="defaultValueInterceptor">A delegate that returns the default value for the property when no value has been set.</param>
+        /// <returns>A reference to the dynamically generated property.</returns>
         public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
@@ -2288,6 +2354,11 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Adds a new item to the view using the specified interceptor action to configure the new item before it is committed.
+        /// </summary>
+        /// <param name="addNewInterceptor">An action that receives an <see cref="AddingNewEventArgs{T}"/> and configures the new item.</param>
+        /// <returns>The <see cref="IEntityItemView{T}"/> wrapping the newly added item.</returns>
         public IEntityItemView<T> AddNew(Action<AddingNewEventArgs<T>> addNewInterceptor)
         {
             Ensure.That(addNewInterceptor).Named("addNewInterceptor").IsNotNull();
@@ -2712,6 +2783,9 @@ namespace Radical.Model
             IsInitializing = true;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is currently being initialized via <see cref="ISupportInitialize"/>.
+        /// </summary>
         protected bool IsInitializing { get; private set; }
 
         void ISupportInitialize.EndInit()

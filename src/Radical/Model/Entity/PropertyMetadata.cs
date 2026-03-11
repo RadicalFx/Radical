@@ -7,6 +7,10 @@ using System.Reflection;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// Abstract base class that holds metadata for a single property, including its name,
+    /// default value, change-notification settings, and cascade change notification targets.
+    /// </summary>
     public abstract class PropertyMetadata : IDisposable
     {
 
@@ -75,6 +79,10 @@ namespace Radical.Model
         readonly object propertyOwner;
         PropertyInfo _property;
 
+        /// <summary>
+        /// Gets the <see cref="PropertyInfo"/> for the property represented by this metadata,
+        /// resolved lazily from the owning object's type.
+        /// </summary>
         protected PropertyInfo Property
         {
             get
@@ -141,11 +149,23 @@ namespace Radical.Model
             return this;
         }
 
+        /// <summary>
+        /// Registers the property identified by the given expression to receive a change notification
+        /// whenever this property changes.
+        /// </summary>
+        /// <typeparam name="T">The type of the cascaded property value.</typeparam>
+        /// <param name="property">A lambda expression identifying the property to cascade notifications to.</param>
+        /// <returns>This metadata instance.</returns>
         public PropertyMetadata AddCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
             return AddCascadeChangeNotifications(property.GetMemberName());
         }
 
+        /// <summary>
+        /// Registers the named property to receive a change notification whenever this property changes.
+        /// </summary>
+        /// <param name="property">The name of the property to cascade notifications to.</param>
+        /// <returns>This metadata instance.</returns>
         public PropertyMetadata AddCascadeChangeNotifications(string property)
         {
             cascadeChangeNotifications.Add(property);
@@ -153,11 +173,23 @@ namespace Radical.Model
             return this;
         }
 
+        /// <summary>
+        /// Unregisters the property identified by the given expression from receiving cascade
+        /// change notifications when this property changes.
+        /// </summary>
+        /// <typeparam name="T">The type of the cascaded property value.</typeparam>
+        /// <param name="property">A lambda expression identifying the property to stop cascading notifications to.</param>
+        /// <returns>This metadata instance.</returns>
         public PropertyMetadata RemoveCascadeChangeNotifications<T>(Expression<Func<T>> property)
         {
             return RemoveCascadeChangeNotifications(property.GetMemberName());
         }
 
+        /// <summary>
+        /// Unregisters the named property from receiving cascade change notifications when this property changes.
+        /// </summary>
+        /// <param name="property">The name of the property to stop cascading notifications to.</param>
+        /// <returns>This metadata instance.</returns>
         public PropertyMetadata RemoveCascadeChangeNotifications(string property)
         {
             if (cascadeChangeNotifications.Contains(property))
@@ -168,13 +200,26 @@ namespace Radical.Model
             return this;
         }
 
+        /// <summary>
+        /// Returns the set of property names that should receive a change notification
+        /// whenever this property changes.
+        /// </summary>
+        /// <returns>An enumerable of property names registered for cascade change notifications.</returns>
         public IEnumerable<string> GetCascadeChangeNotifications()
         {
             return cascadeChangeNotifications;
         }
 
+        /// <summary>
+        /// Sets the default value for this property from a boxed <see cref="PropertyValue"/> instance.
+        /// </summary>
+        /// <param name="value">The boxed property value to use as the default.</param>
         public abstract void SetDefaultValue(PropertyValue value);
 
+        /// <summary>
+        /// Gets the current default value for this property as a boxed <see cref="PropertyValue"/> instance.
+        /// </summary>
+        /// <returns>The boxed default value for this property.</returns>
         public abstract PropertyValue GetDefaultValue();
     }
 }

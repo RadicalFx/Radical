@@ -30,8 +30,14 @@ namespace Radical.ComponentModel.ChangeTracking
         /// </summary>
         event EventHandler ChangesRejected;
 
+        /// <summary>
+        /// Occurs before changes are accepted, allowing the operation to be cancelled.
+        /// </summary>
         event EventHandler<CancelEventArgs> AcceptingChanges;
 
+        /// <summary>
+        /// Occurs before changes are rejected, allowing the operation to be cancelled.
+        /// </summary>
         event EventHandler<CancelEventArgs> RejectingChanges;
 
         /// <summary>

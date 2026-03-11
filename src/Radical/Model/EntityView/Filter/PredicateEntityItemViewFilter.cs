@@ -3,8 +3,15 @@ using System;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// An entity item view filter that uses a <see cref="Predicate{T}"/> delegate to determine which items to include.
+    /// </summary>
+    /// <typeparam name="T">The type of the entity items to filter.</typeparam>
     public sealed class PredicateEntityItemViewFilter<T> : EntityItemViewFilterBase<T> // where T : class
     {
+        /// <summary>
+        /// Gets the predicate delegate used to filter entity items.
+        /// </summary>
         public Predicate<T> FilterDelegate { get; }
         private readonly string filterName;
 

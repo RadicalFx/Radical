@@ -440,6 +440,11 @@ namespace Radical.Messaging
             }
         }
 
+        /// <summary>
+        /// Dispatches the specified message from the given sender to all relevant subscribers.
+        /// </summary>
+        /// <param name="sender">The object sending the message.</param>
+        /// <param name="message">The message to dispatch.</param>
         public void Dispatch(object sender, object message)
         {
             Ensure.That(sender).Named(() => sender).IsNotNull();

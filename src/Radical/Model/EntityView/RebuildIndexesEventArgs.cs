@@ -2,6 +2,9 @@ using System.ComponentModel;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// Provides data for the rebuild indexes event, including the index of the item that triggered the rebuild request.
+    /// </summary>
     public class RebuildIndexesEventArgs : CancelEventArgs
     {
         /// <summary>

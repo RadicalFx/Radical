@@ -1,5 +1,9 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
+    /// <summary>
+    /// Describes a change where a collection item was moved from one index to another.
+    /// </summary>
+    /// <typeparam name="T">The type of the collection item.</typeparam>
     public class ItemMovedDescriptor<T> : ItemChangedDescriptor<T>
     {
         /// <summary>
