@@ -107,7 +107,7 @@ namespace Radical.Observers
             Dispatcher = dispatcher;
         }
 
-        EventHandler disposed = null;
+        EventHandler disposed;
 
         /// <summary>
         /// Starts monitoring the given source object.

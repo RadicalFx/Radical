@@ -19,7 +19,7 @@ namespace Radical.Observers
 
     public class MementoMonitor : AbstractMonitor<IChangeTrackingService>
     {
-        EventHandler handler = null;
+        EventHandler handler;
 
         public MementoMonitor(IChangeTrackingService source)
             : this(source, null)

@@ -264,7 +264,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="T"/> at the specified index.
+        /// Gets or sets the <typeparamref name="T"/> at the specified index.
         /// </summary>
         /// <item></item>
         public T this[int index]
@@ -589,7 +589,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Copies the elements of the <see cref="System.Collections.Generic.ICollection`1"/> to an <see cref="System.Array"/>, starting at a particular <see cref="System.Array"/> index.
+        /// Copies the elements of the <see cref="System.Collections.Generic.ICollection{T}"/> to an <see cref="System.Array"/>, starting at a particular <see cref="System.Array"/> index.
         /// </summary>
         /// <param name="array">The one-dimensional <see cref="System.Array"/> that is the destination of the elements copied from <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>. The <see cref="System.Array"/> must have zero-based indexing.</param>
         /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>

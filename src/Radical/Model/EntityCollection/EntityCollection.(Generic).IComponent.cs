@@ -7,7 +7,7 @@ namespace Radical.Model
     {
 
         /// <summary>
-        /// Represents the method that handles the <see cref="E:System.ComponentModel.IComponent.Disposed"/> event of a component.
+        /// Represents the method that handles the <see cref="System.ComponentModel.IComponent.Disposed"/> event of a component.
         /// </summary>
         public event EventHandler Disposed;
 
@@ -22,10 +22,10 @@ namespace Radical.Model
         private ISite site;
 
         /// <summary>
-        /// Gets or sets the <see cref="T:System.ComponentModel.ISite"/> associated with the <see cref="T:System.ComponentModel.IComponent"/>.
+        /// Gets or sets the <see cref="System.ComponentModel.ISite"/> associated with the <see cref="System.ComponentModel.IComponent"/>.
         /// </summary>
         /// <item></item>
-        /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
+        /// <returns>The <see cref="System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         ISite IComponent.Site

@@ -39,7 +39,7 @@ namespace Radical.Model
         }
 
         private bool defaultValueSet;
-        private T _defaultValue = default(T);
+        private T _defaultValue;
         public virtual T DefaultValue
         {
             get

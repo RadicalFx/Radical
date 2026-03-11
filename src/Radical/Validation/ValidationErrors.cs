@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Radical.Validation
 {
@@ -10,6 +11,6 @@ namespace Radical.Validation
         /// <summary>
         /// An empty list of validation errors.
         /// </summary>
-        public static readonly IEnumerable<ValidationError> Empty = new ValidationError[0];
+        public static readonly IEnumerable<ValidationError> Empty = Array.Empty<ValidationError>();
     }
 }

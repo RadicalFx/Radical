@@ -78,7 +78,7 @@ namespace Radical.ComponentModel
             _customDisplayName = customDisplayName;
         }
 
-        readonly string _customDisplayName = null;
+        readonly string _customDisplayName;
 
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.
@@ -99,7 +99,7 @@ namespace Radical.ComponentModel
         /// When overridden in a derived class, gets the type of the property.
         /// </summary>
         /// <value></value>
-        /// <returns>A <see cref="T:System.Type"/> that represents the type of the property.</returns>
+        /// <returns>A <see cref="System.Type"/> that represents the type of the property.</returns>
         public override Type PropertyType
         {
             get { return typeof(TValue); }

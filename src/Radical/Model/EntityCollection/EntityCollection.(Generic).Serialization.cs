@@ -6,7 +6,7 @@ namespace Radical.Model
 {
     partial class EntityCollection<T>
     {
-        SerializationInfo serializationInfo = null;
+        SerializationInfo serializationInfo;
         StreamingContext streamingContext;
 
         /// <summary>

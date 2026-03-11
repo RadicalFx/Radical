@@ -27,7 +27,7 @@ namespace Radical.Model
            });
         }
 
-        IChangeTrackingService _memento = null;
+        IChangeTrackingService _memento;
         public IChangeTrackingService Memento
         {
             get

@@ -65,19 +65,22 @@ namespace Radical.Diagnostics
 
         public static void Error(this TraceSource source, string message)
         {
+            if (source == null) throw new ArgumentNullException(nameof(source));
             source.TraceEvent(TraceEventType.Error, 0, message);
         }
 
         public static void Error(this TraceSource source, string format, params object[] args)
         {
+            if (source == null) throw new ArgumentNullException(nameof(source));
             source.TraceEvent(TraceEventType.Error, 0, format, args);
         }
-        
+
         public static void Error(this TraceSource source, string message, Exception e)
         {
+            if (source == null) throw new ArgumentNullException(nameof(source));
             if (source.Switch.ShouldTrace(TraceEventType.Error))
             {
-                var evt = string.Format("{0}{1}{2}{1}{3}", message, Environment.NewLine, e.Message, e.StackTrace);
+                var evt = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}{2}{1}{3}", message, Environment.NewLine, e.Message, e.StackTrace);
 
                 source.TraceEvent(TraceEventType.Error, 0, evt);
             }
