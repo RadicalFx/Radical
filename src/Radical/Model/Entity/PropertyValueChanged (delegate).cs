@@ -1,7 +1,16 @@
 ﻿namespace Radical.Model
 {
+    /// <summary>
+    /// Represents the method that handles a property value changed notification for a strongly typed property.
+    /// </summary>
+    /// <typeparam name="T">The type of the property value.</typeparam>
+    /// <param name="e">An object containing the old and new property values.</param>
     public delegate void PropertyValueChanged<T>(PropertyValueChangedArgs<T> e);
 
+    /// <summary>
+    /// Provides data for a property value changed notification, carrying the old and new values.
+    /// </summary>
+    /// <typeparam name="T">The type of the property value.</typeparam>
     public class PropertyValueChangedArgs<T>
     {
         /// <summary>

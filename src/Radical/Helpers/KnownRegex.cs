@@ -1,7 +1,13 @@
 ﻿namespace Radical.Helpers
 {
+    /// <summary>
+    /// Provides a collection of well-known regular expression patterns for common validation scenarios.
+    /// </summary>
     public static class KnownRegex
     {
+        /// <summary>
+        /// Contains regular expression patterns for validating credit card numbers.
+        /// </summary>
         public static class CreditCards
         {
             /// <summary>

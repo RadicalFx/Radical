@@ -176,10 +176,24 @@ namespace Radical.Validation
         }
     }
 
+    /// <summary>
+    /// Defines the strategy used by the <see cref="Ensure"/> class when loading stack-frame source information.
+    /// </summary>
     public enum SourceInfoLoadStrategy
     {
+        /// <summary>
+        /// Eagerly loads the stack-frame source information immediately.
+        /// </summary>
         Load = 0,
+
+        /// <summary>
+        /// Skips loading of stack-frame source information entirely.
+        /// </summary>
         Skip,
+
+        /// <summary>
+        /// Defers loading of stack-frame source information until it is first accessed.
+        /// </summary>
         LazyLoad
     }
 }

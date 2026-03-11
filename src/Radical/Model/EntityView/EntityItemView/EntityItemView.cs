@@ -5,6 +5,10 @@ using System.ComponentModel;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// Represents a view item that wraps an entity of type <typeparamref name="T"/> for use within an <see cref="IEntityView{T}"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the underlying entity item.</typeparam>
     public class EntityItemView<T> :
         IEntityItemView<T>,
         IDataErrorInfo,
@@ -23,6 +27,9 @@ namespace Radical.Model
             OnInit();
         }
 
+        /// <summary>
+        /// Called during initialization, after the view and entity item have been set. Override to perform additional setup.
+        /// </summary>
         protected virtual void OnInit()
         {
 
@@ -142,6 +149,9 @@ namespace Radical.Model
         [field: NonSerialized]
         public event EventHandler EditBegun;
 
+        /// <summary>
+        /// Raises the <see cref="EditBegun"/> event.
+        /// </summary>
         protected virtual void OnEditBegun()
         {
             EditBegun?.Invoke(this, EventArgs.Empty);
@@ -152,6 +162,9 @@ namespace Radical.Model
         /// </summary>
         [field: NonSerialized]
         public event EventHandler EditCanceled;
+        /// <summary>
+        /// Raises the <see cref="EditCanceled"/> event.
+        /// </summary>
         protected virtual void OnEditCanceled()
         {
             EditCanceled?.Invoke(this, EventArgs.Empty);
@@ -162,6 +175,9 @@ namespace Radical.Model
         /// </summary>
         [field: NonSerialized]
         public event EventHandler EditEnded;
+        /// <summary>
+        /// Raises the <see cref="EditEnded"/> event.
+        /// </summary>
         protected virtual void OnEditEnded()
         {
             EditEnded?.Invoke(this, EventArgs.Empty);
@@ -242,6 +258,12 @@ namespace Radical.Model
             get { return View; }
         }
 
+        /// <summary>
+        /// Sets the value of a custom property on this item view.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="value">The value to set.</param>
         public void SetCustomValue<TValue>(string customPropertyName, TValue value)
         {
             var beforeSet = GetCustomValue<TValue>(customPropertyName);
@@ -253,11 +275,21 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Raises the <see cref="PropertyChanged"/> event for the specified property name.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
         public void NotifyPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Gets the value of a custom property on this item view.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <returns>The current value of the custom property.</returns>
         public TValue GetCustomValue<TValue>(string customPropertyName)
         {
             return View.GetCustomPropertyValue<TValue>(customPropertyName, this);
@@ -323,11 +355,20 @@ namespace Radical.Model
             return null;
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance based on the underlying entity item.
+        /// </summary>
+        /// <returns>A hash code for this instance.</returns>
         public override int GetHashCode()
         {
             return EntityItem.GetHashCode();
         }
 
+        /// <summary>
+        /// Determines whether the specified object is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The object to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified object represents the same entity item; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (obj is IEntityItemView<T> other)

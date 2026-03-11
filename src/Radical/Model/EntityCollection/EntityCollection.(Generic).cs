@@ -9,6 +9,11 @@ using System.Runtime.Serialization;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// A generic collection that supports entity change notification, initialization sessions,
+    /// and integration with component model services.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     [Serializable]
     public partial class EntityCollection<T> :
@@ -807,18 +812,31 @@ namespace Radical.Model
 
         readonly CollectionSettings _settings = new CollectionSettings();
 
+        /// <summary>
+        /// Gets the settings that control the behaviour of this collection.
+        /// </summary>
         public CollectionSettings Settings
         {
             get { return _settings; }
         }
 
+        /// <summary>
+        /// Holds configuration settings that control the behaviour of an <see cref="EntityCollection{T}"/>.
+        /// </summary>
         public class CollectionSettings
         {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CollectionSettings"/> class with default values.
+            /// </summary>
             public CollectionSettings()
             {
                 NotifyListItemPropertyChanged = true;
             }
 
+            /// <summary>
+            /// Gets or sets a value indicating whether the collection raises a change notification
+            /// when a property of a contained item changes.
+            /// </summary>
             public bool NotifyListItemPropertyChanged { get; set; }
         }
     }

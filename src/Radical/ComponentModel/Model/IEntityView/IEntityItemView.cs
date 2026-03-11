@@ -27,9 +27,27 @@ namespace Radical.ComponentModel
         /// <value>The owner view.</value>
         IEntityView View { get; }
 
+        /// <summary>
+        /// Sets a custom property value on this item view using the specified property name.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the custom property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="value">The value to set.</param>
         void SetCustomValue<TValue>(string customPropertyName, TValue value);
+
+        /// <summary>
+        /// Gets the value of the custom property identified by the specified property name.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the custom property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <returns>The value of the custom property.</returns>
         TValue GetCustomValue<TValue>(string customPropertyName);
 
+        /// <summary>
+        /// Raises the <see cref="System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event
+        /// for the specified property name.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
         void NotifyPropertyChanged(string propertyName);
     }
 

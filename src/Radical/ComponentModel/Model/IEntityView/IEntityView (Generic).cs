@@ -38,6 +38,13 @@ namespace Radical.ComponentModel
         EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter);
 
+        /// <summary>
+        /// Adds a property mapping using the specified display name, the supplied getter, and a default value interceptor.
+        /// </summary>
+        /// <param name="calculatedPropertyDisplayName">The display name of the new property.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
+        /// <param name="defaultValueInterceptor">A delegate that supplies the default value for the property.</param>
+        /// <returns>A reference to the dynamically generated property.</returns>
         EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(string calculatedPropertyDisplayName,
             EntityItemViewValueGetter<T, TProperty> getter,
             Func<TProperty> defaultValueInterceptor);
@@ -64,6 +71,11 @@ namespace Radical.ComponentModel
         /// <returns>A reference to the dynamically generated property.</returns>
         EntityItemViewPropertyDescriptor<T> AddCustomProperty(string propertyName);
 
+        /// <summary>
+        /// Determines whether a custom property with the specified name has been defined.
+        /// </summary>
+        /// <param name="propertyName">The name of the custom property to check.</param>
+        /// <returns><c>true</c> if a custom property with the given name exists; otherwise, <c>false</c>.</returns>
         bool IsCustomPropertyDefined(string propertyName);
 
         /// <summary>
@@ -95,8 +107,18 @@ namespace Radical.ComponentModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         IEnumerable<EntityItemViewPropertyDescriptor<T>> GetCustomProperties();
 
+        /// <summary>
+        /// Returns the custom property descriptor with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the custom property.</param>
+        /// <returns>The matching <see cref="EntityItemViewPropertyDescriptor{T}"/>, or <c>null</c> if not found.</returns>
         EntityItemViewPropertyDescriptor<T> GetCustomProperty(string name);
 
+        /// <summary>
+        /// Returns the property descriptor with the specified name, including both native and custom properties.
+        /// </summary>
+        /// <param name="name">The name of the property.</param>
+        /// <returns>The matching <see cref="PropertyDescriptor"/>, or <c>null</c> if not found.</returns>
         PropertyDescriptor GetProperty(string name);
 
         /// <summary>
@@ -112,6 +134,10 @@ namespace Radical.ComponentModel
         /// <param name="newIndex">The destination index.</param>
         void Move(IEntityItemView<T> item, int newIndex);
 
+        /// <summary>
+        /// Sorts the view items using the specified comparer.
+        /// </summary>
+        /// <param name="comparer">The comparer used to order the items.</param>
         void ApplySort(IComparer<IEntityItemView<T>> comparer);
 
         /// <summary>
@@ -120,13 +146,40 @@ namespace Radical.ComponentModel
         /// <param name="predicate">The predicate.</param>
         void ApplyFilter(Predicate<T> predicate);
 
+        /// <summary>
+        /// Gets the value of the specified custom property for the given item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the custom property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="item">The item whose custom property value is retrieved.</param>
+        /// <returns>The current value of the custom property for the specified item.</returns>
         TValue GetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> item);
 
+        /// <summary>
+        /// Sets the value of the specified custom property for the given item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the custom property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="item">The item whose custom property value is set.</param>
+        /// <param name="value">The new value to assign to the custom property.</param>
         void SetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> item, TValue value);
 
+        /// <summary>
+        /// Occurs before a new item is added to the view, allowing interception or cancellation of the operation.
+        /// </summary>
         event EventHandler<AddingNewEventArgs<T>> AddingNew;
 
+        /// <summary>
+        /// Adds a new item to the underlying data source and returns a view wrapper for it.
+        /// </summary>
+        /// <returns>An <see cref="IEntityItemView{T}"/> wrapping the newly added item.</returns>
         new IEntityItemView<T> AddNew();
+
+        /// <summary>
+        /// Adds a new item to the underlying data source, using the specified interceptor to configure the operation, and returns a view wrapper for it.
+        /// </summary>
+        /// <param name="addNewInterceptor">A delegate invoked with the <see cref="AddingNewEventArgs{T}"/> before the item is added.</param>
+        /// <returns>An <see cref="IEntityItemView{T}"/> wrapping the newly added item.</returns>
         IEntityItemView<T> AddNew(Action<AddingNewEventArgs<T>> addNewInterceptor);
     }
 }

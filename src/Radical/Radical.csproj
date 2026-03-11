@@ -29,10 +29,6 @@
     <MinVerMinimumMajorMinor>4</MinVerMinimumMajorMinor>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <NoWarn>1591</NoWarn>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>$(NoWarn);1701;1702;NU5105</NoWarn>
   </PropertyGroup>

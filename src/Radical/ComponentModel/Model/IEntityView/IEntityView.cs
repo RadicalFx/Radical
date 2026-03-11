@@ -102,6 +102,10 @@
         /// <param name="newIndex">The destination index.</param>
         void Move(int sourceIndex, int newIndex);
 
+        /// <summary>
+        /// Applies a sort to the view using the specified sort description string.
+        /// </summary>
+        /// <param name="sortDescriptions">A string describing the sort to apply.</param>
         void ApplySort(string sortDescriptions);
     }
 }

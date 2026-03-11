@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Radical.Linq
 {
+    /// <summary>
+    /// Provides extension methods for <see cref="System.Linq.IQueryable{T}"/> to support filling entity collections.
+    /// </summary>
     public static class QueryableExtensions
     {
         /// <summary>

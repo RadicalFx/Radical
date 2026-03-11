@@ -2,6 +2,10 @@
 {
     using System.ComponentModel;
 
+    /// <summary>
+    /// Provides data for an insert operation, including the target index and the value being inserted. Inherits cancellation support from <see cref="CancelEventArgs"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the value being inserted.</typeparam>
     public class InsertEventArgs<T> : CancelEventArgs
     {
         /// <summary>
