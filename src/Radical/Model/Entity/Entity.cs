@@ -7,6 +7,10 @@ using System.Linq.Expressions;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// Abstract base class providing property change notification, property metadata management,
+    /// and disposable resource handling for entity objects.
+    /// </summary>
     [Serializable]
     public abstract class Entity :
         INotifyPropertyChanged,
@@ -98,23 +102,40 @@ namespace Radical.Model
 
 
         private static readonly object propertyChangedEventKey = new object();
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged
         {
             add { Events.AddHandler(propertyChangedEventKey, value); }
             remove { Events.RemoveHandler(propertyChangedEventKey, value); }
         }
 
+        /// <summary>
+        /// Raises the <see cref="PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             EnsureNotDisposed();
             (Events[propertyChangedEventKey] as PropertyChangedEventHandler)?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Raises the <see cref="PropertyChanged"/> event for the specified property.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
         protected void OnPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Raises the <see cref="PropertyChanged"/> event for the property identified by the given expression.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="property">A lambda expression identifying the property that changed.</param>
         protected void OnPropertyChanged<T>(Expression<Func<T>> property)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(property.GetMemberName()));
@@ -312,6 +333,14 @@ namespace Radical.Model
 
         readonly IDictionary<string, PropertyValue> valuesBag = new Dictionary<string, PropertyValue>();
 
+        /// <summary>
+        /// Core implementation for setting a property value. Updates the internal values bag,
+        /// invokes the change callback, and raises property changed notifications when appropriate.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="data">The new property value.</param>
+        /// <param name="pvc">An optional callback invoked when the property value changes.</param>
         protected void SetPropertyValueCore<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
             var oldValue = GetPropertyValue<T>(propertyName);
@@ -346,6 +375,12 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Sets the value of the specified property, raising property changed notifications when the value changes.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="property">A lambda expression identifying the property to set.</param>
+        /// <param name="data">The new property value.</param>
         protected void SetPropertyValue<T>(Expression<Func<T>> property, T data)
         {
             var propertyName = property.GetMemberName();
@@ -353,6 +388,14 @@ namespace Radical.Model
             SetPropertyValue(propertyName, data, null);
         }
 
+        /// <summary>
+        /// Sets the value of the specified property, raising property changed notifications when the value changes,
+        /// and invoking the supplied callback when the value changes.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="property">A lambda expression identifying the property to set.</param>
+        /// <param name="data">The new property value.</param>
+        /// <param name="pvc">A callback invoked when the property value changes.</param>
         protected void SetPropertyValue<T>(Expression<Func<T>> property, T data, PropertyValueChanged<T> pvc)
         {
             var propertyName = property.GetMemberName();
@@ -360,11 +403,25 @@ namespace Radical.Model
             SetPropertyValue(propertyName, data, pvc);
         }
 
+        /// <summary>
+        /// Sets the value of the specified property by name, raising property changed notifications when the value changes.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="data">The new property value.</param>
         protected void SetPropertyValue<T>(string propertyName, T data)
         {
             SetPropertyValue(propertyName, data, null);
         }
 
+        /// <summary>
+        /// Sets the value of the specified property by name, raising property changed notifications when the value changes,
+        /// and invoking the supplied callback when the value changes.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="data">The new property value.</param>
+        /// <param name="pvc">A callback invoked when the property value changes.</param>
         protected virtual void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
             SetPropertyValueCore(propertyName, data, pvc);

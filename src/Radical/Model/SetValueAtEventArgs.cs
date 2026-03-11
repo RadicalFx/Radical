@@ -1,5 +1,9 @@
 ﻿namespace Radical.Model
 {
+    /// <summary>
+    /// Provides data for a set-value-at operation, including the target index, the new value, and the old value being replaced.
+    /// </summary>
+    /// <typeparam name="T">The type of the values being set and replaced.</typeparam>
     public class SetValueAtEventArgs<T> : InsertEventArgs<T>
     {
         /// <summary>

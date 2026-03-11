@@ -39,6 +39,9 @@ namespace Radical.Model
 
 
         private readonly static ViewAllEntityItemViewFilter<T> _instance = new ViewAllEntityItemViewFilter<T>();
+        /// <summary>
+        /// Gets the singleton instance of the <see cref="ViewAllEntityItemViewFilter{T}"/>.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes")]
         public static IEntityItemViewFilter Instance
         {

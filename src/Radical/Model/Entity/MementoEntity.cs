@@ -17,7 +17,7 @@ namespace Radical.Model
         Entity,
         IMemento
     {
-        bool isDisposed = false;
+        bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -203,6 +203,14 @@ namespace Radical.Model
             return metadata;
         }
 
+        /// <summary>
+        /// Sets the value of the specified property by name. When change tracking is active for
+        /// the property, caches the previous value in the change tracking service before updating.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="data">The new property value.</param>
+        /// <param name="pvc">A callback invoked when the property value changes.</param>
         protected override void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
             base.SetPropertyValue<T>(propertyName, data, e =>
@@ -393,6 +401,17 @@ namespace Radical.Model
             return null;
         }
 
+        /// <summary>
+        /// Caches a change in the active change tracking service during a reject callback, routing
+        /// it appropriately based on the reject reason (undo, redo, or silent revert).
+        /// </summary>
+        /// <typeparam name="T">The system type of the property value being tracked.</typeparam>
+        /// <param name="propertyName">The name of the property whose change is being cached.</param>
+        /// <param name="value">The value to cache.</param>
+        /// <param name="rejectCallback">The callback to invoke when the cached change is rejected.</param>
+        /// <param name="commitCallback">The callback to invoke when the cached change is committed.</param>
+        /// <param name="args">The event arguments describing why the change is being rejected.</param>
+        /// <returns>A reference to the cached change, or <c>null</c> if the change was not cached.</returns>
         protected virtual IChange CacheChangeOnRejectCallback<T>(string propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args)
         {
             EnsureNotDisposed();

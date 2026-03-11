@@ -8,11 +8,21 @@ using System.Runtime.Serialization;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// An <see cref="EntityCollection{T}"/> that integrates with the change-tracking infrastructure
+    /// via the <see cref="IMemento"/> contract, enabling undo/redo support for collection mutations.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     [Serializable]
     public class MementoEntityCollection<T> : EntityCollection<T>, IMemento
     {
-
+        /// <summary>
+        /// Called when the <see cref="Memento"/> property changes, propagating the new
+        /// change-tracking service to any <see cref="IMemento"/> items already in the collection.
+        /// </summary>
+        /// <param name="newMemento">The new change-tracking service, or <c>null</c> if tracking is being detached.</param>
+        /// <param name="oldMemento">The previous change-tracking service.</param>
         protected virtual void OnMementoChanged(IChangeTrackingService newMemento, IChangeTrackingService oldMemento)
         {
             EnsureNotDisposed();
@@ -27,7 +37,12 @@ namespace Radical.Model
            });
         }
 
-        IChangeTrackingService _memento = null;
+        IChangeTrackingService _memento;
+        /// <summary>
+        /// Gets or sets the change-tracking service associated with this collection.
+        /// Setting this property propagates the service to all <see cref="IMemento"/> items
+        /// currently in the collection.
+        /// </summary>
         public IChangeTrackingService Memento
         {
             get
@@ -70,6 +85,10 @@ namespace Radical.Model
         }
 
 
+        /// <summary>
+        /// Suspends the change-caching mechanism so that subsequent collection mutations
+        /// are not recorded by the change-tracking service.
+        /// </summary>
         protected void SuspendCaching()
         {
             EnsureNotDisposed();
@@ -92,6 +111,10 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Resumes the change-caching mechanism so that subsequent collection mutations
+        /// are once again recorded by the change-tracking service.
+        /// </summary>
         protected void ResumeCaching()
         {
             EnsureNotDisposed();
@@ -150,6 +173,11 @@ namespace Radical.Model
             _init();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MementoEntityCollection{T}"/> class
+        /// using the supplied list as the backing storage.
+        /// </summary>
+        /// <param name="storage">The <see cref="IList{T}"/> to use as internal storage.</param>
         public MementoEntityCollection(IList<T> storage)
             : base(storage)
         {
@@ -561,6 +589,11 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Called when the <c>AddRange</c> operation has been completed.
+        /// Records the range addition as a single change with the active change-tracking service.
+        /// </summary>
+        /// <param name="addedRange">The items that were added to the collection.</param>
         protected override void OnAddRangeCompleted(IEnumerable<T> addedRange)
         {
             base.OnAddRangeCompleted(addedRange);

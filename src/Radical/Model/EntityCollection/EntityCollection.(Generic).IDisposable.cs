@@ -24,11 +24,11 @@ namespace Radical.Model
             if (disposing)
             {
                 /*
-                 * Se disposing è 'true' significa che dispose
-                 * è stato invocato direttamentente dall'utente
-                 * è quindi lecito accedere ai 'field' e ad 
-                 * eventuali reference perchè sicuramente Finalize
-                 * non è ancora stato chiamato su questi oggetti
+                 * Se disposing ï¿½ 'true' significa che dispose
+                 * ï¿½ stato invocato direttamentente dall'utente
+                 * ï¿½ quindi lecito accedere ai 'field' e ad 
+                 * eventuali reference perchï¿½ sicuramente Finalize
+                 * non ï¿½ ancora stato chiamato su questi oggetti
                  */
                 if (site != null && site.Container != null)
                 {
@@ -56,6 +56,9 @@ namespace Radical.Model
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Throws an <see cref="ObjectDisposedException"/> if this instance has already been disposed.
+        /// </summary>
         protected void EnsureNotDisposed()
         {
             if (isDisposed)

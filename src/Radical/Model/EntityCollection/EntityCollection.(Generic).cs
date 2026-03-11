@@ -9,6 +9,11 @@ using System.Runtime.Serialization;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// A generic collection that supports entity change notification, initialization sessions,
+    /// and integration with component model services.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly")]
     [Serializable]
     public partial class EntityCollection<T> :
@@ -264,7 +269,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="T"/> at the specified index.
+        /// Gets or sets the <typeparamref name="T"/> at the specified index.
         /// </summary>
         /// <item></item>
         public T this[int index]
@@ -589,7 +594,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Copies the elements of the <see cref="System.Collections.Generic.ICollection`1"/> to an <see cref="System.Array"/>, starting at a particular <see cref="System.Array"/> index.
+        /// Copies the elements of the <see cref="System.Collections.Generic.ICollection{T}"/> to an <see cref="System.Array"/>, starting at a particular <see cref="System.Array"/> index.
         /// </summary>
         /// <param name="array">The one-dimensional <see cref="System.Array"/> that is the destination of the elements copied from <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>. The <see cref="System.Array"/> must have zero-based indexing.</param>
         /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
@@ -807,18 +812,31 @@ namespace Radical.Model
 
         readonly CollectionSettings _settings = new CollectionSettings();
 
+        /// <summary>
+        /// Gets the settings that control the behaviour of this collection.
+        /// </summary>
         public CollectionSettings Settings
         {
             get { return _settings; }
         }
 
+        /// <summary>
+        /// Holds configuration settings that control the behaviour of an <see cref="EntityCollection{T}"/>.
+        /// </summary>
         public class CollectionSettings
         {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CollectionSettings"/> class with default values.
+            /// </summary>
             public CollectionSettings()
             {
                 NotifyListItemPropertyChanged = true;
             }
 
+            /// <summary>
+            /// Gets or sets a value indicating whether the collection raises a change notification
+            /// when a property of a contained item changes.
+            /// </summary>
             public bool NotifyListItemPropertyChanged { get; set; }
         }
     }

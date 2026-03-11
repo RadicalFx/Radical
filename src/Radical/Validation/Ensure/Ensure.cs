@@ -1,8 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Radical.Validation
 {
+    [AttributeUsage(AttributeTargets.Parameter)]
+    internal sealed class ValidatedNotNullAttribute : Attribute { }
 
     /// <summary>
     /// Ensure is a simple, fluent based, engine useful to validate
@@ -146,7 +149,7 @@ namespace Radical.Validation
         /// <typeparam name="T">The type of the inspect object value.</typeparam>
         /// <param name="obj">The object value to inspect.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public static IConfigurableEnsure<T> That<T>(T obj)
+        public static IConfigurableEnsure<T> That<T>([ValidatedNotNull] T obj)
         {
             return That<T>(obj, SourceInfoLoadStrategy);
         }
@@ -159,7 +162,7 @@ namespace Radical.Validation
         /// <param name="obj">The object value to inspect.</param>
         /// <param name="strategy">Determines if the Ensure instance should load the current Stack.</param>
         /// <returns>The Ensure instance for fluent interface usage.</returns>
-        public static IConfigurableEnsure<T> That<T>(T obj, SourceInfoLoadStrategy strategy)
+        public static IConfigurableEnsure<T> That<T>([ValidatedNotNull] T obj, SourceInfoLoadStrategy strategy)
         {
             var si = SourceInfo.Empty;
 
@@ -173,10 +176,24 @@ namespace Radical.Validation
         }
     }
 
+    /// <summary>
+    /// Defines the strategy used by the <see cref="Ensure"/> class when loading stack-frame source information.
+    /// </summary>
     public enum SourceInfoLoadStrategy
     {
+        /// <summary>
+        /// Eagerly loads the stack-frame source information immediately.
+        /// </summary>
         Load = 0,
+
+        /// <summary>
+        /// Skips loading of stack-frame source information entirely.
+        /// </summary>
         Skip,
+
+        /// <summary>
+        /// Defers loading of stack-frame source information until it is first accessed.
+        /// </summary>
         LazyLoad
     }
 }

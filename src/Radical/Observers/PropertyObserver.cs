@@ -137,7 +137,7 @@ namespace Radical.Observers
         IDictionary<string, Action<T, string>> propertiesToWatch = new Dictionary<string, Action<T, string>>();
         IList<AbstractMonitor> observablePropertiesToWatch = new List<AbstractMonitor>();
 
-        PropertyChangedEventHandler handler = null;
+        PropertyChangedEventHandler handler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyChangedMonitor&lt;T&gt;"/> class.

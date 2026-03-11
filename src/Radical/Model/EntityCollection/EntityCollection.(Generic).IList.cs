@@ -5,10 +5,10 @@ namespace Radical.Model
     partial class EntityCollection<T>
     {
         /// <summary>
-        /// Gets a item indicating whether the <see cref="T:System.Collections.IList"></see> has a fixed size.
+        /// Gets a item indicating whether the <see cref="System.Collections.IList"></see> has a fixed size.
         /// </summary>
         /// <item></item>
-        /// <returns>true if the <see cref="T:System.Collections.IList"></see> has a fixed size; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.Collections.IList"></see> has a fixed size; otherwise, false.</returns>
         bool IList.IsFixedSize
         {
             get
@@ -20,10 +20,10 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Gets a item indicating whether the <see cref="T:System.Collections.IList"></see> is read-only.
+        /// Gets a item indicating whether the <see cref="System.Collections.IList"></see> is read-only.
         /// </summary>
         /// <item></item>
-        /// <returns>true if the <see cref="T:System.Collections.IList"></see> is read-only; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.Collections.IList"></see> is read-only; otherwise, false.</returns>
         bool IList.IsReadOnly
         {
             get
@@ -34,13 +34,13 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Adds an item to the <see cref="T:System.Collections.IList"/>.
+        /// Adds an item to the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to add to the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="value">The <see cref="System.Object"/> to add to the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
         /// The position into which the new element was inserted.
         /// </returns>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only.-or- The <see cref="System.Collections.IList"/> has a fixed size. </exception>
         int IList.Add(object value)
         {
             EnsureNotDisposed();
@@ -50,11 +50,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.IList"/> contains a specific item.
+        /// Determines whether the <see cref="System.Collections.IList"/> contains a specific item.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to locate in the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="value">The <see cref="System.Object"/> to locate in the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
-        /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
+        /// true if the <see cref="System.Object"/> is found in the <see cref="System.Collections.IList"/>; otherwise, false.
         /// </returns>
         bool IList.Contains(object value)
         {
@@ -63,9 +63,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines the index of a specific item in the <see cref="T:System.Collections.IList"/>.
+        /// Determines the index of a specific item in the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to locate in the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="value">The <see cref="System.Object"/> to locate in the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
         /// The index of <paramref name="value"/> if found in the list; otherwise, -1.
         /// </returns>
@@ -76,13 +76,13 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Inserts an item to the <see cref="T:System.Collections.IList" /> at the specified index.
+        /// Inserts an item to the <see cref="System.Collections.IList" /> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which <paramref name="value" /> should be inserted.</param>
-        /// <param name="value">The <see cref="T:System.Object" /> to insert into the <see cref="T:System.Collections.IList" />.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index" /> is not a valid index in the <see cref="T:System.Collections.IList" />.</exception>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList" /> is read-only.-or- The <see cref="T:System.Collections.IList" /> has a fixed size.</exception>
-        /// <exception cref="T:System.NullReferenceException"><paramref name="value" /> is null reference in the <see cref="T:System.Collections.IList" />.</exception>
+        /// <param name="value">The <see cref="System.Object" /> to insert into the <see cref="System.Collections.IList" />.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="index" /> is not a valid index in the <see cref="System.Collections.IList" />.</exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList" /> is read-only.-or- The <see cref="System.Collections.IList" /> has a fixed size.</exception>
+        /// <exception cref="System.NullReferenceException"><paramref name="value" /> is null reference in the <see cref="System.Collections.IList" />.</exception>
         void IList.Insert(int index, object value)
         {
             EnsureNotDisposed();
@@ -90,10 +90,10 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList"/>.
+        /// Removes the first occurrence of a specific object from the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to remove from the <see cref="T:System.Collections.IList"/>.</param>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        /// <param name="value">The <see cref="System.Object"/> to remove from the <see cref="System.Collections.IList"/>.</param>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only.-or- The <see cref="System.Collections.IList"/> has a fixed size. </exception>
         void IList.Remove(object value)
         {
             EnsureNotDisposed();

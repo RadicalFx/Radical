@@ -37,11 +37,20 @@ namespace Radical.Validation
             Results = results;
         }
 
+        /// <summary>
+        /// Creates a failed validation result with the specified error message.
+        /// </summary>
+        /// <param name="error">The error message describing the validation failure.</param>
+        /// <returns>A <see cref="FailedValidationResult"/> containing the error.</returns>
         public ValidationResult Failed(string error)
         {
             return new FailedValidationResult(error);
         }
 
+        /// <summary>
+        /// Creates a successful validation result.
+        /// </summary>
+        /// <returns>A <see cref="SuccessfulValidationResult"/>.</returns>
         public ValidationResult Succeeded()
         {
             return new SuccessfulValidationResult();
