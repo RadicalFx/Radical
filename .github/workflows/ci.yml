@@ -57,7 +57,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Download artifacts
-        uses: actions/download-artifact@v8.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: nuget-packages
           path: nugets/
