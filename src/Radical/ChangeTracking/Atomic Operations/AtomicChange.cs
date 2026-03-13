@@ -130,7 +130,7 @@ namespace Radical.ChangeTracking
              * in questo momento abbiamo uno special case sul servizio
              * in fase di reject che fa esattamente questo.
              */
-            var reversed = changes.ToArray().Reverse();
+            var reversed = Enumerable.Reverse(changes);
             foreach (var c in reversed)
             {
                 c.Item1.Reject(reason);
