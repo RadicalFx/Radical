@@ -14,8 +14,8 @@
     <PackageReference Include="FakeItEasy" Version="9.0.1" />
     <PackageReference Include="MessagePack" Version="3.1.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="4.2.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="4.2.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="4.2.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.2.3" />
     <PackageReference Include="PublicApiGenerator" Version="11.5.4" />
     <PackageReference Include="SharpTestsEx" Version="2.0.0" />
   </ItemGroup>
