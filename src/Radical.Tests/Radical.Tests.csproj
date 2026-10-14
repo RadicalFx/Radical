@@ -13,7 +13,7 @@
     </PackageReference>
     <PackageReference Include="FakeItEasy" Version="9.0.1" />
     <PackageReference Include="MessagePack" Version="3.1.12" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="4.5.1" />
     <PackageReference Include="MSTest.TestFramework" Version="4.5.1" />
     <PackageReference Include="PublicApiGenerator" Version="11.5.4" />
