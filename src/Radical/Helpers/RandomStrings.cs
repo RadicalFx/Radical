@@ -15,7 +15,7 @@ namespace Radical.Helpers
         /// <summary>
         /// Generates a random string using default settings.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A randomly generated string.</returns>
         public static string GenerateRandom()
         {
             return instance.Next();

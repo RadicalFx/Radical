@@ -59,7 +59,7 @@ namespace Radical.Validation
         /// <summary>
         /// Adds the error.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The type of the property identified by the key.</typeparam>
         /// <param name="key">The key.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="detectedProblems">The detected problems.</param>

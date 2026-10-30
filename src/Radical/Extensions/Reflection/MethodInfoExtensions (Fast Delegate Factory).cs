@@ -7,11 +7,16 @@ namespace Radical.Reflection
     /// <summary>
     /// Represents a fast delegate to a void method call.
     /// </summary>
+    /// <param name="target">The instance the method is invoked on, or <c>null</c> for static methods.</param>
+    /// <param name="arguments">The arguments passed to the method.</param>
     public delegate void LateBoundVoidMethod(object target, object[] arguments);
 
     /// <summary>
     /// Represents a fast delegate to a method call.
     /// </summary>
+    /// <param name="target">The instance the method is invoked on, or <c>null</c> for static methods.</param>
+    /// <param name="arguments">The arguments passed to the method.</param>
+    /// <returns>The value returned by the invoked method.</returns>
     public delegate object LateBoundMethod(object target, object[] arguments);
 
     /// <summary>

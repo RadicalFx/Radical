@@ -12,7 +12,7 @@ namespace Radical
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <returns></returns>
+        /// <returns>The requested service instance.</returns>
         public static TService GetService<TService>(this IServiceProvider serviceProvider)
         {
             return (TService)serviceProvider.GetService(typeof(TService));
@@ -24,7 +24,7 @@ namespace Radical
         /// <typeparam name="SInterface">The type of the interface.</typeparam>
         /// <typeparam name="TInterface">The type of the interface.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <returns></returns>
+        /// <returns>The service registered as <typeparamref name="SInterface"/>, cast to <typeparamref name="TInterface"/>.</returns>
         public static TInterface GetService<SInterface, TInterface>(this IServiceProvider serviceProvider)
         {
             return (TInterface)serviceProvider.GetService(typeof(SInterface));
@@ -35,7 +35,7 @@ namespace Radical
         /// </summary>
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <returns></returns>
+        /// <returns>The requested service instance, or the default value of <typeparamref name="TService"/> if the service is not available.</returns>
         public static TService TryGetService<TService>(this IServiceProvider serviceProvider)
         {
             object service = serviceProvider.GetService(typeof(TService));
@@ -54,7 +54,7 @@ namespace Radical
         /// <typeparam name="SInterface">The type of the interface.</typeparam>
         /// <typeparam name="TInterface">The type of the interface.</typeparam>
         /// <param name="serviceProvider">The service provider.</param>
-        /// <returns></returns>
+        /// <returns>The service registered as <typeparamref name="SInterface"/> cast to <typeparamref name="TInterface"/>, or the default value of <typeparamref name="TInterface"/> if the service is not available.</returns>
         public static TInterface TryGetService<SInterface, TInterface>(this IServiceProvider serviceProvider)
         {
             object service = serviceProvider.GetService(typeof(SInterface));

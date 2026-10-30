@@ -29,7 +29,7 @@ namespace Radical.Helpers
             /// Gets the names the of the given property expressed as Lambda Expression.
             /// </summary>
             /// <param name="propertyRef">The property ref.</param>
-            /// <returns></returns>
+            /// <returns>The name of the referenced property.</returns>
             public string NameOf(Expression<Func<T, object>> propertyRef)
             {
                 return propertyRef.GetMemberName();

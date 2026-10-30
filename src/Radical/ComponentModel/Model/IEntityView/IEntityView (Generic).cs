@@ -19,6 +19,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Adds a property mapping using the specified display name, the supplied property type and the supplied getter and setter.
         /// </summary>
+        /// <typeparam name="TProperty">The type of the custom property.</typeparam>
         /// <param name="calculatedPropertyDisplayName">The display name of the new property.</param>
         /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
         /// <param name="setter">A delegate to call in order to set the value of the dynamically generated property.</param>
@@ -31,6 +32,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Adds a property mapping using the specified display name, the supplied property type and the supplied getter.
         /// </summary>
+        /// <typeparam name="TProperty">The type of the custom property.</typeparam>
         /// <param name="calculatedPropertyDisplayName">Calculated name of the property display.</param>
         /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
         /// <returns>A reference to the dynamically generated property.</returns>
@@ -41,6 +43,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Adds a property mapping using the specified display name, the supplied getter, and a default value interceptor.
         /// </summary>
+        /// <typeparam name="TProperty">The type of the custom property.</typeparam>
         /// <param name="calculatedPropertyDisplayName">The display name of the new property.</param>
         /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
         /// <param name="defaultValueInterceptor">A delegate that supplies the default value for the property.</param>

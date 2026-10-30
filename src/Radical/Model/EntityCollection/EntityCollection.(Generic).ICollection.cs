@@ -14,7 +14,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether access to the <see cref="System.Collections.ICollection"/> is synchronized (thread safe).
         /// </summary>
-        /// <item></item>
         /// <returns>true if access to the <see cref="System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
         bool ICollection.IsSynchronized
         {
@@ -30,8 +29,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets an object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.
         /// </summary>
-        /// <value></value>
-        /// <returns>An object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.</returns>
+        /// <value>An object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.</value>
         object ICollection.SyncRoot
         {
             get
