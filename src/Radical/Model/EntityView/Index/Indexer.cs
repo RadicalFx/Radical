@@ -24,14 +24,14 @@ namespace Radical.Model
 
         /*
          * L'indice di default, gestisce la relazione tra l'EntityItemView e l'indice 
-         * dell'elemento T nella DataSource, serve anche per sapere se un elemento è
+         * dell'elemento T nella DataSource, serve anche per sapere se un elemento ï¿½
          * in stato di "Pending Add", nel qual caso ha un Value pari a -1.
-         * Un elemento è in stato di Pending Add nel caso in cui sia stato chiamato AddNew
+         * Un elemento ï¿½ in stato di Pending Add nel caso in cui sia stato chiamato AddNew
          * sulla View e non sia ancora stato chiamato EndNew, o CancelNew. In questo caso 
          * l'elemento esiste solo nella View e non ancora nella DataSource sottostante, 
          * attualmente siamo in grado di gestire un solo elemento alla volta in stato di 
-         * "Pending Add", ma questa è una limitazione della View e non dell'indice che 
-         * sarebbe già ora in grado di gestirne 'n'.
+         * "Pending Add", ma questa ï¿½ una limitazione della View e non dell'indice che 
+         * sarebbe giï¿½ ora in grado di gestirne 'n'.
          */
         readonly Dictionary<IEntityItemView<T>, int> defaultIndex = new Dictionary<IEntityItemView<T>, int>();
         readonly Dictionary<string, Dictionary<object, IEntityItemView<T>>> propertiesIndexes = new Dictionary<string, Dictionary<object, IEntityItemView<T>>>();
@@ -68,23 +68,22 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets a item indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// Gets a item indicating whether the <see cref="System.Collections.Generic.ICollection{T}"/> is read-only.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.Collections.Generic.ICollection{T}"/> is read-only; otherwise, false.</returns>
         public bool IsReadOnly
         {
             get { return false; }
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Removes the first occurrence of a specific object from the <see cref="System.Collections.Generic.ICollection{T}"/>.
         /// </summary>
-        /// <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to remove from the <see cref="System.Collections.Generic.ICollection{T}"/>.</param>
         /// <returns>
-        /// true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// true if <paramref name="item"/> was successfully removed from the <see cref="System.Collections.Generic.ICollection{T}"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="System.Collections.Generic.ICollection{T}"/>.
         /// </returns>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        /// <exception cref="T:System.NotSupportedException">The <see cref="System.Collections.Generic.ICollection{T}"/> is read-only.</exception>
         public bool Remove(IEntityItemView<T> item)
         {
             int index = storage.IndexOf(item);
@@ -98,9 +97,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Removes all items from the <see cref="System.Collections.Generic.ICollection{T}"/>.
         /// </summary>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only. </exception>
+        /// <exception cref="T:System.NotSupportedException">The <see cref="System.Collections.Generic.ICollection{T}"/> is read-only. </exception>
         public void Clear()
         {
             /*
@@ -116,13 +115,13 @@ namespace Radical.Model
             if (propertiesIndexes.Count > 0)
             {
                 /*
-                 * Se ci sono proprietà indicizzate
+                 * Se ci sono proprietï¿½ indicizzate
                  * svuotiamo anche questi indici, non li
-                 * eliminamo perchè altrimenti non sapremmo
+                 * eliminamo perchï¿½ altrimenti non sapremmo
                  * come reindicizzarli.
                  * 
                  * Questo significa che una colonna indicizzata
-                 * è da rimuovere esplictamente
+                 * ï¿½ da rimuovere esplictamente
                  */
                 foreach (var index in propertiesIndexes)
                 {
@@ -157,21 +156,20 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Gets the number of elements contained in the <see cref="System.Collections.Generic.ICollection{T}"/>.
         /// </summary>
-        /// <item></item>
-        /// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+        /// <returns>The number of elements contained in the <see cref="System.Collections.Generic.ICollection{T}"/>.</returns>
         public int Count
         {
             get { return storage.Count; }
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific item.
+        /// Determines whether the <see cref="System.Collections.Generic.ICollection{T}"/> contains a specific item.
         /// </summary>
-        /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to locate in the <see cref="System.Collections.Generic.ICollection{T}"/>.</param>
         /// <returns>
-        /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+        /// true if <paramref name="item"/> is found in the <see cref="System.Collections.Generic.ICollection{T}"/>; otherwise, false.
         /// </returns>
         public bool Contains(IEntityItemView<T> item)
         {
@@ -179,11 +177,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific item.
+        /// Determines whether the <see cref="System.Collections.Generic.ICollection{T}"/> contains a specific item.
         /// </summary>
-        /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        /// <param name="item">The object to locate in the <see cref="System.Collections.Generic.ICollection{T}"/>.</param>
         /// <returns>
-        /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+        /// true if <paramref name="item"/> is found in the <see cref="System.Collections.Generic.ICollection{T}"/>; otherwise, false.
         /// </returns>
         public bool Contains(T item)
         {
@@ -193,17 +191,17 @@ namespace Radical.Model
         /// <summary>
         /// Gets the <see cref="Radical.Model.EntityItemView&lt;T&gt;"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get.</param>
         public IEntityItemView<T> this[int index]
         {
             get { return storage[index]; }
         }
 
         /// <summary>
-        /// Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Adds an item to the <see cref="System.Collections.Generic.ICollection{T}"/>.
         /// </summary>
-        /// <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        /// <param name="item">The object to add to the <see cref="System.Collections.Generic.ICollection{T}"/>.</param>
+        /// <exception cref="T:System.NotSupportedException">The <see cref="System.Collections.Generic.ICollection{T}"/> is read-only.</exception>
         public void Add(IEntityItemView<T> item)
         {
             storage.Add(item);
@@ -214,8 +212,8 @@ namespace Radical.Model
              * indice, l'item lo recuperiamo dalla
              * List che fa da storage per la View.
              * 
-             * Se l'elemento che stiamo inserendo è un nuovo elemento
-             * questo non sarà ancora presente nella List quindi giustamente
+             * Se l'elemento che stiamo inserendo ï¿½ un nuovo elemento
+             * questo non sarï¿½ ancora presente nella List quindi giustamente
              * viene inserito con Value a -1
              */
             defaultIndex.Add(item, view.DataSource.IndexOf(item.EntityItem));
@@ -227,7 +225,7 @@ namespace Radical.Model
         /// object, in the View.
         /// </summary>
         /// <param name="item">The item to find the index for.</param>
-        /// <returns></returns>
+        /// <returns>The index of the <see cref="IEntityItemView{T}"/> wrapping the item, or -1 if the item is not found.</returns>
         public int IndexOf(T item)
         {
             /*
@@ -235,8 +233,8 @@ namespace Radical.Model
              * drasticamente migliorate se gestissimo anche
              * un'indicizzazione tra T e la posizione dello
              * EntityItemView che lo incapsula utilizzando
-             * un altro Dictionary<T, int> dove T è il DataItem
-             * mentre l'int è l'indice dell'EntityItemView che
+             * un altro Dictionary<T, int> dove T ï¿½ il DataItem
+             * mentre l'int ï¿½ l'indice dell'EntityItemView che
              * lo incapsula
              */
             var x = (from el in storage
@@ -255,7 +253,7 @@ namespace Radical.Model
         /// Return the index of an EntityItemView in the View.
         /// </summary>
         /// <param name="item">The item.</param>
-        /// <returns></returns>
+        /// <returns>The index of the item, or -1 if the item is not found.</returns>
         public int IndexOf(IEntityItemView<T> item)
         {
             return storage.IndexOf(item);
@@ -309,7 +307,7 @@ namespace Radical.Model
             if (!propertiesIndexes.ContainsKey(property.Name))
             {
                 /*
-                 * Se non abbiamo già indicizzato quella proprietà
+                 * Se non abbiamo giï¿½ indicizzato quella proprietï¿½
                  * lo facciamo adesso, creiamo un nuovo Dictionary
                  */
                 Dictionary<object, IEntityItemView<T>> newIndex = new Dictionary<object, IEntityItemView<T>>(Count);
@@ -324,15 +322,15 @@ namespace Radical.Model
             {
                 /*
                  * Scorriamo tutti gli elementi presenti e per ogni elememnto
-                 * facciamo un'associazione tra il valore della proprietà che
+                 * facciamo un'associazione tra il valore della proprietï¿½ che
                  * vogliamo indicizzare e l'elemento
                  * 
-                 * Il problema è che questa cosa funziona solo se la proprietà
-                 * è una chiave univoca all'interno della lista altrimenti ciccia
+                 * Il problema ï¿½ che questa cosa funziona solo se la proprietï¿½
+                 * ï¿½ una chiave univoca all'interno della lista altrimenti ciccia
                  * e direi che mi sembra un comportamento corretto
                  * 
                  * Non ha inoltre senso supportare l'eventuale cambiamento
-                 * di valore delle chiavi perchè se così fosse non sarebbe
+                 * di valore delle chiavi perchï¿½ se cosï¿½ fosse non sarebbe
                  * una chiave...
                  */
                 index.Add(property.GetValue(oiv.EntityItem), oiv);
@@ -353,7 +351,7 @@ namespace Radical.Model
             if (propertiesIndexes.ContainsKey(property.Name))
             {
                 /*
-                 * Se la proprietà è indicizzata facciamo fare all'indice
+                 * Se la proprietï¿½ ï¿½ indicizzata facciamo fare all'indice
                  */
                 Dictionary<object, IEntityItemView<T>> propertyIndex = propertiesIndexes[property.Name];
                 if (propertyIndex.ContainsKey(key))
@@ -368,7 +366,7 @@ namespace Radical.Model
                  * Altrimenti ci tocca scorrere tutta la lista,
                  * recuperare via reflection il valore e confrontarlo
                  * 
-                 * Utilizziamo Object.Equals() e non == perchè se i tipi sono
+                 * Utilizziamo Object.Equals() e non == perchï¿½ se i tipi sono
                  * ValueType vengono boxati e == confronterebe le reference
                  */
                 var item = this.Where(element => Equals(property.GetValue(element.EntityItem), key)).FirstOrDefault();
@@ -425,14 +423,14 @@ namespace Radical.Model
                 storage.ForEach(element => { view.OnUnwireEntityItemView(element); });
 
                 /*
-                 * Dato che è possibile che ci siano elementi nuovi
+                 * Dato che ï¿½ possibile che ci siano elementi nuovi
                  * non ancora inseriti nella DataSource sottostante
                  * dobbiamo tenerne traccia prima di rimuovere tutti
                  * gli elementi presenti, quindi aggiungiamo gli elementi
                  * non presenti nella DataSource sottostante ad una cache 
                  * temporanea. Gli elementi non presenti sono quelli che
                  * nel defaultIndex hanno un Value pari a -1
-                 * Il "ToList()" è necessario per scatenare subito il deferred
+                 * Il "ToList()" ï¿½ necessario per scatenare subito il deferred
                  * loading altrimenti ci perdiamo i pezzi per strada con la clear.
                  */
                 pendingAddElements = defaultIndex.Where(element => element.Value == -1).AsReadOnly();
@@ -446,9 +444,9 @@ namespace Radical.Model
             /*
              * Creiamo una lista, di tuple (Anonymous Type), che tiene traccia
              * di tutti gli elementi nella DataSource che devono essere reinsiriti e del
-             * loro indice relativo alla DataSource, se un elemento è in stato
-             * PendingAdd non sarà ancora presente nella DataSource quindi correttamente
-             * verrà aggiunto con Value a -1
+             * loro indice relativo alla DataSource, se un elemento ï¿½ in stato
+             * PendingAdd non sarï¿½ ancora presente nella DataSource quindi correttamente
+             * verrï¿½ aggiunto con Value a -1
              */
             var sourceElements = ((IEnumerable<T>)view.DataSource)
                 .Where(element => view.Filter.ShouldInclude(element))
@@ -490,7 +488,7 @@ namespace Radical.Model
             if (propertiesIndexes.Count > 0)
             {
                 /*
-                 * Ci sono proprietà indicizzate
+                 * Ci sono proprietï¿½ indicizzate
                  * dobbiamo ricostruire anche questi
                  * indici
                  */
@@ -498,7 +496,7 @@ namespace Radical.Model
                 {
                     /*
                      * Ricostruiamo il PropertyDescriptor
-                     * e reindicizziamo la proprietà
+                     * e reindicizziamo la proprietï¿½
                      */
                     PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(T)).Find(index.Key, false);
                     IndexProperty(property, index.Value);
@@ -527,8 +525,8 @@ namespace Radical.Model
         {
             /*
              * Dobbiamo rimuovere il sort e riportarlo allo stato 
-             * orginale che è quello della DataSource, l'unica nota
-             * è che l'Indice potrebbe essere "filtrato"
+             * orginale che ï¿½ quello della DataSource, l'unica nota
+             * ï¿½ che l'Indice potrebbe essere "filtrato"
              */
             var comparer = new DefaultEntityItemViewSortComparer<T>(view.DataSource);
             storage.Sort(comparer);

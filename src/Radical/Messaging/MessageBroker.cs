@@ -440,6 +440,11 @@ namespace Radical.Messaging
             }
         }
 
+        /// <summary>
+        /// Dispatches the specified message from the given sender to all relevant subscribers.
+        /// </summary>
+        /// <param name="sender">The object sending the message.</param>
+        /// <param name="message">The message to dispatch.</param>
         public void Dispatch(object sender, object message)
         {
             Ensure.That(sender).Named(() => sender).IsNotNull();
@@ -508,6 +513,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous broadcast operation.</returns>
         public Task BroadcastAsync(object sender, object message)
         {
             Ensure.That(message).Named(() => message).IsNotNull();

@@ -12,6 +12,7 @@ namespace Radical
         /// Calls FCL Enum.IsDefined and if the result is false throws
         /// an ArgumentException.
         /// </summary>
+        /// <param name="value">The enumeration value to check.</param>
         /// <exception cref="ArgumentException">If FCL Enum.IsDefined returns false</exception>
         public static void EnsureIsDefined(this Enum value)
         {
@@ -25,6 +26,8 @@ namespace Radical
         /// <summary>
         /// Calls FCL Enum.IsDefined and returns the result.
         /// </summary>
+        /// <param name="value">The enumeration value to check.</param>
+        /// <returns><c>true</c> if the value is defined in its enumeration type; otherwise, <c>false</c>.</returns>
         public static bool IsDefined(this Enum value)
         {
             var enumType = value.GetType();

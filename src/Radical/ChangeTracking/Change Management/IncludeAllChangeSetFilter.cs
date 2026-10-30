@@ -26,7 +26,7 @@
         /// included in the built IChangeSet.
         /// </summary>
         /// <param name="change">The change to evaluate.</param>
-        /// <returns></returns>
+        /// <returns>Always <c>true</c>: all the changes are included.</returns>
         public bool ShouldInclude(IChange change)
         {
             Ensure.That(change).Named("change").IsNotNull();

@@ -82,8 +82,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// Gets the name that can be displayed in a window, such as a Properties window.
         /// </summary>
-        /// <value></value>
-        /// <returns>The name to display for the member.</returns>
+        /// <value>The name to display for the member.</value>
         public override string DisplayName
         {
             get
@@ -95,17 +94,8 @@ namespace Radical.ComponentModel
         /// <summary>
         /// When overridden in a derived class, gets the type of the component this property is bound to.
         /// </summary>
-        /// <value></value>
-        /// <returns>A <see>
-        ///         <cref>T:System.Type</cref>
-        ///     </see>
-        ///     that represents the type of component this property is bound to. When the <see>
-        ///         <cref>M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)</cref>
-        ///     </see>
-        ///     or <see>
-        ///         <cref>M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)</cref>
-        ///     </see>
-        ///     methods are invoked, the object specified might be an instance of this type.</returns>
+        /// <value>A <see cref="System.Type"/> that represents the type of component this property is bound to. When the <see cref="System.ComponentModel.PropertyDescriptor.GetValue(object)"/>
+        /// or <see cref="System.ComponentModel.PropertyDescriptor.SetValue(object, object)"/> methods are invoked, the object specified might be an instance of this type.</value>
         public override Type ComponentType
         {
             get { return typeof(IEntityItemView<T>); }
@@ -114,11 +104,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// When overridden in a derived class, gets the type of the property.
         /// </summary>
-        /// <value></value>
-        /// <returns>A <see>
-        ///         <cref>T:System.Type</cref>
-        ///     </see>
-        ///     that represents the type of the property.</returns>
+        /// <value>A <see cref="System.Type"/> that represents the type of the property.</value>
         public override Type PropertyType
         {
             get { return Property.PropertyType; }
@@ -127,8 +113,7 @@ namespace Radical.ComponentModel
         /// <summary>
         /// When overridden in a derived class, gets a value indicating whether this property is read-only.
         /// </summary>
-        /// <value></value>
-        /// <returns>true if the property is read-only; otherwise, false.</returns>
+        /// <value>true if the property is read-only; otherwise, false.</value>
         public override bool IsReadOnly
         {
             get { return !Property.CanWrite; }

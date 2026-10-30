@@ -30,8 +30,14 @@ namespace Radical.ComponentModel.ChangeTracking
         /// </summary>
         event EventHandler ChangesRejected;
 
+        /// <summary>
+        /// Occurs before changes are accepted, allowing the operation to be cancelled.
+        /// </summary>
         event EventHandler<CancelEventArgs> AcceptingChanges;
 
+        /// <summary>
+        /// Occurs before changes are rejected, allowing the operation to be cancelled.
+        /// </summary>
         event EventHandler<CancelEventArgs> RejectingChanges;
 
         /// <summary>
@@ -146,7 +152,7 @@ namespace Radical.ComponentModel.ChangeTracking
         /// Gets all the changes currently held by
         /// this IChangeTrackingService
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An <see cref="IChangeSet"/> containing all the changes.</returns>
         IChangeSet GetChangeSet();
 
         /// <summary>
@@ -155,7 +161,7 @@ namespace Radical.ComponentModel.ChangeTracking
         /// supplied IChangeSetBuilder.
         /// </summary>
         /// <param name="filter">The IChangeSetBuilder.</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="IChangeSet"/> containing the changes accepted by the supplied <paramref name="filter"/>.</returns>
         IChangeSet GetChangeSet(IChangeSetFilter filter);
 
         /// <summary>

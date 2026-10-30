@@ -5,6 +5,10 @@ namespace Radical.Model
     using System.Collections.Generic;
     using System.ComponentModel;
 
+    /// <summary>
+    /// Provides a comparer for <see cref="IEntityItemView{T}"/> instances based on one or more <see cref="ListSortDescription"/> criteria.
+    /// </summary>
+    /// <typeparam name="T">The type of the underlying entity item.</typeparam>
     public class EntityItemViewSortComparer<T> : IComparer<IEntityItemView<T>>
     //where T : class
     {
@@ -75,10 +79,10 @@ namespace Radical.Model
              * i ListSortDescription...
              * 
              * Diventa necessario confrontare i criteri successivi
-             * solo se il precedente non ha dato risultati utili, cioè
+             * solo se il precedente non ha dato risultati utili, cioï¿½
              * i due valori confrontati sono uguali...
              * 
-             * Il classico esempio è Cognome ASC, Nome DESC confronto i 
+             * Il classico esempio ï¿½ Cognome ASC, Nome DESC confronto i 
              * nomi solo se i Cognomi sono uguali
              */
             int retVal = 0;

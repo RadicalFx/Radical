@@ -152,10 +152,11 @@ namespace Radical.Validation
         {
             var fullErrorMessage = string.Format
             (
+                System.Globalization.CultureInfo.InvariantCulture,
                 fullErrorMessageFormat,
                 Environment.NewLine,
                 si.ClassName,
-                si.SourceType.ToString().ToLower(),
+                si.SourceType.ToString().ToLower(System.Globalization.CultureInfo.InvariantCulture),
                 si.MethodName,
                 UserErrorMessage ?? "--",
                 validatorSpecificMessage,
@@ -183,7 +184,7 @@ namespace Radical.Validation
             get { return inspectedObject; }
         }
 
-        bool state = false;
+        bool state;
 
         /// <summary>
         /// Execute the given predicate and saves the result for later usage.
@@ -265,6 +266,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied predicate returns true.
         /// </summary>
+        /// <param name="func">The predicate to evaluate.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
@@ -280,6 +282,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied predicate returns false.
         /// </summary>
+        /// <param name="func">The predicate to evaluate.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
@@ -295,6 +298,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied object is equal to the currently inspected object.
         /// </summary>
+        /// <param name="value">The value to compare with.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
@@ -312,6 +316,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied object is not equal to the currently inspected object.
         /// </summary>
+        /// <param name="value">The value to compare with.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>

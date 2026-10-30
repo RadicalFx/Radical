@@ -17,7 +17,7 @@ namespace Radical.Model
         Entity,
         IMemento
     {
-        bool isDisposed = false;
+        bool isDisposed;
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -144,16 +144,17 @@ namespace Radical.Model
         /// <summary>
         /// Sets the initial property value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The value.</param>
         /// <param name="trackChanges">The track changes.</param>
-        /// <returns>
+        /// <returns>The property meta-data.</returns>
+        /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
-        /// </returns>
+        /// </remarks>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, T value, bool trackChanges)
         {
             return SetInitialPropertyValue<T>(property.GetMemberName(), value, trackChanges);
@@ -162,16 +163,17 @@ namespace Radical.Model
         /// <summary>
         /// Sets the initial property value, using a lazily evaluated value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="lazyValue">The lazy value.</param>
         /// <param name="trackChanges">The track changes.</param>
-        /// <returns>
+        /// <returns>The property meta-data.</returns>
+        /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
-        /// </returns>
+        /// </remarks>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges)
         {
             var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, lazyValue);
@@ -184,16 +186,17 @@ namespace Radical.Model
         /// <summary>
         /// Sets the initial property value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The value.</param>
         /// <param name="trackChanges">The track changes.</param>
-        /// <returns>
+        /// <returns>The property meta-data.</returns>
+        /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
-        /// </returns>
+        /// </remarks>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges)
         {
             var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, value);
@@ -203,6 +206,14 @@ namespace Radical.Model
             return metadata;
         }
 
+        /// <summary>
+        /// Sets the value of the specified property by name. When change tracking is active for
+        /// the property, caches the previous value in the change tracking service before updating.
+        /// </summary>
+        /// <typeparam name="T">The type of the property value.</typeparam>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="data">The new property value.</param>
+        /// <param name="pvc">A callback invoked when the property value changes.</param>
         protected override void SetPropertyValue<T>(string propertyName, T data, PropertyValueChanged<T> pvc)
         {
             base.SetPropertyValue<T>(propertyName, data, e =>
@@ -294,6 +305,7 @@ namespace Radical.Model
         /// <summary>
         /// Called in order to register this instance as transient.
         /// </summary>
+        /// <param name="transientRegistration">The transient registration behavior.</param>
         protected virtual void OnRegisterTransient(TransientRegistration transientRegistration)
         {
             var autoRemove = transientRegistration == TransientRegistration.AsTransparent;
@@ -393,6 +405,17 @@ namespace Radical.Model
             return null;
         }
 
+        /// <summary>
+        /// Caches a change in the active change tracking service during a reject callback, routing
+        /// it appropriately based on the reject reason (undo, redo, or silent revert).
+        /// </summary>
+        /// <typeparam name="T">The system type of the property value being tracked.</typeparam>
+        /// <param name="propertyName">The name of the property whose change is being cached.</param>
+        /// <param name="value">The value to cache.</param>
+        /// <param name="rejectCallback">The callback to invoke when the cached change is rejected.</param>
+        /// <param name="commitCallback">The callback to invoke when the cached change is committed.</param>
+        /// <param name="args">The event arguments describing why the change is being rejected.</param>
+        /// <returns>A reference to the cached change, or <c>null</c> if the change was not cached.</returns>
         protected virtual IChange CacheChangeOnRejectCallback<T>(string propertyName, T value, RejectCallback<T> rejectCallback, CommitCallback<T> commitCallback, ChangeRejectedEventArgs<T> args)
         {
             EnsureNotDisposed();

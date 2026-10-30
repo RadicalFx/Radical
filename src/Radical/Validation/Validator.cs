@@ -86,6 +86,7 @@ namespace Radical.Validation
         /// </summary>
         /// <param name="property">The property to validate.</param>
         /// <param name="rule">The callback executed to run the rule.</param>
+        /// <returns>The validator instance, for fluent configuration.</returns>
         public Validator<T> AddRule(Expression<Func<T, object>> property, Func<ValidationContext<T>, ValidationResult> rule)
         {
             rules.Add(new ValidationRule<T> 

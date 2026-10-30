@@ -9,6 +9,7 @@ namespace Radical.ChangeTracking
     /// <summary>
     /// Represents a change occurred to an object.
     /// </summary>
+    /// <typeparam name="T">The type of the object that owns the change.</typeparam>
     public abstract class Change<T> : IChange<T>
     {
         /// <summary>
@@ -53,6 +54,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Commits this change.
         /// </summary>
+        /// <param name="reason">The reason of the commit.</param>
         public void Commit(CommitReason reason)
         {
             reason.EnsureIsDefined();
@@ -68,6 +70,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Called in order to commit this change.
         /// </summary>
+        /// <param name="reason">The reason of the commit.</param>
         protected virtual void OnCommit(CommitReason reason)
         {
             if (CommitCallback != null)
@@ -85,6 +88,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Called when Committed event.
         /// </summary>
+        /// <param name="args">The <see cref="CommittedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCommitted(CommittedEventArgs args)
         {
             Committed?.Invoke(this, args);
@@ -93,6 +97,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Rejects this change.
         /// </summary>
+        /// <param name="reason">The reason of the rejection.</param>
         public void Reject(RejectReason reason)
         {
             reason.EnsureIsDefined();
@@ -108,6 +113,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Called in order to reject this change.
         /// </summary>
+        /// <param name="reason">The reason of the rejection.</param>
         protected virtual void OnReject(RejectReason reason)
         {
             ChangeRejectedEventArgs<T> args = new ChangeRejectedEventArgs<T>(Owner, CachedValue, this, reason);
@@ -122,6 +128,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Raises the Rejected event.
         /// </summary>
+        /// <param name="args">The <see cref="RejectedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnRejected(RejectedEventArgs args)
         {
             Rejected?.Invoke(this, args);
@@ -147,13 +154,14 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Gets the advised action for this IChange.
         /// </summary>
-        /// <value>The advised action.</value>
+        /// <param name="changedItem">The item to get the advised action for.</param>
+        /// <returns>The advised action.</returns>
         public abstract ProposedActions GetAdvisedAction(object changedItem);
 
         /// <summary>
         /// Gets the changed entities.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A read-only list containing the owner of this change.</returns>
         public virtual IEnumerable<object> GetChangedEntities()
         {
             return new ReadOnlyCollection<object>(new List<object> { Owner });

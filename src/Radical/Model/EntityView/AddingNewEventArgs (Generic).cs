@@ -2,6 +2,10 @@ using System.ComponentModel;
 
 namespace Radical.Model
 {
+    /// <summary>
+    /// Provides data for the AddingNew event on an entity view.
+    /// </summary>
+    /// <typeparam name="T">The type of item being added.</typeparam>
     public class AddingNewEventArgs<T> : CancelEventArgs
     {
         /// <summary>

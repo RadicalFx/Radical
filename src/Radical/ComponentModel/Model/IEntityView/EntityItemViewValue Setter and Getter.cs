@@ -3,16 +3,24 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Delegate used to get property value
     /// </summary>
+    /// <typeparam name="T">The type of the object wrapped by the entity item view.</typeparam>
+    /// <typeparam name="TValue">The type of the property value.</typeparam>
+    /// <param name="args">The arguments describing the value to get.</param>
+    /// <returns>The value of the property.</returns>
     public delegate object EntityItemViewValueGetter<T, TValue>(EntityItemViewValueGetterArgs<T, TValue> args);
 
     /// <summary>
     /// Delegate used to set property value
     /// </summary>
+    /// <typeparam name="T">The type of the object wrapped by the entity item view.</typeparam>
+    /// <typeparam name="TValue">The type of the property value.</typeparam>
+    /// <param name="args">The arguments describing the value to set.</param>
     public delegate void EntityItemViewValueSetter<T, TValue>(EntityItemViewValueSetterArgs<T, TValue> args);
 
     /// <summary>
     /// Base class for argument for an EntityItemViewValueGetter or EntityItemViewValueSetter
     /// </summary>
+    /// <typeparam name="T">The type of the object wrapped by the entity item view.</typeparam>
     public abstract class EntityItemViewValueArgs<T>
     {
         /// <summary>
@@ -40,6 +48,8 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Argument for an EntityItemViewValueGetter
     /// </summary>
+    /// <typeparam name="T">The type of the object wrapped by the entity item view.</typeparam>
+    /// <typeparam name="TValue">The type of the property value.</typeparam>
     public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
         /// <summary>
@@ -57,6 +67,8 @@ namespace Radical.ComponentModel
     /// <summary>
     /// Argument for an EntityItemViewValueSetter
     /// </summary>
+    /// <typeparam name="T">The type of the object wrapped by the entity item view.</typeparam>
+    /// <typeparam name="TValue">The type of the property value.</typeparam>
     public class EntityItemViewValueSetterArgs<T, TValue> : EntityItemViewValueArgs<T>
     {
         /// <summary>

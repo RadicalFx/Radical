@@ -124,6 +124,11 @@ namespace Radical.Model
         }
 
 
+        /// <summary>
+        /// Creates an <see cref="IEntityItemView{T}"/> wrapper for the specified source item.
+        /// </summary>
+        /// <param name="sourceItem">The source entity item to wrap.</param>
+        /// <returns>A new <see cref="IEntityItemView{T}"/> wrapping the source item.</returns>
         protected internal virtual IEntityItemView<T> CreateEntityItemView(T sourceItem)
         {
             return new EntityItemView<T>(this, sourceItem);
@@ -188,9 +193,9 @@ namespace Radical.Model
                         {
                             /*
                              * Se i due indici, prima e dopo il Rebuild sono diversi
-                             * significa che la posizione dell'elemento è cambiata a seguito
-                             * della modifica che ha subito, molto presumibilmente questo è
-                             * dovuto al fatto che la View è sortata quindi informiamo dello
+                             * significa che la posizione dell'elemento ï¿½ cambiata a seguito
+                             * della modifica che ha subito, molto presumibilmente questo ï¿½
+                             * dovuto al fatto che la View ï¿½ sortata quindi informiamo dello
                              * spostamento
                              */
                             OnListChanged(new ListChangedEventArgs(ListChangedType.ItemMoved, newIndex, oldIndex));
@@ -204,7 +209,7 @@ namespace Radical.Model
                     else
                     {
                         /*
-                         * L'introduzione di ItemRemoved non dovrebbe più portare qui...
+                         * L'introduzione di ItemRemoved non dovrebbe piï¿½ portare qui...
                          */
                         Debug.Fail("...CollectionChangeType.ItemChanged and newIndex = -1...");
                         //OnListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, oldIndex));
@@ -222,16 +227,16 @@ namespace Radical.Model
                      * (nella View) dell'elemento rimosso per farlo sparire anche a
                      * video.
                      * 
-                     * Questa informazione non c'è... perchè a questo punto l'elemento
-                     * è già stato rimosso e l'Indexer non è in grado di dirci dove stava.
+                     * Questa informazione non c'ï¿½... perchï¿½ a questo punto l'elemento
+                     * ï¿½ giï¿½ stato rimosso e l'Indexer non ï¿½ in grado di dirci dove stava.
                      * 
-                     * L'unica soluzione che mi viene in mente è che l'Indexer abbia un indice
+                     * L'unica soluzione che mi viene in mente ï¿½ che l'Indexer abbia un indice
                      * che tiene traccia degli indici: Dictionary<int, int> con 
                      * SourceIndex --> ViewIndex
                      * 
-                     * Un'altra possibile soluzione è che tra gli arguments ci sia anche un riferimento
+                     * Un'altra possibile soluzione ï¿½ che tra gli arguments ci sia anche un riferimento
                      * all'elemento rimosso, in questo modo lo potremmo cercare nella View, perderemmo in
-                     * performance ma sarebbe più semplice
+                     * performance ma sarebbe piï¿½ semplice
                      */
                     oldIndex = Indexer.IndexOf((T)e.Item);
                     ClearCustomValuesFor(e.Item);
@@ -340,13 +345,13 @@ namespace Radical.Model
         //void OnEntityItemViewDeleted( object sender, DeletedEventArgs e )
         //{
         //    /*
-        //     * Questo è l'elemento che è stato cancellato
+        //     * Questo ï¿½ l'elemento che ï¿½ stato cancellato
         //     */
         //    T item = ( T )sender;
 
         //    /*
         //     * Ci assicuriamo che il contesto sia quello giusto,
-        //     * non vedo perchè non dovrebbe ma un controllo in più
+        //     * non vedo perchï¿½ non dovrebbe ma un controllo in piï¿½
         //     * non fa male... :-)
         //     */
         //    if( this.IsInAddingNewQueue( item ) )
@@ -359,13 +364,13 @@ namespace Radical.Model
         //void OnEntityItemViewSaved( object sender, SavedEventArgs e )
         //{
         //    /*
-        //     * Questo è l'elemento che è stato salvato
+        //     * Questo ï¿½ l'elemento che ï¿½ stato salvato
         //     */
         //    T item = ( T )sender;
 
         //    /*
         //     * Ci assicuriamo che il contesto sia quello giusto,
-        //     * non vedo perchè non dovrebbe ma un controllo in più
+        //     * non vedo perchï¿½ non dovrebbe ma un controllo in piï¿½
         //     * non fa male... :-)
         //     */
         //    if( this.IsInAddingNewQueue( item ) )
@@ -384,8 +389,8 @@ namespace Radical.Model
             {
                 /*
                  * Scateniamo l'evento solo nel caso in cui l'item che sta comunicando una
-                 * modifica sia presente nella View, potrebbe non esserci perchè in quel 
-                 * momento la View è filtrata. In realtà non è vero perchè se è filtrata non
+                 * modifica sia presente nella View, potrebbe non esserci perchï¿½ in quel 
+                 * momento la View ï¿½ filtrata. In realtï¿½ non ï¿½ vero perchï¿½ se ï¿½ filtrata non
                  * dovrebbe esistere neanche l'EntityItemView
                  */
                 OnListChanged(new ListChangedEventArgs(ListChangedType.ItemChanged, index));
@@ -424,26 +429,26 @@ namespace Radical.Model
              * Al termine dell'edit di un elemento abbiamo un problema che 
              * non siamo in grado di risolvere in autonomia:
              * 
-             * Se la View è filtrata o sortata in qualche modo collection'è la possibilità che
+             * Se la View ï¿½ filtrata o sortata in qualche modo collection'ï¿½ la possibilitï¿½ che
              * l'elemento di cui abbiamo appena finito l'editing si sposti dalla sua 
              * posizione, a causa del sort, o addirittura scompaia a causa del filtro:
-             * un esempio classico è la classica Person con una proprietà Name, se la View
-             * è sortata e cambio il Name la posizione dell'istanza all'interno della view
+             * un esempio classico ï¿½ la classica Person con una proprietï¿½ Name, se la View
+             * ï¿½ sortata e cambio il Name la posizione dell'istanza all'interno della view
              * potrebbe dover essere cambiata, stessa cosa per il filtro se sto visualizzando
              * le sole Person il cui nome inizia per "M*" cmabiando il nome di una person
-             * non è detto che questa debba restare tra quelle visibili.
+             * non ï¿½ detto che questa debba restare tra quelle visibili.
              * 
-             * Anche se tutto ciò concettualmente è giusto resta il problema che la variazione 
-             * di visibilità o posizione potrebbe essere "mal digerita" dall'utente diamo quindi
-             * la possibilità alla classe derivata di decidere se riapplicare filtro e sort a seguito
+             * Anche se tutto ciï¿½ concettualmente ï¿½ giusto resta il problema che la variazione 
+             * di visibilitï¿½ o posizione potrebbe essere "mal digerita" dall'utente diamo quindi
+             * la possibilitï¿½ alla classe derivata di decidere se riapplicare filtro e sort a seguito
              * di una modifica ad un elemento.
              * 
-             * Il comportamento è: riapplicare sempre.
+             * Il comportamento ï¿½: riapplicare sempre.
              */
             IEntityItemView<T> item = (IEntityItemView<T>)sender;
 
             /*
-             * Dobbiamo sapere se l'elemento è visibile 
+             * Dobbiamo sapere se l'elemento ï¿½ visibile 
              * o meno a seconda del filtro corrente, recuperiamo
              * quindi l'indice dell'elemento prima di applicare
              * il filtro
@@ -452,7 +457,7 @@ namespace Radical.Model
 
             /*
              * Costruiamo un bel RebuildIndexesEventArgs e lo passiamo 
-             * all'eventuale classe derivata che avrà la possibilità di
+             * all'eventuale classe derivata che avrï¿½ la possibilitï¿½ di
              * bloccare il Rebuild
              */
             RebuildIndexesEventArgs args = new RebuildIndexesEventArgs(preFilterIndex);
@@ -468,10 +473,10 @@ namespace Radical.Model
 
             /*
              * Recuperiamo l'indice dopo aver applicato il filtro
-             * se il valore è -1 significa che è stato escluso dal 
+             * se il valore ï¿½ -1 significa che ï¿½ stato escluso dal 
              * filtro corrente, adesso siamo obbligati ad usare EntityItem
-             * perchè se gli Indici sono stati ricreati l'istanza (sender)
-             * che abbiamo di IEntityItemView non esisterà di certo più
+             * perchï¿½ se gli Indici sono stati ricreati l'istanza (sender)
+             * che abbiamo di IEntityItemView non esisterï¿½ di certo piï¿½
              */
             int postFilterIndex = Indexer.IndexOf(item.EntityItem);
 
@@ -538,7 +543,7 @@ namespace Radical.Model
         {
             /*
              * Non ha nessun senso "spostare" elementi su un qualcosa 
-             * che è sortato perchè dato che dopo la Move gli indici 
+             * che ï¿½ sortato perchï¿½ dato che dopo la Move gli indici 
              * vengono ricostruiti gli elementi restano, per l'utente,
              * nella stessa identica posizione....
              */
@@ -557,9 +562,9 @@ namespace Radical.Model
                 .Then((val) => { throw new ArgumentOutOfRangeException(); });
 
             /*
-             * Se la view non è sorted/filterd gli indici coincidono
+             * Se la view non ï¿½ sorted/filterd gli indici coincidono
              * con quelli della data source altrimenti no, quindi in
-             * tutti i casi la prima operazione è quella di recuperare
+             * tutti i casi la prima operazione ï¿½ quella di recuperare
              * gli indici dei rispettivi item nella data source e poi
              * delegare a lei.
              */
@@ -570,7 +575,7 @@ namespace Radical.Model
             if (entityCollection != null)
             {
                 /*
-                 * Se è una IEntityCollection<T> usiamo Move così l'eventuale
+                 * Se ï¿½ una IEntityCollection<T> usiamo Move cosï¿½ l'eventuale
                  * motore di tracking traccia una singola operazione atomica
                  */
                 entityCollection.Move(sourceIndexInDataSource, destinationIndexInDataSource);
@@ -617,7 +622,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the data source supports filtering.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the data source supports filtering; otherwise, false. </returns>
         bool IBindingListView.SupportsFiltering
         {
@@ -627,7 +631,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the filter to be used to exclude items from the collection of items returned by the data source
         /// </summary>
-        /// <item></item>
         /// <returns>The string used to filter items out in the item collection returned by the data source. </returns>
         string IBindingListView.Filter
         {
@@ -667,6 +670,10 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Applies a filter to the view using the specified predicate, or clears the filter if <paramref name="predicate"/> is <c>null</c>.
+        /// </summary>
+        /// <param name="predicate">The predicate to use for filtering, or <c>null</c> to remove the current filter.</param>
         public void ApplyFilter(Predicate<T> predicate)
         {
             if (predicate == null)
@@ -687,10 +694,9 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the filter to be used to exclude items from the collection of items returned by the data source
         /// </summary>
-        /// <value></value>
-        /// <returns>
+        /// <value>
         /// The string used to filter items out in the item collection returned by the data source.
-        /// </returns>
+        /// </value>
         public IEntityItemViewFilter<T> Filter
         {
             get
@@ -698,7 +704,7 @@ namespace Radical.Model
                 if (_filter == null)
                 {
                     /*
-                     * Se il filtro è null impostiamo un bel "ViewAll"
+                     * Se il filtro ï¿½ null impostiamo un bel "ViewAll"
                      */
                     _filter = (IEntityItemViewFilter<T>)ViewAllEntityItemViewFilter<T>.Instance;
                 }
@@ -710,7 +716,7 @@ namespace Radical.Model
                 if (value == null)
                 {
                     /*
-                     * Se il filtro è null impostiamo un bel "ViewAll"
+                     * Se il filtro ï¿½ null impostiamo un bel "ViewAll"
                      */
                     value = (IEntityItemViewFilter<T>)ViewAllEntityItemViewFilter<T>.Instance;
                 }
@@ -724,7 +730,7 @@ namespace Radical.Model
                      *      da applicare le modifiche
                      *    - comunichiamo al mondo sia il reset della lista
                      *      che un evento custom che informa che il filtro
-                     *      è cambiato
+                     *      ï¿½ cambiato
                      */
                     _filter = value;
 
@@ -842,7 +848,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether the list supports sorting.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the list supports sorting; otherwise, false.</returns>
         bool IBindingList.SupportsSorting
         {
@@ -852,7 +857,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the data source supports advanced sorting.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the data source supports advanced sorting; otherwise, false. </returns>
         bool IBindingListView.SupportsAdvancedSorting
         {
@@ -860,12 +864,12 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Sorts the list based on a <see cref="T:System.ComponentModel.PropertyDescriptor"/> and a <see cref="T:System.ComponentModel.ListSortDirection"/>.
+        /// Sorts the list based on a <see cref="System.ComponentModel.PropertyDescriptor"/> and a <see cref="System.ComponentModel.ListSortDirection"/>.
         /// </summary>
-        /// <param name="property">The <see cref="T:System.ComponentModel.PropertyDescriptor"/> to sort by.</param>
-        /// <param name="direction">One of the <see cref="T:System.ComponentModel.ListSortDirection"/> values.</param>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        /// <param name="property">The <see cref="System.ComponentModel.PropertyDescriptor"/> to sort by.</param>
+        /// <param name="direction">One of the <see cref="System.ComponentModel.ListSortDirection"/> values.</param>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public void ApplySort(PropertyDescriptor property, ListSortDirection direction)
         {
             ListSortDescription[] sorts = new ListSortDescription[] {new ListSortDescription(property, direction)};
@@ -873,9 +877,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Sorts the data source based on the given <see cref="T:System.ComponentModel.ListSortDescriptionCollection"/>.
+        /// Sorts the data source based on the given <see cref="System.ComponentModel.ListSortDescriptionCollection"/>.
         /// </summary>
-        /// <param name="sorts">The <see cref="T:System.ComponentModel.ListSortDescriptionCollection"/> containing the sorts to apply to the data source.</param>
+        /// <param name="sorts">The <see cref="System.ComponentModel.ListSortDescriptionCollection"/> containing the sorts to apply to the data source.</param>
         public void ApplySort(ListSortDescriptionCollection sorts)
         {
             //this.SortDescriptions = sorts;
@@ -888,7 +892,7 @@ namespace Radical.Model
 
             /*
              * Le SortDescriptions sono cambiate quindi l'eventuale SortComparer attuale
-             * non va più bene, lo impostiamo a null in questo modo quando l'Indexer 
+             * non va piï¿½ bene, lo impostiamo a null in questo modo quando l'Indexer 
              * riapplica il sort e chiede alla View il SortComparer ne viene creato uno nuovo
              */
             _sortComparer = null;
@@ -928,7 +932,7 @@ namespace Radical.Model
                 for (var i = 0; i < sorts.Length; i++)
                 {
                     /*
-                     * Estrae la proprietà per cui sortare, 
+                     * Estrae la proprietï¿½ per cui sortare, 
                      * eventualmente seguita dalla direzione
                      * */
                     sort = sorts[i].Trim();
@@ -946,7 +950,7 @@ namespace Radical.Model
                     else
                     {
                         /*
-                         * Il nome è tutto ciò che c'è 
+                         * Il nome ï¿½ tutto ciï¿½ che c'ï¿½ 
                          * prima dello spazio
                          */
                         name = sort.Substring(0, pos);
@@ -962,7 +966,7 @@ namespace Radical.Model
                     }
 
                     /*
-                     * Cerchiamo di ricavre la proprietà che 
+                     * Cerchiamo di ricavre la proprietï¿½ che 
                      * rappresentata dal nome passato
                      */
                     var property = new EntityItemViewPropertyDescriptor<T>(typeof(T).GetProperty(name));
@@ -977,6 +981,10 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Applies a sort to the view using the specified comparer.
+        /// </summary>
+        /// <param name="comparer">The comparer to use for sorting the view items.</param>
         public void ApplySort(IComparer<IEntityItemView<T>> comparer)
         {
             //this.SortDescriptions = null;
@@ -998,10 +1006,10 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes any sort applied using <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/>.
+        /// Removes any sort applied using <see cref="System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/>.
         /// </summary>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public void RemoveSort()
         {
             ApplySort(new ListSortDescriptionCollection());
@@ -1010,10 +1018,9 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether the items in the list are sorted.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if <see cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/> has been called and <see cref="M:System.ComponentModel.IBindingList.RemoveSort"/> has not been called; otherwise, false.</returns>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        /// <returns>true if <see cref="System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/> has been called and <see cref="System.ComponentModel.IBindingList.RemoveSort"/> has not been called; otherwise, false.</returns>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public bool IsSorted
         {
             get { return (SortDescriptions.Count > 0 || IsCustomComparer); }
@@ -1022,10 +1029,9 @@ namespace Radical.Model
         /// <summary>
         /// Gets the direction of the sort.
         /// </summary>
-        /// <item></item>
-        /// <returns>One of the <see cref="T:System.ComponentModel.ListSortDirection"/> values.</returns>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        /// <returns>One of the <see cref="System.ComponentModel.ListSortDirection"/> values.</returns>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public ListSortDirection SortDirection
         {
             get
@@ -1042,12 +1048,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets the <see cref="T:System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.
+        /// Gets the <see cref="System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.
         /// </summary>
-        /// <item></item>
-        /// <returns>The <see cref="T:System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.</returns>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
+        /// <returns>The <see cref="System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.</returns>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
         public PropertyDescriptor SortProperty
         {
             get
@@ -1068,8 +1073,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets the collection of sort descriptions currently applied to the data source.
         /// </summary>
-        /// <item></item>
-        /// <returns>The <see cref="T:System.ComponentModel.ListSortDescriptionCollection"/> currently applied to the data source.</returns>
+        /// <returns>The <see cref="System.ComponentModel.ListSortDescriptionCollection"/> currently applied to the data source.</returns>
         public ListSortDescriptionCollection SortDescriptions
         {
             get
@@ -1091,7 +1095,7 @@ namespace Radical.Model
 
             //    /*
             //     * Le SortDescriptions sono cambiate quindi l'eventuale SortComparer attuale
-            //     * non va più bene, lo impostiamo a null in questo modo quando l'Indexer 
+            //     * non va piï¿½ bene, lo impostiamo a null in questo modo quando l'Indexer 
             //     * riapplica il sort e chiede alla View il SortComparer ne viene creato uno nuovo
             //     */
             //    this._sortComparer = null;
@@ -1134,10 +1138,9 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Gets a item indicating whether the <see cref="T:System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> events.
+        /// Gets a item indicating whether the <see cref="System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="System.ComponentModel.IBindingList.ListChanged"/> events.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if the <see cref="T:System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> events when one of its property values changes; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="System.ComponentModel.IBindingList.ListChanged"/> events when one of its property values changes; otherwise, false.</returns>
         public bool RaisesItemChangedEvents
         {
             get { return true; }
@@ -1148,7 +1151,7 @@ namespace Radical.Model
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>
-        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// An <see cref="System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
         /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -1157,17 +1160,17 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+        /// Copies the elements of the <see cref="System.Collections.ICollection"/> to an <see cref="System.Array"/>, starting at a particular <see cref="System.Array"/> index.
         /// </summary>
-        /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+        /// <param name="array">The one-dimensional <see cref="System.Array"/> that is the destination of the elements copied from <see cref="System.Collections.ICollection"/>. The <see cref="System.Array"/> must have zero-based indexing.</param>
         /// <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-        /// <exception cref="T:System.ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         ///     <paramref name="array"/> is null. </exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// <exception cref="System.ArgumentOutOfRangeException">
         ///     <paramref name="index"/> is less than zero. </exception>
-        /// <exception cref="T:System.ArgumentException">
-        ///     <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
-        /// <exception cref="T:System.ArgumentException">The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
+        /// <exception cref="System.ArgumentException">
+        ///     <paramref name="array"/> is multidimensional.-or- <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.-or- The number of elements in the source <see cref="System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>. </exception>
+        /// <exception cref="System.ArgumentException">The type of the source <see cref="System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>. </exception>
         void ICollection.CopyTo(Array array, int index)
         {
             IEntityItemView<T>[] data = new IEntityItemView<T>[Indexer.Count];
@@ -1176,30 +1179,27 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets a item indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+        /// Gets a item indicating whether access to the <see cref="System.Collections.ICollection"/> is synchronized (thread safe).
         /// </summary>
-        /// <item></item>
-        /// <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
+        /// <returns>true if access to the <see cref="System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
         bool ICollection.IsSynchronized
         {
             get { return ((ICollection)DataSource).IsSynchronized; }
         }
 
         /// <summary>
-        /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+        /// Gets an object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.
         /// </summary>
-        /// <item></item>
-        /// <returns>An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.</returns>
+        /// <returns>An object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.</returns>
         object ICollection.SyncRoot
         {
             get { return ((ICollection)DataSource).SyncRoot; }
         }
 
         /// <summary>
-        /// Gets the number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
+        /// Gets the number of elements contained in the <see cref="System.Collections.ICollection"/>.
         /// </summary>
-        /// <item></item>
-        /// <returns>The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.</returns>
+        /// <returns>The number of elements contained in the <see cref="System.Collections.ICollection"/>.</returns>
         public int Count
         {
             get { return Indexer.Count; }
@@ -1207,13 +1207,13 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Adds an item to the <see cref="T:System.Collections.IList"/>.
+        /// Adds an item to the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to add to the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="value">The <see cref="System.Object"/> to add to the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
         /// The position into which the new element was inserted.
         /// </returns>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only.-or- The <see cref="System.Collections.IList"/> has a fixed size. </exception>
         int IList.Add(object value)
         {
             throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
@@ -1221,9 +1221,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes all items from the <see cref="T:System.Collections.IList"/>.
+        /// Removes all items from the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only. </exception>
         void IList.Clear()
         {
             throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
@@ -1231,11 +1231,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.IList"/> contains a specific item.
+        /// Determines whether the <see cref="System.Collections.IList"/> contains a specific item.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to locate in the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="value">The <see cref="System.Object"/> to locate in the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
-        /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
+        /// true if the <see cref="System.Object"/> is found in the <see cref="System.Collections.IList"/>; otherwise, false.
         /// </returns>
         bool IList.Contains(object value)
         {
@@ -1244,19 +1244,19 @@ namespace Radical.Model
             //WARN: implementazione di IndexOf e Contains probabilmente errata;
             /*
              * Dobbiamo prima capire come funziona la DataView e scrivere poi dei test
-             * L'inghippo è questo, da verificare se con la DataView non si verifica.
+             * L'inghippo ï¿½ questo, da verificare se con la DataView non si verifica.
              * Utilizzando il sistema per sincronizzare gli elementi selected di una
              * listview wpf con una collection nel ViewModel succede che la sincronia
-             * funziona solo dalla listview verso il vm e non viceversa, la cosa è evidente
-             * perchè non potendo aggiungere alla view degli elementi selezionati
-             * direttamente un EntityItemView l'unica cosa che possiamo fare è agire
+             * funziona solo dalla listview verso il vm e non viceversa, la cosa ï¿½ evidente
+             * perchï¿½ non potendo aggiungere alla view degli elementi selezionati
+             * direttamente un EntityItemView l'unica cosa che possiamo fare ï¿½ agire
              * sulla datasource ma questo comporta che i 2 entityitemview che wrappano
              * la datasource siano diversi, quando aggiungiamo l'elemento alla lista dei selected
              * da codice e sincronizziamocon la listview la listview viene qui e con in
-             * mano un'istanza dell'entityitemview ci chiede se lo conteniamo, è evidente
-             * che la risposta è no perchè quell'elemento sta nella lista dei selezionati
-             * e non nella lista degli itemsSource della lista, quello che invece è shared
-             * è la data source. In effetti, se spulciamo con reflector, sembra che la dataView
+             * mano un'istanza dell'entityitemview ci chiede se lo conteniamo, ï¿½ evidente
+             * che la risposta ï¿½ no perchï¿½ quell'elemento sta nella lista dei selezionati
+             * e non nella lista degli itemsSource della lista, quello che invece ï¿½ shared
+             * ï¿½ la data source. In effetti, se spulciamo con reflector, sembra che la dataView
              * faccia sempre il controllo sull'entity warppata e non sull'itemview...
              */
             var contains = false;
@@ -1282,9 +1282,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines the index of a specific item in the <see cref="T:System.Collections.IList"/>.
+        /// Determines the index of a specific item in the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="value">The <see cref="T:System.Object"/> to locate in the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="value">The <see cref="System.Object"/> to locate in the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
         /// The index of <paramref name="value"/> if found in the list; otherwise, -1.
         /// </returns>
@@ -1315,9 +1315,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines the index of a specific item in the <see cref="T:System.Collections.IList"/>.
+        /// Determines the index of a specific item in the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="item">The <see cref="T:System.Object"/> to locate in the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="item">The <see cref="System.Object"/> to locate in the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
         /// The index of <paramref name="item"/> if found in the list; otherwise, -1.
         /// </returns>
@@ -1338,9 +1338,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Determines the index of a specific item in the <see cref="T:System.Collections.IList"/>.
+        /// Determines the index of a specific item in the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="item">The <see cref="T:System.Object"/> to locate in the <see cref="T:System.Collections.IList"/>.</param>
+        /// <param name="item">The <see cref="System.Object"/> to locate in the <see cref="System.Collections.IList"/>.</param>
         /// <returns>
         /// The index of <paramref name="item"/> if found in the list; otherwise, -1.
         /// </returns>
@@ -1350,15 +1350,15 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Inserts an item to the <see cref="T:System.Collections.IList"/> at the specified index.
+        /// Inserts an item to the <see cref="System.Collections.IList"/> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
-        /// <param name="item">The <see cref="T:System.Object"/> to insert into the <see cref="T:System.Collections.IList"/>.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        ///     <paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        /// <exception cref="T:System.NullReferenceException">
-        ///     <paramref name="item"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
+        /// <param name="item">The <see cref="System.Object"/> to insert into the <see cref="System.Collections.IList"/>.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///     <paramref name="index"/> is not a valid index in the <see cref="System.Collections.IList"/>. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only.-or- The <see cref="System.Collections.IList"/> has a fixed size. </exception>
+        /// <exception cref="System.NullReferenceException">
+        ///     <paramref name="item"/> is null reference in the <see cref="System.Collections.IList"/>.</exception>
         void IList.Insert(int index, object item)
         {
             throw new ArgumentException(string.Format(CultureInfo.CurrentCulture,
@@ -1366,10 +1366,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets a item indicating whether the <see cref="T:System.Collections.IList"/> is read-only.
+        /// Gets a item indicating whether the <see cref="System.Collections.IList"/> is read-only.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if the <see cref="T:System.Collections.IList"/> is read-only; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.Collections.IList"/> is read-only; otherwise, false.</returns>
         bool IList.IsReadOnly
         {
             get
@@ -1386,20 +1385,19 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets a item indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
+        /// Gets a item indicating whether the <see cref="System.Collections.IList"/> has a fixed size.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
+        /// <returns>true if the <see cref="System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
         bool IList.IsFixedSize
         {
             get { return DataSource.IsFixedSize; }
         }
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList"/>.
+        /// Removes the first occurrence of a specific object from the <see cref="System.Collections.IList"/>.
         /// </summary>
-        /// <param name="item">The <see cref="T:System.Object"/> to remove from the <see cref="T:System.Collections.IList"/>.</param>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        /// <param name="item">The <see cref="System.Object"/> to remove from the <see cref="System.Collections.IList"/>.</param>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only.-or- The <see cref="System.Collections.IList"/> has a fixed size. </exception>
         void IList.Remove(object item)
         {
             IEntityItemView<T> eiv = item as IEntityItemView<T>;
@@ -1434,7 +1432,7 @@ namespace Radical.Model
              * E' stato rimosso un elemento di default la EntityView
              * (Data) farebbe il rebuild degli indici ma 
              * siccome in questo caso la DataSource supporta le notifiche 
-             * il rebuild viene già fatto a seguito degli eventi scatenati
+             * il rebuild viene giï¿½ fatto a seguito degli eventi scatenati
              * dalla DataSource, chiediamo quindi alla EntityView di non
              * fare il rebuild
              */
@@ -1442,16 +1440,16 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes the <see cref="T:System.Collections.IList"/> item at the specified index.
+        /// Removes the <see cref="System.Collections.IList"/> item at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index of the item to remove.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        ///     <paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception>
-        /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///     <paramref name="index"/> is not a valid index in the <see cref="System.Collections.IList"/>. </exception>
+        /// <exception cref="System.NotSupportedException">The <see cref="System.Collections.IList"/> is read-only.-or- The <see cref="System.Collections.IList"/> has a fixed size. </exception>
         void IList.RemoveAt(int index)
         {
             /*
-             * L'indice (index) che arriva è l'indice
+             * L'indice (index) che arriva ï¿½ l'indice
              * dell'elemento nella Vista
              * Recuperiamo dall'Indexer l'indice
              * dell'elemento originale
@@ -1468,9 +1466,9 @@ namespace Radical.Model
                 /*
                  * Anche qui abbiamo un problema, se la lista supporta
                  * le notifiche noi non dobbiamo ricostruire gli indici
-                 * perchè il meccanismo è implicito, in caso contrario
+                 * perchï¿½ il meccanismo ï¿½ implicito, in caso contrario
                  * dobbiamo pensarci noi alla ricostruzione dell'indice
-                 * l'unica possibilità che abbiamo è quella di chiedere
+                 * l'unica possibilitï¿½ che abbiamo ï¿½ quella di chiedere
                  */
                 RebuildIndexesEventArgs args = new RebuildIndexesEventArgs(index);
                 OnRemovedAt(args);
@@ -1486,8 +1484,8 @@ namespace Radical.Model
             else
             {
                 /*
-                 * Se il sourceIndex è -1 significa
-                 * che l'elemento è nuovo... quindi ci
+                 * Se il sourceIndex ï¿½ -1 significa
+                 * che l'elemento ï¿½ nuovo... quindi ci
                  * limitaimo a cancellare l'aggiunta del
                  * nuovo elemento
                  */
@@ -1498,7 +1496,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the <see cref="IEntityItemView&lt;T&gt;"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
             MessageId = "value")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
@@ -1517,7 +1515,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the <see cref="System.Object"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
         object IList.this[int index]
         {
             get { return this[index]; }
@@ -1537,7 +1535,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Raises the <see cref="E:ListChanged"/> event.
+        /// Raises the <see cref="ListChanged"/> event.
         /// </summary>
         /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnListChanged(ListChangedEventArgs e)
@@ -1555,20 +1553,18 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Gets whether a <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or an item in the list changes.
+        /// Gets whether a <see cref="System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or an item in the list changes.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if a <see cref="E:System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or when an item changes; otherwise, false.</returns>
+        /// <returns>true if a <see cref="System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or when an item changes; otherwise, false.</returns>
         bool IBindingList.SupportsChangeNotification
         {
             get { return true; }
         }
 
         /// <summary>
-        /// Gets whether the list supports searching using the <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method.
+        /// Gets whether the list supports searching using the <see cref="System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if the list supports searching using the <see cref="M:System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method; otherwise, false.</returns>
+        /// <returns>true if the list supports searching using the <see cref="System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method; otherwise, false.</returns>
         bool IBindingList.SupportsSearching
         {
             get { return true; }
@@ -1578,8 +1574,8 @@ namespace Radical.Model
         /// Adds a new item to the list.
         /// </summary>
         /// <returns>The item added to the list.</returns>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.AllowNew"/> is false. </exception>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.AllowNew"/> is false. </exception>
         object IBindingList.AddNew()
         {
             return AddNew();
@@ -1590,7 +1586,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether you can update items in the list.
         /// </summary>
-        /// <item></item>
         /// <returns>true if you can update the items in the list; otherwise, false.</returns>
         public virtual bool AllowEdit
         {
@@ -1610,10 +1605,9 @@ namespace Radical.Model
         private bool _allowNew = true;
 
         /// <summary>
-        /// Gets whether you can add items to the list using <see cref="M:System.ComponentModel.IBindingList.AddNew"/>.
+        /// Gets whether you can add items to the list using <see cref="System.ComponentModel.IBindingList.AddNew"/>.
         /// </summary>
-        /// <item></item>
-        /// <returns>true if you can add items to the list using <see cref="M:System.ComponentModel.IBindingList.AddNew"/>; otherwise, false.</returns>
+        /// <returns>true if you can add items to the list using <see cref="System.ComponentModel.IBindingList.AddNew"/>; otherwise, false.</returns>
         public virtual bool AllowNew
         {
             get
@@ -1646,9 +1640,8 @@ namespace Radical.Model
         private bool _allowRemove = true;
 
         /// <summary>
-        /// Gets whether you can remove items from the list, using <see cref="M:System.Collections.IList.Remove(System.Object)"/> or <see cref="M:System.Collections.IList.RemoveAt(System.int)"/>.
+        /// Gets whether you can remove items from the list, using <see cref="System.Collections.IList.Remove(System.Object)"/> or <see cref="System.Collections.IList.RemoveAt(System.Int32)"/>.
         /// </summary>
-        /// <item></item>
         /// <returns>true if you can remove items from the list; otherwise, false.</returns>
         public virtual bool AllowRemove
         {
@@ -1702,9 +1695,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Adds the <see cref="T:System.ComponentModel.PropertyDescriptor"/> to the indexes used for searching.
+        /// Adds the <see cref="System.ComponentModel.PropertyDescriptor"/> to the indexes used for searching.
         /// </summary>
-        /// <param name="property">The <see cref="T:System.ComponentModel.PropertyDescriptor"/> to add to the indexes used for searching.</param>
+        /// <param name="property">The <see cref="System.ComponentModel.PropertyDescriptor"/> to add to the indexes used for searching.</param>
         public void AddIndex(PropertyDescriptor property)
         {
             Indexer.AddIndex(property);
@@ -1721,9 +1714,9 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Removes the <see cref="T:System.ComponentModel.PropertyDescriptor"/> from the indexes used for searching.
+        /// Removes the <see cref="System.ComponentModel.PropertyDescriptor"/> from the indexes used for searching.
         /// </summary>
-        /// <param name="property">The <see cref="T:System.ComponentModel.PropertyDescriptor"/> to remove from the indexes used for searching.</param>
+        /// <param name="property">The <see cref="System.ComponentModel.PropertyDescriptor"/> to remove from the indexes used for searching.</param>
         public void RemoveIndex(PropertyDescriptor property)
         {
             Indexer.RemoveIndex(property);
@@ -1740,6 +1733,11 @@ namespace Radical.Model
         }
 
 
+        /// <summary>
+        /// Gets the <see cref="PropertyDescriptor"/> with the specified name from the view's item properties.
+        /// </summary>
+        /// <param name="name">The name of the property to retrieve.</param>
+        /// <returns>The matching <see cref="PropertyDescriptor"/>, or <c>null</c> if not found.</returns>
         public PropertyDescriptor GetProperty(string name)
         {
             var all = ((ITypedList)this).GetItemProperties(null);
@@ -1808,11 +1806,21 @@ namespace Radical.Model
             return CustomProperties.Values.ToArray<EntityItemViewPropertyDescriptor<T>>();
         }
 
+        /// <summary>
+        /// Determines whether a custom property with the specified name has been defined on this view.
+        /// </summary>
+        /// <param name="propertyName">The name of the custom property to check.</param>
+        /// <returns><c>true</c> if the custom property is defined; otherwise, <c>false</c>.</returns>
         public bool IsCustomPropertyDefined(string propertyName)
         {
             return CustomProperties.ContainsKey(propertyName);
         }
 
+        /// <summary>
+        /// Gets the custom property descriptor with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the custom property.</param>
+        /// <returns>The <see cref="EntityItemViewPropertyDescriptor{T}"/> for the named custom property.</returns>
         public EntityItemViewPropertyDescriptor<T> GetCustomProperty(string name)
         {
             return CustomProperties[name];
@@ -1821,6 +1829,13 @@ namespace Radical.Model
         readonly IDictionary<T, IDictionary<string, PropertyValue>> customPropertyValues =
             new Dictionary<T, IDictionary<string, PropertyValue>>();
 
+        /// <summary>
+        /// Gets the value of a custom property for the specified view item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="owner">The view item that owns the custom property value.</param>
+        /// <returns>The current value of the custom property.</returns>
         public TValue GetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> owner)
         {
             Ensure.That(customPropertyName)
@@ -1833,6 +1848,13 @@ namespace Radical.Model
             return GetCustomPropertyValueCore<TValue>(customPropertyName, owner);
         }
 
+        /// <summary>
+        /// Core implementation for retrieving a custom property value for the specified view item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="owner">The view item that owns the custom property value.</param>
+        /// <returns>The current value of the custom property, or the default value if not yet set.</returns>
         protected virtual TValue GetCustomPropertyValueCore<TValue>(string customPropertyName, IEntityItemView<T> owner)
         {
             var item = owner.EntityItem;
@@ -1858,6 +1880,13 @@ namespace Radical.Model
             return default(TValue);
         }
 
+        /// <summary>
+        /// Sets the value of a custom property for the specified view item.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the property value.</typeparam>
+        /// <param name="customPropertyName">The name of the custom property.</param>
+        /// <param name="owner">The view item that owns the custom property value.</param>
+        /// <param name="value">The value to set.</param>
         public void SetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> owner, TValue value)
         {
             Ensure.That(customPropertyName)
@@ -1894,6 +1923,7 @@ namespace Radical.Model
         /// Adds a the given property to the property mappings of this instance.
         /// </summary>
         /// <param name="customProperty">The custom property to add.</param>
+        /// <returns>The added custom property.</returns>
         public virtual EntityItemViewPropertyDescriptor<T> AddCustomProperty(
             EntityItemViewPropertyDescriptor<T> customProperty)
         {
@@ -1949,6 +1979,14 @@ namespace Radical.Model
             return AddCustomProperty(customPropertyName, getter, null, null);
         }
 
+        /// <summary>
+        /// Adds a custom property mapping with a getter and a default value interceptor.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
+        /// <param name="defaultValueInterceptor">A delegate that returns the default value for the property when no value has been set.</param>
+        /// <returns>A reference to the dynamically generated property.</returns>
         public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
@@ -1975,6 +2013,15 @@ namespace Radical.Model
             return AddCustomProperty(customPropertyName, getter, setter, null);
         }
 
+        /// <summary>
+        /// Adds a custom property mapping with a getter, setter, and a default value interceptor.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="customPropertyName">Custom property name, must be unique among entity properties.</param>
+        /// <param name="getter">A delegate to call in order to get the value of the dynamically generated property.</param>
+        /// <param name="setter">A delegate to call in order to set the value of the dynamically generated property.</param>
+        /// <param name="defaultValueInterceptor">A delegate that returns the default value for the property when no value has been set.</param>
+        /// <returns>A reference to the dynamically generated property.</returns>
         public EntityItemViewPropertyDescriptor<T> AddCustomProperty<TProperty>(
             string customPropertyName,
             EntityItemViewValueGetter<T, TProperty> getter,
@@ -2031,11 +2078,11 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
+        /// Returns the <see cref="System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
         /// </summary>
-        /// <param name="listAccessors">An array of <see cref="T:System.ComponentModel.PropertyDescriptor"/> objects to find in the collection as bindable. This can be null.</param>
+        /// <param name="listAccessors">An array of <see cref="System.ComponentModel.PropertyDescriptor"/> objects to find in the collection as bindable. This can be null.</param>
         /// <returns>
-        /// The <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
+        /// The <see cref="System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
         /// </returns>
         PropertyDescriptorCollection ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
         {
@@ -2043,11 +2090,11 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
+        /// Returns the <see cref="System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
         /// </summary>
-        /// <param name="listAccessors">An array of <see cref="T:System.ComponentModel.PropertyDescriptor"/> objects to find in the collection as bindable. This can be null.</param>
+        /// <param name="listAccessors">An array of <see cref="System.ComponentModel.PropertyDescriptor"/> objects to find in the collection as bindable. This can be null.</param>
         /// <returns>
-        /// The <see cref="T:System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
+        /// The <see cref="System.ComponentModel.PropertyDescriptorCollection"/> that represents the properties on each item used to bind data.
         /// </returns>
         protected virtual PropertyDescriptorCollection OnGetItemProperties(PropertyDescriptor[] listAccessors)
         {
@@ -2059,8 +2106,8 @@ namespace Radical.Model
                 {
                     /*
                      * Dobbiamo generare automaticamente le colonne, procediamo 
-                     * nel più tradizionale dei metodi analizzando via reflection
-                     * il tipo T e recuperando tutte le proprietà che non hanno un
+                     * nel piï¿½ tradizionale dei metodi analizzando via reflection
+                     * il tipo T e recuperando tutte le proprietï¿½ che non hanno un
                      * attributo "Bindable" impostato a false.
                      * Per ogni PropertyDescriptor trovato generiamo un nuovo
                      * EntityItemViewPropertyDescriptor<T> passandogli un riferimento
@@ -2086,7 +2133,7 @@ namespace Radical.Model
                     }
 
                     /*
-                     * aggiungiamo i descriptor così trovati alla lista di quelli che
+                     * aggiungiamo i descriptor cosï¿½ trovati alla lista di quelli che
                      * dovranno essere ritornati al chiamante
                      */
                     properties.AddRange(bindableProperties);
@@ -2095,9 +2142,9 @@ namespace Radical.Model
                 if (CustomProperties.Count > 0)
                 {
                     /*
-                     * Se ci sono delle proprietà custom le aggiungiamo
-                     * alla lista delle proprietà da ritornare, in questo
-                     * modo se AutoGenerateProperties è true le proprietà
+                     * Se ci sono delle proprietï¿½ custom le aggiungiamo
+                     * alla lista delle proprietï¿½ da ritornare, in questo
+                     * modo se AutoGenerateProperties ï¿½ true le proprietï¿½
                      * custom verranno correttamente aggiunte in coda
                      */
                     properties.AddRange(GetCustomProperties());
@@ -2146,7 +2193,7 @@ namespace Radical.Model
         /// <summary>
         /// Returns the name of the list.
         /// </summary>
-        /// <param name="listAccessors">An array of <see cref="T:System.ComponentModel.PropertyDescriptor"/> objects, for which the list name is returned. This can be null.</param>
+        /// <param name="listAccessors">An array of <see cref="System.ComponentModel.PropertyDescriptor"/> objects, for which the list name is returned. This can be null.</param>
         /// <returns>The name of the list.</returns>
         string ITypedList.GetListName(PropertyDescriptor[] listAccessors)
         {
@@ -2156,7 +2203,7 @@ namespace Radical.Model
         /// <summary>
         /// Returns the name of the list.
         /// </summary>
-        /// <param name="listAccessors">An array of <see cref="T:System.ComponentModel.PropertyDescriptor"/> objects, for which the list name is returned. This can be null.</param>
+        /// <param name="listAccessors">An array of <see cref="System.ComponentModel.PropertyDescriptor"/> objects, for which the list name is returned. This can be null.</param>
         /// <returns>The name of the list.</returns>
         protected virtual string OnGetListName(PropertyDescriptor[] listAccessors)
         {
@@ -2170,15 +2217,15 @@ namespace Radical.Model
 
 
         /// <summary>
-        /// Returns the index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor"/>.
+        /// Returns the index of the row that has the given <see cref="System.ComponentModel.PropertyDescriptor"/>.
         /// </summary>
-        /// <param name="property">The <see cref="T:System.ComponentModel.PropertyDescriptor"/> to search on.</param>
+        /// <param name="property">The <see cref="System.ComponentModel.PropertyDescriptor"/> to search on.</param>
         /// <param name="key">The item of the <paramref name="property"/> parameter to search for.</param>
         /// <returns>
-        /// The index of the row that has the given <see cref="T:System.ComponentModel.PropertyDescriptor"/>.
+        /// The index of the row that has the given <see cref="System.ComponentModel.PropertyDescriptor"/>.
         /// </returns>
-        /// <exception cref="T:System.NotSupportedException">
-        ///     <see cref="P:System.ComponentModel.IBindingList.SupportsSearching"/> is false. </exception>
+        /// <exception cref="System.NotSupportedException">
+        ///     <see cref="System.ComponentModel.IBindingList.SupportsSearching"/> is false. </exception>
         public int Find(PropertyDescriptor property, object key)
         {
             return Indexer.Find(property, key);
@@ -2245,7 +2292,7 @@ namespace Radical.Model
         }
 
         /// <summary>
-        /// Raises the <see cref="E:AddingNew"/> event.
+        /// Raises the <see cref="AddingNew"/> event.
         /// </summary>
         /// <param name="e">The <see cref="Radical.Model.AddingNewEventArgs&lt;T&gt;"/> instance containing the event data.</param>
         protected virtual void OnAddingNew(AddingNewEventArgs<T> e)
@@ -2258,7 +2305,7 @@ namespace Radical.Model
                 if (e.NewItem == null && dataSource != null && dataSource.AllowNew)
                 {
                     /*
-                     * il comportamento di default è che se NewItem è null
+                     * il comportamento di default ï¿½ che se NewItem ï¿½ null
                      * e abbiamo in mano IEntityCollection<T> usiamo l'implementazione
                      * di default di CreateNew su IEntityCollection<T>
                      * Se invece ci viene fornito un elemento prendiamo quello e
@@ -2288,6 +2335,11 @@ namespace Radical.Model
             }
         }
 
+        /// <summary>
+        /// Adds a new item to the view using the specified interceptor action to configure the new item before it is committed.
+        /// </summary>
+        /// <param name="addNewInterceptor">An action that receives an <see cref="AddingNewEventArgs{T}"/> and configures the new item.</param>
+        /// <returns>The <see cref="IEntityItemView{T}"/> wrapping the newly added item.</returns>
         public IEntityItemView<T> AddNew(Action<AddingNewEventArgs<T>> addNewInterceptor)
         {
             Ensure.That(addNewInterceptor).Named("addNewInterceptor").IsNotNull();
@@ -2328,9 +2380,9 @@ namespace Radical.Model
 
                 /*
                  * qui dovremmo avere in mano per forza un item
-                 * perchè o è stato creato nel gestore dell'evento
-                 * o ci è stato dato da EntityCollection<T> quindi se
-                 * non c'è l'exception è sacrosanta!
+                 * perchï¿½ o ï¿½ stato creato nel gestore dell'evento
+                 * o ci ï¿½ stato dato da EntityCollection<T> quindi se
+                 * non c'ï¿½ l'exception ï¿½ sacrosanta!
                  */
                 if (item == null)
                 {
@@ -2340,7 +2392,7 @@ namespace Radical.Model
                 if (IsAddingNew)
                 {
                     /*
-                     * C'è un elemento in attesa
+                     * C'ï¿½ un elemento in attesa
                      * di essere 'committed', quindi
                      * prima di aggiungerne uno nuovo
                      * eseguiamo il 'commit'
@@ -2405,9 +2457,9 @@ namespace Radical.Model
              * di default la EntityView (Radical.Model) farebbe
              * il rebuild degli indici ma siccome in questo caso
              * la DataSource supporta le notifiche il rebuild viene
-             * già fatto a seguito degli eventi scatenati dalla
+             * giï¿½ fatto a seguito degli eventi scatenati dalla
              * DataSource, chiediamo quindi alla IEntityView di non
-             * fare il rebuild se la DataSource è di tipo IEntityCollection
+             * fare il rebuild se la DataSource ï¿½ di tipo IEntityCollection
              */
             e.Cancel = DataSource is IEntityCollection<T>;
         }
@@ -2425,15 +2477,15 @@ namespace Radical.Model
 
                 /*
                  * Siamo in fase di commit, come da MSDN ci assicuriamo di avere
-                 * degli elementi pending (può succedere che questo metodo venga 
-                 * richiamato più volte).
+                 * degli elementi pending (puï¿½ succedere che questo metodo venga 
+                 * richiamato piï¿½ volte).
                  * 
                  * Sganciamo il gestore degli eventi per l'oggetto pending
                  * 
                  * E' importante notare che nelle implementazioni attuali
-                 * della DataGrid e del DataGridView itemIndex corrisponderà
-                 * _sempre_ all'indice dell'ultimo elemento semplicemente perchè
-                 * i 2 controlli non consentono di avere più elementi 
+                 * della DataGrid e del DataGridView itemIndex corrisponderï¿½
+                 * _sempre_ all'indice dell'ultimo elemento semplicemente perchï¿½
+                 * i 2 controlli non consentono di avere piï¿½ elementi 
                  * contemporaneamente in Edit e quindi alla stessa stregua in
                  * PendingAddNew 
                  */
@@ -2450,12 +2502,12 @@ namespace Radical.Model
                      * Lo aggiungiamo alla Collection sottostante 
                      * e aspettiamo la notifica 
                      * 
-                     * sta minchia!!! perchè qui non avviene proprio un bel nulla...
+                     * sta minchia!!! perchï¿½ qui non avviene proprio un bel nulla...
                      * la collection sottostante non ci notifica proprio un cazzo...
                      * 
-                     * Il problema è che la DataSource qui non sappiamo cosa sia
+                     * Il problema ï¿½ che la DataSource qui non sappiamo cosa sia
                      * quindi non possiamo affidarci al suo motore di notifica
-                     * per sapere che un nuovo elemento è stato aggiunto e quindi
+                     * per sapere che un nuovo elemento ï¿½ stato aggiunto e quindi
                      * ricostruire gli indici
                      */
                     DataSource.Add(PendingNewItem.EntityItem);
@@ -2473,7 +2525,7 @@ namespace Radical.Model
                 {
                     //TODO: Exception --> Roolback
                     /*
-                     * Probabilmente in caso di Exception sarebbe più sensato
+                     * Probabilmente in caso di Exception sarebbe piï¿½ sensato
                      * eseguire un "Rollback" per non perdere il riferimento
                      * al "PendingNewItem"
                      * 
@@ -2555,11 +2607,11 @@ namespace Radical.Model
                 if (disposing)
                 {
                     /*
-                     * Se disposing è 'true' significa che dispose
-                     * è stato invocato direttamentente dall'utente
-                     * è quindi lecito accedere ai 'field' e ad 
-                     * eventuali reference perchè sicuramente Finalize
-                     * non è ancora stato chiamato su questi oggetti
+                     * Se disposing ï¿½ 'true' significa che dispose
+                     * ï¿½ stato invocato direttamentente dall'utente
+                     * ï¿½ quindi lecito accedere ai 'field' e ad 
+                     * eventuali reference perchï¿½ sicuramente Finalize
+                     * non ï¿½ ancora stato chiamato su questi oggetti
                      */
                     lock (syncRoot)
                     {
@@ -2589,7 +2641,7 @@ namespace Radical.Model
         private static readonly object disposedEventKey = new object();
 
         /// <summary>
-        /// Represents the method that handles the <see cref="E:System.ComponentModel.IComponent.Disposed"/> event of a component.
+        /// Represents the method that handles the <see cref="System.ComponentModel.IComponent.Disposed"/> event of a component.
         /// </summary>
         public event EventHandler Disposed
         {
@@ -2600,9 +2652,9 @@ namespace Radical.Model
         private ISite site;
 
         /// <summary>
-        /// Gets or sets the <see cref="T:System.ComponentModel.ISite"/> associated with the <see cref="T:System.ComponentModel.IComponent"/>.
+        /// Gets or sets the <see cref="System.ComponentModel.ISite"/> associated with the <see cref="System.ComponentModel.IComponent"/>.
         /// </summary>
-        /// <returns>The <see cref="T:System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
+        /// <returns>The <see cref="System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</returns>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual ISite Site
@@ -2672,6 +2724,7 @@ namespace Radical.Model
         /// <summary>
         /// Raises the PropertyChanged event.
         /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <param name="property">The name of the property.</param>
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
         {
@@ -2699,7 +2752,7 @@ namespace Radical.Model
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+        /// A <see cref="System.Collections.Generic.IEnumerator{T}"/> that can be used to iterate through the collection.
         /// </returns>
         IEnumerator<IEntityItemView<T>> IEnumerable<IEntityItemView<T>>.GetEnumerator()
         {
@@ -2712,6 +2765,9 @@ namespace Radical.Model
             IsInitializing = true;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is currently being initialized via <see cref="ISupportInitialize"/>.
+        /// </summary>
         protected bool IsInitializing { get; private set; }
 
         void ISupportInitialize.EndInit()

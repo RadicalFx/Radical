@@ -15,6 +15,7 @@ namespace Radical.Helpers
         /// Given an enumeration type, where enumeration items are marked with a <see cref="EnumItemDescriptionAttribute"/>,
         /// extracts descriptions.
         /// </summary>
+        /// <typeparam name="T">The enumeration type.</typeparam>
         /// <returns>A read-only list of strings that represents descriptions data.</returns>
         public static IEnumerable<string> ExtractDescriptions<T>()
         {
@@ -29,6 +30,7 @@ namespace Radical.Helpers
         /// <summary>
         /// Extracts the binding data from the supplied enum type.
         /// </summary>
+        /// <typeparam name="T">The enumeration type.</typeparam>
         /// <returns>An read-only list of <see cref="EnumBinder&lt;T&gt;"/> objects.</returns>
         public static IEnumerable<EnumBinder<T>> ExtractBindingData<T>()
         {

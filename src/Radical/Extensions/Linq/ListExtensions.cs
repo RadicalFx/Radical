@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Radical.Linq
 {
+    /// <summary>
+    /// Provides extension methods for <see cref="System.Collections.Generic.IList{T}"/>.
+    /// </summary>
     public static class ListExtensions
     {
         /// <summary>

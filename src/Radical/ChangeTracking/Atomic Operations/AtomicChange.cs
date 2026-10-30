@@ -172,9 +172,8 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Gets the advised action for this IChange.
         /// </summary>
-        /// <param name="changedItem"></param>
-        /// <returns></returns>
-        /// <value>The advised action.</value>
+        /// <param name="changedItem">The item to get the advised action for.</param>
+        /// <returns>The advised action.</returns>
         public ProposedActions GetAdvisedAction(object changedItem)
         {
             /*

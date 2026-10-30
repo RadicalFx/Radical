@@ -89,12 +89,11 @@ namespace Radical
         Encoding _encoding;
 
         /// <summary>
-        /// When overridden in a derived class, returns the <see cref="T:System.Text.Encoding"/> in which the output is written.
+        /// When overridden in a derived class, returns the <see cref="System.Text.Encoding"/> in which the output is written.
         /// </summary>
-        /// <value></value>
-        /// <returns>
+        /// <value>
         /// The Encoding in which the output is written.
-        /// </returns>
+        /// </value>
         public override Encoding Encoding
         {
             get

@@ -17,7 +17,7 @@ namespace Radical.Messaging
         /// <summary>
         /// Gets a reference to the callback delegate of this subscription.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The callback delegate.</returns>
         Delegate GetAction();
 
         bool ShouldInvoke(object sender, object message);
@@ -47,6 +47,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous invocation.</returns>
         System.Threading.Tasks.Task InvokeAsync(object sender, object message);
 
         /// <summary>
@@ -54,17 +55,28 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous invocation.</returns>
         System.Threading.Tasks.Task DirectInvokeAsync(object sender, object message);
     }
 
+    /// <summary>
+    /// Defines the priority of a message subscription, controlling the order in which subscribers are invoked.
+    /// </summary>
     public enum SubscriptionPriority
     {
+        /// <summary>Highest priority; subscriber is invoked first.</summary>
         Highest = 3,
+        /// <summary>High priority.</summary>
         High = 2,
+        /// <summary>Above-normal priority.</summary>
         AboveNormal = 1,
+        /// <summary>Normal (default) priority.</summary>
         Normal = 0,
+        /// <summary>Below-normal priority.</summary>
         BelowNormal = -1,
+        /// <summary>Low priority.</summary>
         Low = -2,
+        /// <summary>Lowest priority; subscriber is invoked last.</summary>
         Lowest = -3
     }
 

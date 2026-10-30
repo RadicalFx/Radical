@@ -9,6 +9,7 @@ namespace Radical.ChangeTracking.Specialized
     /// <summary>
     /// Identifies that an item in a collection has been moved.
     /// </summary>
+    /// <typeparam name="T">The type of the collection items.</typeparam>
     public class ItemMovedCollectionChange<T> : CollectionChange<ItemMovedDescriptor<T>>
     {
         /// <summary>
@@ -28,7 +29,7 @@ namespace Radical.ChangeTracking.Specialized
         /// <summary>
         /// Gets the changed entities.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A read-only list containing the moved item.</returns>
         public override IEnumerable<object> GetChangedEntities()
         {
             return new ReadOnlyCollection<object>(new List<object> { Descriptor.Item });
@@ -37,9 +38,8 @@ namespace Radical.ChangeTracking.Specialized
         /// <summary>
         /// Gets the advised action for this IChange.
         /// </summary>
-        /// <param name="changedItem"></param>
-        /// <returns></returns>
-        /// <value>The advised action.</value>
+        /// <param name="changedItem">The item to get the advised action for.</param>
+        /// <returns>The advised action.</returns>
         public override ProposedActions GetAdvisedAction(object changedItem)
         {
             Ensure.That(changedItem)

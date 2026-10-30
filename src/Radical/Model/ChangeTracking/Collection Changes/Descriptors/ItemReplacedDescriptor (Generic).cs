@@ -1,5 +1,9 @@
 ﻿namespace Radical.ChangeTracking.Specialized
 {
+    /// <summary>
+    /// Describes a change where a collection item was replaced by a new item.
+    /// </summary>
+    /// <typeparam name="T">The type of the collection item.</typeparam>
     public class ItemReplacedDescriptor<T> : ItemChangedDescriptor<T>
     {
         /// <summary>
