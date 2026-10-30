@@ -105,7 +105,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets an error message indicating what is wrong with this object.
         /// </summary>
-        /// <item></item>
         /// <returns>An error message indicating what is wrong with this object. The default is an empty string ("").</returns>
         public virtual string Error
         {
@@ -123,6 +122,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets the error message for the property with the given name.
         /// </summary>
+        /// <param name="columnName">The name of the property whose error message to get.</param>
         /// <value>The error message for the property. The default is an empty string ("").</value>
         public virtual string this[string columnName]
         {

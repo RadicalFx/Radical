@@ -629,6 +629,7 @@ namespace Radical.Model
         /// <summary>
         /// Called when clear is completed.
         /// </summary>
+        /// <param name="clearedItems">The items removed by the clear operation.</param>
         protected override void OnClearCompleted(IEnumerable<T> clearedItems)
         {
             base.OnClearCompleted(clearedItems);

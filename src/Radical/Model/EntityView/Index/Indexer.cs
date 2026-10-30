@@ -70,7 +70,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the <see cref="System.Collections.Generic.ICollection{T}"/> is read-only.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the <see cref="System.Collections.Generic.ICollection{T}"/> is read-only; otherwise, false.</returns>
         public bool IsReadOnly
         {
@@ -159,7 +158,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets the number of elements contained in the <see cref="System.Collections.Generic.ICollection{T}"/>.
         /// </summary>
-        /// <item></item>
         /// <returns>The number of elements contained in the <see cref="System.Collections.Generic.ICollection{T}"/>.</returns>
         public int Count
         {
@@ -193,7 +191,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets the <see cref="Radical.Model.EntityItemView&lt;T&gt;"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get.</param>
         public IEntityItemView<T> this[int index]
         {
             get { return storage[index]; }
@@ -227,7 +225,7 @@ namespace Radical.Model
         /// object, in the View.
         /// </summary>
         /// <param name="item">The item to find the index for.</param>
-        /// <returns></returns>
+        /// <returns>The index of the <see cref="IEntityItemView{T}"/> wrapping the item, or -1 if the item is not found.</returns>
         public int IndexOf(T item)
         {
             /*
@@ -255,7 +253,7 @@ namespace Radical.Model
         /// Return the index of an EntityItemView in the View.
         /// </summary>
         /// <param name="item">The item.</param>
-        /// <returns></returns>
+        /// <returns>The index of the item, or -1 if the item is not found.</returns>
         public int IndexOf(IEntityItemView<T> item)
         {
             return storage.IndexOf(item);

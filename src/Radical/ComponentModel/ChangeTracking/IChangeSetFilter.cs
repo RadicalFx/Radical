@@ -12,7 +12,7 @@
         /// included in the built IChangeSet.
         /// </summary>
         /// <param name="change">The change to evaluate.</param>
-        /// <returns></returns>
+        /// <returns><c>true</c> if the change should be included; otherwise, <c>false</c>.</returns>
         bool ShouldInclude(IChange change);
     }
 }

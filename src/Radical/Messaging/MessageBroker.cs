@@ -513,6 +513,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous broadcast operation.</returns>
         public Task BroadcastAsync(object sender, object message)
         {
             Ensure.That(message).Named(() => message).IsNotNull();

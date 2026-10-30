@@ -67,6 +67,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied object is equal to the currently inspected object.
         /// </summary>
+        /// <param name="value">The value to compare with.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
@@ -76,6 +77,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied predicate returns false.
         /// </summary>
+        /// <param name="func">The predicate to evaluate.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
@@ -85,6 +87,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied object is not equal to the currently inspected object.
         /// </summary>
+        /// <param name="value">The value to compare with.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>
@@ -94,6 +97,7 @@ namespace Radical.Validation
         /// <summary>
         /// Ensure that the supplied predicate returns true.
         /// </summary>
+        /// <param name="func">The predicate to evaluate.</param>
         /// <returns>
         /// The Ensure instance for fluent interface usage.
         /// </returns>

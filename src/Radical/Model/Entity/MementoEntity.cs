@@ -144,16 +144,17 @@ namespace Radical.Model
         /// <summary>
         /// Sets the initial property value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The value.</param>
         /// <param name="trackChanges">The track changes.</param>
-        /// <returns>
+        /// <returns>The property meta-data.</returns>
+        /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
-        /// </returns>
+        /// </remarks>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, T value, bool trackChanges)
         {
             return SetInitialPropertyValue<T>(property.GetMemberName(), value, trackChanges);
@@ -162,16 +163,17 @@ namespace Radical.Model
         /// <summary>
         /// Sets the initial property value, using a lazily evaluated value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="lazyValue">The lazy value.</param>
         /// <param name="trackChanges">The track changes.</param>
-        /// <returns>
+        /// <returns>The property meta-data.</returns>
+        /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
-        /// </returns>
+        /// </remarks>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(Expression<Func<T>> property, Func<T> lazyValue, bool trackChanges)
         {
             var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, lazyValue);
@@ -184,16 +186,17 @@ namespace Radical.Model
         /// <summary>
         /// Sets the initial property value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The value.</param>
         /// <param name="trackChanges">The track changes.</param>
-        /// <returns>
+        /// <returns>The property meta-data.</returns>
+        /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
         /// The main difference between SetInitialPropertyValue and SetPropertyValue
         /// is that SetInitialPropertyValue does not raise a property change notification.
-        /// </returns>
+        /// </remarks>
         protected MementoPropertyMetadata<T> SetInitialPropertyValue<T>(string property, T value, bool trackChanges)
         {
             var metadata = (MementoPropertyMetadata<T>)SetInitialPropertyValue(property, value);
@@ -302,6 +305,7 @@ namespace Radical.Model
         /// <summary>
         /// Called in order to register this instance as transient.
         /// </summary>
+        /// <param name="transientRegistration">The transient registration behavior.</param>
         protected virtual void OnRegisterTransient(TransientRegistration transientRegistration)
         {
             var autoRemove = transientRegistration == TransientRegistration.AsTransparent;

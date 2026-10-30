@@ -142,7 +142,7 @@ namespace Radical
         /// Called by Description getter, override this
         /// method to customize Description return value
         /// </summary>
-        /// <param name="description"></param>
+        /// <param name="description">The description value as defined by the attribute.</param>
         /// <returns>
         /// The Description value.
         /// </returns>

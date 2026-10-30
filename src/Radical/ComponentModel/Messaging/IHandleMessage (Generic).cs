@@ -7,6 +7,7 @@
     /// in an Inversion of Control system in order to do automatic message
     /// handling.
     /// </summary>
+    /// <typeparam name="T">The type of the message to handle.</typeparam>
     [Contract]
     public interface IHandleMessage<in T> : IHandleMessage
     {

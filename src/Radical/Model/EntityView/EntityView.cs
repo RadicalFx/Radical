@@ -622,7 +622,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the data source supports filtering.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the data source supports filtering; otherwise, false. </returns>
         bool IBindingListView.SupportsFiltering
         {
@@ -632,7 +631,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the filter to be used to exclude items from the collection of items returned by the data source
         /// </summary>
-        /// <item></item>
         /// <returns>The string used to filter items out in the item collection returned by the data source. </returns>
         string IBindingListView.Filter
         {
@@ -696,10 +694,9 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the filter to be used to exclude items from the collection of items returned by the data source
         /// </summary>
-        /// <value></value>
-        /// <returns>
+        /// <value>
         /// The string used to filter items out in the item collection returned by the data source.
-        /// </returns>
+        /// </value>
         public IEntityItemViewFilter<T> Filter
         {
             get
@@ -851,7 +848,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether the list supports sorting.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the list supports sorting; otherwise, false.</returns>
         bool IBindingList.SupportsSorting
         {
@@ -861,7 +857,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the data source supports advanced sorting.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the data source supports advanced sorting; otherwise, false. </returns>
         bool IBindingListView.SupportsAdvancedSorting
         {
@@ -1023,7 +1018,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether the items in the list are sorted.
         /// </summary>
-        /// <item></item>
         /// <returns>true if <see cref="System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)"/> has been called and <see cref="System.ComponentModel.IBindingList.RemoveSort"/> has not been called; otherwise, false.</returns>
         /// <exception cref="System.NotSupportedException">
         ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
@@ -1035,7 +1029,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets the direction of the sort.
         /// </summary>
-        /// <item></item>
         /// <returns>One of the <see cref="System.ComponentModel.ListSortDirection"/> values.</returns>
         /// <exception cref="System.NotSupportedException">
         ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
@@ -1057,7 +1050,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets the <see cref="System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.
         /// </summary>
-        /// <item></item>
         /// <returns>The <see cref="System.ComponentModel.PropertyDescriptor"/> that is being used for sorting.</returns>
         /// <exception cref="System.NotSupportedException">
         ///     <see cref="System.ComponentModel.IBindingList.SupportsSorting"/> is false. </exception>
@@ -1081,7 +1073,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets the collection of sort descriptions currently applied to the data source.
         /// </summary>
-        /// <item></item>
         /// <returns>The <see cref="System.ComponentModel.ListSortDescriptionCollection"/> currently applied to the data source.</returns>
         public ListSortDescriptionCollection SortDescriptions
         {
@@ -1149,7 +1140,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the <see cref="System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="System.ComponentModel.IBindingList.ListChanged"/> events.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the <see cref="System.ComponentModel.IRaiseItemChangedEvents"/> object raises <see cref="System.ComponentModel.IBindingList.ListChanged"/> events when one of its property values changes; otherwise, false.</returns>
         public bool RaisesItemChangedEvents
         {
@@ -1191,7 +1181,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether access to the <see cref="System.Collections.ICollection"/> is synchronized (thread safe).
         /// </summary>
-        /// <item></item>
         /// <returns>true if access to the <see cref="System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
         bool ICollection.IsSynchronized
         {
@@ -1201,7 +1190,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets an object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.
         /// </summary>
-        /// <item></item>
         /// <returns>An object that can be used to synchronize access to the <see cref="System.Collections.ICollection"/>.</returns>
         object ICollection.SyncRoot
         {
@@ -1211,7 +1199,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets the number of elements contained in the <see cref="System.Collections.ICollection"/>.
         /// </summary>
-        /// <item></item>
         /// <returns>The number of elements contained in the <see cref="System.Collections.ICollection"/>.</returns>
         public int Count
         {
@@ -1381,7 +1368,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the <see cref="System.Collections.IList"/> is read-only.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the <see cref="System.Collections.IList"/> is read-only; otherwise, false.</returns>
         bool IList.IsReadOnly
         {
@@ -1401,7 +1387,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the <see cref="System.Collections.IList"/> has a fixed size.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the <see cref="System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
         bool IList.IsFixedSize
         {
@@ -1511,7 +1496,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the <see cref="IEntityItemView&lt;T&gt;"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
             MessageId = "value")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
@@ -1530,7 +1515,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the <see cref="System.Object"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
         object IList.this[int index]
         {
             get { return this[index]; }
@@ -1570,7 +1555,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether a <see cref="System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or an item in the list changes.
         /// </summary>
-        /// <item></item>
         /// <returns>true if a <see cref="System.ComponentModel.IBindingList.ListChanged"/> event is raised when the list changes or when an item changes; otherwise, false.</returns>
         bool IBindingList.SupportsChangeNotification
         {
@@ -1580,7 +1564,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether the list supports searching using the <see cref="System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the list supports searching using the <see cref="System.ComponentModel.IBindingList.Find(System.ComponentModel.PropertyDescriptor,System.Object)"/> method; otherwise, false.</returns>
         bool IBindingList.SupportsSearching
         {
@@ -1603,7 +1586,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether you can update items in the list.
         /// </summary>
-        /// <item></item>
         /// <returns>true if you can update the items in the list; otherwise, false.</returns>
         public virtual bool AllowEdit
         {
@@ -1625,7 +1607,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether you can add items to the list using <see cref="System.ComponentModel.IBindingList.AddNew"/>.
         /// </summary>
-        /// <item></item>
         /// <returns>true if you can add items to the list using <see cref="System.ComponentModel.IBindingList.AddNew"/>; otherwise, false.</returns>
         public virtual bool AllowNew
         {
@@ -1661,7 +1642,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets whether you can remove items from the list, using <see cref="System.Collections.IList.Remove(System.Object)"/> or <see cref="System.Collections.IList.RemoveAt(System.Int32)"/>.
         /// </summary>
-        /// <item></item>
         /// <returns>true if you can remove items from the list; otherwise, false.</returns>
         public virtual bool AllowRemove
         {
@@ -1943,6 +1923,7 @@ namespace Radical.Model
         /// Adds a the given property to the property mappings of this instance.
         /// </summary>
         /// <param name="customProperty">The custom property to add.</param>
+        /// <returns>The added custom property.</returns>
         public virtual EntityItemViewPropertyDescriptor<T> AddCustomProperty(
             EntityItemViewPropertyDescriptor<T> customProperty)
         {
@@ -2743,6 +2724,7 @@ namespace Radical.Model
         /// <summary>
         /// Raises the PropertyChanged event.
         /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <param name="property">The name of the property.</param>
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> property)
         {
