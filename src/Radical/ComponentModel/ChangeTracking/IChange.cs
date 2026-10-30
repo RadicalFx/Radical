@@ -59,7 +59,8 @@ namespace Radical.ComponentModel.ChangeTracking
         /// <summary>
         /// Gets the advised action for this IChange.
         /// </summary>
-        /// <value>The advised action.</value>
+        /// <param name="changedItem">The item to get the advised action for.</param>
+        /// <returns>The advised action.</returns>
         ProposedActions GetAdvisedAction(object changedItem);
 
         /// <summary>

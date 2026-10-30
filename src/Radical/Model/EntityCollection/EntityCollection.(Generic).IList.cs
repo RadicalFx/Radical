@@ -7,7 +7,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the <see cref="System.Collections.IList"></see> has a fixed size.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the <see cref="System.Collections.IList"></see> has a fixed size; otherwise, false.</returns>
         bool IList.IsFixedSize
         {
@@ -22,7 +21,6 @@ namespace Radical.Model
         /// <summary>
         /// Gets a item indicating whether the <see cref="System.Collections.IList"></see> is read-only.
         /// </summary>
-        /// <item></item>
         /// <returns>true if the <see cref="System.Collections.IList"></see> is read-only; otherwise, false.</returns>
         bool IList.IsReadOnly
         {
@@ -103,7 +101,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the <see cref="System.Object"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
         object IList.this[int index]
         {
             get

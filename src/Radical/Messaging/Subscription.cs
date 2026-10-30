@@ -17,7 +17,7 @@ namespace Radical.Messaging
         /// <summary>
         /// Gets a reference to the callback delegate of this subscription.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The callback delegate.</returns>
         Delegate GetAction();
 
         bool ShouldInvoke(object sender, object message);
@@ -47,6 +47,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous invocation.</returns>
         System.Threading.Tasks.Task InvokeAsync(object sender, object message);
 
         /// <summary>
@@ -54,6 +55,7 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous invocation.</returns>
         System.Threading.Tasks.Task DirectInvokeAsync(object sender, object message);
     }
 

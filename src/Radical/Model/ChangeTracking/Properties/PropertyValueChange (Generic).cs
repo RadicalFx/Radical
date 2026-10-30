@@ -7,6 +7,7 @@ namespace Radical.ChangeTracking.Specialized
     /// <summary>
     /// Identifies a change specific for a property change.
     /// </summary>
+    /// <typeparam name="T">The type of the property value.</typeparam>
     public class PropertyValueChange<T> : Change<T>, IPropertyValueChange
     {
         /// <summary>
@@ -62,9 +63,8 @@ namespace Radical.ChangeTracking.Specialized
         /// <summary>
         /// Gets the advised action for this IChange.
         /// </summary>
-        /// <param name="changedItem"></param>
-        /// <returns></returns>
-        /// <value>The advised action.</value>
+        /// <param name="changedItem">The item to get the advised action for.</param>
+        /// <returns>The advised action.</returns>
         public override ProposedActions GetAdvisedAction(object changedItem)
         {
             Ensure.That(changedItem)

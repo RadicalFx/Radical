@@ -92,7 +92,7 @@ namespace Radical.Threading
 
         /// <summary>Attempts to execute the specified task on the current thread.</summary>
         /// <param name="task">The task to be executed.</param>
-        /// <param name="taskWasPreviouslyQueued"></param>
+        /// <param name="taskWasPreviouslyQueued"><c>true</c> if the task was previously queued to the scheduler; otherwise, <c>false</c>.</param>
         /// <returns>Whether the task could be executed on the current thread.</returns>
         protected sealed override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {

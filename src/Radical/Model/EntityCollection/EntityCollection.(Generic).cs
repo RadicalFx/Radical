@@ -261,7 +261,7 @@ namespace Radical.Model
         /// Gets the item at the given index
         /// </summary>
         /// <param name="index">The index.</param>
-        /// <returns></returns>
+        /// <returns>The item at the given index.</returns>
         protected virtual T GetValueAt(int index)
         {
             EnsureNotDisposed();
@@ -271,7 +271,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets or sets the <typeparamref name="T"/> at the specified index.
         /// </summary>
-        /// <item></item>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
         public T this[int index]
         {
             get
@@ -384,6 +384,7 @@ namespace Radical.Model
         /// <summary>
         /// Called when clear is completed.
         /// </summary>
+        /// <param name="clearedItems">The items removed by the clear operation.</param>
         protected virtual void OnClearCompleted(IEnumerable<T> clearedItems)
         {
 
@@ -421,7 +422,7 @@ namespace Radical.Model
         /// Returns the index of the supplied item.
         /// </summary>
         /// <param name="item">The item.</param>
-        /// <returns></returns>
+        /// <returns>The zero-based index of the item, or -1 if the item is not found.</returns>
         public int IndexOf(T item)
         {
             EnsureNotDisposed();
@@ -470,8 +471,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets a value indicating whether the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/> is read-only.
         /// </summary>
-        /// <value></value>
-        /// <returns>true if the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/> is read-only; otherwise, false.</returns>
+        /// <value>true if the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/> is read-only; otherwise, false.</value>
         protected virtual bool IsReadOnly
         {
             get
@@ -495,6 +495,7 @@ namespace Radical.Model
         /// Removes the specified item.
         /// </summary>
         /// <param name="item">The item to remove.</param>
+        /// <returns><c>true</c> if the item was removed; otherwise, <c>false</c>.</returns>
         public bool Remove(T item)
         {
             EnsureNotDisposed();
@@ -565,8 +566,7 @@ namespace Radical.Model
         /// <summary>
         /// Gets the number of elements contained in the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>.
         /// </summary>
-        /// <value></value>
-        /// <returns>The number of elements contained in the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>.</returns>
+        /// <value>The number of elements contained in the <see cref="System.Collections.Generic.ICollection&lt;T&gt;"/>.</value>
         public int Count
         {
             get

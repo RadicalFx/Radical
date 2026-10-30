@@ -158,7 +158,7 @@ namespace Radical.Model
         /// <typeparam name="T">The property type</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="value">The default value.</param>
-        /// <returns></returns>
+        /// <returns>The property meta-data.</returns>
         /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
@@ -179,7 +179,7 @@ namespace Radical.Model
         /// <typeparam name="T">The property type</typeparam>
         /// <param name="property">The property.</param>
         /// <param name="lazyValue">The lazy value.</param>
-        /// <returns></returns>
+        /// <returns>The property meta-data.</returns>
         /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
@@ -199,6 +199,7 @@ namespace Radical.Model
         /// meta-data for the given property and setting the default
         /// value in the built meta-data.
         /// </summary>
+        /// <returns>The property meta-data.</returns>
         /// <remarks>
         /// This method is a shortcut for the GetMetadata method, in order
         /// to fine customize property meta-data use the GetMetadata method.
@@ -266,6 +267,7 @@ namespace Radical.Model
         /// <summary>
         /// Sets the property meta-data.
         /// </summary>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="metadata">The property meta-data.</param>
         protected virtual void SetPropertyMetadata<T>(PropertyMetadata<T> metadata)
         {
@@ -296,9 +298,9 @@ namespace Radical.Model
         /// <summary>
         /// Suspends notifications for the given property.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="IDisposable"/> that resumes notifications when disposed.</returns>
         protected IDisposable SuspendNotificationsOf<T>(Expression<Func<T>> property)
         {
             var md = GetPropertyMetadata(property);
@@ -310,7 +312,7 @@ namespace Radical.Model
         /// <summary>
         /// Resumes notifications for the given property.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="property">The property.</param>
         protected void ResumeNotificationsFor<T>(Expression<Func<T>> property)
         {

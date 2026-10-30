@@ -5,6 +5,7 @@ namespace Radical.ChangeTracking.Specialized
     /// <summary>
     /// A base, abstract, change class specific for a collection change.
     /// </summary>
+    /// <typeparam name="TDescriptor">The type of the descriptor that describes the collection change.</typeparam>
     public abstract class CollectionChange<TDescriptor> : Change<TDescriptor>
         where TDescriptor : CollectionChangeDescriptor
     {

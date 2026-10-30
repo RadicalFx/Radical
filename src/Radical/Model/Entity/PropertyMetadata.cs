@@ -48,7 +48,7 @@ namespace Radical.Model
         /// <summary>
         /// Creates the meta-data for specified property.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="property">The property.</param>
         /// <returns>
@@ -63,7 +63,7 @@ namespace Radical.Model
         /// <summary>
         /// Creates the meta-data for specified property.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">The property type.</typeparam>
         /// <param name="propertyOwner">The property owner.</param>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns>

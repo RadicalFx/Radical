@@ -8,7 +8,7 @@ namespace Radical.Model
         /// Gets the service.
         /// </summary>
         /// <param name="serviceType">The service.</param>
-        /// <returns></returns>
+        /// <returns>The requested service, or <c>null</c> if this collection is not sited.</returns>
         object IServiceProvider.GetService(Type serviceType)
         {
             if (site != null)

@@ -156,6 +156,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Raises the <c>ChangesRejected</c> event.
         /// </summary>
+        /// <param name="e">The <see cref="CancelEventArgs"/> instance that allows handlers to cancel the operation.</param>
         protected virtual void OnRejectingChanges(CancelEventArgs e)
         {
             (Events?[rejectingChangesEventKey] as EventHandler<CancelEventArgs>)?.Invoke(this, e);
@@ -487,7 +488,7 @@ namespace Radical.ChangeTracking
         /// </summary>
         /// <param name="stateFilter">The state filter.</param>
         /// <param name="exactMatch">if set to <c>true</c> [exact match].</param>
-        /// <returns></returns>
+        /// <returns>The tracked entities whose state matches the supplied <paramref name="stateFilter"/>.</returns>
         public virtual IEnumerable<object> GetEntities(EntityTrackingStates stateFilter, bool exactMatch)
         {
             HashSet<object> all = new HashSet<object>(ObjectReferenceEqualityComparer.Instance);
@@ -751,7 +752,7 @@ namespace Radical.ChangeTracking
         /// Gets all the changes currently held by
         /// this IChangeTrackingService
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An <see cref="IChangeSet"/> containing all the changes.</returns>
         public virtual IChangeSet GetChangeSet()
         {
             return GetChangeSet(IncludeAllChangeSetFilter.Instance);
@@ -763,7 +764,7 @@ namespace Radical.ChangeTracking
         /// supplied IChangeSetFilter.
         /// </summary>
         /// <param name="filter">The IChangeSetFilter.</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="IChangeSet"/> containing the changes accepted by the supplied <paramref name="filter"/>.</returns>
         public virtual IChangeSet GetChangeSet(IChangeSetFilter filter)
         {
             Ensure.That(filter).Named("filter").IsNotNull();
@@ -1220,11 +1221,7 @@ namespace Radical.ChangeTracking
         /// <summary>
         /// Gets the object's changed status.
         /// </summary>
-        /// <value></value>
-        /// <returns>true if the object’s content has changed since the last call to <see>
-        ///         <cref>M:System.ComponentModel.IChangeTracking.AcceptChanges</cref>
-        ///     </see>
-        ///     ; otherwise, false.</returns>
+        /// <value>true if the object’s content has changed since the last call to <see cref="System.ComponentModel.IChangeTracking.AcceptChanges"/>; otherwise, false.</value>
         public virtual bool IsChanged
         {
             get { return backwardChangesStack.Count > 0; }
@@ -1246,19 +1243,9 @@ namespace Radical.ChangeTracking
         }
 
         /// <summary>
-        /// Gets or sets the <see>
-        ///     <cref>T:System.ComponentModel.ISite</cref>
-        /// </see>
-        /// associated with the <see>
-        ///     <cref>T:System.ComponentModel.IComponent</cref>
-        /// </see>
-        /// .
+        /// Gets or sets the <see cref="System.ComponentModel.ISite"/> associated with the <see cref="System.ComponentModel.IComponent"/>.
         /// </summary>
-        /// <value></value>
-        /// <returns>The <see>
-        ///         <cref>T:System.ComponentModel.ISite</cref>
-        ///     </see>
-        ///     object associated with the component; or null, if the component does not have a site.</returns>
+        /// <value>The <see cref="System.ComponentModel.ISite"/> object associated with the component; or null, if the component does not have a site.</value>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ISite Site

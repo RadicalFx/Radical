@@ -6,6 +6,7 @@ namespace Radical.DataBinding
     /// Represents a mean to bind enumeration types to controls treating enumeration types
     /// as a common IList of items.
     /// </summary>
+    /// <typeparam name="T">The enumeration type.</typeparam>
     public class EnumBinder<T>
     {
         /// <summary>
