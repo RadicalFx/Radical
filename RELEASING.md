@@ -59,7 +59,7 @@ Don't change `MinVerMinimumMajorMinor` on `master` to get a release out of it: r
    git push origin X.Y.Z
    ```
 
-   Tags have no `v` prefix. The CI workflow only runs on tags matching `[0-9].[0-9]+.[0-9]` and `[0-9].[0-9]+.[0-9]+-*`, so a stable tag with a patch number of 10 or more, such as `3.0.10`, doesn't trigger a release. Update the patterns in `.github/workflows/ci.yml` before that's needed.
+   Tags have no `v` prefix: the CI workflow only runs on tags matching `[0-9]+.[0-9]+.[0-9]+` and `[0-9]+.[0-9]+.[0-9]+-*`.
 4. The tag build runs the tests and publishes the packages:
    - pre-release tags (`X.Y.Z-*`) go to the [Feedz.io pre-releases feed](https://f.feedz.io/radical-framework/pre-releases/nuget/index.json)
    - stable tags (`X.Y.Z`) go to [NuGet.org](https://www.nuget.org/profiles/radical)
