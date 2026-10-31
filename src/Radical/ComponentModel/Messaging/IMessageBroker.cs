@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Radical.Messaging;
+using System;
+using System.Threading.Tasks;
 
 namespace Radical.ComponentModel.Messaging
 {
@@ -28,45 +30,179 @@ namespace Radical.ComponentModel.Messaging
     {
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, object sender, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, Type messageType, Func<object, object, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, object sender, Type messageType, Action<object, object> callback);
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, Task> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback);
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, Task> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, Type messageType, Action<object, object> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
         /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback);
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
@@ -75,62 +211,18 @@ namespace Radical.ComponentModel.Messaging
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         void Subscribe<T>(object subscriber, Action<object, T> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
         /// <summary>
@@ -139,70 +231,65 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callback">The callback.</param>
-        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use BroadcastAsync/DispatchAsync with fully async callbacks instead. This method will be removed in version 4.0.", error: true)]
-        void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use BroadcastAsync/DispatchAsync with fully async callbacks instead. This method will be removed in version 4.0.", error: true)]
-        void Subscribe<T>(object subscriber, Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, Func<object, T, System.Threading.Tasks.Task> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="callback">The callback.</param>
-        void Subscribe<T>(object subscriber, object sender, Action<object, T> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback);
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<object, T> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe<T>(object subscriber, object sender, Action<object, T> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
         /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
@@ -210,18 +297,116 @@ namespace Radical.ComponentModel.Messaging
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback);
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, Type messageType, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
-        void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback);
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, object sender, Type messageType, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback);
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.AsynchronousCallbackFilter, error: true)]
+        void Subscribe<T>(object subscriber, Func<object, T, Task<bool>> callbackFilter, Func<object, T, Task> callback);
+
 
         /// <summary>
         /// Unsubscribe the specified subscriber from all the subscriptions.
@@ -262,12 +447,22 @@ namespace Radical.ComponentModel.Messaging
         void Unsubscribe<T>(object subscriber, Delegate callback);
 
         /// <summary>
-        /// Broadcasts the specified message in an asynchronous manner without
-        /// waiting for the execution of the subscribers.
+        /// Dispatches the specified message, invoking the subscribers one at a time,
+        /// in the context of the caller, and waiting for each of them to complete.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message to dispatch.</param>
+        /// <returns>A task that completes when all the subscribers have handled the message.</returns>
+        Task DispatchAsync(object sender, object message);
+
+        /// <summary>
+        /// Broadcasts the specified message, invoking the subscribers in parallel
+        /// on thread pool threads.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        void Broadcast(object sender, object message);
+        /// <returns>A task that completes when all the subscribers have handled the message.</returns>
+        Task BroadcastAsync(object sender, object message);
 
         /// <summary>
         /// Broadcasts the specified message in an asynchronous manner without
@@ -275,8 +470,8 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        /// <returns>A task that represents the asynchronous broadcast operation.</returns>
-        System.Threading.Tasks.Task BroadcastAsync(object sender, object message);
+        [Obsolete(ObsoleteMessages.Broadcast, error: true)]
+        void Broadcast(object sender, object message);
 
         /// <summary>
         /// Dispatches the specified message in a synchronous manner waiting for
@@ -284,6 +479,7 @@ namespace Radical.ComponentModel.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message to dispatch.</param>
+        [Obsolete(ObsoleteMessages.Dispatch, error: true)]
         void Dispatch(object sender, object message);
     }
 }
