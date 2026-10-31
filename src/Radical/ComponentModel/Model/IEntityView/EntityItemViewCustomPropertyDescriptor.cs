@@ -141,7 +141,7 @@ namespace Radical.ComponentModel
         /// <returns>The value of the property for the given component.</returns>
         protected override object GetValueCore(IEntityItemView<T> component)
         {
-            var args = new EntityItemViewValueGetterArgs<T, TValue>(component, Name);
+            var args = new EntityItemViewValueGetterArgs<T>(component, Name);
             var returnValue = ValueGetter(args);
 
             return returnValue;
