@@ -427,7 +427,7 @@ namespace Radical.ChangeTracking
             bool isTransient = (state & EntityTrackingStates.IsTransient) == EntityTrackingStates.IsTransient;
 
             Ensure.That(entity)
-                .Named(() => entity)
+                .Named(nameof(entity))
                 .WithMessage("Object already registered as transient.")
                 .If(o => isTransient)
                 .ThenThrow(o => new ArgumentException(o.GetFullErrorMessage()));
@@ -1106,7 +1106,7 @@ namespace Radical.ChangeTracking
         public void Attach(IMemento item)
         {
             Ensure.That(item)
-                .Named(() => item)
+                .Named(nameof(item))
                 .IsNotNull()
                 .If(obj => obj.Memento != null && obj.Memento != this)
                 .ThenThrow(obj =>
