@@ -1839,7 +1839,7 @@ namespace Radical.Model
         public TValue GetCustomPropertyValue<TValue>(string customPropertyName, IEntityItemView<T> owner)
         {
             Ensure.That(customPropertyName)
-                .Named(() => customPropertyName)
+                .Named(nameof(customPropertyName))
                 .IsNotNullNorEmpty()
                 .IsTrue(c => CustomProperties.ContainsKey(c));
 

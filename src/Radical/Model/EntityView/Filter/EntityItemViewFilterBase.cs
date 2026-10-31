@@ -38,7 +38,7 @@ namespace Radical.Model
         /// </returns>
         bool IEntityItemViewFilter.ShouldInclude(object item)
         {
-            Ensure.That(item).Named(() => item)
+            Ensure.That(item).Named(nameof(item))
                 .IsNotNull()
                 .IsTrue(o => o.GetType().Is<T>());
 

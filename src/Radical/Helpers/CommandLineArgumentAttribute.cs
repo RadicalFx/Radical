@@ -16,7 +16,7 @@ namespace Radical.Helpers
         public CommandLineArgumentAttribute(string argumentName)
         {
             Ensure.That(argumentName)
-                .Named(() => argumentName)
+                .Named(nameof(argumentName))
                 .IsNotNullNorEmpty();
 
             ArgumentName = argumentName;

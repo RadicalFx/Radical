@@ -56,7 +56,7 @@ namespace Radical.Messaging
         public MessageBroker(IDispatcher dispatcher, TaskFactory factory)
         {
             Ensure.That(dispatcher).Named("dispatcher").IsNotNull();
-            Ensure.That(factory).Named(() => factory).IsNotNull();
+            Ensure.That(factory).Named(nameof(factory)).IsNotNull();
 
             this.dispatcher = dispatcher;
             this.factory = factory;
@@ -216,7 +216,7 @@ namespace Radical.Messaging
         /// <param name="subscriber">The subscriber.</param>
         public void Unsubscribe(object subscriber)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
@@ -259,8 +259,8 @@ namespace Radical.Messaging
         /// <param name="sender">The sender.</param>
         public void Unsubscribe(object subscriber, object sender)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
 
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
@@ -447,8 +447,8 @@ namespace Radical.Messaging
         /// <param name="message">The message to dispatch.</param>
         public void Dispatch(object sender, object message)
         {
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(message).Named(() => message).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(message).Named(nameof(message)).IsNotNull();
 
             if (message is IRequireToBeValid requireToBeValid)
             {
@@ -481,8 +481,8 @@ namespace Radical.Messaging
         /// <param name="message">The message.</param>
         public void Broadcast(object sender, object message)
         {
-            Ensure.That(message).Named(() => message).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(message).Named(nameof(message)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
 
             if (message is IRequireToBeValid requireToBeValid)
             {
@@ -516,8 +516,8 @@ namespace Radical.Messaging
         /// <returns>A task that represents the asynchronous broadcast operation.</returns>
         public Task BroadcastAsync(object sender, object message)
         {
-            Ensure.That(message).Named(() => message).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
+            Ensure.That(message).Named(nameof(message)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
 
             if (message is IRequireToBeValid requireToBeValid)
             {
@@ -608,11 +608,11 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(messageType).Named(nameof(messageType)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
 
             var subscription = new PocoSubscription(subscriber, sender, callback, callbackFilter, invocationModel, dispatcher);
 
@@ -643,10 +643,10 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(messageType).Named(() => messageType).IsNotNull();
-            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(messageType).Named(nameof(messageType)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
 
             var subscription = new PocoSubscription(subscriber, callback, callbackFilter, invocationModel, dispatcher);
 
@@ -694,10 +694,10 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
 
             var subscription = new PocoSubscription<T>(subscriber, sender, callback, callbackFilter, invocationModel, dispatcher);
 
@@ -715,9 +715,9 @@ namespace Radical.Messaging
         /// <param name="callback">The callback.</param>
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(callback).Named(() => callback).IsNotNull();
-            Ensure.That(callbackFilter).Named(() => callbackFilter).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
 
             var subscription = new PocoSubscription<T>(subscriber, callback, callbackFilter, invocationModel, dispatcher);
 
