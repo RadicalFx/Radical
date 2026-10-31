@@ -88,10 +88,10 @@ namespace Radical.Messaging
 
         public PocoSubscription(object subscriber, Action<object, object> action, Func<object, object, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(action).Named(() => action).IsNotNull();
-            Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
-            Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
+            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
+            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
 
             Subscriber = subscriber;
             this.action = action;
@@ -105,11 +105,11 @@ namespace Radical.Messaging
 
         public PocoSubscription(object subscriber, object sender, Action<object, object> action, Func<object, object, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(action).Named(() => action).IsNotNull();
-            Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
-            Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
+            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
+            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
 
             Subscriber = subscriber;
             this.action = action;
@@ -170,10 +170,10 @@ namespace Radical.Messaging
 
         public PocoSubscription(object subscriber, Action<object, T> action, Func<object, T, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(action).Named(() => action).IsNotNull();
-            Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
-            Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
+            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
+            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
 
             Subscriber = subscriber;
             this.action = action;
@@ -187,11 +187,11 @@ namespace Radical.Messaging
 
         public PocoSubscription(object subscriber, object sender, Action<object, T> action, Func<object, T, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {
-            Ensure.That(subscriber).Named(() => subscriber).IsNotNull();
-            Ensure.That(sender).Named(() => sender).IsNotNull();
-            Ensure.That(action).Named(() => action).IsNotNull();
-            Ensure.That(actionFilter).Named(() => actionFilter).IsNotNull();
-            Ensure.That(dispatcher).Named(() => dispatcher).IsNotNull();
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
+            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
+            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
 
             Subscriber = subscriber;
             this.action = action;

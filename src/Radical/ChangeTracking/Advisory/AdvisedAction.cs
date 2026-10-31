@@ -17,9 +17,9 @@ namespace Radical.ChangeTracking
         /// <param name="action">The action.</param>
         public AdvisedAction(object target, ProposedActions action)
         {
-            Ensure.That(target).Named(() => target).IsNotNull();
+            Ensure.That(target).Named(nameof(target)).IsNotNull();
             Ensure.That(action)
-                .Named(() => action)
+                .Named(nameof(action))
                 .IsDefined()
                 .WithMessage("None is a not supported ProposedActions value.")
                 .If(v => v == ProposedActions.None)

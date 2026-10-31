@@ -24,8 +24,8 @@ namespace Radical.Linq
         /// <exception cref="T:System.ArgumentNullException"><paramref name="source"/> is null.</exception>
         public static T FirstOr<T>(this IEnumerable<T> source, Func<T> defaultValue)
         {
-            Ensure.That(source).Named(() => source).IsNotNull();
-            Ensure.That(defaultValue).Named(() => defaultValue).IsNotNull();
+            Ensure.That(source).Named(nameof(source)).IsNotNull();
+            Ensure.That(defaultValue).Named(nameof(defaultValue)).IsNotNull();
 
             if (!(source is IList<T> list))
             {
@@ -62,8 +62,8 @@ namespace Radical.Linq
         ///   <paramref name="source"/> or <paramref name="defaultValue"/> is null.</exception>
         public static T SingleOr<T>(this IEnumerable<T> source, Func<T> defaultValue)
         {
-            Ensure.That(source).Named(() => source).IsNotNull();
-            Ensure.That(defaultValue).Named(() => defaultValue).IsNotNull();
+            Ensure.That(source).Named(nameof(source)).IsNotNull();
+            Ensure.That(defaultValue).Named(nameof(defaultValue)).IsNotNull();
 
             var list = source as IList<T>;
             if (list == null)

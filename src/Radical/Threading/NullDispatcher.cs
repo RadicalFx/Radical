@@ -19,8 +19,8 @@ namespace Radical.Threading
         /// <param name="args">The delegate arguments, or null if no arguments should passed to the delegate.</param>
         public void Invoke(Delegate d, params object[] args)
         {
-            Ensure.That(d).Named(() => d).IsNotNull();
-            Ensure.That(d.Target).Named(() => d.Target).IsNotNull();
+            Ensure.That(d).Named(nameof(d)).IsNotNull();
+            Ensure.That(d.Target).Named(nameof(d.Target)).IsNotNull();
 
             d.Method.Invoke(d.Target, args);
         }
@@ -31,7 +31,7 @@ namespace Radical.Threading
         /// <param name="action">The action.</param>
         public void Dispatch(Action action)
         {
-            Ensure.That(action).Named(() => action).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
 
             action();
         }
@@ -44,7 +44,7 @@ namespace Radical.Threading
         /// <param name="action">The action to dispatch.</param>
         public void Dispatch<T>(T arg, Action<T> action)
         {
-            Ensure.That(action).Named(() => action).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
 
             action(arg);
         }
@@ -59,7 +59,7 @@ namespace Radical.Threading
         /// <param name="action">The action to dispatch.</param>
         public void Dispatch<T1, T2>(T1 arg1, T2 arg2, Action<T1, T2> action)
         {
-            Ensure.That(action).Named(() => action).IsNotNull();
+            Ensure.That(action).Named(nameof(action)).IsNotNull();
 
             action(arg1, arg2);
         }
@@ -72,7 +72,7 @@ namespace Radical.Threading
         /// <returns>The result of Func invocation.</returns>
         public TResult Dispatch<TResult>(Func<TResult> func)
         {
-            Ensure.That(func).Named(() => func).IsNotNull();
+            Ensure.That(func).Named(nameof(func)).IsNotNull();
 
             return func();
         }

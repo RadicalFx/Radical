@@ -702,11 +702,11 @@ namespace Radical.ComponentModel
         public Radical.ComponentModel.IEntityItemView<T> Item { get; }
         public string PropertyName { get; }
     }
-    public class EntityItemViewValueGetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T>
+    public class EntityItemViewValueGetterArgs<T> : Radical.ComponentModel.EntityItemViewValueArgs<T>
     {
         public EntityItemViewValueGetterArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName) { }
     }
-    public delegate object EntityItemViewValueGetter<T, TValue>(Radical.ComponentModel.EntityItemViewValueGetterArgs<T, TValue> args);
+    public delegate object EntityItemViewValueGetter<T, TValue>(Radical.ComponentModel.EntityItemViewValueGetterArgs<T> args);
     public class EntityItemViewValueSetterArgs<T, TValue> : Radical.ComponentModel.EntityItemViewValueArgs<T>
     {
         public EntityItemViewValueSetterArgs(Radical.ComponentModel.IEntityItemView<T> item, string propertyName, TValue value) { }
