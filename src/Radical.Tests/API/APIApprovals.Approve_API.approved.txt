@@ -827,13 +827,13 @@ namespace Radical.ComponentModel.Messaging
 {
     public interface IHandleMessage
     {
-        void Handle(object sender, object message);
+        System.Threading.Tasks.Task HandleAsync(object sender, object message);
         bool ShouldHandle(object sender, object message);
     }
     [Radical.ComponentModel.Contract]
     public interface IHandleMessage<in T> : Radical.ComponentModel.Messaging.IHandleMessage
     {
-        void Handle(object sender, T message);
+        System.Threading.Tasks.Task HandleAsync(object sender, T message);
     }
     public interface IMessageBroker
     {
@@ -1109,8 +1109,16 @@ namespace Radical.Messaging
     public abstract class AbstractMessageHandler<T> : Radical.ComponentModel.Messaging.IHandleMessage, Radical.ComponentModel.Messaging.IHandleMessage<T>
     {
         protected AbstractMessageHandler() { }
-        public abstract void Handle(object sender, T message);
-        public virtual void Handle(object sender, object message) { }
+        [System.Obsolete("Message handlers are async-only: override HandleAsync instead. See https://docs.r" +
+            "adicalframework.com/upgrade-guides/async-message-broker. This member will be rem" +
+            "oved in version 4.0.0.", true)]
+        public void Handle(object sender, T message) { }
+        [System.Obsolete("Message handlers are async-only: override HandleAsync instead. See https://docs.r" +
+            "adicalframework.com/upgrade-guides/async-message-broker. This member will be rem" +
+            "oved in version 4.0.0.", true)]
+        public void Handle(object sender, object message) { }
+        public abstract System.Threading.Tasks.Task HandleAsync(object sender, T message);
+        public virtual System.Threading.Tasks.Task HandleAsync(object sender, object message) { }
         protected virtual bool OnShouldHandle(object sender, T message) { }
         public bool ShouldHandle(object sender, object message) { }
     }
