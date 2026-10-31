@@ -827,43 +827,108 @@ namespace Radical.ComponentModel.Messaging
 {
     public interface IHandleMessage
     {
-        void Handle(object sender, object message);
+        System.Threading.Tasks.Task HandleAsync(object sender, object message);
         bool ShouldHandle(object sender, object message);
     }
     [Radical.ComponentModel.Contract]
     public interface IHandleMessage<in T> : Radical.ComponentModel.Messaging.IHandleMessage
     {
-        void Handle(object sender, T message);
+        System.Threading.Tasks.Task HandleAsync(object sender, T message);
     }
     public interface IMessageBroker
     {
+        [System.Obsolete("The message broker is async-only: use BroadcastAsync instead, awaiting the return" +
+            "ed task or deliberately discarding it. See https://docs.radicalframework.com/upg" +
+            "rade-guides/async-message-broker. This member will be removed in version 4.0.0.", true)]
         void Broadcast(object sender, object message);
         System.Threading.Tasks.Task BroadcastAsync(object sender, object message);
+        [System.Obsolete(@"The message broker is async-only, and a synchronous Dispatch would have to block on asynchronous subscribers, which can deadlock: await DispatchAsync instead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. This member will be removed in version 4.0.0.", true)]
         void Dispatch(object sender, object message);
+        System.Threading.Tasks.Task DispatchAsync(object sender, object message);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback);
+        void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, System.Action<object, T> callback);
-        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use Bro" +
-            "adcastAsync/DispatchAsync with fully async callbacks instead. This method will b" +
-            "e removed in version 4.0.", true)]
         void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
-        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. Use Bro" +
-            "adcastAsync/DispatchAsync with fully async callbacks instead. This method will b" +
-            "e removed in version 4.0.", true)]
+        void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("Callback filters are evaluated synchronously: subscribe with a Func<object, T, bo" +
+            "ol> filter instead. See https://docs.radicalframework.com/upgrade-guides/async-m" +
+            "essage-broker. This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, object sender, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback);
+        void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback);
         void Unsubscribe(object subscriber);
         void Unsubscribe(object subscriber, object sender);
         void Unsubscribe<T>(object subscriber);
@@ -1044,8 +1109,16 @@ namespace Radical.Messaging
     public abstract class AbstractMessageHandler<T> : Radical.ComponentModel.Messaging.IHandleMessage, Radical.ComponentModel.Messaging.IHandleMessage<T>
     {
         protected AbstractMessageHandler() { }
-        public abstract void Handle(object sender, T message);
-        public virtual void Handle(object sender, object message) { }
+        [System.Obsolete("Message handlers are async-only: override HandleAsync instead. See https://docs.r" +
+            "adicalframework.com/upgrade-guides/async-message-broker. This member will be rem" +
+            "oved in version 4.0.0.", true)]
+        public void Handle(object sender, T message) { }
+        [System.Obsolete("Message handlers are async-only: override HandleAsync instead. See https://docs.r" +
+            "adicalframework.com/upgrade-guides/async-message-broker. This member will be rem" +
+            "oved in version 4.0.0.", true)]
+        public void Handle(object sender, object message) { }
+        public abstract System.Threading.Tasks.Task HandleAsync(object sender, T message);
+        public virtual System.Threading.Tasks.Task HandleAsync(object sender, object message) { }
         protected virtual bool OnShouldHandle(object sender, T message) { }
         public bool ShouldHandle(object sender, object message) { }
     }
@@ -1053,33 +1126,98 @@ namespace Radical.Messaging
     {
         public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher) { }
         public MessageBroker(Radical.ComponentModel.IDispatcher dispatcher, System.Threading.Tasks.TaskFactory factory) { }
+        [System.Obsolete("The message broker is async-only: use BroadcastAsync instead, awaiting the return" +
+            "ed task or deliberately discarding it. See https://docs.radicalframework.com/upg" +
+            "rade-guides/async-message-broker. This member will be removed in version 4.0.0.", true)]
         public void Broadcast(object sender, object message) { }
         public System.Threading.Tasks.Task BroadcastAsync(object sender, object message) { }
+        [System.Obsolete(@"The message broker is async-only, and a synchronous Dispatch would have to block on asynchronous subscribers, which can deadlock: await DispatchAsync instead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. This member will be removed in version 4.0.0.", true)]
         public void Dispatch(object sender, object message) { }
+        public System.Threading.Tasks.Task DispatchAsync(object sender, object message) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, System.Type messageType, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, object sender, System.Type messageType, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Action<object, object> callback) { }
+        public void Subscribe(object subscriber, object sender, System.Type messageType, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, object, bool> callbackFilter, System.Func<object, object, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, System.Action<object, T> callback) { }
-        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the" +
-            " upgade guide for migration guidance. This method will be removed in version 4.0" +
-            ".", true)]
         public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
-        [System.Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the" +
-            " upgade guide for migration guidance. This method will be removed in version 4.0" +
-            ".", true)]
+        public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("Callback filters are evaluated synchronously: subscribe with a Func<object, T, bo" +
+            "ol> filter instead. See https://docs.radicalframework.com/upgrade-guides/async-m" +
+            "essage-broker. This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, System.Func<object, T, System.Threading.Tasks.Task<bool>> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, object sender, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, object sender, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
+        [System.Obsolete("The message broker is async-only: subscribe with a callback returning a Task inst" +
+            "ead. See https://docs.radicalframework.com/upgrade-guides/async-message-broker. " +
+            "This member will be removed in version 4.0.0.", true)]
         public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Action<object, T> callback) { }
+        public void Subscribe<T>(object subscriber, object sender, Radical.ComponentModel.Messaging.InvocationModel invocationModel, System.Func<object, T, bool> callbackFilter, System.Func<object, T, System.Threading.Tasks.Task> callback) { }
         public void Unsubscribe(object subscriber) { }
         public void Unsubscribe(object subscriber, object sender) { }
         public void Unsubscribe<T>(object subscriber) { }
