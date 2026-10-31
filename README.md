@@ -10,6 +10,7 @@ The Radical framework is designed to help develop composite WPF applications bas
 
 * Latest release is available on NuGet: http://www.nuget.org/profiles/radical
 * Development releases are available on Feedz.io: https://f.feedz.io/radical-framework/pre-releases/nuget/index.json
+* How releases are made: [RELEASING.md](RELEASING.md)
 
 ### Q&A
 
