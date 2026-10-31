@@ -29,7 +29,7 @@ namespace Radical.Model
         public override bool ShouldInclude(T item)
         {
             Ensure.That(item)
-                .Named(() => item)
+                .Named(nameof(item))
                 .If(i => ReferenceEquals(i, null))
                 .ThenThrow(e => new ArgumentNullException(e.GetFullErrorMessage()));
 
