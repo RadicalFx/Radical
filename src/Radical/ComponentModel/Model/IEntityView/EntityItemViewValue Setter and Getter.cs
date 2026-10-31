@@ -7,7 +7,7 @@ namespace Radical.ComponentModel
     /// <typeparam name="TValue">The type of the property value.</typeparam>
     /// <param name="args">The arguments describing the value to get.</param>
     /// <returns>The value of the property.</returns>
-    public delegate object EntityItemViewValueGetter<T, TValue>(EntityItemViewValueGetterArgs<T, TValue> args);
+    public delegate object EntityItemViewValueGetter<T, TValue>(EntityItemViewValueGetterArgs<T> args);
 
     /// <summary>
     /// Delegate used to set property value
@@ -49,8 +49,7 @@ namespace Radical.ComponentModel
     /// Argument for an EntityItemViewValueGetter
     /// </summary>
     /// <typeparam name="T">The type of the object wrapped by the entity item view.</typeparam>
-    /// <typeparam name="TValue">The type of the property value.</typeparam>
-    public class EntityItemViewValueGetterArgs<T, TValue> : EntityItemViewValueArgs<T>
+    public class EntityItemViewValueGetterArgs<T> : EntityItemViewValueArgs<T>
     {
         /// <summary>
         /// EntityItemViewValueArgs constructor.
