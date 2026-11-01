@@ -1,6 +1,8 @@
 ﻿using Radical.ComponentModel.Messaging;
 using Radical.Reflection;
 using Radical.Validation;
+using System;
+using System.Threading.Tasks;
 
 namespace Radical.Messaging
 {
@@ -15,21 +17,45 @@ namespace Radical.Messaging
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public abstract void Handle(object sender, T message);
+        /// <returns>A task that completes when the message has been handled.</returns>
+        public abstract Task HandleAsync(object sender, T message);
 
         /// <summary>
         /// Handles the specified message.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        public virtual void Handle(object sender, object message)
+        /// <returns>A task that completes when the message has been handled.</returns>
+        public virtual Task HandleAsync(object sender, object message)
         {
             Ensure.That(message)
                 .Named("message")
                 .IsNotNull()
                 .IsTrue(msg => msg.GetType().Is<T>());
 
-            Handle(sender, (T)message);
+            return HandleAsync(sender, (T)message);
+        }
+
+        /// <summary>
+        /// Handles the specified message.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        [Obsolete(ObsoleteMessages.Handle, error: true)]
+        public void Handle(object sender, T message)
+        {
+            throw new NotSupportedException(ObsoleteMessages.Handle);
+        }
+
+        /// <summary>
+        /// Handles the specified message.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        [Obsolete(ObsoleteMessages.Handle, error: true)]
+        public void Handle(object sender, object message)
+        {
+            throw new NotSupportedException(ObsoleteMessages.Handle);
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Radical.Messaging
         {
             public Type MessageType { get; } = messageType;
 
-            public List<ISubscription> Subscriptions { get; } = [];
+            public List<Subscription> Subscriptions { get; } = [];
         }
 
         static readonly TraceSource logger = new (typeof(MessageBroker).FullName!);
@@ -63,7 +63,7 @@ namespace Radical.Messaging
             msgSubsIndex = [];
         }
 
-        void SubscribeCore(Type messageType, ISubscription subscription)
+        void SubscribeCore(Type messageType, Subscription subscription)
         {
             msgSubsIndexLock.EnterUpgradeableReadLock();
             try
@@ -106,109 +106,494 @@ namespace Radical.Messaging
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, Action<object, T> callback)
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
         {
-            Subscribe(subscriber, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, Action<object, T> callback)
-        {
-            Subscribe(subscriber, sender, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, Type messageType, Action<object, object> callback)
-        {
-            Subscribe(subscriber, messageType, InvocationModel.Default, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, Action<object, object> callback)
-        {
-            Subscribe(subscriber, sender, messageType, InvocationModel.Default, callback);
+            Subscribe<T>(subscriber, InvocationModel.Default, (_, _) => true, callback);
         }
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback)
+        {
+            Subscribe<T>(subscriber, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, Task> callback)
+        {
+            Subscribe<T>(subscriber, invocationModel, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback)
+        {
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+
+            var subscription = new Subscription(subscriber, null, callback, (s, msg) => callback(s, (T)msg), (s, msg) => callbackFilter(s, (T)msg), invocationModel, dispatcher);
+
+            SubscribeCore(typeof(T), subscription);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, object sender, Func<object, T, Task> callback)
+        {
+            Subscribe<T>(subscriber, sender, InvocationModel.Default, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback)
+        {
+            Subscribe<T>(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, Task> callback)
+        {
+            Subscribe<T>(subscriber, sender, invocationModel, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Func<object, T, Task> callback)
+        {
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+
+            var subscription = new Subscription(subscriber, sender, callback, (s, msg) => callback(s, (T)msg), (s, msg) => callbackFilter(s, (T)msg), invocationModel, dispatcher);
+
+            SubscribeCore(typeof(T), subscription);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, Type messageType, Func<object, object, Task> callback)
+        {
+            Subscribe(subscriber, messageType, InvocationModel.Default, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback)
+        {
+            Subscribe(subscriber, messageType, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, Task> callback)
+        {
+            Subscribe(subscriber, messageType, invocationModel, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback)
+        {
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(messageType).Named(nameof(messageType)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+
+            var subscription = new Subscription(subscriber, null, callback, callback, callbackFilter, invocationModel, dispatcher);
+
+            SubscribeCore(messageType, subscription);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, Task> callback)
+        {
+            Subscribe(subscriber, sender, messageType, InvocationModel.Default, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback)
+        {
+            Subscribe(subscriber, sender, messageType, InvocationModel.Default, callbackFilter, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, Task> callback)
+        {
+            Subscribe(subscriber, sender, messageType, invocationModel, (_, _) => true, callback);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback; the returned task completes when the subscriber has handled the message.</param>
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Func<object, object, Task> callback)
+        {
+            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
+            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
+            Ensure.That(messageType).Named(nameof(messageType)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+
+            var subscription = new Subscription(subscriber, sender, callback, callback, callbackFilter, invocationModel, dispatcher);
+
+            SubscribeCore(messageType, subscription);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe<T>(object subscriber, Action<object, T> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Action<object, T> callback)
         {
-            Subscribe(subscriber, invocationModel, (s, msg) => true, callback);
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
         }
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
+        /// given type of message using the supplied callback.
         /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
         /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
         {
-            Subscribe(subscriber, messageType, invocationModel, (s, msg) => true, callback);
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
         }
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe<T>(object subscriber, object sender, Action<object, T> callback)
         {
-            Subscribe(subscriber, sender, messageType, invocationModel, (s, msg) => true, callback);
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
         }
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
         /// <param name="sender">The sender filter.</param>
         /// <param name="invocationModel">The invocation model.</param>
         /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
         public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Action<object, T> callback)
         {
-            Subscribe(subscriber, sender, invocationModel, (_, _) => true, callback);
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
         }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, Type messageType, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, object sender, Type messageType, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
+        /// <summary>
+        /// Subscribes the given subscriber to notifications of the
+        /// given type of message using the supplied callback
+        /// only if the sender is the specified reference.
+        /// </summary>
+        /// <param name="subscriber">The subscriber.</param>
+        /// <param name="sender">The sender filter.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="invocationModel">The invocation model.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
+        /// <param name="callback">The callback.</param>
+        [Obsolete(ObsoleteMessages.SynchronousSubscribe, error: true)]
+        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
+        {
+            throw new NotSupportedException(ObsoleteMessages.SynchronousSubscribe);
+        }
+
 
         /// <summary>
         /// Unsubscribes the specified subscriber from all the subcscriptions.
@@ -419,7 +804,7 @@ namespace Radical.Messaging
             }
         }
 
-        ISubscription[] GetSubscriptionsFor(Type messageType, object sender)
+        Subscription[] GetSubscriptionsFor(Type messageType, object sender)
         {
             msgSubsIndexLock.EnterReadLock();
             try
@@ -441,11 +826,13 @@ namespace Radical.Messaging
         }
 
         /// <summary>
-        /// Dispatches the specified message from the given sender to all relevant subscribers.
+        /// Dispatches the specified message, invoking the subscribers one at a time,
+        /// in the context of the caller, and waiting for each of them to complete.
         /// </summary>
-        /// <param name="sender">The object sending the message.</param>
+        /// <param name="sender">The sender.</param>
         /// <param name="message">The message to dispatch.</param>
-        public void Dispatch(object sender, object message)
+        /// <returns>A task that completes when all the subscribers have handled the message.</returns>
+        public Task DispatchAsync(object sender, object message)
         {
             Ensure.That(sender).Named(nameof(sender)).IsNotNull();
             Ensure.That(message).Named(nameof(message)).IsNotNull();
@@ -459,61 +846,32 @@ namespace Radical.Messaging
             var messageType = message.GetType();
 #pragma warning restore CA1062
             var subscriptions = GetSubscriptionsFor(messageType, sender);
-            var anySubscription = subscriptions.Any();
 
-            if (!anySubscription)
+            if (!subscriptions.Any())
             {
                 logger.Warning("No Subscribers for the given message type: {0}", messageType.ToString("SN"));
+                return Task.CompletedTask;
             }
-            else
-            {
-                subscriptions
-                    .Where(sub => sub.ShouldInvoke(sender, message))
-                    .ForEach(subscription => subscription.DirectInvoke(sender, message));
-            }
+
+            return DispatchCoreAsync(subscriptions, sender, message);
         }
 
-        /// <summary>
-        /// Broadcasts the specified message in an asynchronus manner without
-        /// waiting for the execution of the subscribers.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="message">The message.</param>
-        public void Broadcast(object sender, object message)
+        static async Task DispatchCoreAsync(Subscription[] subscriptions, object sender, object message)
         {
-            Ensure.That(message).Named(nameof(message)).IsNotNull();
-            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
-
-            if (message is IRequireToBeValid requireToBeValid)
+            foreach (var subscription in subscriptions.Where(sub => sub.ShouldInvoke(sender, message)))
             {
-                requireToBeValid.Validate();
-            }
-            
-#pragma warning disable CA1062
-            var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
-#pragma warning restore CA1062
-
-            if (subscriptions.Any())
-            {
-
-                subscriptions.Where(sub => sub.ShouldInvoke(sender, message))
-                    .ForEach(sub =>
-                    {
-                        factory.StartNew(() =>
-                        {
-                            sub.Invoke(sender, message);
-                        }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-                    });
+                // No ConfigureAwait(false): each subscriber runs in the context of the caller, as Dispatch did.
+                await subscription.DirectInvokeAsync(sender, message);
             }
         }
 
         /// <summary>
-        /// Broadcasts the specified message in an asynchronus manner without
-        /// waiting for the execution of the subscribers.
+        /// Broadcasts the specified message, invoking the subscribers in parallel
+        /// on thread pool threads.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        /// <returns>A task that represents the asynchronous broadcast operation.</returns>
+        /// <returns>A task that completes when all the subscribers have handled the message.</returns>
         public Task BroadcastAsync(object sender, object message)
         {
             Ensure.That(message).Named(nameof(message)).IsNotNull();
@@ -528,200 +886,49 @@ namespace Radical.Messaging
             var subscriptions = GetSubscriptionsFor(message.GetType(), sender);
 #pragma warning restore CA1062
 
-            var tasks = new List<Task>();
-            if (subscriptions.Any())
-            {
-                subscriptions
-                    .Where(sub => sub.ShouldInvoke(sender, message))
-                    .ForEach(sub =>
-                    {
-                        if (sub is IAsyncSubscription @as)
-                        {
-                            tasks.Add(@as.InvokeAsync(sender, message));
-                        }
-                        else
-                        {
-                            tasks.Add(factory.StartNew(() =>
-                            {
-                                sub.Invoke(sender, message);
-                            }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
-                        }
-                    });
+            var tasks = subscriptions
+                .Where(sub => sub.ShouldInvoke(sender, message))
+                .Select(sub => factory.StartNew(() => sub.InvokeAsync(sender, message), CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default).Unwrap())
+                .ToArray();
 
-            }
-
-            return Task.WhenAll(tasks.ToArray());
+            return Task.WhenAll(tasks);
         }
 
         /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback.
+        /// Broadcasts the specified message in an asynchronus manner without
+        /// waiting for the execution of the subscribers.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callback">The callback.</param>
-        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance. This method will be removed in version 4.0.", error: true)]
-        public void Subscribe<T>(object subscriber, Func<object, T, Task> callback)
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        [Obsolete(ObsoleteMessages.Broadcast, error: true)]
+        public void Broadcast(object sender, object message)
         {
-            throw new NotSupportedException("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance.");
+            throw new NotSupportedException(ObsoleteMessages.Broadcast);
+        }
+
+        /// <summary>
+        /// Dispatches the specified message from the given sender to all relevant subscribers.
+        /// </summary>
+        /// <param name="sender">The object sending the message.</param>
+        /// <param name="message">The message to dispatch.</param>
+        [Obsolete(ObsoleteMessages.Dispatch, error: true)]
+        public void Dispatch(object sender, object message)
+        {
+            throw new NotSupportedException(ObsoleteMessages.Dispatch);
         }
 
         /// <summary>
         /// Subscribes the given subscriber to notifications of the
         /// given type of message using the supplied callback.
         /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
+        /// <typeparam name="T">The type of message the subscriber is interested in.</typeparam>
         /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
+        /// <param name="callbackFilter">The filter invoked to determine if the callback should be invoked.</param>
         /// <param name="callback">The callback.</param>
-        [Obsolete("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance. This method will be removed in version 4.0.", error: true)]
+        [Obsolete(ObsoleteMessages.AsynchronousCallbackFilter, error: true)]
         public void Subscribe<T>(object subscriber, Func<object, T, Task<bool>> callbackFilter, Func<object, T, Task> callback)
         {
-            throw new NotSupportedException("This method has a sync-over-async design flaw that can lead to deadlocks. See the upgade guide for migration guidance.");
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
-        {
-            Subscribe(subscriber, sender, messageType, InvocationModel.Default, callbackFilter, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, object sender, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
-            Ensure.That(messageType).Named(nameof(messageType)).IsNotNull();
-            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
-            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
-
-            var subscription = new PocoSubscription(subscriber, sender, callback, callbackFilter, invocationModel, dispatcher);
-
-            SubscribeCore(messageType, subscription);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, Type messageType, Func<object, object, bool> callbackFilter, Action<object, object> callback)
-        {
-            Subscribe(subscriber, messageType, InvocationModel.Default, callbackFilter, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only.
-        /// </summary>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="messageType">Type of the message.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe(object subscriber, Type messageType, InvocationModel invocationModel, Func<object, object, bool> callbackFilter, Action<object, object> callback)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(messageType).Named(nameof(messageType)).IsNotNull();
-            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
-            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
-
-            var subscription = new PocoSubscription(subscriber, callback, callbackFilter, invocationModel, dispatcher);
-
-            SubscribeCore(messageType, subscription);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, Func<object, T, bool> callbackFilter, Action<object, T> callback)
-        {
-            Subscribe(subscriber, InvocationModel.Default, callbackFilter, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, Func<object, T, bool> callbackFilter, Action<object, T> callback)
-        {
-            Subscribe(subscriber, sender, InvocationModel.Default, callbackFilter, callback);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback only
-        /// if the sender is the specified reference.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="sender">The sender filter.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, object sender, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
-            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
-            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
-
-            var subscription = new PocoSubscription<T>(subscriber, sender, callback, callbackFilter, invocationModel, dispatcher);
-
-            SubscribeCore(typeof(T), subscription);
-        }
-
-        /// <summary>
-        /// Subscribes the given subscriber to notifications of the
-        /// given type of message using the supplied callback.
-        /// </summary>
-        /// <typeparam name="T">The type of message the subecriber is interested in.</typeparam>
-        /// <param name="subscriber">The subscriber.</param>
-        /// <param name="invocationModel">The invocation model.</param>
-        /// <param name="callbackFilter">The filter invoked to determine if the callback shopuld be invoked.</param>
-        /// <param name="callback">The callback.</param>
-        public void Subscribe<T>(object subscriber, InvocationModel invocationModel, Func<object, T, bool> callbackFilter, Action<object, T> callback)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
-            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
-
-            var subscription = new PocoSubscription<T>(subscriber, callback, callbackFilter, invocationModel, dispatcher);
-
-            SubscribeCore(typeof(T), subscription);
+            throw new NotSupportedException(ObsoleteMessages.AsynchronousCallbackFilter);
         }
     }
 }
