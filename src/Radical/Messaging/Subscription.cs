@@ -1,64 +1,11 @@
-﻿using Radical.ComponentModel;
+﻿﻿using Radical.ComponentModel;
 using Radical.ComponentModel.Messaging;
 using Radical.Validation;
 using System;
+using System.Threading.Tasks;
 
 namespace Radical.Messaging
 {
-    interface ISubscription
-    {
-        object Subscriber { get; }
-        object Sender { get; }
-
-        InvocationModel InvocationModel { get; }
-
-        SubscriptionPriority Priority { get; }
-
-        /// <summary>
-        /// Gets a reference to the callback delegate of this subscription.
-        /// </summary>
-        /// <returns>The callback delegate.</returns>
-        Delegate GetAction();
-
-        bool ShouldInvoke(object sender, object message);
-
-        /// <summary>
-        /// The subscriber invocation model is based on the <see cref="InvocationModel" /> property.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="message">The message.</param>
-        void Invoke(object sender, object message);
-
-        /// <summary>
-        /// The subscriber is invoked in the same thread of the dispatcher.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="message">The message.</param>
-        void DirectInvoke(object sender, object message);
-    }
-
-    interface IAsyncSubscription : ISubscription
-    {
-        //we can't do this now, till we have mixed async and sync subscriber
-        //System.Threading.Tasks.Task<bool> ShouldInvokeAsync(Object sender, Object message);
-
-        /// <summary>
-        /// The subscriber invocation model is based on the <see cref="InvocationModel" /> property.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="message">The message.</param>
-        /// <returns>A task that represents the asynchronous invocation.</returns>
-        System.Threading.Tasks.Task InvokeAsync(object sender, object message);
-
-        /// <summary>
-        /// The subscriber is invoked in the same thread of the dispatcher.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="message">The message.</param>
-        /// <returns>A task that represents the asynchronous invocation.</returns>
-        System.Threading.Tasks.Task DirectInvokeAsync(object sender, object message);
-    }
-
     /// <summary>
     /// Defines the priority of a message subscription, controlling the order in which subscribers are invoked.
     /// </summary>
@@ -80,167 +27,93 @@ namespace Radical.Messaging
         Lowest = -3
     }
 
-    class PocoSubscription : ISubscription
+    class Subscription
     {
         readonly IDispatcher dispatcher;
-        readonly Action<object, object> action;
-        private readonly Func<object, object, bool> actionFilter;
+        readonly Delegate action;
+        readonly Func<object, object, Task> callback;
+        readonly Func<object, object, bool> callbackFilter;
 
-        public PocoSubscription(object subscriber, Action<object, object> action, Func<object, object, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
+        // action is the callback as supplied by the subscriber, used to unsubscribe it;
+        // callback and callbackFilter are adapted to the untyped message.
+        public Subscription(object subscriber, object sender, Delegate action, Func<object, object, Task> callback, Func<object, object, bool> callbackFilter, InvocationModel invocationModel, IDispatcher dispatcher)
         {
             Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
             Ensure.That(action).Named(nameof(action)).IsNotNull();
-            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
+            Ensure.That(callback).Named(nameof(callback)).IsNotNull();
+            Ensure.That(callbackFilter).Named(nameof(callbackFilter)).IsNotNull();
             Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
 
             Subscriber = subscriber;
-            this.action = action;
-            this.actionFilter = actionFilter;
-            Sender = null;
-            InvocationModel = invocationModel;
-            this.dispatcher = dispatcher;
-
-            Priority = SubscriptionPriority.Normal;
-        }
-
-        public PocoSubscription(object subscriber, object sender, Action<object, object> action, Func<object, object, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
-            Ensure.That(action).Named(nameof(action)).IsNotNull();
-            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
-            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
-
-            Subscriber = subscriber;
-            this.action = action;
-            this.actionFilter = actionFilter;
             Sender = sender;
+            this.action = action;
+            this.callback = callback;
+            this.callbackFilter = callbackFilter;
             InvocationModel = invocationModel;
             this.dispatcher = dispatcher;
 
             Priority = SubscriptionPriority.Normal;
         }
 
+        public object Subscriber { get; }
+
+        public object Sender { get; }
+
+        public InvocationModel InvocationModel { get; }
+
+        public SubscriptionPriority Priority { get; }
+
+        /// <summary>
+        /// Gets a reference to the callback delegate of this subscription.
+        /// </summary>
+        /// <returns>The callback delegate.</returns>
         public Delegate GetAction()
         {
             return action;
         }
 
-        public object Subscriber { get; private set; }
-
-        public object Sender { get; private set; }
-
-        public InvocationModel InvocationModel { get; private set; }
-
-        public SubscriptionPriority Priority { get; private set; }
-
-        public void Invoke(object sender, object message)
+        public bool ShouldInvoke(object sender, object message)
         {
-            InvokeCore(dispatcher, action, sender, message, InvocationModel);
+            return callbackFilter(sender, message);
         }
 
-        public void DirectInvoke(object sender, object message)
+        /// <summary>
+        /// The subscriber invocation model is based on the <see cref="InvocationModel" /> property.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous invocation.</returns>
+        public Task InvokeAsync(object sender, object message)
         {
-            InvokeCore(dispatcher, action, sender, message, InvocationModel.Default);
+            return InvokeCore(sender, message, InvocationModel);
         }
 
-        static void InvokeCore(IDispatcher dispatcher, Action<object, object> action, object sender, object message, InvocationModel type)
+        /// <summary>
+        /// The subscriber is invoked in the same thread of the dispatcher.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="message">The message.</param>
+        /// <returns>A task that represents the asynchronous invocation.</returns>
+        public Task DirectInvokeAsync(object sender, object message)
         {
-            if (type == InvocationModel.Safe && !dispatcher.IsSafe)
+            return InvokeCore(sender, message, InvocationModel.Default);
+        }
+
+        Task InvokeCore(object sender, object message, InvocationModel invocationModel)
+        {
+            Task task;
+            if (invocationModel == InvocationModel.Safe && !dispatcher.IsSafe)
             {
-                dispatcher.Dispatch<Object, Object>(sender, message, action);
+                // Only the synchronous part of the callback is marshalled: once it
+                // awaits, it resumes on the dispatcher thread through its synchronization context.
+                task = dispatcher.Dispatch(() => callback(sender, message));
             }
             else
             {
-                action(sender, message);
+                task = callback(sender, message);
             }
-        }
 
-        public bool ShouldInvoke(object sender, object message)
-        {
-            return actionFilter(sender, message);
-        }
-    }
-
-    class PocoSubscription<T> : ISubscription
-    {
-        readonly IDispatcher dispatcher;
-        readonly Action<object, T> action;
-        private readonly Func<object, T, bool> actionFilter;
-
-        public PocoSubscription(object subscriber, Action<object, T> action, Func<object, T, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(action).Named(nameof(action)).IsNotNull();
-            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
-            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
-
-            Subscriber = subscriber;
-            this.action = action;
-            this.actionFilter = actionFilter;
-            Sender = null;
-            InvocationModel = invocationModel;
-            this.dispatcher = dispatcher;
-
-            Priority = SubscriptionPriority.Normal;
-        }
-
-        public PocoSubscription(object subscriber, object sender, Action<object, T> action, Func<object, T, bool> actionFilter, InvocationModel invocationModel, IDispatcher dispatcher)
-        {
-            Ensure.That(subscriber).Named(nameof(subscriber)).IsNotNull();
-            Ensure.That(sender).Named(nameof(sender)).IsNotNull();
-            Ensure.That(action).Named(nameof(action)).IsNotNull();
-            Ensure.That(actionFilter).Named(nameof(actionFilter)).IsNotNull();
-            Ensure.That(dispatcher).Named(nameof(dispatcher)).IsNotNull();
-
-            Subscriber = subscriber;
-            this.action = action;
-            this.actionFilter = actionFilter;
-            Sender = sender;
-            InvocationModel = invocationModel;
-            this.dispatcher = dispatcher;
-
-            Priority = SubscriptionPriority.Normal;
-        }
-
-        public Delegate GetAction()
-        {
-            return action;
-        }
-
-        public object Subscriber { get; private set; }
-
-        public object Sender { get; private set; }
-
-        public InvocationModel InvocationModel { get; private set; }
-
-        public SubscriptionPriority Priority { get; private set; }
-
-        public void Invoke(object sender, object message)
-        {
-            InvokeCore(dispatcher, action, sender, (T)message, InvocationModel);
-        }
-
-        public void DirectInvoke(object sender, object message)
-        {
-            InvokeCore(dispatcher, action, sender, (T)message, InvocationModel.Default);
-        }
-
-        static void InvokeCore(IDispatcher dispatcher, Action<object, T> action, object sender, T message, InvocationModel type)
-        {
-            if (type == InvocationModel.Safe && !dispatcher.IsSafe)
-            {
-                dispatcher.Dispatch<Object, T>(sender, message, action);
-            }
-            else
-            {
-                action(sender, message);
-            }
-        }
-
-        public bool ShouldInvoke(object sender, object message)
-        {
-            return actionFilter(sender, (T)message);
+            return task ?? Task.CompletedTask;
         }
     }
 }
