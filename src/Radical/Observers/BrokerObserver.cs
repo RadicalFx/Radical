@@ -1,6 +1,7 @@
 ﻿using Radical.ComponentModel.Messaging;
 using Radical.Validation;
 using System;
+using System.Threading.Tasks;
 
 namespace Radical.Observers
 {
@@ -73,12 +74,14 @@ namespace Radical.Observers
         public MessageBrokerMonitor WaitingFor<TMessage>(Func<TMessage, bool> filter) where TMessage : class
         {
             broker.Subscribe<TMessage>(this, (sender, msg) =>
-           {
-               if (filter(msg))
-               {
-                   OnChanged();
-               }
-           });
+            {
+                if (filter(msg))
+                {
+                    OnChanged();
+                }
+
+                return Task.CompletedTask;
+            });
 
             return this;
         }
@@ -99,6 +102,8 @@ namespace Radical.Observers
                 {
                     OnChanged();
                 }
+
+                return Task.CompletedTask;
             });
 
             return this;

@@ -1,4 +1,6 @@
-﻿namespace Radical.ComponentModel.Messaging
+﻿using System.Threading.Tasks;
+
+namespace Radical.ComponentModel.Messaging
 {
     /// <summary>
     /// An <c>IHandleMessage</c> is a component specialized
@@ -14,7 +16,8 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
-        void Handle(object sender, object message);
+        /// <returns>A task that completes when the message has been handled.</returns>
+        Task HandleAsync(object sender, object message);
 
         /// <summary>
         /// Determines if this message handler is interested in handling the given message.
