@@ -1,13 +1,13 @@
 # Releasing
 
-This repository follows the same release process as the other RadicalFx repositories: [Radical](https://github.com/RadicalFx/Radical/blob/master/RELEASING.md), [Radical.Windows](https://github.com/RadicalFx/Radical.Windows/blob/master/RELEASING.md), and [Radical.Avalonia](https://github.com/RadicalFx/Radical.Avalonia/blob/main/RELEASING.md).
+This repository follows the same release process as the other RadicalFx repositories: [Radical](https://github.com/RadicalFx/Radical/blob/main/RELEASING.md), [Radical.Windows](https://github.com/RadicalFx/Radical.Windows/blob/main/RELEASING.md), and [Radical.Avalonia](https://github.com/RadicalFx/Radical.Avalonia/blob/main/RELEASING.md).
 
 ## Branches and versions
 
 Versions are calculated by [MinVer](https://github.com/adamralph/minver) from git tags. Nothing else sets a version number.
 
-- **`master`** is where development happens, and it always builds the **next major** that hasn't been branched yet. Its `MinVerMinimumMajorMinor`, in `src/Radical/Radical.csproj`, is set to that major, so untagged builds are versioned `N.0.0-alpha.0.<height>`.
-- **`release-X.Y`** branches stabilize and patch an `X.Y` release. Betas, release candidates, the final release, and patch releases are all tagged on the release branch, never on `master`.
+- **`main`** is where development happens, and it always builds the **next major** that hasn't been branched yet. Its `MinVerMinimumMajorMinor`, in `src/Radical/Radical.csproj`, is set to that major, so untagged builds are versioned `N.0.0-alpha.0.<height>`.
+- **`release-X.Y`** branches stabilize and patch an `X.Y` release. Betas, release candidates, the final release, and patch releases are all tagged on the release branch, never on `main`.
 
 To see which release branches exist, and what each branch builds:
 
@@ -16,11 +16,11 @@ git branch -r --list 'origin/release-*'
 dotnet build src/Radical/Radical.csproj -t:MinVer -getProperty:MinVerVersion
 ```
 
-Until a repository ships its first stable major, it may have no release branch yet. In that case pre-releases are tagged on `master`.
+Until a repository ships its first stable major, it may have no release branch yet. In that case pre-releases are tagged on `main`.
 
 ## Where changes go
 
-1. Every change goes to `master` first, through a pull request.
+1. Every change goes to `main` first, through a pull request.
 2. If a change also has to ship in a release that's being prepared, cherry-pick it onto a branch created from `release-X.Y` and open a pull request against `release-X.Y`:
 
    ```shell
@@ -33,18 +33,18 @@ Until a repository ships its first stable major, it may have no release branch y
    - Renovate dependency updates, unless the release needs them: release branches keep their own dependency set.
    - Workflows that only run from the default branch, such as the project board one.
 
-Anything merged to `master` after a release branch is created is **not** in that release unless it's backported.
+Anything merged to `main` after a release branch is created is **not** in that release unless it's backported.
 
 ## Starting a new major
 
 To start stabilizing major `X` (for example, the first `X.0.0-beta.1`):
 
-1. On `master`, `MinVerMinimumMajorMinor` should already be `X`.
-2. Create `release-X.0` from `master` and push it.
-3. Open a pull request on `master` that sets `MinVerMinimumMajorMinor` to `X+1`, so `master` moves on to the next major.
+1. On `main`, `MinVerMinimumMajorMinor` should already be `X`.
+2. Create `release-X.0` from `main` and push it.
+3. Open a pull request on `main` that sets `MinVerMinimumMajorMinor` to `X+1`, so `main` moves on to the next major.
 4. Tag the first pre-release on `release-X.0`, as described below.
 
-Don't change `MinVerMinimumMajorMinor` on `master` to get a release out of it: releases come from the release branch.
+Don't change `MinVerMinimumMajorMinor` on `main` to get a release out of it: releases come from the release branch.
 
 ## Tagging a release
 
